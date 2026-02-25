@@ -1,0 +1,118 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebCloudStudio</title>
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #0a0a0f;
+        color: #e0e0e0;
+        font-family: 'Courier New', Courier, monospace;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .grid-bg {
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 0;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .hello {
+        font-size: clamp(3rem, 10vw, 8rem);
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        animation: flash 1.4s infinite;
+        color: #00c8ff;
+        text-shadow:
+          0 0 10px #00c8ff,
+          0 0 30px #00c8ff,
+          0 0 80px #00c8ff44;
+      }
+
+      @keyframes flash {
+        0%, 49%  { opacity: 1; }
+        50%, 100% { opacity: 0.15; }
+      }
+
+      .subtitle {
+        margin-top: 1.5rem;
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        color: #888;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      nav {
+        margin-top: 3rem;
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a {
+        color: #00c8ff;
+        text-decoration: none;
+        font-size: 1rem;
+        letter-spacing: 0.1em;
+        padding: 0.5rem 1.2rem;
+        border: 1px solid #00c8ff44;
+        border-radius: 4px;
+        transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      }
+
+      nav a:hover {
+        background: #00c8ff11;
+        border-color: #00c8ff;
+        box-shadow: 0 0 12px #00c8ff44;
+      }
+
+      .footer {
+        position: fixed;
+        bottom: 1.5rem;
+        font-size: 0.75rem;
+        color: #333;
+        letter-spacing: 0.15em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-bg"></div>
+    <main>
+      <h1 class="hello">Hello World!</h1>
+      <p class="subtitle">WebCloudStudio &mdash; portfolio under construction</p>
+      <nav>
+        <a href="#">Projects</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </nav>
+    </main>
+    <p class="footer">webcloudstudio.com</p>
+  </body>
+</html>

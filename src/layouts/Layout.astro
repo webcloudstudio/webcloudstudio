@@ -1,0 +1,133 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Web Cloud Studio — Software Portfolio' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+    <style is:global>
+      :root {
+        --bg:        #080810;
+        --surface:   #0e0e1a;
+        --surface2:  #13132080;
+        --border:    #1e1e35;
+        --accent:    #4f9cf9;
+        --accent2:   #a78bfa;
+        --text:      #e2e8f0;
+        --muted:     #64748b;
+        --danger:    #f87171;
+        --green:     #4ade80;
+        --orange:    #fb923c;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      code, .mono {
+        font-family: 'Fira Code', 'Courier New', monospace;
+        font-size: 0.88em;
+      }
+
+      /* ── NAV ── */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #08081099;
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: 0.1em;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .logo:hover { text-decoration: none; }
+      .logo-dot { color: var(--accent); }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+      .nav-links a {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+      /* ── MAIN ── */
+      main { flex: 1; }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem 1.5rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href={base} class="logo">WCS<span class="logo-dot">.</span></a>
+        <div class="nav-links">
+          <a href={base}>Home</a>
+          <a href={`${base}#projects`}>Projects</a>
+          <a href="mailto:edward.m.barlow@gmail.com">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      &copy; {new Date().getFullYear()} Web Cloud Studio &mdash; Ed Barlow
+    </footer>
+  </body>
+</html>

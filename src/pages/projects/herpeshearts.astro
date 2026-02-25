@@ -1,0 +1,459 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+<Layout
+  title="HerpesHearts — Web Cloud Studio"
+  description="Case study: HerpesHearts.com — a full-featured community dating platform for the HSV+ community, built with Django 5, PostgreSQL, and Docker."
+>
+  <!-- ── HERO ── -->
+  <section class="project-hero">
+    <div class="inner">
+      <a href={base} class="back-link">← Back to Portfolio</a>
+      <div class="hero-top">
+        <div class="project-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="36" height="36">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="project-type mono">Web Application &bull; Non-Profit &bull; Live in Beta</p>
+          <h1>HerpesHearts<span class="accent">.</span>com</h1>
+        </div>
+      </div>
+
+      <p class="lead">
+        A community dating platform for HSV+ individuals — privacy-first,
+        completely free, and built to last. No ads, no credit cards, no premium tiers.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://www.herpeshearts.com" target="_blank" rel="noopener" class="btn-primary">
+          Visit Live Site ↗
+        </a>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-value">Django 5</span>
+          <span class="stat-label">Backend</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">PostgreSQL</span>
+          <span class="stat-label">Database</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">Railway</span>
+          <span class="stat-label">Hosting</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">501(c)(3)</span>
+          <span class="stat-label">Foundation (planned)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OVERVIEW ── -->
+  <section class="content-section">
+    <div class="inner two-col">
+      <div>
+        <h2>Overview</h2>
+        <p>
+          HerpesHearts addresses a genuine gap: the 67% of people under 50 who carry HSV-1
+          or HSV-2 face significant stigma in traditional dating spaces. HerpesHearts is a
+          judgment-free platform where that conversation doesn't need to happen — everyone
+          already knows.
+        </p>
+        <p>
+          The platform operates as a non-profit with plans to incorporate as a 501(c)(3)
+          foundation. Revenue comes entirely from voluntary donations and Patreon. No user
+          data is ever sold or shared with third parties.
+        </p>
+      </div>
+      <div>
+        <h2>My Role</h2>
+        <p>
+          Solo developer and founder. Designed the architecture, built the full stack,
+          deployed to production, and continue to operate and iterate on the platform.
+          All code, infrastructure, and operations are managed by Web Cloud Studio.
+        </p>
+        <div class="callout">
+          <strong>Non-profit mission:</strong> Every technical decision prioritizes
+          user privacy, safety, and accessibility over monetization.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TECH STACK ── -->
+  <section class="content-section alt-bg">
+    <div class="inner">
+      <h2>Technology Stack</h2>
+      <div class="tech-grid">
+        <div class="tech-group">
+          <h3>Backend</h3>
+          <ul>
+            <li><span class="tag tag--py">Django 5.0</span> Web framework</li>
+            <li><span class="tag tag--py">Python 3.11</span> Application runtime</li>
+            <li><span class="tag tag--py">Gunicorn</span> WSGI server</li>
+            <li><span class="tag tag--py">django-allauth</span> OAuth authentication</li>
+          </ul>
+        </div>
+        <div class="tech-group">
+          <h3>Data & Storage</h3>
+          <ul>
+            <li><span class="tag tag--db">PostgreSQL</span> Primary database</li>
+            <li><span class="tag tag--db">Backblaze B2</span> S3-compatible media</li>
+            <li><span class="tag tag--db">django-storages</span> Storage abstraction</li>
+            <li><span class="tag tag--db">OpenCV</span> Photo quality analysis</li>
+          </ul>
+        </div>
+        <div class="tech-group">
+          <h3>Infrastructure</h3>
+          <ul>
+            <li><span class="tag tag--ops">Docker</span> Containerization</li>
+            <li><span class="tag tag--ops">Railway</span> Cloud hosting + CI/CD</li>
+            <li><span class="tag tag--ops">WhiteNoise</span> Static file serving</li>
+            <li><span class="tag tag--ops">Mailgun</span> Transactional email</li>
+          </ul>
+        </div>
+        <div class="tech-group">
+          <h3>Security</h3>
+          <ul>
+            <li><span class="tag tag--sec">OAuth only</span> No password storage</li>
+            <li><span class="tag tag--sec">django-csp</span> Content security policy</li>
+            <li><span class="tag tag--sec">django-ratelimit</span> Rate limiting</li>
+            <li><span class="tag tag--fe">Bootstrap 5</span> Responsive frontend</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KEY FEATURES ── -->
+  <section class="content-section">
+    <div class="inner">
+      <h2>Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>OAuth-Only Auth</h3>
+          <p>No passwords stored anywhere. Users authenticate via Google, Microsoft, or Facebook. Simplifies GDPR compliance and eliminates credential breach risk.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👤</div>
+          <h3>Rich Profiles</h3>
+          <p>80+ customizable profile fields. Staged setup workflow that progressively unlocks features as users complete their profile — driving completion without friction.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Advanced Search</h3>
+          <p>Distance-based filtering using US ZIP code geolocation, plus filters for age, body type, education, faith, and 20+ trait categories.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Direct Messaging</h3>
+          <p>Full conversation system with read-status tracking, message deletion, and conversation history management. Restricted to verified users for safety.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Moderation Tools</h3>
+          <p>Staff dashboard with role-based access control, member management, badge assignment, email campaign management, and full audit logging of all user actions.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Lifecycle Events</h3>
+          <p>Comprehensive audit trail tracking first login, profile activation, completions, and role changes. All events can trigger configurable email notifications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ARCHITECTURE ── -->
+  <section class="content-section alt-bg">
+    <div class="inner">
+      <h2>Architecture Decisions</h2>
+      <div class="decision-list">
+        <div class="decision">
+          <h3>Privacy by design, not by policy</h3>
+          <p>
+            OAuth-only login means no passwords exist to breach. Profile photos use privacy controls
+            (public/private). No analytics trackers or third-party ad scripts are loaded.
+            Data is never sold or shared. These are architectural guarantees, not opt-in settings.
+          </p>
+        </div>
+        <div class="decision">
+          <h3>Containerized, cloud-native from day one</h3>
+          <p>
+            The application runs inside Docker on Railway, with Railway managing PostgreSQL, SSL,
+            and deployment pipelines. Pushing to GitHub triggers an automated build and deploy.
+            Backblaze B2 handles all media with an S3-compatible API, keeping storage costs near zero.
+          </p>
+        </div>
+        <div class="decision">
+          <h3>Staged profile completion workflow</h3>
+          <p>
+            New users unlock features progressively: basic browsing after essentials, photos after
+            completing required fields, and messaging after uploading a profile photo. This drives
+            profile quality without hard-blocking users and models the product as a journey.
+          </p>
+        </div>
+        <div class="decision">
+          <h3>Non-profit financial model</h3>
+          <p>
+            No payment processing means no PCI compliance scope, no subscription churn, and no
+            incentive to harvest user data. Operations are funded through optional Patreon donations.
+            Plans to formalize as a 501(c)(3) foundation are underway.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="content-section cta-section">
+    <div class="inner cta-inner">
+      <h2>See It Live</h2>
+      <p>HerpesHearts is live in beta at herpeshearts.com — registration is open and free.</p>
+      <a href="https://www.herpeshearts.com" target="_blank" rel="noopener" class="btn-primary">
+        Visit HerpesHearts.com ↗
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── HERO ── */
+  .project-hero {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--text); text-decoration: none; }
+
+  .hero-top {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #a78bfa22, #a78bfa44);
+    border: 1px solid #a78bfa40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent2);
+    flex-shrink: 0;
+  }
+
+  .project-type {
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .accent { color: var(--accent2); }
+
+  .lead {
+    max-width: 680px;
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions { margin-bottom: 3rem; }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    background: var(--accent);
+    color: #080810;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; text-decoration: none; transform: translateY(-1px); }
+
+  .stat-row {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-value { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── CONTENT SECTIONS ── */
+  .content-section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+  .alt-bg { background: var(--surface); }
+
+  .content-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  .content-section p {
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    font-size: 0.97rem;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+  }
+
+  .callout {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--accent2);
+    background: #a78bfa0a;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .callout strong { color: var(--accent2); }
+
+  /* ── TECH GRID ── */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .tech-group h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.85rem;
+    font-weight: 600;
+  }
+
+  .tech-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+
+  .tech-group li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  /* ── TAGS (reuse from index) ── */
+  .tag {
+    font-size: 0.7rem;
+    font-family: 'Fira Code', monospace;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .tag--py      { background: #22c55e18; color: #4ade80; border: 1px solid #22c55e30; }
+  .tag--db      { background: #fb923c18; color: #fb923c; border: 1px solid #fb923c30; }
+  .tag--ops     { background: #4f9cf918; color: #4f9cf9; border: 1px solid #4f9cf930; }
+  .tag--fe      { background: #a78bfa18; color: #a78bfa; border: 1px solid #a78bfa30; }
+  .tag--sec     { background: #f8717118; color: #f87171; border: 1px solid #f8717130; }
+
+  /* ── FEATURES ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .feature-card:hover { border-color: #4f9cf940; }
+
+  .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+  .feature-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .feature-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── DECISIONS ── */
+  .decision-list { display: flex; flex-direction: column; gap: 2rem; }
+
+  .decision {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .decision:hover { border-color: var(--accent); }
+
+  .decision h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .decision p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── CTA ── */
+  .cta-section { border-bottom: none; }
+  .cta-inner { text-align: center; }
+  .cta-inner h2 { font-size: 2rem; }
+  .cta-inner p { margin-bottom: 1.5rem; font-size: 1rem; }
+</style>

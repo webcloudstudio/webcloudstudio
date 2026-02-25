@@ -1,118 +1,413 @@
 ---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
 ---
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebCloudStudio</title>
-    <style>
-      *, *::before, *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+<Layout title="Web Cloud Studio — Ed Barlow">
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow mono">&gt; cd ~/portfolio</p>
+      <h1>
+        <span class="name">Ed Barlow</span>
+        <span class="rule"></span>
+        <span class="role">Web Cloud Studio</span>
+      </h1>
+      <p class="hero-desc">
+        Software engineer, database architect, and published author.
+        Building thoughtful systems for complex problems.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="mailto:edward.m.barlow@gmail.com" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-grid"></div>
+  </section>
 
-      body {
-        background: #0a0a0f;
-        color: #e0e0e0;
-        font-family: 'Courier New', Courier, monospace;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
+  <!-- ── PROJECTS ── -->
+  <section class="projects" id="projects">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-tag mono">// projects</span>
+        <h2>Selected Work</h2>
+        <p class="section-sub">A sample of projects in production and in progress.</p>
+      </div>
 
-      .grid-bg {
-        position: fixed;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px);
-        background-size: 40px 40px;
-        z-index: 0;
-      }
+      <div class="card-grid">
 
-      main {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        padding: 2rem;
-      }
+        <!-- CARD: HerpesHearts -->
+        <article class="card card--featured">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <div class="card-meta">
+              <span class="card-type">Web Application &bull; Live</span>
+              <a href="https://www.herpeshearts.com" target="_blank" rel="noopener" class="card-url">
+                herpeshearts.com ↗
+              </a>
+            </div>
+          </div>
 
-      .hello {
-        font-size: clamp(3rem, 10vw, 8rem);
-        font-weight: 900;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        animation: flash 1.4s infinite;
-        color: #00c8ff;
-        text-shadow:
-          0 0 10px #00c8ff,
-          0 0 30px #00c8ff,
-          0 0 80px #00c8ff44;
-      }
+          <h3 class="card-title">HerpesHearts</h3>
+          <p class="card-desc">
+            A full-featured community dating platform built for the HSV+ community.
+            Privacy-first architecture, completely free with zero ads, operating as a
+            non-profit. Includes OAuth authentication, advanced profile matching,
+            real-time messaging, and a staff moderation system.
+          </p>
 
-      @keyframes flash {
-        0%, 49%  { opacity: 1; }
-        50%, 100% { opacity: 0.15; }
-      }
+          <div class="tags">
+            <span class="tag tag--py">Django 5</span>
+            <span class="tag tag--py">Python</span>
+            <span class="tag tag--db">PostgreSQL</span>
+            <span class="tag tag--ops">Docker</span>
+            <span class="tag tag--ops">Railway</span>
+            <span class="tag tag--fe">Bootstrap 5</span>
+            <span class="tag tag--sec">OAuth</span>
+          </div>
 
-      .subtitle {
-        margin-top: 1.5rem;
-        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-        color: #888;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-      }
+          <div class="card-actions">
+            <a href="https://www.herpeshearts.com" target="_blank" rel="noopener" class="btn-primary btn-sm">
+              Live Site ↗
+            </a>
+            <a href={`${base}projects/herpeshearts`} class="btn-ghost btn-sm">
+              Case Study →
+            </a>
+          </div>
+        </article>
 
-      nav {
-        margin-top: 3rem;
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
+        <!-- CARD: Book -->
+        <article class="card">
+          <div class="card-top">
+            <div class="card-icon card-icon--book" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+              </svg>
+            </div>
+            <div class="card-meta">
+              <span class="card-type">Published Book &bull; Amazon</span>
+              <a href="https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC"
+                 target="_blank" rel="noopener" class="card-url">
+                amazon.com ↗
+              </a>
+            </div>
+          </div>
 
-      nav a {
-        color: #00c8ff;
-        text-decoration: none;
-        font-size: 1rem;
-        letter-spacing: 0.1em;
-        padding: 0.5rem 1.2rem;
-        border: 1px solid #00c8ff44;
-        border-radius: 4px;
-        transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-      }
+          <h3 class="card-title">Process Based Database Administration</h3>
+          <p class="card-desc">
+            <em>Agile and Other Best Practices for Database Management.</em>
+            A comprehensive guide to modern DBA practices, bridging traditional
+            database administration with Agile methodology. Covers process design,
+            team workflows, and operational best practices for enterprise database teams.
+          </p>
 
-      nav a:hover {
-        background: #00c8ff11;
-        border-color: #00c8ff;
-        box-shadow: 0 0 12px #00c8ff44;
-      }
+          <div class="tags">
+            <span class="tag tag--db">Database</span>
+            <span class="tag tag--db">PostgreSQL</span>
+            <span class="tag tag--ops">Agile</span>
+            <span class="tag tag--neutral">Best Practices</span>
+            <span class="tag tag--neutral">Enterprise</span>
+          </div>
 
-      .footer {
-        position: fixed;
-        bottom: 1.5rem;
-        font-size: 0.75rem;
-        color: #333;
-        letter-spacing: 0.15em;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="grid-bg"></div>
-    <main>
-      <h1 class="hello">Hello World!</h1>
-      <p class="subtitle">WebCloudStudio &mdash; portfolio under construction</p>
-      <nav>
-        <a href="#">Projects</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </nav>
-    </main>
-    <p class="footer">webcloudstudio.com</p>
-  </body>
-</html>
+          <div class="card-actions">
+            <a href="https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC"
+               target="_blank" rel="noopener" class="btn-primary btn-sm">
+              View on Amazon ↗
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,156,249,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,156,249,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  /* fade the grid out at the bottom */
+  .hero-grid::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+
+  .hero-eyebrow {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .name {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .rule {
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+    margin: 0.25rem 0;
+  }
+
+  .role {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-desc {
+    max-width: 540px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+  }
+
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    display: inline-block;
+    padding: 0.65rem 1.5rem;
+    background: var(--accent);
+    color: #080810;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover {
+    opacity: 0.88;
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.65rem 1.5rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    background: #4f9cf910;
+    text-decoration: none;
+  }
+
+  .btn-sm { padding: 0.5rem 1.1rem; font-size: 0.85rem; }
+
+  /* ── PROJECTS SECTION ── */
+  .projects {
+    padding: 5rem 0;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .section-tag {
+    color: var(--accent);
+    font-size: 0.85rem;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+  }
+
+  .card:hover {
+    border-color: #4f9cf940;
+    box-shadow: 0 0 40px #4f9cf910;
+    transform: translateY(-3px);
+  }
+
+  .card--featured {
+    border-color: #a78bfa30;
+  }
+
+  .card--featured:hover {
+    border-color: #a78bfa60;
+    box-shadow: 0 0 40px #a78bfa12;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .card-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #a78bfa22, #a78bfa44);
+    border: 1px solid #a78bfa30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent2);
+  }
+
+  .card-icon--book {
+    background: linear-gradient(135deg, #4f9cf922, #4f9cf944);
+    border-color: #4f9cf930;
+    color: var(--accent);
+  }
+
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .card-type {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .card-url {
+    font-size: 0.82rem;
+    font-family: 'Fira Code', monospace;
+    color: var(--accent);
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .card-url:hover { opacity: 1; text-decoration: none; }
+
+  .card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .card-desc {
+    font-size: 0.93rem;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  /* ── TAGS ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-family: 'Fira Code', monospace;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .tag--py      { background: #22c55e18; color: #4ade80; border: 1px solid #22c55e30; }
+  .tag--db      { background: #fb923c18; color: #fb923c; border: 1px solid #fb923c30; }
+  .tag--ops     { background: #4f9cf918; color: #4f9cf9; border: 1px solid #4f9cf930; }
+  .tag--fe      { background: #a78bfa18; color: #a78bfa; border: 1px solid #a78bfa30; }
+  .tag--sec     { background: #f8717118; color: #f87171; border: 1px solid #f8717130; }
+  .tag--neutral { background: #64748b18; color: #94a3b8; border: 1px solid #64748b30; }
+
+  /* ── CARD ACTIONS ── */
+  .card-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+</style>

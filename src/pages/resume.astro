@@ -1,0 +1,592 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+<Layout title="Resume — Ed Barlow" description="Resume of Ed Barlow — Senior Principal Engineer with 30+ years of hands-on leadership in data platforms, infrastructure, and full-stack development.">
+
+  <section class="resume-wrap">
+    <div class="inner">
+
+      <!-- TOP BAR -->
+      <div class="resume-topbar">
+        <a href={base} class="back-link">← Portfolio</a>
+        <a href={`${base}resume.pdf`} download class="btn-download">
+          ↓ Download PDF
+        </a>
+      </div>
+
+      <!-- HEADER -->
+      <header class="resume-header">
+        <h1>Edward Barlow</h1>
+        <div class="resume-contact-row">
+          <span>West Chester, PA</span>
+          <span class="sep">·</span>
+          <a href="tel:+19148374798">(914) 837-4798</a>
+          <span class="sep">·</span>
+          <a href="mailto:edward.m.barlow@gmail.com">edward.m.barlow@gmail.com</a>
+          <span class="sep">·</span>
+          <a href="https://linkedin.com/in/ed-barlow" target="_blank" rel="noopener">linkedin.com/in/ed-barlow</a>
+        </div>
+      </header>
+
+      <hr class="divider" />
+
+      <!-- SUMMARY -->
+      <section class="resume-section">
+        <h2>Professional Summary</h2>
+        <div class="summary-block">
+          <p>
+            <strong>Senior Principal Engineer with 30+ years of hands-on leadership</strong> delivering
+            business solutions, critical infrastructure, and data platforms for leading hedge funds,
+            insurance companies, and startups. Deep technical expertise. Full Stack.
+          </p>
+          <p>
+            <strong>AI-Assisted Developer</strong> using Claude Code to leverage wide, deep expertise and
+            very strong writing skills in multiple disparate projects. <strong>Early adopter</strong> across
+            multiple technology waves: C++, SQL, Java, Automation, Streaming, Big Data.
+          </p>
+          <p>
+            <strong>Leadership approach:</strong> Active listener and communicator who translates business
+            concepts into actionable technical plans. Drives vision, execution, quality, and a collaborative
+            culture. Detail oriented. Published author.
+          </p>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- COMPETENCIES -->
+      <section class="resume-section">
+        <h2>Core Competencies</h2>
+        <div class="competency-grid">
+          <div class="competency-group">
+            <h3>Leadership &amp; Delivery</h3>
+            <div class="comp-tags">
+              <span>Team Leadership</span><span>Agile / SAFe</span>
+              <span>Digital Transformation</span><span>Process &amp; Governance</span>
+              <span>Roadmaps</span>
+            </div>
+          </div>
+          <div class="competency-group">
+            <h3>Technical Expertise</h3>
+            <div class="comp-tags">
+              <span>High-Speed Data Engineering</span><span>Database Architecture</span>
+              <span>Microservices &amp; APIs</span><span>Data Quality</span>
+              <span>Security</span><span>CI/CD / DevOps</span>
+              <span>Analytics &amp; Reporting</span>
+            </div>
+          </div>
+          <div class="competency-group">
+            <h3>Data &amp; Scale</h3>
+            <div class="comp-tags">
+              <span>Data at Size &amp; Speed</span><span>ETL / ELT Pipelines</span>
+              <span>Streaming</span><span>Data Warehousing</span>
+              <span>Internet of Things</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- TECHNICAL SKILLS -->
+      <section class="resume-section">
+        <h2>Technical Skills</h2>
+        <div class="skills-table">
+          <div class="skill-row">
+            <span class="skill-label">Languages</span>
+            <span class="skill-val">Python, Java, JavaScript / Angular, SQL, Bash, C / C++, Perl</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Databases</span>
+            <span class="skill-val">PostgreSQL, MySQL, Oracle, Sybase, SQL Server, Snowflake, Aurora, VoltDB</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">NoSQL</span>
+            <span class="skill-val">DynamoDB, Elasticsearch / ELK, Redshift, Delta Lake, Databricks</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">DevOps &amp; Infra</span>
+            <span class="skill-val">Terraform, Docker, Kubernetes / OpenShift, Jenkins, Ansible, Airflow, Linux, Windows Server, AWS</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Data &amp; Streaming</span>
+            <span class="skill-val">Kafka, ETL Pipelines, DBT, Delta Lake</span>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- EXPERIENCE -->
+      <section class="resume-section">
+        <h2>Professional Experience</h2>
+        <div class="exp-list">
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3>Future Standard Investments</h3>
+                <p class="exp-title">VP — Lead Engineer</p>
+              </div>
+              <span class="exp-dates">09/2024 – Present</span>
+            </div>
+            <ul>
+              <li>Responsible for $40B Portfolio Advisor's private wealth management business</li>
+              <li>Delivered Canoe Intelligence (AI Document Parsing) enterprise document flow processing solution</li>
+              <li>Responsible for Dealcloud Workflow System</li>
+            </ul>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3>Evernorth Health Services LLC (Cigna)</h3>
+                <p class="exp-title">Software Engineering Senior Advisor</p>
+              </div>
+              <span class="exp-dates">05/2020 – 09/2024</span>
+            </div>
+            <ul>
+              <li>Managed 6–8 engineers on enterprise reporting platform transformation</li>
+              <li>Crafted data pipelines from Hadoop / Teradata to Redshift / Snowflake for new reporting content</li>
+              <li>Delivered product documentation, Git flow / UAT / release / support processes, enterprise cloud security solution, E2E testing framework (Cypress), and usage monitoring (Divolte)</li>
+              <li>Served as Product Owner for one year managing planning / strategy, stakeholder relationships, and business alignment</li>
+            </ul>
+            <p class="exp-tech"><span class="tech-label">Stack:</span> AWS · Python · Terraform · Aurora/PostgreSQL · Redshift · DynamoDB · Angular · SAS · Snowflake · Delta Lake · Teradata Vantage · Databricks</p>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3>Point72 Asset Management L.P.</h3>
+                <p class="exp-title">Platform Engineering Consultant</p>
+              </div>
+              <span class="exp-dates">05/2018 – 04/2020</span>
+            </div>
+            <ul>
+              <li>Led platform modernization initiative migrating Hadoop to OpenShift (Kubernetes) and Elasticsearch</li>
+              <li>Served as senior Kafka expert on a high-volume streaming data platform</li>
+              <li>Reduced AWS costs by 20% through dynamic infrastructure scaling</li>
+            </ul>
+            <p class="exp-tech"><span class="tech-label">Stack:</span> AWS · OpenShift · Ansible · Jenkins · Docker · Kubernetes · Python · Airflow · Kafka</p>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3>Walker Digital Table Systems LLC</h3>
+                <p class="exp-title">Director of Database, Architecture, and Business Intelligence</p>
+              </div>
+              <span class="exp-dates">07/2013 – 05/2018</span>
+            </div>
+            <ul>
+              <li>Led 2 scrum teams (infrastructure and reporting) for casino floor management startup</li>
+              <li>Direct CIO report managing all non-Java technical initiatives</li>
+              <li>Java API and REST microservice architecture for high-performance IoT streaming based on Kafka</li>
+              <li>Real-time high-speed multi-host in-memory distributed database system (VoltDB)</li>
+              <li>Kafka-streamed reporting warehouse for 200+ operational reports using skinned Jaspersoft</li>
+            </ul>
+            <p class="exp-tech"><span class="tech-label">Stack:</span> Kafka · Python · PostgreSQL · Java · Jenkins · Docker/Kubernetes · Tableau · Elasticsearch (ELK) · Jasper Reports · Angular</p>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3>Millennium Partners LLC</h3>
+                <p class="exp-title">Director of Internal Tools and Architecture</p>
+              </div>
+              <span class="exp-dates">07/2011 – 12/2012</span>
+            </div>
+            <ul>
+              <li>Modernized IT process and tooling across the organization</li>
+              <li>Deployed and managed incident management system (Remedy) and Support Portal</li>
+              <li>Delivered change management processes and procedures</li>
+              <li>Built 15,000-CI configuration management database (CMDB)</li>
+              <li>Implemented purchasing and deployment processes</li>
+            </ul>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3>Millennium Partners LLC</h3>
+                <p class="exp-title">Director of Database and Compliance Infrastructure</p>
+              </div>
+              <span class="exp-dates">03/2003 – 07/2011</span>
+            </div>
+            <ul>
+              <li>Direct CTO report at high-volume quantitative hedge fund</li>
+              <li>Managed 175 production database systems (Sybase, MySQL, PostgreSQL, Oracle, SQL Server)</li>
+              <li>Led 24×6 worldwide team of 6–8 administrators and developers</li>
+              <li>Developed in-house compliance systems for entitlement review, certifications, personal trading, and restricted list</li>
+              <li>Implemented disaster recovery and business continuity for critical trading systems</li>
+            </ul>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3>SQL Technologies LLC</h3>
+                <p class="exp-title">Principal (Independent Contractor)</p>
+              </div>
+              <span class="exp-dates">09/1994 – 03/2003</span>
+            </div>
+            <ul>
+              <li>Full-stack database and development services across major financial and media clients</li>
+              <li><strong>Time Warner:</strong> Saved $100M magazine process rewrite with 9-month optimization engagement</li>
+              <li><strong>JP Morgan:</strong> Built Morgan Cage and Enterprise Security Master; managed 20 Sybase contractors for large corporate transformation</li>
+              <li><strong>Bankers Trust:</strong> Enterprise risk management system (RAROC)</li>
+              <li><strong>Weiss, Peck &amp; Greer:</strong> Core C libraries for top-ten-volume trade processing infrastructure</li>
+              <li><strong>Sanford Bernstein:</strong> Primary order routing system for top-ten-volume trading desk</li>
+            </ul>
+            <p class="exp-tech"><span class="tech-label">Stack:</span> Sybase · Sybase/IQ · SQL Server · PostgreSQL · Oracle · C/C++ · Bash · PowerBuilder · Perl/CGI · Erwin</p>
+          </div>
+
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- EDUCATION -->
+      <section class="resume-section two-col-section">
+        <div>
+          <h2>Education</h2>
+          <div class="edu-item">
+            <h3>Cornell University</h3>
+            <p>Master of Engineering, Electrical Engineering</p>
+          </div>
+          <div class="edu-item">
+            <h3>Cornell University</h3>
+            <p>Bachelor of Engineering, Electrical Engineering</p>
+          </div>
+        </div>
+        <div>
+          <h2>Certifications</h2>
+          <ul class="cert-list">
+            <li>AWS Cloud Practitioner</li>
+            <li>ITIL Foundation Certification</li>
+          </ul>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- PUBLICATIONS -->
+      <section class="resume-section">
+        <h2>Publications &amp; Notable Projects</h2>
+        <div class="pub-list">
+          <div class="pub-item">
+            <div class="pub-meta">Author · 2017</div>
+            <h3>Process-Based Database Administration</h3>
+            <p>Best practices for scaling IT platforms, governance, and operational excellence. Published on Amazon.</p>
+          </div>
+          <div class="pub-item">
+            <div class="pub-meta">Principal · 2005–2012</div>
+            <h3>GEM — Generic Enterprise Manager</h3>
+            <p>Full-featured enterprise operations portal for Win32/Linux hosts and databases with log monitoring, alerting, and auditing. Comparable to ServiceNow.</p>
+          </div>
+          <div class="pub-item">
+            <div class="pub-meta">Open Source</div>
+            <h3>Sybase &amp; SQL Server Utilities</h3>
+            <p>Widely adopted open source backup scripts and database utilities.</p>
+          </div>
+          <div class="pub-item">
+            <div class="pub-meta">Open Source</div>
+            <h3>Conquer — Multiplayer Strategy Game</h3>
+            <p>A fantasy C/C++ multiplayer game in the vein of Civilization — approximately 100,000 lines of C/C++.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .resume-wrap {
+    padding: 3rem 0 5rem;
+  }
+
+  .inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── TOP BAR ── */
+  .resume-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .back-link {
+    color: var(--muted);
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--text); text-decoration: none; }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-download:hover {
+    border-color: var(--accent);
+    background: #4f9cf910;
+    text-decoration: none;
+  }
+
+  /* ── HEADER ── */
+  .resume-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .resume-header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .resume-contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .resume-contact-row a { color: var(--accent); }
+  .resume-contact-row a:hover { text-decoration: underline; }
+  .sep { color: var(--border); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  /* ── SECTIONS ── */
+  .resume-section { margin-bottom: 0; }
+
+  .resume-section h2 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── SUMMARY ── */
+  .summary-block p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+  .summary-block strong { color: var(--text); }
+
+  /* ── COMPETENCIES ── */
+  .competency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .competency-group h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .comp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .comp-tags span {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.55rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  /* ── SKILLS TABLE ── */
+  .skills-table { display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .skill-label {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding-top: 0.05rem;
+    white-space: nowrap;
+  }
+
+  .skill-val { color: var(--text); }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 2rem; }
+
+  .exp-item {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .exp-item:hover { border-color: var(--accent); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.15rem;
+  }
+
+  .exp-title {
+    font-size: 0.88rem;
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  .exp-dates {
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+    font-family: 'Fira Code', monospace;
+    padding-top: 0.15rem;
+  }
+
+  .exp-item ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-item li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-item li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .exp-item li strong { color: var(--text); }
+
+  .exp-tech {
+    font-size: 0.8rem;
+    color: #475569;
+    font-family: 'Fira Code', monospace;
+    margin-top: 0.25rem;
+  }
+
+  .tech-label {
+    color: var(--muted);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  /* ── EDUCATION + CERTS ── */
+  .two-col-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .edu-item {
+    margin-bottom: 1rem;
+  }
+  .edu-item h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .edu-item p { font-size: 0.88rem; color: var(--muted); }
+
+  .cert-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .cert-list li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .cert-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
+
+  /* ── PUBLICATIONS ── */
+  .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .pub-item {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .pub-item:hover { border-color: var(--accent2); }
+
+  .pub-meta {
+    font-size: 0.75rem;
+    color: var(--accent2);
+    font-family: 'Fira Code', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+  }
+
+  .pub-item h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .pub-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+</style>

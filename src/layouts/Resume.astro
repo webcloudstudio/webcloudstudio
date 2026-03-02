@@ -1,0 +1,98 @@
+---
+import Layout from './Layout.astro';
+const { frontmatter } = Astro.props;
+---
+
+<Layout title="Resume — Ed Barlow">
+  <style is:global>
+    .resume-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      line-height: 1.8;
+    }
+
+    .resume-container h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 0 0 0.5rem 0;
+      color: var(--text);
+    }
+
+    .resume-container > p:first-of-type {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .resume-container hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
+
+    .resume-container h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      margin: 2rem 0 1rem 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .resume-container h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 1.5rem 0 0.25rem 0;
+    }
+
+    .resume-container p {
+      color: var(--muted);
+      margin: 0.5rem 0;
+    }
+
+    .resume-container strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .resume-container ul,
+    .resume-container ol {
+      color: var(--muted);
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    .resume-container li {
+      margin: 0.5rem 0;
+    }
+
+    .resume-container a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .resume-container a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      body { background: white; color: black; }
+      .resume-container { padding: 0; }
+      .resume-container h1 { color: black; }
+      .resume-container h2 { color: black; border-color: #ddd; }
+      .resume-container h3 { color: black; }
+      .resume-container p,
+      .resume-container li { color: #333; }
+      .resume-container strong { color: black; }
+      .resume-container a { color: #0066cc; }
+    }
+  </style>
+
+  <div class="resume-container">
+    <slot />
+  </div>
+</Layout>

@@ -1,6 +1,10 @@
+---
+layout: ../layouts/Resume.astro
+---
+
 # Edward Barlow
 
-**West Chester, PA | (914) 837-4798**  
+**West Chester, PA | (914) 837-4798**
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**
 
 ---

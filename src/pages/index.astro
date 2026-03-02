@@ -29,7 +29,8 @@ const base = import.meta.env.BASE_URL;
         <h2>Selected Work</h2>
       </div>
 
-      <div class="card-grid">
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
         <!-- CARD: Herpes Hearts -->
         <article class="card card--featured">
           <div class="card-top">
@@ -99,7 +100,63 @@ const base = import.meta.env.BASE_URL;
             </a>
           </div>
         </article>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="carousel-controls">
+          <button class="carousel-button carousel-prev" id="carouselPrev" aria-label="Previous project">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="carousel-indicators" id="carouselIndicators"></div>
+          <button class="carousel-button carousel-next" id="carouselNext" aria-label="Next project">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
+
+  <script>
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
+    const carouselIndicators = document.getElementById('carouselIndicators');
+
+    const cards = Array.from(carouselTrack.querySelectorAll('article'));
+    let currentIndex = 0;
+
+    // Create indicators
+    cards.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+      dot.setAttribute('aria-label', `Go to project ${index + 1}`);
+      dot.addEventListener('click', () => goToSlide(index));
+      carouselIndicators.appendChild(dot);
+    });
+
+    function updateCarousel() {
+      const offset = -currentIndex * 100;
+      carouselTrack.style.transform = `translateX(${offset}%)`;
+
+      // Update indicators
+      document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = (index + cards.length) % cards.length;
+      updateCarousel();
+    }
+
+    carouselPrev.addEventListener('click', () => goToSlide(currentIndex - 1));
+    carouselNext.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+    // Auto-rotate every 8 seconds
+    setInterval(() => goToSlide(currentIndex + 1), 8000);
+  </script>
 </Layout>

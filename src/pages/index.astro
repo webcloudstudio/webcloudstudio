@@ -22,8 +22,17 @@ const base = import.meta.env.BASE_URL;
   <!-- PROJECTS -->
   <section class="projects" id="projects">
     <div class="section-inner">
-      <div class="section-header">
-        <h2>Selected Work</h2>
+      <div class="carousel-header">
+        <h3>Selected Work</h3>
+        <div class="carousel-nav">
+          <button class="carousel-button" id="carousel-prev" aria-label="Previous slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <div class="carousel-indicators" id="carousel-indicators"></div>
+          <button class="carousel-button" id="carousel-next" aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
       </div>
 
       <div class="carousel-container">
@@ -230,17 +239,6 @@ const base = import.meta.env.BASE_URL;
           
         </article>
         </div>
-
-        <!-- Carousel Controls -->
-        <div class="carousel-controls">
-          <button class="carousel-button" id="carousel-prev" aria-label="Previous slide">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <div class="carousel-indicators" id="carousel-indicators"></div>
-          <button class="carousel-button" id="carousel-next" aria-label="Next slide">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
       </div>
     </div>
   </section>
@@ -253,7 +251,6 @@ const base = import.meta.env.BASE_URL;
     const cards = document.querySelectorAll('.carousel-track article');
 
     let currentSlide = 0;
-    let autoplayInterval;
 
     // Determine slides per view based on screen size
     function getSlidesPerView() {
@@ -281,7 +278,7 @@ const base = import.meta.env.BASE_URL;
       }
     }
 
-    // Update carousel position
+    // Update carousel position with peek effect
     function updateCarousel() {
       const slidesPerView = getSlidesPerView();
       const offset = currentSlide * (100 / slidesPerView);
@@ -296,28 +293,22 @@ const base = import.meta.env.BASE_URL;
     // Navigate to specific slide
     function goToSlide(n) {
       const totalSlides = getTotalSlides();
-      currentSlide = (n + totalSlides) % totalSlides;
+      currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
       updateCarousel();
-      resetAutoplay();
     }
 
-    // Next/Prev navigation
+    // Next/Prev navigation with boundary checks
     function nextSlide() {
-      goToSlide(currentSlide + 1);
+      const totalSlides = getTotalSlides();
+      if (currentSlide < totalSlides - 1) {
+        goToSlide(currentSlide + 1);
+      }
     }
 
     function prevSlide() {
-      goToSlide(currentSlide - 1);
-    }
-
-    // Autoplay
-    function startAutoplay() {
-      autoplayInterval = setInterval(nextSlide, 6000);
-    }
-
-    function resetAutoplay() {
-      clearInterval(autoplayInterval);
-      startAutoplay();
+      if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+      }
     }
 
     // Event listeners
@@ -334,6 +325,5 @@ const base = import.meta.env.BASE_URL;
     // Initialize
     createIndicators();
     updateCarousel();
-    startAutoplay();
   </script>
 </Layout>

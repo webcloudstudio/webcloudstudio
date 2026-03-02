@@ -1,84 +1,45 @@
 ---
 import Layout from './Layout.astro';
-const { frontmatter } = Astro.props;
 ---
 
-<Layout title="Resume — Ed Barlow">
+<Layout title="About — Ed Barlow">
   <style is:global>
     .resume-container {
-      max-width: 720px;
+      max-width: 700px;
       margin: 0 auto;
       padding: 4rem 2rem;
-      line-height: 1.9;
-      font-size: 1rem;
+      line-height: 1.8;
+      font-size: 1.05rem;
     }
 
     .resume-container h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin: 0 0 2rem 0;
+      font-size: 2rem;
+      font-weight: 400;
+      margin: 0 0 0.5rem 0;
       color: var(--text);
-      letter-spacing: -0.02em;
-    }
-
-    .resume-container > p:first-of-type {
-      color: var(--text);
-      font-size: 1.1rem;
-      margin: 0 0 2rem 0;
-      font-weight: 500;
-    }
-
-    .resume-container hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 3rem 0;
     }
 
     .resume-container h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text);
-      margin: 2.5rem 0 1.5rem 0;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin: 0 0 2rem 0;
       text-transform: none;
-      letter-spacing: normal;
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .resume-container h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin: 1.5rem 0 0.5rem 0;
     }
 
     .resume-container p {
-      color: #c9d1d9;
-      margin: 1rem 0;
+      color: var(--text);
+      margin: 1.5rem 0;
       font-weight: 400;
     }
 
-    .resume-container strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .resume-container ul,
-    .resume-container ol {
-      color: #c9d1d9;
-      margin: 1.5rem 0;
-      padding-left: 2rem;
-    }
-
-    .resume-container li {
-      margin: 0.75rem 0;
-      color: #c9d1d9;
+    .resume-container img {
+      display: block;
     }
 
     .resume-container a {
       color: var(--accent);
       text-decoration: none;
-      font-weight: 500;
     }
 
     .resume-container a:hover {
@@ -89,11 +50,8 @@ const { frontmatter } = Astro.props;
       body { background: white; color: black; }
       .resume-container { padding: 0; }
       .resume-container h1 { color: black; }
-      .resume-container h2 { color: black; }
-      .resume-container h3 { color: black; }
-      .resume-container p,
-      .resume-container li { color: #333; }
-      .resume-container strong { color: black; }
+      .resume-container h2 { color: #666; }
+      .resume-container p { color: black; }
       .resume-container a { color: #0066cc; }
     }
   </style>

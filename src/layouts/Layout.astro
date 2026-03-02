@@ -349,27 +349,15 @@ const base = import.meta.env.BASE_URL;
         margin-bottom: 3rem;
       }
 
-      .carousel-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2rem;
+      .gallery-header {
         margin-bottom: 2rem;
       }
 
-      .carousel-header h3 {
+      .gallery-header h3 {
         font-size: 1.5rem;
         font-weight: 700;
         letter-spacing: -0.01em;
         margin: 0;
-        flex: 0 0 auto;
-      }
-
-      .carousel-nav {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        flex: 0 0 auto;
       }
 
       .section-tag {
@@ -392,85 +380,50 @@ const base = import.meta.env.BASE_URL;
         font-size: 1rem;
       }
 
-      /* ── CAROUSEL ── */
-      .carousel-container {
+      /* ── GALLERY ── */
+      .gallery-container {
         position: relative;
         overflow: hidden;
       }
 
-      .carousel-track {
+      .gallery-track {
         display: flex;
         gap: 1.5rem;
-        transition: transform 0.4s ease-out;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .carousel-track article {
+      .gallery-track article {
         flex: 0 0 100%;
         min-width: 100%;
       }
 
-      @media (min-width: 769px) {
-        .carousel-track article {
-          flex: 0 0 50%;
-          min-width: 50%;
-        }
-      }
-
-      @media (min-width: 1201px) {
-        .carousel-track article {
-          flex: 0 0 calc(100% / 3);
-          min-width: calc(100% / 3);
-        }
-      }
-
-      .carousel-button {
-        background: none;
-        border: 1px solid var(--border);
-        color: var(--muted);
-        padding: 0.4rem 0.5rem;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s;
+      .gallery-dots {
         display: flex;
-        align-items: center;
         justify-content: center;
-        flex-shrink: 0;
+        gap: 0.6rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
       }
 
-      .carousel-button:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-      }
-
-      .carousel-button:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-      }
-
-      .carousel-indicators {
-        display: flex;
-        gap: 0.4rem;
-      }
-
-      .carousel-dot {
-        width: 7px;
-        height: 7px;
+      .gallery-dot {
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         background: var(--border);
         border: none;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.25s ease;
         padding: 0;
+        flex-shrink: 0;
       }
 
-      .carousel-dot.active {
-        background: var(--accent);
-        width: 20px;
-        border-radius: 3px;
+      .gallery-dot:hover {
+        background: var(--muted);
       }
 
-      .carousel-dot:hover {
+      .gallery-dot.active {
         background: var(--accent);
+        box-shadow: 0 0 12px var(--accent);
       }
 
       /* ── CARDS ── */

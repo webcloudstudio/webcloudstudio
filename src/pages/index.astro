@@ -1,23 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getTagColorClass } from '../config/tags';
 const base = import.meta.env.BASE_URL;
 ---
 <Layout title="Web Cloud Studio — Ed Barlow">
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-content">
-        <h1>
-          <span class="name">Ed Barlow</span>
-        </h1>
-        <p class="hero-desc">
-          Software engineer, database architect, and published author.
-          Building thoughtful systems for complex problems.
-        </p>
-      </div>
-      <div class="hero-logo">
-        <img src="/webcloudstudio/wcs-logo.jpg" alt="Web Cloud Studio Logo" />
-      </div>
+      <p class="hero-eyebrow mono">&gt; cd ~/portfolio</p>
+      <h1>
+        <span class="name">Ed Barlow</span>
+      </h1>
+      <p class="hero-desc">
+        Software engineer, database architect, and published author.
+        Building thoughtful systems for complex problems.
+      </p>
     </div>
     <div class="hero-grid"></div>
   </section>
@@ -30,7 +27,115 @@ const base = import.meta.env.BASE_URL;
       </div>
 
       <div class="carousel-container">
-        <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-track">
+        <!-- CARD: Enterprise Command Center -->
+        <article class="card card--featured">
+          <div class="card-top">
+            <div class="card-icon " aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <div class="card-meta">
+              <span class="card-type">Software &bull; In Progress</span>
+              
+            </div>
+          </div>
+
+          <h3 class="card-title">Enterprise Command Center</h3>
+          <p class="card-desc">Claude Command Center - Process, Governance, and Reporting best standards for Claude Developers</p>
+
+          <div class="tags">
+            <span class={`tag ${getTagColorClass('Claude')}`}>Claude</span>
+            <span class={`tag ${getTagColorClass('Administration')}`}>Administration</span>
+            <span class={`tag ${getTagColorClass('Process')}`}>Process</span>
+            <span class={`tag ${getTagColorClass('Best Practices')}`}>Best Practices</span>
+          </div>
+
+          
+        </article>
+
+        <!-- CARD: Conquer -->
+        <article class="card card--featured">
+          <div class="card-top">
+            <div class="card-icon " aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <div class="card-meta">
+              <span class="card-type">Free Software &bull; In Progress</span>
+              
+            </div>
+          </div>
+
+          <h3 class="card-title">Conquer</h3>
+          <p class="card-desc">Conquer is a multi player C game published in the 80s and Early 90s</p>
+
+          <div class="tags">
+            <span class={`tag ${getTagColorClass('C++')}`}>C++</span>
+            <span class={`tag ${getTagColorClass('Game')}`}>Game</span>
+            <span class={`tag ${getTagColorClass('Mulit-Player')}`}>Mulit-Player</span>
+          </div>
+
+          
+        </article>
+
+        <!-- CARD: Ed Barlows Sybase Stored Procedure -->
+        <article class="card card--featured">
+          <div class="card-top">
+            <div class="card-icon " aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <div class="card-meta">
+              <span class="card-type">Software &bull; In Progress</span>
+              
+            </div>
+          </div>
+
+          <h3 class="card-title">Ed Barlows Sybase Stored Procedure</h3>
+          <p class="card-desc">Widely Used Shareware Stored Procedure Library For SQL Server and Sybase Servers</p>
+
+          <div class="tags">
+            <span class={`tag ${getTagColorClass('Free')}`}>Free</span>
+            <span class={`tag ${getTagColorClass('Stored Procedure')}`}>Stored Procedure</span>
+            <span class={`tag ${getTagColorClass('Sql')}`}>Sql</span>
+            <span class={`tag ${getTagColorClass('Server Administration')}`}>Server Administration</span>
+          </div>
+
+          
+        </article>
+
+        <!-- CARD: GEM -->
+        <article class="card card--featured">
+          <div class="card-top">
+            <div class="card-icon " aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <div class="card-meta">
+              <span class="card-type">Software &bull; In Progress</span>
+              
+            </div>
+          </div>
+
+          <h3 class="card-title">GEM</h3>
+          <p class="card-desc">Generic Enterprise Manager is a full featured on-premise system management utility competitive with service now</p>
+
+          <div class="tags">
+            <span class={`tag ${getTagColorClass('Perl')}`}>Perl</span>
+            <span class={`tag ${getTagColorClass('CGI')}`}>CGI</span>
+            <span class={`tag ${getTagColorClass('Administration')}`}>Administration</span>
+            <span class={`tag ${getTagColorClass('Monitoring')}`}>Monitoring</span>
+            <span class={`tag ${getTagColorClass('Enterprise')}`}>Enterprise</span>
+          </div>
+
+          
+        </article>
+
         <!-- CARD: Herpes Hearts -->
         <article class="card card--featured">
           <div class="card-top">
@@ -51,13 +156,13 @@ const base = import.meta.env.BASE_URL;
           <p class="card-desc">A full-featured community dating platform built for the HSV+ community. Features OAuth-only authentication (Google), custom profiles, messaging, likes, blocking, and profile search.</p>
 
           <div class="tags">
-            <span class="tag tag--py">Django</span>
-            <span class="tag tag--py">Python</span>
-            <span class="tag tag--db">PostgreSQL</span>
-            <span class="tag tag--ops">Docker</span>
-            <span class="tag tag--ops">Railway</span>
-            <span class="tag tag--fe">Bootstrap</span>
-            <span class="tag tag--sec">OAuth</span>
+            <span class={`tag ${getTagColorClass('Django')}`}>Django</span>
+            <span class={`tag ${getTagColorClass('Python')}`}>Python</span>
+            <span class={`tag ${getTagColorClass('PostgreSQL')}`}>PostgreSQL</span>
+            <span class={`tag ${getTagColorClass('Docker')}`}>Docker</span>
+            <span class={`tag ${getTagColorClass('Railway')}`}>Railway</span>
+            <span class={`tag ${getTagColorClass('Bootstrap')}`}>Bootstrap</span>
+            <span class={`tag ${getTagColorClass('OAuth')}`}>OAuth</span>
           </div>
 
           <div class="card-actions">
@@ -87,11 +192,11 @@ const base = import.meta.env.BASE_URL;
           <p class="card-desc">A practical guide to modern best practices for enterprise data and database systems management. Covers agile workflows, monitoring, security, disaster recovery, and database development at scale.</p>
 
           <div class="tags">
-            <span class="tag tag--db">Database</span>
-            <span class="tag tag--db">PostgreSQL</span>
-            <span class="tag tag--neutral">Agile</span>
-            <span class="tag tag--neutral">Best Practices</span>
-            <span class="tag tag--neutral">Enterprise</span>
+            <span class={`tag ${getTagColorClass('Database')}`}>Database</span>
+            <span class={`tag ${getTagColorClass('PostgreSQL')}`}>PostgreSQL</span>
+            <span class={`tag ${getTagColorClass('Agile')}`}>Agile</span>
+            <span class={`tag ${getTagColorClass('Best Practices')}`}>Best Practices</span>
+            <span class={`tag ${getTagColorClass('Enterprise')}`}>Enterprise</span>
           </div>
 
           <div class="card-actions">
@@ -100,20 +205,40 @@ const base = import.meta.env.BASE_URL;
             </a>
           </div>
         </article>
+
+        <!-- CARD: Senior.Tv -->
+        <article class="card card--featured">
+          <div class="card-top">
+            <div class="card-icon " aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <div class="card-meta">
+              <span class="card-type">Software &bull; In Progress</span>
+              
+            </div>
+          </div>
+
+          <h3 class="card-title">Senior.Tv</h3>
+          <p class="card-desc"></p>
+
+          <div class="tags">
+            
+          </div>
+
+          
+        </article>
         </div>
 
         <!-- Carousel Controls -->
         <div class="carousel-controls">
-          <button class="carousel-button carousel-prev" id="carouselPrev" aria-label="Previous project">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
+          <button class="carousel-button" id="carousel-prev" aria-label="Previous slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
-          <div class="carousel-indicators" id="carouselIndicators"></div>
-          <button class="carousel-button carousel-next" id="carouselNext" aria-label="Next project">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
+          <div class="carousel-indicators" id="carousel-indicators"></div>
+          <button class="carousel-button" id="carousel-next" aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </button>
         </div>
       </div>
@@ -121,42 +246,94 @@ const base = import.meta.env.BASE_URL;
   </section>
 
   <script>
-    const carouselTrack = document.getElementById('carouselTrack');
-    const carouselPrev = document.getElementById('carouselPrev');
-    const carouselNext = document.getElementById('carouselNext');
-    const carouselIndicators = document.getElementById('carouselIndicators');
+    const carouselTrack = document.querySelector('.carousel-track');
+    const carouselPrev = document.getElementById('carousel-prev');
+    const carouselNext = document.getElementById('carousel-next');
+    const indicatorsContainer = document.getElementById('carousel-indicators');
+    const cards = document.querySelectorAll('.carousel-track article');
 
-    const cards = Array.from(carouselTrack.querySelectorAll('article'));
-    let currentIndex = 0;
+    let currentSlide = 0;
+    let autoplayInterval;
 
-    // Create indicators
-    cards.forEach((_, index) => {
-      const dot = document.createElement('button');
-      dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
-      dot.setAttribute('aria-label', `Go to project ${index + 1}`);
-      dot.addEventListener('click', () => goToSlide(index));
-      carouselIndicators.appendChild(dot);
-    });
+    // Determine slides per view based on screen size
+    function getSlidesPerView() {
+      if (window.innerWidth < 769) return 1;
+      if (window.innerWidth < 1201) return 2;
+      return 3;
+    }
 
+    // Calculate total slides needed
+    function getTotalSlides() {
+      const slidesPerView = getSlidesPerView();
+      return Math.ceil(cards.length / slidesPerView);
+    }
+
+    // Create indicator dots
+    function createIndicators() {
+      indicatorsContainer.innerHTML = '';
+      const totalSlides = getTotalSlides();
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot';
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        indicatorsContainer.appendChild(dot);
+      }
+    }
+
+    // Update carousel position
     function updateCarousel() {
-      const offset = -currentIndex * 100;
-      carouselTrack.style.transform = `translateX(${offset}%)`;
+      const slidesPerView = getSlidesPerView();
+      const offset = currentSlide * (100 / slidesPerView);
+      carouselTrack.style.transform = `translateX(-${offset}%)`;
 
-      // Update indicators
-      document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentIndex);
+      // Update dots
+      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
       });
     }
 
-    function goToSlide(index) {
-      currentIndex = (index + cards.length) % cards.length;
+    // Navigate to specific slide
+    function goToSlide(n) {
+      const totalSlides = getTotalSlides();
+      currentSlide = (n + totalSlides) % totalSlides;
       updateCarousel();
+      resetAutoplay();
     }
 
-    carouselPrev.addEventListener('click', () => goToSlide(currentIndex - 1));
-    carouselNext.addEventListener('click', () => goToSlide(currentIndex + 1));
+    // Next/Prev navigation
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
 
-    // Auto-rotate every 8 seconds
-    setInterval(() => goToSlide(currentIndex + 1), 8000);
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    // Autoplay
+    function startAutoplay() {
+      autoplayInterval = setInterval(nextSlide, 6000);
+    }
+
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      startAutoplay();
+    }
+
+    // Event listeners
+    carouselNext.addEventListener('click', nextSlide);
+    carouselPrev.addEventListener('click', prevSlide);
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      createIndicators();
+      currentSlide = 0;
+      updateCarousel();
+    });
+
+    // Initialize
+    createIndicators();
+    updateCarousel();
+    startAutoplay();
   </script>
 </Layout>

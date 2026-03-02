@@ -22,12 +22,20 @@ const base = import.meta.env.BASE_URL;
   <!-- PROJECTS -->
   <section class="projects" id="projects">
     <div class="section-inner">
-      <div class="gallery-header">
-        <h3>Selected Work</h3>
+      <div class="work-header">
+        <h2>Selected Work</h2>
+        <div class="work-controls">
+          <button id="scroll-prev" class="scroll-btn" aria-label="Previous">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button id="scroll-next" class="scroll-btn" aria-label="Next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
       </div>
 
-      <div class="gallery-container">
-        <div class="gallery-track">
+      <div class="cards-scroll-container">
+        <div class="cards-scroll-track">
         <!-- CARD: Enterprise Command Center -->
         <article class="card card--featured">
           <div class="card-top">
@@ -230,63 +238,64 @@ const base = import.meta.env.BASE_URL;
           
         </article>
         </div>
-
-        <!-- Dots Navigation -->
-        <div class="gallery-dots" id="gallery-dots"></div>
       </div>
     </div>
   </section>
 
   <script>
-    const galleryTrack = document.querySelector('.gallery-track');
-    const dotsContainer = document.getElementById('gallery-dots');
-    const cards = document.querySelectorAll('.gallery-track article');
+    const scrollTrack = document.querySelector('.cards-scroll-track');
+    const prevBtn = document.getElementById('scroll-prev');
+    const nextBtn = document.getElementById('scroll-next');
 
-    let currentCard = 0;
-    const totalCards = cards.length;
+    let scrollOffset = 0;
 
-    // Create one dot per card
-    function createDots() {
-      dotsContainer.innerHTML = '';
-      for (let i = 0; i < totalCards; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'gallery-dot';
-        if (i === 0) dot.classList.add('active');
-        dot.setAttribute('aria-label', `Go to card ${i + 1}`);
-        dot.addEventListener('click', () => goToCard(i));
-        dotsContainer.appendChild(dot);
+    // Get how many cards fit per view
+    function getCardsPerView() {
+      const width = window.innerWidth;
+      if (width < 769) return 1;
+      if (width < 1201) return 2;
+      return 3;
+    }
+
+    // Scroll by one card width
+    function scroll(direction) {
+      const cardsPerView = getCardsPerView();
+      const cardCount = scrollTrack.querySelectorAll('article').length;
+      const maxScroll = Math.max(0, cardCount - cardsPerView);
+
+      if (direction === 'next') {
+        scrollOffset = Math.min(scrollOffset + 1, maxScroll);
+      } else {
+        scrollOffset = Math.max(scrollOffset - 1, 0);
       }
+
+      updateScroll();
     }
 
-    // Navigate to a specific card
-    function goToCard(index) {
-      currentCard = index;
-      updateGallery();
+    // Apply scroll transform
+    function updateScroll() {
+      const cardsPerView = getCardsPerView();
+      const offset = scrollOffset * (100 / cardsPerView);
+      scrollTrack.style.transform = `translateX(-${offset}%)`;
+
+      // Update button states
+      const cardCount = scrollTrack.querySelectorAll('article').length;
+      const maxScroll = Math.max(0, cardCount - cardsPerView);
+      prevBtn.disabled = scrollOffset === 0;
+      nextBtn.disabled = scrollOffset === maxScroll;
     }
 
-    // Update gallery display
-    function updateGallery() {
-      // Move track to show current card
-      const offset = currentCard * 100;
-      galleryTrack.style.transform = `translateX(-${offset}%)`;
+    // Event listeners
+    prevBtn.addEventListener('click', () => scroll('prev'));
+    nextBtn.addEventListener('click', () => scroll('next'));
 
-      // Update active dot
-      document.querySelectorAll('.gallery-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentCard);
-      });
-    }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' && currentCard < totalCards - 1) {
-        goToCard(currentCard + 1);
-      } else if (e.key === 'ArrowLeft' && currentCard > 0) {
-        goToCard(currentCard - 1);
-      }
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      scrollOffset = 0;
+      updateScroll();
     });
 
     // Initialize
-    createDots();
-    updateGallery();
+    updateScroll();
   </script>
 </Layout>

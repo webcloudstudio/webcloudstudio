@@ -349,15 +349,51 @@ const base = import.meta.env.BASE_URL;
         margin-bottom: 3rem;
       }
 
-      .gallery-header {
-        margin-bottom: 2rem;
+      .work-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
       }
 
-      .gallery-header h3 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        letter-spacing: -0.01em;
+      .work-header h2 {
+        font-size: clamp(1.8rem, 4vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
         margin: 0;
+      }
+
+      .work-controls {
+        display: flex;
+        gap: 0.75rem;
+        flex-shrink: 0;
+      }
+
+      .scroll-btn {
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+
+      .scroll-btn:hover:not(:disabled) {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: #4f9cf908;
+      }
+
+      .scroll-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
       }
 
       .section-tag {
@@ -380,50 +416,38 @@ const base = import.meta.env.BASE_URL;
         font-size: 1rem;
       }
 
-      /* ── GALLERY ── */
-      .gallery-container {
+      /* ── CARDS SCROLL ── */
+      .cards-scroll-container {
         position: relative;
         overflow: hidden;
       }
 
-      .gallery-track {
+      .cards-scroll-track {
         display: flex;
         gap: 1.5rem;
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
 
-      .gallery-track article {
+      /* Mobile: 1 card per view */
+      .cards-scroll-track article {
         flex: 0 0 100%;
         min-width: 100%;
       }
 
-      .gallery-dots {
-        display: flex;
-        justify-content: center;
-        gap: 0.6rem;
-        margin-top: 2rem;
-        flex-wrap: wrap;
+      /* Tablet: 2 cards per view */
+      @media (min-width: 769px) {
+        .cards-scroll-track article {
+          flex: 0 0 calc(50% - 0.75rem);
+          min-width: calc(50% - 0.75rem);
+        }
       }
 
-      .gallery-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--border);
-        border: none;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        padding: 0;
-        flex-shrink: 0;
-      }
-
-      .gallery-dot:hover {
-        background: var(--muted);
-      }
-
-      .gallery-dot.active {
-        background: var(--accent);
-        box-shadow: 0 0 12px var(--accent);
+      /* Desktop: 3 cards per view */
+      @media (min-width: 1201px) {
+        .cards-scroll-track article {
+          flex: 0 0 calc(33.333% - 1rem);
+          min-width: calc(33.333% - 1rem);
+        }
       }
 
       /* ── CARDS ── */

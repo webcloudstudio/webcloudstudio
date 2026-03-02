@@ -1,8 +1,15 @@
-<svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
-      .sig-text { font-family: "Brush Script MT", "Lucida Handwriting", cursive; font-size: 48px; fill: currentColor; }
+      @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+      .sig-text {
+        font-family: "Great Vibes", cursive;
+        font-size: 62px;
+        font-weight: 400;
+        fill: currentColor;
+        letter-spacing: -2px;
+      }
     </style>
   </defs>
-  <text x="10" y="48" class="sig-text">Ed</text>
+  <text x="15" y="60" class="sig-text">Ed</text>
 </svg>

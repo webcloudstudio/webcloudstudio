@@ -12,11 +12,32 @@ import Layout from './Layout.astro';
       font-size: 1.05rem;
     }
 
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
     .resume-container h1 {
       font-size: 2rem;
       font-weight: 400;
-      margin: 0 0 0.5rem 0;
+      margin: 0;
       color: var(--text);
+    }
+
+    .resume-signature {
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+    }
+
+    .resume-signature img {
+      width: 140px;
+      height: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
 
     .resume-container h2 {
@@ -49,6 +70,7 @@ import Layout from './Layout.astro';
     @media print {
       body { background: white; color: black; }
       .resume-container { padding: 0; }
+      .resume-header { border-color: #ddd; }
       .resume-container h1 { color: black; }
       .resume-container h2 { color: #666; }
       .resume-container p { color: black; }
@@ -57,6 +79,13 @@ import Layout from './Layout.astro';
   </style>
 
   <div class="resume-container">
-    <slot />
+    <div class="resume-header">
+      <div>
+        <slot />
+      </div>
+      <div class="resume-signature">
+        <img src="/webcloudstudio/signature.svg" alt="Ed Barlow signature">
+      </div>
+    </div>
   </div>
 </Layout>

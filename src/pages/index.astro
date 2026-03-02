@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getTagColorClass } from '../config/tags';
 const base = import.meta.env.BASE_URL;
 ---
 <Layout title="Web Cloud Studio — Ed Barlow">
@@ -10,11 +9,17 @@ const base = import.meta.env.BASE_URL;
       <p class="hero-eyebrow mono">&gt; cd ~/portfolio</p>
       <h1>
         <span class="name">Ed Barlow</span>
+        <span class="rule"></span>
+        <span class="role">Web Cloud Studio</span>
       </h1>
       <p class="hero-desc">
         Software engineer, database architect, and published author.
         Building thoughtful systems for complex problems.
       </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href={`${base}resume`} class="btn-ghost">Resume &rarr;</a>
+      </div>
     </div>
     <div class="hero-grid"></div>
   </section>
@@ -22,20 +27,13 @@ const base = import.meta.env.BASE_URL;
   <!-- PROJECTS -->
   <section class="projects" id="projects">
     <div class="section-inner">
-      <div class="work-header">
+      <div class="section-header">
+        <span class="section-tag mono">// projects</span>
         <h2>Selected Work</h2>
-        <div class="work-controls">
-          <button id="scroll-prev" class="scroll-btn" aria-label="Previous">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <button id="scroll-next" class="scroll-btn" aria-label="Next">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <p class="section-sub">A sample of projects in production and in progress.</p>
       </div>
 
-      <div class="cards-scroll-container">
-        <div class="cards-scroll-track">
+      <div class="card-grid">
         <!-- CARD: Enterprise Command Center -->
         <article class="card card--featured">
           <div class="card-top">
@@ -54,10 +52,10 @@ const base = import.meta.env.BASE_URL;
           <p class="card-desc">Claude Command Center - Process, Governance, and Reporting best standards for Claude Developers</p>
 
           <div class="tags">
-            <span class={`tag ${getTagColorClass('Claude')}`}>Claude</span>
-            <span class={`tag ${getTagColorClass('Administration')}`}>Administration</span>
-            <span class={`tag ${getTagColorClass('Process')}`}>Process</span>
-            <span class={`tag ${getTagColorClass('Best Practices')}`}>Best Practices</span>
+            <span class="tag tag--py">Claude</span>
+            <span class="tag tag--fe">Administration</span>
+            <span class="tag tag--db">Process</span>
+            <span class="tag tag--py">Best Practices</span>
           </div>
 
           
@@ -81,9 +79,9 @@ const base = import.meta.env.BASE_URL;
           <p class="card-desc">Conquer is a multi player C game published in the 80s and Early 90s</p>
 
           <div class="tags">
-            <span class={`tag ${getTagColorClass('C++')}`}>C++</span>
-            <span class={`tag ${getTagColorClass('Game')}`}>Game</span>
-            <span class={`tag ${getTagColorClass('Mulit-Player')}`}>Mulit-Player</span>
+            <span class="tag tag--db">C++</span>
+            <span class="tag tag--sec">Game</span>
+            <span class="tag tag--sec">Mulit-Player</span>
           </div>
 
           
@@ -107,10 +105,10 @@ const base = import.meta.env.BASE_URL;
           <p class="card-desc">Widely Used Shareware Stored Procedure Library For SQL Server and Sybase Servers</p>
 
           <div class="tags">
-            <span class={`tag ${getTagColorClass('Free')}`}>Free</span>
-            <span class={`tag ${getTagColorClass('Stored Procedure')}`}>Stored Procedure</span>
-            <span class={`tag ${getTagColorClass('Sql')}`}>Sql</span>
-            <span class={`tag ${getTagColorClass('Server Administration')}`}>Server Administration</span>
+            <span class="tag tag--db">Free</span>
+            <span class="tag tag--ops">Stored Procedure</span>
+            <span class="tag tag--sec">Sql</span>
+            <span class="tag tag--sec">Server Administration</span>
           </div>
 
           
@@ -134,11 +132,11 @@ const base = import.meta.env.BASE_URL;
           <p class="card-desc">Generic Enterprise Manager is a full featured on-premise system management utility competitive with service now</p>
 
           <div class="tags">
-            <span class={`tag ${getTagColorClass('Perl')}`}>Perl</span>
-            <span class={`tag ${getTagColorClass('CGI')}`}>CGI</span>
-            <span class={`tag ${getTagColorClass('Administration')}`}>Administration</span>
-            <span class={`tag ${getTagColorClass('Monitoring')}`}>Monitoring</span>
-            <span class={`tag ${getTagColorClass('Enterprise')}`}>Enterprise</span>
+            <span class="tag tag--db">Perl</span>
+            <span class="tag tag--neutral">CGI</span>
+            <span class="tag tag--fe">Administration</span>
+            <span class="tag tag--db">Monitoring</span>
+            <span class="tag tag--db">Enterprise</span>
           </div>
 
           
@@ -164,13 +162,13 @@ const base = import.meta.env.BASE_URL;
           <p class="card-desc">A full-featured community dating platform built for the HSV+ community. Features OAuth-only authentication (Google), custom profiles, messaging, likes, blocking, and profile search.</p>
 
           <div class="tags">
-            <span class={`tag ${getTagColorClass('Django')}`}>Django</span>
-            <span class={`tag ${getTagColorClass('Python')}`}>Python</span>
-            <span class={`tag ${getTagColorClass('PostgreSQL')}`}>PostgreSQL</span>
-            <span class={`tag ${getTagColorClass('Docker')}`}>Docker</span>
-            <span class={`tag ${getTagColorClass('Railway')}`}>Railway</span>
-            <span class={`tag ${getTagColorClass('Bootstrap')}`}>Bootstrap</span>
-            <span class={`tag ${getTagColorClass('OAuth')}`}>OAuth</span>
+            <span class="tag tag--py">Django</span>
+            <span class="tag tag--py">Python</span>
+            <span class="tag tag--db">PostgreSQL</span>
+            <span class="tag tag--ops">Docker</span>
+            <span class="tag tag--ops">Railway</span>
+            <span class="tag tag--fe">Bootstrap</span>
+            <span class="tag tag--sec">OAuth</span>
           </div>
 
           <div class="card-actions">
@@ -200,11 +198,11 @@ const base = import.meta.env.BASE_URL;
           <p class="card-desc">A practical guide to modern best practices for enterprise data and database systems management. Covers agile workflows, monitoring, security, disaster recovery, and database development at scale.</p>
 
           <div class="tags">
-            <span class={`tag ${getTagColorClass('Database')}`}>Database</span>
-            <span class={`tag ${getTagColorClass('PostgreSQL')}`}>PostgreSQL</span>
-            <span class={`tag ${getTagColorClass('Agile')}`}>Agile</span>
-            <span class={`tag ${getTagColorClass('Best Practices')}`}>Best Practices</span>
-            <span class={`tag ${getTagColorClass('Enterprise')}`}>Enterprise</span>
+            <span class="tag tag--db">Database</span>
+            <span class="tag tag--db">PostgreSQL</span>
+            <span class="tag tag--sec">Agile</span>
+            <span class="tag tag--py">Best Practices</span>
+            <span class="tag tag--db">Enterprise</span>
           </div>
 
           <div class="card-actions">
@@ -237,65 +235,7 @@ const base = import.meta.env.BASE_URL;
 
           
         </article>
-        </div>
       </div>
     </div>
   </section>
-
-  <script>
-    const scrollTrack = document.querySelector('.cards-scroll-track');
-    const prevBtn = document.getElementById('scroll-prev');
-    const nextBtn = document.getElementById('scroll-next');
-
-    let scrollOffset = 0;
-
-    // Get how many cards fit per view
-    function getCardsPerView() {
-      const width = window.innerWidth;
-      if (width < 769) return 1;
-      if (width < 1201) return 2;
-      return 3;
-    }
-
-    // Scroll by one card width
-    function scroll(direction) {
-      const cardsPerView = getCardsPerView();
-      const cardCount = scrollTrack.querySelectorAll('article').length;
-      const maxScroll = Math.max(0, cardCount - cardsPerView);
-
-      if (direction === 'next') {
-        scrollOffset = Math.min(scrollOffset + 1, maxScroll);
-      } else {
-        scrollOffset = Math.max(scrollOffset - 1, 0);
-      }
-
-      updateScroll();
-    }
-
-    // Apply scroll transform
-    function updateScroll() {
-      const cardsPerView = getCardsPerView();
-      const offset = scrollOffset * (100 / cardsPerView);
-      scrollTrack.style.transform = `translateX(-${offset}%)`;
-
-      // Update button states
-      const cardCount = scrollTrack.querySelectorAll('article').length;
-      const maxScroll = Math.max(0, cardCount - cardsPerView);
-      prevBtn.disabled = scrollOffset === 0;
-      nextBtn.disabled = scrollOffset === maxScroll;
-    }
-
-    // Event listeners
-    prevBtn.addEventListener('click', () => scroll('prev'));
-    nextBtn.addEventListener('click', () => scroll('next'));
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      scrollOffset = 0;
-      updateScroll();
-    });
-
-    // Initialize
-    updateScroll();
-  </script>
 </Layout>

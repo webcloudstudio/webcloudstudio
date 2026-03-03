@@ -9,17 +9,11 @@ const base = import.meta.env.BASE_URL;
       <p class="hero-eyebrow mono">&gt; cd ~/portfolio</p>
       <h1>
         <span class="name">Ed Barlow</span>
-        <span class="rule"></span>
-        <span class="role">Web Cloud Studio</span>
       </h1>
       <p class="hero-desc">
         Software engineer, database architect, and published author.
         Building thoughtful systems for complex problems.
       </p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn-primary">View Projects</a>
-        <a href={`${base}resume`} class="btn-ghost">Resume &rarr;</a>
-      </div>
     </div>
     <div class="hero-grid"></div>
   </section>
@@ -27,13 +21,20 @@ const base = import.meta.env.BASE_URL;
   <!-- PROJECTS -->
   <section class="projects" id="projects">
     <div class="section-inner">
-      <div class="section-header">
-        <span class="section-tag mono">// projects</span>
+      <div class="work-header">
         <h2>Selected Work</h2>
-        <p class="section-sub">A sample of projects in production and in progress.</p>
+        <div class="work-controls">
+          <button id="scroll-prev" class="scroll-btn" aria-label="Previous">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button id="scroll-next" class="scroll-btn" aria-label="Next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
       </div>
 
-      <div class="card-grid">
+      <div class="cards-scroll-container">
+        <div class="cards-scroll-track">
         <!-- CARD: Enterprise Command Center -->
         <article class="card card--featured">
           <div class="card-top">
@@ -49,7 +50,21 @@ const base = import.meta.env.BASE_URL;
           </div>
 
           <h3 class="card-title">Enterprise Command Center</h3>
-          <p class="card-desc">Claude Command Center - Process, Governance, and Reporting best standards for Claude Developers</p>
+          <p class="card-desc">Claude Command Center
+Operations :  Monitoring: Notifications & Heartbeats
+Scheduler: Jobs (instances), Daemons/Batches, Schedules
+Mandated Standards and Security
+Project MetaData
+                        Git, Unit Tests, Versioning
+                Standard Command & Control Layer
+                Integrated Configuration
+        Github Home Page Publishing
+        User Workflow
+                Proposal -> Defined -> Submit/Develop -> Test -> Release
+                Project/Epic/Feature Tickets
+        Hooks
+                New Project
+                Alerts/Popups - Im Done, Compact Me, Usage Warning</p>
 
           <div class="tags">
             <span class="tag tag--py">Claude</span>
@@ -211,31 +226,65 @@ const base = import.meta.env.BASE_URL;
             </a>
           </div>
         </article>
-
-        <!-- CARD: Senior.Tv -->
-        <article class="card card--featured">
-          <div class="card-top">
-            <div class="card-icon " aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </div>
-            <div class="card-meta">
-              <span class="card-type">Software &bull; In Progress</span>
-              
-            </div>
-          </div>
-
-          <h3 class="card-title">Senior.Tv</h3>
-          <p class="card-desc"></p>
-
-          <div class="tags">
-            
-          </div>
-
-          
-        </article>
+        </div>
       </div>
     </div>
   </section>
+
+  <script>
+    const scrollTrack = document.querySelector('.cards-scroll-track');
+    const prevBtn = document.getElementById('scroll-prev');
+    const nextBtn = document.getElementById('scroll-next');
+
+    let scrollOffset = 0;
+
+    // Get how many cards fit per view
+    function getCardsPerView() {
+      const width = window.innerWidth;
+      if (width < 769) return 1;
+      if (width < 1201) return 2;
+      return 3;
+    }
+
+    // Scroll by one card width
+    function scroll(direction) {
+      const cardsPerView = getCardsPerView();
+      const cardCount = scrollTrack.querySelectorAll('article').length;
+      const maxScroll = Math.max(0, cardCount - cardsPerView);
+
+      if (direction === 'next') {
+        scrollOffset = Math.min(scrollOffset + 1, maxScroll);
+      } else {
+        scrollOffset = Math.max(scrollOffset - 1, 0);
+      }
+
+      updateScroll();
+    }
+
+    // Apply scroll transform
+    function updateScroll() {
+      const cardsPerView = getCardsPerView();
+      const offset = scrollOffset * (100 / cardsPerView);
+      scrollTrack.style.transform = `translateX(-${offset}%)`;
+
+      // Update button states
+      const cardCount = scrollTrack.querySelectorAll('article').length;
+      const maxScroll = Math.max(0, cardCount - cardsPerView);
+      prevBtn.disabled = scrollOffset === 0;
+      nextBtn.disabled = scrollOffset === maxScroll;
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', () => scroll('prev'));
+    nextBtn.addEventListener('click', () => scroll('next'));
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      scrollOffset = 0;
+      updateScroll();
+    });
+
+    // Initialize
+    updateScroll();
+  </script>
 </Layout>

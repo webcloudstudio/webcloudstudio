@@ -10,7 +10,7 @@ const base = import.meta.env.BASE_URL;
         <span class="name">Ed Barlow</span>
       </h1>
       <p class="hero-desc">
-        Software engineer, database architect, and published author. Building thoughtful systems for complex problems.
+        Superb Software engineer, database architect, and published author. Building thoughtful systems for complex problems.
       </p>
     </div>
     <div class="hero-grid"></div>
@@ -19,11 +19,9 @@ const base = import.meta.env.BASE_URL;
   <!-- PROJECTS -->
   <section class="projects" id="projects">
     <div class="section-inner">
-      <!-- Header row: subtitle left | title center | (spacer right) -->
       <div class="projects-header">
-        <p class="section-subtitle">A selection of my work</p>
         <h2 class="work-header-title">Projects</h2>
-        <span></span>
+        <p class="section-subtitle">A selection of my work</p>
       </div>
 
       <!-- Responsive card grid -->
@@ -136,24 +134,20 @@ const base = import.meta.env.BASE_URL;
     .projects { padding: 3rem 0; }
 
     .projects-header {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: baseline;
-      gap: 1rem;
+      text-align: center;
       margin-bottom: 2.5rem;
+    }
+
+    .work-header-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 0.4rem;
     }
 
     .section-subtitle {
       color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .work-header-title {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      text-align: center;
+      font-size: 1rem;
       margin: 0;
-      white-space: nowrap;
     }
 
     /* Responsive grid — 3 col → 2 col → 1 col */

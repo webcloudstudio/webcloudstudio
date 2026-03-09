@@ -16,10 +16,6 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-content">
-            <div class="card-top-meta">
-              <span class="card-type-badge">Software</span>
-            </div>
-
             <div class="tags">
               <span class="tag tag--neutral">Freeware</span>
             <span class="tag tag--neutral">Stored Procedures</span>
@@ -44,10 +40,6 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-content">
-            <div class="card-top-meta">
-              <span class="card-type-badge">AI Workflow</span>
-            </div>
-
             <div class="tags">
               <span class="tag tag--neutral">AI</span>
             <span class="tag tag--neutral">Workflow</span>
@@ -70,10 +62,6 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-content">
-            <div class="card-top-meta">
-              <span class="card-type-badge">Dating App</span>
-            </div>
-
             <div class="tags">
               <span class="tag tag--py">Django</span>
             <span class="tag tag--ops">Docker</span>
@@ -105,10 +93,6 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-content">
-            <div class="card-top-meta">
-              <span class="card-type-badge">Book</span>
-            </div>
-
             <div class="tags">
               <span class="tag tag--py">Best Practices</span>
             <span class="tag tag--neutral">Data Engineering</span>
@@ -139,10 +123,6 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-content">
-            <div class="card-top-meta">
-              <span class="card-type-badge">Free Game</span>
-            </div>
-
             <div class="tags">
               <span class="tag tag--db">C++</span>
             <span class="tag tag--neutral">Multi-Player Game</span>
@@ -165,10 +145,6 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-content">
-            <div class="card-top-meta">
-              <span class="card-type-badge">Software</span>
-            </div>
-
             <div class="tags">
               <span class="tag tag--db">Perl</span>
             <span class="tag tag--neutral">Enterprise Administration</span>
@@ -204,11 +180,12 @@ import Layout from '../../layouts/Layout.astro';
       margin: 0;
     }
 
-    /* Responsive grid — 3 col → 2 col → 1 col */
+    /* Grid: column gap only — rows touch */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.75rem;
+      column-gap: 1.75rem;
+      row-gap: 0;
     }
 
     @media (max-width: 1024px) {
@@ -258,22 +235,14 @@ import Layout from '../../layouts/Layout.astro';
       background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
     }
 
+    /* Content grows to fill card, items packed at top */
     .card-content {
       flex: 1;
-      padding: 1.25rem 1.5rem;
+      padding: 1.25rem 1.5rem 0.75rem;
       display: flex;
       flex-direction: column;
-      gap: 0.65rem;
-    }
-
-    .card-top-meta { display: flex; align-items: center; }
-
-    .card-type-badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      color: var(--muted);
+      align-items: flex-start;
+      gap: 0.6rem;
     }
 
     .card-title {
@@ -289,27 +258,42 @@ import Layout from '../../layouts/Layout.astro';
       font-size: 0.88rem;
       color: var(--muted);
       line-height: 1.65;
-      flex: 1;
     }
 
-    .card-actions { padding: 0 1.5rem 1.25rem; }
+    /* Action area: fixed height for 2 button rows, button pinned to bottom */
+    .card-actions {
+      min-height: 5rem;
+      padding: 0.75rem 2rem 1.5rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
 
-    .card-link-trigger { position: relative; display: inline-block; }
+    .card-link-trigger {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
 
     .card-link-btn {
       background: none;
-      border: 1px solid var(--border);
+      border: 1px solid var(--accent);
       color: var(--accent);
       font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 500;
-      padding: 0.4rem 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.65rem 2.5rem;
       border-radius: 6px;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      width: 100%;
     }
 
-    .card-link-btn:hover { border-color: var(--accent); background: #4f9cf910; }
+    .card-link-btn:hover {
+      background: var(--accent);
+      color: #080810;
+    }
 
     .card-link-flyout {
       position: absolute;

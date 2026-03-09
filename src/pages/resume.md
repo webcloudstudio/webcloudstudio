@@ -2,22 +2,18 @@
 layout: ../layouts/Resume.astro
 ---
 
-# Edward Barlow
+# Edward Barlow - AI Adoption Consultant
 
-> **AI Adoption Consultant** for Small and Mid-Sized Business.
-> My framework provides **Engineering Best Practices** to enable **Your Ideas**.
+> My **Software Engineering Best Practices Markdown** can AI enable your Small/Mid-Sized Business.
 
 **West Chester, PA | (914) 837-4798**  
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**
-
----
 
 ## PROFESSIONAL SUMMARY
 
 **Senior Principal Engineer with 30+ years of experience** delivering business solutions, critical infrastructure, and data platforms for leading financial institutions, insurance companies, and startups. People and process-first technology leader specializing in backend platform architecture, data engineering, distributed systems, and growth-enabling infrastructure.
 
 **Leadership approach:** Active listener who translates business concepts into actionable technical plans and execution. Trusted communicator bridging stakeholder needs and engineering teams. Drives vision, execution, quality, and collaborative IT culture through digital transformation. Published author with expert technical writing skills. I drive operational excellence by fixing problems the right way.
-
 
 ## CORE COMPETENCIES
 
@@ -26,7 +22,6 @@ layout: ../layouts/Resume.astro
 **Technical Expertise:** Backend Platform Development • Distributed Systems • Microservices & APIs • Data Quality • Security • CI/CD/DevOps • System Design • Monitoring & Observability • Technical Documentation
 
 **Data & Scale:** Highly Available Systems • ETL/ELT Pipelines • Streaming • Data Warehousing • Database Architecture • Performance at Scale
-
 
 ## TECHNICAL SKILLS
 
@@ -39,9 +34,6 @@ layout: ../layouts/Resume.astro
 **DevOps & Infrastructure:** Terraform, Docker, Kubernetes/Openshift, Jenkins, Ansible, Airflow, Linux, Windows Server, AWS 
 
 **Data & Streaming:** Kafka, ETL Pipelines, DBT, Delta Lake
-
----
-<div style="page-break-after: always"></div>
 
 ## PROFESSIONAL EXPERIENCE
 
@@ -106,8 +98,6 @@ layout: ../layouts/Resume.astro
     - **Sanford Bernstein:** Primary order routing system for top-ten-volume trading desk 
 - Technologies: Sybase, Sybase/IQ, SQL Server, PostgreSQL, Oracle, C/C++, Bash, PowerBuilder, Perl/CGI, Erwin
 
----
-
 ## EDUCATION
 
 **Cornell University**  
@@ -116,14 +106,10 @@ Master of Engineering, Electrical Engineering
 **Cornell University**  
 Bachelor of Engineering, Electrical Engineering
 
----
-
 ## CERTIFICATIONS
 
 - AWS Cloud Practitioner
 - ITIL Foundation Certification
-
----
 
 ## PUBLICATIONS & PROJECTS
 
@@ -134,5 +120,3 @@ Bachelor of Engineering, Electrical Engineering
 **Principal:** Open Source Sybase & SQL Server utilities and backup scripts (widely adopted open source)
 
 **Principal:** Open Source Conquer - A fantasy C/C++ multiplayer game like Civilization (~100,000 lines of C/C++)
-
----

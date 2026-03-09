@@ -4,7 +4,8 @@ layout: ../layouts/Resume.astro
 
 # Edward Barlow
 
-**AI Adoption Consultant** For Small and Mid Sized Business. My framework provides **Engineering Best Practices** to enable **Your Ideas**.
+> **AI Adoption Consultant** for Small and Mid-Sized Business.
+> My framework provides **Engineering Best Practices** to enable **Your Ideas**.
 
 **West Chester, PA | (914) 837-4798**  
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**

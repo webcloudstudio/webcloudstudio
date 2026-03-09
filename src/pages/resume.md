@@ -4,7 +4,9 @@ layout: ../layouts/Resume.astro
 
 # Edward Barlow
 
-**West Chester, PA | (914) 837-4798**
+**AI Adoption Consultant** For Small and Mid Sized Business. My framework provides **Engineering Best Practices** to enable **Your Ideas**.
+
+**West Chester, PA | (914) 837-4798**  
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**
 
 ---
@@ -13,11 +15,8 @@ layout: ../layouts/Resume.astro
 
 **Senior Principal Engineer with 30+ years of experience** delivering business solutions, critical infrastructure, and data platforms for leading financial institutions, insurance companies, and startups. People and process-first technology leader specializing in backend platform architecture, data engineering, distributed systems, and growth-enabling infrastructure.
 
-**Early adopter** across multiple technology waves: C++, SQL, Java, Automation, Streaming, Big Data. Current focus is **AI-assisted software development and writing**.
-
 **Leadership approach:** Active listener who translates business concepts into actionable technical plans and execution. Trusted communicator bridging stakeholder needs and engineering teams. Drives vision, execution, quality, and collaborative IT culture through digital transformation. Published author with expert technical writing skills. I drive operational excellence by fixing problems the right way.
 
----
 
 ## CORE COMPETENCIES
 
@@ -27,7 +26,6 @@ layout: ../layouts/Resume.astro
 
 **Data & Scale:** Highly Available Systems • ETL/ELT Pipelines • Streaming • Data Warehousing • Database Architecture • Performance at Scale
 
----
 
 ## TECHNICAL SKILLS
 
@@ -37,11 +35,12 @@ layout: ../layouts/Resume.astro
 
 **NoSQL:** DynamoDB, Elasticsearch/ELK, Redshift, Delta Lake, Databricks
 
-**DevOps & Infrastructure:** Terraform, Docker, Kubernetes/Openshift, Jenkins, Ansible, Airflow, Linux, Windows Server, AWS
+**DevOps & Infrastructure:** Terraform, Docker, Kubernetes/Openshift, Jenkins, Ansible, Airflow, Linux, Windows Server, AWS 
 
 **Data & Streaming:** Kafka, ETL Pipelines, DBT, Delta Lake
 
 ---
+<div style="page-break-after: always"></div>
 
 ## PROFESSIONAL EXPERIENCE
 
@@ -51,7 +50,7 @@ layout: ../layouts/Resume.astro
 - Delivered Canoe Intelligence (AI Document Parsing) enterprise document flow processing solution
 - Responsible for Dealcloud Workflow System implementation and management
 
-### EVERNORTH HEALTH SERVICES LLC
+### EVERNORTH HEALTH SERVICES LLC 
 **Software Engineering Senior Advisor** | 05/2020 - 09/2024
 - Led team of 6-8 engineers building modern enterprise reporting platform serving multiple product teams
 - Set technical strategy and owned platform abstractions enabling cross-team analytics and reporting workflows
@@ -97,23 +96,23 @@ layout: ../layouts/Resume.astro
 
 ### SQL TECHNOLOGIES LLC
 **Principal** | 09/1994 - 03/2003
-- Full Stack Independent contractor providing database and backend development services
+- Full Stack Independent contractor providing database and backend development services 
 - Clients Included:
     - **Time Warner:** Saved $100 million magazine process rewrite with a 9 month contract optimization and tuning
     - **JP Morgan:** Built Morgan Cage. Built Enterprise Security Master. Managed 20 Sybase contractors for a large corporate transformation
-    - **Bankers Trust:** Enterprise risk management system (RAROC)
+    - **Bankers Trust:** Enterprise risk management system (RAROC) 
     - **Weiss, Peck & Greer:** Core C libraries for top-ten-volume trade processing infrastructure
-    - **Sanford Bernstein:** Primary order routing system for top-ten-volume trading desk
+    - **Sanford Bernstein:** Primary order routing system for top-ten-volume trading desk 
 - Technologies: Sybase, Sybase/IQ, SQL Server, PostgreSQL, Oracle, C/C++, Bash, PowerBuilder, Perl/CGI, Erwin
 
 ---
 
 ## EDUCATION
 
-**Cornell University**
+**Cornell University**  
 Master of Engineering, Electrical Engineering
 
-**Cornell University**
+**Cornell University**  
 Bachelor of Engineering, Electrical Engineering
 
 ---
@@ -134,3 +133,5 @@ Bachelor of Engineering, Electrical Engineering
 **Principal:** Open Source Sybase & SQL Server utilities and backup scripts (widely adopted open source)
 
 **Principal:** Open Source Conquer - A fantasy C/C++ multiplayer game like Civilization (~100,000 lines of C/C++)
+
+---

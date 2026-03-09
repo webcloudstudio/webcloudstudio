@@ -1,16 +1,81 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const base = import.meta.env.BASE_URL;
 ---
 <Layout title="Web Cloud Studio — Ed Barlow">
-  <section class="hero">
-    <div class="hero-inner">
-      <h1><span class="name">Ed Barlow</span></h1>
-      <p class="hero-desc">Superb Software engineer, database architect, and published author. Building thoughtful systems for complex problems.</p>
-      <div class="hero-cta">
-        <a href={`${base}/projects/`} class="btn-primary">View Projects</a>
+  <section class="home-intro">
+    <div class="section-inner">
+      <h1 class="home-name">Ed Barlow</h1>
+      <div class="home-body">
+<p>Software engineer, database architect, and published author building thoughtful
+systems for complex problems.</p>
+<h2>What I Do</h2>
+<ul>
+<li><strong>AI Workflow Automation</strong> — Building intelligent tools that accelerate development</li>
+<li><strong>Database Architecture</strong> — Enterprise-scale data systems and stored procedure libraries</li>
+<li><strong>Web Applications</strong> — Full-stack platforms from dating apps to portfolio sites</li>
+<li><strong>Open Source</strong> — Shareware and free software since the 1980s</li>
+</ul>
+<p><em>Available for consulting engagements.</em></p>
       </div>
     </div>
-    <div class="hero-grid"></div>
   </section>
+
+  <style>
+    .home-intro { padding: 4rem 0 3rem; }
+
+    .home-name {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 2rem;
+    }
+
+    .home-body { max-width: 680px; }
+
+    .home-body p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0 0 1.25rem;
+    }
+
+    .home-body h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+      letter-spacing: 0.01em;
+    }
+
+    .home-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .home-body li {
+      font-size: 0.95rem;
+      color: var(--muted);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .home-body li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .home-body strong { color: var(--text); font-weight: 600; }
+
+    .home-body em {
+      color: var(--muted);
+      font-style: italic;
+      font-size: 0.92rem;
+    }
+  </style>
 </Layout>

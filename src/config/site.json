@@ -1,11 +1,12 @@
 {
   "logo": "Web Cloud Studio",
   "name": "Ed Barlow",
-  "tagline": "Superb Software engineer, database architect, and published author. Building thoughtful systems for complex problems.",
+  "tagline": "Software engineer, database architect, and published author. Building thoughtful systems for complex problems.",
   "email": "edward.m.barlow@gmail.com",
   "phone": "(914) 837-4798",
   "phone_e164": "+19148374798",
   "copyright": "Web Cloud Studio — Ed Barlow",
   "section_title": "Projects",
-  "section_subtitle": "A selection of my work"
+  "section_subtitle": "A selection of my work",
+  "home_html": "<p>Software engineer, database architect, and published author building thoughtful\nsystems for complex problems.</p>\n<h2>What I Do</h2>\n<ul>\n<li><strong>AI Workflow Automation</strong> — Building intelligent tools that accelerate development</li>\n<li><strong>Database Architecture</strong> — Enterprise-scale data systems and stored procedure libraries</li>\n<li><strong>Web Applications</strong> — Full-stack platforms from dating apps to portfolio sites</li>\n<li><strong>Open Source</strong> — Shareware and free software since the 1980s</li>\n</ul>\n<p><em>Available for consulting engagements.</em></p>"
 }

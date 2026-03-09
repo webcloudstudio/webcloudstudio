@@ -5,87 +5,117 @@ import Layout from './Layout.astro';
 <Layout title="About — Ed Barlow">
   <style is:global>
     .resume-container {
-      max-width: 700px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 4rem 2rem;
-      line-height: 1.8;
-      font-size: 1.05rem;
+      padding: 3rem 2rem 5rem;
     }
 
-    .resume-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
+    /* Name & contact block */
+    .resume-container h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.4rem;
+      color: var(--text);
+    }
+
+    /* Section headings */
+    .resume-container h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 2.5rem 0 0.75rem;
+      padding-bottom: 0.4rem;
       border-bottom: 1px solid var(--border);
     }
 
-    .resume-container h1 {
-      font-size: 2rem;
-      font-weight: 400;
-      margin: 0;
-      color: var(--text);
-    }
-
-    .resume-signature {
-      flex-shrink: 0;
-      margin-top: 0.5rem;
-    }
-
-    .resume-signature img {
-      width: 140px;
-      height: auto;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-    }
-
-    .resume-container h2 {
+    /* Company / institution names */
+    .resume-container h3 {
       font-size: 1rem;
-      font-weight: 400;
-      color: var(--muted);
-      margin: 0 0 2rem 0;
-      text-transform: none;
+      font-weight: 700;
+      color: var(--text);
+      margin: 1.5rem 0 0.2rem;
     }
 
     .resume-container p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0.4rem 0;
+    }
+
+    /* Bold labels (name line, competency labels, etc.) */
+    .resume-container strong {
       color: var(--text);
-      margin: 1.5rem 0;
-      font-weight: 400;
+      font-weight: 600;
     }
 
-    .resume-container img {
-      display: block;
+    /* Bullet lists */
+    .resume-container ul {
+      margin: 0.5rem 0 0.5rem 0;
+      padding: 0;
+      list-style: none;
     }
 
+    .resume-container li {
+      font-size: 0.91rem;
+      color: var(--muted);
+      line-height: 1.65;
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+
+    .resume-container li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* Nested lists (client sub-bullets) */
+    .resume-container li li {
+      padding-left: 1.1rem;
+      margin-top: 0.2rem;
+    }
+
+    .resume-container li li::before {
+      content: '·';
+      color: var(--muted);
+    }
+
+    /* Horizontal rules between sections */
+    .resume-container hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* Links */
     .resume-container a {
       color: var(--accent);
       text-decoration: none;
     }
+    .resume-container a:hover { text-decoration: underline; }
 
-    .resume-container a:hover {
-      text-decoration: underline;
-    }
-
+    /* Print */
     @media print {
       body { background: white; color: black; }
-      .resume-container { padding: 0; }
-      .resume-header { border-color: #ddd; }
+      .resume-container { padding: 0; max-width: 100%; }
       .resume-container h1 { color: black; }
-      .resume-container h2 { color: #666; }
-      .resume-container p { color: black; }
-      .resume-container a { color: #0066cc; }
+      .resume-container h2 { color: #333; border-color: #ccc; }
+      .resume-container h3 { color: black; }
+      .resume-container p,
+      .resume-container li { color: #333; }
+      .resume-container strong { color: black; }
+      .resume-container hr { border-color: #ddd; }
+      header, footer { display: none; }
     }
   </style>
 
   <div class="resume-container">
-    <div class="resume-header">
-      <div>
-        <slot />
-      </div>
-      <div class="resume-signature">
-        <img src="/webcloudstudio/signature.svg" alt="Ed Barlow signature">
-      </div>
-    </div>
+    <slot />
   </div>
 </Layout>

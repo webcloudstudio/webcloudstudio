@@ -4,7 +4,7 @@ layout: ../layouts/Resume.astro
 
 # Edward Barlow - AI Adoption Consultant
 
-> My **Software Engineering Best Practices Markdown** can AI enable your Small/Mid-Sized Business.
+> My **AI Best Practices Framework** Can Enable Your Small or Mid-Sized Business.
 
 **West Chester, PA | (914) 837-4798**  
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**

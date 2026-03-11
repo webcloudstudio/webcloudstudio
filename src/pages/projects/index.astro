@@ -1,12 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Projects — Web Cloud Studio">
+<Layout title="Selected Projects — Ed Barlow">
   <section class="projects-page">
     <div class="section-inner">
       <div class="projects-header">
-        <h1 class="page-title">Projects</h1>
-        <p class="page-subtitle">A selection of my work</p>
+        <h1 class="page-title">Selected Projects</h1>
+        
       </div>
       <div class="cards-grid">
         <!-- CARD: Ed Barlows Stored Procedure Library -->
@@ -20,6 +20,7 @@ import Layout from '../../layouts/Layout.astro';
               <span class="tag tag--neutral">Freeware</span>
             <span class="tag tag--neutral">Stored Procedures</span>
             <span class="tag tag--ops">Sybase</span>
+            <span class="tag-break"></span>
             <span class="tag tag--ops">Sql Server</span>
             </div>
 
@@ -29,25 +30,33 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-actions">
-            
+            <div class="card-link-trigger">
+            <button class="card-link-btn">View Project ↗</button>
+            <div class="card-link-flyout" role="tooltip">
+              <a href="https://github.com/webcloudstudio/Ed_Barlows_Stored_Procedures" target="_blank" rel="noopener" class="card-link-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                https://github.com/webcloudstudio/Ed_Barlows_Stored_Procedures
+              </a>
+            </div>
+          </div>
           </div>
         </article>
 
-        <!-- CARD: Command Center -->
+        <!-- CARD: AI Best Practice Framework -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="/webcloudstudio/images/GAME.webp" alt="Command Center" class="card-image"/>
+            <img src="/webcloudstudio/images/GAME.webp" alt="AI Best Practice Framework" class="card-image"/>
           </div>
 
           <div class="card-content">
             <div class="tags">
-              <span class="tag tag--neutral">AI</span>
-            <span class="tag tag--neutral">Workflow</span>
+              <span class="tag tag--py">Best Practices</span>
+            <span class="tag tag--ops">DevOps</span>
             </div>
 
-            <h3 class="card-title">Command Center</h3>
+            <h3 class="card-title">AI Best Practice Framework</h3>
 
-            <p class="card-desc">My End to End Workflow Automation</p>
+            <p class="card-desc">Multi Project Engine-Agnostic Framework providing each of your devops, security, operations, and development best practices customized</p>
           </div>
 
           <div class="card-actions">
@@ -180,12 +189,11 @@ import Layout from '../../layouts/Layout.astro';
       margin: 0;
     }
 
-    /* Grid: column gap only — rows touch */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      column-gap: 1.75rem;
-      row-gap: 0;
+      column-gap: 1.5rem;
+      row-gap: 1.5rem;
     }
 
     @media (max-width: 1024px) {
@@ -196,27 +204,35 @@ import Layout from '../../layouts/Layout.astro';
       .cards-grid { grid-template-columns: 1fr; }
     }
 
+    /* Override global Layout.astro card padding/gap — must be explicit */
     .card {
+      padding: 0 !important;
+      gap: 0 !important;
       display: flex;
       flex-direction: column;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
       transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
     }
 
     .card:hover {
       border-color: #4f9cf950;
-      box-shadow: 0 8px 32px #4f9cf910;
-      transform: translateY(-3px);
+      box-shadow: 0 6px 24px #4f9cf910;
+      transform: translateY(-2px);
     }
 
+    /* Image: full bleed, no margin */
     .card-image-wrapper {
       width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 140px;
+      margin: 0;
+      padding: 0;
       background: var(--surface2);
       overflow: hidden;
+      flex-shrink: 0;
+      display: block;
     }
 
     .card-image {
@@ -224,56 +240,79 @@ import Layout from '../../layouts/Layout.astro';
       height: 100%;
       object-fit: cover;
       display: block;
+      margin: 0;
+      padding: 0;
       transition: transform 0.3s ease;
     }
 
     .card:hover .card-image { transform: scale(1.03); }
 
     .card-image-placeholder {
-      width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 140px;
       background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
     }
 
-    /* Content grows to fill card, items packed at top */
+    /* Content */
     .card-content {
       flex: 1;
-      padding: 1.25rem 1.5rem 0.75rem;
+      padding: 0.7rem 1rem 0.4rem;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 0.6rem;
+      gap: 0.3rem;
     }
 
+    /* Tags: first 3 on row 1, remainder on row 2 */
+    .tags {
+      display: flex !important;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-family: 'Fira Code', monospace;
+      padding: 0.18rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* Zero-size flex break injected after 3rd tag in Python */
+    .tag-break {
+      flex-basis: 100%;
+      width: 0;
+      height: 0;
+    }
+
+    /* Title: tight spacing above and below */
     .card-title {
-      margin: 0;
-      font-size: 1.15rem;
+      margin: 0.15rem 0 0.1rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text);
-      line-height: 1.3;
+      line-height: 1.25;
     }
 
     .card-desc {
       margin: 0;
-      font-size: 0.88rem;
+      font-size: 0.83rem;
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.55;
     }
 
-    /* Action area: fixed height for 2 button rows, button pinned to bottom */
+    /* Actions: tight bottom, view button only */
     .card-actions {
-      min-height: 5rem;
-      padding: 0.75rem 2rem 1.5rem;
+      padding: 0.4rem 1rem 0.6rem;
+      margin-top: auto !important;
       display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      flex-direction: column;
     }
 
     .card-link-trigger {
       position: relative;
       width: 100%;
-      display: flex;
-      justify-content: center;
     }
 
     .card-link-btn {
@@ -281,9 +320,9 @@ import Layout from '../../layouts/Layout.astro';
       border: 1px solid var(--accent);
       color: var(--accent);
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      padding: 0.65rem 2.5rem;
+      padding: 0.4rem 1rem;
       border-radius: 6px;
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s, color 0.2s;

@@ -1,26 +1,23 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Selected Projects — Ed Barlow">
+<Layout title="My Projects — Ed Barlow">
   <section class="projects-page">
     <div class="section-inner">
       <div class="projects-header">
-        <h1 class="page-title">Selected Projects</h1>
+        <h1 class="page-title">My Projects</h1>
         
       </div>
       <div class="cards-grid">
         <!-- CARD: Ed Barlows Stored Procedure Library -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="images/EdBarlowsStoredProcs.webp" alt="Ed Barlows Stored Procedure Library" class="card-image"/>
+            <img src="/webcloudstudio/images/EdBarlowsStoredProcs.webp" alt="Ed Barlows Stored Procedure Library" class="card-image"/>
           </div>
 
           <div class="card-content">
             <div class="tags">
-              <span class="tag tag--neutral">Freeware</span>
-            <span class="tag tag--neutral">Stored Procedures</span>
-            <span class="tag tag--ops">Sybase</span>
-            <span class="tag-break"></span>
+              <span class="tag tag--ops">Sybase</span>
             <span class="tag tag--ops">Sql Server</span>
             </div>
 
@@ -30,14 +27,16 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-actions">
-            <a href="/project-docs/EdBarlowsStoredProcs/" target="_blank" rel="noopener" class="card-link-btn">Project Documentation ↗</a>
-            
+            <a href="/webcloudstudio/project-docs/EdBarlowsStoredProcs/" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
+            <a href="https://github.com/webcloudstudio/Ed_Barlows_Stored_Procedures" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
           </div>
         </article>
 
-        <!-- CARD: GAME — Generic Agent Management Environment -->
+        <!-- CARD: GAME — Agent Management -->
         <article class="card">
-          <div class="card-image-wrapper card-image-placeholder"></div>
+          <div class="card-image-wrapper">
+            <img src="/webcloudstudio/images/GAME.webp" alt="GAME — Agent Management" class="card-image"/>
+          </div>
 
           <div class="card-content">
             <div class="tags">
@@ -46,13 +45,13 @@ import Layout from '../../layouts/Layout.astro';
             <span class="tag tag--neutral">platform</span>
             </div>
 
-            <h3 class="card-title">GAME — Generic Agent Management Environment</h3>
+            <h3 class="card-title">GAME — Agent Management</h3>
 
-            <p class="card-desc">Personal workflow management system for ~14 projects across software, books, and tools. Runs as a local Flask web app with GitHub Pages publishing.</p>
+            <p class="card-desc">My Best Practice Environment Based on GEM Tooling. Useful for any project types.</p>
           </div>
 
           <div class="card-actions">
-            <a href="/project-docs/GAME/" target="_blank" rel="noopener" class="card-link-btn">Project Documentation ↗</a>
+            <a href="/webcloudstudio/project-docs/GAME/" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
             
           </div>
         </article>
@@ -60,7 +59,7 @@ import Layout from '../../layouts/Layout.astro';
         <!-- CARD: Herpes Hearts -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="images/HerpesHearts.webp" alt="Herpes Hearts" class="card-image"/>
+            <img src="/webcloudstudio/images/HerpesHearts.webp" alt="Herpes Hearts" class="card-image"/>
           </div>
 
           <div class="card-content">
@@ -77,14 +76,14 @@ import Layout from '../../layouts/Layout.astro';
 
           <div class="card-actions">
             
-            
+            <a href="https://www.herpeshearts.com" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
           </div>
         </article>
 
         <!-- CARD: Process-Based Database Administration -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="images/ProcessBasedDataEngineering.webp" alt="Process-Based Database Administration" class="card-image"/>
+            <img src="/webcloudstudio/images/ProcessBasedDataEngineering.webp" alt="Process-Based Database Administration" class="card-image"/>
           </div>
 
           <div class="card-content">
@@ -100,14 +99,14 @@ import Layout from '../../layouts/Layout.astro';
 
           <div class="card-actions">
             
-            
+            <a href="https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
           </div>
         </article>
 
         <!-- CARD: Conquer -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="images/conquer_2026.webp" alt="Conquer" class="card-image"/>
+            <img src="/webcloudstudio/images/conquer_2026.webp" alt="Conquer" class="card-image"/>
           </div>
 
           <div class="card-content">
@@ -130,7 +129,7 @@ import Layout from '../../layouts/Layout.astro';
         <!-- CARD: GEM - The Generic Enterprise Manager -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="images/gem.webp" alt="GEM - The Generic Enterprise Manager" class="card-image"/>
+            <img src="/webcloudstudio/images/gem.webp" alt="GEM - The Generic Enterprise Manager" class="card-image"/>
           </div>
 
           <div class="card-content">
@@ -145,7 +144,7 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-actions">
-            <a href="/project-docs/gem/" target="_blank" rel="noopener" class="card-link-btn">Project Documentation ↗</a>
+            <a href="/webcloudstudio/project-docs/gem/" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
             
           </div>
         </article>
@@ -283,12 +282,12 @@ import Layout from '../../layouts/Layout.astro';
       line-height: 1.55;
     }
 
-    /* Actions: docs button above view button */
+    /* Actions: docs + github buttons side by side */
     .card-actions {
       padding: 0.4rem 1rem 0.6rem;
       margin-top: auto !important;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 0.4rem;
     }
 
@@ -307,7 +306,7 @@ import Layout from '../../layouts/Layout.astro';
       border-radius: 6px;
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s, color 0.2s;
-      width: 100%;
+      flex: 1;
     }
 
     .card-link-btn:hover {

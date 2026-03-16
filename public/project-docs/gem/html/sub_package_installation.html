@@ -1,0 +1,201 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Generator" content="Microsoft Word 97">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (WinNT; U) [Netscape]">
+   <meta name="Author" content="Ed Barlow">
+   <title>sub_package_installation</title>
+</head>
+<body background="sybase_back.gif">
+&nbsp;
+<br><img SRC="product.gif" ALT="NEW PRODUCT!" height=74 width=200 align=LEFT>
+<div align=right><b><font face="Verdana"><font size=+4><font color="#3333FF">p</font><font color="#009900">r</font><font color="#FF0000">e</font><font color="#FF9900">r</font><font color="#CC33CC">e</font><font color="#CC0000">q</font><font color="#999900">u</font><font color="#009900">i</font><font color="#CC33CC">s</font><font color="#FF9900">i</font><font color="#FF0000">t</font><font color="#66FF99">e
+</font><font color="#339999">p</font><font color="#9999FF">a</font><font color="#FF0000">c</font><font color="#CC33CC">k</font><font color="#999900">a</font><font color="#009900">g</font><font color="#3333FF">e</font></font></font></b>
+<br><b><font face="Verdana"><font size=+4><font color="#009900">i</font><font color="#FF0000">n</font><font color="#FF9900">s</font><font color="#CC33CC">t</font><font color="#CC0000">a</font><font color="#999900">l</font><font color="#009900">l</font><font color="#CC33CC">a</font><font color="#FF9900">t</font><font color="#FF0000">i</font><font color="#66FF99">o</font><font color="#339999">n</font></font></font></b></div>
+
+<hr>
+<h3>
+The Following instructions describe how to install perl, sybperl, and apache
+for both NT and UNIX/LINUX.</h3>
+
+<h3>
+STEP 1: Download Required Software</h3>
+[ Synopsis: Download Web Server, Perl, &amp; SybPerl ]
+<p>The following links are provided for ease of use. These links are valid
+as of 11/24/99. Go to activestate.com, perl.com, or apache.org if a link
+is no longer available.
+<p>For Windows NT, you will need the following software:
+<br>&nbsp;
+<table>
+<tr>
+<td WIDTH="300"><a href="http://www.activestate.com/ActivePerl/download.htm">ACTIVESTATE
+PERL</a></td>
+
+<td WIDTH="400">For Activestates Windows NT binary download page</td>
+</tr>
+
+<tr>
+<td WIDTH="300"><a href="http://www.apache.org/dist/binaries/win32/">APACHE
+WEB SERVER</a></td>
+
+<td WIDTH="400">NT binary</td>
+</tr>
+</table>
+
+<p>Most UNIX have perl pre-installed. Be certain that you have a current
+release of perl by typing perl -v (which should show a version number of
+5.004 or later). You should have perl in your PATH. If you dont have perl
+installed, you will need to install from
+<br>&nbsp;
+<table>
+<tr>
+<td WIDTH="300"><b>PERL DOWNLOAD PAGE</b></td>
+
+<td WIDTH="400">Download <a href="http://www.perl.com">binaries</a> or
+the <a href="http://www.perl.com/CPAN/src/latest.tar.gz">latest source
+code</a></td>
+</tr>
+
+<tr>
+<td WIDTH="300"><b>APACHE WEB SERVER&nbsp;</b></td>
+
+<td WIDTH="400">In <a href="http://www.apache.org/dist/binaries/">Binary
+Format</a> or in <a href="http://www.apache.org/dist/">Source Format</a></td>
+</tr>
+</table>
+
+<h3>
+STEP 2: Install Perl</h3>
+[ Synopsis: Get perl working ]
+<p>Your administrator may have allready performed this task.
+<p>Perl 5.005 or later must be installed on your system. Use <i>perl -v</i>
+to get the version number. Use all defaults if you are installing on NT
+including the mapping of .pl files to perl (very important). On UNIX, be
+sure that the correct version of perl is first in your path. Note that
+if you are using MKS toolkit on NT, the version of perl provided is not
+recent enough - you will need a more recent version - so I recommend removing
+the MKS toolkit version of perl and reinstalling the latest activestate
+perl version.
+<p>If you have problems installing perl, check with your systems administrator.
+Most systems administrators have experience installing perl.
+<h3>
+STEP 3: Install Sybase::DBlib</h3>
+[ Synopsis: Install perl Sybase::DBlib module ]
+<p>After Perl is installed, you must install the Sybase::DBlib perl add
+on module. Your administrator may have allready performed this task.
+<p>For Windows NT, this is done using the ppm.pl program (installed with
+your activestate perl installation). If you have a Proxy/Firewall at your
+company, you will need to set the <b>HTTP_proxy</b> environment variable
+using control_panel -> system -> environment to something like <i>http://web-proxy.myco.com:80</i>
+(obviously based this on your proxy). The following commands within ppm
+will do an installation:
+<pre>&nbsp;>ppm.pl
+&nbsp;PPM> install sybperl
+&nbsp;&nbsp; ( some messages indicating success appear)
+&nbsp;PPM> exit</pre>
+For UNIX, the Sybase::DBlib will need to be downloaded and compiled from
+www.cpan.com (cpan is the place perl add on libraries are stored). You
+will need to compile the version using the standard:
+<pre>&nbsp;perl Makefile.PL
+&nbsp;make
+&nbsp;make test
+&nbsp;make install</pre>
+Also I noticed on NT that some versions of activestates sybperl package
+have hard coded reference to P:/modules. If you get this error, you must
+hand edit the DBlib.pm and CTlib.pm files in your perl installation directory
+to remove the redefinition of the SYBASE environment variable in the BEGIN
+block.
+<h3>
+STEP 3b: Install MIME-Lite</h3>
+This is required if you are loading on Windows Nt as it does not appear
+to be part of the default installation
+<h3>
+STEP 4: Create New Sybase Database For Webmonitor (only needed to install
+webmonitor)</h3>
+[ Synopsis: Create 20MB database as a repository ]
+<p>If you intend to try <b>Webmonitor II</b>, you will need to create a
+new database named webmonitor on one of your servers. This database should
+be about 20 MB. If you need to, you may share an existing database, but
+this is not recommended. This database will need the <b>select into</b>
+option set.
+<h3>
+STEP 5: Setup Local Web Server</h3>
+[ Synopsis: Get working web server and add virtual directory named with
+script access pointing to the main directory into which you installed the
+software.&nbsp; ]
+<p>You may also set this package up to ftp output to an external web server
+by editing the configuration file.&nbsp; If you wish to run this software
+on a server that
+<br>has its own server, you are responsible for setting it up, but that
+is not a big deal.&nbsp; Webmonitor REQUIRES a web server on the machine
+it is installed. Free web servers like Internet Information Server (IIS)
+on NT or Apache on UNIX or NT work fine and are easy to install and run.
+IIS can easily be installed by your NT administrator and Apache can be
+downloaded from www.apache.org (binary for NT or compilable source for
+UNIX - its really easy). I test under both Apache and IIS on NT and under
+Apache on Unix. Take all defaults on the web server installation.
+<p>You need to set up a virtual directory with script access pointing to
+the main install directory (eg: D:/ADMIN_SCRIPTS if you extracted into
+D:/ on nt).&nbsp; You should set these directories up with script, execute,
+and index permissions.
+<p>The following are changes I made to my apache configuration file (default
+on NT is C:/program files/apache group/apache/conf/httpd.conf). If you
+are using apache on your own workstation, it is suggested that you lower
+the apache resource utilization values (use your discression) - these will
+not be high volume applications.
+<p>Comment out the following line
+<pre>&nbsp;&nbsp; # UseCanonicalName On</pre>
+Change DefaultType
+<pre>&nbsp;&nbsp; #DefaultType text/plain
+&nbsp;&nbsp; DefaultType text/html</pre>
+Append the following lines. This extract assumes windows NT and that you
+have extracted into C:/ so there is a directory named <i>C:/ADMIN_SCRIPTS</i>.
+It also assumes that your Sybase directory is C:/sybase. Change these directories
+as appropriate if you have installed elsewhere on NT or are installing
+on UNIX.
+<pre>&nbsp;&nbsp; &lt;Directory "C:/ADMIN_SCRIPTS/">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Options All
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AllowOverride None
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Order allow,deny
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Allow from all
+&nbsp;&nbsp; &lt;/Directory>
+&nbsp;&nbsp; Alias /sybase_tools/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "C:/ADMIN_SCRIPTS/"
+
+&nbsp;&nbsp; # perl can be used for cgi
+&nbsp;&nbsp; AddHandler cgi-script .pl
+
+&nbsp;&nbsp; # Set this to your sybase variable
+&nbsp;&nbsp; SetEnv SYBASE c:\sybase</pre>
+For <b>IIS</b>, go to the IIS Admin Manager and use Add Virtual Directory
+to add the directories using the admin manager. Be sure that execute, script,
+and directory browsing are all turned on.
+<h3>
+STEP 6: Test Web Server Setup</h3>
+[ Synopsis: test web server setup ]
+<p>First connect to your web server, and then use your browser to go to
+the virtual directories set up in the last step. The main page should give
+you a nice welcome banner and you should see a directory index in the two
+virtual directories (/webmonitor and /server_documentation).
+<p>The address you are going to go too can take 2 forms. On my NT machine
+(named mymachine), which runs a stand alone apache and is not part of the
+domain, i go to the<font color="#3333FF"> http://mymachine/ </font>get
+the main apache splash screen. I then go to <font color="#3333FF">http://mymachine/sybase_tools/</font>
+to see the application main screen.
+<p>On machines that ARE part of the domain, you must add domain to your
+url. If your domain is .abcd.com, and your port (because you are on UNIX
+and dont have root) is 8080, your url would b <i><font color="#3333FF">http://mymachine.abcd.com:8080/</font></i>
+for the main web server page and <i><font color="#3333FF">http://mymachine.abcd.com:8080/webmonitor/</font></i>
+for a directory listing of application files.
+<h3>
+You are now done and can proceed with the installation.</h3>
+To contact SQL Technologies :
+<address>
+barlowedward@hotmail.com</address>
+
+<br>Phone 914 632 0222
+<br>151 Centre Ave 6C
+<br>New Rochelle
+<br>NY 10805
+</body>
+</html>

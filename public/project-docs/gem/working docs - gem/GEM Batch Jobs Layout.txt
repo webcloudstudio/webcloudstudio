@@ -1,0 +1,131 @@
+Batch Job Definitions
+	http://dcmweb.mlp.com/machines/RM-Intro.htm
+---------------------
+AlarmCleanupDB.ksh
+AlarmRoutingAgent.ksh
+CheckOraclePersistent.ksh
+CheckSqlSvrPersistent.ksh
+CheckSybasePersistent.ksh
+< CleanupWin32GEM.ksh
+> CleanupUnixGEM.ksh
+		Cleaning /apps/sybmon/gem_dev/data/GEM_BATCHJOB_LOGS
+ConsoleArchiver.ksh
+ConsoleBuildAndFtp.ksh
+> ConsoleUnixHourly.ksh
+> ConsoleUnixNightly.ksh
+> ConsoleUnixWeekly.ksh
+< ConsoleWin32Hourly.ksh
+< ConsoleWin32Nightly.ksh
+< ConsoleWin32Weekly.ksh
+DirectoryChecker.ksh
+DnsMonitor.ksh
+		Reading nameservers from /apps/sybmon/gem_dev/conf/dns.dat
+< GemRpt_Win32_Diskspace.ksh
+< GemRpt_Win32_Eventlog.ksh
+< GemRpt_Win32_SecurityRpt.ksh
+GemRpt_AgentReport.ksh
+GemRpt_BackupReport.ksh
+GemRpt_Backups.ksh
+GemRpt_BlackoutReport.ksh
+GemRpt_ProductionErrors.ksh
+GemRpt_ProductionList.ksh
+GemRpt_ProductionWarnings.ksh
+GemRpt_Sybase_ASE.ksh
+GemRpt_Sybase_BackupServer.ksh
+GemRpt_Sybase_RepServer.ksh
+GemRpt_Unix_Errors.ksh
+GemRpt_Unix_Warnings.ksh
+> GetUnixDiskSpace.ksh
+LargeLogFileArchive.ksh
+> LockedLoginDetector.ksh
+< MssqlAuditor.ksh
+< MssqlBackupCrosscheckWeekly.ksh
+< MssqlBackupCrosscheck_AM.ksh
+< MssqlBackupCrosscheck_PM.ksh
+< MssqlBackupHistory.ksh
+< MssqlCheck_Development.ksh
+< MssqlClusterCheck.ksh
+< MssqlCycleEventLogs.ksh
+< MssqlDailyCheck.ksh
+< MssqlJobStatusRpt.ksh
+< MssqlLogMaintPlan.ksh
+< MssqlPing.ksh
+< MssqlScheduledJobRpt.ksh
+		Creates html_output report
+< MssqlShrinkDatabases.ksh
+< MssqlShrinklogs.ksh
+< MssqlStoredProcUpdater.ksh
+< MssqlSurvey.ksh
+< MssqlTruncateMaster.ksh
+MailGemErrors.ksh
+> OptdiagAnalyze.ksh
+OraSurvey.ksh
+< SpaceMonitorMssql.ksh
+		Create Flat File DB In Data Area
+> SybCheck_Development.ksh
+> SybDailyCheck.ksh
+> SybStoredProcUpdater.ksh
+> SybTruncateMaster.ksh
+> SybTruncateSybsystemdb.ksh
+> SybTruncateSybsystemprocs.ksh
+PortMonitor.ksh
+SybAuditor.ksh
+SybBkpSvrConfig.ksh
+SybBkpSvrLogFetch.ksh
+SybBkpSvrLogRpt.ksh
+SybCheck_Development.ksh
+SybDailyCheck.ksh
+SybErrLogAllRpt.ksh
+SybErrLogConfig.ksh
+SybErrLogFetch.ksh
+SybErrLogRpt.ksh
+SybErrLogSaveAlarms.ksh
+SybHistSvrConfig.ksh
+SybHistSvrLogFetch.ksh
+SybHistSvrLogRpt.ksh
+SybMonSvrConfig.ksh
+SybMonSvrLogFetch.ksh
+SybMonSvrLogRpt.ksh
+SybPing.ksh
+SybRepCompare.ksh
+SybRepMonAgent.ksh
+SybRepMonCheck.ksh
+SybRepMonReport.ksh
+SybRepServerChecker.ksh
+SybRepSvrConfig.ksh
+SybRepSvrLogFetch.ksh
+SybRepSvrLogRpt.ksh
+SybRepSvrSaveAlarms.ksh
+SybSpaceMonitor.ksh
+		Create Flat File DB In Data Area
+SybSpaceMonitorRW.ksh
+SybStoredProcUpdater.ksh
+SybSurvey.ksh
+SybThresholdManager.ksh
+SybThresholdManagerReinstall.ksh
+SybTruncateMaster.ksh
+SybTruncateSybsystemdb.ksh
+SybTruncateSybsystemprocs.ksh
+TestDfltConnectivity.ksh
+TraceRoute.ksh
+> UnixBackupStateStaticInfo.ksh
+> UnixDRChecker.ksh
+> UnixFileCheck.ksh
+		Reading control file /apps/sybmon/gem_dev/conf/unix_file_check.dat
+> UnixFileCleanup.ksh
+		Reading control file /apps/sybmon/gem_dev/conf/unix_cleanup.dat
+UnixPing.ksh					pings all unix systems
+> UnixSurvey.ksh
+< Win32DRChecker.ksh
+< Win32DiskUpdater.ksh
+< Win32Diskspace.ksh
+< Win32Eventlog.ksh
+< Win32FileCheck.ksh
+< Win32FileCleanup.ksh
+< Win32GetHosts.ksh
+< Win32HostsRpt.ksh
+< Win32Ping.ksh
+< Win32ServiceChecker.ksh
+< Win32ServiceCheckerUpdate.ksh
+< Win32Survey.ksh
+< Win32TaskScheduler.ksh

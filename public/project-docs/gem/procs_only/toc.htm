@@ -1,0 +1,119 @@
+<HTML><HEAD><TITLE>EXTENDED STORED PROCEDURES</TITLE>
+<META NAME=AUTHOR CONTENT="Edward Barlow"> </HEAD>
+<BODY TEXT=BLACK BGCOLOR=WHITE><FONT SIZE=2>
+<B>EXTENDED STORED PROCEDURES</B><BR>
+<BR><B>Procedure Overview</B><BR>
+<A HREF=readme.htm#link1 TARGET=basefrm>Stored procedure library</A><BR>
+<A HREF=readme.htm#link2 TARGET=basefrm>Installation</A><BR>
+<A HREF=readme.htm#link3 TARGET=basefrm>Special thanks</A><BR>
+<A HREF=readme.htm#link4 TARGET=basefrm>Right to use, resale and copyright</A><BR>
+<A HREF=readme.htm#link5 TARGET=basefrm>Uninstall</A><BR>
+<A HREF=readme.htm#link6 TARGET=basefrm>Warranty</A><BR>
+<BR><B>Procedure List</B><BR>
+<A HREF=readme.htm#link7 TARGET=basefrm>List of procedures</A><BR>
+<A HREF=readme.htm#link8 TARGET=basefrm>Auditing error codes</A><BR>
+<BR><B>Procedure Details</B><BR>
+<A HREF=readme.htm#link9 TARGET=basefrm>sp  auditdb</A><BR>
+<A HREF=readme.htm#link10 TARGET=basefrm>sp  auditsecurity</A><BR>
+<A HREF=readme.htm#link11 TARGET=basefrm>sp  badindex</A><BR>
+<A HREF=readme.htm#link12 TARGET=basefrm>sp  bcp</A><BR>
+<A HREF=readme.htm#link13 TARGET=basefrm>sp  block</A><BR>
+<A HREF=readme.htm#link14 TARGET=basefrm>sp  checkkey</A><BR>
+<A HREF=readme.htm#link15 TARGET=basefrm>sp  colconflict</A><BR>
+<A HREF=readme.htm#link16 TARGET=basefrm>sp  collist</A><BR>
+<A HREF=readme.htm#link17 TARGET=basefrm>sp  colnull</A><BR>
+<A HREF=readme.htm#link18 TARGET=basefrm>sp  configure</A><BR>
+<A HREF=readme.htm#link19 TARGET=basefrm>sp  date</A><BR>
+<A HREF=readme.htm#link20 TARGET=basefrm>sp  datediff</A><BR>
+<A HREF=readme.htm#link21 TARGET=basefrm>sp  dbspace</A><BR>
+<A HREF=readme.htm#link22 TARGET=basefrm>sp  dbuse</A><BR>
+<A HREF=readme.htm#link23 TARGET=basefrm>sp  depends</A><BR>
+<A HREF=readme.htm#link24 TARGET=basefrm>sp  diskdevice</A><BR>
+<A HREF=readme.htm#link25 TARGET=basefrm>sp  dumpdevice</A><BR>
+<A HREF=readme.htm#link26 TARGET=basefrm>sp  find missing index</A><BR>
+<A HREF=readme.htm#link27 TARGET=basefrm>sp  flowchart</A><BR>
+<A HREF=readme.htm#link28 TARGET=basefrm>sp  grep</A><BR>
+<A HREF=readme.htm#link29 TARGET=basefrm>sp  groupprotect</A><BR>
+<A HREF=readme.htm#link30 TARGET=basefrm>sp  help</A><BR>
+<A HREF=readme.htm#link31 TARGET=basefrm>sp  helpcolumn</A><BR>
+<A HREF=readme.htm#link32 TARGET=basefrm>sp  helpdb</A><BR>
+<A HREF=readme.htm#link33 TARGET=basefrm>sp  helpdbdev</A><BR>
+<A HREF=readme.htm#link34 TARGET=basefrm>sp  helpdefault</A><BR>
+<A HREF=readme.htm#link35 TARGET=basefrm>sp  helpdevice</A><BR>
+<A HREF=readme.htm#link36 TARGET=basefrm>sp  helpgroup</A><BR>
+<A HREF=readme.htm#link37 TARGET=basefrm>sp  helpindex</A><BR>
+<A HREF=readme.htm#link38 TARGET=basefrm>sp  helplogin</A><BR>
+<A HREF=readme.htm#link39 TARGET=basefrm>sp  helpmirror</A><BR>
+<A HREF=readme.htm#link40 TARGET=basefrm>sp  helpobject</A><BR>
+<A HREF=readme.htm#link41 TARGET=basefrm>sp  helpproc</A><BR>
+<A HREF=readme.htm#link42 TARGET=basefrm>sp  helprotect</A><BR>
+<A HREF=readme.htm#link43 TARGET=basefrm>sp  helprule</A><BR>
+<A HREF=readme.htm#link44 TARGET=basefrm>sp  helpsegment</A><BR>
+<A HREF=readme.htm#link45 TARGET=basefrm>sp  helptable</A><BR>
+<A HREF=readme.htm#link46 TARGET=basefrm>sp  helptext</A><BR>
+<A HREF=readme.htm#link47 TARGET=basefrm>sp  helptrigger</A><BR>
+<A HREF=readme.htm#link48 TARGET=basefrm>sp  helptype</A><BR>
+<A HREF=readme.htm#link49 TARGET=basefrm>sp  helpuser</A><BR>
+<A HREF=readme.htm#link50 TARGET=basefrm>sp  helpview</A><BR>
+<A HREF=readme.htm#link51 TARGET=basefrm>sp  id</A><BR>
+<A HREF=readme.htm#link52 TARGET=basefrm>sp  indexspace</A><BR>
+<A HREF=readme.htm#link53 TARGET=basefrm>sp  iostat</A><BR>
+<A HREF=readme.htm#link54 TARGET=basefrm>sp  isactive</A><BR>
+<A HREF=readme.htm#link55 TARGET=basefrm>sp  lock</A><BR>
+<A HREF=readme.htm#link56 TARGET=basefrm>sp  lockt</A><BR>
+<A HREF=readme.htm#link57 TARGET=basefrm>sp  ls</A><BR>
+<A HREF=readme.htm#link58 TARGET=basefrm>sp  noindex</A><BR>
+<A HREF=readme.htm#link59 TARGET=basefrm>sp  objprotect</A><BR>
+<A HREF=readme.htm#link60 TARGET=basefrm>sp  proclib version</A><BR>
+<A HREF=readme.htm#link61 TARGET=basefrm>sp  qspace</A><BR>
+<A HREF=readme.htm#link62 TARGET=basefrm>sp  quickstats</A><BR>
+<A HREF=readme.htm#link63 TARGET=basefrm>sp  read write</A><BR>
+<A HREF=readme.htm#link64 TARGET=basefrm>sp  revalias</A><BR>
+<A HREF=readme.htm#link65 TARGET=basefrm>sp  revbindings</A><BR>
+<A HREF=readme.htm#link66 TARGET=basefrm>sp  revdb</A><BR>
+<A HREF=readme.htm#link67 TARGET=basefrm>sp  revdevice</A><BR>
+<A HREF=readme.htm#link68 TARGET=basefrm>sp  revgroup</A><BR>
+<A HREF=readme.htm#link69 TARGET=basefrm>sp  revindex</A><BR>
+<A HREF=readme.htm#link70 TARGET=basefrm>sp  revkey</A><BR>
+<A HREF=readme.htm#link71 TARGET=basefrm>sp  revlogin</A><BR>
+<A HREF=readme.htm#link72 TARGET=basefrm>sp  revmirror</A><BR>
+<A HREF=readme.htm#link73 TARGET=basefrm>sp  revrole</A><BR>
+<A HREF=readme.htm#link74 TARGET=basefrm>sp  revrule</A><BR>
+<A HREF=readme.htm#link75 TARGET=basefrm>sp  revsegment</A><BR>
+<A HREF=readme.htm#link76 TARGET=basefrm>sp  revtable</A><BR>
+<A HREF=readme.htm#link77 TARGET=basefrm>sp  revtype</A><BR>
+<A HREF=readme.htm#link78 TARGET=basefrm>sp  revuser</A><BR>
+<A HREF=readme.htm#link79 TARGET=basefrm>sp  segment</A><BR>
+<A HREF=readme.htm#link80 TARGET=basefrm>sp  server</A><BR>
+<A HREF=readme.htm#link81 TARGET=basefrm>sp  size</A><BR>
+<A HREF=readme.htm#link82 TARGET=basefrm>sp  stat</A><BR>
+<A HREF=readme.htm#link83 TARGET=basefrm>sp  syntax</A><BR>
+<A HREF=readme.htm#link84 TARGET=basefrm>sp  trigger</A><BR>
+<A HREF=readme.htm#link85 TARGET=basefrm>sp  uptime</A><BR>
+<A HREF=readme.htm#link86 TARGET=basefrm>sp  vdevno</A><BR>
+<A HREF=readme.htm#link87 TARGET=basefrm>sp  who</A><BR>
+<A HREF=readme.htm#link88 TARGET=basefrm>sp  whoactive</A><BR>
+<A HREF=readme.htm#link89 TARGET=basefrm>sp  whodo</A><BR>
+<A HREF=readme.htm#link90 TARGET=basefrm>sp  whoe</A><BR>
+<BR><B>MDA Procedure Details</B><BR>
+<A HREF=readme.htm#link91 TARGET=basefrm>sp  monbackup</A><BR>
+<A HREF=readme.htm#link92 TARGET=basefrm>sp  moncache</A><BR>
+<A HREF=readme.htm#link93 TARGET=basefrm>sp  mondump</A><BR>
+<A HREF=readme.htm#link94 TARGET=basefrm>sp  monengine</A><BR>
+<A HREF=readme.htm#link95 TARGET=basefrm>sp  monio</A><BR>
+<A HREF=readme.htm#link96 TARGET=basefrm>sp  monlock</A><BR>
+<A HREF=readme.htm#link97 TARGET=basefrm>sp  monlocksql</A><BR>
+<A HREF=readme.htm#link98 TARGET=basefrm>sp  monnet</A><BR>
+<A HREF=readme.htm#link99 TARGET=basefrm>sp  monobj</A><BR>
+<A HREF=readme.htm#link100 TARGET=basefrm>sp  monopenobj</A><BR>
+<A HREF=readme.htm#link101 TARGET=basefrm>sp  monpwaits</A><BR>
+<A HREF=readme.htm#link102 TARGET=basefrm>sp  monrunning</A><BR>
+<A HREF=readme.htm#link103 TARGET=basefrm>sp  monserver</A><BR>
+<A HREF=readme.htm#link104 TARGET=basefrm>sp  monspid</A><BR>
+<A HREF=readme.htm#link105 TARGET=basefrm>sp  monsql</A><BR>
+<A HREF=readme.htm#link106 TARGET=basefrm>sp  montableusage</A><BR>
+<A HREF=readme.htm#link107 TARGET=basefrm>sp  montopn</A><BR>
+<A HREF=readme.htm#link108 TARGET=basefrm>sp  monunusedindex</A><BR>
+<A HREF=readme.htm#link109 TARGET=basefrm>sp  monusedtables</A><BR>
+<A HREF=readme.htm#link110 TARGET=basefrm>sp  monwaits</A><BR>
+</FONT> </BODY>

@@ -1,0 +1,11 @@
+=head1 The Monitor Tab
+
+PURPOSE: Define Your GEM Monitoring Servers
+
+This tab allows you to validate your GEM Monitoring Server configuraiton.  The actual set up of the values will only
+occur when you run configure.pl - so this page will change when you run configure.pl on other systems.   You will need to
+specifiy the Full UNC Path for all windows monitoring servers.
+
+On SAMBA installs, you will not be able to Verify Monitor Servers until you have run configure.pl on both the unix and win32 sides.
+
+EXAMPLE: if the code is on a samba share such that /apps/gem is mapped to \\samba\gem, you would have monitor servers with code locations of /apps/gem and \\samba\gem.  You might also have G:/gem as an alternate location if the win32 monitoring server mapped that directory to G:/

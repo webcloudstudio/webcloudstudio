@@ -1,0 +1,31 @@
+=head1 The Files Tab
+
+PURPOSE: Identify Database Home Directories & Important FIles
+
+This tab contains rows for each  UNIX/Linux system, listing
+survey results (collected earlier) in blue and configuration directives in black.
+If survey results look incorrect, correct the configuration directives (with the add/delete buttons)
+and rerun the surveys.
+
+=over 4
+
+=item * Sybase ASE Server $SYBASE Directory
+is a valid sybase server directory and is searched for Error Logs, RUN_* files, and other config information.
+
+=item * Application Log File (unused in v1)
+
+=item * Ignore This RUN_* File
+directives that the Sybase server RUN_* file is unused and should be "ignored" to prevent confusion about what runs where.
+
+=item * Operating System Log File (unused in v1)
+
+=item * Sybase Open Client $SYBASE Directory
+are surveyed only for interface file consistency checks.
+
+=item * Oracle ORAHOME Directory (unused in v1)
+
+=item * SQL Server Maintenance Plan Logs (unused in v1)
+
+=back
+
+When completed, you consider clicking "SAVE CONFIGURATION CHANGES

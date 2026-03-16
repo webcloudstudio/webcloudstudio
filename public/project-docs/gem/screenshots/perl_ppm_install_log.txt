@@ -1,0 +1,152 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\f0\fs20 $ cd C:/perl\par
+$ ls\par
+bin   eg    html  lib   site\par
+$ cd bin\par
+$ ls\par
+GET                  find2perl.bat        podchecker.bat\par
+GET.bat              gedi                 podselect.bat\par
+HEAD                 gedi.bat             ppm\par
+HEAD.bat             h2ph.bat             ppm.bat\par
+IISScriptMap.pl      h2xs.bat             ppm3\par
+IISVirtualDir.pl     instmodsh.bat        ppm3-bin\par
+POST                 libnetcfg.bat        ppm3-bin.bat\par
+POST.bat             lwp-download         ppm3-bin.cfg\par
+PerlEx30.dll         lwp-download.bat     ppm3.bat\par
+PerlExOverLimit.txt  lwp-mirror           prove.bat\par
+PerlEz.dll           lwp-mirror.bat       psed.bat\par
+PerlMsg.dll          lwp-request          pstruct.bat\par
+PerlSE.dll           lwp-request.bat      ptar\par
+SOAPsh.bat           lwp-rget             ptar.bat\par
+SOAPsh.pl            lwp-rget.bat         ptardiff\par
+XMLRPCsh.bat         perl.exe             ptardiff.bat\par
+XMLRPCsh.pl          perl5.8.6.exe        ptked\par
+a2p.exe              perl5.8.8.exe        ptked.bat\par
+c2ph.bat             perl58.dll           ptksh\par
+config.pl            perlbug.bat          ptksh.bat\par
+configPPM3.pl        perlcc.bat           reloc_perl\par
+cpan.bat             perldoc.bat          reloc_perl.bat\par
+crc32                perlglob.bat         runperl.bat\par
+crc32.bat            perlglob.exe         s2p.bat\par
+decode-base64        perlis.dll           search.bat\par
+decode-base64.bat    perlivp.bat          splain.bat\par
+decode-qp            piconv.bat           stubmaker.bat\par
+decode-qp.bat        pl2bat.bat           stubmaker.pl\par
+dprofpp.bat          pl2pm.bat            tkjpeg\par
+enc2xs.bat           plexalizer.pl        tkjpeg.bat\par
+encode-base64        pod2html.bat         widget\par
+encode-base64.bat    pod2latex.bat        widget.bat\par
+encode-qp            pod2man.bat          wperl.exe\par
+encode-qp.bat        pod2text.bat         xsubpp.bat\par
+exetype.bat          pod2usage.bat\par
+$ ppm\par
+PPM - Programmer's Package Manager version 3.4.\par
+Copyright (c) 2001 ActiveState Software Inc.  All Rights Reserved.\par
+\par
+Entering interactive shell. Using Term::ReadLine::Perl as readline library.\par
+\par
+Type 'help' to get started.\par
+\par
+ppm> install DBI\par
+Error: No valid repositories: Error: 500 Can't connect to\par
+ppm.ActiveState.com:80 (connect: Unknown error)\par
+ppm> install DBI\par
+====================\par
+Install 'DBI' version 1.50 in ActivePerl 5.8.8.817.\par
+====================\par
+Downloaded 558145 bytes.\par
+Extracting 73/73: blib/arch/auto/DBI/Driver_xst.h\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\dbd_xsh.h\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\DBI.bs\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\DBI.dll\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\DBI.exp\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\DBI.lib\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\dbipport.h\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\dbivport.h\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\DBIXS.h\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\dbi_sql.h\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\Driver.xst\par
+Installing C:\\Perl\\site\\lib\\auto\\DBI\\Driver_xst.h\par
+Installing C:\\Perl\\html\\bin\\dbiprof.html\par
+Installing C:\\Perl\\html\\bin\\dbiproxy.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI.html\par
+Installing C:\\Perl\\html\\site\\lib\\Roadmap.html\par
+Installing C:\\Perl\\html\\site\\lib\\Bundle\\DBI.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBD\\DBM.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBD\\File.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBD\\Proxy.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBD\\Sponge.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\Changes.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\DBD.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\FAQ.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\Profile.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\ProfileData.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\ProfileDumper.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\ProxyServer.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\PurePerl.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\Roadmap.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\W32ODBC.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\Const\\GetInfoReturn.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\Const\\GetInfoType.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\Const\\GetInfo\\ANSI.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\Const\\GetInfo\\ODBC.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\DBD\\Metadata.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\ProfileDumper\\Apache.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBI\\SQL\\Nano.html\par
+Installing C:\\Perl\\html\\site\\lib\\Win32\\DBIODBC.html\par
+Files found in blib\\arch: installing files in blib\\lib into architecture depende\par
+nt library tree\par
+Installing C:\\Perl\\site\\lib\\DBI.pm\par
+Installing C:\\Perl\\site\\lib\\Roadmap.pod\par
+Installing C:\\Perl\\site\\lib\\Bundle\\DBI.pm\par
+Installing C:\\Perl\\site\\lib\\DBD\\DBM.pm\par
+Installing C:\\Perl\\site\\lib\\DBD\\ExampleP.pm\par
+Installing C:\\Perl\\site\\lib\\DBD\\File.pm\par
+Installing C:\\Perl\\site\\lib\\DBD\\NullP.pm\par
+Installing C:\\Perl\\site\\lib\\DBD\\Proxy.pm\par
+Installing C:\\Perl\\site\\lib\\DBD\\Sponge.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\Changes.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\DBD.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\FAQ.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\Profile.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\ProfileData.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\ProfileDumper.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\ProxyServer.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\PurePerl.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\Roadmap.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\W32ODBC.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\Const\\GetInfoReturn.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\Const\\GetInfoType.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\Const\\GetInfo\\ANSI.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\Const\\GetInfo\\ODBC.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\DBD\\Metadata.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\ProfileDumper\\Apache.pm\par
+Installing C:\\Perl\\site\\lib\\DBI\\SQL\\Nano.pm\par
+Installing C:\\Perl\\site\\lib\\Win32\\DBIODBC.pm\par
+Installing C:\\Perl\\bin\\dbiprof\par
+Installing C:\\Perl\\bin\\dbiprof.bat\par
+Installing C:\\Perl\\bin\\dbiproxy\par
+Installing C:\\Perl\\bin\\dbiproxy.bat\par
+Successfully installed DBI version 1.50 in ActivePerl 5.8.8.817.\par
+ppm> install DBD::ODBC\par
+Searching for 'DBD::ODBC' returned no results. Try a broader search first.\par
+ppm> install DBD-ODBC\par
+====================\par
+Install 'DBD-ODBC' version 1.13 in ActivePerl 5.8.8.817.\par
+====================\par
+Downloaded 78867 bytes.\par
+Extracting 11/11: blib/arch/auto/DBD/ODBC/ODBC.lib\par
+Installing C:\\Perl\\site\\lib\\auto\\DBD\\ODBC\\ODBC.bs\par
+Installing C:\\Perl\\site\\lib\\auto\\DBD\\ODBC\\ODBC.dll\par
+Installing C:\\Perl\\site\\lib\\auto\\DBD\\ODBC\\ODBC.exp\par
+Installing C:\\Perl\\site\\lib\\auto\\DBD\\ODBC\\ODBC.lib\par
+Installing C:\\Perl\\html\\site\\lib\\DBD\\ODBC.html\par
+Installing C:\\Perl\\html\\site\\lib\\DBD\\ODBC\\Changes.html\par
+Files found in blib\\arch: installing files in blib\\lib into architecture depende\par
+nt library tree\par
+Installing C:\\Perl\\site\\lib\\DBD\\ODBC.pm\par
+Installing C:\\Perl\\site\\lib\\DBD\\ODBC\\Changes.pm\par
+Successfully installed DBD-ODBC version 1.13 in ActivePerl 5.8.8.817.\par
+ppm>\par
+}
+

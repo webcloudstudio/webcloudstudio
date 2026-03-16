@@ -1,0 +1,212 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>NAME</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<ul>
+
+		<li><a href="#synopsis">SYNOPSIS</a></li>
+		<li><a href="#sybase_backup_crosscheck">SYBASE BACKUP CROSSCHECK</a></li>
+		<li><a href="#sql_svr_log_file_checks">SQL SVR LOG FILE CHECKS</a></li>
+		<li><a href="#replication_monitor">REPLICATION MONITOR</a></li>
+	</ul>
+
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>FREQUENTLY ASKED QUESTIONS</p>
+<p>&lt;span style='font-size:14.0pt;font-family:Arial'&gt;
+</p>
+<pre>
+
+=head2 DESCRIPTION</pre>
+<p>q) &lt;b&gt;i just want to install your stored procedure library... what should i do.&lt;/b&gt;</p>
+<p>a) just go to the ADMIN_SCRIPTS/procs subdirectory and run &lt;your perl&gt;/configure.pl.
+	The main issue you will in counter with this perl script is your perl setup and
+   your perl library path.  If you get missing module messages it is likely that this
+   is the problem.  The script uses the GEM library DBIFunc.pm, which is located in the
+   lib directory.  The configure.pl script should find it automatically, if it does not,
+   please contact SQL Technologies.  configure.pl will prompt you for Server, Login (an
+   sa login) and Password - it will then autodetect if you are on Microsoft SQL Server
+	or Sybase and install the procedures as appropriate.</p>
+<p>q) &lt;b&gt;i cant run ``perl configure.pl'' or ``perl gem.pl'' to start the application.&lt;/b&gt;</p>
+<p>a) Well... thats pretty general... i would love some more information.  The first thing
+   to do is run ``perl troubleshoot.pl''.</p>
+<p>q) &lt;b&gt;i want my data subdirectory to exist somewhere besides data...&lt;/b&gt;</p>
+<p>a) use symbolic links.  There are currently dependencies on the path to this directory
+   that are not completely flexible - hence the lack of a GemRpt_DATA_DIR configuration
+   variable in configure.cfg.  This may change in future versions.</p>
+<p>q) &lt;b&gt;i wish to run from unix&lt;/b&gt;</p>
+<p>a) this is an x windows application from windows - you need to set your display and have an x emulator like exceed running on your pc.</p>
+<pre>
+   export DISPLAY=10.5.103.51:0.0
+   /usr/local/bin/perl-5.8.1 gem.pl</pre>
+<p>q) &lt;b&gt;the screen freezes when running some commands&lt;/b&gt;</p>
+<p>a) check the background screen, the screen you called the GEM or configure.pl programs from, for output.
+   the lack of <code>fork()</code> functionality on Windows implies that sometimes there are issues like this.  It is
+   being worked.  The solution to this is often to just hit return a few times in the background screen.</p>
+<p>q) &lt;b&gt;i get the following message at startup&lt;/b&gt;
+  junk after document element at line 6050, column 0, byte 933251 at C:/Perl/site/
+  lib/XML/Parser.pm line 168
+  &lt;Hit Enter Key To Continue&gt;</p>
+<p>a) you have a screwed up xml configuration file.  The above file is screwed up at line 6050.  You
+will need to edit the file and fix it or to roll back to one of the dated backups.</p>
+<p>q) &lt;b&gt;why dont some of the perl scripts run stand alone???  &lt;/b&gt;</p>
+<pre>
+ for example i run &lt;i&gt;perl fix_db.pl -AX&lt;/i&gt; and i get</pre>
+<pre>
+  Can't locate Repository.pm in @INC (@INC contains:
+     /apps/gem/perl/lib/5.8.4/sun4-solaris-thread-multi
+     /apps/gem/perl/lib/5.8.4
+     /apps/gem/perl/lib/site_perl/5.8.4/sun4-solaris-thread-multi
+     /apps/gem/perl/lib/site_perl/5.8.4
+     /apps/gem/perl/lib/site_perl .) at fix_db.pl line 21.
+BEGIN failed--compilation aborted at fix_db.pl line 21.</pre>
+<p>a) GEM libraries in perl are NOT stored in the normal perl library locations.  They are stored in the lib subdirectory
+of the GEM install.  If you installed into /apps/gem, you need to run &lt;i&gt;perl -I/apps/gem/lib fix_db.pl -A</p>
+<p>To get around this problem, we use lines like
+</p>
+<pre>
+
+        &lt;i&gt;use lib qw(/apps/gem/lib);&lt;/i&gt;</pre>
+<p>Which are touched / updated by the GEM  Configuration Utility when you run the reformatter option.</p>
+<p>If the code does not work, you can also run
+</p>
+<pre>
+
+   &lt;i&gt;perl -I/apps/gem/lib fix_db.pl -AX&lt;/i&gt;</pre>
+<p>q) &lt;b&gt;I keep getting these pop up screens from my scheduled tasks&lt;/b&gt;</p>
+<p>a) run your windows scheduled tasks using a different account from your
+interactive account.</p>
+<p>q) &lt;b&gt;My windows graphical application gets stuck/frozen&lt;/b&gt;</p>
+<p>a) this is one of those silly windows'isms.  If you have tabbed into the
+console window and scrolled, the application can get frozen.
+Of course, all
+the information (plus more) that you see in this window is actually saved
+into the log file and can be viewed from there.   &lt;b&gt; HIT RETURN IN YOUR
+CONSOLE WINDOW TO CONTINU&/b;.</p>
+<p>q) &lt;b&gt;I have a problem installing... help!!!&lt;/b&gt;</p>
+<p>a) well... im sorry to hear that... but the right thing to do is report it
+to sql technologies and to attach the log file to your error report.  This
+file is the application name with a .log extension - so configure.log is
+the configure.pl log file.  This log file does contain lots of details on
+your install and should hopefully help us solve your problem.  Thanks!</p>
+<p>q) &lt;b&gt;Rep Server Error Log Contains:&lt;/b&gt;</p>
+<p>E. 2006/04/25 12:04:04. ERROR #14024 <code>USER(sa)</code> - /execint.c(1038)
+Executor does not allow the entered command in the current mode.</p>
+<p>a) Sadly, this appears to be intrinsic to the DBD::Sybase library.  It must
+do some under the covers sql commands to verify the connection.  This
+message means a ``normal'' sql command was sent to the rep server - which
+of course will not handle it because the rep server has no sql language
+handler.  Ignore the messages.</p>
+<p>q) i keep getting messages ``no statement executing at ....''</p>
+<p>a) this comes from older versions of DBD::Sybase and has been fixed in
+the latest version.  Ignore the messages or upgrade</p>
+<p>q) ok i scheduled all these jobs - what if something goes wrong?</p>
+<p>a) the console contains the contents of all your log files!  Basically the
+jobs in your crontab all use a similar syntax to :</p>
+<pre>
+  $ cat TraceRoute.ksh
+  umask 000
+  /apps/gem/perl/bin/perl /apps/gem/gem/ADMIN_SCRIPTS/monitoring/tracert.pl -BATCH_ID=TraceRoute $* &gt; /apps/gem/gem/data/GEM_BATCHJOB_LOGS/Unix_TraceRoute.log 2&gt; /apps/gem/gem/data/batchjob_errors/Unix_TraceRoute.log</pre>
+<p>Of course this is all customized ... the perl, the file locations etc...</p>
+<p>So how do you see what happened!!! just look at the console under ``GEM Logs'' -&gt; ``BATCH FILE EXECUTION LOGS''.  Do this every few days to make sure things are working (or whenever you notice a problem.o</p>
+<p><table cellspacing="0" cellpadding="0"><tr><td>q) when i install the stored procedure library, i get language mismatch messages like :
+<tr><td><td>Msg 2401, Level 11, State 2:
+<tr><td><td>Server 'CALYPSODB':
+<tr><td><td>Character set conversion is not available between client character set 'utf8'
+<tr><td><td>and server character set 'iso_1'.
+<tr><td><td>No conversions will be done.
+</table></p>
+<pre>
+
+a) set the LANG environment variable as appropriate</pre>
+<pre>
+   export LANG=C
+
+
+q) I have an Installation failure on some kind of _BAK table</pre>
+<pre>
+   &gt; perl upgrade.pl</pre>
+<pre>
+   [ snip ]
+         TABLE      ContainerMap                   SAVE  drop  Install Restore
+    TABLE      ContainerOverride              SAVE  drop  Install Restore
+    TABLE      Container_full                 SAVE  drop  Install Restore</pre>
+<pre>
+        *****************************************************
+        Cant Backup Table Event.  Event_BAK allready exists! This indicates that a prior release failed.  Event_BAK is a backup of Event prior to the upgrade - make sure that the data is ok, dr
+        op Event_BAK, and rerun this command
+        *****************************************************
+        /apps/gem/perl/bin/perl  -I/apps/gem/gem/lib  /apps/gem/gem/bin/configure.pl --LOGFILE=logs/upgrade_part2.log --UPGRADE
+
+a) You have a prior failed upgrade and a table archive (with the _BAK extension) exists.  You are probably ok to just drop the
+   _BAK table but you would be better served to
+
+      insert Event select * from Event_BAK
+      drop table Event_BAK</pre>
+<p>
+</p>
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<p>The following describes the major processes involved within the GEM system</p>
+<p>
+</p>
+<h2><a name="sybase_backup_crosscheck__head2_sql_svr_backup_crosscheck">SYBASE BACKUP CROSSCHECK
+=head2 SQL SVR BACKUP CROSSCHECK</a></h2>
+<p>The following batches read event log info and store the results in the database.  After storing the results, they run
+the script UpdateBackupStateStaticInfo.pl to fix up static info (like the list of working databases in the system) and
+then will run a reporting tool Backup_Crosscheck_Report.pl which reads crosscheck.dat and compares the results to the
+saved values in the BackupState table.</p>
+<pre>
+        MssqlBackupCrosscheck.ksh
+        MssqlBackupCrosscheckWeekly.ksh
+
+To collect data initially, we suggest you run the above with --NOALARM so you dont get totally spammed with alarms
+about databases you dont care about.  Once you do the initial run (with --NOALARM) look at the standard output for
+the job and appropriately edit crosscheck.dat to remove any databases for which you dont care about backups and to
+appropriately have the system handle/manage your log shipping.  By setting up the directives in this config file, you
+can inform GEM that systems should be log-shipped and it will intelligently understand that means that tran dumps must
+happen on primary and loads happen on secondary and that the database names must match between the systems.
+
+=head2 SYBASE LOG FILE CHECKS</pre>
+<p>The following Jobs Relate To Fetching Sybase Log Files</p>
+<p><table cellspacing="0" cellpadding="0"><tr><td>SybErrLogAllRpt.ksh  <td>Generates ``Sybase Error Log - UnFiltered''
+<tr><td>SybErrLogFetch.ksh  <td>Fetch The Logs &amp; Generate Console Sybase Error Log Fetch Report
+<tr><td>SybErrLogSaveAlarms.ksh<td>Save Alarms From Prefetched Files - Report in ``Sybase Error Log - Recent''
+<tr><td>SybErrLogConfig.ksh  <td>Generates The Console Sybase Error Log Configuration Report
+<tr><td>SybErrLogRpt.ksh<td>Generates ``Sybase Error Log - Filtered''</table></p>
+<p>The best mechanism to approach this process is to look at the Configuration Report and to remove any log files that
+are irrelevant -&gt; the way we do this is to actually mark the RUN files associated with the log files as bad.
+
+</p>
+<p>
+</p>
+<h2><a name="sql_svr_log_file_checks__head2_configuration_checker">SQL SVR LOG FILE CHECKS
+=head2 CONFIGURATION CHECKER</a></h2>
+<p>allsrv_query_long.pl --QUERY=select @@SERVERNAME,value,comment from sysconfigures where comment=``procedure cache size'' --TYPE=SYBASE
+
+</p>
+<p>
+</p>
+<h2><a name="replication_monitor__head2_cleaning_up_files">REPLICATION MONITOR
+=head2 CLEANING UP FILES</a></h2>
+
+</body>
+
+</html>

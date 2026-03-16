@@ -1,0 +1,28 @@
+=head1 The Servers Tab
+
+PURPOSE: Register your Databases & Systems
+
+=over 4
+
+=item * The Full GEM Add Server Wizard
+surveys your environment and discovers your databases - prompting for logins and passwords appropriately.
+To save time, it guesses passwords by reusing previously entered ones.
+This wizard only registers NEW servers and is re-runnable.
+
+=item * The Free GEM Add Server Wizard
+For FREE Gem provides a simple data entry screen to enter up to 4 DATABASEs.
+
+=item * Database Requirements
+Access must be via 'sa' or an account with similar roles/permissions.
+GEM does not support blank/empty administrator passwords.
+
+=item * Access To Unix Systems
+no password ssh access should be set up with reads permissions on the
+DBMS log files in $SYBASE/$ORA_HOME.
+
+=item * Access To Win32 Systems
+is via native authentication - the account must read Event Logs and
+Administrative File Shares (ie. requires administrator).
+
+=back
+

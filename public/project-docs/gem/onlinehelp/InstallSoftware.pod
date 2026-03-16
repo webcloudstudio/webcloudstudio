@@ -1,0 +1,22 @@
+=head1 The Install Software Tab
+
+Now would be a good time to Save Configuration Changes!
+
+Click the "Install Software" button to run the numbered steps listed below that button.
+
+=over 4
+
+=item * Reformat Code
+Removes Control-M's and Sets Hashbangs
+
+=item * Create GEM Batch Scripts
+creates your batch scripts. In a hybrid environment run this on UNIX last - so none of the files have control-M
+characters embedded
+
+=item * Backup Manager
+sets up default directories for the backup system
+
+=item * Modify Console Scripts
+
+=back
+

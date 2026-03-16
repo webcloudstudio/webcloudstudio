@@ -1,0 +1,2811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ed Barlow's Extended Stored Procedure Library</title>
+<style>
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       font-size: 15px; line-height: 1.6; color: #222; display: flex;
+       min-height: 100vh; }
+
+/* ── Sidebar ── */
+#sidebar {
+  width: 240px; min-width: 240px; background: #1a2940; color: #cdd9ea;
+  height: 100vh; position: sticky; top: 0; overflow-y: auto;
+  padding: 0 0 2rem 0;
+}
+#sidebar-header {
+  background: #111d2e; padding: 1rem 1rem 0.75rem;
+  border-bottom: 1px solid #2d4060;
+}
+#sidebar-header h1 { font-size: 0.95rem; font-weight: 700; color: #fff;
+  line-height: 1.3; }
+#sidebar-header p { font-size: 0.75rem; color: #7a98be; margin-top: 0.25rem; }
+
+nav { padding: 0.5rem 0; }
+.nav-section { padding: 0.6rem 1rem 0.2rem;
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #5a7a9a; }
+nav a { display: block; padding: 0.22rem 1rem 0.22rem 1.2rem;
+  color: #b0c8e0; text-decoration: none; font-size: 0.82rem;
+  transition: background 0.15s; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+nav a:hover { background: #243650; color: #fff; }
+nav a.section-link { padding-left: 1rem; color: #8fb8d8; font-weight: 500; }
+
+/* ── Main content ── */
+#content { flex: 1; padding: 2rem 3rem; max-width: 900px; overflow-x: auto; }
+
+#content h1 { font-size: 1.6rem; font-weight: 700; margin: 2rem 0 0.5rem;
+  color: #1a2940; border-bottom: 2px solid #d0dae8; padding-bottom: 0.4rem; }
+#content h1:first-child { margin-top: 0; }
+#content h2 { font-size: 1.15rem; font-weight: 600; margin: 1.4rem 0 0.4rem;
+  color: #2c4a70; }
+#content h3 { font-size: 1rem; font-weight: 600; margin: 1rem 0 0.3rem;
+  color: #3a5a80; }
+#content p { margin: 0.5rem 0; }
+#content ul, #content ol { margin: 0.4rem 0 0.4rem 1.8rem; }
+#content li { margin: 0.15rem 0; }
+
+/* HTML tables from PROCEDURES.pod */
+#content table { border-collapse: collapse; margin: 0.5rem 0; }
+#content td { padding: 0.2rem 1rem 0.2rem 0; vertical-align: top; }
+#content td:first-child { white-space: nowrap; }
+#content td a { color: #2060a0; font-weight: 500; text-decoration: none; }
+#content td a:hover { text-decoration: underline; }
+#content H3 { font-size: 1rem; font-weight: 600; margin: 1.2rem 0 0.3rem;
+  color: #2c4a70; }
+
+/* Code */
+#content pre { background: #f4f6f9; border: 1px solid #d8e0eb;
+  border-radius: 4px; padding: 0.75rem 1rem; overflow-x: auto;
+  margin: 0.6rem 0; }
+#content code { font-family: 'Cascadia Code', 'Consolas', 'Menlo', monospace;
+  font-size: 0.85rem; }
+#content pre code { font-size: 0.82rem; color: #1a2940; }
+
+/* Proc sections */
+.proc-section { border-top: 1px solid #e8ecf2; padding-top: 0.5rem;
+  margin-top: 0.5rem; }
+
+/* Back-to-top */
+.proc-section h1::after { content: " ↑"; font-size: 0.7rem; color: #aaa;
+  font-weight: 400; }
+.proc-section h1 a { color: inherit; text-decoration: none; }
+
+</style>
+</head>
+<body>
+<div id="sidebar">
+<div id="sidebar-header">
+<h1>Ed Barlow's<br>Stored Proc Library</h1>
+<p>v7.06 &mdash; Sybase &amp; SQL Server</p>
+</div>
+<nav>
+<div class="nav-section">Documentation</div>
+<a class="section-link" href="#overview">Overview</a>
+<a class="section-link" href="#installation">Installation</a>
+<a class="section-link" href="#uninstall">Uninstall</a>
+<a class="section-link" href="#procedures">Procedure List</a>
+<a class="section-link" href="#errors">Audit Error Codes</a>
+<a class="section-link" href="#license">License</a>
+<a class="section-link" href="#warranty">Warranty</a>
+<a class="section-link" href="#thanks">Acknowledgements</a>
+<div class="nav-section">Procedures</div>
+<div class="nav-section" style="padding-top:0.4rem">Server &amp; Session</div>
+<a href="#sp__who">sp__who</a>
+<a href="#sp__whodo">sp__whodo</a>
+<a href="#sp__whoactive">sp__whoactive</a>
+<a href="#sp__whoe">sp__whoe</a>
+<a href="#sp__uptime">sp__uptime</a>
+<a href="#sp__server">sp__server</a>
+<a href="#sp__id">sp__id</a>
+<a href="#sp__isactive">sp__isactive</a>
+<div class="nav-section" style="padding-top:0.4rem">Locking &amp; Blocking</div>
+<a href="#sp__lock">sp__lock</a>
+<a href="#sp__lockt">sp__lockt</a>
+<a href="#sp__block">sp__block</a>
+<div class="nav-section" style="padding-top:0.4rem">Space &amp; Devices</div>
+<a href="#sp__dbspace">sp__dbspace</a>
+<a href="#sp__qspace">sp__qspace</a>
+<a href="#sp__helpdb">sp__helpdb</a>
+<a href="#sp__helpdevice">sp__helpdevice</a>
+<a href="#sp__diskdevice">sp__diskdevice</a>
+<a href="#sp__dumpdevice">sp__dumpdevice</a>
+<a href="#sp__helpdbdev">sp__helpdbdev</a>
+<a href="#sp__helpmirror">sp__helpmirror</a>
+<a href="#sp__segment">sp__segment</a>
+<a href="#sp__helpsegment">sp__helpsegment</a>
+<a href="#sp__indexspace">sp__indexspace</a>
+<a href="#sp__vdevno">sp__vdevno</a>
+<div class="nav-section" style="padding-top:0.4rem">Object Info</div>
+<a href="#sp__help">sp__help</a>
+<a href="#sp__helptable">sp__helptable</a>
+<a href="#sp__helpcolumn">sp__helpcolumn</a>
+<a href="#sp__helpindex">sp__helpindex</a>
+<a href="#sp__helpview">sp__helpview</a>
+<a href="#sp__helpproc">sp__helpproc</a>
+<a href="#sp__helptext">sp__helptext</a>
+<a href="#sp__helpobject">sp__helpobject</a>
+<a href="#sp__ls">sp__ls</a>
+<a href="#sp__helpdefault">sp__helpdefault</a>
+<a href="#sp__helptype">sp__helptype</a>
+<a href="#sp__helptrigger">sp__helptrigger</a>
+<a href="#sp__helprule">sp__helprule</a>
+<div class="nav-section" style="padding-top:0.4rem">Permissions</div>
+<a href="#sp__helpgroup">sp__helpgroup</a>
+<a href="#sp__helplogin">sp__helplogin</a>
+<a href="#sp__helpuser">sp__helpuser</a>
+<a href="#sp__groupprotect">sp__groupprotect</a>
+<a href="#sp__objprotect">sp__objprotect</a>
+<a href="#sp__helprotect">sp__helprotect</a>
+<div class="nav-section" style="padding-top:0.4rem">Column Analysis</div>
+<a href="#sp__collist">sp__collist</a>
+<a href="#sp__colconflict">sp__colconflict</a>
+<a href="#sp__colnull">sp__colnull</a>
+<div class="nav-section" style="padding-top:0.4rem">Index Analysis</div>
+<a href="#sp__badindex">sp__badindex</a>
+<a href="#sp__noindex">sp__noindex</a>
+<a href="#sp__read_write">sp__read_write</a>
+<a href="#sp__find_missing_index">sp__find_missing_index</a>
+<div class="nav-section" style="padding-top:0.4rem">Auditing</div>
+<a href="#sp__auditdb">sp__auditdb</a>
+<a href="#sp__auditsecurity">sp__auditsecurity</a>
+<a href="#sp__checkkey">sp__checkkey</a>
+<div class="nav-section" style="padding-top:0.4rem">Reverse Engineering</div>
+<a href="#sp__revdb">sp__revdb</a>
+<a href="#sp__revtable">sp__revtable</a>
+<a href="#sp__revindex">sp__revindex</a>
+<a href="#sp__revlogin">sp__revlogin</a>
+<a href="#sp__revuser">sp__revuser</a>
+<a href="#sp__revgroup">sp__revgroup</a>
+<a href="#sp__revsegment">sp__revsegment</a>
+<a href="#sp__revdevice">sp__revdevice</a>
+<a href="#sp__revalias">sp__revalias</a>
+<a href="#sp__revbindings">sp__revbindings</a>
+<a href="#sp__revmirror">sp__revmirror</a>
+<a href="#sp__revrole">sp__revrole</a>
+<a href="#sp__revrule">sp__revrule</a>
+<a href="#sp__revkey">sp__revkey</a>
+<a href="#sp__revtype">sp__revtype</a>
+<div class="nav-section" style="padding-top:0.4rem">Miscellaneous</div>
+<a href="#sp__grep">sp__grep</a>
+<a href="#sp__depends">sp__depends</a>
+<a href="#sp__flowchart">sp__flowchart</a>
+<a href="#sp__syntax">sp__syntax</a>
+<a href="#sp__iostat">sp__iostat</a>
+<a href="#sp__bcp">sp__bcp</a>
+<a href="#sp__date">sp__date</a>
+<a href="#sp__datediff">sp__datediff</a>
+<a href="#sp__quickstats">sp__quickstats</a>
+<a href="#sp__stat">sp__stat</a>
+<a href="#sp__size">sp__size</a>
+<a href="#sp__trigger">sp__trigger</a>
+<a href="#sp__dbuse">sp__dbuse</a>
+<a href="#sp__configure">sp__configure</a>
+<a href="#sp__proclib_version">sp__proclib_version</a>
+</nav>
+</div>
+<div id="content">
+<section id="overview">
+<h1 id="overview">STORED PROCEDURE LIBRARY</h1>
+<p>The following is a guide to a FREE set of stored procedures that extend the Sybase and Microsoft SQL Server provided system procedures. These procedures provide additional functionality and new ways to look at the data provided in the System Tables. They also provide new formats that allows users, developers, and administrators to see the data they want in the format they want. This collection has been developed by several authors, and is maintained by Edward Barlow.  This package is intended to be a professional  tool suitable for general use on all your servers.</p>
+<p>These procedures are installed into sybsystemprocs on Sybase and into master on Microsoft Sql Server. All procedure names start with "sp__" (two underscores). This naming convention ensures that the procedures, when run, will be available from any database and that, when they are run, the database context will be the current database. This naming convention also ensures that there are no naming conflicts with Sybase's internal procedures.  Thus, if you want to see space in the statsdb database, you can run:</p>
+<pre><code>  use statsdb
+  exec sp__dbspace</code></pre>
+<p>Most of these procedures can be passed the parameter @dont_format='Y' to produce unformatted output.  One goal was to produce output that is readable in 80 column mode for convenience in isql/osql.  This is done by truncating some fields (dbname, username etc), which can result in truncated output.  If you need more detail or are using a graphical query analyzer you can pass the @dont_format='y' argument and it will show all fields at full length (no column truncation).</p>
+<pre><code>   sp__who @dont_format=&#x27;Y&#x27;</code></pre>
+<p><P><B>Extended Stored Procedure Library Links</B>. <A HREF="http://www.edbarlow.com">Home Page</A> &nbsp; <A HREF="http://www.edbarlow.com/download/procs.tgz">Standalone Download</A> &nbsp; <A HREF="http://www.edbarlow.com/download.pl">GEM Download</A></p>
+<p>These stored procedures are released as Free software under a standard <A HREF=http://www.gnu.org/copyleft/gpl.html>GPL</A> license.</p>
+<p>These procedures have been tested under</p>
+<pre><code>  SQL SERVER 2000
+  SQL SERVER 2005
+  SQL SERVER 2008
+  SQL SERVER 2008r2
+  SYBASE 4.9
+  SYBASE 10
+  SYBASE 11
+  SYBASE 12
+  SYBASE 15</code></pre>
+</section>
+
+<section id="installation">
+<h1 id="installation">INSTALLATION</h1>
+<p>The library is distributed in two ways.  The Generic Enterprise Manager software incldues a copy and a full featured user interface to install the procedures.  GEM also uses these procedures extensively - the console creates numerous reports based on these procedures that can be viewed using your web browser.  You can also download these procedures as a standalone package.</p>
+<p>The primary interface to install this library is to use the configure.pl program. configure.pl is a perl script that requires DBI and either DBD::Sybase (unix) or DBD::ODBC (windows).  You can also use the older - unsupported .bat/.sh files that are shipped with the distribution but let me repeat - they are not supported.  The .bat files require two parameters SERVERNAME and PASSWORD (the installSQLSVR.bat script only requires SERVERNEAME - it uses native authentication).</p>
+<p>To run configure.pl type</p>
+<pre><code>  perl configure.pl -?</code></pre>
+<p>which should respond with</p>
+<pre><code>	Unknown option: ?
+	usage: configure.pl --DEBUG --USER=sa --PASSWORD=pass --SERVER=svr --MINVERSION=ver --UPGRADE_TO_LATEST --ALLSERVERS|--SQLSERVERS|--SYBSERVERS [-FILE=File]</code></pre>
+<p>If it does not produce the above output on windows - and the cause is missing libraries (the above mentioned DBI and DBD::ODBC), you can install them by running</p>
+<pre><code>  ppm install DBI
+  ppm install DBD::ODBC</code></pre>
+<p>If the libaries are missing on unix, contact your unix administrator.</p>
+<p>If the above command works (ie it displays the command syntax) - your perl has all necessary modules installed - you can just run</p>
+<pre><code>   perl configure.pl</code></pre>
+<p>ignoring the command line arguments and it will ask you for SERVER/LOGIN/PASSWORD.  The login you use must have sa_role (sybase) or sysadmin (sql server) role.</p>
+<p>As system databases will be modified by these procedures, it is suggested that you dump that database before you load the procedure.</p>
+<p>If you are not able to get the perl installer working - you can install via the following unspported scripts:</p>
+<pre><code> configure.sh - the original shell script installer
+ installSQLSVR.bat
+ installSYBASE12.bat
+ installSYBASE15.bat
+ installSYBASE_MDA.bat - must change to mda procedure directory</code></pre>
+<p>You are, of course, required to know the sa password to the server to install. Well thats not quite true - sql server, if you enter an incorrect password,  will attempt to use native windows authentication (so the install will work if you have admin role on the server). Note that, on sybase, the default size for sybsystemprocs is a bit small - it is recommended you extend the default size to use the full sysprocsdev device that gets allocated during installation.  You could always just try an install and if you get out of space messages - to extend the space and reinstall.</p>
+</section>
+
+<section id="uninstall">
+<h1 id="uninstall">UNINSTALL</h1>
+<p>SQL statements to uninstall this package are contained in the file cleanup.SQL.</p>
+</section>
+
+<section id="procedures">
+<h1 id="procedures">LIST OF PROCEDURES</h1>
+<p>A menu program that provides a shell level interface is available, thanks to Lars Karlsson of Sweden, in the program menu.sh. Run it and see!</p>
+<h2>GENERAL HELP PROCEDURES</h2>
+<p><TABLE> <TR> <TD><A HREF="#sp__depends">sp__depends</A></TD></p>
+<p><TD>Better version of sp_depends</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__help">sp__help</A></TD></p>
+<p><TD>Better sp_help</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpdb">sp__helpdb</A></TD></p>
+<p><TD>Database Information</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpdevice">sp__helpdevice</A></TD></p>
+<p><TD>Break down database devices into a nice report</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpgroup">sp__helpgroup</A></TD></p>
+<p><TD>List groups in database by access level</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpindex">sp__helpindex</A></TD></p>
+<p><TD>Shows indexes by table</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpsegment">sp__helpsegment</A></TD></p>
+<p><TD>Segment Information</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helprotect">sp__helprotect</A></TD></p>
+<p><TD>Simple Protection Info for the database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helptext">sp__helptext</A></TD></p>
+<p><TD>Show comments with line splits ok</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpuser">sp__helpuser</A></TD></p>
+<p><TD>Lists users in current database by group (includes aliases)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__lock">sp__lock</A></TD></p>
+<p><TD>Lock information</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__syntax">sp__syntax</A></TD></p>
+<p><TD>Works on any procedure to give you syntax</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__who">sp__who</A></TD></p>
+<p><TD>sp_who that fits on a page</TD> </TR> </TABLE></p>
+<p><H3> SYSTEM ADMINISTRATOR PROCEDURES</H3></p>
+<p><TABLE> <TR> <TD><A HREF="#sp__block">sp__block</A></TD></p>
+<p><TD>Blocking processes.</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__dbspace">sp__dbspace</A></TD></p>
+<p><TD>Summary of current database space information.</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__dumpdevice">sp__dumpdevice</A></TD></p>
+<p><TD>Listing of Dump devices</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__diskdevice">sp__diskdevice</A></TD></p>
+<p><TD>Listing of Disk devices</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpdbdev">sp__helpdbdev</A></TD></p>
+<p><TD>Show how Databases use Devices</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helplogin">sp__helplogin</A></TD></p>
+<p><TD>Show logins and remote logins to server</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpmirror">sp__helpmirror</A></TD></p>
+<p><TD>Shows mirror information, discover broken mirrors</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__segment">sp__segment</A></TD></p>
+<p><TD>Segment Information</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__server">sp__server</A></TD></p>
+<p><TD>Server summary report (very useful)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__stat">sp__stat</A></TD></p>
+<p><TD>Give basic server performance information (loops)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__vdevno">sp__vdevno</A></TD></p>
+<p><TD>Who's who in the device world</TD> </TR> </TABLE></p>
+<p><H3> DBA PROCEDURES</H3></p>
+<p><TABLE> <TR> <TD><A HREF="#sp__badindex">sp__badindex</A></TD></p>
+<p><TD>list badly formed indexes (allow nulls) or those needing statistics</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__collist">sp__collist</A></TD></p>
+<p><TD>list all columns in database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__find_missing_index">sp__find_missing_index</A></TD></p>
+<p><TD>Finds keys that do not have associated index</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__flowchart">sp__flowchart</A></TD></p>
+<p><TD>Makes a flowchart of procedure nesting</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__groupprotect">sp__groupprotect</A></TD></p>
+<p><TD>Permission info by group</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__indexspace">sp__indexspace</A></TD></p>
+<p><TD>Space used by indexes in database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__id">sp__id</A></TD></p>
+<p><TD>Gives information on who you are and which db you are in</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__noindex">sp__noindex</A></TD></p>
+<p><TD>list of tables without indexes.</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpcolumn">sp__helpcolumn</A></TD></p>
+<p><TD>show columns for given table</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpdefault">sp__helpdefault</A></TD></p>
+<p><TD>list defaults (part of objectlist)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpobject">sp__helpobject</A></TD></p>
+<p><TD>list objects</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpproc">sp__helpproc</A></TD></p>
+<p><TD>list procs (part of objectlist)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helprule">sp__helprule</A></TD></p>
+<p><TD>list rules (part of objectlist)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helptable">sp__helptable</A></TD></p>
+<p><TD>list tables (part of objectlist)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helptrigger">sp__helptrigger</A></TD></p>
+<p><TD>list triggers (part of objectlist)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__helpview">sp__helpview</A></TD></p>
+<p><TD>list views (part of objectlist)</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__objprotect">sp__objprotect</A></TD></p>
+<p><TD>Permission info by object</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__read_write">sp__read_write</A></TD></p>
+<p><TD>list tables by # procs that read, # that write, # that do both</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__trigger">sp__trigger</A></TD></p>
+<p><TD>Useful synopsis report of current database trigger schema</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__whodo">sp__whodo</A></TD></p>
+<p><TD>sp__who - filtered for only active processes</TD> </TR> </TABLE></p>
+<p><H3> AUDIT PROCEDURES</H3></p>
+<p><TABLE> <TR> <TD><A HREF="#sp__auditsecurity">sp__auditsecurity</A></TD></p>
+<p><TD>Security Audit On Server</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__auditdb">sp__auditdb</A></TD></p>
+<p><TD>Audit Current Database For Potential Problems</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__checkkey">sp__checkkey</A></TD></p>
+<p><TD>Generate script for referential integrity problems (uses key info from sp_foreignkey)</TD> </TR> </TABLE></p>
+<p><H3> REVERSE ENGINEERING PROCEDURES</H3></p>
+<p><TABLE> <TR> <TD><A HREF="#sp__revalias">sp__revalias</A></TD></p>
+<p><TD>get alias generation script for current database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revdb">sp__revdb</A></TD></p>
+<p><TD>get database generation script for server</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revdevice">sp__revdevice</A></TD></p>
+<p><TD>get device generation script for server</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revgroup">sp__revgroup</A></TD></p>
+<p><TD>get group generation script for current database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revindex">sp__revindex</A></TD></p>
+<p><TD>get index generation script for current database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revlogin">sp__revlogin</A></TD></p>
+<p><TD>get login generation script for server</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revmirror">sp__revmirror</A></TD></p>
+<p><TD>get mirror generation script for current database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revsegment">sp__revsegment</A></TD></p>
+<p><TD>get segment generation script for current database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revtable">sp__revtable</A></TD></p>
+<p><TD>get table generation script for current database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__revuser">sp__revuser</A></TD></p>
+<p><TD>get user generation script for current database</TD> </TR> </TABLE></p>
+<p><H3> OTHER PROCEDURES</H3></p>
+<p><TABLE> <TR> <TD><A HREF="#sp__bcp">sp__bcp</A></TD></p>
+<p><TD>Create unix script to bcp in/out database</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__date">sp__date</A></TD></p>
+<p><TD>Who can remember all the date styles?</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__iostat">sp__iostat</A></TD></p>
+<p><TD>Loops n times showing active processes only</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__grep">sp__grep</A></TD></p>
+<p><TD>Search for patern</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__isactive">sp__isactive</A></TD></p>
+<p><TD>Shows info about a single active process</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__ls">sp__ls</A></TD></p>
+<p><TD>Lists specific objects</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__quickstats">sp__quickstats</A></TD></p>
+<p><TD>Quick dump of server summary information</TD> </TR></p>
+<p><TR> <TD><A HREF="#sp__whoactive">sp__whoactive</A></TD></p>
+<p><TD>Show info about who is active</TD> </TR> </TABLE></p>
+</section>
+
+<section id="errors">
+<h1 id="errors">AUDITING ERROR CODES</h1>
+<p>The following is a list of errors generated by the auditing procedures</p>
+<pre><code>	31001 User +name+ Is Locked
+	31002 Login +name+ Is Expired
+	31003 User +name+ Has Null Password
+	31003 User +name+ Has Null/Short Password
+	31003 User +name+ Has Short (&lt;=4 character) Password
+	31004 User +name+ Has +dbname+ Database As Default
+	31005 Allow Updates is Set
+	31006 ERROR: Num Open Devices Parameter Set Too Low
+	31007 ERROR: Num Open Databases Parameter Set Too Low
+	31008 Allow Updates is Set
+	31009 User +name+ Has Pasword=Id
+	31010 Allow Updates is Set
+	31011 Tempdb is only +@tempdb)+MB
+	31012 User sa is trusted from +srvname
+	31013 Database +name+ Created For Load
+	31014 Database +name+ Suspect
+	31015 Database +name+ Offline
+	31016 Database +name+ Offline until recovery completes
+	31017 Database +name+ Is Being Recovered
+	31018 Database +name+ Has Suspect Pages
+	31019 Database +name+ Is Being Upgraded
+	31020 Database +name+ -&gt; No Log Device and No TL on Chkpt
+	31021 ERROR: MIRROR BROKEN: +name
+	31022 ERROR: CHECK MIRRORING: +name
+	31025 x.name+ Config Has Been Reset To +c.value2+ (default=+c.defvalue)
+	31030 ERROR: Login +name+ Has an invalid default db (dbname)
+	31031 Device +rtrim(dev.name)+ Is Mapped But Unused (no segments). Size (MB) = usg.size/512.
+	31032 ERROR: Sybsystemprocs should be &gt; 60 MB (@c)
+	31033 ERROR: tempdb should be &gt;= 100 MB (@c)
+	31034 Database +name+ Is not auto-shrink
+	31035 Database +name+ Has No Torn Page Detection
+	31036 Database +name+ Is Unusable
+	31037 User +name+ Has Stupid Password
+	31038 user +u.name+ can use db but lacks login
+	31040 File +name+ Is Not Autogrowth
+	31101 User +user_name(uid)+ Owns Objects
+	32000 Login +m.name+ is aliased to +u.name
+	32007 suid + a.suid+ lacks login and is aliased to +u.name
+	32008 user +u.name+ can use db but lacks login suid=suid
+	32009 database +db_name()+ has not been tran dumped in
+	32010 Object +name+ Has No Comments
+	32010 count(*)+ Objects Have No Comments
+	32011 Comments for id + id + have no object
+	32013 v.name + Permission granted to + u.name
+	32014 Table +object_name(id)+ Index + name + is suspect
+	32016 Object: +object_name(s1.id)+ Has Statistics From +s1.moddate 0)+ and +s2.moddate 0)
+	32017 Object: +object_name(s1.id)+ Has OLD Statistics From +s1.moddate 0)
+	32018 name + permissions granted to public on +object_name(id) from sysprotects master.dbo.spt_values c
+	32019 db_name()+ has +@dat+MB data and + @log+MB log
+	32100 Login + m.name + is aliased to + u.name
+	32101 User +user_name(uid)+ Has + count(*)+ Objects
+	32101 User +user_name(uid)+ Owns Objects
+	32102 Object +name+ exists in the db and in sybsystemprocs - This is a possible Trojan Horse
+	32102 Object +name+ in master - Possible Trojan Horse
+	32102 Object +o.name+ Exists in master and the database - Possible Trojan Horse
+	32102 Object +o.name+ Possible Trojan Horse (Exists in master)
+	32103 Object +object_name(id)+ has access to syslogins
+	32104 No Groups Exist In Database +db_name()
+	32105 User +n1.name+ is a member of group public
+	32106 Group Public +rtrim(v.name)+ access to + count(*) + objects
+	32106 Group Public access to object +o.name+ type=+o.type
+	32110 DB Collation +collation+ != Server Collation + serverproperty(collation)</code></pre>
+</section>
+
+<section id="license">
+<h1 id="license">RIGHT TO USE, RESALE AND COPYRIGHT</h1>
+<p>All procedures in this package are copyright (c) 1994-2011 by Edward Barlow. They are released under a standard <A HREF=http://www.gnu.org/copyleft/gpl.html> GPL</A> license agreement. The license will be changed to GPL v3 when the GPL v3 draft is formalized.</p>
+<p>You may redistribute the package at will (see below). Tell your friends. Give me access to procedures that you have written for future versions. Tell me about bugs. Be nice - I am making no money off this.</p>
+<p>You are allowed to use this software so long as all copyright notices, README, and other documentation are not altered and so long as no money is made by the sale of this software (i.e. you cant include it in a commercial package without permission). If you would like to "make money" or include the code in a commercial package, I ask that you decide on a "fair" price and create some form of "fair" agreement. Make two copies, sign them both, and send them to the package author (Edward Barlow). If the agreement seems fair, I will sign both and send one copy back to you, and we will have a deal. I have put significant effort into this code and, while my primary purpose is to create software for people to use, I expect a fair shake from anybody who can profit from my endeavors.</p>
+<p>Procedures submitted by outside authors retain the authors copyright (which can be found in the code files and which should be noted in this documentation) but I (Edward Barlow and any companies I create to distribute software) get the right to redistribute them as i see fit (this is to protect me).</p>
+</section>
+
+<section id="warranty">
+<h1 id="warranty">WARRANTY</h1>
+<p>(Are you kidding...) This software is provided as-is. No warranties or guarantees are made. To the best of my knowledge, any bugs or outstanding issues are documented in the file "BUGS" that comes with the source code.</p>
+<p>That file is probably NOT shipped in this distribution because there are no no bugs - although there is generally a bunch of changes that get made whenever the Database vendor releases a new version of the database. If you notify me of any bugs, i will fix them as i can.</p>
+</section>
+
+<section id="thanks">
+<h1 id="thanks">Special Thanks</h1>
+<p>Special thanks to Simon Walker of the SQL Workshop Ltd, who authored many of them and who greatly assisted in this project. Special thanks to Desiree Johnson for her help. The menu.sh program is compliments of Lars Karlsson of Sweden. The permanent home for this distribution is http://www.edbarlow.com</p>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__auditdb">NAME</h1>
+<p>sp__auditdb  - Audit current database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<pre><code>   Checks Common Database Problems
+   Lists users in group public if groups are used.
+   Warn about lack of groups if no groups exist besides public.
+   List users aliased to another non dbo user.
+   List aliases without logins (login previously dropped).
+   List users without logins (login previously dropped).
+   List objects owned by non-dbo (maybe poor code control?).
+   Find objects with access to syslogins in them. This
+      procedure excludes normal objects like sp__addlogin. Use
+      of this procedure will identify potential Trojan horses.
+   Find any objects with public access.
+   If not master db, list any objects starting with &quot;sp_&quot; that
+      are also in master (Trojan horses).
+   Database has not had transaction log dump in 24 hours.
+   Checks Object / Comment mismatch (hand deleted, or rename)
+   Create object permissions granted to users</code></pre>
+<h2>USAGE</h2>
+<p>sp__auditdb [@srvname, @hostname ]</p>
+<p>External programs that collect errors can pass the parameters parameters (@srvname &amp; @hostname) to the procedure. If these are passed, the procedure will print a slightly different return set that includes error numbers and other information.</p>
+<h2>SEE ALSO</h2>
+<p>sp__auditsecurity</p>
+<h2>ACCESS</h2>
+<p>This procedure can be only runable by sa because it may reveal information that can help an intruder..</p>
+<h2>SAMPLE OUTPUT</h2>
+<p>1> sp__auditdb</p>
+<pre><code>   Error
+   ---------------------------------------------
+   Object get_comn_syslogins has access to syslogins
+   Object get_comn_sysusers has access to syslogins
+   Object get_comn_sysusers has access to syslogins
+   User sa is a member of group public
+   Group Public access to object pb_catcol type=P
+   Group Public access to object pb_catedt type=P
+   Group Public access to object pbcatfmt type=U
+   Group Public access to object pbcattbl type=U</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__auditsecurity">NAME</h1>
+<p>sp__auditsecurity - Audit system security</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<pre><code>  Reports Users With Passwords like the Username
+  Reports Users With Null Passwords
+  Reports Users With Short (&amp;lt;=4 character) Passwords
+  Reports Users With Master/Model/Tempdb Database As Default (except sa)
+  Reports allow updates is set
+  Reports Users with stupid passwords like &quot;sybase&quot;....</code></pre>
+<h2>USAGE</h2>
+<p>sp__auditsecurity [@print_only_errors,] [@srvname, @hostname ]</p>
+<p>if @print_only_errors is not null then prints only errors. Otherwise it will print statements about successes</p>
+<p>Programs that collect errors can pass the parameters parameters (@srvname &amp; @hostname) to the procedure. If these are passed, the procedure will print a slightly different return set that includes error numbers and other information.</p>
+<h2>SEE ALSO</h2>
+<p>sp__auditdb</p>
+<h2>ACCESS</h2>
+<p>This procedure is only runable by sa because it reveals users with weak passwords.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code>  1&gt; sp__auditsecurity
+
+  Security Violations
+  ------------------------------------------------------
+  (No Users With Null Passwords)
+  User monitor Has master Database As Default
+  User mon6 Has master Database As Default
+  User a Has master Database As Default
+  Allow Updates is Set
+  (Allow Updates is Not Set)
+  (No Trusted Remote Logins)</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__badindex">NAME</h1>
+<p>sp__badindex - List badly formed indexes or those needing statistics</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Identifies bad indexes according to the following rules. Finds indexes containing null, vbl lth, text, or image columns. Find indexes over 30 bytes long or indexes that have never had statistics updated on them. List NC indexes on small tables.</p>
+<h2>USAGE</h2>
+<p>sp__badindex [ @tablename ]</p>
+<h2>SAMPLE OUTPUT</h2>
+<p>1> exec sp__badindex</p>
+<pre><code> Table/Index Name               Description            Problem Found
+ ------------------------------ ---------------------- --------------
+ alerts.XPKalerts               Length = 60            &gt;30 Byte Index
+ alerts.XPKalerts               srvname char(30)       Allows Null
+ audit_trail.XPKaudit_trail     Length = 38            &gt;30 Byte Index
+ comn_database.XPKdatabase      Length = 60            &gt;30 Byte Index
+ comn_dumpdevices.XPKcomn_dumpd Length = 60            &gt;30 Byte Index
+ comn_syscolumns.XPKcomn_syscol Length = 94            &gt;30 Byte Index</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__bcp">NAME</h1>
+<p>sp__bcp - Produce object-level bcp commands to get server data</p>
+<h2>AUTHOR</h2>
+<p>Simon Walker, The SQL Workshop LTD.</p>
+<h2>DESCRIPTION</h2>
+<p>Creates bcp in / out shell script that can be used to extract info from the database.</p>
+<h2>USAGE</h2>
+<p>sp__bcp {server}, [database], [user], [password], [direction], [extension], [commands]</p>
+<p>where...</p>
+<pre><code>        {@server} Server name (should really be entered since
+              @@servername is rarely defined)
+        [@database] Defaults to database procedure is run in
+        [@user] Defaults to current username
+        [@password] Defaults to current password
+        [@direction] &quot;out&quot; or &quot;in&quot;. Defaults to out
+        [@extension] File extension will default to .dat
+        [@commands] Allows you to enter further switching commands
+              (-c option to bcp)</code></pre>
+<h2>BUGS</h2>
+<p>It is advisable to run the stored procedure through isql in at least 132 column mode (-w132) to stop the crummy (isql) program from inserting linefeeds.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code>        1&gt; use master
+        1&gt; sp__bcp SYBASE,master,sa,xxx
+        echo &quot;&quot;
+        echo &quot;&quot;
+        echo BCP out table master..spt_committab
+        bcp master..spt_committab out spt_committab.dat -Usa -Pxxx
+        -SSYBASE -c
+        echo &quot;&quot;
+        echo &quot;&quot;
+        echo BCP out table master..spt_values
+        bcp master..spt_values out spt_values.dat -Usa -Pxxx -SSYBASE</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__block">NAME</h1>
+<p>sp__block - Show blocked processes details</p>
+<h2>AUTHOR</h2>
+<p>4.9 version: Simon Walker, The SQL Workshop LTD. System 10 version: Ed Barlow</p>
+<h2>DESCRIPTION</h2>
+<p>Monitor Blocked Processes</p>
+<h2>SEE ALSO</h2>
+<p>sp__block sp__lockt</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code>  1&gt; sp__block
+  SPID User       Host   Program    Blocking on Table    Lock Type
+  ---- ---------- ------ ---------- -------------------- ---------------
+  7    giraffe                      AARDVARKS_R_US       Update_page-blk
+  7    giraffe                      AARDVARKS_R_US       Ex_page-blk
+
+  Blocked SPID Blocked User Host Program Blocked By SPID
+  ------------ ------------ ---------- ---------- ---------------
+  26           edisking                           7
+  26           ediswise                           7
+  45           iamrich                            7
+  45           iampoor                            7</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__checkkey">NAME</h1>
+<p>sp__checkkey  - Creates script you can use to check db referential integrity.</p>
+<h2>AUTHOR</h2>
+<p>Ed Barlow</p>
+<h2>DESCRIPTION</h2>
+<p>Create script to check foreign key relationships. For example if you have a field stor_id in table sales that indicates the store the sales are for, the script output lists stor_id's in sales that do not have rows in store. The script uses foreign keys that you have set up.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code>	 1&gt; sp__checkkey
+
+	 [ for each foreign key in database ]
+	 declare @cnt int
+	 set nocount on
+	 select title_id into #tmp from roysched
+	 delete #tmp from #tmp p,titles d where p.title_id=d.title_id
+	 if exists ( select * from #tmp )
+	 begin
+	  select @cnt=count(*) from #tmp
+	  if @cnt&gt;=100
+	  print &#x27;first 100 keys in roysched w/o data in titles&#x27;
+	  else
+	  print &#x27;distinct keys in roysched w/o data in titles&#x27;
+	  set rowcount 100
+	  select distinct * from #tmp
+	  set rowcount 0
+	 end
+	 drop table #tmp
+	 go
+	 [ WHEN RUN THIS SCRIPT PRODUCES ]
+
+	 1&gt; [ execute above ]
+	 distinct keys in roysched w/o data in titles
+
+	 title_id
+	 ----------
+	 A12224</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__colconflict">NAME</h1>
+<p>sp__colconflict  - Analyze conflicting columns definitions in current database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Reports column with multiple definitions (for example, one. defined in table A as an int and in B as a smallint).</p>
+<h2>USAGE</h2>
+<p>sp__colconflict [ @objectname ]</p>
+<p>@objname specifies objects to select (query like "%@objname%")</p>
+<h2>SEE ALSO</h2>
+<p>sp__helpcolumn, sp__collist</p>
+<p>sp__helpnull</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__colconflict
+ Column               Table                Defn            Null
+ -------------------- -------------------- --------------- --------
+ attribute            schedule_history     char(30)        null
+ attribute            schedule_attributes  varchar(127)    null
+ description          error_severity       char(18)        null
+ description          system               char(255)       null
+ description          disks                char(30)        null
+ description          user_view            char(30)        null
+ description          remarks              varchar(127)    null
+ description          hardware             varchar(127)    null
+ group_name           schedule_defn        char(18)        not null
+ group_name           schedule_groups      char(18)        not null
+ group_name           comn_sysusers        char(30)        not null
+ group_name           model                char(30)        null</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__collist">NAME</h1>
+<p>sp__collist  - Analyze columns in current database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Reports column definitionsand reports columns with multiple definitions (for example, one. defined in table A as an int and in B as a smallint) and columns that have conflicting "allow null" definitions.</p>
+<h2>USAGE</h2>
+<p>sp__collist [ @objectname ]</p>
+<p>@objname specifies objects to select (query like "%@objname%")</p>
+<h2>SEE ALSO</h2>
+<p>sp__helpcolumn</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code>  1&gt; exec sp__collist
+  column          type            Nulls    Ident    Num Tables
+  --------------- --------------- -------- -------- ----------
+  action          char(18)        null              1 Tables
+  allow_null      tinyint         null              1 Tables
+  allow_updates   smallint        null              1 Tables
+  attribute       char(30)        null              1 Tables
+  attribute       varchar(127)    null              1 Tables
+  audit_trail     tinyint         not null          1 Tables
+  benchmark       int             null              4 Tables</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__colnull">NAME</h1>
+<p>sp__colnull  - columns with conflicting nullity</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Reports column with same name but conflicting nullity (for example, one. defined in table A as allow null and in B as not allow null).</p>
+<h2>USAGE</h2>
+<p>sp__colnull [ @objectname ]</p>
+<p>@objname specifies objects to select (query like "%@objname%")</p>
+<h2>SEE ALSO</h2>
+<p>sp__helpcolumn, sp__collist,</p>
+<p>sp__helpconflict</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__colnull
+ Column               Table                Defn            Null
+ -------------------- -------------------- --------------- --------
+ controller           disk_usg             char(10)        not null
+ controller           controllers          char(10)        not null
+ controller           disks                char(10)        null
+ crdate               audit_trail          datetime        not null
+ crdate               db_space_save        datetime        not null
+ crdate               comn_sysobjects      datetime        not null
+ crdate               server_syslocks      datetime        not null
+ crdate               db_space_history     datetime        not null
+ crdate               password_history     datetime        not null
+ crdate               table_space_save     datetime        not null
+ crdate               table_space_history  datetime        not null
+ crdate               alerts               datetime        null
+ crdate               comn_database        datetime        null</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__configure">NAME</h1>
+<p>sp__configure - a better system configuration viewer</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>This, unlike sp_configure, gives straight result set viewing, sorted into categories.  It also shows any defaults if available.</p>
+<h2>SEE ALSO</h2>
+<h2>USAGE</h2>
+<pre><code> Proc_name                      Order Parameter
+ ------------------------------ ----- ------------------------------
+ sp__configure                      1 @dont_format char(1) NOT NULL</code></pre>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> Category                     Option Name               Value   Default
+ ---------------------------- ------------------------- ------- -------
+ default data cache           2K I/O Buffer Pool        7800    NULL
+ SQL Server Administration    Upgrade version           11510   1100
+ default data cache           User Defined Cache        0       0
+ default data cache           User Defined Cache        7800    NULL
+ Physical Memory              additional netmem         0
+ Languages                    default character set ID  2       1
+ Languages                    default language          0</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__date">NAME</h1>
+<p>sp__date  - Show date conversion formats for the server</p>
+<h2>AUTHOR</h2>
+<p>Simon Walker, The SQL Workshop LTD.</p>
+<h2>DESCRIPTION</h2>
+<p>show date conversion formats for server. you could look it up but...</p>
+<h2>USAGE</h2>
+<p>sp__date [ @datestring ]</p>
+<p>@datestring is date string to convert - if not given uses getdate()</p>
+<h2>SAMPLE OUTPUT</h2>
+<p>1> exec sp__date</p>
+<pre><code>  0   Oct 31 1997 12:21AM           100  Oct 31 1997 12:21AM
+  1   10/31/97                      101  10/31/1997
+  2   97.10.31                      102  1997.10.31
+  3   31/10/97                      103  31/10/1997
+  4   31.10.97                      104  31.10.1997
+  5   31-10-97                      105  31-10-1997
+  6   31 Oct 97                     106  31 Oct 1997
+  7   Oct 31, 97                    107  Oct 31, 1997
+  8   00:21:35                      108  00:21:35
+  9   Oct 31 1997 12:21:35:150AM    109  Oct 31 1997 12:21:35:150AM
+  10  10-31-97                      110  10-31-1997
+  11  97/10/31                      111  1997/10/31
+  12  971031                        112  19971031</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__datediff">NAME</h1>
+<p>sp__datediff  - Gives real datediff between time and now</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>ARGUMENTS</h2>
+<pre><code>        @starttime datetime
+        @scale char(1)
+        @outp float     output</code></pre>
+<h2>DESCRIPTION</h2>
+<p>Returns time differences in FLOATING format.  So difference between 3:20AM and 4:40AM in hours is 1.333 and in days is 1.333/24 or about .055.</p>
+<pre><code> if     @scale=&#x27;h&#x27;
+        select @outp= convert(float,datediff(mi,@startdate,getdate()))/60
+ else   if @scale=&#x27;d&#x27;
+        select @outp= convert(float,datediff(hh,@startdate,getdate()))/24
+ else   if @scale=&#x27;m&#x27;
+        select @outp= convert(float,datediff(ss,@startdate,getdate()))/60
+ else   if @scale=&#x27;s&#x27;
+        select @outp= convert(float,datediff(ss,@startdate,getdate()))</code></pre>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; declare @x float
+ 2&gt; exec sp__datediff &quot;Jan 20 1999&quot;,&quot;h&quot;,@x</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__dbspace">NAME</h1>
+<p>sp__dbspace  - Show current db space</p>
+<h2>AUTHOR</h2>
+<p>Unknown</p>
+<h2>DESCRIPTION</h2>
+<p>calculates out amounts reserved and used for current database</p>
+<h2>SEE ALSO</h2>
+<p>sp__qspace</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__dbspace
+ 1&gt; exec sp__dbspace
+ Name      Data MB    Used MB     Percent Log MB  Log Used  Log Pct
+ --------- ---------- ----------- ------- ------- --------- -------
+ statsdb           10         6.6   66.29       0      0.00    0.00</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__dbuse">NAME</h1>
+<p>sp__dbuse  - Show system information</p>
+<h2>AUTHOR</h2>
+<p>Philippe Wathelet (Flexible Consulting) philipew@hotmail.com )</p>
+<h2>VERSION</h2>
+<p>5.2</p>
+<h2>DESCRIPTION</h2>
+<p>This procedure gives a complete outlook of a database relating to its various components, including the server it runs on.  It is designed to operate in a System 11 environment only.</p>
+<h2>USAGE</h2>
+<pre><code> ......:1&gt;sp__dbuse &lt;database name&gt;
+ ......:2&gt;go</code></pre>
+<p>From any database including <database name>. If only the beginning of the DB name is given then the full name is found if identifiable.</p>
+<p>OR</p>
+<pre><code> ......:1&gt;sp__dbuse
+ ......:2&gt;go</code></pre>
+<p><database name> defaults to the current DB. This usage will return the most information.</p>
+<p>OR</p>
+<pre><code> master:1&gt;sp__dbuse
+ master:2&gt;go</code></pre>
+<p>If the current DB is master, <database name> defaults to the DB with the log full else to the first DB with a blocking lock on else to the DB with the largest data percentage full.</p>
+<h2>SEE ALSO</h2>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> ----------------------------------------------
+ You are &#x27;SYS_INSTALL&#x27; as &#x27;dbo&#x27; under SPID 10</code></pre>
+<p>on  with role(s): sa, sso, oper</p>
+<pre><code> -DATABASE:  Monday Oct 11 1999 11:18AM
+ ========
+
+ Database: xrm_db          dbid:5
+ DB owner: xrm_mgr         suid:6
+ Creation: Apr  1 1999  9:42AM     MB:      52
+
+ -PLACEMENT:
+ =========
+
+ id Database    id Database
+ -- ------------------- -- -------------------
+ 4  sybsystemprocs
+ 5  xrm_db &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+ 6  xrm_sod01_db
+ 7  xrm_security_db
+ 8  sim_db
+
+ -OPTIONS:
+ =======
+
+ - Select into/bulkcopy/pllsort
+ - Trunc log on chkpt
+ - Abort tran on log full
+
+ -IN USE BY:
+ =========
+
+ All DBs  # # # # # # # # # # # # # # # # # #
+ This DB  xrm_db is NOT in use
+
+ -ROLES:
+ =====
+
+ sa sso        oper       replication
+ ---------- ---------- ---------- ------------
+ sa
+ SYS_OPER
+ SYS_INSTAL
+ SCRIPT_SVR
+
+ -SERVER:
+ ======
+
+ Running  ####################################
+ Idle     ##################################
+
+ SQL      #############
+ I/O      ####################################
+
+ Received ####################################
+ Sent     ###############################
+ Errors: 2
+
+ Read     #######
+ Write    ####################################
+ Errors: 0
+
+ -ENGINES:
+ =======
+
+ Nr     Status  # Pr    Online since
+ 0      online  0       Oct  6 1999 11:48AM
+
+ -DATA:
+ ====
+ Size MB    Used MB    Full %          Free MB
+ 40         30.8       77.1            9.2
+
+ -LOG:
+ ===
+
+ Size MB    Used MB    Full %          Free MB
+ 12         0.1        0.8             11.9
+
+ -ALLOCATED:
+ =========
+
+ Device      Usage                           Size MB
+ datadev1       -           Data        -       40
+ logdev1        -           Log         -       10
+ logdev1        -           Log         -       2
+
+ -AVAILABLE: (max used Virtual Device Nr = 3  )
+ =========
+
+ Device VDN    Total MB    Free MB
+ datadev1       2            28
+ logdev1        3            13
+ master         0            1
+ sysprocsdev    1            0
+             + ------     + -----
+                387          42
+ ----------------------------------------------
+ see also &#x27;sp__dbuse usage&#x27;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__depends">NAME</h1>
+<p>sp__depends - It's a superset of sp_depends.</p>
+<h2>AUTHOR</h2>
+<p>Q Vincent Yin (umyin@mctrf.mb.ca),     Sep 1995</p>
+<h2>DESCRIPTION</h2>
+<p>This proc can handle usertypes, defaults and rules that are not covered by the original proc sp_depends.  For tables, procs, etc, that are covered by sp_depends, this proc will simply call sp_depends. It prints usage and quits if invoked without arguments. Otherwise:</p>
+<p>For each line printed by this proc:</p>
+<pre><code>  If @format=null, output is in tabular format similar to sp_depends.
+  If @format=&#x27;drop&#x27;, output is in isql format.</code></pre>
+<p>For example,</p>
+<pre><code>  exec sp__depends &#x27;my_rule&#x27;, &#x27;drop&#x27;</code></pre>
+<p>will print (not execute) isql scripts that would unbind my_rule from all attached columns and usertypes, and then drop my_rule.  By running the generated isql script, you won't encounter this frustrating error:</p>
+<pre><code>  Msg 3716, Level 16, State 1:
+  The rule &#x27;my_rule&#x27; cannot be dropped because it is
+      bound to one or more column.</code></pre>
+<h2>BUGS</h2>
+<p>@format='drop' doesn't guarentee the successful dropping of usertype because the usertype may have been used by some tables and procs.</p>
+<p>I didn't pay much attention to the owners of objects since all objects at our site are owned by dbo.</p>
+<h2>USAGE</h2>
+<pre><code> Proc_name                 Order Parameter
+ ------------------------- ----- ------------------------------
+ sp__depends                   1 @objname varchar(30) NOT NULL
+ sp__depends                   2 @format varchar(30) NOT NULL
+ sp__depends                   3 @dont_format char(1) NOT NULL</code></pre>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> object                         dependant
+ ------------------------------ ------------------------------
+ sp_procxmode                   sysobjects
+ sp_validlang                   syslanguages
+ sp_getmessage                  sysusermessages
+ sp_getmessage                  sysmessages
+ sp_getmessage                  syslanguages
+ sp_getmessage                  sp_validlang
+ sp_configure                   sysattributes
+ sp_configure                   sysdevices
+ sp_configure                   sysconfigures
+ sp_configure                   syscurconfigs</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__diskdevice">NAME</h1>
+<p>sp__diskdevice  - List disk devices and their basic information</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Basic information about disk devices</p>
+<h2>USAGE</h2>
+<p>sp__diskdevice [@devname char(30)=NULL, @dont_format char(1)=null, @sortorder char(1)='N' ]</p>
+<p>@devname: device name you are interested in - defaults to printing all dump devices</p>
+<p>@dont_format: standard argument if set then print full column width</p>
+<p>@sort_order: default to "N" which is to sort files by dbname. If anything else is passed, it will sort by filename</p>
+<p>on sql server you can run</p>
+<h2>SEE ALSO</h2>
+<p>sp__helpdevice, sp__dumpdevice</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__diskdevice
+ ****** PHYSICAL DISK DEVICES (Mirror info after device name) ******
+ Device Name   Physical Name                   size   alloc    free
+ ------------- ------------------------------- ------ -------- --------
+ datadev       /disk1/sybase10/datadev.dat     20.0MB   20.0MB    0.0MB
+ datadev2      /disk1/sybase10/datadev2.dat    19.5MB   17.0MB    2.5MB
+ datadev3      /disk1/sybase10/datadev3.dat    10.0MB    4.0MB    6.0MB
+ master        d_master                        17.0MB   16.5MB    0.5MB
+ sybsecurity   /disk1/sybase10/sybsecurity.da   5.0MB    5.0MB    0.0MB
+ sysprocsdev   /disk1/sybase10/sysprocsdev.da  10.0MB   10.0MB    0.0MB</code></pre>
+<h2>SAMPLE SQL SERVER OUTPUT</h2>
+<pre><code> 1&gt; exec sp__diskdevice</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__dumpdevice">NAME</h1>
+<p>sp__dumpdevice  - List dump devices and their basic information</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Basic information about dump devices</p>
+<h2>USAGE</h2>
+<p>sp__dumpdevice [@devname]</p>
+<p>@devname: device name you are inetested in - defaults to printing all dump devices</p>
+<h2>SEE ALSO</h2>
+<p>sp__helpdevice, sp__diskdevice</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__dumpdevice
+ 1&gt; exec sp__dumpdevice
+ Device Name          Physical Name
+ -------------------- --------------------------------------------------
+ tapedump1            /dev/rmt4
+ tapedump2            /dev/rst0</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__find_missing_index">NAME</h1>
+<p>sp__find_missing_index  - Lists potentially missing indexes</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Lists potentially missing indexes. Assumes that your foreign key relationships are potential joins and compares keys with actual indexes, listing any keys that do not have associated indexes. This proc will list a key relationship based on fields a,b,c &amp; d if there were no index on a, a&amp;b, a&amp;b&amp;c and so on, assuming that the dba has done his work and would not have an index that was not sufficiently selective (ie. if you decide a is good enough for an index your relationship a,b,c,d should use it in its joins). If this proc does not find the missing index, your model is not sufficiently defined.</p>
+<h2>USAGE</h2>
+<p>sp__find_missing_index [ @objname ] [ @p1]</p>
+<p>@objectname gives you missing indexes for that object</p>
+<p>@p1 if passed will give full output suitable for programs, but too long for humans to read.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__find_missing_index
+ No Indexes Found in Current Database</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__flowchart">NAME</h1>
+<p>sp__flowchart  - List execution flow of procedures</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>List flow of procedures in current db. Goes 6 levels. Does this from sysdepends. See also sp__read_write for another good optimization tool. I think the output is readable but...</p>
+<h2>USAGE</h2>
+<p>sp__flowchart [ @objname ] [ @p1]</p>
+<p>@objectname gives you flow only from 1 object</p>
+<p>@p1 if passed will give full 30 character by 6 level output (otherwise the output is</p>
+<p>parsed to 15 characters wide strings x 4 levels to fit on the screen).</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__flowchart
+ level 1            level 2            level 3            level 4
+ ------------------ ------------------ ------------------ -----------
+ ap_insert_server   ap_insert_system</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__grep">NAME</h1>
+<p>sp__grep  - grep for Sybase SQL Server System 10</p>
+<h2>AUTHOR</h2>
+<p>Andrew Zanevsky, AZ Databases, Inc.</p>
+<p>DESCRIPTION: Searches syscomments table in the current database for occurences of a combination of strings. Correctly handles cases when a substring begins in one row of syscomments and continues in the next.</p>
+<h2>USAGE</h2>
+<p>sp__grep @parameter [,@case]</p>
+<p>@parameter describes the search:</p>
+<p>string1 {operation1 string2} {operation2 string 3} ... where - stringN is a string of characters enclosed in curly brackets not longer than 80 characters. Brackets may be omitted if stringN does not</p>
+<p>contain spaces or characters: +,-,&amp;; operationN is one of the characters: +,-,&amp;.</p>
+<p>Parameter is interpreted as follows:</p>
+<p>1.Combine the list of all objects where string1 occurs.</p>
+<p>2.If there is no more operations in the parameter, then display the list and stop. Otherwise continue.</p>
+<p>3.If the next operation is + then add to the list all objects where the next string occurs; else if the next operation is - then delete from the list all objects where the next string occurs; else if the next operation is &amp; then delete from the list all objects where the next string does not occur (leave in the list only those objects where the next string occurs);</p>
+<p>4.Goto step 2.</p>
+<p>Parameter may be up to 255 characters long &amp; may not contain &lt;Line Feed> characters. Please note that operations are applied in the order they are used in the parameter string (left to right). There is no other priority of executing them. Every operation is applied to the list combined as a result of all previous operations.</p>
+<p>Number of spaces between words of a string matters in a search (e.g. "select *" is not equal to "select *"). Short or frequently used strings (such as "select") may produce a long result set.</p>
+<p>- @case: i = insensitive / s = sensitive (default).</p>
+<h2>SAMPLE OUTPUT</h2>
+<p>list all objects where string 'employee' occurs;</p>
+<p>sp__grep employee</p>
+<p>list all objects where string 'employee' occurs in any case (upper, lower, or mixed), such as 'EMPLOYEE', 'Employee', 'employee', etc.;</p>
+<p>sp__grep employee, i</p>
+<p>list all objects where either both strings 'employee' and 'salary' occur or string 'department' occurs, and string 'trigger' does not occur;</p>
+<p>sp__grep 'employee&amp;salary+department-trigger'</p>
+<p>list all objects where string "select FirstName + LastName" occurs;</p>
+<p>sp__grep '{select FirstName + LastName}'</p>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__groupprotect">NAME</h1>
+<p>sp__groupprotect - Synopsis of protection stuff.</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Gives number of select / update /delete /insert / revoke / and execute grants for each group and type of object. Useful to summarize what groups have priviliges to do what.</p>
+<h2>SEE ALSO</h2>
+<p>sp__helprotect, sp__objprotect</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code>  1&gt; sp__groupprotect
+  2&gt; go
+  type grp             tot  sel    upd  del  ins  rev  exe
+  ---- --------------- ---- ------ ---- ---- ---- ---- ----
+  P    g_mon6          27   0      0    0    0    0    0
+  P    public          27   0      0    0    0    0    9
+  R    g_mon6          6    0      0    0    0    0    0
+  R    g_monitor       6    0      0    0    0    0    0
+  S    g_mon6          57   0      0    0    0    0    0
+  S    g_monitor       57   0      0    0    0    0    0
+  S    public          57   16     0    0    0    0    0
+  U    g_mon6          33   0      0    0    0    0    0
+  U    g_monitor       33   0      0    0    0    0    0
+  U    public          33   11     0    0    0    0    0
+  V    g_mon6          3    0      0    0    0    0    0
+  V    g_monitor       3    0      0    0    0    0    0
+  V    public          3    0      0    0    0    0    0</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__help">NAME</h1>
+<p>sp__help  - Modified sp_help</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Pretty version of sp_help. sp_help scrolls off screen and is ugly. List objects in current database (if @objname undefined) or list table columns (if @objname defined). The proc is slow....</p>
+<h2>USAGE</h2>
+<p>sp_help [@objname]</p>
+<p>if @objname is defined, will list information about specific object if that object exists. If the object doesnt exist, it will try to print all objects that contain the string fragment @object. EXAMPLE</p>
+<p>sp__help "pmt_" Info about all objects with "pmt_" in the name</p>
+<p>sp__help server Info about table server (with column listing)</p>
+<h2>SEE ALSO</h2>
+<p>sp__help calls the procedures sp__helpcolumn and sp__helpindex when an object is passed as a parameter.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code>    1&gt; exec sp__help
+     Name                 Owner                Object_type
+     -------------------- -------------------- -----------------
+     alerts               dbo                  user table
+     audit_trail          dbo                  user table
+     comn_database        dbo                  user table
+     comn_dumpdevices     dbo                  user table
+     comn_syscolumns      dbo                  user table
+
+     comn_sysdevices      dbo                  user table
+     comn_sysindexes      dbo                  user table
+     comn_syslocks        dbo                  user table
+
+    1&gt; sp__help authors
+     Name                 Owner                Object_type
+     -------------------- -------------------- ----------------
+     authors              dbo user             table
+
+    table name    insert trigger  update trigger  delete trigger
+    ------------- --------------- --------------- ---------------
+    authors       authors_ins     ...........     ............
+
+    Column_name   Type            Nulls Default_name    Rule_name
+    ------------- --------------- ----- --------------- --------
+    au_id         id 0
+    au_lname      varchar(40)     0
+    au_fname      varchar(40)     0
+    phone         char(12)        0      phonedflt
+    address       varchar(40)     1
+
+    INDEX KEY c = clustered     u = unique
+              a = allow dup row s = suspect
+
+    Table Name           Index Name  c u a s List of Index Keys
+    -------------------- ----------- - - - - ------------------
+    authors              auidind     Y Y     au_id</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpcolumn">NAME</h1>
+<p>sp__helpcolumn  - List columns for table / database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>List columns for given table</p>
+<h2>USAGE</h2>
+<p>sp__helpcolumn @objname , @p1</p>
+<p>@objname can be any valid table or view. If null returns all columns.</p>
+<p>@p1 if set will not reformat columns</p>
+<p>note the columns are sorted by column id if an object is selected and by column name if not.</p>
+<h2>SEE ALSO</h2>
+<p>sp__collist</p>
+<h2>SAMPLE OUTPUT</h2>
+<p>1> sp__helpcolumn server</p>
+<p>1> exec sp__helpcolumn</p>
+<pre><code> Column name       Type         I   Null Dflt Rule Table
+ ----------------- ------------ --- ---- ---- ---- --------------------
+ action            char(18)       0 Yes            audit_trail
+ allow_null        tinyint        0 Yes            comn_syscolumns
+ allow_updates     smallint       0 Yes            server_configures
+ attribute         char(30)       0 Yes            schedule_history
+ attribute         varchar(127)   0 Yes            schedule_attributes
+ audit_trail       tinyint        0 No             personal_preferences
+ benchmark         int            0 Yes            server_statistics
+ benchmark         int            0 Yes            summary_statistics
+ ...</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpdb">NAME</h1>
+<p>sp__helpdb  - shows database information in a nice format</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Show standard database information in a concise format</p>
+<h2>SEE ALSO</h2>
+<p>The following procedures are especially useful while creating new databases and attempting to perform optimal allocation of space: sp__helpdb, sp__helpdbdev, sp__helpdevice</p>
+<h2>USAGE</h2>
+<p>sp_helpdb shows information about all databases</p>
+<p>sp__helpdb [ @dbname ] prints specific information about given database.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__helpdb statsdb
+ name       size_data  size_log owner
+ ---------- ---------- -------- ----------
+ statsdb    7.000000   2.000000 sa
+
+ Database Name Device Name Size Usage
+ --------------- --------------- --------------------
+ statsdb data3 2.000000 data only
+ statsdb datadevice 2.000000 data only
+ statsdb datadevice 3.000000 data only
+ statsdb log 2.000000 log only
+ 1&gt; sp__helpdb
+ 1&gt; exec sp__helpdb
+ key   description             key   description
+ ---   -----------             ---   -----------
+ si    select into/bulkcopy    ro    read only
+ tl    trunc. log on chkpt     do    dbo use only
+ cr    no chkpt on recovery    su    single user
+ cl    crashed during load     ab    abort tran
+ ds    database suspect
+
+ ****** DATABASE CONFIGURATION *******
+  database           data log   owner  si tl cr cl ds ro do su ab
+  ------------------ ---- ----- ------ -- -- -- -- -- -- -- -- --
+  master (1)             5 N/A  sa
+  mis (7)               15    6 sa
+  model (3)              2 N/A  sa
+  pubs2 (8)              4    2 sa
+  statsdb (6)           10 N/A  sa          Y
+  sybsecurity (5)        5 N/A  sa          Y
+  sybsystemprocs (4)    14    3 sa       Y  Y
+  tempdb (2)             7 N/A  sa       Y  Y
+
+  total space used total data total log
+  ---------------- ---------- ----------
+       73.00            62.00      11.00</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpdbdev">NAME</h1>
+<p>sp__helpdbdev  - Show how database uses devices</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Show device to database breakdown. Which devices are used by database.</p>
+<h2>SEE ALSO</h2>
+<p>The following procedures are especially useful while creating new databases and attempting to perform optimal allocation of space: sp__helpdb, sp__helpdevice, sp__helpdbdev.</p>
+<h2>USAGE</h2>
+<p>sp__helpdbdev [ @dbname ]</p>
+<p>if @dbname parameter is passed, only show information for given database</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__helpdbdev
+
+ Database Name Device Name Size Usage
+ --------------- --------------- -------------------- ---------------
+ master master 2.000000 data and log
+ master master 2.000000 data and log
+ master master 3.000000 data and log
+ migrator datadevice 10.000000 data and log
+ model master 2.000000 data and log
+ pubs2 master 2.000000 data and log
+ tempdb master 2.000000 data and log
+
+ 1&gt; exec sp__helpdbdev
+  Database Name   Device Name     Size                 Usage
+  --------------- --------------- -------------------- ---------------
+  master          master                      1.500000 data and log
+  master          master                      3.000000 data and log
+  mis             datadev2                    5.000000 data only</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpdefault">NAME</h1>
+<p>sp__helpdefault  - list default information in current databases</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>list defaults information in current database</p>
+<h2>USAGE</h2>
+<p>sp__helpdefault [ @objectname ]</p>
+<p>if @objectname is provided then procedure will attempt to print information about only one object (if it exists). If not, it will print any objects with that string fragment in them. An error occurs if no objects with the string fragment exist. For example, if you wish to print any table with the name tbl in them use sp__helptable "tbl". If no parameter is passed, all object of type displayed.</p>
+<h2>SEE ALSO</h2>
+<p>sp__help, sp__helpdefault, sp__helpobject, sp__helpproc, sp__helprule, sp__helptable, sp__helptrigger, sp__helpview</p>
+<h2>BUGS</h2>
+<p>These procedures only read row one of syscomments to determine useful information regarding defaults, rules, and views. It is concievable (though unlikely) that a very long select statement could cause necessary data to be in row two, resulting in ugly output.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__helpdefault
+
+  Default Name         Times Used Definition
+  -------------------- ---------- -------------------------------------</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpdevice">NAME</h1>
+<p>sp__helpdevice  - Break down database devices into a nice report</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Just the info you need, in the format you want. Split between dump and disk devices. Can also be used to show which databases use a given device.</p>
+<h2>SEE ALSO</h2>
+<p>The following procedures are especially useful while creating new databases and attempting to perform optimal allocation of space: sp__helpdevice, sp__helpdbdev, sp__helpdb.</p>
+<h2>USAGE</h2>
+<p>sp__helpdevice summary information on all devices sp__helpdevice @devicename details for particular device</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__helpdevice
+
+ Device Name          Physical Name
+ -------------------- ---------------------------------------
+ tapedump1            /dev/rmt4
+ tapedump2            /dev/rst0
+
+ Device Name    Physical Name                   size     alloc   free
+ -------------- ------------------------------- -------- ------- ------
+ datadev        /disk1/sybase10/datadev.dat       20.0MB  20.0MB 0.0MB
+ datadev2       /disk1/sybase10/datadev2.dat      19.5MB  17.0MB 2.5MB
+ datadev3       /disk1/sybase10/datadev3.dat      10.0MB   4.0MB 6.0MB
+ master         d_master                          17.0MB  16.5MB 0.5MB
+ sybsecurity    /disk1/sybase10/sybsecurity.da     5.0MB   5.0MB 0.0MB
+ sysprocsdev    /disk1/sybase10/sysprocsdev.da    10.0MB  10.0MB 0.0MB
+
+ 1&gt; sp__helpdevice datadevice
+ Device Name    Physical Name               size    alloc   free
+ -------------- --------------------------- ------- ------- --------
+ datadevice     /disk1/sybase10/datadev.dat 20.0MB  20.0MB   0.0MB
+
+ db_name                        size                 usage
+ ------------------------------ -------------------- --------------
+ migrator                       10.000000            data and log
+ statsdb                         2.000000            data only</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpgroup">NAME</h1>
+<p>sp__helpgroup  - Lists groups members in current database (incl. aliases)</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Lists users AND aliases in current database. The alias feature is one that is NOT in sp_helpuser. This is a quick method of seeing who has access to particular data. Groups with no users are also shown.</p>
+<h2>USAGE</h2>
+<p>sp__helpgroup [ @groupname ]</p>
+<p>if @groupname provided, it will only provide information about that specific group.</p>
+<h2>SEE ALSO</h2>
+<p>sp__helplogin, sp__helpuser</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__helpgroup
+ Group_name     Login_name     Alias User_name      Default_db
+ -------------- -------------- ----- -------------- --------------
+ g_mon6         mon6                 mon6           master
+ g_monitor      monitor              monitor        master
+ navigator_role N.A.           N     N.A.           N.A.
+ oper_role      N.A.           N     N.A.           N.A.
+ public         sa                   dbo            master
+ public         statsdbo       Y     dbo            statsdb
+ public         ebarlow              ebarlow        statsdb
+ replication_ro N.A.           N     N.A.           N.A.</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpindex">NAME</h1>
+<p>sp__helpindex  - Shows indexes by table</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>show index information in current database</p>
+<h2>USAGE</h2>
+<p>sp__helpindex [ @objectname, ] [ @width ]</p>
+<p>if @objectname is defined, will print index information just for current object. Parameter @width allows printing in modes greater than 80 columns. It may sound weird, but if @objectname is a procedure, it will give any indexes that are used by tables dependant on the procedure (useful for tuning).</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__helpindex
+  INDEX KEY: c = clustered u = unique
+             a = allow dup row s = suspect
+  Table Name           Index Name  c u a s List of Keys
+  -------------------- ----------- - - - - ---------------------
+  alerts XPKalerts                 Y Y     hostname,srvname
+  applications XPKAccounti         Y Y     dbname
+  audit_trail XPKaudit_tr          Y Y     date,login_name
+  comn_database XPKdatabase        Y Y     srvname,dbname
+  comn_dumpdevices XPKcomn_dum     Y Y     srvname,devname
+  comn_syssegments XPKcomn_sys     Y Y     seg_id
+  comn_sysusages XPKcomn_sys       Y Y     srvname,devname,dbname
+
+ 1&gt; exec sp__helpindex
+    INDEX KEY:     c = clustered            u = unique
+                   a = allow dup row        s = suspect
+
+ Table Name        Index Name  c u a s List of Index Keys
+ ----------------- ----------- - - - - -----------------------
+ alerts            XPKalerts   Y   Y   hostname,srvname
+ audit_trail       XPKaudit_tr Y   Y   crdate,login_name
+ comn_database     XPKdatabase Y Y     srvname,dbname
+ comn_dumpdevices  XPKcomn_dum Y Y     srvname,devname
+ comn_syscolumns   XPKcomn_sys Y Y     srvname,dbname,object_id</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helplogin">NAME</h1>
+<p>sp__helplogin  - Show logins and remote logins to the server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Shows both login and remote login information Note: if Running as sa on pre 4.9 releases, the password field will show. If running system 10, roles for logins are shown.</p>
+<h2>USAGE</h2>
+<p>sp__helplogin [ @loginname ]</p>
+<h2>SEE ALSO</h2>
+<p>sp__helpgroup, sp__helpuser</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> (4.9 Version)
+ 1&gt; sp__helplogin
+ ****** SERVER LOGINS *******
+ Login_name     Default_db     RemoteName     RemoteSrvr
+ -------------- -------------- -------------- --------------
+ cosmic         migrator
+ ebarlow        pubs2
+ probe          master
+ qqq            pubs2
+ sa             master
+
+ 1&gt; exec sp__helplogin
+ ****** SERVER LOGINS *******
+  Id   Login_name     Default_db     Sht Lck Exp SA SSO Oper Remote
+  ---- -------------- -------------- --- --- --- -- --- ---- ------
+  12   a              master
+  4    ebarlow        statsdb
+  6    george         statsdb
+  7    lperry         sybsystemprocs
+  11   mis            mis
+  13   misread        mis
+  10   mon6           master
+  9    monitor        master
+  2    probe          master
+  1    sa             master                     Y  Y   Y
+  3    statsdbo       statsdb</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpmirror">NAME</h1>
+<p>sp__helpmirror  - Show mirrors, discover broken mirrors</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>show mirror information in 3 batches: mirrored devices, disabled mirrors, and confused mirrors. The "Pri" &amp; "Sec" fields mean the primary and mirror are active if starred. The Serial field contains a star if Serial writes - none if Parallel.</p>
+<h2>USAGE</h2>
+<p>sp__helpmirror</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__helpmirror
+ ******* SYBASE MIRROR INFORMATION *******
+ MIRRORED DEVICES
+ Device Pri Sec Serial Mirror Reads
+ --------------- --- --- ------ -------------------------------- -----
+ data2 * * * /home/programs/sybase/datax *
+
+ 1&gt; sp__helpmirror
+ ******* SYBASE MIRROR INFORMATION *******</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpobject">NAME</h1>
+<p>sp__helpobject  - list objects in current databases</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>list tables, views, procedures, rules, defaults, and triggers in current database</p>
+<h2>USAGE</h2>
+<p>sp__helpobject [ @objectname ]</p>
+<p>if @objectname is provided then procedure will attempt to print information about only one object (if it exists). If not, it will print any objects with that string fragment in them. An error occurs if no objects with the string fragment exist. For example, if you wish to print any table with the name tbl in them use sp__helptable "tbl". If no parameter is passed, all object of type displayed.</p>
+<h2>SEE ALSO</h2>
+<p>sp__help, sp__helpdefault, sp__helpobject, sp__helpproc, sp__helprule, sp__helptable, sp__helptrigger, sp__helpview</p>
+<h2>BUGS</h2>
+<p>These procedures only read row one of syscomments to determine useful information regarding defaults, rules, and views. It is concievable (though unlikely) that a very long select statement could cause necessary data to be in row two, resulting in ugly output.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__helpobject
+
+ Table Name         Rows   Res KB Usd KB Rows/KB Segment   Cr Date
+ ------------------ ------ ------ ------ ------- --------- -------
+ alerts             420    176    146      2.87  default   24Jan96
+ audit_trail        4      62     6        0.66  default   24Jan96
+ comn_database      4      32     6        0.66  default   24Jan96
+ comn_dumpdevices   3      32     6        0.50  default   24Jan96
+ comn_syscolumns    593    160    138      4.29  default   24Jan96
+ comn_sysdevices    2      32     6        0.33  default   24Jan96
+ comn_sysindexes    70     32     16       4.37  default   24Jan96
+ comn_syslocks      0      16     2        0.00  default   24Jan96
+
+ View Name            Cr Date    Tables Used
+ -------------------- ---------- -------------------------------
+ titleview            02/22/95   authors, titles, titleauthor
+
+ Procedure_name                 Owner           Created_date
+ ------------------------------ --------------- ------------
+ ap_audit_report                dbo             24Jan96
+ ap_audit_start                 dbo             24Jan96
+ ap_audit_status                dbo             24Jan96
+
+ Rule Name     Times Usd Definition
+ ------------- --------- ------------------------------------------
+ pub_idrule    1         @pub_id in (&quot;1389&quot;, &quot;0736&quot;, &quot;0877&quot;, &quot;1622&quot;
+ title_idrule  2         @title_id like &quot;[0-9][0-9][0-9][0-9]&quot;
+
+ Default Name         Times Used Definition
+ -------------------- ---------- ---------------------------------
+ datedflt             1          getdate()
+ phonedflt            1          &quot;unknown&quot;
+ typedflt             1          &quot;undecided&quot;
+
+ Trigger Name                   Cr Date Ins Cnt Del Cnt Upd Cnt
+ ------------------------------ ------- ------- ------- -------
+ db_space_ins_trigger           24Jan96 1       1       1
+ lock_del_trigger               24Jan96 1       1       1
+ person_del_trigger             18Jan96 1       1       1
+ person_ins_trigger             18Jan96 1       1       1
+ scheduler_ins_trigger          24Jan96 1       1       1
+ server_del_trigger             24Jan96 1       1       1</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpproc">NAME</h1>
+<p>sp__helpproc  - list procedure information in current databases</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>list procedure information in current database</p>
+<h2>USAGE</h2>
+<p>sp__helpproc [ @objectname ]</p>
+<p>if @objectname is provided then procedure will attempt to print information about only one object (if it exists). If not, it will print any objects with that string fragment in them. An error occurs if no objects with the string fragment exist. For example, if you wish to print any table with the name tbl in them use sp__helptable "tbl". If no parameter is passed, all object of type displayed.</p>
+<h2>SEE ALSO</h2>
+<p>sp__help, sp__helpdefault, sp__helpobject, sp__helpproc, sp__helprule, sp__helptable, sp__helptrigger, sp__helpview</p>
+<h2>BUGS</h2>
+<p>These procedures only read row one of syscomments to determine useful information regarding defaults, rules, and views. It is concievable (though unlikely) that a very long select statement could cause necessary data to be in row two, resulting in ugly output.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__helpproc
+
+ Procedure_name                 Owner           Created_date
+ ------------------------------ --------------- ------------
+ ap_audit_report                dbo             24Jan96
+ ap_audit_start                 dbo             24Jan96
+ ap_audit_status                dbo             24Jan96
+ ap_config_info                 dbo             24Jan96
+ ap_debug_statsdb               dbo             24Jan96
+ ap_diff_db                     dbo             24Jan96
+ ap_diff_srvr                   dbo             24Jan96
+ ap_get_disk_layout             dbo             24Jan96</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helprotect">NAME</h1>
+<p>sp__helprotect  - Protection Information for current database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>list protection information for current database</p>
+<h2>USAGE</h2>
+<p>sp__helprotect [ @parameter = objectname | username | group ] [@do_system_tables] [@dont_format]</p>
+<p>if @parameter is provided then procedure will attempt to print information about only one object (if it exists), group, or user.  If no parameter is passed, all objects are displayed. The @do_system_tables parameter, if not null, will include system tables in the output.</p>
+<h2>SEE ALSO</h2>
+<p>sp__groupprotect, sp__objprotect</p>
+<h2>BUGS</h2>
+<p>helprotect should really be spelled helpprotect, but im sticking with the sybase naming convention.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__helprotect
+ ------------------------------
+ Grant Execute on ap_get_disk_layout  to public
+ Grant Execute on ap_get_ind_to_rebuild  to public</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helprule">NAME</h1>
+<p>sp__helprule  - list rule information in current databases</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>list rules information in current database</p>
+<h2>USAGE</h2>
+<p>sp__helprule [ @objectname ]</p>
+<p>if @objectname is provided then procedure will attempt to print information about only one object (if it exists). If not, it will print any objects with that string fragment in them. An error occurs if no objects with the string fragment exist. For example, if you wish to print any table with the name tbl in them use sp__helptable "tbl". If no parameter is passed, all object of type displayed.</p>
+<h2>SEE ALSO</h2>
+<p>sp__help, sp__helpdefault, sp__helpobject, sp__helpproc, sp__helprule, sp__helptable, sp__helptrigger, sp__helpview</p>
+<h2>BUGS</h2>
+<p>These procedures only read row one of syscomments to determine useful information regarding defaults, rules, and views. It is concievable (though unlikely) that a very long select statement could cause necessary data to be in row two, resulting in ugly output.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__helprule
+ Rule Name     Times Used Definition
+ ------------- ---------- ---------------------------------------------
+ pub_idrule    1          @pub_id in (&quot;1389&quot;, &quot;0736&quot;, &quot;0877&quot;, &quot;1622&quot;, &quot;
+ title_idrule  2          @title_id like &quot;bu[0-9][0-9][0-9][0-9]&quot;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpsegment">NAME</h1>
+<p>sp__helpsegment  - Stored procedure to check segments on server</p>
+<h2>DESCRIPTION</h2>
+<p>shows segments information by database. Also shows sizes of segments.Used in conjunction with sp__segment procedure to decipher segment heirarchy.</p>
+<h2>USAGE</h2>
+<p>sp__helpsegment [ @segname ]</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__helpsegment
+
+ Segment Codes:
+
+ U=USER-defined segment on this device fragment
+ L=Database LOG may be placed on this device fragment
+ D=Database objects may be placed on this device fragment by DEFAULT
+ S=SYSTEM objects may be placed on this device fragment
+
+ ******* SERVER SEGMENT MAP *******
+  db         segmap   segname         segs device name     size (MB)
+  ---------- -------- --------------- ---- --------------- ---------
+  master            7 system           LDS master             3.00
+  master            7 default          LDS master             3.00
+  master            7 logsegment       LDS master             3.00
+  master            7 system           LDS master             1.50
+  master            7 default          LDS master             1.50
+  master            7 logsegment       LDS master             1.50
+  mis               4 logsegment       L   datadev            3.00
+  mis               4 logsegment       L   datadev            3.00
+
+ 1&gt; sp__helpsegment &quot;datadevice&quot;</code></pre>
+<p>Segment Codes: U=USER-defined segment on this device fragment L=Database LOG may be placed on this device fragment D=Database objects may be placed on this device fragment by DEFAULT S=SYSTEM objects may be placed on this device fragment</p>
+</section>
+
+<section class="proc-section">
+<p>migrator 7 LDS datadevice 10.00 statsdb 99 U DS datadevice 2.00</p>
+<h1 id="sp__helptable">NAME</h1>
+<p>sp__helptable  - list table information in current databases</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>list table information in current database</p>
+<h2>USAGE</h2>
+<p>sp__helptable [ @objectname ]</p>
+<p>if @objectname is provided then procedure will attempt to print information about only one object (if it exists). If not, it will print any objects with that string fragment in them. An error occurs if no objects with the string fragment exist. For example, if you wish to print any table with the name tbl in them use sp__helptable "tbl". If no parameter is passed, all object of type displayed.</p>
+<h2>SEE ALSO</h2>
+<p>sp__help, sp__helpdefault, sp__helpobject, sp__helpproc, sp__helprule, sp__helptable, sp__helptrigger, sp__helpview</p>
+<h2>BUGS</h2>
+<p>These procedures only read row one of syscomments to determine useful information regarding defaults, rules, and views. It is concievable (though unlikely) that a very long select statement could cause necessary data to be in row two, resulting in ugly output.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__helptable
+
+  Table Name         Rows   Res KB Usd KB Rows/KB Segment    Cr Date
+  ------------------ ------ ------ ------ ------- ---------- -------
+  alerts             420    176    146      2.87  default    24Jan96
+  audit_trail        4      62     6        0.66  default    24Jan96
+  comn_database      4      32     6        0.66  default    24Jan96
+  comn_dumpdevices   3      32     6        0.50  default    24Jan96
+  comn_syscolumns    593    160    138      4.29  default    24Jan96
+  comn_sysdevices    2      32     6        0.33  default    24Jan96
+  comn_sysindexes    70     32     16       4.37  default    24Jan96
+  comn_syslocks      0      16     2        0.00  default    24Jan96</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helptext">NAME</h1>
+<p>sp__helptext  - show helptext info with spacing correct</p>
+<h2>AUTHOR</h2>
+<p>Andrew Zanevsky, AZ Databases, Inc.</p>
+<h2>DESCRIPTION</h2>
+<p>list text of code. Uses print statement for technical reasons.</p>
+<h2>USAGE</h2>
+</section>
+
+<section class="proc-section">
+<p>sp__helptext @objectname</p>
+<h1 id="sp__helptrigger">NAME</h1>
+<p>sp__helptrigger  - list trigger information in current databases</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>list trigger information in current database</p>
+<h2>USAGE</h2>
+<p>sp__helptrigger [ @objectname ]</p>
+<p>if @objectname is provided then procedure will attempt to print information about only one object (if it exists). If not, it will print any objects with that string fragment in them. An error occurs if no objects with the string fragment exist. For example, if you wish to print any table with the name tbl in them use sp__helptable "tbl". If no parameter is passed, all object of type displayed.</p>
+<h2>SEE ALSO</h2>
+<p>sp__help, sp__helpdefault, sp__helpobject, sp__helpproc, sp__helprule, sp__helptable, sp__helptrigger, sp__helpview. Another way to look at triggers is sp__trigger.</p>
+<h2>BUGS</h2>
+<p>These procedures only read row one of syscomments to determine useful information regarding defaults, rules, and views. It is concievable (though unlikely) that a very long select statement could cause necessary data to be in row two, resulting in ugly output.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__helptrigger
+
+ Trigger Name                   Cr Date Ins Cnt Del Cnt Upd Cnt
+ ------------------------------ ------- ------- ------- -------
+ db_space_ins_trigger           24Jan96 1       1       1
+ lock_del_trigger               24Jan96 1       1       1
+ person_del_trigger             18Jan96 1       1       1
+ person_ins_trigger             18Jan96 1       1       1
+ scheduler_ins_trigger          24Jan96 1       1       1
+ server_del_trigger             24Jan96 1       1       1
+ server_ins_trigger             24Jan96 1       1       1
+ server_upd_trigger             24Jan96 1       1       1</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helptype">NAME</h1>
+<p>sp__helptype - get data types (user and system defined)</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>There is no easy way to look at user defined types using the current system procs, so here one is.</p>
+<h2>USAGE</h2>
+<pre><code> Proc_name                      Order Parameter
+ ------------------------------ ----- ------------------------------
+ sp__helptype                       1 @dont_format char(1) NOT NULL</code></pre>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> TYPE                  DEFAULT       RULE          NULL BASE TYPE
+ --------------------- ------------- ------------- ---- -----------
+ binary                NULL          NULL             1 binary
+ tinyint               NULL          NULL             1 tinyint
+ smallint              NULL          NULL             1 smallint
+ int                   NULL          NULL             1 int
+ float                 NULL          NULL             1 float
+ numeric               NULL          NULL             1 numeric
+ money                 NULL          NULL             1 money
+ datetime              NULL          NULL             1 datetime
+ intn                  NULL          NULL             1 intn</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpuser">NAME</h1>
+<p>sp__helpuser  - Lists users in current database by access level (incl. aliases)</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Lists users AND aliases in current database. The alias feature is one that is NOT in sp_helpuser. This is a quick method of seeing who has access to particular data. Users whose logins are not in syslogins are listed with a login name of NULL.</p>
+<h2>SEE ALSO</h2>
+<p>sp__helplogin, sp__helpgroup</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__helpuser
+
+ Login_name        User_name         Alias Group_name        Default_db
+ ----------------- ----------------- ----- ----------------- -----------
+ sa                dbo                     public            master
+ statsdbo          dbo               Y     public            statsdb
+ ebarlow           ebarlow                 public            statsdb
+ mon6              mon6                    g_mon6            master
+ monitor           monitor                 g_monitor         master</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__helpview">NAME</h1>
+<p>sp__helpview  - list views in current databases</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>list views information in current database</p>
+<h2>USAGE</h2>
+<p>sp__helpview [ @objectname ]</p>
+<p>if @objectname is provided then procedure will attempt to print information about only one object (if it exists). If not, it will print any objects with that string fragment in them. An error occurs if no objects with the string fragment exist. For example, if you wish to print any table with the name tbl in them use sp__helptable "tbl". If no parameter is passed, all object of type displayed.</p>
+<h2>SEE ALSO</h2>
+<p>sp__help, sp__helpdefault, sp__helpobject, sp__helpproc, sp__helprule, sp__helptable, sp__helptrigger, sp__helpview</p>
+<h2>BUGS</h2>
+<p>These procedures only read row one of syscomments to determine useful information regarding defaults, rules, and views. It is concievable (though unlikely) that a very long select statement could cause necessary data to be in row two, resulting in ugly output.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__helpview
+
+ View Name             Cr Date    Tables Used
+  -------------------- ---------- --------------------------------------</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__id">NAME</h1>
+<p>sp__id  - Tells you who you are and in which database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow</p>
+<p>DESCRIPTION:</p>
+<p>Tells you who you are and in which database you are in</p>
+<h2>USAGE</h2>
+<p>sp__id</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__id
+
+ db                   login                id   db name
+ -------------------- -------------------- ---- --------------------
+ statsdb              sa                   1    dbo</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__indexspace">NAME</h1>
+<p>sp__indexspace  - Space breakdown by index in current database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>sp__indexspace gives details of the space used by index in the database. It is a quick way of finding out information on in the database (did your load succeed...). Another way to look at this information is with the stored procedure sp__indexspace, which sumarizes on an index by index basis. Rows/KB is calculated only on the data plus index pages used. It ignores system overhead. If the Rows/KB field (actual rows in table) is much less than the Max/KB (maximum according to row size - found in rowpage field of sysindexes), the index may be very fragmented and could be in need of rebuilding (drop and recreate it). This is only relevant if there is a signifcant numbers of rows.</p>
+<h2>USAGE</h2>
+<p>sp__indexspace [ @table ]</p>
+<h2>SEE ALSO</h2>
+<p>sp__helptable</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__indexspace
+
+ Data Level (Index Type 0 or 1)
+ Name                   Rows     Used/Data/Idx KB Rows/KB Segment
+ ---------------------- -------- ---------------- ------- ------------
+ alerts.XPKalerts       420      176/142/4          2.88  default
+ audit_trail.XPKaudit_t 4        62/2/4             0.67  default
+ comn_database.XPKdatab 4        32/2/4             0.67  default
+ comn_dumpdevices.XPKco 3        32/2/4             0.50  default
+ comn_syscolumns.XPKcom 593      160/122/16         4.30  default
+
+ Non Clustered Indexes
+
+ Name                   Rows     Used/Data/Idx KB Rows/KB Segment
+ ---------------------- -------- ---------------- ------- ------------
+ pbcatcol.pbcatcol_idx  0        16/0/2             0.00  default</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__iostat">NAME</h1>
+<p>sp__iostat  - Equivalent of the unix iostat command</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>SEE ALSO</h2>
+<p>sp__whoactive, sp__isactive, sp__iostat</p>
+<h2>DESCRIPTION</h2>
+<p>Unix iostat command equivalent. Does a loop on existing processes and prints only rows in sysprocesses that are doing anything (io or cpu > 0).</p>
+<h2>BUGS</h2>
+<p>Does not monitor logins started after process starts.</p>
+<h2>USAGE</h2>
+<p>sp__iostat { [ @count ] [, @delay ]</p>
+<pre><code>        @count is number of iterations (default=3)
+        @delay - delay between stats rows in seconds. Valid values
+                are 1,3,5,10,30,60</code></pre>
+<h2>SAMPLE OUTPUT</h2>
+<p>1> exec sp__iostat</p>
+<pre><code> -------- ---------
+ 00:22:32 No Change
+
+ Time     Spid Login      Cmd              Cpu    Io   Mem  Blk
+ -------- ---- ---------- ---------------- ------ ---- ---- ---
+ 00:22:42 6    NULL       SITE HANDLER     DEAD   DEAD DEAD   0
+
+ -------- ---------
+ 00:22:52 No Change</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__isactive">NAME</h1>
+<p>sp__isactive  - Check who is doing something on server</p>
+<h2>AUTHOR</h2>
+<p>Androw Zanevsky, AZ Databases, Inc. 71232.3446@compuserve.com</p>
+<h2>SEE ALSO</h2>
+<p>sp__whoactive, sp__isactive, sp__iostat</p>
+<h2>DESCRIPTION</h2>
+<p>Monitors indicators of a given process for specified time and reports activity (CPU, IO, Locks...).</p>
+<p>If any indicator changes, then process is active. This proc uses the waitfor command.</p>
+<h2>USAGE</h2>
+<p>sp__whoactive @spid [, @delay ]</p>
+<p>@spid is the spid to watch</p>
+<p>@delay is the monitoring interval in seconds (must be 5,10,20,or 60) - defaults to 5</p>
+<h2>SAMPLE OUTPUT</h2>
+<p>> sp__isactive 1</p>
+<pre><code> time     locks  cpu         phys_io   cmd          status
+ -------- ------ ----------- --------- ------------ -------------
+ 21:24:51 0      5           0         SELECT       running
+ 21:24:56 0      5           0         SELECT       running
+  ~+4 sec 0      0           0
+
+ Process shows no activity</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__lock">NAME</h1>
+<p>sp__lock  - Check locks on server</p>
+<h2>AUTHOR</h2>
+<p>Simon Walker, The SQL Workshop LTD., Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>pretty print locks</p>
+<h2>USAGE</h2>
+<p>sp__lock</p>
+<h2>SEE ALSO</h2>
+<p>sp__block</p>
+<p>sp__lockt</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__lock
+
+ Type        User               Table                  Page     Cmd
+ ----------- ------------------ ---------------------- -------- ------
+ Sh_intent   sa (pid=1)         master..spt_values     0        SELECT</code></pre>
+</section>
+
+<section class="proc-section">
+<p>object is not in the current database, it will be displayed</p>
+<h1 id="sp__lockt">NAME</h1>
+<p>sp__lockt  - Check table locks on server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>pretty print table locks</p>
+<h2>USAGE</h2>
+<p>sp__lockt</p>
+<h2>SEE ALSO</h2>
+<p>sp__block   sp__lock</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__lockt
+
+ spid dbname           objname          type
+ ---- ---------------- ---------------- ----------------
+ 1    master           spt_values       Sh_intent</code></pre>
+<h2>BUGS</h2>
+<p>Only shows correct object name for objects in current database. If the</p>
+</section>
+
+<section class="proc-section">
+<p>object is not in the current database, object id will be displayed</p>
+<h1 id="sp__ls">NAME</h1>
+<p>sp__ls - Equivalent of the unix ls command</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Unix ls equivalent. lists objects in db</p>
+<h2>USAGE</h2>
+<p>sp__ls [ @string ]</p>
+<p>@ string: search string - pass in wildcards as you wish (ie. xxx% or ab%cd%). Does a normal Sybase like on the string passed.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__ls
+
+ Object_name                    Type Owner           Created_date
+ ------------------------------ ---- --------------- --------------------
+ alerts                         U    dbo             Jan 24 1996  1:43PM
+ ap_audit_report                P    dbo             Jan 24 1996  5:38PM
+ ap_audit_start                 P    dbo             Jan 24 1996  5:38PM
+ ...</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__noindex">NAME</h1>
+<p>sp__noindex - Analysis of what tables lack indexes.</p>
+<h2>AUTHOR</h2>
+<p>Simon Walker, The SQL Workshop LTD.</p>
+<h2>DESCRIPTION</h2>
+<p>find tables with either no index or no clustered index. If the table has more than a small number of rows (5 data pages), you may be able to easily improve system performance by adding some.</p>
+<h2>USAGE</h2>
+<p>sp__noindex</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__noindex
+
+ No_Indexes                     Rows        Pages
+ ------------------------------ ----------- -----------
+ model                                    1           1
+ server_syslocks                          0           1
+ system_stats_save                     3610         145
+ summary_statistics_save               3022         160
+ table_space_save                      1028          47
+ db_space_save                           90           6
+ comn_syslocks                            0           1
+
+ No_Clustered_Index             Rows        Pages
+ ------------------------------ ----------- -----------
+ pbcattbl                                 0           1
+ pbcatcol                                 0           1
+ x                                        0           1</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__objprotect">NAME</h1>
+<p>sp__objprotect - Synopsis of protection stuff.</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Gives number of select / update /delete /insert / revoke / and execute grants for each object. Can either be by user (parameter) or total.</p>
+<h2>SEE ALSO</h2>
+<p>sp__groupprotect, sp__helprotect</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__objprotect &#x27;public&#x27;
+
+ name                     type sel    upd    del    ins    rev    exe
+ ------------------------ ---- ------ ------ ------ ------ ------ ------
+ datedflt                 D    0      0      0      0      0      0
+ phonedflt                D    0      0      0      0      0      0
+ typedflt                 D    0      0      0      0      0      0
+ byroyalty                P    0      0      0      0      0      1
+ discount_proc            P    0      0      0      0      0      1
+ history_proc             P    0      0      0      0      0      1
+ insert_sales_proc        P    0      0      0      0      0      1
+ insert_salesdetail_proc  P    0      0      0      0      0      1
+ storeid_proc             P    0      0      0      0      0      1
+ storename_proc           P    0      0      0      0      0      1</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__proclib_version">NAME</h1>
+<p>sp__proclib_version - Quick dump of statistics on server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Returns Extended Stored Procedure Library version number</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__proclib_version
+
+ -----
+  3.80</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__qspace">NAME</h1>
+<p>sp__qspace - a faster version of sp__dbspace</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>sp__dbspace has had locking problems in busy environments when run programaticly. Use this procedure if you are running space monitoring in a loop.</p>
+<h2>SEE ALSO</h2>
+<p>sp__dbspace</p>
+<h2>USAGE</h2>
+<pre><code> Proc_name                 Order Parameter
+ ------------------------- ----- ------------------------------
+ sp__qspace                    1 @dont_format char(1) NOT NULL</code></pre>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> Name                     Percent         Log Pct
+ ------------------------ --------------- ----------------
+ master                         63.789063         0.000000</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__quickstats">NAME</h1>
+<p>sp__quickstats - Quick dump of statistics on server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Quick dump of server stats. Can be run in a tight loop to see how things happen on the server. Normally this program will get the current date from the server, and then run in a while loop running the sp__quickstats procedure (parameter of the previously retrieved date). The parameters mean the following: conn is number of non - sa connections. Time is the time taken to run this query. tbllocks are the number of table locks. runnable is the number of non sa processes performing work.</p>
+<h2>USAGE</h2>
+<p>sp__quickstats { @starttime }</p>
+<p>if @starttime is not passed, will not print out a date field at the end.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__quickstats
+
+ blks conn ctime  locks run  tlock %cpu  %io   %idle minutes
+ ---- ---- ------ ----- ---- ----- ----- ----- ----- ----------
+ 0    0    126    0     0    0     17.51  0.00 82.49 10.2</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__read_write">NAME</h1>
+<p>sp__read_write - Identifies which tables are read &amp; which are written by procs</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>This nice proc identifies which tables are read and which are written by stored procedures in the database. Useful for tuning/optimization. See sp__flowchart. read_write is both read &amp; write. The data used by ths proc is not accurate.</p>
+<h2>USAGE</h2>
+<p>sp__read_write</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__read_write
+
+ Tblname                        Sel   Reads Writes R&amp;amp;W   num_rows
+ ------------------------------ ----- ----- ------ ----- -----------
+ alerts                         0     2     2      2             420
+ audit_trail                    0     0     4      0               4
+ comn_database                  0     0     0      0               4
+ comn_syscolumns                0     0     0      0             593
+ comn_sysdevices                0     0     0      0               2
+ comn_sysindexes                0     0     0      0              70
+ comn_syslocks                  0     0     0      0               0
+ comn_syslogins                 0     0     0      0               6
+ comn_sysobjects                0     0     0      0             325
+ comn_sysusages                 0     0     0      0               4
+ comn_sysusers                  0     0     0      0              16
+ db_space                       0     0     0      0               3
+ db_space_history               0     1     1      1              88
+ dflt_configures                0     1     1      1               4</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revalias">NAME</h1>
+<p>sp__revalias - Reverse engineer aliases</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers aliases</p>
+<h2>USAGE</h2>
+<p>sp__revalias</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser</p>
+<p>WARNING: Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revalias
+
+ Text
+ -----------------------------------------------------------------------
+ exec sp_addalias &#x27;probe&#x27;,&#x27;dbo&#x27;
+ exec sp_addalias &#x27;ebarlow&#x27;,&#x27;dbo&#x27;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revbindings">NAME</h1>
+<p>sp__revbindings - reverse engineer bindings in db</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Reverse engineer bindings of user defined types to columns</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> bindings
+ -----------------------------------------------------
+ exec sp_bindefault option_yn_def,&#x27;acc_control.modify&#x27;
+ exec sp_bindefault option_yn_def,&#x27;sod_control.modify&#x27;
+ exec sp_bindrule option_yn_rule,option_yn_type
+ exec sp_bindefault option_yn_def,option_yn_type</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revdb">NAME</h1>
+<p>sp__revdb - Reverse engineer database layout of the server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers layout of the databases on a server. Purposly excludes device "master", "model", and "tempdb".</p>
+<h2>USAGE</h2>
+<p>sp__revdb</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser</p>
+<p>WARNING: Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revdb
+
+ Create Database statsdb on &#x27;data3&#x27;=2
+  ,&#x27;datadevice&#x27;=2
+  ,&#x27;datadevice&#x27;=3
+  log on &#x27;log&#x27;=2
+ go
+ Create Database migrator on &#x27;datadevice&#x27;=10
+ go
+ Create Database pubs2 on &#x27;master&#x27;=2
+ go</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revdevice">NAME</h1>
+<p>sp__revdevice - Reverse engineer device layout of the server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers layout of the devices on a server. Purposly excludes device "master", "diskdump", "tapedump1", and "tapedump2".</p>
+<h2>USAGE</h2>
+<p>sp__revdevice</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser</p>
+<p>WARNING: Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revdevice
+
+ /********* BACKUP DEVICES *********/
+ Text
+ ---------------------------
+ exec sp_addumpdevice &#x27;disk&#x27;,&#x27;diskdump&#x27;,&#x27;/dev/null&#x27;,2
+ exec sp_addumpdevice &#x27;disk&#x27;,&#x27;master_dbdump&#x27;,&#x27;/dumps/master_dbdump&#x27;,2
+ exec sp_addumpdevice &#x27;disk&#x27;,&#x27;master_logdump&#x27;,&#x27;/dumps/master_logdump&#x27;, 2
+ exec sp_addumpdevice &#x27;disk&#x27;,&#x27;tapedump1&#x27;,&#x27;/dev/rmt4&#x27;,2
+ exec sp_addumpdevice &#x27;disk&#x27;,&#x27;tapedump2&#x27;,&#x27;/dev/rst0&#x27;,2
+
+ /****** PHYSICAL DISK DEVICES ******/
+ Text
+ ----------------------------------------------------------------------
+ disk init name=&#x27;data2&#x27;,physname=&#x27;/sybase/data2&#x27;,vdevno=2,size=1024
+ disk init name=&#x27;data3&#x27;,physname=&#x27;/sybase/data3&#x27;, vdevno=4,size=2000
+ disk init name=&#x27;data&#x27;,physname=&#x27;/sybase/data&#x27;, vdevno=7,size=8096
+ disk init name=&#x27;log&#x27;, physname=&#x27;/sybase/log&#x27;, vdevno=3, size=1024</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revgroup">NAME</h1>
+<p>sp__revgroup - Reverse engineer groups layout of the server / database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers layout of the groups in your current database</p>
+<h2>USAGE</h2>
+<p>sp__revgroup</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser</p>
+<p>WARNING: Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revgroup
+
+ -------------------------------------------------
+ exec sp_addgroup &#x27;developer&#x27;
+ exec sp_addgroup &#x27;user&#x27;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revindex">NAME</h1>
+<p>sp__revindex - Reverse engineer indexes in current database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers indexes in your current database</p>
+<h2>USAGE</h2>
+<p>sp__revindex</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser WARNING:</p>
+<p>Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revindex
+
+ Text
+ -------------------------------------------------------------------
+ create clustered index XPKalerts on dbo.alerts (hostname,srvname)
+
+ create unique clustered index XPKAccounting on dbo.applications
+     (dbname)
+ create unique clustered index XPKaudit_trail on dbo.audit_trail
+     (date,login_name)
+ create unique clustered index XPKdatabase on dbo.comn_database
+     (srvname,dbname)
+ create unique clustered index XPKcomn_dumpdevices
+     on dbo.comn_dumpdevices</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revkey">NAME</h1>
+<p>sp__revkey - Reverse engineer keys in the database</p>
+<h2>AUTHOR</h2>
+<p>Created By  : "Chris Vilsack" <cvilsack@btmna.com></p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers keys in your current database.</p>
+<h2>USAGE</h2>
+<p>sp__revkey</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser, sp__revtable</p>
+<p>WARNING: run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> exec sp_primarykey &#x27;sd_region&#x27;, region_id
+ go
+ exec sp_primarykey &#x27;sd_site&#x27;, site_id
+ go
+ exec sp_primarykey &#x27;sd_table_maint&#x27;, tbl_name
+ go
+ exec sp_primarykey &#x27;sd_timeband&#x27;, timeband_id
+ go
+ exec sp_primarykey &#x27;acc_control&#x27;, db_name
+ go</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revlogin">NAME</h1>
+<p>sp__revlogin - Reverse engineer logins for current server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers logins in your current server. Can only be run by sa.</p>
+<h2>USAGE</h2>
+<p>sp__revlogin</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser WARNING:</p>
+<p>Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revlogin
+
+ ---------------------------------------------
+ exec sp_addlogin &#x27;sa&#x27;,&#x27;sybase&#x27;,&#x27;master&#x27;
+ exec sp_addlogin &#x27;probe&#x27;,&#x27;&#x27;,&#x27;master&#x27;
+ exec sp_addlogin &#x27;ebarlow&#x27;,&#x27;ebarlow&#x27;,&#x27;statsdb&#x27;
+ exec sp_addlogin &#x27;xxx&#x27;,&#x27;xxx&#x27;,&#x27;master&#x27;
+ exec sp_addlogin &#x27;yyy&#x27;,&#x27;yyy&#x27;,&#x27;master&#x27;
+ exec sp_addlogin &#x27;ttt&#x27;,&#x27;ttt&#x27;,&#x27;statsdb&#x27;
+ SYSTEM 10 NOTE:
+
+ As the system 10 password is encrypted, the password field is filled</code></pre>
+</section>
+
+<section class="proc-section">
+<p>in with "N.A." instead of the actual password.</p>
+<h1 id="sp__revmirror">NAME</h1>
+<p>sp__revmirror - Reverse engineer mirrors on current server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers mirror information</p>
+<h2>USAGE</h2>
+<p>sp__revuser</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser WARNING:</p>
+<p>Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revmirror
+ ----------------------------------------------------------
+ disk mirror name=&#x27;data2&#x27;,mirror=&#x27;/home/programs/sybase/datax&#x27;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revrole">NAME</h1>
+<p>sp__revrole - reverse engineer role granting sql for this server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> exec sp_role &#x27;grant&#x27;,sa_role    , SYS_OPER
+ exec sp_role &#x27;grant&#x27;,sa_role    , SYS_INSTALL
+ exec sp_role &#x27;grant&#x27;,sa_role    , SCRIPT_SVR
+ exec sp_role &#x27;grant&#x27;,sso_role   , xrm_mgr
+ exec sp_role &#x27;grant&#x27;,sso_role   , SYS_OPER
+ exec sp_role &#x27;grant&#x27;,sso_role   , SYS_INSTALL
+ exec sp_role &#x27;grant&#x27;,sso_role   , SCRIPT_SVR
+ exec sp_role &#x27;grant&#x27;,oper_role  , xrm_admin
+ exec sp_role &#x27;grant&#x27;,oper_role  , SYS_OPER
+ exec sp_role &#x27;grant&#x27;,oper_role  , SYS_INSTALL
+ exec sp_role &#x27;grant&#x27;,oper_role  , SCRIPT_SVR</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revrule">NAME</h1>
+<p>sp__revrule - Reverse engineer rules in the database</p>
+<h2>AUTHOR</h2>
+<p>Created By  : "Chris Vilsack" <cvilsack@btmna.com></p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers rules in your current database.</p>
+<h2>USAGE</h2>
+<p>sp__revrule</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser, sp__revtable</p>
+<p>WARNING: run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> exec sp_bindrule &#x27;cc1_sd_product_group&#x27;, &#x27;sd_product_group.fx&#x27;
+ exec sp_bindrule &#x27;cc2_sd_product_group&#x27;, &#x27;sd_product_group.int&#x27;
+ exec sp_bindrule &#x27;option_yn_rule&#x27;, &#x27;acc_control.active&#x27;
+ exec sp_bindrule &#x27;option_yn_rule&#x27;, &#x27;acc_control.backup&#x27;
+ exec sp_bindrule &#x27;option_yn_rule&#x27;, &#x27;acc_control.modify&#x27;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revsegment">NAME</h1>
+<p>sp__revsegment - Reverse engineer segments of current server / database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers segment layout in your current database</p>
+<h2>USAGE</h2>
+<p>sp__revsegment</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser, sp__revsegment WARNING:</p>
+<p>Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revsegment
+ -------------------------------------------
+ exec sp_addsegment &#x27;yyy&#x27;,&#x27;datadevice&#x27;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revtable">NAME</h1>
+<p>sp__revtable - Reverse engineer tables of current server / database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. ).  Modified by Victor Go and Viorel Vlad to add the constraint stuff.</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers table layout in your current database.  This version handles default, check, and primary key constraints.</p>
+<h2>USAGE</h2>
+<p>sp__revtable</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser, sp__revtable</p>
+<p>WARNING: run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revtable authors
+
+ tbl_txt
+ -------------------------------------------
+ CREATE TABLE authors
+ (
+ au_id id NOT NULL,
+ au_lname varchar(40) NOT NULL,
+ au_fname varchar(40) NOT NULL,
+ phone char(12) NOT NULL,
+ address varchar(40) NULL,
+ city varchar(20) NULL,
+ state char(2) NULL,
+ country varchar(12) NULL,
+ postalcode char(10) NULL
+ )</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revtype">NAME</h1>
+<p>sp__revtype - Reverse engineer types in database</p>
+<h2>AUTHOR</h2>
+<pre><code>        Dinyar Ghyara [SMTP:Dinyar_Ghyara_Tk@data.japan.ml.com]
+        Thursday, August 05, 1999 4:46 PM</code></pre>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers types in your current database</p>
+<h2>USAGE</h2>
+<p>sp__revtype</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revtype</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revtype
+ -------------------------------------------
+ exec sp_addtype application_type,&quot; char( 20 )&quot; ,&quot;not null&quot;
+ exec sp_addtype ccy_type,&quot; char( 5  )&quot; ,&quot;not null&quot;
+ exec sp_addtype deal_type_type,&quot; char( 10 )&quot; ,&quot;not null&quot;
+ exec sp_addtype option_yn_type,&quot; char( 1  )&quot; ,&quot;not null&quot;
+ exec sp_addtype product_type,&quot; char( 10 )&quot; ,&quot;not null&quot;
+ exec sp_addtype profit_center_type,&quot; char( 20 )&quot; ,&quot;not null&quot;
+ exec sp_addtype site_type,&quot; char( 10 )&quot; ,&quot;not null&quot;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__revuser">NAME</h1>
+<p>sp__revuser - Reverse engineer users of current server / database</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>reverse engineers user layout in your current database</p>
+<h2>USAGE</h2>
+<p>sp__revuser</p>
+<h2>SEE ALSO</h2>
+<p>sp__revalias, sp__revdb, sp__revdevice, sp__revgroup, sp__revindex, sp__revlogin, sp__revmirror, sp__revuser</p>
+<h2>WARNING</h2>
+<p>Run all the reverse engineering utilities in at least 180 column mode (-w180) to prevent line wrapping.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; sp__revuser
+ -------------------------------------------
+ exec sp_adduser &#x27;sa&#x27;,&#x27;dbo&#x27;,&#x27;developer&#x27;
+ exec sp_adduser &#x27;xxx&#x27;,&#x27;xxx&#x27;,&#x27;user&#x27;
+ exec sp_adduser &#x27;yyy&#x27;,&#x27;yyy&#x27;,&#x27;user&#x27;
+ exec sp_adduser &#x27;ttt&#x27;,&#x27;ttt&#x27;,&#x27;developer&#x27;</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__segment">NAME</h1>
+<p>sp__segment - Segment information</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>show segmentation</p>
+<h2>USAGE</h2>
+<p>sp__segment [ @segment ]</p>
+<p>if @segment is passed, will only print info for the given segment</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__segment
+
+ segment       Data KB     Indx KB     Total
+ ------------- ----------- ----------- -----------
+ default              2874        1432        4306
+ logsegment             16          16          32
+ system                  0          16          16
+               sum         sum
+               =========== ===========
+                      2890        1464
+
+ segment       type       indexname                        Size KB
+ ------------- ---------- -------------------------------- ----------
+ default       CLUSTERED  alerts.XPKalerts                 176
+ default       CLUSTERED  audit_trail.XPKaudit_trail       62
+ default       CLUSTERED  comn_database.XPKdatabase        32
+ default       CLUSTERED  comn_dumpdevices.XPKcomn_dumpd   32
+ default       CLUSTERED  comn_syscolumns.XPKcomn_syscol   160</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__server">NAME</h1>
+<p>sp__server - Summary info about a server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>server summary report</p>
+<h2>USAGE</h2>
+<p>sp__server</p>
+<h2>SEE ALSO</h2>
+<p>The following procedures are called by sp__server: sp__helpdb, sp__helpdbdev, sp__devspace, sp__helpdevice, sp__helpmirror, sp__vdevno, sp__helpsegment, sp__helplogin.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__server
+
+ [ OUTPUT TRUCATED FOR SPACE ]
+
+ ******* SYBASE VERSION *******
+ SQL Server/4.9.2/EBF 1950 Rollup/Sun4/OS 4.1.2/1/OPT/
+      Wed Sep 8 00:30:38 PDT 1993
+
+ tl    trunc. log on chkpt     do    dbo use only
+ cr    no chkpt on recovery    su    single user
+ cl    crashed during load     ab    abort tran
+ ds    database suspect
+
+ ****** DATABASE CONFIGURATION *******
+ database         data     log  owner si tl cr cl ds ro do su ab
+ --------------- ----- -------- ----  -- -- -- -- -- -- -- -- --
+ master (1)          5 N/A      sa
+ mis (7)            15        6 sa
+ model (3)           2 N/A      sa
+ pubs2 (8)           4        2 sa
+
+ total space used total data total log
+ ---------------- ---------- ----------
+      73.00            62.00      11.00
+
+ Database Name   Device Name     Size           Usage
+ --------------- --------------- -------------- ---------------
+ master          master                1.500000 data and log
+ master          master                3.000000 data and log
+ mis             datadev2              5.000000 data only
+ mis             datadev2             10.000000 data only
+ mis             datadev               3.000000 log only
+
+ Device Name          Physical Name
+ -------------------- ---------------------------------------------
+ tapedump1            /dev/rmt4
+
+ Device Name    Physical Name               size     alloc    free
+ -------------- --------------------------- -------- -------- --------
+ datadev        /disk1/sybase/datadev.dat     20.0MB   20.0MB    0.0MB
+ datadev2       /disk1/sybase/datadev2.dat    19.5MB   17.0MB    2.5MB
+ datadev3       /disk1/sybase/datadev3.dat    10.0MB    4.0MB    6.0MB
+
+ ******* SYBASE MIRROR INFORMATION *******
+    (NO DEVICES ARE MIRRORED)
+
+ vdevno  device
+ ------- ------------------------------
+     0   master
+     1   sysprocsdev
+     2   sybsecurity
+
+ db         segmap      segname         segs device name   size (MB)
+ ---------- -------- --------------- ---- ------------- ---------
+ master            7 system           LDS master           3.00
+ master            7 default          LDS master           3.00
+ master            7 logsegment       LDS master           3.00
+ master            7 system           LDS master           1.50
+ master            7 default          LDS master           1.50
+
+ ****** SERVER LOGINS *******
+
+ Id   Login_name     Default_db     Sht Lck Exp SA SSO Oper Remote
+ ---- -------------- -------------- --- --- --- -- --- ---- ------
+ 12   a              master
+ 4    ebarlow        statsdb
+ 6    george         statsdb
+ 7    lperry         sybsystemprocs
+ 11   mis            mis
+ 13   misread        mis</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__size">NAME</h1>
+<p>sp__size - rewrite</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<h2>SEE ALSO</h2>
+<h2>USAGE</h2>
+<pre><code> Proc_name                      Order Parameter
+ ------------------------------ ----- ------------------------------
+ sp__size                           1 @objname varchar(40) NOT NULL</code></pre>
+<p>(return status = 0)</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> Proc_name                Size  Avail_size  Lines       Avail_lines
+ ------------------------ ----- ----------- ----------- -----------
+ mon_authorize_non_sa     6  KB         122           2         253
+ mon_rpc_attach           3  KB         125           1         254
+ mon_rpc_connect          2  KB         126           1         254
+ sp_configure             180KB         -52          73         182
+ sp_dboption              116KB          12          49         206
+ sp_dbupgrade             73 KB          55          19         236
+ sp_getmessage            33 KB          95          14         241
+ sp_loaddbupgrade         6  KB         122           2         253
+ sp_procxmode             28 KB         100          12         243
+ sp_prtsybsysmsgs         4  KB         124           1         254
+ sp_validlang             6  KB         122           2         253</code></pre>
+<p>(11 rows affected) (return status = 0)</p>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__stat">NAME</h1>
+<p>sp__stat - Sybase iostat/vmstat equivalent for server</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Prints the @@ variables for your server in a loop. Note this proc is actually 2 procedures (sp__stat and sp__stat2) because the @@ variables seem to be replaced when the procedure is executed not when the loop gets to them (so print @@cpu, wait, print @@cpu, wait, print @@cpu will print the same thing each time).</p>
+<h2>USAGE</h2>
+<p>sp__stat @cnt, @delay, @batch</p>
+<p>@cnt is the number of rows to print</p>
+<p>@delay is the number of seconds delay allowed (must be 1,2,3,4,5,10,30,60)</p>
+<p>@batch is a flag - if null will print in real time, if not null, will hold results in #tmp table</p>
+<p>and then print them all at once.</p>
+<h2>NOTES</h2>
+<p>The Cpu, IO, and Idle values are in ticks.</p>
+<p>The net in and net out values are in packets</p>
+<p>All the numbers except Users and Runnable processes are from @@variables of the same name. The users is the number of non - system users, the Run field is the number of users doing something. The conn is the number of connections that happened in the interval.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__stat
+
+ Usrs Run %Cpu %IO  Secs Conn Net in Net out Reads Writes Errors
+ ---- --- ---- ---- ---- ---- ------ ------- ----- ------ ------
+ 0    0   0    0    3    0    0      0       0     2      0
+
+ Usrs Run %Cpu %IO  Secs Conn Net in Net out Reads Writes Errors
+ ---- --- ---- ---- ---- ---- ------ ------- ----- ------ ------
+ 0    0   33   0    2    0    0      1       0     0      0
+
+ Usrs Run %Cpu %IO  Secs Conn Net in Net out Reads Writes Errors
+ ---- --- ---- ---- ---- ---- ------ ------- ----- ------ ------
+ 0    0   0    0    2    0    0      0       0     0      0</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__syntax">NAME</h1>
+<p>sp__syntax - Syntax of a stored procedure</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<p>Shows syntax of a stored procedure. Who can remember how to use sp_addlogin... Wont tell you what is optional and what is required, but it does tell you how to use the proc.</p>
+<h2>USAGE</h2>
+<p>sp__syntax [@procname]</p>
+<p>you probably should pass in a parameter, otherwise you will get gobs of output.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__syntax ap_diff_db
+
+ Proc_name                      Order Parameter
+ ------------------------------ ----- ------------------------------
+ ap_diff_db                         1 @srv1 char(30)
+ ap_diff_db                         2 @db1 char(30)</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__trigger">NAME</h1>
+<p>sp__trigger - Useful synopsis report of current database trigger schema</p>
+<h2>AUTHOR</h2>
+<p>Simon Walker, The SQL Workshop LTD.</p>
+<h2>DESCRIPTION</h2>
+<p>show all tables/triggers in current database</p>
+<h2>USAGE</h2>
+<p>sp__trigger [@tablename]</p>
+<h2>SEE ALSO</h2>
+<p>sp__helptrigger</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__trigger
+
+ table name         insert trigger     update trigger  delete trigger
+ ------------------ ------------------ --------------- ---------------
+ alerts             .................. ............... ...............
+ audit_trail        .................. ............... ...............
+ comn_database      .................. ............... ...............
+ comn_dumpdevices   .................. ............... ...............
+ comn_syscolumns    .................. ............... ...............
+ comn_sysdevices    .................. ............... ...............
+ comn_sysindexes    .................. ............... ...............
+ comn_syslocks      lock_del_trigger   ............... ...............
+ comn_syslogins     syslogin_insert_tr ............... ...............
+ comn_sysobjects    .................. ............... ...............</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__uptime">NAME</h1>
+<p>sp__uptime  - shows server uptime</p>
+<h2>AUTHOR</h2>
+<p>Edward Barlow ( SQL Technologies, inc. )</p>
+<h2>DESCRIPTION</h2>
+<pre><code> 1&gt; sp__uptime
+ name       size_data  size_log owner
+ ---------- ---------- -------- ----------
+ statsdb    7.000000   2.000000 sa</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__vdevno">NAME</h1>
+<p>sp__vdevno - Show used device numbers</p>
+<h2>AUTHOR</h2>
+<p>Simon Walker, The SQL Workshop LTD.</p>
+<h2>DESCRIPTION</h2>
+<p>Shows Used Device Numbers</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__vdevno
+
+ vdevno  device
+ ------- ------------------------------
+     0   master
+     1   sysprocsdev
+     2   sybsecurity
+     3         -- free --
+     4         -- free --
+     5         -- free --
+     6         -- free --
+     7   datadev
+     8   datadev3
+     9   datadev2</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__who">NAME</h1>
+<p>sp__who - Check who is on server</p>
+<h2>AUTHOR</h2>
+<p>Simon Walker, The SQL Workshop LTD. Ed Barlow</p>
+<h2>DESCRIPTION</h2>
+<p>pretty version of sp_who</p>
+<h2>USAGE</h2>
+<p>sp__who [ @parameter ]</p>
+<p>if @param is a login, it will only print information for that login. If @param is a database, it will only print information about users in that database.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__who
+
+ spid logi   host     proc dbname     status   cmd              bk
+ ---- ------ -------- ---- ---------- -------- ---------------- --
+ 1    sa     gamesrus 9056 statsdb    running  SELECT           0
+ 2    NULL                 master     sleeping NETWORK HANDLER  0
+ 3    NULL                 master     sleeping MIRROR HANDLER   0
+ 4    NULL                 master     sleeping AUDIT PROCESS    0</code></pre>
+<p>1> exec sp__who  MyDb</p>
+<p>spid  logi      hostinfo         proc  dbname      status   cmd              bk</p>
+<pre><code> ---- --------- --------         ----  ----------  -------- ---------------- --</code></pre>
+<p>15  	gemalarms unix_monitor.pl  13299	gemalarms	recv sle	AWAITING COMMAN	0 20  	gemalarms sybmon filter.pl 3784	gemalarms	recv sle	AWAITING COMMAN	0 31  	gemalarms sybmon port_monitor.pl	gemalarms	recv sle	AWAITING COMMAN	0 38  	gemalarms monitor_appslog. 4236	gemalarms	recv sle	AWAITING COMMAN	0</p>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__whoactive">NAME</h1>
+<p>sp__whoactive - Check who is doing something on server</p>
+<h2>AUTHOR</h2>
+<p>Androw Zanevsky, AZ Databases, Inc. 71232.3446@compuserve.com</p>
+<h2>DESCRIPTION</h2>
+<p>Monitors indicators of a given process for specified time and reports activity (CPU, IO, Locks...).</p>
+<p>If any indicator changes, then process is active. This proc uses the waitfor command.</p>
+<h2>USAGE</h2>
+<p>sp__whoactive [ @loginname] [, @delay ]</p>
+<p>@loginname is the spid to watch. Can pass 'active' or 'all' in place of logins (I hope you</p>
+<p>dont have logins 'active' and 'all' on your server :).</p>
+<p>@delay is the monitoring interval in seconds (must be 5,10,20,or 60) - defaults to 5</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__whoactive
+
+    Oct 31 1997 12:23AM
+ Activity indicators of all logins during the last  5 seconds
+
+ spid  loginame  locks cpu   i/o  cmd              status   blkd bcnt a
+ ----- --------- ----- ----- ---- ---------------- -------- ---- ---- -
+     1 sa            0     0    0 INSERT           running     0    0 @
+     2 NULL          0     0    0 NETWORK HANDLER  sleeping    0    0
+     3 NULL          0     0    0 MIRROR HANDLER   sleeping    0    0
+     4 NULL          0     0    0 AUDIT PROCESS    sleeping    0    0
+     5 NULL          0     0    0 CHECKPOINT SLEEP sleeping    0    0</code></pre>
+<p>Total:   5 process(es).  (* - active, @ - this process.)</p>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__whodo">NAME</h1>
+<p>sp__whodo - Check who is doing something on server</p>
+<h2>AUTHOR</h2>
+<p>Simon Walker &amp; Ed Barlow (Ed rewrote Simons command)</p>
+<h2>DESCRIPTION</h2>
+<p>sp__who that drops awaiting commands and the sa stuff</p>
+<h2>SEE ALSO</h2>
+<p>sp__whoactive, sp__isactive, sp__iostat, sp__who</p>
+<h2>USAGE</h2>
+<p>sp__whodo [ @param ]</p>
+<p>if @param is a login, it will only print information for that login. If it is a database, it will only print information about users in that database.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__whodo
+
+ pid loginame  cpu   io  mem  dbname     status   cmd      bk bktime
+ --- --------- ----- --- ---- ---------- -------- -------  -- ------
+ 1   sa        1104  8   1    statsdb    running  INSERT   0  0</code></pre>
+</section>
+
+<section class="proc-section">
+<h1 id="sp__whoe">NAME</h1>
+<p>sp__whoe - Long format Who is on System</p>
+<h2>AUTHOR</h2>
+<p>Philippe Wathelet July 1998</p>
+<h2>DESCRIPTION</h2>
+<p>This is a substitute for Sybase's standard sp_who stored procedure</p>
+<p>The output is clearer without line wrapping.  You can help it with:</p>
+<pre><code>   isql -U&lt;user&gt; -S&lt;server&gt; -w150</code></pre>
+<p>allowing a width of up to 150 characters per line for example</p>
+<h2>USAGE</h2>
+<p>sp__whoe [ @login ]</p>
+<p>if @login is passed, it will only print information for that login.</p>
+<h2>SAMPLE OUTPUT</h2>
+<pre><code> 1&gt; exec sp__whoe</code></pre>
+</section>
+</div>
+</body>
+</html>

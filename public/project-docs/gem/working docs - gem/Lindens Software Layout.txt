@@ -1,0 +1,19 @@
+Home					dflt
+Blade Hosts
+	Bl Inv			php-bin/blade_chassis.php
+	Full Bl			php-bin/blade-full.php
+	Unx Inv			php-bin/inv_hosts.php
+Compliance
+	Worm Usage		compliance.php
+MDTick
+	Tape
+	Nfs
+	Top 20 Mnts
+	Media Usage
+Tidal
+	Tidal Docs		tidal/*
+	Tidal Depl
+RNA
+	Docs				rna/*
+Wiki					internal unix wiki
+

@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisioDocument>
+	<DocumentProperties>
+		<Title></Title>
+		<HyperlinkBase href=""></HyperlinkBase>
+	</DocumentProperties>
+	<Pages>
+		<Page ID="0" Name="Inventory Master" NameU="Main">
+			<Layer IX="0">
+				<Name>Entities</Name>
+				<NameUniv>Entities</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Relationships</Name>
+				<NameUniv>Relationships</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="2">
+				<Name>Categories</Name>
+				<NameUniv>Categories</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="3">
+				<Name>Table Inheritance</Name>
+				<NameUniv>Table Inheritance</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="4">
+				<Name>Composite Types</Name>
+				<NameUniv>Composite Types</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="5">
+				<Name>Type Inheritance</Name>
+				<NameUniv>Type Inheritance</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="16" UniqueID="{C82664F0-1085-41CA-94EF-FE0958DBD435}" Name="Entity.16" NameU="Entity.16" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.254906499048721</PinX>
+						<PinY Unit="IN">5.205502249484590</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="37" UniqueID="{693FA2DB-BDC0-4F78-AE1A-6B838C9DC5BD}" Name="Entity.37" NameU="Entity.37" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.451704823633681</PinX>
+						<PinY Unit="IN">9.305503775363498</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="41" UniqueID="{9E22285B-D52D-4840-9D47-E7B26FF91634}" Name="Entity.41" NameU="Entity.41" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.602461207250107</PinX>
+						<PinY Unit="IN">7.096876922704304</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="44" UniqueID="{6992FA7B-6B58-4809-BF1A-5F894E21EA64}" Name="Relationship.44" NameU="Relationship.44" Master="8">
+					<XForm>
+						<PinX Unit="IN">4.829914456774468</PinX>
+						<PinY Unit="IN">6.790105255175393</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="45" UniqueID="{6D1E807B-8A0F-435E-A888-EAB4964E678D}" Name="Relationship.45" NameU="Relationship.45" Master="8">
+					<XForm>
+						<PinX Unit="IN">6.454166030883788</PinX>
+						<PinY Unit="IN">8.159523555210658</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="61" UniqueID="{1CBB7850-7B52-4C56-BDB4-42EB0844AD79}" Name="Entity.61" NameU="Entity.61" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.800000000000000</PinX>
+						<PinY Unit="IN">4.255503012424044</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="65" UniqueID="{262407D2-3D1C-44FC-9607-002A158FB271}" Name="Relationship.65" NameU="Relationship.65" Master="8">
+					<XForm>
+						<PinX Unit="IN">3.102180307935004</PinX>
+						<PinY Unit="IN">4.605502249484591</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="19" UniqueID="{CC222BF1-BC79-4173-BE10-CC1532FC1CF2}" Name="Entity.19" NameU="Entity.19" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.645585215428818</PinX>
+						<PinY Unit="IN">4.727829049343533</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="25" UniqueID="{4F8E124F-11E3-42D2-90A7-0433689415D2}" Name="Relationship.25" NameU="Relationship.25" Master="8">
+					<XForm>
+						<PinX Unit="IN">5.400491714477539</PinX>
+						<PinY Unit="IN">4.727829049343533</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="8" UniqueID="{892FC19C-B417-4105-8A4C-407B9EF9A86E}" Name="Sheet.8" NameU="Sheet.8">
+					<Text>INVENTORY SYSTEM TABLES
+
+Business Systems
+- define groupings of systems
+- is_view =&gt; for reports
+- is_systemview =&gt; cant change
+
+Systems
+- keyed on physical hostname
+- INV_aliases==ypcat hosts
+- has one and only 1 relationship
+- contains feed and final rows
+</Text>
+					<XForm>
+						<PinX Unit="IN">3.000000000000000</PinX>
+						<PinY Unit="IN">8.799999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="2" UniqueID="{A4D88BAD-FF4A-4C8F-9E60-A67A9C323630}" Name="Sheet.2" NameU="Sheet.2">
+					<Text>attribute_category
+- unique to inserting program
+- programs should delete their rows and reinsert</Text>
+					<XForm>
+						<PinX Unit="IN">2.000000000000000</PinX>
+						<PinY Unit="IN">2.449999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="10" UniqueID="{00E36FD0-571D-40B4-B0ED-011D0CE9DB4D}" Name="Sheet.10" NameU="Sheet.10">
+					<Text>production_state
+- PRODUCTION
+- DEVELOPMENT
+- DR
+- QA
+system_type
+- sybase
+- win32servers
+- sqlsvr
+- unix
+- oracle
+- dnsalias</Text>
+					<XForm>
+						<PinX Unit="IN">1.927777777777777</PinX>
+						<PinY Unit="IN">6.649999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="3" UniqueID="{7C997387-B8AD-4B10-8D7C-979A3A7C9987}" Name="Entity" NameU="Entity" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.707600748876084</PinX>
+						<PinY Unit="IN">1.938836600070529</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="6" UniqueID="{95856760-88B5-4054-80F5-B93AD76046E3}" Name="Relationship" NameU="Relationship" Master="8">
+					<XForm>
+						<PinX Unit="IN">4.462507247924805</PinX>
+						<PinY Unit="IN">3.363835455661349</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="1" UniqueID="{8E32199C-FF27-482E-8088-31E3F65F797F}" Name="Sheet.1" NameU="Sheet.1">
+					<Text>INV_aliases
+- from ypcat hosts</Text>
+					<XForm>
+						<PinX Unit="IN">7.599999999999999</PinX>
+						<PinY Unit="IN">3.849999999999999</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="4" Name="Reports" NameU="Reports">
+			<Layer IX="0">
+				<Name>Relationships</Name>
+				<NameUniv>Relationships</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Entities</Name>
+				<NameUniv>Entities</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="2">
+				<Name>Categories</Name>
+				<NameUniv>Categories</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="1" UniqueID="{AE06E45E-93A1-49E9-9957-DFA60123F94D}" Name="Entity" NameU="Entity" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.900000000000000</PinX>
+						<PinY Unit="IN">8.527829049343534</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="4" UniqueID="{6479A0B0-26A6-48EA-B0B6-B4F4DF886521}" Name="Entity.4" NameU="Entity.4" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.042769658228409</PinX>
+						<PinY Unit="IN">8.527829049343533</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="7" UniqueID="{3022590F-1E4E-44EF-9A13-A4787B6F3FB0}" Name="Relationship" NameU="Relationship" Master="8">
+					<XForm>
+						<PinX Unit="IN">2.990265673230415</PinX>
+						<PinY Unit="IN">8.527829049343534</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="8" UniqueID="{8A4D5259-17ED-467C-9044-E6EABF64EAB2}" Name="Entity.8" NameU="Entity.8" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.656536448338977</PinX>
+						<PinY Unit="IN">8.622170187717012</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="11" UniqueID="{8AA380BD-9E4F-4ED2-8ECE-C452DF769B75}" Name="Relationship.11" NameU="Relationship.11" Master="8">
+					<XForm>
+						<PinX Unit="IN">5.149306106567384</PinX>
+						<PinY Unit="IN">8.527829049343533</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="12" UniqueID="{2055892F-5F27-4753-8D10-068159723A36}" Name="Entity.75" NameU="Entity.75" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.025598561426651</PinX>
+						<PinY Unit="IN">1.600000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="25" UniqueID="{8093CFFB-E1B7-4FCB-A88C-B5C42E02068A}" Name="Sheet.25" NameU="Sheet.25">
+					<Text>Report System
+- Allows Subscription To Reports &amp; Alerts
+- Allows User Defined Reports</Text>
+					<XForm>
+						<PinX Unit="IN">2.250000000000001</PinX>
+						<PinY Unit="IN">9.600000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="46" UniqueID="{16F587C0-367F-4E29-B68F-4E2430FC1105}" Name="Sheet.46" NameU="Sheet.46">
+					<Text>APPLICATION TRACKING
+- databasename includes wildcards
+- allows autodetection of db server owner</Text>
+					<XForm>
+						<PinX Unit="IN">2.700000000000000</PinX>
+						<PinY Unit="IN">1.772170950656467</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="47" UniqueID="{BD640F7D-CC52-4A9D-A747-66FD1F412A64}" Name="Entity.40" NameU="Entity.40" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.069310951232910</PinX>
+						<PinY Unit="IN">3.227829049343534</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="50" UniqueID="{BD891942-831E-4E9D-A67E-7F847F04521F}" Name="Sheet.50" NameU="Sheet.50">
+					<Text>SYSTEM CONSTANTS
+- general purpose system constants</Text>
+					<XForm>
+						<PinX Unit="IN">2.518269884923448</PinX>
+						<PinY Unit="IN">3.500000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="51" UniqueID="{2C9179E9-F160-4E31-9C5F-9B8FC7B4D78B}" Name="Entity.51" NameU="Entity.51" Master="7">
+					<XForm>
+						<PinX Unit="IN">5.901027644017686</PinX>
+						<PinY Unit="IN">5.988835837131076</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="54" UniqueID="{C6F27B8F-3453-4955-B086-388F81E747DA}" Name="Sheet.54" NameU="Sheet.54">
+					<Text>LONG RUNNING OPERATIONS
+- saved performance tuning notes</Text>
+					<XForm>
+						<PinX Unit="IN">2.400000000000000</PinX>
+						<PinY Unit="IN">6.250000000000000</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="5" Name="TechAudits" NameU="SystemAudits">
+			<Layer IX="0">
+				<Name>Relationships</Name>
+				<NameUniv>Relationships</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Entities</Name>
+				<NameUniv>Entities</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="1" UniqueID="{6F3F9A6F-1A6D-473F-A521-3B2738132DDD}" Name="Entity.33" NameU="Entity.33" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.709577666701825</PinX>
+						<PinY Unit="IN">6.216826076253256</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="4" UniqueID="{0EF65C59-D7BF-4079-AE44-08818AAB65B2}" Name="Entity.53" NameU="Entity.53" Master="7">
+					<XForm>
+						<PinX Unit="IN">3.732343363087675</PinX>
+						<PinY Unit="IN">8.316824550374351</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="7" UniqueID="{30759984-3E5E-4FCD-A013-DB92D07AA320}" Name="Entity.69" NameU="Entity.69" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.316171681543838</PinX>
+						<PinY Unit="IN">8.311165688747831</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="10" UniqueID="{EC320CE2-9DAA-4F19-B2E8-6E1ECEE9BE9D}" Name="Entity.16" NameU="Entity.16" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.842036544265301</PinX>
+						<PinY Unit="IN">8.361166451687286</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="13" UniqueID="{F29BF6CB-F959-4B25-A543-E1E0E1F504B6}" Name="Relationship" NameU="Relationship" Master="8">
+					<XForm>
+						<PinX Unit="IN">2.504914146156088</PinX>
+						<PinY Unit="IN">8.316824550374351</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="14" UniqueID="{D1661019-4DA8-4B1D-9AF3-9262797D807D}" Name="Relationship.14" NameU="Relationship.14" Master="8">
+					<XForm>
+						<PinX Unit="IN">5.261281483522680</PinX>
+						<PinY Unit="IN">8.338995501030819</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="15" UniqueID="{C8DB4839-C694-4A2F-A01F-43AB3C4D3178}" Name="Relationship.15" NameU="Relationship.15" Master="8">
+					<XForm>
+						<PinX Unit="IN">6.809577666701825</PinX>
+						<PinY Unit="IN">7.538997026909724</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="16" UniqueID="{76C5208B-99D7-4568-A22B-E1D335518EEC}" Name="Sheet.16" NameU="Sheet.16" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.100000000000001</PinX>
+						<PinY Unit="IN">6.194497750515408</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="19" UniqueID="{DB84389A-4033-4B9D-A289-F6D944026B76}" Name="Relationship.19" NameU="Relationship.19" Master="8">
+					<XForm>
+						<PinX Unit="IN">5.407844405860679</PinX>
+						<PinY Unit="IN">6.216826076253257</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="20" UniqueID="{B55CF92F-0E94-465A-B3DB-DE8EC55AFD67}" Name="Sheet.20" NameU="Sheet.20">
+					<Text>SECURITY &amp; CONFIGURATION AUDIT TABLES
+- Search Systems For Potential Errors
+- Define Policies
+- Apply Policies To Systems</Text>
+					<XForm>
+						<PinX Unit="IN">3.800000000000000</PinX>
+						<PinY Unit="IN">10.150000000000000</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="7" Name="Credentials" NameU="Gem Tables">
+			<Layer IX="0">
+				<Name>Entities</Name>
+				<NameUniv>Entities</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Relationships</Name>
+				<NameUniv>Relationships</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="1" UniqueID="{16C18A04-98EC-4278-94AE-E8231D261147}" Name="Entity.1" NameU="Entity.1" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.700000000000000</PinX>
+						<PinY Unit="IN">4.105503775363498</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="4" UniqueID="{3A982B28-E271-4452-B006-0AB204F9F4B0}" Name="Entity.12" NameU="Entity.12" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.299250758031358</PinX>
+						<PinY Unit="IN">5.849842624918620</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="7" UniqueID="{E57B2FA9-49FB-4C71-A19D-24717AAB9FC5}" Name="Relationship" NameU="Relationship" Master="8">
+					<XForm>
+						<PinX Unit="IN">3.498958015441894</PinX>
+						<PinY Unit="IN">4.385927087307400</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="8" UniqueID="{AB998BE3-E551-4582-8386-5BB398B4E0DD}" Name="Entity" NameU="Entity" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.807584727147569</PinX>
+						<PinY Unit="IN">6.938836600070530</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="11" UniqueID="{AE6299EE-8647-4A7F-A8EA-6F6301B3F969}" Name="Relationship.24" NameU="Relationship.24" Master="8">
+					<XForm>
+						<PinX Unit="IN">3.199250758031357</PinX>
+						<PinY Unit="IN">6.477673200141060</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="12" UniqueID="{20F08E72-8202-43EE-8097-D552BEFC6304}" Name="Relationship.30" NameU="Relationship.30" Master="8">
+					<XForm>
+						<PinX Unit="IN">1.706917363573784</PinX>
+						<PinY Unit="IN">5.605503775363498</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="13" UniqueID="{E6A1079B-50C9-4786-9EED-BC47B8055C28}" Name="Entity.66" NameU="Entity.66" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.853416788915148</PinX>
+						<PinY Unit="IN">5.805503775363500</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="16" UniqueID="{0E4FFDA8-60C2-4579-97E9-B81C4C8AE138}" Name="Relationship.69" NameU="Relationship.69" Master="8">
+					<XForm>
+						<PinX Unit="IN">5.503416788915147</PinX>
+						<PinY Unit="IN">5.827673200141060</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="17" UniqueID="{890F4C9D-6AA5-4889-A645-EB7DCF74082F}" Name="Sheet.17" NameU="Sheet.17">
+					<Text>DISCOVERED CREDENTIALS
+- LDAP Users
+- LDAP Groups
+- Database SysLogins
+- NIS Users
+- NIS Groups
+- /etc/passwd
+- win32 hardware credentials
+</Text>
+					<XForm>
+						<PinX Unit="IN">2.850000000000001</PinX>
+						<PinY Unit="IN">9.400000000000000</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="6" Name="Credential Certs" NameU="Mappings">
+			<Layer IX="0">
+				<Name>Relationships</Name>
+				<NameUniv>Relationships</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Entities</Name>
+				<NameUniv>Entities</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="1" UniqueID="{E92F9151-D3CB-4A51-ABD5-7EDFB7033FF3}" Name="Entity.72" NameU="Entity.72" Master="7">
+					<XForm>
+						<PinX Unit="IN">7.200749241968643</PinX>
+						<PinY Unit="IN">5.400000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="4" UniqueID="{BD120954-8B27-4CFB-AF2B-428D506A0FB6}" Name="Entity.2" NameU="Entity.2" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.623136937281142</PinX>
+						<PinY Unit="IN">6.927829049343533</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="7" UniqueID="{99FD407E-E793-463F-B63F-81A01D49A3BD}" Name="Entity.7" NameU="Entity.7" Master="7">
+					<XForm>
+						<PinX Unit="IN">2.200000000000000</PinX>
+						<PinY Unit="IN">3.200000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="10" UniqueID="{E1B3CFA1-CD1F-4637-8163-1BAC81CD52C6}" Name="Entity.10" NameU="Entity.10" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.610890543797959</PinX>
+						<PinY Unit="IN">3.600000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="13" UniqueID="{F0BAE39C-9ECC-4EF4-B66E-A555F938346B}" Name="Sheet.13" NameU="Sheet.13">
+					<Text>CREDENTIAL NOTES
+- User Entered Overrides
+- Applied To Principal Map</Text>
+					<XForm>
+						<PinX Unit="IN">6.655555555555555</PinX>
+						<PinY Unit="IN">7.999999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="14" UniqueID="{7D6277F0-97D0-4867-BFBE-85DAE4DD69BF}" Name="Entity.15" NameU="Entity.15" Master="7">
+					<XForm>
+						<PinX Unit="IN">3.877821385523329</PinX>
+						<PinY Unit="IN">8.600000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="17" UniqueID="{45414240-E5CF-43C0-A43E-CAEE776417C2}" Name="Entity.18" NameU="Entity.18" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.679106938501845</PinX>
+						<PinY Unit="IN">8.411162636990019</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="20" UniqueID="{6B48FFA1-E877-4D6C-BA6A-53E5A9E55F53}" Name="Entity.21" NameU="Entity.21" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.400000000000000</PinX>
+						<PinY Unit="IN">6.905503775363497</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="23" UniqueID="{07658B1F-3560-4B3F-91B7-FEE65E4DE1F9}" Name="Sheet.23" NameU="Sheet.23">
+					<Text>CREDENTIAL CERTIFICATIONS
+- Principal Map maps credentials to ldap users
+- Credential Notes has User Overrides</Text>
+					<XForm>
+						<PinX Unit="IN">2.500000000000001</PinX>
+						<PinY Unit="IN">10.100000000000003</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="24" UniqueID="{5C60F694-2627-48E7-9EF5-4E21B41D68DD}" Name="Dynamic connector.9" NameU="Dynamic connector.9" Master="9">
+					<XForm>
+						<PinX Unit="IN">4.250479161402236</PinX>
+						<PinY Unit="IN">7.680580937025281</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="25" UniqueID="{2EC52B9B-BF64-4C4F-8AEC-2FD64BA4B0E5}" Name="Dynamic connector.25" NameU="Dynamic connector.25" Master="9">
+					<XForm>
+						<PinX Unit="IN">2.779106938501844</PinX>
+						<PinY Unit="IN">8.463914524671768</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="26" UniqueID="{6DD34FD3-92C0-46A4-AB77-3B96D8D83540}" Name="Sheet.26" NameU="Sheet.26">
+					<Text>Note: Triggers audit actions into INV_principal_map_audit</Text>
+					<XForm>
+						<PinX Unit="IN">6.100000000000000</PinX>
+						<PinY Unit="IN">0.700001144409179</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="27" UniqueID="{1FA513D2-AEBA-4D76-A5F1-C85DE6C2DDE4}" Name="Relationship" NameU="Relationship" Master="8">
+					<XForm>
+						<PinX Unit="IN">3.332528287340874</PinX>
+						<PinY Unit="IN">3.600000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="28" UniqueID="{F4988D52-6B4C-464D-9BDD-C46C5B62396E}" Name="Sheet.28" NameU="Sheet.28">
+					<Text>SYSTEM USER
+- Permissions in GUI
+
+APPROVER
+AUDITOR
+DASHBOARD ADMINISTRATOR
+DASHBOARD DEVELOPER
+DATA SCRUBBER
+DBA ADMIN
+DEMO ALL FEATURES
+SYSTEM POWERUSER
+SYSTEMPOWERUSER
+UNIX SYSADMIN
+WINDOWS SYSADMIN</Text>
+					<XForm>
+						<PinX Unit="IN">6.655555555555555</PinX>
+						<PinY Unit="IN">9.600000000000000</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="8" Name="Monitoring" NameU="Monitoring">
+			<Layer IX="0">
+				<Name>Relationships</Name>
+				<NameUniv>Relationships</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Entities</Name>
+				<NameUniv>Entities</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="1" UniqueID="{AE563688-E54C-46EC-A922-B2F9C26202C0}" Name="Entity" NameU="Entity" Master="7">
+					<XForm>
+						<PinX Unit="IN">2.000000000000000</PinX>
+						<PinY Unit="IN">8.038835074191622</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="4" UniqueID="{5142B5E4-1843-4BE2-9602-8CE9DF888D48}" Name="Entity.4" NameU="Entity.4" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.968599665502061</PinX>
+						<PinY Unit="IN">7.955501486545138</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="7" UniqueID="{472335BC-D938-456E-8A13-8120512761E6}" Name="Entity.7" NameU="Entity.7" Master="7">
+					<XForm>
+						<PinX Unit="IN">5.331400334497939</PinX>
+						<PinY Unit="IN">5.388837363009982</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="10" UniqueID="{AE360B8D-88DB-4A6B-B510-459466BE2EFA}" Name="Entity.10" NameU="Entity.10" Master="7">
+					<XForm>
+						<PinX Unit="IN">2.246203959325304</PinX>
+						<PinY Unit="IN">5.000000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="13" UniqueID="{C3F3BFFE-4B58-4DA6-84DC-45076DB984DC}" Name="Entity.13" NameU="Entity.13" Master="7">
+					<XForm>
+						<PinX Unit="IN">2.500000000000000</PinX>
+						<PinY Unit="IN">2.722196967909070</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="16" UniqueID="{C1FEB892-C33E-4A0B-A784-3972E452C1CB}" Name="Entity.16" NameU="Entity.16" Master="7">
+					<XForm>
+						<PinX Unit="IN">5.500000000000000</PinX>
+						<PinY Unit="IN">3.000000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="19" UniqueID="{487515C5-9F5D-460B-A025-A5803BE9A25C}" Name="Sheet.19" NameU="Sheet.19">
+					<Text>Monitoring Tables
+Heartbeat =&gt; service – no timestamp
+Event =&gt; has a timestamp
+Critical/Error/Warning/Ok</Text>
+					<XForm>
+						<PinX Unit="IN">2.599999999999999</PinX>
+						<PinY Unit="IN">10.100000000000000</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="9" Name="BackupMonitoring" NameU="BackupMonitoring">
+			<Layer IX="0">
+				<Name>Relationships</Name>
+				<NameUniv>Relationships</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Entities</Name>
+				<NameUniv>Entities</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="1" UniqueID="{A828B7C4-AE96-456D-AE21-F9222332C0C2}" Name="Entity" NameU="Entity" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.908888280054580</PinX>
+						<PinY Unit="IN">7.194501565212672</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="4" UniqueID="{65C6C834-D885-459F-B3B9-758057DDBF84}" Name="Entity.4" NameU="Entity.4" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.852253377100478</PinX>
+						<PinY Unit="IN">2.383332061767579</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="7" UniqueID="{9F81F14E-70C6-464E-8C0C-9ABB1301D729}" Name="Entity.24" NameU="Entity.24" Master="7">
+					<XForm>
+						<PinX Unit="IN">6.843618738988389</PinX>
+						<PinY Unit="IN">2.288834311252170</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="10" UniqueID="{CEC9865D-B2B5-4FAE-889D-E8DEE224D16A}" Name="Entity.28" NameU="Entity.28" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.243618738988389</PinX>
+						<PinY Unit="IN">2.500000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="13" UniqueID="{9C7DE563-B49B-4155-861B-6A5D5ABB8752}" Name="Relationship.31" NameU="Relationship.31" Master="8">
+					<XForm>
+						<PinX Unit="IN">2.975019073486328</PinX>
+						<PinY Unit="IN">2.383332061767579</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="14" UniqueID="{135F469A-D8DB-4414-B0A8-CDC921B17B7A}" Name="Relationship.27" NameU="Relationship.27" Master="8">
+					<XForm>
+						<PinX Unit="IN">5.543618738988389</PinX>
+						<PinY Unit="IN">2.288834311252170</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="15" UniqueID="{9292D00B-C358-4440-B9B6-135713DC50AA}" Name="Sheet.15" NameU="Sheet.15">
+					<Text>agent_type
+Batch Job,
+Gem Monitor,
+Backup Job,
+Credential Mgt</Text>
+					<XForm>
+						<PinX Unit="IN">2.000000000000000</PinX>
+						<PinY Unit="IN">6.361111111111112</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="16" UniqueID="{0F131FDB-C2BE-4D34-A059-3656065AE3D5}" Name="Sheet.16" NameU="Sheet.16">
+					<Text>BATCH JOB TRACKING
+Saves state for specific batch jobs
+Focused on backups
+Et. Batchjob_history is one run per server, but each step stored in batchjob_step
+
+API
+MlpBatchJobStart(--BATCHID=&gt;)
+MlpBatchJobStep(--STEP=&gt;)
+MlpBatchJobEnd()
+MlpBatchJobErr(txt)</Text>
+					<XForm>
+						<PinX Unit="IN">2.675000000000000</PinX>
+						<PinY Unit="IN">9.250000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="17" UniqueID="{BB40A682-0677-4993-9AB1-A92783344A98}" Name="Sheet.17" NameU="Sheet.17">
+					<Text>INV_batchjob_definition – 1 row per batchjob
+INV_batchjob_history – one row per run
+INV_batchjob_step – one row per operation</Text>
+					<XForm>
+						<PinX Unit="IN">2.500000000000000</PinX>
+						<PinY Unit="IN">5.000000000000001</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="10" Name="Perormance" NameU="Perormance">
+			<Layer IX="0">
+				<Name>Entities</Name>
+				<NameUniv>Entities</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Relationships</Name>
+				<NameUniv>Relationships</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="1" UniqueID="{6CB966B7-83BC-4390-8152-82228FEB4098}" Name="Entity" NameU="Entity" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.800000000000001</PinX>
+						<PinY Unit="IN">8.161167977566189</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="7" UniqueID="{B9EB6F93-21A6-42A4-93A0-79FC4E739D0A}" Name="Entity.7" NameU="Entity.7" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.400000000000000</PinX>
+						<PinY Unit="IN">3.400000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="10" UniqueID="{3C6247E8-467D-46EB-900D-6D51B874AEA9}" Name="Entity.10" NameU="Entity.10" Master="7">
+					<XForm>
+						<PinX Unit="IN">7.400000000000000</PinX>
+						<PinY Unit="IN">8.072164847140844</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="17" UniqueID="{3BEB6D24-174E-4CC9-B151-A0F7C9DA29B3}" Name="Dynamic connector.17" NameU="Dynamic connector.17" Master="9">
+					<XForm>
+						<PinX Unit="IN">6.100000000000001</PinX>
+						<PinY Unit="IN">8.161167977566189</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="18" UniqueID="{93923E8D-5A42-4507-BF97-9EC7F400D515}" Name="Sheet.18" NameU="Sheet.18">
+					<Text>PERFORMANCE HISTORY
+Int and float statistics
+Details Vs Rollup
+Only One Day of Details Needed
+Category == All, 7/30/90DayRollup,
+         or YYMMDD for 1 Day Rollup
+Time_bucket = (60*hr+min)/10
+Dow = 1=sun 6=sat (may change)
+
+
+</Text>
+					<XForm>
+						<PinX Unit="IN">2.600000000000001</PinX>
+						<PinY Unit="IN">9.350000000000001</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="19" UniqueID="{AF505F0D-F736-4E8E-B31C-7838321FAA3E}" Name="Entity.19" NameU="Entity.19" Master="7">
+					<XForm>
+						<PinX Unit="IN">1.717250859400283</PinX>
+						<PinY Unit="IN">6.411165688747832</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="22" UniqueID="{B71AD9D3-2460-4EFD-8AC2-1E3A48EC33F6}" Name="Entity.22" NameU="Entity.22" Master="7">
+					<XForm>
+						<PinX Unit="IN">4.912042271753799</PinX>
+						<PinY Unit="IN">3.161167977566187</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+			</Shapes>
+		</Page>
+	</Pages>
+</VisioDocument>

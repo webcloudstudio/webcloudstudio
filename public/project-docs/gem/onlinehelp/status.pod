@@ -1,0 +1,5 @@
+=head1 The Status Tab
+
+PURPOSE: Allow you to see the status of your GEM Installation
+
+This tab allows you see which installation steps have been run successfully.

@@ -1,0 +1,24 @@
+=head1 The Register Tab
+
+PURPOSE: Basic setup plus product registration
+
+=over 4
+
+=item * Enter Your Information:
+This info is never shared so you might as well make it correct. Your Email address will be used as a target for some GEM Reports.
+
+=item * Describe Your Environment & Databases
+
+=item * Select Gem License Type
+Details on the differences between the Free and Full License can be found on the welcome page.
+
+=item * Select Connectivity Options
+GEM requires no password ssh access between your UNIX GEM monitoring system and your database hosts.  If this
+is set up, use the defaults (Allow SSH on the Unix to Unix line - nothing else selected).  Alternate access (rsh and ftp) methods
+are available but some features may be disabled.  Leave the Win32 Monitor connectivity options unchecked.
+
+=item * Click "REGISTER YOUR VERSION"
+to register your product.
+
+=back 3
+

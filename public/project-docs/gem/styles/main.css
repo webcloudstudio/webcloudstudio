@@ -1,0 +1,534 @@
+/* website styles */
+td.indent {
+	padding-left:20px;
+}
+
+td.nonlink {
+	font-weight:bold;
+}
+form,.tabbottom {
+	margin:0;
+	padding:0;
+}
+.menuheader {
+	color:#fff;
+	font-weight:bold;
+	padding:10px 0 0 5px;
+}
+.linkheader {
+	font-weight:bold;
+	padding: 8px 0 6px 0;
+
+}
+.padthis {
+	padding-left:20px;
+}
+html {
+	overflow: scroll;
+}
+/*changed background and font family & size-jm*/
+body {
+	font: 12px Arial, Helvetica, sans-serif;
+	background: #FFF url(../img/watermark.jpg) repeat-x fixed;
+	margin: 0;
+}
+h3 {
+	margin:12.0pt 0 6.0pt 0;
+	font: italic 12.0pt "Arial Black";
+}
+h4 {
+	margin:12.0pt 0;
+	font:italic normal 12.0pt Arial;
+	text-transform:uppercase;
+	text-decoration:underline;
+}
+h5 {
+	margin:0 0 12.0pt 0;
+	font:normal 9.0pt "Arial Black";
+}
+h6 {
+	margin:0 0 .0001pt 0;
+	font:normal 8.0pt Garamond;
+}
+ul {
+	margin-top:-10px;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+input, textarea, select {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+}
+/* Miscellaneous classes for reuse */
+.fltrt { /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class should be placed on a div or break element and should be the final element before the close of a container that should fully contain a float */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0;
+}
+.DocSiteHeading {
+	margin: 30px 0 7px 0;
+	padding: 0 0 3px 0;
+	font: 24.0pt Arial;
+	color: #334A99;
+	background-color: #FFF;
+	text-align: left;
+}
+.WholeContainer {
+	position: relative;
+	width: 750px;
+	margin: 15px auto 0;
+	background-color: #FFF;
+}
+.DocSiteContainer {
+	padding: 0 10px;
+	border:none;
+	font-family:Arial;
+}
+.ContentPage{
+	background-color:#00CCFF;
+}
+.DocParagraph {
+	text-align:justify;
+}
+.ManualHeading {
+	font-family: Arial;
+}
+.FormLabel {
+	padding-right:5px;
+	text-align:right;
+	font:14px Arial;
+	color:#334A99;
+	vertical-align:top;
+}
+.FormDisplay {
+	padding-right:5px;
+	text-align:left;
+	font-family:Arial;
+	vertical-align:top;
+}
+.FormField {
+	text-align:left;
+	font-size:medium;
+	font-weight:bold;
+	color:#330099;
+	vertical-align:top;
+}
+.ListContent {
+	margin-top:0;
+	padding: 0 10px 10px 10px;
+	font:14px Arial, Helvetica, sans-serif;
+}
+.ProductList {
+	text-align: left;
+	width: 100px;
+	vertical-align:top;
+	padding	:0 5px 10px 5px;
+	font-weight:bold;
+}
+.exampleup {
+	padding: 0 20px;
+	float: left;
+	width: 230px;
+}
+.wrapper {
+	width: 133px;
+	margin: 0 auto;
+}
+div.button {
+	height: 20px;
+	width: 90px;
+	background: url(MDS/Images/upbutton1.jpg) 0 0;
+}
+div.button.hover {
+	background: url(MDS/Images/upbutton2.jpg) 0 20px;
+}
+table.MLPTable {
+	border: .75pt solid black;
+	width: auto;
+	font: 9.0pt Arial;
+	text-align: left;
+	border-collapse: collapse;
+	vertical-align: top;
+}
+.MLPTableCells {
+	padding: 4px;
+	vertical-align: top;
+	font:9.0pt Arial, Helvetica, sans-serif;
+	background: #FFF;
+}
+.MLPTableHeaderCells {
+	background: #CCC;
+	padding: 4px;
+	font:bold 9.0pt Arial, Helvetica, sans-serif;
+	vertical-align: top;
+}
+/* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal {
+	margin:0 0 .0001pt 0;
+	font:8.0pt Arial, Helvetica, sans-serif;
+}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText {
+	margin:12.0pt 0 6.0pt 0;
+	font:9.0pt Garamond;
+}
+p.MsoList, li.MsoList, div.MsoList {
+	margin:0 0 12.0pt .25in;
+	font:12.0pt Arial;
+	letter-spacing:-.25pt;
+}
+p.MsoListBullet, li.MsoListBullet, div.MsoListBullet {
+	margin:0 0 6.0pt .5in;
+	text-indent:-.25in;
+	font:10.0pt Arial;
+}
+p.MsoListNumber, li.MsoListNumber, div.MsoListNumber {
+	margin:0 .25in 6.0pt .5in;
+	text-indent:-.25in;
+	font:10.0pt Arial;
+}
+p.MsoList2, li.MsoList2, div.MsoList2 {
+	margin:0 0 12.0pt .75in;
+	font:12.0pt Arial;
+	letter-spacing:-.25pt;
+}
+p.MsoList3, li.MsoList3, div.MsoList3 {
+	margin:0 0 12.0pt 1.0in;
+	font:12.0pt Arial;
+	letter-spacing:-.25pt;
+}
+p.MsoList4, li.MsoList4, div.MsoList4 {
+	margin:0 0 12.0pt 1.25in;
+	font:12.0pt Arial;
+	letter-spacing:-.25pt;
+}
+p.MsoList5, li.MsoList5, div.MsoList5 {
+	margin:0 0 12.0pt 1.5in;
+	font:12.0pt Arial;
+	letter-spacing:-.25pt;
+}
+p.MsoListBullet2, li.MsoListBullet2, div.MsoListBullet2 {
+	margin:0 0 6.0pt 1.0in;
+	text-indent:-.25in;
+	font:10.0pt Arial;
+}
+p.MsoListBullet3, li.MsoListBullet3, div.MsoListBullet3 {
+	margin:0 0 6.0pt 1.25in;
+	text-indent:-.25in;
+	font:10.0pt Arial;
+}
+p.MsoListNumber2, li.MsoListNumber2, div.MsoListNumber2, p.MsoListNumber3, li.MsoListNumber3, div.MsoListNumber3 {
+	margin:0 .25in 6.0pt 0;
+	font:10.0pt Arial;
+}
+p.MsoTitle, li.MsoTitle, div.MsoTitle {
+	margin:0 0 24.0pt 0;
+	border:none;
+	padding:0;
+	font:24.0pt "Arial Black";
+	color:gray;
+	letter-spacing:-1.75pt;
+}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText {
+	margin:0 0 6.0pt 0;
+	font:10.0pt Arial;
+}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent {
+	margin:0 0 6.0pt .5in;
+	font:10.0pt Arial;
+}
+p.MsoSubtitle, li.MsoSubtitle, div.MsoSubtitle {
+	margin:97.0pt 0 .0001pt 0;
+	border:none;
+	padding:0;
+	font:9.0pt/10pt Garamond;
+	color:gray;
+	text-transform:uppercase;
+	letter-spacing:1.5pt;
+}
+p.MsoBodyText2, li.MsoBodyText2, div.MsoBodyText2, p.MsoBodyText3, li.MsoBodyText3, div.MsoBodyText3 {
+	margin:0 0 6.0pt 0;
+	font:10.0pt/200% Arial;
+}
+p.MsoBodyTextIndent2, li.MsoBodyTextIndent2, div.MsoBodyTextIndent2 {
+	margin:0 0 6.0pt .75in;
+	font:10.0pt Arial;
+}
+span.CharChar {
+	font-family:Arial;
+}
+span.CharChar4 {
+	font-family:"Arial Black";
+}
+span.CharChar3 {
+	font-family:"Arial Black";
+}
+span.CharChar2 {
+	font-style:italic;
+	font-family:Arial;
+	text-transform:uppercase;
+	text-decoration:underline;
+}
+span.CharChar1 {
+	font-family:"Arial Black";
+}
+p.Default, li.Default, div.Default {
+	margin:0 0 .0001pt 0;
+	text-autospace:none;
+	font:12.0pt Arial;
+	color:black;
+}
+p.Picture, li.Picture, div.Picture {
+	margin:12.0pt 0;
+	text-align:center;
+	font:10.0pt Arial;
+}
+span.Superscript {
+	position:relative;
+	top:0;
+	vertical-align:super;
+}
+p.BodyTextSource, li.BodyTextSource, div.BodyTextSource {
+	margin:0 0 0 .25in;
+	font:10.0pt "Courier New";
+}
+p.NoteText, li.NoteText, div.NoteText {
+	margin:0 0 6.0pt 0;
+	font:italic 10.0pt Arial;
+}
+p.NoteTextIndent, li.NoteTextIndent, div.NoteTextIndent {
+	margin:0 0 6.0pt .5in;
+	font:italic 10.0pt Arial;
+}
+p.NoteTextIndent2, li.NoteTextIndent2, div.NoteTextIndent2 {
+	margin:0 0 6.0pt .75in;
+	font:italic 10.0pt Arial;
+}
+p.PictureIndent, li.PictureIndent, div.PictureIndent {
+	margin:12.0pt 1.0in 12.0pt .5in;
+	text-align:center;
+	font:10.0pt Arial;
+}
+p.PictureIndent2, li.PictureIndent2, div.PictureIndent2 {
+	margin:12.0pt 1.0in 12.0pt 1.0in;
+	text-align:center;
+	font:10.0pt Arial;
+}
+p.SourceText, li.SourceText, div.SourceText {
+	margin:0 0 .0001pt 0;
+	font:10.0pt Courier;
+}
+p.TableHeaderText, li.TableHeaderText, div.TableHeaderText {
+	margin:0 0 6.0pt 0;
+	font:bold 9.0pt Arial;
+}
+p.TableText, li.TableText, div.TableText {
+	margin:0 0 .0001pt 0 ;
+	font:9.0pt Arial;
+}
+#stretch-background {
+	width:100%;
+	height:100%;
+}
+/* Specify the position and layering for the content that needs to appear in front of the background image. Must have a higher z-index value than the background image. Also add some padding to compensate for removing the margin from the 'html' and 'body' tags. */
+#stretch-content {
+	position:relative;
+	z-index:1;
+}
+.main_table {
+	background-color:#FFF;
+	width:98%;
+	padding:0;
+	margin-left: 7px;
+
+
+}
+.cell {
+	padding-left:20px;
+	width:33%
+}
+.center {
+	text-align:center;
+}
+#oldlinks {
+	text-align:center;
+}
+.editor_ok_button, .button {
+	border:1px solid #EEE;
+	background-color:#CCC;
+	color:#333;
+}
+#todoadd input {
+	border:1px solid #EEE;
+	color:#333;
+}
+.editor_cancel {
+	color:#333;
+	padding:5px;
+}
+/* STATUS REPORT STYLES
+#todo tr.rowodd { background-color: #FFF; }
+#todo tr.roweven { background-color: #F2F2F2; }
+*/
+
+#todo textarea, #todo input {
+	border:1px solid #EEE;
+}
+#todo, #todoadd {
+	font:11px Verdana, Arial, Helvetica, sans-serif;
+}
+#todo, #todo td, #todo th, #todoadd, #todoadd td {
+	border:1px solid #CCC;
+	border-collapse:collapse;
+	text-align:center;
+	padding: 5px;
+}
+#todo td {
+	background-color:#FFF
+}
+#todo table {
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+#todo .sortcol {
+	cursor: pointer;
+}
+#todo th {
+	padding-right: 20px;
+}
+#todo .sortasc, #todo .sortdesc {
+	background-color: #B9DDFF;
+}
+
+#todo .sortasc {
+	background: url(/img/up.gif) no-repeat right center;
+}
+#todo .sortdesc {
+	background: url(/img/down.gif) no-repeat right center;
+}
+#todo .nosort {
+	cursor: default;
+}
+#todo .prio1 {
+	background-color: #FFD700;
+}
+#todo .prio2 {
+	background-color: #FFA500;
+}
+#todo .prio3 {
+	background-color: #E13E00;
+}
+#todo th.resize-handle-active {
+	cursor: e-resize;
+}
+div.resize-handle {
+	cursor: e-resize;
+	width: 2px;
+	border-right: 1px dashed #1E90FF;
+	position:absolute;
+	top:0;
+	left:0;
+}
+#todo .long {
+	text-align:left;
+}
+#todoadd {
+	margin:10px 0;
+}
+#todoadd .title {
+	font-weight:bold;
+}
+#addtodo, #hidefinished {
+	margin: 5px;
+	display: block;
+	text-align: left;
+}
+#fullcontent {
+	margin: 0 1%
+}
+.invisible {
+	display:none;
+}
+a, a:active {
+	outline: none;
+}
+a:focus {
+	-moz-outline-style: none;
+}
+#todo #job {
+	width:40%;
+}
+#todo #who, #todo #status {
+	width:10%;
+}
+div#fullpage, div#docfullpage {
+	position:absolute;
+	top:25px;
+}
+.topbar{
+	position:fixed;
+	width:100%;
+	z-index:10;
+	top:0;
+}
+.doc_header{
+	text-align:left;
+	margin-left:100px;
+}
+.doc_content{
+	padding:5px 10px 0 10px;
+	background-color:#FFF;
+	vertical-align:top;
+}
+#doc{
+	position:absolute;
+	left:300px;
+}
+#doc_menu{
+	/*position:fixed;*/
+	position:absolute;
+	z-index:1;
+}
+a img {
+	border:0;
+}
+.big {
+	font-size:16px;
+}
+.active {
+	font-weight:bold;
+}
+#loadingscreen{
+	text-align:center;
+	vertical-align:middle;
+	position:absolute;
+	top:50%;
+	left:0;
+	width:100%;
+}
+#inner_central{
+	margin:0 auto;
+	width:300px;
+	padding:20px;
+	border:1px dashed #ccc;
+	background-color:#FFF;
+}
+#inner_central img {
+	display:block;
+	margin:0 auto;
+	padding-bottom:10px;
+

@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+<!-- Copyright (c) 2005-2011 By SQL Technologies - All Rights Reserved -->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM GEM Screenshots</title>
+  <link rel="stylesheet" type="text/css" href="../styles/mystyle.css">
+  <meta name="author" content="Edward Barlow">
+  <meta name="Description" content="GEM - The Generic Enterprise Manager">
+  <meta name="keywords" content="sybase, sql server, oracle,  tools,  utilities,  shareware,  database, monitoring, administrator, tool, CURRENT_TILE, GEM, free, administration, reporting, configuration">
+</head>
+<body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GEM Screenshots</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
+ <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
+<A NAME=link2></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GEM SCREENSHOTS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link3></A>
+<h1>Document purpose</h1>
+<p>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'>   This document will give screen shots of GEM.<P>
+ <p><A Href=http://www.edbarlow.com/gem/doc/screenshots/perl_ppm_install_log.txt>Installing dbi & dbd libs on win32</a><P>
+ <p><A Href=http://www.edbarlow.com/gem/doc/screenshots/OsqlNotInPath.txt>Osql / Isql / Ping not in your path</a> Not having any of these commands will cause an error on configure.pl startup. This is a non fatal error, but only if you are intentionally not using these features (ie. you are on win32 but do not want sql server support).<P>
+ <p><A Href=http://www.edbarlow.com/gem/doc/screenshots/initial_run_troubleshoot.txt>Initial Run of troubleshoot.pl</a><P>
+ <p><A Href=http://www.edbarlow.com/gem/doc/screenshots/initial_run_configure.txt>Initial Run of configure.pl</a><P>
+<h3>Normal  configure.pl Startup</h3>
+<P>
+ Configure.pl is the main program for installing the G.E.M.  It allows you  to register your servers and provides a full interface to configuring the  system.<P>
+ $ perl configure.pl Generic Enterprise Manager Setup Driver<P>
+<pre>
+        Use 'perl configure.pl --DEBUG' to see diagnostic messages.
+        Messages will be logged to configure.log
+</pre>
+<P>
+<pre>
+ Generic Enterprise Manager Configuration Utility
+ Copyright (c) 1995-2005 by SQL Technologies
+ Root Directory: W:/dev
+ Installation Log File: W:/dev/logs/gamecomp_configure.log
+ &gt;&gt; [configure] | Reading GEM Function Library
+ &gt;&gt; [func]      | Reading Configuration Files - FULL
+ &gt;&gt; [func]      | Parsing Key Values from xml
+ &gt;&gt; [configure] | Application Version: Build 634 (Apr 10 2006)
+ &gt;&gt; [configure] | Start Time: Mon Apr 10 22:29:34 2006
+ &gt;&gt; [configure] | Configuration Files Loaded - initializing
+ &gt;&gt; [connectmgr]| Initializing Connection Manager
+ &gt;&gt; [connectmgr]| Loading DBI Drivers
+ &gt;&gt; [connectmgr]| Done Initializing Connection Manager
+ &gt;&gt; Initialization Completed - Starting Main TK Loop
+</pre>
+<P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/ConfigureBackgroundXterm.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/ConfigureConnectAllSetToContinue.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/ConfigurePathsScreenUnixOnly.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/ConfigurePathsScreenUnixWin32.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/ConfigureRegisterScreen.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/ConfigureRegistrationOkBox.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/ConfigureServersScreen.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/UnixConfigureWelcomeScreen.jpg" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/UnixConfigureWelcomeScreen.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image001.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image003.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image005.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image007.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image009.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image011.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image013.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image015.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image018.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image020.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image022.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image024.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image026.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image028.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image030.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image032.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image034.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image036.png" v:shapes="_x0000_i1025">  <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image038.png" v:shapes="_x0000_i1025"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image002.jpg" v:shapes="_x0000_i1025"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image004.jpg" v:shapes="_x0000_i1026"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image006.jpg" v:shapes="_x0000_i1027"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image008.jpg" v:shapes="_x0000_i1028"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image010.jpg" v:shapes="_x0000_i1029"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image012.jpg" v:shapes="_x0000_i1030"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image014.jpg" v:shapes="_x0000_i1031"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image016.jpg" v:shapes="_x0000_i1032"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image017.jpg" v:shapes="_x0000_i1033"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image019.jpg" v:shapes="_x0000_i1034"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image021.jpg" v:shapes="_x0000_i1035"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image023.jpg" v:shapes="_x0000_i1036"> <P>
+ <img width=641 height=432 src="http://www.edbarlow.com/gem/screenshots/image025.jpg" v:shapes="_x0000_i1037"> <P>
+ <br clear=all style='page-break-before:always'><P>
+
+<A NAME=link4></A>
+<h1>Eventviewer.pl</h1>
+<p>
+<P>
+ The event viewer allows you to see the state of your systems all at once.   In normal operation, it provides you with timely information about problems  in your environment.  It allows you to review errors and state that they are  ok (for 24 hours – if the alarm is found after 24 hours, the message will  reappear) or delete the message.  You can also filter the messages by source  monitoring program, server, and severity.  You can set up groups of servers  (like all your databases or all your windows boxes) and see messages just  from them.<P>
+ <img width=625 height=383 src="http://www.edbarlow.com/gem/screenshots/image027.jpg" v:shapes="_x0000_i1038"> <P>
+ The examples on the following pagges show recent  messages from a single production system.  Note that there are numerous messages  but the system has filtered them down to a manageable number of alerst.<P>
+ <img width=628 height=432 src="http://www.edbarlow.com/gem/screenshots/image029.jpg" v:shapes="_x0000_i1039"> <P>
+ This information above is a subset of the messages stored for that system,  which are more numerous and include a variety of event logs and monitoring  messages. Here are two sample screens showing All the events and heartbeats for a production sql server.<P>
+ <img width=625 height=383 src="http://www.edbarlow.com/gem/screenshots/image031.jpg" v:shapes="_x0000_i1040"> <P>
+ <img width=625 height=383 src="http://www.edbarlow.com/gem/screenshots/image033.jpg" v:shapes="_x0000_i1041"> <P>
+ <br clear=all style='page-break-before:always'><P>
+
+<A NAME=link5></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Monitor.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <A HREF=#link5>Monitor.pl</A> is your system monitor.  It provides easy navigation between databases  and allows you to see a variety of performance reports at your fingertips.   The main power here is to see exactly what is going  on in your servers.  <A HREF=#link5>Monitor.pl</A> is a G.E.M. plugin and will be included in  the final G.E.M. release.   <P>
+ <img width=576 height=375 src="http://www.edbarlow.com/gem/screenshots/image035.jpg" v:shapes="_x0000_i1042"> <P>
+ In addition <P>
+ <img width=576 height=375 src="http://www.edbarlow.com/gem/screenshots/image037.jpg" v:shapes="_x0000_i1043"> <P>
+ <img width=576 height=375 src="http://www.edbarlow.com/gem/screenshots/image039.jpg" v:shapes="_x0000_i1044"> <P>
+ <br clear=all style='page-break-before:always'><hr><br>
+This output is documentation for the SQL Technologies GEM Screenshots.
+<ADDRESS>copyright &#169 1998-2011 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+<!-- Copyright (c) 2005-2011 By SQL Technologies - All Rights Reserved -->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM Installation Guide</title>
+  <link rel="stylesheet" type="text/css" href="../styles/mystyle.css">
+  <meta name="author" content="Edward Barlow">
+	<meta name="Description" content="Installation GUIDE for GEM.">
+	<meta name="keywords" content="sybase, sql server, install guide, tools, audit, configuration reporting, database, html, monitoring, administrator, free, freeware, GEM, server administration, auditing, perl">
+</head>
+<body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Installation Guide</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
+ <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
+<A NAME=link2></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>INSTALLATION GUIDE</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> The following guide describes how to install GEM.<P>
+ If you are planning to using GEM, please contact Sql Technologies by email.  We are interested in making your <em><strong>GEM</strong></em> Installation a success, and will provide installation support.  We are aiming for full customer satisfaction and will work with you to make this product a success.<P>
+
+<A NAME=link3></A>
+<h1>Pre-install check list</h1>
+<p>
+<P>
+<UL>
+<P>
+<LI><B>PICK 1 or 2 SYSTEM(s) TO USE AS GEM MONITORING SERVER(s)</B>
+<P>
+ <em><strong>GEM</strong></em>  manages your systems from central monitoring systems.  A Windows systems is used to manage your Windows databases.  A Unix or Linux server is used for your Unix servers.  If you have both (a "Hybrid Environment") Windows and  Unix based databases, you will need 2 monitoring systems.  <P>
+ These systems run a lot of perl batch jobs.  It is recommended that you use dedicated systems for your production  <em><strong>GEM</strong></em> monitoring servers. For your initial trial setup, you can use a development system as a monitoring station as the system does not have high requirements. <p> On Windows monitoring systems, we suggest you have access to a Windows login other than the login you normally use for login.  On Windows, scheduled <em><strong>GEM</strong></em> batch jobs  might result in the pop up of dos cmd boxes (which is annoying).  Scheduling the jobs using a 'batch' Windows account prevents this. <P>
+ You will need appropriate SQL Server and/or Sybase/Oracle client software to be installed on your monitoring servers.<P>
+<LI><B>PICK A HOME FOR THE GEM CODE</B>
+<P>
+ Identify the directory you are going to install <em><strong>GEM</strong></em> into.   This is only tricky if you have a Hybrid Environment, in which case your admins  need to create a <span><u><b>samba share</b></u></span> such that a single directory appear in both Unix/Linux and Windows.   When <em><strong>GEM</strong></em> is installed on a samba share, the same  code works unchanged to monitor both your Unix and Windows environments seamlessly.<P>
+<LI><B>INSTALL & VERIFY perl 5.8.1 OR LATER</B>
+<P>
+ Each monitoring station requires perl to be installed at version 5.8.1 or later.   This can be verified by running the command <font color=red><em>perl -v</em></font>  (prints the version number). <P>
+ On Windows, we recommend the latest Activestate Perl  from <A href=http://www.activestate.com>http://www.activestate.com</A>.   Use the default installation options.<P>
+ On UNIX, binary releases can be downloaded from <A href=http://www.cpan.org>http://www.cpan.org</A>. You can have your Unix admins install/provide perl for you or can  install your own version of perl in your own home directory.   The second approach has the advantage that you have control, and will not need permission of the Unix administrators to add/update modules.<P>
+<LI><B>ADD PERL MODULES (WINDOWS MONITORING STATIONS)</B>
+<P>
+ <font color=red>Note perl module installation on windows systems is now done via <A HREF=#link6>configure.pl</A></font><P>
+ Verify availability of the perl DBI module and associated DBD perl modules.   DBI and DBD::ODBC are required on Windows servers.  <P>
+ On Windows, install these modules via :  <p> [StartKey] -> [Run] and then type <font color=red>ppm install DBI</font>  <br>and  <br> [StartKey] -> [Run] and then type <font color=red> ppm install DBD::ODBC </font>.   <P>
+ <font color=blue>If your company has a firewall/proxy set up such that the ppm commands fail we suggest:<P>
+ Bring up a browser and go to http://ppm.activestate.com/PPMPackages/zips/ - select your version and go to the Windows subdirectoy and download the latest zip file.  The file will contain 3 files when extracted - a .ppd file, a readme, and a .tar.gz file.   To install this ActiveState PPM package, run the following command in the current directory:<P>
+ ppm install DBD-ODBC.ppd<P>
+ You should download both the DBD::ODBC and DBI libraries. The latest versions (as of October 2007 are 1.13 and 1.58 respectively. </font><P>
+<LI><B>ADD PERL MODULES (UNIX MONITORING STATIONS)</B>
+<P>
+ Verify availability of the perl DBI module and associated DBD perl modules.   DBI and native drivers DBD::Sybase, DBD::Mysql or DBD::Oracle are required for the perl on your Unix monitoring servers.<P>
+ On Unix, the DBI and DBD::Sybase modules must be installed by hand.  You may also wish to install DBD::Oracle, although oracle support is currently limited with full support scheduled for 3Q08. Module installation on Unix may require administrator help (the make install step requires write access to the perl library directories which are write protected unless you are using a local version of perl. <P>
+<LI><B>IDENTIFY SCRIPT CAPABLE DIRECTORY ON YOUR WEB SERVER </B>
+<P>
+ <em><strong>GEM</strong></em> uses perl/cgi for its primary user interface.  To run these scripts, you must create a 'script enabled' directory on your web server. We recommend an IIS server be used for this because of the native security features within IIS tie into the security features within the <em><strong>GEM</strong></em> user interface and allow provisioning on a screen by screen basis. You should secure this web directory as you see fit for information of that type.   <P>
+<LI><B>CREATE A MONITORING DATABASE</B>
+<P>
+ <em><strong>GEM</strong></em> requires a <strong><u>small  monitoring database</u></strong>. Place this database on Sybase if you have a 'Hybrid' or 'Unix Only' environment.  The free version of sybase for linux is appropriate. The database can be placed on Microsoft SQL Server in Windows only environments.  <font color=red>Be forwarned that the software is primarily run on a Sybase/Linux database and is currently untested on Sql Server.  This should not pose a problem as the code should be 100% compatible.</font>.  This database will store  enterprise monitoring information and must be accessible from all your monitoring servers.   If you have Unix Systems yet wish (for some reason) to use a SQL Server as your  repository, you can install FreeTds and the Unix verison of DBD::ODBC. <p><P>
+<LI><B>MONITORING DATABASE CREATION (Sybase)</B>
+ <ul> <li>Create A Database Named gemalarms with size >= 200MB </li> <li>Turn on select into and truncate log on checkpoint database options </li> <li>Create login named gemalarms with password gemalarms </li> <li>Add login gemalarms to database gemalarms in group public (not a dbo account) </li> </ul><P>
+ <FONT color=RED> use master<br> --create devices (for example purposes only)<br> disk init name='gemdata',physname='/export/home/sybase/data/gemdata.dat',vdevno=5, size=1024000<br> disk init name='gemlog', physname='/export/home/sybase/data/gemlog.dat', vdevno=6, size= 256000<br> go<br> create database gemalarms on gemdata=300 log on gemlog=100<br> go<br> exec sp_dboption gemalarms,"select",true<br> exec sp_dboption gemalarms,"trunc",true<br> go<br> sp_addlogin "gemalarms","gemalarms","gemalarms"<br> go<br> use gemalarms<br> go<br> checkpoint<br> go<br> sp_adduser gemalarms<br> go<br> </font><p><P>
+<LI><B>MONITORING DATABASE CREATION (Sql Server)</B>
+ <ul> <li>Create A Database Named gemalarms</li> <li>Turn on simple recovery mode</li> <li>Create login named gemalarms with password gemalarms </li> <li>Add login gemalarms to database gemalarms with datareader/datawriter permission </li> </ul><P>
+<LI><B>IDENTIFY THE DATABASE SERVERS YOU WANT TO MONITOR</B>
+<P>
+ If you are trialing <em><strong>GEM</strong></em>, we recommend installing on 4-6 database servers on 4-6 separate sytems and that the trial be either 'all Unix' or 'all Windows' databases.   You will require the following rights on these database servers:<P>
+ You need Windows administrator access your Windows database servers - needed to monitor disk space, server processes, and event logs<P>
+ You will require sa_role access for all your Sybase database servers to installation the stored procedure library.  You can use a non-sa access for monitoring<P>
+ You will require "no-password" access via ssh for your Unix systems for access to log files<P>
+ You will require sybase Unix account access for your Sybase database servers. this is used to read sybase event logs<P>
+<LI><B>SET UP YOUR ODBC DATA SOURCES OR interfaces FILE</B>
+<P>
+ Ensure that all the database servers identified in the last step have <u><b>ODBC entries</b></u>  (Windows Monitoring Box),  and have appropriate Sybase interfaces file (and Oracle tnsnames.ora) entries. The configuration process (configure.pl) will automatically discover your servers based on these values. <p><P>
+<LI><B>SET UP SECURE INTRA SYSTEM COMMUNICATIONS (UNIX)</B>
+<P>
+ All UNIX systems involved with GEM must be accessible from the Unix monitoring system by ssh/scp with no password.   The account you will be using to schedule the batch jobs and to run gem must be able to  get into these systems without passwords.  <P>
+ <FONT color=RED> monitor ebarlow: ssh sybase@sybprod<br> Last login: Wed Apr  2 11:37:29 2008 from monitor<br> $<br> </FONT><P>
+</UL>
+<P>
+
+<A NAME=link4></A>
+<h1>Suggestions on your first implementation</h1>
+<p>
+<P>
+ Database administrators can be, and should be, a cautious lot.  We obviously would like to roll out a tool like <em><strong>GEM</strong></em> to monitor a single test box.  This would obviously be the lowest risk configuration.  An installation like that totally and completely buys you nothing.  <em><strong>GEM</strong></em> will be of no value. That is <b>totally and completely the wrong way to roll out</b> <em><strong>GEM</strong></em>.  <P>
+ The correct way to roll out <em><strong>GEM</strong></em> is to implement it on between 4 and 6 test and dev servers.  Obviously dont trial  <em><strong>GEM</strong></em> on anything production (that includes your workstation). Your Trial needs this many systems to let you to see how the <em><strong>GEM</strong></em> software works.  Plus, <em><strong>GEM</strong></em> is a LOT of effort to implement, so you might as well get some use out of your <em><strong>GEM</strong></em> trial. <P>
+ We do recommend using a 'server' class machine as monitoring station, iis server, and database.  It can be an older system - but this does insulate you from any side effects on performance that can be caused by using your personal workstation for any of these tasks. You can, if you so choose, use your personal workstation to run the required database and web server as well as making that personal workstation the dedicated monitoring  station. This sort of works - it is fairly lightweight application on modern boxes - but you WILL see some impact.  You must use an windows account other than your own to run the batch scripts - or you will see annoying pop up screens. <P>
+ Ensure that you have defined ALL items on the <em><strong>GEM</strong></em> pre-install check list.   For example, <em><strong>GEM</strong></em> loses half its value in a Unix environment if you dont have 'no password'  access via ssh connectivity to your Unix systems. Simarly, "ADMINSITRATOR GROUP" rights are required for direct access to your Windows servers log files.  You need these.   Additionally, it is highly strongly very suggested that you have a web server with a script capable directory into which you can place our cgi perl interface.  While we do have a TK version of the interface, the web interface is the one you should use. <P>
+ Presuming you have a reasonable network configuration, <em><strong>GEM</strong></em> has a pretty low footprint on everything  but the monitoring host system.  Network impact is mostly semi hourly fetches of your database error logs.  <em><strong>GEM</strong></em> does install our system stored procedures on all your database servers.  They are a nice package and you will like them.  On the monitoring system, <em><strong>GEM</strong></em> runs a bunch of perl batch jobs - and frequently  multiple jobs will run at the same time.  We recommend multi processor systems as your monitoring systems, but most 2-4 year old server class systems will be fine (find some depricated system).  Linux is a good choice for a monitoring system to monitor Unix database. <P>
+ As far as your database servers go, <em><strong>GEM</strong></em> has the experience to be a good citizen.  <em><strong>GEM</strong></em>  is designed by active dbas, not a lab by developers. Your developers and users should have not have any noticable degredation in performance  as a result of <em><strong>GEM</strong></em>.  <P>
+ <FONT COLOR=PURPLE>A good solid burn in environment for <em><strong>GEM</strong></em> should have between 4 and 6 database servers and 4 to 6 different host systems (of course nothing production should be touched).</FONT> It would be slightly simpler to implement the trial if running all Windows or all Unix databases.<P>
+
+<A NAME=link5></A>
+<h1>Download & initial setup</h1>
+<p>
+<P>
+<UL>
+<P>
+<LI><B>DOWNLOAD AND EXTRACT GEM</B>
+<P>
+ You should now download and extract the <em><strong>GEM</strong></em> software  from <A HREF="http://www.edbarlow.com/download.pl">http://www.edbarlow.com/download.pl</A>.<P>
+ You will need a passcode to download the software which can be recieved by mail from SQL Technolgies.<P>
+ Extract into the directory identified in the pre-install checklist. You should need to install into only one location regardless of whether you have a hybrid or non-hybrid environment.<P>
+ The <em><strong>GEM</strong></em> download file is a standard compressed tar file and can be extracted with winzip (Windows), gnu tar (<code>tar xvzf gem.tgz</code>), or with <code>gzip -d gem.tgz; tar xvf gem.tar</code>. If you install <em><strong>GEM</strong></em> into a subdirectory, do not use a directory that includes space characters (ie. Program Files). White space in the directory name is not a tested option.<P>
+<LI><B>SET YOUR DISPLAY ENVIRONMENT VARIABLE (Unix)</B>
+<P>
+ Many of the <em><strong>GEM</strong></em> tools use perl/Tk for a user interface.  On Windows this works without support, but on Unix this requires some type of X terminal manager (like exceed).  On UNIX, you must set the environment variable DISPLAY correctly.<P>
+ <font color=RED>EXPORT DISPLAY=your_ip_address:0.0.</font></p><P>
+ Unix users will also require an X terminal manager installed on their workstation.  Your infrastructure support can help you install this if you are not allready set up.<P>
+<LI><B>VERIFY YOUR PERL INSTALLATION</B>
+<P>
+ <p><em><font color=RED>perl troubleshoot.pl</FONT></em></p><P>
+ Use the program troubleshoot.pl in the root of the installation tree to test for the presence of necessary perl libraries.   troubleshoot.pl is the <em><strong>GEM</strong></em> installation trouble shooting program  and it can be run to diagnose any <em><strong>GEM</strong></em> issues - a successful run indicates that  your configuration is stable. <P>
+<LI><B>RUN <A HREF=#link6>configure.pl</A></B>
+<P>
+ See the section on <A HREF=#link6>configure.pl</A> for details on what this program does. <P>
+</UL>
+<P>
+
+<A NAME=link6></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>configure.pl </H1>
+<H3> GEM Configuration Tool</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <A HREF=#link6>configure.pl</A> is the <EM><STRONG>GEM</STRONG></EM> configuration utility.   This utility will build the configuration files (stored in the conf subdirectory) and runs some basic setup tasks for GEM.  The GEM Configuration Tool is quite intelligent, and will survey your systems to give you a good baseline that should require minimal tuning to work within your environment.  <P>
+ Some of the things <A HREF=#link6>configure.pl</A> does include:<P>
+<UL>
+<P>
+<LI><B>Create Configuration Files</B>
+<P>
+ One primary output of <A HREF=#link6>configure.pl</A> is the configuration files stored in the conf directory.  These files can be hand edited once GEM is set up.<P>
+<LI><B>Rebuild of all the code</B>
+<P>
+ Changing the hashbangs (the first line of the file on unix is known as a hashbang and defines the command line interpreter to use),  removing Control-M (dos newline) characters from the files, and modifying library paths.<P>
+<LI><B>Monitoring Setup</B>
+<P>
+ The initial database installation is done via <A HREF=#link6>configure.pl</A><P>
+<LI><B>Initial Build</B>
+<P>
+ This program also will generate an initial version of the <EM><STRONG>GEM</STRONG></EM> console and prepopulate  the alarm system with alerts and reports relevant to your environment.  <P>
+
+<A NAME=link7></A>
+<h1>Important notes</h1>
+<p>
+<P>
+<UL>
+<P>
+<LI><B>configure.pl and <A HREF=#link14>gem.pl</A> create log files in the logs subdirectory, </B>
+ which includes both console messages AND diagnostic messages.  If you have a problem please look at this file.  It contains all output including output that should be only produced with <A HREF=#link6>configure.pl</A> --DEBUG.<P>
+<LI><B>Work through the tabs from left to right.</B>
+<P>
+<LI><B>"Save Configuration Changes"</B>
+ writes your configuration files.  While some operations (adding stored procedures to servers) are permanent once completed, the majority are not. It is important to save before you quit.<P>
+</UL>
+<P>
+
+<A NAME=link8></A>
+<h1>How to run <A HREF=#link6>configure.pl</A></h1>
+<p>
+<P>
+ <p><font color=RED>perl <A HREF=#link6>configure.pl</A></FONT></p><P>
+ If you wish to see diagnostic messages, you may run <font color=RED>perl <A HREF=#link6>configure.pl</A> --DEBUG</FONT></p><P>
+ <FONT SIZE=+1 COLOR=RED>FOLLOW THE FOLLOWING STEP BY STEP INSTRUCTIONS TO COMPLETE YOUR INSTALLATION</FONT><P>
+ After you run <A HREF=#link6>configure.pl</A>, it will bring you through a set of screens designed to validate your perl installation and to run a basic sanity check.<P>
+ The first screen:<P>
+ <PRE><pre>
+ ************************************
+ * Generic Enterprise Manager Setup *
+ ************************************
+<P>
+ Welcome to GEM.   <A HREF=#link6>configure.pl</A> sets up GEM configuration files.
+<P>
+ No changes are made to any of your servers from <A HREF=#link6>configure.pl</A>
+  - exception the web application is copied to a directory you will identify.
+<P>
+ *****************************
+ *** This process is safe  ***
+ *****************************
+<P>
+ Hit Enter To Continue, CTRL-C to Exit
+<P>
+</pre>
+ </PRE> Hit enter and work through the screens. After the first few screens it will start running programs<P>
+ For Example: <i>C:\Perl\bin\perl.EXE  -IG:/gem/Win32_perl_lib_5_8 -IG:/gem/lib  G:/gem/bin/test_perl_modules.pl</i> which tests your perl libraries and<P>
+ For Example: <i>C:\Perl\bin\perl.EXE  -IG:/gem/Win32_perl_lib_5_8 -IG:/gem/lib  G:/gem/bin/test_copy_configfiles.pl</i> which copies the .dat.sample extension configuration files to .dat files (if those .dat files do not exist)<P>
+ For Example <i>C:\Perl\bin\perl.EXE  -IG:/gem/Win32_perl_lib_5_8 -IG:/gem/lib  G:/gem/bin/test_required_commands.pl</i> which tests that the rquired commands are in your path.  After this, it will start up the <A HREF=#link6>configure.pl</A> user interface.
+<A NAME=link9></A>
+<h1>The welcome tab</h1>
+<p>
+<P>
+ GENERAL: Navigate the configuration utility tabs from left to right.  Online help is available on our web site.<P>
+ PURPOSE: Introduction, License Details, License Acceptance<P>
+ This tab explains GEM and details licensing options.  New users will want to use our Free GEM License to trial the product - and switch to the Full GEM License after they are comfortable.  <P>
+ Select "I AGREE WITH THE LICENSE" to continue<P>
+ The GEM Help pages provide help to guide you through your install.  Each page has a separate help section.
+<A NAME=link10></A>
+<h1>The register tab</h1>
+<p>
+<P>
+ PURPOSE: Basic setup plus product registration<P>
+<UL>
+<P>
+<LI><B>Enter Your Information:</B>
+ This info is never shared so you might as well make it correct. Your Email address will be used as a target for some GEM Reports. <P>
+<LI><B>Describe Your Environment & Databases</B>
+<P>
+<LI><B>Select Gem License Type</B>
+ Details on the differences between the Free and Full License can be found on the welcome page.  <P>
+<LI><B>Select Connectivity Options</B>
+ GEM requires no password ssh access between your UNIX GEM monitoring system and your database hosts.  If this is set up, use the defaults (Allow SSH on the Unix to Unix line - nothing else selected).  Alternate access (rsh and ftp) methods are available but some features may be disabled.  Leave the Win32 Monitor connectivity options unchecked.<P>
+<LI><B>Click "REGISTER YOUR VERSION"</B>
+ to register your product.<P>
+</UL>
+<P>
+
+<A NAME=link11></A>
+<h1>The paths tab</h1>
+<p>
+<P>
+ PURPOSE: Define your possible SYBASE and ORAHOME directories<P>
+ Enter all possible locations for the SYBASE and ORAHOME variables in your preferred order.  This will be used by the server  discovery process.  <P>
+ For example, you might put C:/sybase D:/sybase /export/home/sybase /apps/sybase as 4 entries on a samba install for your sybase directories.<P>
+ The system actually supports 10 instances of each variable - you will need to manually edit gem.dat if you have more than 5 though.
+<A NAME=link12></A>
+<h1>The mail tab</h1>
+<p>
+<P>
+ PURPOSE: Ensure Mail Connectivity <P>
+ This tab is tests mail connectivity from your monitoring server.  You can test mail on windows and on unix.  The windows  montioring workstation will require that you define your SMTP Mail Server.  <P>
+ Both "Test Mail Install" buttons will result in a mail being sent to your GEM Administrator Mail Address (entered earlier).  This tab is important as electronic mail is fundamental way we communicate server problems to you.<P>
+
+<A NAME=link13></A>
+<h1>The database tab</h1>
+<p>
+<P>
+ PURPOSE: Set Up Alarm & Monitoring System<P>
+ GEM uses a centralized alarm database which must be called gemalarms. This small database must allready exist and be set up as per the installation instructions.  The Install/Upgrade Database button creates the tables & procedures in that db.<P>
+ The database must be accessible from all your monitoring servers.  This implies that sql server can only be used for an alarm db when you are in a win32 only environment.  You are responsible for the unixodbc setup required for sql server connectivity from unix if you insist on using sql server.  As sql server does not run on unix, this should not be a problem. Use Sybase for unix only and samba installs.<P>
+<UL>
+<P>
+<LI><B>Fill in the Alarm Database Server Info</B>
+ with information about the preconfigured alarm database.  The Alarm System Mail Address is arbitrary and alerts are be mailed using that as a reply-to address.  It is ok to use an INVALID mail address  as you wont ever reply to the alerts.<P>
+<LI><B>Install/Upgrade Alarm Database</B>
+ creates your alarm database tables & procedures <P>
+<LI><B>Validate Alarm Database</B>
+ checks the database for sanity and version. <P>
+</UL>
+<P>
+
+<A NAME=link14></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>gem.pl </H1>
+<H3> GEM Post Installation Task Manager</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <A HREF=#link14>gem.pl</A> is the <EM><STRONG>GEM</STRONG></EM> post configuration tasks manager.   This utility will run tasks that you might want to repeatedly run after an installation.   For example, every time you add a server, you should rebuild your batch scripts and reschedule them - because the tasks are customized to your list of servers.<P>
+
+<A NAME=link15></A>
+<h1>Post installation tasks manager - unix</h1>
+<p>
+<P>
+ Once you are done with your <EM><STRONG>GEM</STRONG></EM> installation, there are a variety of post-installation tasks .   This checklist is designed to help you with these tasks.  <P>
+<pre>
+ <A HREF=#link14>gem.pl</A> - version 1
+  -- started at Sat Jun 25 07:27:10 2011 on server sybmon as user sybase
+ Appending environment variable perlargs (-I/apps/sybmon/lib) to includepath
+ You are running on sybmon, the registered Alternate Unix Monitor Station
+</pre>
+<P>
+<pre>
+ ****************************************************
+ * Gem Administrator v1.000                         *
+ ****************************************************
+     1] Discover Sybase Servers From Interfaces File
+     2] Test SSH connectivity to your unix systems
+     3] Map Credentials To Users
+     4] Batch Jobs: Create Unix GEM Batch Scripts
+     5] Batch Jobs: Create Crontab To Schedule Unix Batch Jobs
+     6] Batch Jobs: Show GEM Batch Jobs
+     7] Run Promotion
+     8] Test Default Unix Connectivity
+     9] Reformat Codeline
+     l] Load static data
+     d] Start or End diagnostic mode
+ q or x] exit
+</pre>
+<P>
+<pre>
+   INPUT:
+</pre>
+<P>
+
+<A NAME=link16></A>
+<h1>Post installation tasks manager - windows</h1>
+<p>
+<P>
+<pre>
+ [G:/gem] perl <A HREF=#link14>gem.pl</A>
+ <A HREF=#link14>gem.pl</A> - version 1
+  -- started at Sat Jun 25 07:38:45 2011 on server adwte506 as user ebarlow
+ You are running on adwte506, the registered Alternate Win32 Monitor Station
+</pre>
+<P>
+<pre>
+ ****************************************************
+ * Gem Administrator v1.000                         *
+ ****************************************************
+     1] Load Configfiles To Database (must promote)
+     2] Discover Sybase Sql Servers From Interfaces File
+     3] Load Active Directory Computers
+     4] Fetch Windows Credentials
+     5] Fetch LDAP User Information
+     6] Map Credentials To Users
+     7] Snapshot Win32 Services
+     8] Batch Jobs: Create Win32 GEM Batch Scripts
+     9] Batch Jobs: Schedule Win32 Batch Jobs
+    10] Batch Jobs: Show GEM Batch Jobs
+    11] Run Promotion
+     l] Load static data
+     d] Start or End diagnostic mode
+ q or x] exit
+</pre>
+<P>
+<pre>
+   INPUT:
+<P>
+</pre>
+
+<A NAME=link17></A>
+<h1>Reformat codeline (unix only)</h1>
+<p>
+<P>
+ Removes Control-M's and Sets Hashbangs<P>
+
+<A NAME=link18></A>
+<h1>Batch jobs: create unix gem batch scripts</h1>
+<p>
+<P>
+ Creates a Crontab file named crontab.txt file in the gem home directory that is appropriate for unix cron.   To install into cron:<P>
+<pre>
+   export EDITOR=vi
+   crontab -e
+   &lt;vi window pops up&gt;
+   :r crontab.txt
+</pre>
+<P>
+ Be sure that the account you schedule this on has a .forward file so any errors will not be routed! A .forward file is a file in your HOME directory that contains mail addresses.<P>
+ You can put the following type line at the head of your crontab.  It applies to all commands in the crontab<P>
+ PATH=/apps/sybase.linux/12.5.1b/OCS-12_5/bin:/usr/bin/:/bin<P>
+
+<A NAME=link19></A>
+<h1>Batch jobs: create win32 gem batch scripts</h1>
+<p>
+<P>
+ Creates batch jobs for your windows monitoring station<P>
+
+<A NAME=link20></A>
+<h1>Batch jobs: schedule win32 batch jobs</h1>
+<p>
+<P>
+ provides a native interface to the windows task scheduler.  Provide an account & password  which has access to windows event logs,  windows disk administrative shares, and windows services (probably requires adminstrator).
+<A NAME=link21></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>POST INSTALLATION STEPS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link22></A>
+<h1>Other things to do</h1>
+<p>
+<P>
+ Once you are done with your <EM><STRONG>GEM</STRONG></EM> installation, there are a variety of post-installation tasks .  <P>
+<h3>Modify your Password Files</h3>
+<P>
+ The password files are located in <font color=red>conf/*_password.dat</font> and are hand editable.<P>
+<pre>
+   sybase_passwords.dat
+   oracle_password.dat
+   win32_password.dat
+   unix_passwords.dat
+   sqlsvr_password.dat
+<P>
+</pre>
+ All configuration files are self documented. <P>
+ If you add new databases or systems, recreate & reschedule your Batch Scripts.  Most scripts work against all servers in the configuration files,  but some scripts work on a specific database (specifically the ones with the Database name in the file name).<P>
+<h3>Windows Directory Cleaner</h3>
+<P>
+ One of the harder tasks of the Windows DBA is disk space cleanup. Something is *always* running out of space...  <EM><STRONG>GEM</STRONG></EM> automates this task for you.<P>
+ The file <font color=red>conf/win32_cleanup.dat</font> contains a list of disk space Cleanup instructions for the Windows cleanup batch job.   It is suggested that you customize this file to include your tran/archive log directories, your application log directories, and any other directories that fill up on your systems. A best practice is to add rows to this file over time, every time the Windows disk space monitor spots a directory that is filling up. The lines in this file conform to the arguments of ADMIN_SCRIPTS/bin/purge_old_files.pl, and include --hours and --days to identify the keep times, --dir to identify the directory to purge, and either --compress=<compress program> or --del (to identify what to do with the old files).  See the syntax of purge_old_files.pl for other options. <font size=-1><P>
+<pre>
+   # FILENAME: win32_cleanup.dat
+   #
+   # USED BY:  Batch job Win32FileCleanup
+   #
+   # SYNOPSIS: Directives for cleaning up win32 drives.  This file is
+   #    identical to Unix_Cleanup.dat but for the --compress (Win32 only)
+   #    argument which is missing and the required --host argument (Unix Only).
+   #
+   #
+   # FORMAT  : HOSTNAME drive drive drive.
+   #
+   # DETAILS : The arguments are the arguments to purge_old_win32_files.pl
+   #
+   #  --host=&lt;host&gt;
+   #  --hours=&lt;hours&gt;
+   #  --days=&lt;days&gt;
+   #  --dir=&lt;dir&gt;
+   #  [--del]                - do you wish to delete the file?
+   #  [--done]             - only work on files with .done extension
+   #
+   # EXAMPLE FORMATS:
+   #
+   # Delete 14+ day old files on host h1
+   # --days=14 --dir=//adsrv012/c$/oracle/admin/SCPROD/udump --del
+   #
+   # Delete files with .done extension older than 2 days old
+   # Note: this will delete .done.gz files and .done files
+   # --days=2 --dir=//SRVR001/d$/logshipbuffer --del --done
+   #
+   #######################################################################
+   #
+   # START RECOMMENDED PURGES
+   # --days=7 --dir=C:/gem/data/logs -del
+   # --days=7 --dir=C:/gem/data/batchjob_errors -del
+   # --days=7 --dir=C:/gem/data/GEM_BATCHJOB_LOGS -del
+   # --days=7 --dir=C:/gem/data/CONSOLE_REPORTS -del
+   # --days=7 --dir=C:/gem/data/cronlogs -del
+   # --days=7 --dir=C:/gem/data/errors -del
+   # --days=7 --dir=C:/gem/data/backup_reports -del
+   # --days=7 --dir=C:/gem/data/html_output -del
+   # --days=30 --dir=C:/gem/data/BACKUP_LOGS\*\sessionlog -del
+   # --days=30 --dir=C:/gem/data/BACKUP_LOGS\*\errors -del
+   # END RECOMMENDED PURGES
+</pre>
+<P>
+ </font><P>
+<h3>Unix Directory Cleaner</h3>
+<P>
+ The Unix_Cleanup.dat file will control Unix file/directory cleanups.  It is similar to the Windows cleanup file but for the addition of the --hostname argument.<P>
+<h3>port_monitor.dat</h3>
+<P>
+ Port Monitoring is a quick availability test - and a good way to find out if a database or system is down.   The file <font color=red>conf/port_monitor.dat</font> contains a list of Hosts and Ports to Monitor.  <P>
+ This file is autogenerated by one of the batch scripts.<P>
+ Simple format:<P>
+ <font size=-1><P>
+<pre>
+  # hostname                      PORT SERVER   DESCRIPTION
+  SRVR001                        1433 SRVR001   Microsoft SQL Server
+  SRVR007                        1433 SRVR007   Microsoft SQL Server
+  brokersql                      1433 BROKERSQL Microsoft SQL Server
+  mail1                            25   Sendmail on mail1
+</pre>
+<P>
+ </font><P>
+<h3>Sybase Replication Monitoring</h3>
+<P>
+ The File <font color=red>conf/Replication.dat</font> is used by the Sybase replication server monitoring scripts and will need to be popluated with your Rep Servers and Routes. <font size=-1><P>
+<pre>
+   # FILENAME: replication.dat
+   #
+   # SYNOPSIS: Lists your sybase replication server information
+   #
+   # FORMAT:
+   #
+   # REPSERVER $NAME $LOGIN $PASSWORD $THRESHOLD_MB
+   # REPROUTE  $SOURCE_SVR $SOURCE_DB $DEST_SVR $DEST_DB $REPSERVER
+   #
+   # EXAMPLES (350MB Thresholds):
+   #
+   #  REPSERVER REP1DR_RS sa &lt;pass&gt; 350
+   #  REPSERVER REP2_RS   sa &lt;pass&gt; 350
+   #  REPSERVER REP1_RS   sa &lt;pass&gt; 350
+   #
+   #  REPROUTE  SYB1 my_db SYB2   my_db REP2_RS
+   #  REPROUTE  SYB1 my_db SYB1DR my_db REP2_RS
+   #
+   # ONCE YOU SET THIS FILE UP - PLEASE RUN
+   #      ADMIN_SCRIPTS/monitoring/SybRepMonitor.pl --ACTION=INSTALL
+   # MONITORING IS HANDLED AUTOMATICALLY BY THE GEM BATCH SybRepMonAgent
+   ##############################
+</pre>
+<P>
+ </font> There are two programs that check replication. The batch SybRepServerChecker will check all your rep servers to be sure that no routes are suspended, that disk space is reasonable, and that there are no other serious errors.  There are also three batches, SybRepMonAgent, SybRepMonCheck, and SybRepMonReport that compute latencies of your replication, and will warn you when replication falls behind.  These three batch programs call SybRepMonitor.pl.  This program takes an argument --ACTION. <P>
+ To initialize this system, you need to set up your configuration file and then run  <font color=red>myperl SybRepMonitor.pl --ACTION=INSTALL</font><P>
+<h3>Adjust Diskspace Alarm Thresholds</h3>
+<P>
+ You may not wish all your alarms to work at the same thresholds - preferring to set some thresholds individually.  Generally speaking, this is most needed when some resourse is  nearing "full" and generating alarms, but you can not fix the problem immediately - intending to fix the problem later.  The <font color=red>conf/threshold_overrides.dat</font> file allows you that control.   <font size=-1><P>
+<pre>
+   # FILENAME: threshold_overrides.dat
+   #
+   # SYNOPSIS: Monitoring Thresholds
+   #
+   # DETAILS : This file permits you to turn off alarms and to control their
+   # severity.  This is a Comma Separated File
+   #
+   # SAMPLE FORMAT:
+   # &lt;system&gt; &lt;monitor_program&gt; &lt;level&gt; &lt;threshold&gt; &lt;optional subsystem&gt;
+   #
+   # monitor_program=UnixDiskspace|PcDiskspace|SybSpaceMonitor
+   #                         |SpaceMonitorSqlsvr|ThresholdManager
+   # level=CRITICAL|ERROR|WARNING
+   #
+   # remember to reset higher priority thresholds so there is no overlap - ie if you
+   # set ERROR to 98%, then you should set critical to something larger (say 99%).
+   # The programs may act wierd if the CRITICAL threshold was less than the ERROR threshold.
+   #
+   # By default - SybSpaceMonitor & SpaceMonitorSqlsvr will use 90/92/95% as
+   # their default thresholds
+   #
+   # Replication thresholds are in minutes.  For replication,  you can put a
+   # blank target name in if you want but not a blank source name
+   #
+   # EXAMPLES
+   # eg.  directfeed,UnixDiskspace,WARNING,80,Disk: /var
+   # eg.  direct1,UnixDiskspace,WARNING,80,Disk: /var
+   # eg.  direct2 ,UnixDiskspace,WARNING,80,Disk: /var
+   #
+   # eg.  SYBSVR1,SybSpaceMonitor,WARNING,80,db1
+   # eg.  SYB1,SybSpaceMonitor,ERROR,95
+   # eg.  SYB1,SybSpaceMonitor,ERROR,95,clientdb
+   #
+   # eg.  ADSRV057,PcDiskspace,ERROR,98,d$
+   # eg.  ADSRV057,PcDiskspace,CRITICAL,99,d$
+   #
+   # eg.  SERVERNM,ThresholdManager,CRITICAL,99,logsegment|default
+   #
+   # EXAMPLE REPLICATION STUFF
+   # eg.  SOURCESVR,SybRepMonCheck,CRITICAL,30,TARGETNM
+   # eg.  SOURCESVR,SybRepMonCheck,ERROR,15,TARGETNM
+   # eg.  SYB1,SybRepMonCheck,CRITICAL,80,IMAGSYB2
+   # eg.  SYB1,SybRepMonCheck,CRITICAL,80,
+   # eg.  SYB1,SybRepMonCheck,ERROR,60
+   #
+   #########################################
+</pre>
+<P>
+ </font><h3>The sybase threshold manager</h3>
+<P>
+ Another <EM><STRONG>GEM</STRONG></EM>  component is the Sybase threshold manager. This program (ADMIN_SCRIPTS/bin/threshold_manager.pl) installs customized  sp_thresholdaction procedures into your databases and allows you to find peak usage (most important for log file sizes).   This proactive utility will hopefully prevent you from running out of log space - because you will have been warned in advance in such a way that you can expand capacity before there is a production alert.<P>
+ The sp_thresholdaction procedures we install are simple reporting versions that insert peak usage data into a small table in sybsystemprocs.   You can run a report showing peak usage of data and log segments in your databases which is the Threshold Report you can view in the console.<P>
+ This procedure needs to be installed manually by running the threshold manager reinstall batch script<P>
+ <font color=red>ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=INSTALL</font><P>
+ after you have registered your servers.  One warning.  If you increase the *size* of any of your databases,  you will need to rerun the above installation command. Sybase thresholds are based on free pages and the percentages are therefore set when you run the installation.  So, if you double the size of a database, your 60% threshold will be firing at 30% and recording it as 60% full!  Just reinstall and you will be ok!.   <P>
+ Other commands of interest:<P>
+ <font color=red>ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=CHECK</font><P>
+ <font color=red>ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=REPORT</font><P>
+ This feature only works with Sybase<P>
+<h3>Snapshot Win32 Services</h3>
+<P>
+ This information is stored in <font color=red>conf/win32_service.dat</font> and can be created from <A HREF=#link14>gem.pl</A> using "Snapshot Win32 Services".  This script will survey all your windows servers and  create a snapshot of their services in the above file.  From this point on, a weekly routine will snapshot services for any NEW services, and another routine will test for the availability of those services.  Currently only a few, sql related, services are alertable.<P>
+
+<A NAME=link23></A>
+<h1>Install web server scripts</h1>
+<p>
+<P>
+ You need to copy the ../gem/lib subdirectory and the ../gem/ADMIN_SCRIPTS/cgi-bin directories to the web server directory.  <P>
+ From <A HREF=#link14>gem.pl</A>, run Rollout Web Server Code<P>
+
+<A NAME=link24></A>
+<h1>Your own scheduled tasks</h1>
+<p>
+<P>
+ You can alert on the output of your scripts by following our conventions.  Our convention is to have normal script output in .out files (standard output) and .err files for alarmable messages (standared error).   YOu can put these files into the data/html_output or data/cronlogs directories.<P>
+<pre>
+  script.pl &gt; /apps/gem/data/cronlogs/script.out  2&gt; /apps/gem/data/cronlogs/script.err
+</pre>
+<P>
+
+<A NAME=link25></A>
+<h1>Directory security</h1>
+<p>
+<P>
+ <EM><STRONG>GEM</STRONG></EM>  is an administrative tool, designed for system administrators.  As such, the conf directory contains all your passwords.  You need to protect this data via operating system permissions.<P>
+ I suggest 'chmod -R 770 *' on unix to be run in your gem home directory<P>
+
+<A NAME=link26></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>How To Upgrade GEM</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <em><strong>GEM</strong></em> is designed for simple upgrades.  The steps are as follows<P>
+<UL>
+<P>
+<LI><B>Download the latest codeline</B>
+<P>
+<LI><B>Extract on top of your existing distribution!!!</B>
+<P>
+ No configuration files are shipped with the installation so there should be no problems. All configuration files are shipped with a .sample extension.  <P>
+ On your Windows monitoring server, you may not be able to extract the code because the task scheduler is running a batch job that calls one of the perl scripts.  Windows will not let you overwrite a program that is running.  This does not happen under Unix.  You can either go into the task scheduler, stop all running jobs before rerunning the extract, or kill the jobs and then stop the task scheduler process.  I normally just stop the jobs, but sometimes  (because end task does not work cleanly) i am forced to stop the scheduler process for the duration of the extract.  <P>
+<LI><B>Run <font color=red><code>perl <A HREF=#link14>gem.pl</A></code></font></B>
+<P>
+ And select the upgrade your version option.<P>
+ The new downloaded code will have *OUR* hashbangs, library paths, and sybase environment. The upgrade option updates these files automatically. It will also re-installing your alarm database.   During the period you are upgrading - your <em><strong>GEM</strong></em> batch jobs will probably fail and send you alarm mail.   Ignore these failures notifications.<P>
+ <font color=red>ONCE YOU HAVE SUCCESSFULLY RUN upgrade.pl YOU ARE DONE</FONT><P>
+</UL>
+<P>
+<hr><br>
+This output is documentation for the SQL Technologies Installation Guide.
+<ADDRESS>copyright &#169 1998-2011 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

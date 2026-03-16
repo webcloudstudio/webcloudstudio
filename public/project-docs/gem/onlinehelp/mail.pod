@@ -1,0 +1,10 @@
+=head1 The Mail Tab
+
+PURPOSE: Ensure Mail Connectivity
+
+This tab is tests mail connectivity from your monitoring server.  You can test mail on windows and on unix.  The windows
+montioring workstation will require that you define your SMTP Mail Server.
+
+Both "Test Mail Install" buttons will result in a mail being sent to your GEM Administrator Mail Address (entered earlier).  This tab is
+important as electronic mail is fundamental way we communicate server problems to you.
+

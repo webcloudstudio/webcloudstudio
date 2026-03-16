@@ -1,0 +1,322 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>No Title</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#other_things_to_do">OTHER THINGS TO DO</a></li>
+	<ul>
+
+		<li><a href="#modify_your_password_files">Modify your Password Files</a></li>
+		<li><a href="#windows_directory_cleaner">Windows Directory Cleaner</a></li>
+		<li><a href="#unix_directory_cleaner">Unix Directory Cleaner</a></li>
+		<li><a href="#port_monitor_dat">port_monitor.dat</a></li>
+		<li><a href="#sybase_replication_monitoring">Sybase Replication Monitoring</a></li>
+		<li><a href="#adjust_diskspace_alarm_thresholds">Adjust Diskspace Alarm Thresholds</a></li>
+		<li><a href="#snapshot_win32_services">Snapshot Win32 Services</a></li>
+	</ul>
+
+	<li><a href="#install_web_server_scripts">Install web server scripts</a></li>
+	<li><a href="#your_own_scheduled_tasks">Your Own Scheduled Tasks</a></li>
+	<li><a href="#directory_security">DIRECTORY SECURITY</a></li>
+	<li><a href="#name">NAME</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>POST INSTALLATION STEPS</p>
+<p>
+</p>
+<hr />
+<h1><a name="other_things_to_do">OTHER THINGS TO DO</a></h1>
+<p>Once you are done with your &lt;EM&gt;&lt;STRONG&gt;GEM&lt;/STRONG&gt;&lt;/EM&gt; installation, there are a variety of post-installation tasks .</p>
+<p>
+</p>
+<h2><a name="modify_your_password_files">Modify your Password Files</a></h2>
+<p>The password files are located in &lt;font color=red&gt;conf/*_password.dat&lt;/font&gt; and are hand editable.</p>
+<pre>
+        sybase_passwords.dat
+        oracle_password.dat
+        win32_password.dat
+        unix_passwords.dat
+        sqlsvr_password.dat
+
+All configuration files are self documented.</pre>
+<p>If you add new databases or systems, recreate &amp; reschedule your Batch Scripts.  Most scripts work against all servers in the configuration files,
+but some scripts work on a specific database (specifically the ones with the Database name in the file name).</p>
+<p>
+</p>
+<h2><a name="windows_directory_cleaner">Windows Directory Cleaner</a></h2>
+<p>One of the harder tasks of the Windows DBA is disk space cleanup.
+Something is *always* running out of space...  &lt;EM&gt;&lt;STRONG&gt;GEM&lt;/STRONG&gt;&lt;/EM&gt; automates this task for you.</p>
+<p>The file &lt;font color=red&gt;conf/win32_cleanup.dat&lt;/font&gt; contains a list of disk space
+Cleanup instructions for the Windows cleanup batch job.
+It is suggested that you customize this file to include your tran/archive log
+directories, your application log directories, and any other directories that
+fill up on your systems. A best practice is to add rows to this file over time,
+every time the Windows disk space monitor spots a directory that is filling up.
+The lines in this file conform to the arguments of ADMIN_SCRIPTS/bin/purge_old_files.pl,
+and include --hours and --days to identify the keep times, --dir to identify the
+directory to purge, and either --compress=&lt;compress program&gt; or --del (to identify what to do with the old files).  See the syntax of purge_old_files.pl for other options.
+&lt;font size=-1&gt;</p>
+<pre>
+        # FILENAME: win32_cleanup.dat
+        #
+        # USED BY:  Batch job Win32FileCleanup
+        #
+        # SYNOPSIS: Directives for cleaning up win32 drives.  This file is
+        #    identical to Unix_Cleanup.dat but for the --compress (Win32 only)
+        #    argument which is missing and the required --host argument (Unix Only).
+        #
+        #
+        # FORMAT  : HOSTNAME drive drive drive.
+        #
+        # DETAILS : The arguments are the arguments to purge_old_win32_files.pl
+        #
+        #  --host=&lt;host&gt;
+        #  --hours=&lt;hours&gt;
+        #  --days=&lt;days&gt;
+        #  --dir=&lt;dir&gt;
+        #  [--del]                                      - do you wish to delete the file?
+        #  [--done]                             - only work on files with .done extension
+        #
+        # EXAMPLE FORMATS:
+        #
+        # Delete 14+ day old files on host h1
+        # --days=14 --dir=//adsrv012/c$/oracle/admin/SCPROD/udump --del
+        #
+        # Delete files with .done extension older than 2 days old
+        # Note: this will delete .done.gz files and .done files
+        # --days=2 --dir=//SRVR001/d$/logshipbuffer --del --done
+        #
+        #######################################################################
+        #
+        # START RECOMMENDED PURGES
+        # --days=7 --dir=C:/gem/data/logs -del
+        # --days=7 --dir=C:/gem/data/batchjob_errors -del
+        # --days=7 --dir=C:/gem/data/GEM_BATCHJOB_LOGS -del
+        # --days=7 --dir=C:/gem/data/CONSOLE_REPORTS -del
+        # --days=7 --dir=C:/gem/data/cronlogs -del
+        # --days=7 --dir=C:/gem/data/errors -del
+        # --days=7 --dir=C:/gem/data/backup_reports -del
+        # --days=7 --dir=C:/gem/data/html_output -del
+        # --days=30 --dir=C:/gem/data/BACKUP_LOGS\*\sessionlog -del
+        # --days=30 --dir=C:/gem/data/BACKUP_LOGS\*\errors -del
+        # END RECOMMENDED PURGES</pre>
+<p>&lt;/font&gt;</p>
+<p>
+</p>
+<h2><a name="unix_directory_cleaner">Unix Directory Cleaner</a></h2>
+<p>The Unix_Cleanup.dat file will control Unix file/directory cleanups.  It is similar to the Windows cleanup
+file but for the addition of the --hostname argument.</p>
+<p>
+</p>
+<h2><a name="port_monitor_dat">port_monitor.dat</a></h2>
+<p>Port Monitoring is a quick availability test - and a good way to find out if a database or system is down.
+The file &lt;font color=red&gt;conf/port_monitor.dat&lt;/font&gt;
+contains a list of Hosts and Ports to Monitor.</p>
+<p>This file is autogenerated by one of the batch scripts.</p>
+<p>Simple format:</p>
+<p>&lt;font size=-1&gt;</p>
+<pre>
+  # hostname                      PORT SERVER   DESCRIPTION
+  SRVR001                        1433 SRVR001   Microsoft SQL Server
+  SRVR007                        1433 SRVR007   Microsoft SQL Server
+  brokersql                      1433 BROKERSQL Microsoft SQL Server
+  mail1                                                                  25     Sendmail on mail1</pre>
+<p>&lt;/font&gt;</p>
+<p>
+</p>
+<h2><a name="sybase_replication_monitoring">Sybase Replication Monitoring</a></h2>
+<p>The File &lt;font color=red&gt;conf/Replication.dat&lt;/font&gt; is used by the Sybase replication server monitoring
+scripts and will need to be popluated with your Rep Servers and Routes.
+&lt;font size=-1&gt;</p>
+<pre>
+        # FILENAME: replication.dat
+        #
+        # SYNOPSIS: Lists your sybase replication server information
+        #
+        # FORMAT:
+        #
+        # REPSERVER $NAME $LOGIN $PASSWORD $THRESHOLD_MB
+        # REPROUTE  $SOURCE_SVR $SOURCE_DB $DEST_SVR $DEST_DB $REPSERVER
+        #
+        # EXAMPLES (350MB Thresholds):
+        #
+        #  REPSERVER REP1DR_RS sa &lt;pass&gt; 350
+        #  REPSERVER REP2_RS   sa &lt;pass&gt; 350
+        #  REPSERVER REP1_RS   sa &lt;pass&gt; 350
+        #
+        #  REPROUTE  SYB1 my_db SYB2   my_db REP2_RS
+        #  REPROUTE  SYB1 my_db SYB1DR my_db REP2_RS
+        #
+        # ONCE YOU SET THIS FILE UP - PLEASE RUN
+        #      ADMIN_SCRIPTS/monitoring/SybRepMonitor.pl --ACTION=INSTALL
+        # MONITORING IS HANDLED AUTOMATICALLY BY THE GEM BATCH SybRepMonAgent
+        ##############################</pre>
+<p>&lt;/font&gt;
+There are two programs that check replication. The batch SybRepServerChecker will check all your rep
+servers to be sure that no routes are suspended, that disk space is reasonable, and that there are no other
+serious errors.  There are also three batches, SybRepMonAgent, SybRepMonCheck, and SybRepMonReport
+that compute latencies of your replication, and will warn you when replication falls behind.  These three
+batch programs call SybRepMonitor.pl.  This program takes an argument --ACTION.</p>
+<p>To initialize this system, you need to set up your configuration file and then run
+&lt;font color=red&gt;myperl SybRepMonitor.pl --ACTION=INSTAL<a href="#font">font</a></p>
+<p>
+</p>
+<h2><a name="adjust_diskspace_alarm_thresholds">Adjust Diskspace Alarm Thresholds</a></h2>
+<p>You may not wish all your alarms to work at the same thresholds - preferring to set some
+thresholds individually.  Generally speaking, this is most needed when some resourse is
+nearing ``full'' and generating alarms, but you can not fix the problem immediately - intending
+to fix the problem later.  The &lt;font color=red&gt;conf/threshold_overrides.dat&lt;/font&gt; file allows you that control.
+&lt;font size=-1&gt;</p>
+<pre>
+        # FILENAME: threshold_overrides.dat
+        #
+        # SYNOPSIS: Monitoring Thresholds
+        #
+        # DETAILS : This file permits you to turn off alarms and to control their
+        # severity.  This is a Comma Separated File
+        #
+        # SAMPLE FORMAT:
+        # &lt;system&gt; &lt;monitor_program&gt; &lt;level&gt; &lt;threshold&gt; &lt;optional subsystem&gt;
+        #
+        # monitor_program=UnixDiskspace|PcDiskspace|SybSpaceMonitor
+        #                         |SpaceMonitorSqlsvr|ThresholdManager
+        # level=CRITICAL|ERROR|WARNING
+        #
+        # remember to reset higher priority thresholds so there is no overlap - ie if you
+        # set ERROR to 98%, then you should set critical to something larger (say 99%).
+        # The programs may act wierd if the CRITICAL threshold was less than the ERROR threshold.
+        #
+        # By default - SybSpaceMonitor &amp; SpaceMonitorSqlsvr will use 90/92/95% as
+        # their default thresholds
+        #
+        # Replication thresholds are in minutes.  For replication,  you can put a
+        # blank target name in if you want but not a blank source name
+        #
+        # EXAMPLES
+        # eg.  directfeed,UnixDiskspace,WARNING,80,Disk: /var
+        # eg.  direct1,UnixDiskspace,WARNING,80,Disk: /var
+        # eg.  direct2 ,UnixDiskspace,WARNING,80,Disk: /var
+        #
+        # eg.  SYBSVR1,SybSpaceMonitor,WARNING,80,db1
+        # eg.  SYB1,SybSpaceMonitor,ERROR,95
+        # eg.  SYB1,SybSpaceMonitor,ERROR,95,clientdb
+        #
+        # eg.  ADSRV057,PcDiskspace,ERROR,98,d$
+        # eg.  ADSRV057,PcDiskspace,CRITICAL,99,d$
+        #
+        # eg.  SERVERNM,ThresholdManager,CRITICAL,99,logsegment|default
+        #
+        # EXAMPLE REPLICATION STUFF
+        # eg.  SOURCESVR,SybRepMonCheck,CRITICAL,30,TARGETNM
+        # eg.  SOURCESVR,SybRepMonCheck,ERROR,15,TARGETNM
+        # eg.  SYB1,SybRepMonCheck,CRITICAL,80,IMAGSYB2
+        # eg.  SYB1,SybRepMonCheck,CRITICAL,80,
+        # eg.  SYB1,SybRepMonCheck,ERROR,60
+        #
+        #########################################</pre>
+<p>&lt;/font&gt;
+=head2 The sybase threshold manager</p>
+<p>Another &lt;EM&gt;&lt;STRONG&gt;GEM&lt;/STRONG&gt;&lt;/EM&gt;  component is the Sybase threshold manager.
+This program (ADMIN_SCRIPTS/bin/threshold_manager.pl) installs customized
+sp_thresholdaction procedures into your databases and allows you to find
+peak usage (most important for log file sizes).   This proactive utility
+will hopefully prevent you from running out of log space - because you
+will have been warned in advance in such a way that you can expand capacity
+before there is a production alert.</p>
+<p>The sp_thresholdaction procedures we install are simple reporting
+versions that insert peak usage data into a small table in sybsystemprocs.
+You can run a report showing peak usage of data and log segments in your databases
+which is the Threshold Report you can view in the console.</p>
+<p>This procedure needs to be installed manually by running the threshold manager reinstall batch script</p>
+<p>&lt;font color=red&gt;ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=INSTAL<a href="#font">font</a></p>
+<p>after you have registered your servers.  One warning.  If you increase the *size* of any of your databases,
+you will need to rerun the above installation command. Sybase thresholds are based on free pages and
+the percentages are therefore set when you run the installation.  So, if you double the size of a database,
+your 60% threshold will be firing at 30% and recording it as 60% full!  Just reinstall and you will be ok!.</p>
+<p>Other commands of interest:</p>
+<p>&lt;font color=red&gt;ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=CHECK&lt;/font&gt;</p>
+<p>&lt;font color=red&gt;ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=REPORT&lt;/font&gt;</p>
+<p>This feature only works with Sybase</p>
+<p>
+</p>
+<h2><a name="snapshot_win32_services">Snapshot Win32 Services</a></h2>
+<p>This information is stored in &lt;font color=red&gt;conf/win32_service.dat&lt;/font&gt; and can be created from
+gem.pl using ``Snapshot Win32 Services''.  This script will survey all your windows servers and
+create a snapshot of their services in the above file.  From this point on, a weekly routine will
+snapshot services for any NEW services, and another routine will test for the availability of those
+services.  Currently only a few, sql related, services are alertable.</p>
+<p>
+</p>
+<hr />
+<h1><a name="install_web_server_scripts">Install web server scripts</a></h1>
+<p>You need to copy the ../gem/lib subdirectory and the ../gem/ADMIN_SCRIPTS/cgi-bin directories to the web server directory.</p>
+<p>From gem.pl, run Rollout Web Server Code</p>
+<p>
+</p>
+<hr />
+<h1><a name="your_own_scheduled_tasks">Your Own Scheduled Tasks</a></h1>
+<p>You can alert on the output of your scripts by following our conventions.  Our convention is to have normal
+script output in .out files (standard output) and .err files for alarmable messages (standared error).
+YOu can put these files into the data/html_output or data/cronlogs directories.</p>
+<pre>
+  script.pl &gt; /apps/gem/data/cronlogs/script.out  2&gt; /apps/gem/data/cronlogs/script.err</pre>
+<p>
+</p>
+<hr />
+<h1><a name="directory_security">DIRECTORY SECURITY</a></h1>
+<p>&lt;EM&gt;&lt;STRONG&gt;GEM&lt;/STRONG&gt;&lt;/EM&gt;  is an administrative tool, designed for system administrators.  As such,
+the conf directory contains all your passwords.  You need to protect this
+data via operating system permissions.</p>
+<p>I suggest 'chmod -R 770 *' on unix to be run in your gem home directory</p>
+<p>
+</p>
+<hr />
+<h1><a name="name">NAME</a></h1>
+<p>How To Upgrade GEM</p>
+<p>&lt;em&gt;&lt;strong&gt;GEM&lt;/strong&gt;&lt;/em&gt; is designed for simple upgrades.  The steps are as follows</p>
+<ul>
+<li><strong><a name="item_download_the_latest_codeline">Download the latest codeline</a></strong>
+
+<li><strong><a name="item_extract_on_top_of_your_existing_distribution_21_21">Extract on top of your existing distribution!!!</a></strong>
+
+<p>No configuration files are shipped with the installation so there should be no problems.
+All configuration files are shipped with a .sample extension.</p>
+<p>On your Windows monitoring server, you may not be able to extract the code because the
+task scheduler is running a batch job that calls one of the perl scripts.  Windows will
+not let you overwrite a program that is running.  This does not happen under Unix.  You
+can either go into the task scheduler, stop all running jobs before rerunning the extract,
+or kill the jobs and then stop the task scheduler process.  I normally just stop the jobs, but sometimes
+(because end task does not work cleanly) i am forced to stop the scheduler process for the duration of the
+extract.</p>
+</li>
+<li><strong><a name="item_run__3cfont_color_3dred_3e_3ccode_3eperl_gem_2epl_">Run &lt;font color=red&gt;&lt;code&gt;perl gem.pl&lt;/code&gt;&lt;/font&gt;</a></strong>
+
+<p>And select the upgrade your version option.</p>
+<p>The new downloaded code will have *OUR* hashbangs, library paths, and sybase environment. The upgrade
+option updates these files automatically. It will also re-installing your alarm database.   During
+the period you are upgrading - your &lt;em&gt;&lt;strong&gt;GEM&lt;/strong&gt;&lt;/em&gt; batch jobs will probably fail and send you alarm mail.
+Ignore these failures notifications.</p>
+<p>&lt;font color=red&gt;ONCE YOU HAVE SUCCESSFULLY RUN upgrade.pl YOU ARE DON&/FONT;</p>
+</li>
+</ul>
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+=head1 The Scheduler Tab
+
+PURPOSE: Define Scheduling and Actually Schedule Batch Jobs
+
+=over 4
+
+=item * Look over the jobs as defined
+to ensure that they are correct - you can use the default Frequencies by default
+
+=item * Schedule on this server (Win32 Monitoring Only)
+provides a native interface to the windows task scheduler.  Provide an account & password
+which has access to windows event logs,
+windows disk administrative shares, and windows services (probably requires adminstrator).
+
+=item * Create Unix Crontab
+will create a crontab.txt file in the gem home directory that is appropriate for unix cron.
+To install into cron:
+
+	export EDITOR=vi
+
+	crontab -e
+
+	<vi window pops up>
+
+	:r crontab.txt
+
+Be sure that the account you schedule this on has a .forward file so any errors will not be routed!
+A .forward file is a file in your HOME directory that contains mail addresses.
+
+=back
+
+

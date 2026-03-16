@@ -1,0 +1,55 @@
+Script started on Wed Apr 12 16:23:32 2006
+$ /usr/local/bin/perl-5.6.2   8.2 configure.pl
+Generic Enterprise Manager Setup Driver
+
+	Use 'perl configure.pl --DEBUG' to see diagnostic messages.
+	Messages will be logged to configure.log
+
+Testing commands that should be in your path
+Running ping -?
+	ping -? succeeded
+Running isql -v
+	isql -v succeeded
+SUCCESSFUL: found all required commands
+Generic Enterprise Manager Configuration Utility
+Copyright (c) 1995-2005 by SQL Technologies
+Cant append /apps/sybmon/gem/logs/installhist.log No such file or directory at /apps/sybmon/gem/bin/configure.pl line 93.
+Root Directory: /apps/sybmon/gem
+Installation Log File: /apps/sybmon/gem/logs/ig1_configure.log
+>> [configure] | Reading GEM Function Library
+>> [func]      | Reading Configuration Files - FULL
+>> [func]      | creating /apps/sybmon/gem/conf/configure.cfg from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/documenter.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/gem.xml from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/oracle_password.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/pc_password.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/sqlsvr_password.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/sybase_passwords.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/threshold_overrides.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/unix_passwords.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/Unix_Cleanup.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/Win32_Cleanup.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/console.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/console_reports.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/dns.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/pc_service.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/port_monitor.dat from sample file
+>> [func]      | creating /apps/sybmon/gem/conf/replication.dat from sample file
+>> [func]      | Reading XML Data - gem.xml
+>> [func]      | Parsing Key Values from xml
+>> [GemData]   | NEW CLASS administrator IN XML DATA
+>> [GemData]   | NEW CLASS install IN XML DATA
+>> [GemData]   | NEW CLASS plugin:documenter IN XML DATA
+>> [configure] | Application Version: Build 635 (Apr 12 2006)
+>> [configure] | Start Time: Wed Apr 12 16:23:44 2006
+>> [configure] | Configuration Files Loaded - initializing
+>> [connectmgr]| Initializing Connection Manager
+>> [connectmgr]| Loading DBI Drivers
+>> [GemData]   | NEW CLASS available_dsns IN XML DATA
+>> [GemData]   | NEW CLASS available_drivers IN XML DATA
+>> [connectmgr]| Done Initializing Connection Manager
+>> [GemData]   | NEW CLASS installsteps IN XML DATA
+>> Initialization Completed - Starting Main TK Loop
+$ ^D
+
+Script done on Wed Apr 12 16:23:57 2006

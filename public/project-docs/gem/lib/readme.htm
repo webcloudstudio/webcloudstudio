@@ -1,0 +1,1694 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+<!-- Copyright (c) 2005-2011 By SQL Technologies - All Rights Reserved -->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM GEM LIBRARIES</title>
+  <link rel="stylesheet" type="text/css" href="../styles/mystyle.css">
+  <meta name="author" content="Edward Barlow">
+  <meta name="Description" content="GEM - The Generic Enterprise Manager">
+  <meta name="keywords" content="sybase, sql server, oracle,  tools,  utilities,  shareware,  database, monitoring, administrator, tool, CURRENT_TILE, GEM, free, administration, reporting, configuration">
+</head>
+<body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GEM LIBRARIES</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
+ <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
+<A NAME=link2></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>CommonFunc.pm </H1>
+<H3> Common Function Library</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Standard/Miscellaneous functions<P>
+<h3>SUMMARY</h3>
+<P>
+<pre>
+ get_version() - returns version of the gem ($version,$sht_version)
+ is_nt()       - return 1/0 if you are on NT/Windows
+ cd_home()     - cd to the directory that contains the main code and return that directory
+ today()       - returns date string yyyymmdd.hhmiss
+ is_up()       - writes lock file useful to determine if program is allready running
+</pre>
+<P>
+
+<A NAME=link3></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>CommonHeader.pm </H1>
+<H3> 2 HOUR TIMEOUT!</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This module will be included in most batch jobs.  It is currently used to set an alarm to reap processes that get stuck and to define your SYBASE variables.<P>
+ use alarm(0) to cancel if you want - i use --NOTIMEOUT as a stanadard arg for this
+<A NAME=link4></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>DBIFunc.pm </H1>
+<H3> DBI Database Subroutines</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This is my cut at a generic subroutine library for sybase perl applications. I have used it for a variety of packages and it seems quite adequate. It currently uses dblib. These routines are useful if you only need a single connection to sybase.<P>
+<h3>AUTHOR</h3>
+<P>
+<pre>
+   Edward Barlow
+   mail: edbarlow@mad.scientist.com
+   url : http://www.edbarlow.com
+   All Rights Reserved
+<P>
+</pre>
+<h3>FUNCTION OVERVIEW</h3>
+<P>
+<pre>
+ dbi_add_line_number
+ dbi_colorize_sql     - format sql text
+ dbi_eachobject
+ dbi_get_sql_text     - get sql text for an object
+ dbi_get_dirlist
+ dbi_has_login_failed
+ dbi_msg_exclude      - tell message handler to ignore this message
+ dbi_msg_ok      - tell message handler to error out on this message
+ dbi_set_ignore
+ dbi_disconnect     - close you connection
+ dbi_connect     - connect to your server
+ dbi_use_database     - use database
+ dbi_query       - the main query
+ dbi_decode_row       - interpret output from dbi_query()
+ dbi_query_to_table   - command - output html formatted
+ dbi_set_debug   - set debug option
+ dbi_set_web_page      - set html_on option
+ dbi_get_errorlogs    - return a list of error log files
+ dbi_set_mode    - set run mode
+<P>
+</pre>
+<h3>LIBRARY FUNCTIONS</h3>
+<P>
+<UL>
+<P>
+<LI><B>dbi_disconnect()</B>
+<P>
+<pre>
+ DESCRIPTION: cleans up and exits the server
+ RETURNS:     no return code
+<P>
+</pre>
+<LI><B>dbi_connect($server,$login,$password)</B>
+<P>
+<pre>
+ DESCRIPTION: connects to sybase using login & password.
+ RETURNS:     1/0
+ OPTIONAL :   -nosybaseenvcheck if you are on a web page and dont want to check $SYBASE
+<P>
+</pre>
+<LI><B>dbi_use_database($db)</B>
+<P>
+<pre>
+ DESCRIPTION: use a database
+ PARAMETERS:  $db - database name
+ RETURNS:     returns 1 (success) or 0 (fail)
+<P>
+</pre>
+<LI><B>dbi_query($db,$query,$die_on_error,$print_hdr,$add_batchid,$srv,$login,$pass)</B>
+<P>
+<pre>
+ DESCRIPTION:   run a command
+ PARAMETERS:
+   $db     - database name
+   $query       - what to run
+   $die_on_err (optional) - if defined then die if an error
+   $print_hdr   - if defined first row will be header info
+   $add_batchid - batch id should be added
+   $srv    - OPTIONAL SERVER ONLY FOR THIS COMMAND
+   $login       - OPTIONAL LOGIN TO SERVER ONLY FOR THIS COMMAND
+   $pass   - OPTIONAL PASSWORD TO SERVER ONLY FOR THIS COMMAND
+ RETURNS:  returns array (success) or undef (fail). The array must
+        be decoded
+<P>
+</pre>
+<LI><B>dbi_decode_row($row)</B>
+<P>
+<pre>
+ DESCRIPTION:  decodes packed row returned by the functions
+ PARAMETERS:  $row - packed row
+ RETURNS:  array - each element is a cell for row
+<P>
+</pre>
+<LI><B>dbi_query_to_table($db,$query,$print_hdr, $table_options)</B>
+<P>
+<pre>
+ DESCRIPTION: Run sybase query to table (or multiple tables)
+ RETURNS: table formatted output
+<P>
+</pre>
+<LI><B>dbi_msg_exclude()</B>
+<P>
+<pre>
+ DESCRIPTION:  adds to list of messages to exclude
+ PARAMETERS:  message number
+ RETURNS:  N.A.
+ NOTES:  Currently list of messages is
+<P>
+   5701,3,4 - use database successful message
+   4002    - login incorrect message
+   911,13,16,18,19     - Unable To Use Db
+   2409       - char set conversion
+   20012     - srv name not in interfaces file
+   20018     - general message
+   20019     - results pending
+<P>
+</pre>
+<LI><B>dbi_msg_ok($msg)</B>
+<P>
+<pre>
+ DESCRIPTION:  remove message from list of messages to exclude
+ PARAMETERS:  message number
+ RETURNS:  N.A.
+<P>
+</pre>
+<LI><B>dbi_get_sql_text($objname,$print_go)</B>
+<P>
+<pre>
+ DESCRIPTION:  return text for an object
+ NOTES:  handles any object type in current db
+ PARAMETERS:
+   $objname: object name in current db
+   $print_go:  do you wish to include a line with the word go
+<P>
+</pre>
+<LI><B>dbi_colorize_sql($html)</B>
+<P>
+<pre>
+ DESCRIPTION:  formats sql text
+<P>
+</pre>
+<LI><B>dbi_get_dirlist($directory)</B>
+<P>
+<pre>
+ DESCRIPTION:  Returns list of files in directory
+<P>
+</pre>
+<LI><B>dbi_get_errorlogs($errorlog_type,$SYBASE)</B>
+<P>
+<pre>
+ DESCRIPTION: returns a list of sybase errorlogs.
+ PARAMETERS:    errorlog_type:
+   if type=0 SYBASE
+   if type=1 Backupserver
+   if type=2 Both
+<P>
+</pre>
+<LI><B>dbi_eachobject($db,$cmd,$type,$do_print)</B>
+<P>
+<pre>
+ DESCRIPTION: runs cmd on each object of type and print output
+ PARAMETERS:
+   $do_print: print text of what you are doing too
+   $type: object type
+<P>
+</pre>
+<LI><B>dbi_set_mode($mode)</B>
+<P>
+<pre>
+ DESCRIPTION: sets the mode to NORMAL or INLINE.
+ RETURNS: Returns current mode (before set).
+<P>
+</pre>
+<LI><B>dbi_set_debug($debug_mode)</B>
+<P>
+<pre>
+ DESCRIPTION: Sets Debug Flag
+<P>
+</pre>
+<LI><B>dbi_set_web_page($NL)</B>
+<P>
+<pre>
+ DESCRIPTION: Sets NEWLINE  & controls printing of pre on errors
+<P>
+</pre>
+</UL>
+<P>
+
+<A NAME=link5></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Do_Time.pm </H1>
+<H3> Misc Time <A HREF=#link8>Functions</A></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Very simple time functions.<P>
+<pre>
+  do_time(-time=&gt;secs, -fmt=&gt;formatstring);
+</pre>
+<P>
+<pre>
+  do_diff() - pretty print dime differences
+</pre>
+
+<A NAME=link6></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Doc.pm </H1>
+<H3> build html documentation</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ Build html based documentation from your perl application using the perl pod documentation format.  The output of this library is a cross indexed frames based documentation set based on the multiple files in your perl application (ie. this works on many perl files instead of just 1).<P>
+<h3>DESCRIPTION</h3>
+<P>
+ The user will create a small document generator script (using <A HREF=#link23>Doc.pm</A>) which will specify which files to extract pod from and in what order to do it (as well as other options).  Whenever you wish to rebuild your documentation set you run the driver program and create them.<P>
+<h3>FUNCTIONS</h3>
+<P>
+<UL>
+<P>
+<LI><B>doc_init() - Initialize documentation set.</B>
+<P>
+ PARAMETERS: out_dir, source_dir, colorscheme, home_page, copyright_years, company_name, product_name, color_h1<P>
+ Starts a frameset that can be referenced via the file index.htm in the directory you pass as out_dir. This file (index.htm) contains a master frameset,  consisting of three parts: a page top (top.htm), a table of contents (toc.htm) on the left side, and a body on the right side (readme.htm).   Filenames are fixed.<P>
+<LI><B>doc_navlink() - Add new external link to table of contents.</B>
+<P>
+ PARAMETERS: name, link<P>
+ Places a special hyperlink in the table of contents. These links are special and will bring up a new browser window. This is for external links, perhaps to another set of documentation or to your company home page. 2 breaks appear this after link.<P>
+<LI><B>doc_finish() - Finish / Write up the documentation set.</B>
+<P>
+ PARAMETERS:  none<P>
+ Write and close the files opened earlier.<P>
+<LI><B>doc_dir() - Documents a section of data from a files in a directory.</B>
+<P>
+ PARAMETERS: files, ignore, dir, section<P>
+ This is the main function.  It documents a section (in the table of contents) from data in a single directory.  By default it includes all files, but you can specify files with the 'files' parameter and can ignore files with 'ignore'. The title is 'section' and the directory used is 'dir'.<P>
+</UL>
+<P>
+<h3>PARAMETERS DESCRIPTIONS</h3>
+<P>
+<UL>
+<P>
+<LI><B>source_dir</B>
+<P>
+ Source of Folder-Tree input files.  These files are required for javascript.  The source dir is an optional parameter.  You may think the documentation looks better if this parameter is not passed :)<P>
+<LI><B>out_dir</B>
+<P>
+ Output Directory For the web pages. It actually places stuff in the html subdirectory of this directory.<P>
+<LI><B>company_name</B>
+<P>
+ Your company Name.<P>
+<LI><B>home_page</B>
+<P>
+ Your Home Page for links.<P>
+<LI><B>copyright_years</B>
+<P>
+ Copyright Notice Years<P>
+<LI><B>indent_level</B>
+<P>
+ Default to 1.  If this is set to 2 then head2's show up in the documentation table of contents and head1's are not indented. If it is set to 1 then head1's in pod files are indented in table of contents (no head2's).  If 0 then all head1's show up non indented (no head2's).<P>
+<LI><B>product_name</B>
+<P>
+ Product Name<P>
+<LI><B>current_section</B>
+<P>
+ Section header - goes in table of contents<P>
+<LI><B>color_h1</B>
+<P>
+ All first level headings get colored - not just NAME blocks.<P>
+<LI><B>colorscheme</B>
+<P>
+ Change the color scheme of the documentation.  Currently available color schemes are: DARKRED, PINK, OLIVE, LTBLUE, RED, ORANGE, LTGREEN, DKBLUE, BLUERED, and PURPLE.<P>
+</UL>
+<P>
+<h3>NOTES</h3>
+<P>
+ The documentation shows in a nice 3 pane window.  The top pane (top.htm) will give title info.  The left pane (toc.htm) gives table of contents and navigation information.  The right pane (readme.htm) will give documentation with anchors embedded so the table of contents can work.<P>
+ Documentation can be built from directories by using the doc_dir function to read all files for pod documentation. Files can either be in perl source code (.pl) files or .pod files.  Documentation can also come from files with .htm or .html extensions.  These files are parsed so as to remove everything but the body section.<P>
+ If reading pod files, the first file is readme.pod.  After that it is alphabetical.<P>
+ In addition to regular pod documentation, get any documentation between "^# ===" blocks (comments only).  If line is of format ^#\s*(\w+)\s*: then word is a heading<P>
+ Specifically the doc subdirectory will contain README.txt and individual doc pages and the html directory will contain x.html files (from x.pl), and an index.html which is composed of a readme.html and toc.html (table of contents)<P>
+<h3>CROSSREFERENCE</h3>
+<P>
+ The application will keep track of any keyword titles (ie items in the table of contents).  When it is almost done, it will rewrite the main page and replace any words that match the title with self hyperlinks.<P>
+<h3>EXAMPLE</h3>
+<P>
+<pre>
+   use strict;
+   use Doc;
+</pre>
+<P>
+<pre>
+   doc_init(
+      out_dir    =&gt; '../web'            ,
+      home_page       =&gt; 'http://www.edbarlow.com',
+      copyright_years =&gt; '1998-1999'         ,
+      company_name    =&gt; 'IQ Financial'           ,
+      product_name    =&gt; 'OPERATIONS MGR'
+   );
+</pre>
+<P>
+<pre>
+   # add link to top level
+   doc_navlink( name=&gt;"Return To Top Level", link=&gt;"../index.htm");
+</pre>
+<P>
+<pre>
+   #any pod documents in ../web/pod are in DOCUMENTATION section
+   doc_dir(
+      dir     =&gt; "../web/pod"     ,
+      section =&gt; "DOCUMENTATION"
+   );
+</pre>
+<P>
+<pre>
+   # SCREENS section
+   doc_dir(
+      ignore     =&gt; ['func.pl','web_run_cmd.pl',
+           'web_view_file.pl','web_waitfor.pl'],
+      dir      =&gt; "../web"    ,
+      section    =&gt; "SCREENS"
+   );
+</pre>
+<P>
+<pre>
+   # INTERNALS section
+   doc_dir(
+      files     =&gt; ['func.pl','web_run_cmd.pl',
+          'web_view_file.pl','web_waitfor.pl'],
+      dir      =&gt; "../web"    ,
+      section    =&gt; "INTERNALS"
+   );
+</pre>
+<P>
+<pre>
+   doc_finish();
+</pre>
+<P>
+
+<A NAME=link7></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Inventory.pm </H1>
+<H3> inventory system perl function api</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link8></A>
+<h1>Functions</h1>
+<p>
+<P>
+<UL>
+<P>
+<LI><B>InvYpcatHosts()</B>
+<P>
+<pre>
+   loads ypcat hosts if you are on unix into table INV_aliases
+</pre>
+<P>
+<LI><B>InvUpdSystem()</B>
+<P>
+<pre>
+   -system_name=&gt;                 # required
+   -system_type=&gt;                 # required
+   -attribute_category=&gt;          # your key for this data set
+   -attributes =&gt;                 # hashref with key value pairs
+                                  # sets keys matching a column in INV_system
+                                  # table in preference to INV_system_attribute
+   -delete=&gt;                      # optional. if set delete the system
+   -clearattributes=&gt;             # optional. if set delete all attributes
+                                  # matching attribute_category
+</pre>
+<P>
+<LI><B>InvGetSystem()</B>
+<P>
+<pre>
+   fetch one or more systems plus optionally their data
+</pre>
+<P>
+<pre>
+ my($hashref)=InvGetSystem( -whereclause=&gt; )
+ -or-
+ my($hashref)=InvGetSystem( -system_name=&gt; -and- -system_type=&gt; )
+</pre>
+<P>
+<pre>
+ Additional/Optional Args:
+</pre>
+<P>
+<pre>
+   -type               - Database | Host | ApproveRqdDatabase
+   -where              - if set then this is an added where clause restricting the systems being returned
+   -debug              - prints the queries to standard output
+   -system_name        - restrict list to systems of this name (wildcards ok)
+   -system_type        - restrict list to systems of given system_type
+</pre>
+<P>
+<pre>
+   -attribute_category:    Only returns atts of that category
+   -getattributes:         Returns attributes
+                           Default only the key rows in INV_system
+   -bsystem                Business sytem
+   -simple                 SINGLETON return hash and its in upper case
+</pre>
+<P>
+ InvGetSystem(-whereclause=>is_infra_monitored=Y, -host_type=>linux) would return a hashref with keys of system_name:system_type and values which are a hash ref of existing values.<P>
+<LI><B>InvSetSACreds()</B>
+<P>
+<pre>
+   - REQUIRED ARGS: -DSN / -monitor_host
+</pre>
+<P>
+<pre>
+   - OPTIONAL ARGS:
+      -state
+      -system_name/-system_type
+      -login/-password
+      -hostname/-port
+</pre>
+<P>
+<LI><B>InvGetAllSACreds()</B>
+<P>
+<pre>
+   - sets $sfetched=TRUE
+   - caches all sa creds into @sacreds
+   - each element of @sacreds is a hash of all the values in the GEM_sacred table
+</pre>
+<P>
+<LI><B>InvGetSACredByDSNandMonhost()</B>
+<P>
+<pre>
+   - arguments -DSN, monitor_host
+   - gets password for a given DSN/monitor_host
+   - returns (login,pass,state,sysname,systype,hostname,port
+</pre>
+<P>
+<LI><B>InvGetTypeByName()</B>
+<P>
+<pre>
+   - returns type for a passed in system name and 'database' or 'host'
+</pre>
+<P>
+<LI><B>InvRelateTwo()</B>
+<P>
+<pre>
+     - Relates Two Servers Together - returns relationship id that was used
+     - Arguments: $server1,$server1_type,$server2,$server2_type,$role1, $role2
+</pre>
+<P>
+<LI><B>InvSetRelationship()</B>
+<P>
+<pre>
+   - Set a relationship - can pass null rid...
+   - Arguments; $rid,$sysid,$sysname,$systype,$ip,$description,$relationship
+</pre>
+<P>
+<LI><B>InvReportDisplay()</B>
+<pre>
+   - Generic Table Display Widget that uses HTML::Dashboard
+   - takes -col_headers and -data arguments
+</pre>
+<P>
+<LI><B>InvUpdateAttributeDictionary()</B>
+<P>
+<LI><B>InvPromote()</B>
+<P>
+<LI><B>InvUpdateBusinessSystem()</B>
+<P>
+</UL>
+<P>
+
+<A NAME=link9></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>JobScheduler.pm </H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Persists job scheduler info to conf directory file $dir."/conf/jobscheduler.dat"<P>
+<pre>
+ save_jobscheduler
+ fetch_jobscheduler
+<P>
+</pre>
+ $jobscheduler is a hash of hashes.
+<A NAME=link10></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>LogFunc.pm </H1>
+<H3> Parse Log Files For Errors</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Generic log file filtering library.  Can do lots of neat stuff.  It is probably not the best way to do it, but it works.  Features an optional patern file which can be used to keep track of "recent" changes to the file.<P>
+ The patern file feature allows you to identify recent changes in your error log.  This is optional. The patern file works this way.  The first time through (no file will exist), the file will be writen with a byte offset and the text from the last line successfully processed.  The next time through, this file can be read and checked to see that the appropriate line exists at the byte offset.  This will tell us that the log file has not been overwritten, removed, or whatever. If the line exists at the byte offset, it is assumed that the file has simply been appended to.   The search then starts at the byte offset from the patern file.  If the string is not at that byte count, the patern file is ignored and the search starts at the beginning of the file.<P>
+ You may specify an filter file which contains directives on what lines to ignore.   Additionally you may ignore lines by using the log_rm_pat function.<P>
+<h3>SUMMARY</h3>
+<P>
+<pre>
+ log_filter_file    - read a filter directives file
+ log_process_file   - handle an input file and return filtered results
+ log_rd_patern_file - read patern file
+ log_wr_patern_file - write patern file
+ log_debug     - set debug mode
+ log_grep      - set paterns that must be in output string
+ log_rm_pat    - this patern should not appear in output
+</pre>
+<P>
+<h3>FUNCTIONS</h3>
+<P>
+<UL>
+<P>
+<LI><B>log_rm_pat</B>
+<P>
+ Set paterns to remove from output lines.  The lines are not removed, just the patern.  The remove paterns should be a pipe (|) separated list.  They may contain perl wild cards.<P>
+<LI><B>log_grep(search_patern=>pat,today=>1|0,yesterday=>1|0,date_fmt=>fmtstr)</B>
+<P>
+ ARGUMENTS: "search_patern" "today" "yesterday" "date_fmt"<P>
+ Set information that the output must contain.  This can be either based on dates (using today/yesterday with date_fmt) or explicitly. The Search Patern Instructions are a pipe separated list of strings (format a|b|c).  Date Format is parsed as follows:<P>
+<pre>
+   mm 1-12   month
+   yy 99,00,01        year
+   dm 1,9,10,13    day of month
+   dd 01,09,10,13  day of month
+   mon Jan Feb... month
+</pre>
+<P>
+ Input Arguments<P>
+<pre>
+ search_patern     - grep paterns in addition to date filters
+ today           - if defined do today
+ yesterday        - if defined do yesterday
+ date_fmt        - search string format for dates
+</pre>
+<P>
+<LI><B>log_debug</B>
+<P>
+ Sets debug flag.  Only run if you want debug messages shown.<P>
+<LI><B>log_filter_file(file=>filename)</B>
+<P>
+ Input Arguments<pre>
+   file   - patern file to write
+</pre>
+<P>
+ Read filter instructions from filename<P>
+<LI><B>log_process_file(file=>input_file,ignore_blanks=>1, search_patern=>patern, byte_offset=>byte_offset_for_pat, max_lines=>max_output_lines, cat_nogrep=>1)</B>
+<P>
+ Input Arguments<P>
+ file    - input file to read<P>
+ ignore_blanks - ignore blanks if defined<P>
+ search_patern - search patern of last line read<P>
+ byte_offset  - byte offset to start search of search_patern from<P>
+ cat_nogrep   - lines that dont pass grep pass are appended to prior line if the prior line passed all tests.  This can join things like deadlock info that spans multiple lines<P>
+ max_lines  - max output lines<P>
+ Output Parameters<pre>
+ $num_rows_read   - rows read
+ $num_rows_returned - rows filtered
+ $found_input_patern - did you find the input patern
+ $lastline_read   - can be used as patern for next search
+ $byte_count    - byte count of this last line
+ @output     - filtered output
+</pre>
+<P>
+ Filter a File.  Returns (num_rows_printed,num_rows_read,found_patern,returned_patern,byte_cnt,@output)<P>
+<LI><B>log_rd_patern_file(file=>filename)</B>
+<P>
+ Input Arguments<pre>
+ file   - patern file to write
+</pre>
+<P>
+ Read a patern file.  Returns byte count and start patern.<P>
+<LI><B>log_wr_patern_file(patern=>pat,bytes=>bytes,file=>filename)</B>
+<P>
+ Input Arguments<pre>
+ patern  - line on the file
+ bytes   - byte count of last read line
+ file   - patern file to write
+</pre>
+<P>
+ Write out a patern file.<P>
+<h3>Notes</h3>
+<P>
+ The exclude files use a simple syntax...<P>
+ PATERN=[perlpat] EXCLUDE=[string to exclude]<P>
+</UL>
+
+<A NAME=link11></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Logger.pm </H1>
+<H3> master message handler</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ <A HREF=#link12>Logger.pm</A> allows you a variety of utility functions to log messages approrpiately according to arguments you have passed in to the logger_init() function.  These directives allow you to specify files to log to as well as potential email addresses to send stuff to.<P>
+<h3>LOGGER OPTIONS</h3>
+<P>
+ The Arguments passed to logger_init() define the process.<P>
+<pre>
+  -debug               do you wish to see debug messages (1 or undef)
+  -logfile            a log file
+  -errfile            an error log file.  removed at process end if empty
+  -database            a database name for error messages
+  -command_run       the current command being run with arguments
+  -mail_host          a mail server/host for mail messages
+  -mail_to             comma separated list of mail targets for errors
+  -success_mail_to    comma separated list of mail targets for success
+  -success_subject   subject line for successes
+  -fail_subject      subject line  for fails
+</pre>
+<P>
+<h3>logger_init() options for Ed Barlow Scripts</h3>
+<P>
+<pre>
+  -debug                  optional
+  -logfile               $opt_l
+  -errfile               $opt_e
+  -database               $opt_d
+  -command_run          $CONFIG{COMMAND_RUN}
+  -mail_host             $CONFIG{MAIL_HOST}
+  -mail_to                $CONFIG{MAIL_TO}
+  -success_mail_to       $CONFIG{SUCCESS_MAIL_TO}
+</pre>
+<P>
+<h3>FUNCITONS</h3>
+<P>
+<pre>
+   logger_init()
+   logdie(@msgs)
+   infof(fmt,msg)
+   info(@msgs)
+   debug(@msgs)
+   alert(@msgs)
+   warning(@msgs)
+</pre>
+<P>
+<pre>
+   bad_email(@msgs)
+   ok_email(@msgs)
+</pre>
+<P>
+ Priority order is<P>
+<pre>
+   debug() &lt; info() &lt; alert() &lt; logdie()
+</pre>
+<P>
+<h3>ROUTING</h3>
+<P>
+ The following maps functions to actions.<P>
+<pre>
+  HANDLER    MIN LVL     MAX LVL
+  screen1    info        critical      print to screen normal msgs
+  screen2    debug       debug         debug messages printed only if -d
+  file1      info        critical      log file  - normal messages
+  errfile1   error       critical      error file-  for warnings and up
+  emailok    alert       alert         use alert level for ok emails
+  emailbad   emergency   emergency     use emergency for failures
+</pre>
+<P>
+
+<A NAME=link12></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Logger.pm </H1>
+<H3> master message handler</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ <A HREF=#link12>Logger.pm</A> allows you a variety of utility functions to log messages approrpiately according to arguments you have passed in to the logger_init() function.  These directives allow you to specify files to log to as well as potential email addresses to send stuff to.<P>
+<h3>LOGGER OPTIONS</h3>
+<P>
+ The Arguments passed to logger_init() define the process.<P>
+<pre>
+  -debug               do you wish to see debug messages (1 or undef)
+  -logfile            a log file
+  -errfile            an error log file.  removed at process end if empty
+  -database            a database name for error messages
+  -command_run       the current command being run with arguments
+  -mail_host          a mail server/host for mail messages
+  -mail_to             comma separated list of mail targets for errors
+  -success_mail_to    comma separated list of mail targets for success
+  -success_subject   subject line for successes
+  -fail_subject      subject line  for fails
+</pre>
+<P>
+<h3>logger_init() options for Ed Barlow Scripts</h3>
+<P>
+<pre>
+  -debug                  optional
+  -logfile               $opt_l
+  -errfile               $opt_e
+  -database               $opt_d
+  -command_run          $CONFIG{COMMAND_RUN}
+  -mail_host             $CONFIG{MAIL_HOST}
+  -mail_to                $CONFIG{MAIL_TO}
+  -success_mail_to       $CONFIG{SUCCESS_MAIL_TO}
+</pre>
+<P>
+<h3>FUNCITONS</h3>
+<P>
+<pre>
+   logger_init()
+   logdie(@msgs)
+   infof(fmt,msg)
+   info(@msgs)
+   debug(@msgs)
+   alert(@msgs)
+   warning(@msgs)
+</pre>
+<P>
+<pre>
+   bad_email(@msgs)
+   ok_email(@msgs)
+</pre>
+<P>
+ Priority order is<P>
+<pre>
+   debug() &lt; info() &lt; alert() &lt; logdie()
+</pre>
+<P>
+<h3>ROUTING</h3>
+<P>
+ The following maps functions to actions.<P>
+<pre>
+  HANDLER    MIN LVL     MAX LVL
+  screen1    info        critical      print to screen normal msgs
+  screen2    debug       debug         debug messages printed only if -d
+  file1      info        critical      log file  - normal messages
+  errfile1   error       critical      error file-  for warnings and up
+  emailok    alert       alert         use alert level for ok emails
+  emailbad   emergency   emergency     use emergency for failures
+</pre>
+<P>
+
+<A NAME=link13></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>MlpAlarm.pm </H1>
+<H3> Alarming And Monitoring</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This perl module provides a generic mechanism to manage alarms and monitoring. The tool is distributed as a perl module with several associated programs (a web based GUI, an alarm router, and some monitoring programs).   The library contains several simple functions to monitor your systems and some back end functions used by the reporting user interface.  Alarm data is stored in a database (Sybase or SQL Server).<P>
+<h3>SUMMARY</h3>
+<P>
+ MlpAlarm provides a simple mechanism to manage alarming and reporting.  <A HREF=#link8>Functions</A> use a by name interface with consistent parameters for simplicity and ease of use.  It has the following features<P>
+ The system supports the following types of "data"<P>
+<UL>
+<P>
+<LI><B>Heartbeat Data</B>
+<P>
+ Heartbeats are frequent up/down type messages regarding state.  Examples of programs that generate heartbeats include ping and a database disk space monitor which alarms based on space used.  Heartbeats are saved with a -severity argument which can be EMERGENCY, CRITICAL, ERROR, WARNING, or OK.  Because we expect heartbeats frequently, it is considered a problem if a heartbeat is not generated in a timely manner. Heartbeats are stored using the MlpHeartbeat() function. The system does not keep track of historical Heartbeat information.<P>
+<LI><B>Batch Job Data</B>
+<P>
+ Batch jobs typically run infrequently but regularly.  They can thus be treated as Heartbeats with a low frequency.  The system identifies batch jobs by the -batchjob argment to MlpHeartbeat.  Because some batch jobs have a frequency as low as once per month, it is not considered a warning when a Heartbeat message is not generated in a timely manner.<P>
+ Because the system does not care how long it is between batch job heartbeats, heartbeat messages for batch jobs may include three states in adition to the normal Heartbeat states.   These are "RUNNING", "NOT RUN", and "COMPLETED".  Batch jobs, when started, should set their state to RUNNING, and when finished should set their state to COMPLETED (which is the same as OK) or one of the error states.<P>
+ There are several convenience functions starting with MlpBatch...() that can be used to store Batch Job data.  These routines are simple wrappers on MlpHeartbeat().<P>
+<LI><B>Event Data</B>
+<P>
+ Events are incidents on our systems for which we care about the time they occurred.  Event logs for your servers are an example.  Because we care what time they occurred, The system keeps a history of all the events you have saved and a cleanup program must be run to purge this data.  Events are stored using the MlpEvent() function.<P>
+</UL>
+<P>
+ Fundamentally, from the perspective of a user of this module, the system consists of 3 functions named MlpHeartbeat and MlpEvent.  These functions can be considered Black Boxes to transmit, store, and route your messages appropriately.<P>
+<h3>THE GORY DETAILS</h3>
+<P>
+<h3>System/Subsystem Values</h3>
+<P>
+ Everything monitored is keyed by monitoring_program, system and subsystem.  A Systems is a hardware or software component.  Subsystems refer to individual parts of those systems (disks, logs etc).   If you are monitoring batch jobs, the system refers to a logical group of batch jobs, while the subsystem refers to the step.<P>
+<h3>Containers</h3>
+<P>
+ When you view the data, you view it by Containers, which are groups of systems.  The user interface supports a mechanism to create and manage your "Containers".  An example of containers are PRODUCTION, DATABASES, or UNIX.  This allows different users to see  only the subset of systems they are interested in.<P>
+<h3>State/Severity Values</h3>
+<P>
+ Key to the system is the state and severity levels.  Message routing will be based on a combination of the key (monitoring_program/system/subsystem) and this value.<P>
+ The following are legitimate heartbeat states<P>
+<UL>
+<P>
+<LI><B>EMERGENCY = system down / critical failure</B>
+<P>
+<LI><B>CRITICAL = serious problem.</B>
+<P>
+<LI><B>ERROR = non fatal error possibly requiring administrator attention</B>
+<P>
+<LI><B>WARNING = non fatal warning.</B>
+<P>
+<LI><B>INFORMATION = a simple message.  Synonym for OK.</B>
+<P>
+<LI><B>DEBUG = messages only of interest to developers</B>
+<P>
+</UL>
+<P>
+ Additionally, batch jobs may also be<P>
+<UL>
+<P>
+<LI><B>STARTED = the job has started</B>
+<P>
+<LI><B>COMPLETED = the job has completed normally</B>
+<P>
+<LI><B>NOT_RUN = the job has not started (default state)</B>
+<P>
+</UL>
+<P>
+ If a batch job aborts/fails, the status should not be COMPLETED (it should be one of the other states from above).  Note that you can have the batch job submit many RUNNING heartbeats, with different message texts, to identifying the exact position in the batch.<P>
+
+<A NAME=link14></A>
+<h1>Monitoring api</h1>
+<p>
+<P>
+<h3>MlpHeartbeat()</h3>
+<P>
+ Heartbeat message.  A heartbeat message may require attention but the system does not keep heartbeat history.  Ping is an example of a heartbeat message.<P>
+ Requried Arguments: -state, -monitor_program -system<P>
+<pre>
+ -state=&gt;[STARTED, COMPLETED, RUNNING, EMERGENCY, CRITICAL, ERROR, WARNING, INFORMATION, DEBUG]
+<P>
+</pre>
+ Optional Arguments: -debug -subsystem -message_text -document_url -batchjob<P>
+<pre>
+ -batchjob =&gt;   this is a batch job - so value is not going to be refreshed frequently
+ -event_time =&gt; valid sybase date time format - usually can be ignored
+<P>
+</pre>
+<h3>MlpEvent()</h3>
+<P>
+ MlpEvent saves Events, which are monitioring messages where history may be of interest.  Application errorlogs are examples of events.<P>
+ Required arguments;<P>
+<pre>
+ -message_text=&gt;[text string]
+ -severity=&gt;[EMERGENCY,CRITICAL,ERROR,WARNING,INFORMATION,DEBUG]
+ -system=&gt;[system being monitored]
+ -monitor_program=&gt;[program name.  Default is basename($0)]
+ -severity
+<P>
+</pre>
+ Optional arguments:<P>
+<pre>
+ -subsystem=&gt;[subsystem being monitored]
+ -debug
+ -event_id=&gt; 0
+ -message_value=&gt; 0
+ -message_text
+ -document_url=&gt; 0
+ -event_time=&gt;[timestamp of event in sybase format.  Default to now]
+ -save_syslog= 0|1   - save event using syslogd if on unix
+ -save_dbms = 0|1
+<P>
+</pre>
+<h3>Batch Job Convenience <A HREF=#link8>Functions</A></h3>
+<P>
+ Batch jobs in the system are treated as a special case of Heartbeats.  You *could* write your manager using a heartbeat fore each batch, or you can use these convenience functions.<P>
+ 4 functions are provided as simple wrappers to the MlpHeartbeat function for use by batch jobs.  These functions are MlpBatchStart, MlpBatchRunning, MlpBatchDone, and MlpBatchJobErr.   Funcamentally, when your batch or monitoring job starts, you call MlpBatchStart and you finish with a call to MlpBatchDone or MlpBatchJobErr.  If your job runs for a while (or continuously), you can use MlpBatchRunning to indicate that the batch is still alive.<P>
+<UL>
+<P>
+<LI><B>MlpBatchStart()</B>
+<P>
+ This function identifies that a program has started.  The program should be passed either -name or -system (they are synonyms) and the -batchjob flag.   If you are using multiple occurances of this program to check multiple systems, you should identify the system monitored with the -subsystem parameter. If you are running a batchjob, you should also pass a name for the batch job with -monitor_program.  Finally you can pass in an optional -message.<P>
+ Additionally, if this is a -batchjob, you may specify -step to indicate which step this subsystem is numbered and -reset_status to clear times.<P>
+ example<pre>
+   MlpBatchStart(-monitor_program=&gt;"NightlyCopy", -name="IMAGSYB1", -batchjob=&gt;1);
+<P>
+</pre>
+<LI><B>MlpBatchJobStep()</B>
+<P>
+ This function just saves a heartbeat in the system so you can see that your batch or monitoring job is working.<P>
+ example<pre>
+   MlpBatchJobStep()
+   MlpBatchRunning(-message=&gt;"at step number 3")
+<P>
+</pre>
+<LI><B>MlpBatchJobEnd()</B>
+<P>
+ The batch has completed.  Required -monitor_program and -system.  Optional -name -debug -subsystem -message -stepnum.<P>
+<pre>
+   UPDATE INV_batchjob_definition set status_value='.$args{-EXIT_CODE}.', last_end_time=getdate(), .
+   last_exit_code='.         $args{-EXIT_CODE}.', last_exit_notes=.dbi_quote(-text=&gt;$args{-EXIT_NOTES},
+<P>
+   UPDATE INV_batchjob_history set status_value='.$args{-EXIT_CODE}.',end_time=getdate(), .
+   exit_rtncode='.$args{-EXIT_CODE}.', exit_notes=.dbi_quote(-text=&gt;$args{-EXIT_NOTES}, -connection=&gt;$gemalarms_connection).
+<P>
+   UPDATE INV_batchjob_step set end_time=getdate()
+<P>
+</pre>
+<LI><B>MlpBatchJobErr($msg)</B>
+<P>
+ Calls MlpBatchJobEnd( -EXIT_CODE=>'ERROR',  -EXIT_NOTES=>$msg);<P>
+</UL>
+<P>
+
+<A NAME=link15></A>
+<h1>Monitoring reporting</h1>
+<p>
+<P>
+ The reporting functions are pretty for developer internal use and are simply listed here for completeness:<P>
+<UL>
+<P>
+<LI><B>MlpGetCategory()</B>
+<P>
+ Args:  -user => username, -debug<P>
+ Get report category code<P>
+<LI><B>MlpGetScreens()</B>
+<P>
+ Args:  -user=>username, -category=name, -debug<P>
+ Get screens viewable by a user<P>
+<LI><B>MlpGetReportCode()</B>
+<P>
+ Args:  -user=>username, -screen_name=name<P>
+ Get Report type code<P>
+<LI><B>MlpRunScreen()</B>
+<P>
+ Args: -screen_name=name, [-container=name], -system, -program, -debug<P>
+ MlpRunScreen() returns an array of pointer to arrays.  You can override your predefined containers or just use the normally set up ones.  You can pass -NL to define newline characters for debug messages<P>
+<LI><B>MlpGetContainer()</B>
+<P>
+ Args:  -name=name, [-type=(s)ystem|(c)container], -user=>username, -debug=>[1|0], -screen_name=>name<P>
+ Fetch a list of systems and containers<P>
+<LI><B>MlpGetDbh()</B>
+<P>
+ Returns the DBprocess handle currently in use (shouldnt be needed)<P>
+<LI><B>MlpGetProgram()</B>
+<P>
+ Gets a list of monitoring program information<P>
+<LI><B>MlpGetSeverity()</B>
+<P>
+ Retrieves a list of severities<P>
+<LI><B>MlpManageData()</B>
+<P>
+ Administrative interface to the system<P>
+<LI><B>MlpGetOperator()</B>
+<P>
+ Returns operator information<P>
+</UL>
+<P>
+
+<A NAME=link16></A>
+<h1>Monitoring coding</h1>
+<p>
+<P>
+<h3>Example 1.  Write Event Log</h3>
+<P>
+ The following example writes an event message.  Note that the monitor program name will be determined from the current program name, and the system the event is for will be determined by hostname():<P>
+<pre>
+ #!C:\Perl\bin\perl.exe
+ use lib 'G:/ADMIN_SCRIPTS/lib';
+ use strict;
+ use MlpAlarm;
+ MlpEvent( -severity=&gt;"INFORMATION",
+           -message_text=&gt;"Test Message",
+           -system=&gt;"test");
+<P>
+</pre>
+<h3>Example 2. A Simple Monitor</h3>
+<P>
+ The following example monitors something...<P>
+<pre>
+ #!C:\Perl\bin\perl.exe
+ use lib 'G:/ADMIN_SCRIPTS/lib';
+ use MlpAlarm;
+ MlpBatchStart( -system=&gt;"TaQ",-subsystem=&gt;'Nyse',-monitorjob =&gt; 1 );
+ if( ! connect($SERVER) ) {
+   MlpBatchJobErr("Can Not Connect To DB $SERVER: $text" );
+   MlpHeartbeat(    -system   =&gt; 'TaQ', -subsystem =&gt; 'Nyse',
+            -state=&gt;"ERROR", -monitor_program=&gt;"TaqMonitor",
+            -message_text=&gt;"Can Not Connect to Taq/Nyse");
+   die "ERROR - Can Not Connect to Data Source TaQ";
+ }
+ while( 1 ) {
+   my($rc,$text)=monitor_taq($SERVER);
+   if( $rc  eq  "ERROR" ) {
+      MlpHeartbeat( -state=&gt;"ERROR", -debug=&gt;$opt_d, -system=&gt;"TaQ", -subsystem=&gt;"Nyse",
+         -monitor_program=&gt;"TaqMonitor", -message_text=&gt;$text);
+   } else {
+      MlpHeartbeat( -state=&gt;"OK", -debug=&gt;$opt_d, -system=&gt;"TaQ", -subsystem=&gt;"Nyse",
+         -monitor_program=&gt;"TaqMonitor", -message_text=&gt;"Server Ok: $text");
+   }
+   sleep(300);
+   MlpBatchRunning(-message=&gt;'still working')
+ }
+ MlpBatchDone(-message=&gt;'completed normally');
+<P>
+</pre>
+<h3>Example 3. A Complex Multistep Batch</h3>
+<P>
+ Let us assume that we have a batch job called Nightly that is composed of 6 named steps.  We would like to see the state of this batch in the appropriate order and would like to reset the state of the subbatches when we start.  This way we can see progress.  So... we should *always* see 6 substeps plus an overall step when we look a the Heartbeat table.  When the batch starts, everything gets marked "not run".  When steps get run their status gets updated.<P>
+ The way we do this is to use our convenience functions. Technically, the use master heartbeat differes from that of the steps as it has no -subsystem while the steps do.  But they are connected - they share the same other information.  The Master row state will be set to RUNNING at the start.  This row will have its timestamp updated when any MlpBatchStep row is run.  It will also have its message updated to be the last message saved by any of the -step functons.  Note that this means that failed substeps where the program continues will result in a progression like (state=RUNNING msg="Running Step 1 : Init") to (state=RUNNING msg="Step 1 Failed") to (state=RUNNING msg="Running Step 2 : AlphaSetup") in short order.  You must track final state and write that with MlpBatchDone/MlpBatchJobErr as normal.<P>
+<pre>
+ # start up our program, clear the states of all the jobs
+ my($finalstate,$finalmsg)=("OK","Job Complted Successfully";
+<P>
+ # start our batch named Nightly and reset all associated rows
+ MlpBatchStart( -system=&gt;"Nightly",-batchjob =&gt; 1, -reset_status=&gt;1 );
+ $rc=connect();
+ if( $rc eq "FAIL" ) {       # Fail the whole batch...
+    MlpBatchJobErr("Can not Connect");
+    die "Done - Error Can Not Connect";
+ }
+<P>
+ # Step 1 - changed to RUNNING and then to COMPLETED or ERROR
+ MlpBatchStep( -stepname=&gt;"Init",-stepnum=&gt;1);
+ $rc=init();
+ if( $rc eq "FAIL" ) {
+    MlpBatchJobErr("Step 1 Failed $!", -stepnum=&gt;1 );
+    ($finalstate,$finalmsg)=("ERROR","Step 1 Failed $!");
+ } else {
+    MlpBatchDone( -message=&gt;"Step 1 Completed Normally", -stepnum=&gt;1 );
+ }
+<P>
+ # Step 2
+ if( $finalstate eq "OK" ) {
+   MlpBatchStep( -stepname=&gt;"AlphaSetup", -stepnum=&gt;2 );
+   $rc=AlphaSetup();
+   if( $rc eq "FAIL" ) {
+      MlpBatchJobErr("Step 2 Failed $!", -stepnum=&gt;2 );
+      ($finalstate,$finalmsg)=("ERROR","Step 2 Failed $!");
+   } else {
+      MlpBatchDone( -message=&gt;"Step 2 Completed Normally", -stepnum=&gt;2 );
+   }
+ }
+<P>
+ # Step 3 - A long Running step
+ # changed to RUNNING and then the timestamp is updated every 100 second
+ # loop and finally to COMPLETED or ERROR
+ if( $finalstate eq "OK" ) {
+   MlpBatchStep( -stepname=&gt;"AlphaRun", -stepnum=&gt;3 );
+   while($i&lt;100) {
+      sleep(100);
+      $rc = itterate();
+      last if $rc eq 'FAIL";
+      MlpBatchRunning(-message=&gt;"step 3: completed $i/100", -stepnum=&gt;3);
+      $i++;
+   }
+    if( $rc eq "FAIL" ) {
+       MlpBatchJobErr("Step 3 Failed at part $i: $!", -stepnum=&gt;3 );
+       ($finalstate,$finalmsg)=("ERROR","Step 2 Failed at part $i $!");
+    } else {
+       MlpBatchDone( -message=&gt;"Step 3 Completed Normally", -stepnum=&gt;3 );
+    }
+ }
+<P>
+ if( $finalstate eq "ERROR" ) {
+    MlpBatchJobErr($finalmsg );
+ } else {
+    MlpBatchDone( -message=&gt;$finalmsg );
+ }
+<P>
+</pre>
+
+<A NAME=link17></A>
+<h1>Monitoring notes</h1>
+<p>
+<P>
+ The following are paths and perl versions that are known to work with this lib.<P>
+<UL>
+<P>
+<LI><B>NT</B>
+<P>
+ With G: mapped to /samba/sybmon<P>
+<pre>
+   #!C:/perl/bin/perl.ex
+   use lib 'G:/ADMIN_SCRIPTS/lib
+<P>
+</pre>
+<LI><B>Solaris</B>
+<P>
+<pre>
+   #!/usr/local/bin/perl-5.6.1
+   use lib '/apps/sybmon/ADMIN_SCRIPTS/lib';
+<P>
+</pre>
+<LI><B>Linux</B>
+<P>
+<pre>
+   #!/usr/local/bin/perl-5.8.2
+   use lib "/apps/sybmon/ADMIN_SCRIPTS/lib";
+<P>
+</pre>
+</UL>
+<P>
+<h3>FEATURE HEARTBEAT</h3>
+<P>
+ The MlpHeartbeat() function has been modified to provide true heartbeats.  Simply pass in an appropriate set of core information (monitor_program,system,text...) and the argument -heartbeat=minutes and a record will be placed that has been "REVIEWED" for getdate()+minutes.  If no new "heartbeat shows up", an alarm will be sent whenever it expires!<P>
+<h3>MONITORJOB / BATCHJOB</h3>
+<P>
+ In addition to Heartbeats and Events, the system will handle batch jobs and agents.  Agents are the programs that collect Heartbeats and Events.  Agents are stored with by setting -monitor_program=>1 in the functions.  This saves heartbeat data with batchjob=AGENT.  Batchjobs are considered all data with batchjob!=AGENT but not null. The functions MlpBatchStart, MlpBatchDone, MlpBatchJobErr, and MlpBatchRunning and MlpBatchStep.<P>
+
+<A NAME=link18></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Repository.pm </H1>
+<H3> Customizable Server/Password Repository</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+<pre>
+   # Get Password For Particular Server
+   ($login,$password)=get_password(-type=&gt;"sybase", -name=&gt;"SYBPROD")
+</pre>
+<P>
+<pre>
+   # Work on all Sybase Servers
+   use Repository;
+   @servers=get_password(-type=&gt;xxx,-name=&gt;undef)
+   foreach (@servers) {
+      ($login,$password)=get_password(-type=&gt;xxx, -name=&gt;$_)
+      ...
+   }
+</pre>
+<P>
+<pre>
+   # Get Unix Servers
+   use Repository;
+   @hosts=get_password(-type=&gt;"unix", -name=&gt;undef)
+</pre>
+<P>
+<pre>
+   # Get information on particular server
+   %info_about_servers=get_password_info($server)
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This basic module should be extended to allow encryption.  For now it allows you to get passwords from a file for your application through a standard interface that can be enhanced to meet your security concerns.<P>
+ Two files are required for this module to work.  The first file is a configuration file that identifies the password information.  This file must exist in the current directory (checked first),  or in one of the directories in your perl library include path.  The file name is sybase_password.cfg by default.<P>
+ The password file is user definable but needs to follow the following rules:<P>
+<pre>
+   lines starting with # are ignored
+   lines starting with any white space are informational and can be
+      returned with the get_password_info function.
+</pre>
+<P>
+ Normally, the password file should be named password.cfg in the current directory and have the format<P>
+ SERVER<spaces>PASSWORD<spaces>LOGIN <spaces>KEY=VALUE <spaces>KEY=VALUE SERVER<spaces>PASSWORD<spaces>LOGIN <spaces>KEY=VALUE <spaces>KEY=VALUE<P>
+ If your password file is of a different format, or you are using a differently named password file, you need to define a configuration file (default sybase_password.cfg).  This file should be of the format:<P>
+<pre>
+   PASSFILE=passwords
+   SERVER_COL=0
+   LOGIN_COL=1
+   PASS_COL=2
+</pre>
+<P>
+ get_password_info returns lines that start with spaces<P>
+<h3>LOG FILES</h3>
+<P>
+ get_logfiles()<P>
+<pre>
+   reads info from files.dat
+   returns a pointer to an array of hashes of file items
+   this function replaces
+      my($dat)=$gem_data-&gt;get_set_data(-class=&gt;'unix',-name=&gt;$unixhost,-arg=&gt;'discovered_files');
+   with
+      my($dat)=get_logfiles(-hostname=&gt;$unixhost);
+      foreach (@$dat) { print "HOST:FILENAME = $_; }
+   takes -hostname - in which case it only returns data for the hostname
+</pre>
+<P>
+ =HEAD3 Example <P>
+ use of get_logfiles to find all interfaces files on a host... From interfaces_file_rpt.pl<P>
+ my($dat)=get_logfiles(-hostname=>$unixhost); next unless defined $dat; foreach ( keys %$dat ) {<pre>
+   if( ref $$dat{$_} ) {
+      if( $$dat{$_}{File_Type} eq "Interfaces File" ) {
+         print " --&gt; key =&gt; $_\n" if $DEBUG;
+         my($h,$f)=split(/:/,$_);
+         $$dat{$_}{name}=$f;
+         push @INTERFACES_FILES,$$dat{$_};
+      }
+   } else {
+      if( $$dat{File_Type} eq "Interfaces File" ) {
+         print " --&gt; key =&gt; $_ SINGLETON\n" if $DEBUG;
+         print "DBG: SINGLETON FOR Host $unixhost\n" if defined $DEBUG and ! defined $PORTLIST;
+         push @INTERFACES_FILES,$dat;
+         last;
+      }
+   }
+</pre>
+ }<P>
+<h3>EDITING CONFIG FILES</h3>
+<P>
+ add_edit_item() - is the api to modify & edit the configfiles<P>
+<pre>
+ required arguments: -op -type -name -values (unless op=del) = hashptr
+ optional arguments: -login -password -debug
+</pre>
+<P>
+<pre>
+ -type =&gt; type of the configfile
+       =&gt; allowed values; sybase, unix, sqlsvr, oracle, win32servers, documenter, monitor_server, logfiles
+</pre>
+<P>
+<pre>
+ if -op = add will add or update as needed
+ if -op = update then will ad or update exiting keys based on -value
+          To Delete a key - run with op=update and set value={emptystring}
+          This will not delete any servers
+</pre>
+<P>
+<pre>
+ if -name
+   -name and -del will delete server
+   -name and -conntype will set conntype
+</pre>
+<P>
+<pre>
+ -values =&gt; a hashptr that contains key value pairs
+         =&gt; unneeded if op = -del
+         =&gt; otherwise keys are [system/server]|[key] and values are the values to put in that key
+</pre>
+<P>
+<pre>
+ EXAMPLE = update 2 SERVER_TYPES in the unix password file
+<P>
+ my(%x);
+ $x{host1|SERVER_TYPE}=PRODUCTION;
+ $x{host2|SERVER_TYPE}=DEVELOPMENT;
+ add_edit_item(-op=&gt;update, -type=&gt;unix, -values=&gt;\%x);
+</pre>
+<P>
+<pre>
+ EXAMPLE = update disks on windows server mywin32
+ $x{$host."|DISKS"}="c$ d$ e$"
+ add_edit_item(-op=&gt;update, -type=&gt;win32s
+</pre>
+<P>
+<h3>MONITOR SERVERS</h3>
+<P>
+ Sybase Monitor servers behave slightly differently.  These servers are stored in monitorserver.dat and represent a map of monitor server -> sybase server.  When you run get_password(-type=>monitor_server) you get a hash with keys of MONITOR.$MON_SERVER or HISTORICAL.$HIST_SERVER and values of the ASE Sybase SQL Server associated with the monitor server. When you run get_password(-type=>monitor_server,-name=XXX_MON) you recieve the login and password information for the sybase server associated with that monitor server...<P>
+
+<A NAME=link19></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RunCommand.pm </H1>
+<H3> Architecture Independant External Command Execution</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This is an attempt at an architecture independent mechanism to run external commands.<P>
+ On Win32 Architectures, Spawn a separate process window.  On unix, run job in the background window with a fileevent manager.  This is only useful in a Tk architecture.<P>
+<h3>USAGE</h3>
+<P>
+ RunCommand(-key=>value...);<P>
+<pre>
+   -cmd         - The system command to run.  If the first word in the command ends in .pl, then the
+                 current version of perl will be prepended to it
+   -err         - prefix for alarm messages
+   -mainwindow - main window - if you pass this an error box will appear if
+                the command errors out
+   -printfunc  - optional function ref to print ouput messages.
+   -printhdr   - prefix for -printfunc commands
+   -title      - window title
+<P>
+   -statusfunc - function ref to print status messages to.
+<P>
+   -showinwin   - if defined it will create an output window with the results
+                  will use -title||-showinwin for the title
+                  will ignore output lines matching -ignore_string
+<P>
+</pre>
+<P>
+ get_win32_disks($system)<P>
+<pre>
+   returns an array of disks
+<P>
+</pre>
+<h3>FLOW</h3>
+<P>
+<pre>
+   -statusmsg version info
+   -statusmsg $cmd without password
+   if ! open( CMD )
+      print debug: ...
+      -mainwindow -&gt; messagebox() if -mainwindow
+   foreach &lt;results&gt;
+      -printfunc( -printhdr.$_
+      push @output,$_
+   if $?!=0   # command returncode
+      messagebox ( -err.msg.$cmd_no_pass.@output )
+      return (0,\@output)
+   if -showinwin
+<P>
+</pre>
+<h3>NOTES</h3>
+<P>
+ If the command is a perl command, the current running perl will be used<P>
+ Returns two args - $status, $outputref.  $status is 1 for success and 0 for failure.  $outputref is a ptr to an array of return data.<P>
+
+<A NAME=link20></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RunOn.pm </H1>
+<H3> Common Function Library</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Cant this monitoring host run the code<P>
+<h3>SUMMARY</h3>
+<P>
+<pre>
+ is_mysql_is_ok_on_unix()   - returns 1/0 if this monitoring server can run mysql code
+ is_sybase_is_ok_on_unix()  - returns 1/0 if this monitoring server can run sybase code
+ is_sqlsvr_is_ok_on_unix()  - returns 1/0 if this monitoring server can run sqlsvr code
+ is_oracle_is_ok_on_unix()  - returns 1/0 if this monitoring server can run oracle code
+<P>
+ is_windows_is_ok_on_unix() - returns 1/0 if this monitoring server can run windows code
+ is_unix_is_ok_on_unix()    - returns 1/0 if this monitoring server can run unix code
+</pre>
+
+<A NAME=link21></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>UpdFunc.pm </H1>
+<H3> <A HREF=#link8>Functions</A> to update directory trees</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ FUNCTIONS TO UPDATE AND MAINTAIN DIRECTORIES<P>
+<h3>SUMMARY</h3>
+<P>
+ This library consists of three functions.  The dirupdate() function will update common files in directories to the most recent version.  The dircmp() routine will compare 2 directories in the same manner as does dircmp(1).  The dircopy() makes a target directory EXACTLY like a source directory.<P>
+<h3>FUNCTIONS</h3>
+<P>
+<UL>
+<P>
+<LI><B>dirupdate()</B>
+<P>
+ Update files between directories to the most recent file.  An Output file of copy commands is created.  This is useful to maintain releases when development is being handled in more than one subtree.<P>
+<UL>
+<P>
+<LI><B>UPDATE_MISSING</B>
+<P>
+<LI><B>OUTPUT FILE</B>
+<P>
+<LI><B>DEBUG</B>
+<P>
+<LI><B>DIRLIST</B>
+<P>
+ (array reference)<P>
+<LI><B>IGNORE_SUBDIRS</B>
+<P>
+<LI><B>IGNORE_EXTENSIONS</B>
+<P>
+ (array references)<P>
+<LI><B>HIDE OUTPUT FILE</B>
+<P>
+<LI><B>EQUIVALENTS_ONLY</B>
+<P>
+ Update equivalent directories only.  Ie. if your dir 1 has subdirs a and b and dir 2 has subdirs b and c then files in dir1 is compared to dir2 and files in dir1/b to dir2/b and that is it.<P>
+<LI><B>APPEND</B>
+<P>
+ (append to file)<P>
+<LI><B>IGNORE_FILES</B>
+<P>
+ (array references)<P>
+</UL>
+<P>
+<LI><B>dircmp()</B>
+<P>
+ Compares directories.  Works with the same parameters as the above routine.<P>
+<LI><B>direxact()</B>
+<P>
+ Copy Files between different directories from a source directory.  An Output file of copy commands is created.<P>
+ SRC_DIRECTORY - only set on call DIR FNAME EXT DEST_DIRECTORY - destination directories DEBUG<P>
+</UL>
+<P>
+
+<A NAME=link22></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Win32Scheduler.pm </H1>
+<H3> Scheduling Module For Windows and Unix</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This module can set schedules for batchs on unix and windows. The information as to what you wish to schedule is saved in the gem.xml configuration file.<P>
+ This module is acutally very simple.  It only allows one time schedule (trigger) per job and only permits jobs to run under some very basic criterion.<P>
+<h3>FUNCTIONS</h3>
+<P>
+ get_a_task -<pre>
+   -name   =&gt; task name
+</pre>
+<P>
+ get_all_tasks -<pre>
+   returns a hash of hashes from the job scheduler.  Keys of primary hash are job names.  Keys of subhash are:
+</pre>
+<P>
+<pre>
+   Creator
+   Comment
+   UserName
+   Application
+   Parameters
+   Working_Directory
+   Priority
+</pre>
+<P>
+<pre>
+   Flags ="";
+   Flags.="INTERACTIVE " if $p=~$scheduler-&gt;TASK_FLAG_INTERACTIVE;
+   Flags.="DISABLED " if $p=~$scheduler-&gt;TASK_FLAG_DISABLED;
+   Flags.="DELETE_WHEN_DONE " if $p=~$scheduler-&gt;TASK_FLAG_DELETE_WHEN_DONE;
+   Flags.="HIDDEN " if $p=~$scheduler-&gt;TASK_FLAG_HIDDEN;
+</pre>
+<P>
+<pre>
+   Status
+   ExitCode
+   Next_Run_Time
+   Last_Run_Time= $time[7].$time[6].$time[4]." $time[3]:$time[2]:$time[1]";
+   MaxRunTime
+   trigger $i=\%trigger;
+</pre>
+<P>
+ schedule_a_job<pre>
+    -name
+    -schedule   hourly, weekly, daily, boot
+    -account
+    -password
+    -program   the program you wish to run
+    -directory   working directory
+    -start_hour
+    -start_minutes
+</pre>
+<P>
+<pre>
+    the following only apply to the hourly schedule and are optional
+    -end_hour
+    -end_minutes
+    -frequency
+</pre>
+<P>
+ new<pre>
+   argument : -name_prefix=&gt;prefix : this prefix applies to all jobs you care about.  This can be
+              used to ignore other scheduled jobs that are on the system.  If -name_prefix=&gt;xx_,
+              then only jobs starting with xx_ will be considered
+</pre>
+
+<A NAME=link23></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Doc.pm </H1>
+<H3> build html documentation</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ Build html based documentation from your perl application using the perl pod documentation format.  The output of this library is a cross indexed frames based documentation set based on the multiple files in your perl application (ie. this works on many perl files instead of just 1).<P>
+<h3>DESCRIPTION</h3>
+<P>
+ The user will create a small document generator script (using <A HREF=#link23>Doc.pm</A>) which will specify which files to extract pod from and in what order to do it (as well as other options).  Whenever you wish to rebuild your documentation set you run the driver program and create them.<P>
+<h3>FUNCTIONS</h3>
+<P>
+<UL>
+<P>
+<LI><B>doc_init() - Initialize documentation set.</B>
+<P>
+ PARAMETERS: out_dir, source_dir, colorscheme, home_page, copyright_years, company_name, product_name, color_h1<P>
+ Starts a frameset that can be referenced via the file index.htm in the directory you pass as out_dir. This file (index.htm) contains a master frameset,  consisting of three parts: a page top (top.htm), a table of contents (toc.htm) on the left side, and a body on the right side (readme.htm).   Filenames are fixed.<P>
+<LI><B>doc_navlink() - Add new external link to table of contents.</B>
+<P>
+ PARAMETERS: name, link<P>
+ Places a special hyperlink in the table of contents. These links are special and will bring up a new browser window. This is for external links, perhaps to another set of documentation or to your company home page. 2 breaks appear this after link.<P>
+<LI><B>doc_finish() - Finish / Write up the documentation set.</B>
+<P>
+ PARAMETERS:  none<P>
+ Write and close the files opened earlier.<P>
+<LI><B>doc_dir() - Documents a section of data from a files in a directory.</B>
+<P>
+ PARAMETERS: files, ignore, dir, section<P>
+ This is the main function.  It documents a section (in the table of contents) from data in a single directory.  By default it includes all files, but you can specify files with the 'files' parameter and can ignore files with 'ignore'. The title is 'section' and the directory used is 'dir'.<P>
+</UL>
+<P>
+<h3>PARAMETERS DESCRIPTIONS</h3>
+<P>
+<UL>
+<P>
+<LI><B>source_dir</B>
+<P>
+ Source of Folder-Tree input files.  These files are required for javascript.  The source dir is an optional parameter.  You may think the documentation looks better if this parameter is not passed :)<P>
+<LI><B>out_dir</B>
+<P>
+ Output Directory For the web pages. It actually places stuff in the html subdirectory of this directory.<P>
+<LI><B>company_name</B>
+<P>
+ Your company Name.<P>
+<LI><B>home_page</B>
+<P>
+ Your Home Page for links.<P>
+<LI><B>copyright_years</B>
+<P>
+ Copyright Notice Years<P>
+<LI><B>indent_level</B>
+<P>
+ Default to 1.  If this is set to 2 then head2's show up in the documentation table of contents and head1's are not indented. If it is set to 1 then head1's in pod files are indented in table of contents (no head2's).  If 0 then all head1's show up non indented (no head2's).<P>
+<LI><B>product_name</B>
+<P>
+ Product Name<P>
+<LI><B>current_section</B>
+<P>
+ Section header - goes in table of contents<P>
+<LI><B>color_h1</B>
+<P>
+ All first level headings get colored - not just NAME blocks.<P>
+<LI><B>colorscheme</B>
+<P>
+ Change the color scheme of the documentation.  Currently available color schemes are: DARKRED, PINK, OLIVE, LTBLUE, RED, ORANGE, LTGREEN, DKBLUE, BLUERED, and PURPLE.<P>
+</UL>
+<P>
+<h3>NOTES</h3>
+<P>
+ The documentation shows in a nice 3 pane window.  The top pane (top.htm) will give title info.  The left pane (toc.htm) gives table of contents and navigation information.  The right pane (readme.htm) will give documentation with anchors embedded so the table of contents can work.<P>
+ Documentation can be built from directories by using the doc_dir function to read all files for pod documentation. Files can either be in perl source code (.pl) files or .pod files.  Documentation can also come from files with .htm or .html extensions.  These files are parsed so as to remove everything but the body section.<P>
+ If reading pod files, the first file is readme.pod.  After that it is alphabetical.<P>
+ In addition to regular pod documentation, get any documentation between "^# ===" blocks (comments only).  If line is of format ^#\s*(\w+)\s*: then word is a heading<P>
+ Specifically the doc subdirectory will contain README.txt and individual doc pages and the html directory will contain x.html files (from x.pl), and an index.html which is composed of a readme.html and toc.html (table of contents)<P>
+<h3>CROSSREFERENCE</h3>
+<P>
+ The application will keep track of any keyword titles (ie items in the table of contents).  When it is almost done, it will rewrite the main page and replace any words that match the title with self hyperlinks.<P>
+<h3>EXAMPLE</h3>
+<P>
+<pre>
+   use strict;
+   use Doc;
+</pre>
+<P>
+<pre>
+   doc_init(
+      out_dir    =&gt; '../web'            ,
+      home_page       =&gt; 'http://www.edbarlow.com',
+      copyright_years =&gt; '1998-1999'         ,
+      company_name    =&gt; 'IQ Financial'           ,
+      product_name    =&gt; 'OPERATIONS MGR'
+   );
+</pre>
+<P>
+<pre>
+   # add link to top level
+   doc_navlink( name=&gt;"Return To Top Level", link=&gt;"../index.htm");
+</pre>
+<P>
+<pre>
+   #any pod documents in ../web/pod are in DOCUMENTATION section
+   doc_dir(
+      dir     =&gt; "../web/pod"     ,
+      section =&gt; "DOCUMENTATION"
+   );
+</pre>
+<P>
+<pre>
+   # SCREENS section
+   doc_dir(
+      ignore     =&gt; ['func.pl','web_run_cmd.pl',
+           'web_view_file.pl','web_waitfor.pl'],
+      dir      =&gt; "../web"    ,
+      section    =&gt; "SCREENS"
+   );
+</pre>
+<P>
+<pre>
+   # INTERNALS section
+   doc_dir(
+      files     =&gt; ['func.pl','web_run_cmd.pl',
+          'web_view_file.pl','web_waitfor.pl'],
+      dir      =&gt; "../web"    ,
+      section    =&gt; "INTERNALS"
+   );
+</pre>
+<P>
+<pre>
+   doc_finish();
+</pre>
+<P>
+
+<A NAME=link24></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>DSget.pm </H1>
+<H3> Common Function Library For LDAP programs</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Standard/Miscellaneous functions for ldap<P>
+<h3>SUMMARY</h3>
+<hr><br>
+This output is documentation for the SQL Technologies GEM LIBRARIES.
+<ADDRESS>copyright &#169 1998-2011 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

@@ -1,0 +1,5 @@
+=head1 The Reports Tab
+
+PURPOSE: Allow you to see default GEM reports
+
+This tab allows you to validate that your agents have run successfully.

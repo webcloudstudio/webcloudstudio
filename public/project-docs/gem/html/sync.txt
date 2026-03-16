@@ -1,0 +1,342 @@
+                          Login Syncronizer v3
+                           By Edward Barlow
+                        Copyright (c) 1996-1997
+
+The login synchonizer will make your login and user tables similar across
+your servers.  This is of great benefit when loading sybase databases (you
+dont need to adjust sysusers and sysalternates after the load) and makes
+user management in complex environments easier.
+
+The package consists of several programs.  The main program, sync_logins,
+is a compare and replace program that adjusts syslogins, sysusers, and
+sysalternates in a predefined way so that some or all of the information
+is common between servers.  The process has been designed to be safe, and
+it allows you to view login/suid differences as well as performing the
+actual adds/deltas.  As system tables are being manually adjusted, this
+process is intrinsically dangerous, but the program has been designed to be
+failsafe and i dont believe you can get into a situation where your server
+logins are out of sync. All users should read this document to see how
+this is done.
+
+The remaining programs are backup and restore facilities to manage the risks
+posed by direct modification of the system tables.  The system table backup
+script is called save_system_tables, and will save your system tables using
+bcp and archive them for the future. The restore utility, restore_system_tables,
+will restores data saved by save_system_tables.   I RECOMMEND SAVING ALL
+SYSTEM TABLES EACH NIGHT AS PART OF YOUR NIGHTLY PROCESSING.  HOPEFULLY YOU
+WILL NEVER NEED TO RESTORE THIS DATA.
+
+All these packages require perl5 and access to the sa password.
+
+I (of course) accept no responsibility for damage caused by use of my tools.
+NOTE: THE SYNC_LOGINS OPERATION ALTERS SYSTEM TABLES DIRECTLY AND IS THEREFORE
+*INTRINSICALLY* DANGEROUS AND SHOULD BE PERFORMED WITH CARE.  I dont know of
+any problems, but you should be careful none the less (it is your data).
+
+Documention on this program follows
+
+#############################################################################
+
+                              sync_logins
+                           By Edward Barlow
+
+This program synchronizes logins between two servers.  This is important when
+dealing with dumps and loads or with warm standby / situations.  In general
+it is good practice to maintain consistent suids across all systems.
+
+Note.  this package requires perl5 and System 10 or better (this is because I
+lock logins that are added).  4.9 and earlier releases are not supported.
+
+Sybase databases are only related to the login tables via the sysusers and
+sysalternates tables.  All database internal information is stored by uid.  If
+you load a database into another server, you must rework the suid to uid
+mappings in these tables or you will end up with user A having the permissions
+that user B should have.  The sync logins program solves this problem.
+
+The concept here is that you will build a master server from all the servers in
+your environment.  This master server will contain the "correct" or "master"
+list of information from the syslogins tables in all your servers.  Normally
+you will only copy logins & suids, but you could also copy passwords (still
+encrypted, default databases etc).  Once you have built your master table
+of enterprise information you can distribute the information to your servers,
+correcting the information in master as well as the information in each
+database on the remote.  Once this is done, you can use the program to check
+that all the servers are identical. You might want to add the check on a nightly
+basis.  Note that by default the logins you replicate are inactive and have
+an unusable password, but you can use command line options to alter this
+behavior.
+
+After your servers are in sync, every time you wish to add a login, you will
+simply add it to the "master" server (using sp_addlogin) and you will run a
+distribution wrapper to distribute that id to your other servers.  You can
+manage this with sp_addlogin *if* all your suids are already in sync.
+
+The following is the help that prints when you run sync_logins with no
+parameters.  This will give you an idea of what the tool does.
+
+----------------------
+
+  sync_logins - MULTI SERVER SYBASE LOGIN/SUID SYNCRONIZER.
+  version 1.1 - copyright (c) 1996 by Edward Barlow
+
+  This tool adds logins and updates suids in your servers to keep them
+  in sync with one server. NOTE: You must specify -m, -C, -r, -s, or -ms
+
+  USAGE: sync_logins -M MASTER_SRV1 -p PASS1 -S SECOND_SRV2 -P PASS2 -dmsurbR
+
+  FLAGS:  -d  DEBUG (will not change servers)
+          -m  UPDATE MASTER SERVER (only adds logins)
+          -s  UPDATE SECONDARY SERVER (adds logins & upd suids)
+          -u  UPDATE SUIDS ONLY (no new logins)
+          -A  ACTIVATE NEW LOGINS (unlocks new logins on secondary server)
+          -D  UPDATE DEFAULT DB (sync secondary server default db to master server - for new logins)
+          -W  UPDATE PASSWORDS (sync secondary server passwords to master server - for new logins)
+          -w<passwd>  DEFAULT PASSWORD (works only with -W option.  Supply a default secondary server password - for new logins)
+          -r  REPORT ONLY (no server changes)
+          -b  BATCH (dont ask for interactive confirmation)
+          -R  RECOVER (from program crash - unimplemented)
+          -C  CLEANUP (from program crash )
+
+The options -A -D -W -w and -C are new for version 3
+----------------------
+
+The job works with the following strict rules.  The suids from the master
+server are ALWAYS preserved.  The suids from the secondary are modified as
+necessary to accomodate the master.  Logins are added and suids in sysusers and sysalternates are updated to bring the two servers into sync.  Any logins that
+are added will be locked.  This means that, as an end result, every login will
+be on every server (but most will be locked).  As you can see from the usage
+(above), you can specify which server you wish to update or manage.  You can
+also use the utility to generate difference reports.  Here are the rules for
+the general case on how to manage differences.
+
+   1) login in master server only
+
+      in this case add it to secondary as same suid.  If there is a login
+      with that suid, assign that one a new unused suid (max + 1) and give
+      the login that was in master the suid in question.
+
+   2) login in secondary server only
+
+      in this case add it to master.  If there is already a login in master
+      with the secondary suid, the *new* login on master will have a new
+      suid that is free on BOTH of the servers and the secondary server suid
+      will be updated to that suid.  The changed secondary suid will
+      propogate to all databases that contain that user.
+
+   3) in both servers with same suid
+
+      not much to do here - report it only.
+
+   4) in both servers with different suid
+
+      update secondary to master suid.  Update all databases with that user
+      to the new suid.
+
+INSTALL:
+
+No install is needed per se... You need perl on your system, and should
+edit all the executables to change the first line to be the path of your
+perl.
+
+TECHNICAL DETAILS:
+
+A server's information is saved in a PERMANANT (for the duration of the run)
+table "login_map" that exists in master.  A second permanent table
+("login_map_ok") is used as a flag when "login_map" is all set.  These tables
+exist only for the duration of the run, and can be used to recover from a crash
+in the middle of things.  This is very important.  The main way to really foul
+up your server using this tool is to crash in the middle of the update section.
+By having the information saved, you can continue from the middle of a crash by
+using the recover option (ie... you know what the system should look like so you
+can fix it up).
+
+SIGNAL HANDLING
+this program can NOT die after you start making updates.  Dieing then is
+bad.  Thus i am trapping INT, QUIT, HUP, TERM, and ABRT signals  and continuing
+with my work.  I think this is a better solution than letting you control-C in
+the middle of updates to the system tables.  Before you start updating, you can
+kill the program.
+
+RECOVERY FROM FAILURE:
+If the process fails for any reason, it will probably leave allow updates turned
+on.  I dont think of this as an error.  This section deals with real errors (ie
+syslogin/sysuser corruptions).
+
+The master server can never be hurt, as all you can do is insert syslogins.
+
+I dont think there can be a failure unless the process dies in the middle of
+the update to the secondary server.  The secondary server is updated  via
+
+   1) sp_configure "allow updates"
+   2) insert logins
+   3) update syslogin suids
+   4) foreach database
+      4a) update sysalternates then sysusers
+   5) sp_configure "allow updates"
+
+The process can die before or after each of these steps.  It can not die during
+a step as a step is really a transaction (step 4 has an explicit begin/commit
+around it).  So here is the recovery analysis
+
+      BEFORE                           AFTER
+1)       N.A               N.A.
+2)       No bigdeal - just rerun
+3)       syslogins to sysusers mapping will be incorrect - should undo your
+      syslogins mapping if possible
+4)       Continue to apply to the remaining databasess
+5)       N.A               N.A.
+
+For now, to recover, rerun your command with the -d option and cut the output
+out! You can run it by hand!
+
+ALGORITHM:
+
+The following is a summary of the algorithm
+
+SELECT name,suid from both servers
+CREATE temporary table in both servers with the servers logins and
+      status field is 0
+COMPARE DATA
+      insert new logins into other server w/status field = 1
+      update new_suid field in secondary to suid from master
+FIX UP SUIDS - cant have 2 rows with same suid
+      Get Max Suid
+LOOP THROUGH ACCOUNTS THAT HAVE DUPLICATE SUID's
+      if master then change new login
+      if secondary then change old login (keep master suid)
+GET DATABASE LIST
+
+ALLOW UPDATES
+INSERT SYSLOGINS
+UPDATE SYSLOGINS
+FOR EACH DB - UPDATE SUSERS, SYSALTERNATES
+UNALLOW UPDATES
+
+#############################################################################
+
+-------------------------------
+README FOR save_system_tables
+-------------------------------
+
+This program copies out a configurable set of system tables.  It uses the bcp
+and can be called with either -n or -c (default).   Output files are coded
+as (database)_(table) and will exist in a directory with the same name as
+the server (unless overridden with -D).  This utility only works for system
+tables (but you can modify it for user tables if you would like).
+
+The list of tables is retrieved from the file $0.cfg (unless you specify the -C
+option).  Rows in this file that have "NORMAL=" or "FULL=" are read to identify
+which tables you will copy out.  "FULL=" tables only will be copied out if you
+specify the -A option.
+
+USAGE: $0  -Uuser -Ppassword -Sserver [-D dir] [-C config file]
+
+Special Options:
+   -d DEBUG
+   -a ABORT ON ERROR
+   -r SHOW ROWS COPIED MSGS
+   -n Native Mode (default is char mode)
+   -A All tables (not just normal ones)
+
+EXAMPLE
+-------
+$ save_system_tables -Ubarlowe -PXXXX -SSYB10 -C users_and_alts.cfg
+
+Copying Out autosys..
+Copying Out bronzec..
+Copying Out bronzen..
+Copying Out master...
+Copying Out mis..
+Copying Out model..
+Copying Out people..
+Copying Out people_old..
+Copying Out pr_silver..
+Copying Out prodfix..
+Copying Out pubs2..
+Copying Out rollout..
+Copying Out security..
+
+#############################################################################
+
+-------------------------------
+README FOR restore_system_tables
+-------------------------------
+
+A companion program for save_system_tables.  This program restores system
+tables.  It uses bcp options as set in the save command (-n or -c).  Input
+files are coded as (database)_(table) and will exist in a directory with
+the same name as the server (unless overridden with -D).  This utility works
+works for any table (unlike the save which is hard coded for system tables).
+
+Definately be careful with this one...  Make a backup of master at least.  It
+is also NOT appropriate to bcp in all system tables if those tables originated
+from another server.  You could then end up with devices in use by multiple
+servers (which is presumably NOT what you want).  Ergo... be careful with the
+master tables.
+
+SPECIAL
+-------
+How we handle syslogins.  Syslogins is always applied *last*.  The reason for
+this is that  if you apply changes to syslogins, the password can change and
+you can get mucked up.  As a result, we dont change the sa password.  That is
+your job...
+
+THUS... YOUR SA PASSWORD WILL NOT CHANGE FROM THIS ROUTINE
+
+USAGE
+-----
+USAGE: restore_system_tables  -Uuser -Ppassword -Sserver [-D dir]
+
+This program will restore system tables previously saved by the
+save_system_tables command
+
+Special Options:
+   -d DEBUG
+   -a ABORT ON ERROR
+   -r SHOW ROWS COPIED MSGS
+   -n Native Mode (default is char mode)
+   -A All tables (not just normal ones)
+
+Reads directory for files to work with:
+
+EXAMPLE
+-------
+The following example rewrites these three master tables.
+
+$ls tmpo
+master_sysalternates
+master_syslogins
+master_sysusers
+
+$restore_system_tables -a -Usa -Pbarlow -SBARLOW_1 -Dtmpo
+==>Configuration option changed. Run the RECONFIGURE command to install.
+==>DB=master TABLE=sysalternates
+==>DB=master TABLE=sysusers
+==>DB=master TABLE=syslogins
+==>Configuration option changed. Run the RECONFIGURE command to install.
+
+
+ALGORITHM
+---------
+
+LOGIN TO SYBASE
+READ FILE LISTING
+sp_configure 'allow updates',1
+reconfigure with override
+CLEAN OUT TEMPDB TMP FILES (files starting with tmp_)
+process_a_file $file if not master..syslogins
+process_a_file master..syslogins (if it existed)
+sp_configure 'allow updates',0
+reconfigure
+
+process_a_file
+{
+   use $db
+   select * into tempdb..tmp$table from $db..$table where 1=2
+   bcp tempdb..tmp$table in ".$DIRECTORY."/".$db."_".$table." ".$mode." -U$opt_U -P$passwd -S$opt_S
+   begin tran x
+   delete $table
+   insert $table select * from tempdb..tmp$table
+   commit tran x
+   drop table tempdb..tmp$table
+}

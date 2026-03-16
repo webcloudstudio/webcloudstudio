@@ -1,0 +1,12 @@
+=head1 The Welcome Tab
+
+GENERAL: Navigate the configuration utility tabs from left to right.  Online help is available on our web site.
+
+PURPOSE: Introduction, License Details, License Acceptance
+
+This tab explains GEM and details licensing options.  New users will want to use our Free GEM License to trial the
+product - and switch to the Full GEM License after they are comfortable.
+
+Select "I AGREE WITH THE LICENSE" to continue
+
+The GEM Help pages provide help to guide you through your install.  Each page has a separate help section.

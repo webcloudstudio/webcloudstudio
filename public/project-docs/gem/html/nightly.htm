@@ -1,0 +1,674 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Generator" content="Microsoft Word 97">
+   <meta name="Template" content="D:\PROGRAM FILES\MICROSOFT OFFICE\OFFICE\html.dot">
+   <meta name="GENERATOR" content="Mozilla/4.7 [en] (WinNT; U) [Netscape]">
+   <meta name="Author" content="Ed Barlow">
+   <meta name="Description" content="This page describes a free set of Sybase Backup Scripts">
+   <meta name="KeyWords" content="Sybase, Backup, Free, Shareware, Dump">
+   <title>Sybase Backup Scripts</title>
+</head>
+<body background="sybase_back.gif">
+&nbsp;
+<center><table BORDER=2 CELLPADDING=5 BGCOLOR="#FFFFFF" >
+<tr>
+<td>
+<center><b><font face="Arial Black"><font color="#663300"><font size=+3>Sybase
+Backup Scripts</font></font></font></b>
+<br><b><font face="Arial Black"><font color="#663300">by Edward Barlow</font></font></b></center>
+</td>
+</tr>
+</table></center>
+
+<h2>
+<a NAME="INTRODUCTION"></a>INTRODUCTION</h2>
+This package is a simple backup facility for Sybase. It includes a robust
+<i>Dump</i>,
+<i>Dbcc</i>,
+and <i>Update Statistics</i> services. Driver scripts (<i>nightly.SERVERNAME</i>
+or <i>tran_log.SERVERNAME</i>) to run these programs are created by the
+<i>configure</i>
+utility. A menu for operators is provided (<i>menu.ksh</i>) that provides
+them with the ability to load dumps and incremental dumps and to start
+and stop your server (among other things).
+<p>All programs are written in bourne shell using a robust shell function
+library (<i>func.ksh</i>). The individual scripts should, consequently,
+be simple and easy to understand. The library interfaces with a error handler
+that can be customized easily to send mail, page, write to syslogd, or
+do whatever you want (<i>on_error.ksh</i>).
+<p>The V4 release contains a few bug fixes and a new menu script. I highly
+recommend you check <a href="www.edbarlow.com">my web site</a> periodically
+to find any future releases. If you haven't already,
+<a href="http://www.edbarlow.com/download/latest.tar.gz">Download
+the latest gzipped tar file</a>. Note this is a
+compressed tar file even though it ends with a .tar extension - rename
+it to latest.tar.gz.  NOTE: this download is my full toolkit.  The shell
+backup scripts are in the subdirectory shell_backup_scripts : change
+to that directory and follow the instructions in the <a href="#INSTALLATION">installation</a>
+section. If you have any comments, <a href="mailto:barlowedward@hotmail.com">please
+contact me.</a>
+<p>Note that this package, which is in reliable use at quite a few locations
+is intended for "normal" sybase installations.&nbsp; Specifically, it relies
+on dumping the databases to disk.&nbsp; Your system administrator is then
+responsible for backing up to tape.&nbsp; It also makes no provision for
+striping of dumps.&nbsp; This means that if you have large databases (over
+2GB), you will be unable to use this package because the databases will
+not be dumpable to system files on most unix systems.&nbsp; See your system
+<br>administrator or contact the author with any questions in this area.
+<p>The author is happy to discuss installation, support, and customization
+of this package to your environment.&nbsp; Contact SQL Technologies at
+www.edbarlow.com for further information.
+<p>This package is being distributed for free. Enjoy!
+<p>This file should contain everything you need to know regarding these
+scripts, but it is a bit disorganized.&nbsp; Please read it.
+<h2>
+<a NAME="Table"></a>TABLE OF CONTENTS</h2>
+
+<table BORDER CELLPADDING=7 WIDTH="100%" >
+<tr>
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF"><a href="#INTRODUCTION">Introduction</a></td>
+
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF"><a href="#DIRECTORY_LAYOUT">Directory
+Layout&nbsp;</a></td>
+
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF"><a href="#nightly.SERVERNAME">The
+Main Backup Script</a></td>
+
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF"><a href="#nightly.SERVERNAME">The
+nightly.SERVERNAME script</a></td>
+
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF">
+<dir><a href="#RIGHTS">Rights</a></dir>
+</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF"><a href="#INSTALLATION">Installation</a></td>
+
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF"><a href="#NOTES">Notes</a></td>
+
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF"><a href="#PROGRAMS">Programs</a></td>
+
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF"><a href="#MENU">Menu</a></td>
+
+<td VALIGN=TOP WIDTH="20%" BGCOLOR="#FFFFFF">
+<dir><a href="#SECURITY">Security</a></dir>
+</td>
+</tr>
+</table>
+
+<h2>
+FEATURES</h2>
+The following are some of the features of these scripts:
+<ol>
+<li>
+Standard Nightly Processing: including Full Database Dump, Update Statistics,
+sp_recompile, and standard DBCC's</li>
+
+<li>
+Optional Auditing - which creates a report of your configuration that can
+be used for disaster recovery.&nbsp; This report includes dumps of the
+system tables, and formated reports from extended stored procedure librayr
+proceures.&nbsp; It requires the free extended stored procedure library
+(download from the same site where you got these backup scripts</li>
+
+<li>
+Optional Object Level BCP Backups - databases can be specified that allow
+bcp backups</li>
+
+<li>
+Nice error handling - it is clear if there are errors</li>
+
+<li>
+Backup files are optionally compressed</li>
+
+<li>
+Scripts for loading backups</li>
+
+<li>
+Menu system that operators can use - which you may place in a restricted
+shell for startup</li>
+</ol>
+
+<h2>
+<a NAME="DIRECTORY_LAYOUT"></a>DIRECTORY LAYOUT</h2>
+All output is placed in a nice directory structure,identified to the system
+when you run the configure command.&nbsp; The directory identified to configure
+will be composed of the following sub directories:
+<br>&nbsp;
+<table>
+<tr>
+<td>$DSQUERY/audits</td>
+
+<td>Directory to put audit results (optional)</td>
+</tr>
+
+<tr>
+<td>$DSQUERY/bcp</td>
+
+<td>Directory to put bcp level backups (optional)</td>
+</tr>
+
+<tr>
+<td>$DSQUERY/dbcc</td>
+
+<td>Directory for raw dbcc output</td>
+</tr>
+
+<tr>
+<td>$DSQUERY/dbdumps</td>
+
+<td>Directory for local server dumps&nbsp;</td>
+</tr>
+
+<tr>
+<td>$DSQUERY/errors</td>
+
+<td>Directory for error messages</td>
+</tr>
+
+<tr>
+<td>$DSQUERY/logdumps</td>
+
+<td>Directory for local server tran log dumps</td>
+</tr>
+
+<tr>
+<td>$DSQUERY/sessionlog</td>
+
+<td>Directory for run logs (necessary if you are running from a scheduler
+like cron)</td>
+</tr>
+</table>
+
+<p>Note the beauty of this layout.&nbsp; Because error messages are written
+to files in an error directory, you only need to peruse this directory
+on a daily basis.&nbsp; If any files are in this directory there is a problem!&nbsp;
+The other directories contain enough information to resolve the problem
+(ie. a full log of the session is in the sessionlogs subdirectory and the
+raw dbcc output is in the dbcc directory...).&nbsp; The administrator is
+responsible for cleaning the error directory after reading the files it
+contains. Remember, files are only created in the error directory if a
+problem is encountered. Session logs and dbcc output are kept in sessionlog
+and dbcc, but will probably never need to be used (unless you are debugging
+a problem). dbdumps and logdumps contain the actual dumps. The audits subdirectory
+contains the output of the two audit shell scripts.&nbsp; I believe these
+files will contain system configuration information sufficient to rebuild
+your server after a system failure.
+<h2>
+<a NAME="nightly_SERVERNAME"></a>nightly.$DSQUERY</h2>
+When you initially install the scripts (using the configure command), you
+will create a nightly.$DSQUERY, a tran_logs.$DSQUERY, and a test_script.$DSQUERY
+script. The nightly.$DSQUERY script is the main backup script and is run
+once per night (hence the name nightly).&nbsp; The tran_logs* scripts dump
+all transaction logs on a data server as appropriate (no data and log on
+same device, truncate log on checkpoint is off).&nbsp; The test_script*
+scripts are used to test the backup scripts.&nbsp; Test script will do
+a simple quick dump of master to see that things (like paths) are set up
+correctly. Be forewarned, these script contain <b>embedded</b> <b>passwords</b>.
+See the security section for more on this.
+<p>The nightly.$DSQUERY script will do the following:
+<ol>
+<li>
+Dbcc everything but tempdb/model</li>
+
+<li>
+Report on db's that have either Select into on or have data and log on
+the same segment, but have Trunc. Log on chkpt off .</li>
+
+<li>
+Do a transaction log dump prior to the full dump.</li>
+
+<li>
+Dump All Databases but tempdb/model.</li>
+
+<li>
+Optionally Compress the dumps</li>
+
+<li>
+Update Statistics and Recompile everything but tempdb/model</li>
+
+<li>
+Optionally Run One of the Two Audit Reports Of Your Configuration (if extended
+procs installed)</li>
+</ol>
+This is fine for the majority of db's, but if your dbs are too large to
+dump to files (usually when they exceed the 2 GB file size for Unix) you
+are on your own and will need to dump directly to tape.
+<p>The two audit reports may contain sensitive information and should probably
+be protected.&nbsp; They require my extended stored procedure library to
+be installed (after v3.1).&nbsp; The audit scripts audit potential configuration
+and security problems as well as printing device and database layouts.
+<h2>
+<a NAME="tran_logs_SERVERNAME"></a>tran_logs.$DSQUERY</h2>
+This script does a transaction log dump on SOME of your databases. The
+databases that are dumped are those that are "production", which means
+that "trunc. log on checkpoint" is off and "select into/bcp" is also off.
+Of course, master, model, and tempdb are never transaction log dumped.
+<h2>
+<a NAME="RIGHTS"></a>RIGHTS AND REDISTRIBUTION</h2>
+This package and related programs is copyright&copy; 1996-2000 by Edward
+M Barlow. All Rights to this program are reserved. You may use and redistribute
+this software, without charge, so long as copyright notices remain intact
+and you make no money in the process. And if you are a kind soul and have
+a consulting budget - keep me in mind for that spot!
+<p>To the best of my knowledge this program works as specified, but I make
+no warranty about it (i.e.. you get what you pay for). I recommend you
+browse the scripts to see what i have done prior to using them in any production
+environments. Let me repeat, I offer no WARRANTY whatsoever on this software.
+If you make any changes that make the tool better, please send the changes
+to me so all can have them. I rely on people like yourself to enhance my
+software and make it work beautifully.
+<h2>
+<a NAME="INSTALLATION"></a>INSTALLATION</h2>
+You should install this package as the Sybase account (or whatever account
+you will use for the backups). The reason for this is so that you have
+appropriate permissions on dump files (rename etc...). If you really need
+to change this, comment out the AmISybase functions in the drivers (but
+be careful here - check the permissions on your dumps).
+<p>The scripts are released as a compressed tar file (either extension
+.Z or .gz). Be sure that the downloaded file has the appropriate extension
+(some time the browser will truncate the extension).
+<ol>
+<li>
+Download the file from the web site <a href="http://www.edbarlow.com">http://www.edbarlow.com</a></li>
+
+<li>
+Rename the script to nightly.tar.gz if your brain dead browser downloaded
+it as nightly.tar (your mime types are wrong)</li>
+
+<li>
+Run the command <i><b>gunzip nightly.tar.gz</b>
+</i>or<i> <b>gzip -d nightly.tar.gz</b></i>.
+to uncompress the file</li>
+
+<li>
+untar with the command <i><b>tar xvf nightly.tar</b>,</i> which will create
+the shell_backup_scripts subdirectory.</li>
+
+<li>
+make a directory into which you wish to put your backups.&nbsp; This directory
+should, of course, have enough space for your backups.&nbsp; If you need
+multiple file systems for this (due to a system 2GB file system limitation),
+dont worry at this point.&nbsp; Let the configure script (next step) create
+the directory tree under the base directory created in this step - and
+then mount additional file systems into the mount points created by configure.b</li>
+
+<li>
+Change into this directory and then run the <b><i>configure</i></b> script.
+This script will ask you for your SERVER name, the login that you will
+run as (either sa or an operator account that you have already set up),
+the password for that account, and a directory (which must already be set
+up) for the dumps. The dump directory should have lots of space. The configure
+script will set up subdirectories in the dump directory and will create
+a nightly.$DSQUERY, a tran_logs.$DSQUERY, and a test_script.$DSQUERY script.</li>
+
+<li>
+Test your configuration with <b><i>run test_script.$DSQUERY</i></b>, which
+tests your setup by trying to dump master.&nbsp; At this stage it is common
+to get a message about misconfigured databases.&nbsp; I lump databases
+into two categories: production databases (select into/bcp is off, truncate
+log on chkpt. is off, and data and log are on separate devices) and development
+databases ( truncate log on chkpt. is on).&nbsp; Any other configuration
+will generate an error message, and to be honest, you should fix it.&nbsp;
+The main problem here is that sometimes some sybase system databases (notably
+sybsystemprocs) are set up with wierd options.</li>
+
+<li>
+Further test by run <b><i>nightly.$DSQUERY</i></b> and<b><i> tran_logs.$DSQUERY</i></b>
+by hand.</li>
+
+<br>Add your script to sybase's crontab (or whatever scheduler you use).&nbsp;
+On unix this is done with <b><i>crontab -e.&nbsp; </i></b>If your editor
+doesn't work here, set the environment variable EDITOR (e.g. <b><i>EDITOR=/bin/vi</i></b>).&nbsp;
+If you get a permission violation, contact your unix support person and
+have them allow you to run cron jobs.&nbsp; A sample cron can be found
+in crontab.sample.&nbsp; Note that you must run the scripts as the SYBASE
+account.&nbsp; Note that the output already goes to the session file, so
+redirect cron output to /dev/null so you dont get voluminous mail. ie.<i>
+/home/programs/bin/nightly.SYBASE >/dev/null</i>. You probably want to
+dump tran logs every ten minutes on production systemscrontab.sample.</ol>
+If you wish to run the menu.ksh program in a restricted unix account, modify
+your /etc/password (however you normally do this). You probably want it
+to run as a user in group Sybase (so you can use Sybase for something else).
+If this is the case, test starting a server - you could easily bomb on
+permissions. To set up as a member of group Sybase, remember that permissions
+should be set for group.
+<p>If you have specific error handling in mind, edit on_error.ksh, which
+is the script that handles all errors.&nbsp; This script is easily modifiable.
+<h2>
+COMPRESSION</h2>
+The current implementation supports database backup compression (local
+configurations only).&nbsp; To compress your files, set the compression
+section of your environment file:
+<br>&nbsp;
+<dl>
+<dl>
+<dt>
+#</dt>
+
+<dt>
+# COMPRESSION</dt>
+
+<dt>
+#</dt>
+
+<dt>
+# typically this will be /usr/local/bin/gzip and gunzip</dt>
+
+<dt>
+#&nbsp; or /usr/ucb/compress and uncompress.&nbsp; Leave blank for no compression.</dt>
+
+<dt>
+COMPRESS_PROGRAM=</dt>
+
+<dt>
+UNCOMPRESS_PROGRAM=</dt>
+</dl>
+</dl>
+To something like
+<blockquote>&nbsp;
+<br>COMPRESS_PROGRAM=/home/programs/bin/gzip
+<br>UNCOMPRESS_PROGRAM=/home/programs/bin/gunzip</blockquote>
+There are some gotcha's if you do compression (which is why it has not
+been in until the latest version).&nbsp; Firstly, to compress you need
+double the disk space of the dump files (it makes a copy).&nbsp; This can
+cause all&nbsp; kinds of disk errors if you are not careful.&nbsp; Secondly,
+the backup program will now break when run by any account except Sybase
+(or root i guess).&nbsp; It will get a permission violation (cant modify
+to file).&nbsp; Other than that the compression should work fine.
+<p>One note on file compression.&nbsp; It takes twice the space to compress
+a file. There is no space checking involved.&nbsp; If you run out of dump
+space the scripts will die.&nbsp; If you need to compress, you might not
+have room to compress.
+<h2>
+<a NAME="NOTES"></a>FREQUENTLY ASKED QUESTIONS</h2>
+This package is stable.&nbsp; Every year or so i get an enhancement request
+- and this year there was even a trivial (and silly) bug.&nbsp; But modifications
+to the package are rare - which means it should be stable!!!&nbsp; And
+that is the point isnt it.
+<p>This package should run cleanly from cron.&nbsp; If it doesn't, test
+the nightly* and tran_logs* from the command line.&nbsp; There could well
+be some environmental difference that is breaking things.
+<p>Run out of the *sybase* cron instead of root (if you run out of root,
+you should do a "su - Sybase -c" but this is not recommended).&nbsp; In
+fact to make this a little more clear, almost every real problem I have
+ever encountered with the scripts has been by people using "su - Sybase
+-c..." instead of running out of sybase's crontab (so just dont do it).
+<p>A session log AND a separate error log are created for each run.&nbsp;
+The error log is removed after a run if it is empty and mailed to the specified
+user(s) if it is not empty.
+<p>User objects (non dbo) will not have statistics updated on them, I cant
+figure out how to get sp_recompile to work on these, so no dice.
+<p>New system 11.9 and System 12 features are not included (the scripts
+have not been modified in years).&nbsp; If any new features come out that
+should be included in this package please contact the author.
+<p>The scripts should work on microsoft sql server, but i have not tried
+them on this server in a long time.&nbsp; If you have a MS SQL server,
+try them out and let me know the results (and tell me how the scripts fail).&nbsp;
+Of course, to run them on a SQL server you will probably need a UNIX clone
+like MKS Toolkit to get them to work.
+<p>all scripts can be viewed and edited better with tabstop=3
+<p>Modify on_error.ksh to manage your own errors (perhaps you wish to get
+pages etc...).&nbsp; Errors pass through this script before they are are
+written&nbsp; to a file (identified in the environment file) .&nbsp; You
+can modify this for your own error&nbsp; handler.
+<p>For remote servers, a file called GENERATION.$DSQUERY is created.&nbsp;
+This file maintains the current generation for the server.&nbsp; This number
+is incremented prior to a full nightly dump of the server.&nbsp; It uses
+this number to create a unique filename on the remote disk for the dumps.&nbsp;
+The transaction log dumps also have the generation as well as the hour
+the log was dumped (you can modify this if you dump more than once an hour).&nbsp;
+If you maintain more than one generation and need to do a restore, first
+check the GENERATION.$DSQUERY for that server to determine the current
+generation, restore that full dump (filename: {dbname}_dbdump{generation})
+then apply the transaction dumps appropriately.&nbsp; This is necessary
+because you cannot delete files on a remote disk (without NFS or some other
+such mounting capability which is not presumed). So in this way the dumps
+will write over the old dumps and will not require you to delete remote
+files.
+<p>Remote generations will not work with Pre System 10.
+<p>If you have tables named like State, Error, Msg, you may have trouble
+with the dbcc program.&nbsp; These strings are greped for as error messages.&nbsp;
+In the worst case (you have mixed case tables of these names, or a case
+insensitive server with these table names).
+<h2>
+<a NAME="PROGRAMS"></a>PROGRAMS INCLUDED</h2>
+
+<table BORDER=0 CELLSPACING=0 >
+<tr>
+<td VALIGN=CENTER>Dbcc.ksh&nbsp;</td>
+
+<td VALIGN=CENTER>run dbcc on 1 database</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>DumpSybase.ksh&nbsp;</td>
+
+<td VALIGN=CENTER>dump (full or incremental) 1 database&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>ENVIRONMENT.*</td>
+
+<td VALIGN=CENTER>your configuration parameters</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>ForEach.ksh</td>
+
+<td VALIGN=CENTER>Loop through a database</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>IsUp.ksh&nbsp;</td>
+
+<td VALIGN=CENTER>is a program up</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>on_error.ksh</td>
+
+<td VALIGN=CENTER>user error handler - edit to hook in however you want</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>Run*Audit.ksh</td>
+
+<td VALIGN=CENTER>audits a database</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>StartSybase.ksh</td>
+
+<td VALIGN=CENTER>start Sybase &amp; archive your logs</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>StopSybase.ksh</td>
+
+<td VALIGN=CENTER>stop Sybase</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>Update_Statistics.ksh</td>
+
+<td VALIGN=CENTER>update statistics on a database</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>configure</td>
+
+<td VALIGN=CENTER>setup the package</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>func.ksh</td>
+
+<td VALIGN=CENTER>all the functions you need</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>menu.ksh</td>
+
+<td VALIGN=CENTER>a menu program</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>nightly.*&nbsp;</td>
+
+<td VALIGN=CENTER>sample main nightly batch</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>test_script.*</td>
+
+<td VALIGN=CENTER>script to test your installation</td>
+</tr>
+
+<tr>
+<td VALIGN=CENTER>tran_logs.*</td>
+
+<td VALIGN=CENTER>script to do incremental dumps</td>
+</tr>
+</table>
+
+<h2>
+<a NAME="MENU"></a>MENU</h2>
+The menu.ksh program provides a user interface for the package. The menu
+is run by <i>menu.ksh SERVER BACKUPSERVER login [password]</i>. If password
+is not passed, you will be prompted. The menu is self-explanitory as follows
+<pre>DATABASE OPTIONS BACKUP MENU
+1) Backup A Database
+2) Restore A Database
+3) Start Database Server
+4) Stop Database Server
+5) Start Backup Server
+
+6) See Backup Error Logs
+7) Delete Backup Error Logs
+8) Show Database Error Log
+9) Show Database Backupserver Errorlog
+
+10) Kill User Process
+11) Show Users on System
+
+12) Put a Database In Single User Mode
+13) Put a Database In Multi User Mode
+
+q) quit</pre>
+
+<h2>
+<a NAME="SECURITY"></a>SECURITY</h2>
+Keep these scripts secure using unix permissioning - they should be owned
+by Sybase and NOT accessible by group other. Some of the scripts have passwords
+imbedded in them. Everything should run as Sybase (the user or the group)
+for safety. Internally, passwords are passed by a global variable so people
+using buggy versions of 'ps' can not discover them. To do this, the programs
+accept the variable SYBPASSWORD which is set in your driver script. If
+you wish to write your own drivers, copy what i do in the nightly.sample
+script and pass the string "N.A." to the programs in place of the password
+parameter.
+<p>The 2 audit reports may include sensitive information and should be
+protected if you so wish. The full audit script actually does a basic "crack"
+to discover logins where user=password. They require the extended stored
+procedure library to be installed (post v3.1). Samples are included as
+FullAudit.out and Audit.out.
+<h2>
+RIGHTS AND REDISTRIBUTION</h2>
+You are welcome to use and redistribute this software, without charge,
+provided you make no money from it and provided you maintain all copyright
+notices intact. To the best of my knowledge this program works as specified,
+but I make no waranty about it (ie.&nbsp; you get what you pay for).&nbsp;
+I recommend you browse the scripts to see what i have done prior to using
+them in any production environments.&nbsp; I offer no WARRANTY whatsoever
+on this software. It is ok for you to modify any of the programs (so long
+as you dont remove any of the copyright notices).&nbsp; If you make any
+changes that make the tool better, send the changes to me so all can have
+them.&nbsp; I rely on people like yourself to enhance this toolkit and
+make it work beautifully.
+<p>This software is copyright &copy;1996-2000 by Edward Barlow
+<h2>
+OTHER</h2>
+Thanx to Stephen Agan who modified the backup scripts to support remote
+servers.
+<br>&nbsp;
+<h2>
+VERSION INFORMATION</h2>
+
+<dl><b><font face="Courier New,Courier"><font size=-1>V5.1: Sun Oct 10
+15:04:14 EDT 1999</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>&nbsp;&nbsp;&nbsp; 11/1/99
+Made tran_logs.sample not remove dbcc files</font></font>
+<br><font face="Courier New,Courier"><font size=-1>&nbsp;&nbsp;&nbsp; 10
+13 99 Made fix to tran_logs.sample .sh extensions changed to .ksh</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>V5.0: Wed Jun&nbsp;
+9 10:28:13 EDT 1999</font></font></b>
+<br><b><font face="Courier New,Courier"><font size=-1>V4.6: Fri Oct 30
+14:24:39 EST 1998</font></font></b>
+<br><b><font face="Courier New,Courier"><font size=-1>V4.5: Sun May 17
+18:23:10 EDT 1998</font></font></b>
+<br><b><font face="Courier New,Courier"><font size=-1>V4.4: Fri Apr&nbsp;
+3 15:45:03 EST 1998</font></font></b>
+<br><b><font face="Courier New,Courier"><font size=-1>V4.3: Sun Apr 12
+12:12:51 EDT 1998</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>Removed configure.cfg
+from distribution. no AmISybase function in default config. compression
+into configuration program. full auditing not by default.</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>V4.2: Mon Jun 23
+10:45:22 EST 1997</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>added -type f to find
+commands for windows nt systems removed : from date of files&nbsp;<b> </b>Command
+line options to nighlty. Fixed run_query which could generate spurious
+messages when, for example, you had a table named error or Msg in your
+database.</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>v4.1</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>Added support for backing
+up remote servers (including generations). Added ability to mail error
+file to certain user(s). Prompt user for # of generations in configure.
+Added nightly.jobs to automagically submit all nightly jobs in the directory.
+Added backup via bcp BCP scripts. do not handle identities currently in
+bcp.</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>v4.0</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>added menu.ksh changed
+a variety of things - including dynamic get of errorlog from the RUN_xxx
+scripts. added compression ability modified docs changed Update stats routine
+to make ForEach ./ForEach added ISQL_FLAGS variable removed chmod -f flag
+- doesnt work on all unix versions</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>v3.4</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>fixed dbcc error of
+catting whole thing to one line configure history file created with default
+answers for server chmod to protect the directory for the <b>v3.3 Fixes&nbsp;
+
+</b>configure gives error if cur directory not made by system added purge
+of sessionlogs changes status to Status in test* Added Audit Routines</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>v3.2</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>minor error in tran_logs.*
+one final ./func.ksh if . not in path</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>v3.1</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>removed ForEach* programs
+fixed alert in nightly fixed bug in purge of log dumps moved initialize
+later so you could run Dump by hand (bug) moved more stuff from nightly
+to func.ksh</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>v3</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>made '.' not be required
+in path removed error log if empty made configure able to create dir if
+it exists removed need for dump devices unless 4.9 configure creates nightly.SERVER
+files Alert on bad dump databases now handles multiple servers per system
+- need different install for now create environment file</font></font>
+<br><b><font face="Courier New,Courier"><font size=-1>v2</font></font></b>
+<br><font face="Courier New,Courier"><font size=-1>If $SYBASE/install/errorlog_server
+is on mounted partition, Stop/start now work Changed a bunch of messages
+Added configure utility Modified Error Handling so it is much more robust.
+Print normal dump messages to the screen. If dump file exists, the program
+will not stall. Write to session log</font></font></dl>
+
+<hr>
+<br>Ed
+<br>barlowedward@hotmail.com
+<p>The current home for future releases is my web site:
+<p>http://www.edbarlow.com
+</body>
+</html>

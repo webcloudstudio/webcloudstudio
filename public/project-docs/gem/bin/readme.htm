@@ -1,0 +1,3595 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+<!-- Copyright (c) 2005-2011 By SQL Technologies - All Rights Reserved -->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM GEM UTILITIES GUIDE</title>
+  <link rel="stylesheet" type="text/css" href="../styles/mystyle.css">
+  <meta name="author" content="Edward Barlow">
+	<meta name="Description" content="these useful perl utilities for sybase and sql server use DBI and DBD">
+	<meta name="keywords" content="sybase, sql server, microsoft, utilities, perl, command line, administration, tools, free, GEM, useful">
+</head>
+<body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GEM UTILITIES GUIDE</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
+ <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
+<A NAME=link2></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>DATABASE UTILITIES TOOLKIT </H1>
+<H3> A Perl Toolkit for DBAs</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link3></A>
+<h1>Description</h1>
+<p>
+<P>
+ This package contains database related utilities written in perl.  These utilities are have been designed over time to automate  database related tasks.<P>
+ If you make changes to these utilities, find bugs, or if you have utilities to contribute, please contact the author.<P>
+ The toolkit requires several the GEM perl libraries.  These libraries are installed by the installation process, which modifies the perl library path by adjusting the 'use lib' lines in each utility.  If you run the utilities and get module not found errors, you should rerun the GEM configuration utility.<P>
+ All material in this package is Copyright &copy; 1998-2006 By Edward Barlow. All rights are reserved. <P>
+ This package is distributed as part of the Generic Enterprise Manager  and right to use is superseeded by the Generic Enterprise Manager right to use.<P>
+
+<A NAME=link4></A>
+<h1>On line documentation</h1>
+<p>
+<P>
+ You can use perldoc to get instant documentation/help on any of the programs in this package. <i>perldoc <A HREF=#link35>adduser.pl</A></i> will give you the usage of the <A HREF=#link35>adduser.pl</A> command. You can also pass an invalid argument (ie -?) to a program to get  an abreviated usage specification.<P>
+
+<A NAME=link5></A>
+<h1>Supported systems</h1>
+<p>
+<P>
+ These utilities work under both UNIX and NT.  <P>
+
+<A NAME=link6></A>
+<h1>System requirements</h1>
+<p>
+<P>
+<LI><B>perl</B>
+<P>
+ These utilities require perl 5.002  or later.  Unix Source can be found at <A HREF=http://www.perl.com/CPAN/src/latest.tar.gz>www.perl.org</A>.  An NT version can be found at <A HREF=http://www.activestate.com>www.activestate.com</A>.<P>
+ On NT, you will need to associate perl with .pl extensions (done in the default NT configuration).<P>
+<LI><B>perl add ons</B>
+<P>
+ Sybase::Dblib is required as a perl add on.<P>
+ A few NT specific utilities will use Win32::Process Win32::Service and Win32::Shell. These need not be installed unless you wish to run these NT utilities - they start with the letters nt.<P>
+ The add on libraries will need to be installed by hand.  Use ppm.pl on NT and follow normal download instructions on CPAN to install the UNIX version.<P>
+<LI><B>environment</B>
+<P>
+ Your version of perl must be in your path and your environment variable $SYBASE must also be set.<P>
+<LI><B>stored procedures</B>
+<P>
+ The free extended stored procedure library (also found at http://www.edbarlow.com) <b>MUST</b> be installed on your sybase servers.  These stored procedures are used throughout this code so be sure the latest version is installed.<P>
+</UL>
+<P>
+
+<A NAME=link7></A>
+<h1>Html</h1>
+<p>
+<P>
+ <A HREF=#link7>Html</A> is an easy, platform independant way of showing output. Many of these utilities output html if the -h or --HTML options  are used. This often is the prefered mode of output (you get color, formatting etc...) and it sure beats text files. You can look at these files by pointing your browser to them, or install your own web server (apache is free from www.apache.org) and to place output files in a location that web server knows about to view it very nicely.<P>
+
+<A NAME=link8></A>
+<h1>Notes</h1>
+<p>
+<P>
+ Most of the utilities in this package use DBIFunc, the updated dbi  database library.  Some of these programs still use Sybase::SybFunc, an older version that uses native Sybperl database connectivity.   The two libraries are incompatible and Sybase::SybFunc is depreciated.<P>
+
+<A NAME=link9></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>BkpChk_Mssql_Logs.pl </H1>
+<H3> get and save info about backups of your sql servers</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Finds the state of your windows MSSQL backups by reading the eventlogs and then saving the results into the Alarms database.  It then runs <A HREF=#link12>BkpChk_Report.pl</A> to create reports.<P>
+ This command is called from two batches:<P>
+ MssqlBackupCrosscheck<pre>
+   <A HREF=#link9>BkpChk_Mssql_Logs.pl</A> -HOURS=3 --OUTFILE=...html_output/MssqlBackupCrosscheck.txt --BATCHID=MssqlBackupCrosscheck\n",
+</pre>
+<P>
+ MssqlBackupCrosscheckWeekly<pre>
+   <A HREF=#link9>BkpChk_Mssql_Logs.pl</A> -DAYS=7 --OUTFILE=.../html_output/MssqlBackupCrosscheckWeekly.txt --BATCHID=MssqlBackupCrosscheckWeekly\n",
+</pre>
+<P>
+ The output from this command will therefore be<P>
+<pre>
+   MssqlBackupCrosscheck.txt or MssqlBackupCrosscheckWeekly.txt
+</pre>
+<P>
+ This program will also call <A HREF=#link12>BkpChk_Report.pl</A> To Create<P>
+<pre>
+   <A HREF=#link12>BkpChk_Report.pl</A> --SQLSVRONLY -NOSTDOUT --ERROR_REPORT=.../html_output/MssqlBackupCrosscheckErrors.html    --ALL_REPORT=.../html_output/MssqlBackupCrosscheck.html --BATCHID=$BATCHID --TRANHOURS=2
+</pre>
+<P>
+ Creating<pre>
+   MssqlBackupCrosscheckErrors.html
+   MssqlBackupCrosscheck.html
+</pre>
+<P>
+
+<A NAME=link10></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RepositoryRun.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link11></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+
+<A NAME=link12></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>BkpChk_Report.pl </H1>
+<H3> SQL Server Backup Report</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Scans the event log and creates a backup and restore history for a server. There are two types of reports here.  The first is the Backup Report, which simply prints backup details for a server.  The second is a Restore report which is more cmoplicated and shows restore mappings to the primary server<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link12>BkpChk_Report.pl</A> --ALL_REPORT=file --HTMLFILE=file --SYSTEM=system --TRANHOURS=hours --USER=sa --PASSWORD=password --SRVNAME=ODBCID --NOSTDOUT --REPORT=<backup|restore> --PRIMARY=<primary host if restore> --DEBUG --HTMLDETAIL=file --LISTEVENTS<P>
+<h3>EXAMPLE</h3>
+<P>
+ To see whats going on in a server<P>
+<pre>
+   <A HREF=#link12>BkpChk_Report.pl</A> --SYSTEM=S1 --HOURS=96
+</pre>
+<P>
+ To put results in a file<P>
+<pre>
+   <A HREF=#link12>BkpChk_Report.pl</A> --SYSTEM=S1 --HOURS=96 --NOSTDOUT --ALL_REPORT=my_report.txt
+</pre>
+<P>
+ Since the ascii report sucks - an heml file can be generated by<P>
+<pre>
+   <A HREF=#link12>BkpChk_Report.pl</A> --SYSTEM=S1 --HOURS=96 --NOSTDOUT
+      --HTMLFILE=my_report.html
+</pre>
+<P>
+ If you are using log shipping, a new report opens up.  Say your server is BACKUP1 which does log loads from PRIMARY1<P>
+<pre>
+  <A HREF=#link12>BkpChk_Report.pl</A> --SYSTEM=BACKUP1 --PRIMARY=PRIMARY1 --HOURS=96
+  --NOSTDOUT --HTMLFILE=main.html --REPORT=restore --HTMLDETAIL=details.html
+</pre>
+<P>
+ The above creates a linked pair of reports - with a summary in HTMLFILE and details of the shipping and loading in HTMLDETAIL.  Note that some times your report will be out of sync... the Behind time explains this - its possible that the lsn's dont match up intentionally.<P>
+
+<A NAME=link13></A>
+<h1>Backup crosscheck procedures</h1>
+<p>
+<P>
+ a) once per week we run <A HREF=#link14>BkpChk_UpdateStaticInfo.pl</A> to update BackupState table static information which includes a list of db's and servers that are on them as well as dboptions etc... document_all with report 23 or 24 will run this.<P>
+ b) For Windows, we run MssqlBkpChk.ksh (which calls <A HREF=#link9>BkpChk_Mssql_Logs.pl</A>) once per hour. This batch parses event logs and saves results in BackupState. The job then runs <A HREF=#link12>BkpChk_Report.pl</A> to generate latest reports<P>
+ <A HREF=#link9>BkpChk_Mssql_Logs.pl</A> -HOURS=3 --BATCHID=MssqlBkpChk<pre>
+   --OUTFILE=//samba666/sybmon/dev/data/html_output/MssqlBkpChk.txt  $*
+    &gt; //samba666/sybmon/dev/data/GEM_BATCHJOB_LOGS/Win_MssqlBkpChk.log
+   2&gt; //samba666/sybmon/dev/data/GEM_BATCHJOB_LOGS/Win_MssqlBkpChk.err
+</pre>
+<P>
+<pre>
+   -&gt; Calls <A HREF=#link12>BkpChk_Report.pl</A> --SQLSVRONLY -NOSTDOUT
+      --ERROR_REPORT=//samba666/sybmon/dev/data/html_output/MssqlBkpChkErrors.html
+      --ALL_REPORT=//samba666/sybmon/dev/data/html_output/MssqlBkpChk.html
+      --HTML
+      --BATCHID=HourlyBackupReport
+      --TRANHOURS=2
+</pre>
+<P>
+ =end<P>
+
+<A NAME=link14></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>BkpChk_UpdateStaticInfo.pl </H1>
+<H3> Update Backup Configuration Info For Reports</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   mssql_msdb_report.pl
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This program interrogates the msdb tables in order to create variables that can be used by the GEM backup scripts or whatever.  Basically, it dumps the msdb tables in a reasonable ascii format that you can read.<P>
+
+<A NAME=link15></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>UPdateBackupStateStaticInfo.pl </H1>
+<H3> Get Backup times And Save Them</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   UPdateBackupStateStaticInfo.pl -UUSER -SSERVER -PPASS -nmax_num_users
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Updates the static state information in the BackupState table for reporting purposes. Specifically, this program will<pre>
+  a) rectify the rows by removing rows for databases that no longer exist
+  b) update the is_tran_truncated, is_useable, and from_internal_system_name fields
+</pre>
+<P>
+ This program needs be run rarely (weekly?) and will be spawned by the Weekly Console Rebuild.<P>
+
+<A NAME=link16></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>monitor_tables.pl </H1>
+<H3> Sybase MDA Table Monitoring Reports</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link16>monitor_tables.pl</A> -USA_USER -SSERVER -PSA_PASS
+</pre>
+<P>
+
+<A NAME=link17></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>ConsoleArchiver.pl </H1>
+<H3> Archives The Console</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link17>ConsoleArchiver.pl</A>
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Archives the console. I have found that keeping backups of the console is invaluable for disaster situations.  The specific reasons:<P>
+<pre>
+  you can lose the configuration information you care about because it get overwritten
+</pre>
+<P>
+<pre>
+  you may need to look up configuration information from last month
+</pre>
+<P>
+<pre>
+  disk space is cheap!
+</pre>
+<P>
+ This will be run from a weekly batch, but only the first week of the month will actually do the overwrite.  After that it just exits out...<P>
+
+<A NAME=link18></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>QueryToCsv.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ Runs a query and puts output to a csv file<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+  perl <A HREF=#link24>QueryToCsv.pl</A> -LOGIN=USERNAME -SERVER=SERVERNAME -PASSWORD=PASSWORD -DATABASE=DATABASE -QUERYFILE=FILE --OUTFILE=FILE
+<P>
+</pre>
+
+<A NAME=link19></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>DR_Checker.pl </H1>
+<H3> Check your dr database configuration</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Checks Your Log Shipping Servers For<pre>
+   ... APPROPRIATE SET OF DATABASES (And Sizes if Sybase) & DB Flags
+   ... SYSLOGINS
+   ... TEMP SPACE (sybase)
+   ... SYSCONFIGURES
+   ... SQL Native Log ship status if needed
+</pre>
+<P>
+<h3>USAGE</h3>
+<P>
+ Usage: DR_Checker.pl --OUTFILE=file --HTMLFILE=file --SYSTEM=system --USER=sa --PASSWORD=password --SRVNAME=ODBCID --OUTFILE=<backup|restore> --PRIMARY=<primary host if restore> --DEBUG --HTMLDETAIL=file --LISTEVENTS<P>
+ #status_message( "\tCopying Syslogins\n" );<pre>
+   #status_message( "\tComparing Temporary Space\n" );
+   #status_message( "\tComparing Sysconfigures\n" );
+</pre>
+<P>
+ =end<P>
+
+<A NAME=link20></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GetSybMDASqlText.pl </H1>
+<H3> get running sql</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ GetSybMDASqlText.pl --SERVER=xxx --USER=xxx --PASSWORD=xxx --RUNMINUTES=s [--DELETE] [--TABULATE] [--REPORT] [--CLEAR]<pre>
+   --TABULATE will print the output formatted by columns (spaces)
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Uses the MDA tables to collect info on sql running on your servers<P>
+ Creates a table MDAhistory in db with output<P>
+ --REPORT allows you to see existing data<P>
+ --CLEAR clears out the table and exits<P>
+ --DELETE clears out the table and continues<P>
+ --RUNMINUTES allows you to schedule this via cron - it will run that number of minutes<P>
+ --TABULATE pretty prints the output which is probably what you want.  If its not passed, a tab is used as a delimeter. if it is passed, we remove all multi-whitespace so the query report looks ok<P>
+ this handles the differences between the 2 versions of the MDA table<P>
+ REQUIRES MDA TABLES TO BE INSTALLED & SET UP APPROPRIATELY<P>
+ SYBASE ONLY OF COURSE<P>
+<h3>MDA Tables</h3>
+<P>
+ sp_help monSysSQLText<pre>
+   NUMBER  : sql text pipe max messages
+   REQUIRES: enable monitoring, max SQL text monitored, SQL batch capture, sql text pipe max messages, and statement pipe active
+   *SPID
+   *KPID
+   *BatchID
+   ServerUserID         =&gt; suser_name()
+   SequenceInBatch      =&gt; CAN JOIN THESE FIELDS TOGETHER - THEY ARE ONLY 255 LONG
+</pre>
+<P>
+<pre>
+   SQLText
+</pre>
+ sp_help monSysPlanText<pre>
+   NUMBER  : plan text pipe max messages
+   REQUIRES: enable monitoring, plan text pipe max messages, and plan text pipe active
+   *SPID
+   *KPID
+   *BatchID
+   **ContextID
+   **PlanID
+   SequenceNumber
+   DBID
+   ProcedureID
+   PlanText
+</pre>
+<P>
+ sp_help monSysStatement<pre>
+   NUMBER  : statement pipe max messages
+   REQUIRES: enable monitoring, statement statistics active, per object statistics active, statement pipe max messages, and statement pipe active
+   *SPID
+   *KPID
+   *BatchID
+   DBID
+   ProcedureID
+   **PlanID
+   **ContextID
+   LineNumber
+   CpuTime
+   WaitTime
+   MemUsageKB
+   PhysicalReads
+   LogicalReads
+   PagesModified
+   PacketsSent
+   PacketsReceived
+   NetworkPacketSize
+   PlansAltered
+   StartTime            -&gt; VERY USEFUL
+   EndTime               -&gt; VERY USEFUL
+</pre>
+ monOpenObjectActivity<P>
+ Ideas - Batch Count By SPID/KPID/BatchId
+<A NAME=link21></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>HistServerMonitor.pl </H1>
+<H3> read logmaintplan table in mssql and save as heartbeats</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Reads the logmaintplan table in mssql - which stores sql server job states and stores the results as heartbeats.<P>
+
+<A NAME=link22></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>LockedLoginDetector.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link23></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+ Detects locked logins and alerts appropriately
+<A NAME=link24></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>QueryToCsv.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ Runs a query and puts output to a csv file<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+  perl <A HREF=#link24>QueryToCsv.pl</A> -LOGIN=USERNAME -SERVER=SERVERNAME -PASSWORD=PASSWORD -DATABASE=DATABASE -QUERYFILE=FILE --OUTFILE=FILE
+<P>
+</pre>
+
+<A NAME=link25></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RepositoryRun.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link26></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+
+<A NAME=link27></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RunCommandOnSystems.pl </H1>
+<H3> loop through your servers utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Run a program in all your servers.  <P>
+ In other words... if you wish to run a program to remove user paulr on a server you might type<P>
+<pre>
+        adduser -SSYBASE -Usa -PXXX -x -upaulr
+</pre>
+<P>
+ but with this utility, you could run that command on ALL your servers in one fell swoop with:<P>
+<pre>
+        <A HREF=#link27>RunCommandOnSystems.pl</A> --DOALL=sybase "adduser -SSERVERNAME -x -upaulr"
+</pre>
+<P>
+<h3>USAGE</h3>
+<P>
+ To Run Update Statistics on All msdb databases out there:<P>
+ perl <A HREF=#link27>RunCommandOnSystems.pl</A> --DOALL=sqlsvr perl G:/gem/ADMIN_SCRIPTS/dbi_backup_scripts/update_stats.pl -Dmsdb -Uxxx -Pxxx -SSERVERNAME<P>
+
+<A NAME=link28></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>runquery.pl </H1>
+<H3> rum a query on a server</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ RunQuery.pl --SERVER=xxx --USER=xxx --PASSWORD=xxx --DATABASE=db<pre>
+  --HTML --QUERY=xxx --TABULATE
+</pre>
+<P>
+<pre>
+  --TABULATE will print the output formatted by columns (spaces)
+</pre>
+<P>
+<pre>
+  --MAILTO will mail the output to the users ONLY if the query returns &gt;= 1 row.
+    This can be used for alarming.!
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This is a very basic program that uses standard arguments.  It takes a passed in query, runs it, and prints the output to standard output with minimal formatting.  Currently, this is only useful to test connectivity.<P>
+ If --TABULATE passed it pretty prints the output which is probably what you want.  If its not passed, a tab is used as a delimeter.<P>
+<h3>EXAMPLE</h3>
+<P>
+<pre>
+   perl RunQuery.pl --SERVER=SYBPROD -QUERY=sp__id --DATABASE=master --USER=sa --PASSWORD=xxx --SUBJECT=hi --MAILTO=noname@abc.com --MAILFROM=a@b.com --SMTPSERVER=xxx.xxx.com
+</pre>
+<P>
+
+<A NAME=link29></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RepositoryRun.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link30></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+
+<A NAME=link31></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RepositoryRun.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link32></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+
+<A NAME=link33></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RepositoryRun.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link34></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+
+<A NAME=link35></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>adduser.pl </H1>
+<H3> utility to add users and logins</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This perl script creates / drops logins & users.  It works in a set of databases (ie. you can pass in a wildcard for the db - but you probably dont want to pass in % or the user will be added to tempdb etc... It creates the login only if necessary.  The user is added to public if the group is not passed.   It deletes the login only if <b>-x</b> is passed - so you could invoke the script multiple times with multiple db% lists to get a useful setup.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        ./adduser.pl [-dx] -USA_USER -SSERVER -PSA_PASS -DDB_LIST
+            -uNEW_USER -pNEW_PASS -gNEW_GROUP [ -rDEF_DB -fFULLNAME ]
+</pre>
+<P>
+<pre>
+        DB_LIST may include wildcards
+            -d debug mode
+            -x remove stuff only
+</pre>
+<P>
+ You may pass a sybase wildcard to DB_LIST like xrm% and it will only work in those databases<P>
+ You may ignore <b>-U</b> and <b>-P</b> options if you have set up password file<P>
+<h3>NOTES</h3>
+<P>
+ It will print ugly messages if both the NEW_GROUP and the public group are not available.<P>
+<h3>BUGS</h3>
+<P>
+ It will fail if trying to remove login that has objects or that is actual db creator (not just owner).  You must run sp_changedbowner to get it to work.<P>
+
+<A NAME=link36></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>alldb.pl </H1>
+<H3> loop through your databases utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Run a program on every db in a server or on all objects in a database. You can select a subset of databases to run in and can run on objects by type (tables...).<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        Usage: AllDb -sne -TTYPE -SSRV -UUSR -PPASS -DDB SQL_STMT
+</pre>
+<P>
+ Log in to SRV and runs SQL_STMT in each database you can use.  This program may also be used to run a proc on each object in a database.<P>
+<pre>
+        B&lt;-s&gt; - no system databases
+        B&lt;-D&gt; - Database mask (include sybase wildcards) - Default = %
+        B&lt;-T&gt; - Object Type - Run "SQL_STMT ObjectName" for each
+              object of type -T
+        B&lt;-e&gt; - echo cmd to screen
+        B&lt;-n&gt; - dont exec command - just print it (sets -e option)
+</pre>
+<P>
+ The parameter to <b>-T</b> should be U (table), P (proc), TR (trigger)... as per the definition of the type field of sysobjects.<P>
+ Example: <em>AllDb -SX -Usa -Ppass exec sp_helpdb</em> will execute sp_helpdb in all your databases.<P>
+ Example: C<AllDb -SX -Usa -Ppass -Dxrm%db -TP sp_helptext> will execute sp_helptext on each proc in any databases that match the wildcard string xrm%db.<P>
+ Output is tab separated and no headers are printed (its not isql you know)<P>
+<h3>SEE ALSO</h3>
+<P>
+ AllSrv - AllSrv and AllDb can be used in conjunction easily<P>
+
+<A NAME=link37></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>allsrv.pl </H1>
+<H3> loop through your servers utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Run a program in all your servers.  This is useful with the other utilities provided in this directory.  It requires that the run utility take <b>-S</b>/<b>-U</b>/<b>-P</b> parameters.  The server should be in your password file as per Repository.<P>
+ In other words... if you wish to run a program to remove user paulr on a server you might type<P>
+<pre>
+        adduser -SSYBASE -Usa -PXXX -x -upaulr
+</pre>
+<P>
+ but with this utility, you could run that command on ALL your servers in one fell swoop with:<P>
+<pre>
+        AllSrv adduser -x -upaulr
+</pre>
+<P>
+ As you can see, the <b>-U</b>,<b>-P</b>, and <b>-S</b> parameters are added automatically<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        Usage: ./AllSrv Parameters
+</pre>
+<P>
+ Generic program  to run on all servers.  If you type<P>
+<pre>
+                "./AllSrv MY_PROG OTHER_PARM"
+</pre>
+<P>
+ you will end up executing<P>
+<pre>
+                "MY_PROG -SSRV -PPASS -UUSR OTHER_PARM"
+</pre>
+<P>
+ for all the servers in your password.cfg file.<P>
+
+<A NAME=link38></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>allsrv_query.pl </H1>
+<H3> loop through your servers utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Run a program in all your servers.  This is useful with the other utilities provided in this directory.  It requires that the run utility take <b>-S</b>/<b>-U</b>/<b>-P</b> parameters.  The server should be in your password file as per Repository.<P>
+ In other words... if you wish to run a program to remove user paulr on a server you might type<P>
+<pre>
+        adduser -SSYBASE -Usa -PXXX -x -upaulr
+</pre>
+<P>
+ but with this utility, you could run that command on ALL your servers in one fell swoop with:<P>
+<pre>
+        AllSrv adduser -x -upaulr
+</pre>
+<P>
+ As you can see, the <b>-U</b>,<b>-P</b>, and <b>-S</b> parameters are added automatically<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        Usage: ./AllSrv Parameters
+</pre>
+<P>
+ Generic program  to run on all servers.  If you type<P>
+<pre>
+                "./AllSrv MY_PROG OTHER_PARM"
+</pre>
+<P>
+ you will end up executing<P>
+<pre>
+                "MY_PROG -SSRV -PPASS -UUSR OTHER_PARM"
+</pre>
+<P>
+ for all the servers in your password file.<P>
+
+<A NAME=link39></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>allsrv_query_long.pl </H1>
+<H3> loop through your servers and run a query</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link40></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+ $ perl <A HREF=#link39>allsrv_query_long.pl</A><P>
+ Usage: allsqlsrv_query_long.pl --QUERY=Query --COLUMNS=1,3,5 --SHOWQUERIES --PRINT_HDR --TYPE=SQLSVR|SYBASE --DEBUG --HTML --HEADER=col1,col2 --SHOWSERVER<P>
+ Generic program to run a query on all servers.  If you type<pre>
+        "allsrv_query_long.pl Query"
+</pre>
+ you will end up executing<pre>
+        Query
+</pre>
+ on all your servers from the master database.<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This is the long arguments version of <A HREF=#link38>allsrv_query.pl</A> (and should be used in preference).  This program loops through all sybase and/or sql servers in your config files and runs a single query in them - formatting output appropriately.  You can control the columns to show, whether its html output etc...<P>
+ This is quite useful to get administrative values (like procedure cache size) from your servers or to audit them<P>
+
+<A NAME=link41></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>audit_fetch.pl </H1>
+<H3> analyze your sysaudits information</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Parses through sysaudits and gives you pretty output.  This relieves the signifcant pain in the rear end to look at audit info.  Since sybase auditing is brain dead in its timings (who decided to not audit end times of batches), the summary timings that this program calculates are really nearly useless - they are based on the difference between the statement and the time the next statement was run.<P>
+ Of use however, is the parser, which does things like parse down strings (in quotes) to nothing and remove parameters from stored proc text, which makes your output times summarized better.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        ./audit_fetch.pl [-d] -USA_USER -SSERVER -PSA_PASS
+</pre>
+<P>
+<pre>
+        optional parms
+        -t              optional table name (default=sysaudits)
+        -h              htmlize output
+        -p              parse/summarize the sql by removing quotes etc
+        -DDB            database name to use in selectivity criterion
+        -lLOGINNAME     login name to use in selectivity criterion
+        -sSTARTTIME     start time to use in selectivity criterion
+        -eENDTIME       end time to use in selectivity criterion
+        -d              DEBUG MODE
+</pre>
+<P>
+<pre>
+        sort options  (default is to sort text)
+        -o n  num hits, b  besttime, w  worsttime, a  avg time
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ html output is the preferred method of viewing the logs as tables are perfect for this kind of thing.<P>
+
+<A NAME=link42></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>bcp_out.pl </H1>
+<H3> copy files out of a database</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Bcp all tables out of a database and into flat files The files can be read with <A HREF=#link43>bcp_in.pl</A>.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link45>bcp_out.pl</A> [-DEBUG] [-BCP_COMMAND=cmd] [-BCP_ARGS=args] [--NOEXEC] --SERVER=xxx --USER=xxx --PASSWORD=xxx --DATABASE=db -EXCLUDE=TBL,TBL -INDIR=INDIR Tbl Tbl Tbl<P>
+<pre>
+     Extracts data from a database
+</pre>
+<P>
+<pre>
+     -BCP_ARGS=args for bcp - default is -n
+     -EXCLUDE=exclude tables (separated by comma)
+     -DEBUG debug mode
+</pre>
+<P>
+
+<A NAME=link43></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>bcp_in.pl </H1>
+<H3> utility to copy files into a server</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Bcp files into a server.  The files should be created with <A HREF=#link45>bcp_out.pl</A>. The files are in character mode with a delimeter of two tildas.<P>
+<h3>USAGE</h3>
+<pre>
+        <A HREF=#link43>bcp_in.pl</A> [-d] -UUSER -SSERVER -PPASS -DDB [-iDIR] File File File
+</pre>
+<P>
+
+<A NAME=link44></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>bcp_out.pl </H1>
+<H3> copy files out of a database</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Bcp all tables out of a database and into flat files The files can be read with <A HREF=#link43>bcp_in.pl</A>.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link45>bcp_out.pl</A> [-DEBUG] [-BCP_COMMAND=cmd] [-BCP_ARGS=args] [--NOEXEC] --SERVER=xxx --USER=xxx --PASSWORD=xxx --DATABASE=db -EXCLUDE=TBL,TBL -OUTDIR=OUTDIR Tbl Tbl Tbl<P>
+<pre>
+     Extracts data from a database
+</pre>
+<P>
+<pre>
+     -BCP_ARGS=args for bcp - default is -n
+     -EXCLUDE=exclude tables (separated by comma)
+     -DEBUG debug mode
+</pre>
+<P>
+
+<A NAME=link45></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>bcp_out.pl </H1>
+<H3> copy files out of a database</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Bcp all tables out of a database and into flat files The files can be read with <A HREF=#link45>bcp_out.pl</A>. The files are in character mode with a delimeter of two tildas.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link45>bcp_out.pl</A> [-dx] -UUSER -SSERVER -PPASS -DDB_LIST -oOUTDIR Tbl Tbl Tbl<P>
+<pre>
+      DB_LIST may include wildcards
+      If no TBLs defined, will bcp out all tables in the directory
+      OUTDIR is created if it does not exist
+      -d debug mode
+</pre>
+<P>
+
+<A NAME=link46></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>check_app_cksum.pl </H1>
+<H3> Check an application checksum (requires cksum command)</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Uses cksum program to compare checksums in a directory (and its subdirectories) with a static data file.  A great way to identify programs that are bad or out of date between a release and an output directory.  Ignores files with extensions .err, .log, .sample, .env, .cfg, or with digits as their extensions.<P>
+ Create a 'gold' area of your software and run the checksummer on it to create an output file.  You can then compare the output file to other directories to find what is different.   eg:<P>
+<h3>EXAMPLE</h3>
+<P>
+<pre>
+        # create my_file
+        <A HREF=#link46>check_app_cksum.pl</A> -D/a/b/c -omy_file
+</pre>
+<P>
+<pre>
+        # compare using my_file
+        <A HREF=#link46>check_app_cksum.pl</A> -D/d/b/c -imy_file
+</pre>
+<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link46>check_app_cksum.pl</A> -DDirectory [-oOUTFILE|-iINFILE] -RPrefix -f<P>
+ Checks application checksums against a file. Use -f to show files not in both file and directory.<P>
+ Note that the prefix is removed from the file names to ease comparison. If no prefix is sent, it is assumed to be same as Directory.<P>
+
+<A NAME=link47></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>clean_ctrl_char.pl </H1>
+<H3> cleanup control characters from files</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link47>clean_ctrl_char.pl</A> FILE FILE FILE ...<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Clean up control characters from files.<P>
+
+<A NAME=link48></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>clean_ctrl_M.pl </H1>
+<H3> parse off ctrl</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Filter that removes new lines that can be created when moving DOS-UNIX.  Can be used to operate on a file, directory (with subdirectories), or stdin.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        cat file | clean_ctrl_M
+        clean_ctrl_M -FFile
+        clean_ctrl_M -DDirectory
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ The program is simple.<P>
+
+<A NAME=link49></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>brdcst_interfaces.pl </H1>
+<H3> broadcast interfaces file to other servers</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ UNDER HEAVY DEVELOPMENT<P>
+ Broadcasts your interfaces file to other machines.  Requires homgenious environment.<P>
+
+<A NAME=link50></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>copy_statistics.pl </H1>
+<H3> Copy optdiag stats around</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link50>copy_statistics.pl</A>.pl -UUSER -SSERVER -PPASS -nmax_num_users
+</pre>
+<P>
+<h3>EXAMPLE</h3>
+<P>
+ /usr/local/bin/perl-5.6.1 /apps/sybmon/dev/ADMIN_SCRIPTS/bin/copy_statistics.pl<pre>
+   -SERVER=SYB1 -USER=sa -PASSWORD=xxx -DATABASE=clientmlp --TOSERVER=SYB2
+   --TABLE=hts_exec_control,hts_ord_control,hts_exec_adj
+</pre>
+<P>
+ Copies stats for the 3 three listed tables from SYB1 to SYB2<P>
+
+<A NAME=link51></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>copy_syslogins.pl </H1>
+<H3> maintain syslogins on servers that should be identical</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Some servers should have identical syslogins.  This simple utility maintains a slave server based on a master server.  The program will abort if the logins can not be maintained.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link51>copy_syslogins.pl</A>  -Fsrv [ -Uusr -Ppass ] -tsrv [ -uusr -ppass ]<P>
+ Note the syntax -F (FROM) server with login/pass from (-U/-P)<pre>
+           and  -t (to) server with login/pass from (-u/-p)
+</pre>
+ Copy New Logins Over (they must be mostly identical to start)<P>
+<h3>NOTES</h3>
+<P>
+ Requires select into/bcp on tempdb in target server.  Requires source and target server to be identical versions.  This is what i use to maintain servers that should have exact copies of logins from produciton (eg. hot backups, systems used for split nightly batch runs, and some developement servers)<P>
+
+<A NAME=link52></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>crdate_report.pl </H1>
+<H3> simple report on objects created</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ A basic security report.  Only works on production servers.<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link52>crdate_report.pl</A> --SYSTEMS=system[,system]<P>
+
+<A NAME=link53></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>create_dflt_groups.pl </H1>
+<H3> create read_only_group and super_user_group in your server</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This very simple perl script creates a group named super_user_group and a group read_only_group in all your databases in a server.  The super_user_group is granted select,insert,update,delete on all tables and views, execute on all procs.  The read_only_group is granted select on tables only.<P>
+ It is kind of nice to have these groups around and then you can manage who has access to what based on these things.  Of course, if you change ddl (drop/add stuff) then the permissions will be lost and you will need to add them back by rerunning this proc.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        <A HREF=#link53>create_dflt_groups.pl</A> [-dx] -USA_USER -SSERVER -PSA_PASS -DDB
+        -d debug mode
+        -x remove stuff only
+</pre>
+<P>
+ note database can be a wild card<P>
+
+<A NAME=link54></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>create_ins_script.pl </H1>
+<H3> create insert script utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Output a set of insert statements that will rebuild the data in a server.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   USAGE: <A HREF=#link54>create_ins_script.pl</A> -Ssrv -Uusr -Ppass -Ddb -ttable -qquery
+     [-eexclcol1,exclcol2] -iintcol1,intcol2
+</pre>
+<P>
+<pre>
+   -i no quote columns (used for user defined types)
+   -e exclude from report
+</pre>
+<P>
+<pre>
+   Output is placed in tablename.ins
+</pre>
+<P>
+<pre>
+   If no query passed with -q it will do a select *
+</pre>
+<P>
+
+<A NAME=link55></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>crosstab.pl </H1>
+<H3> create a crosstab output</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Creates a cross tab report based on a query.  This reformats your output in a nice concise manner.  For example, say you wished to run a report on each database in your server and generate a report that looks like:<P>
+<pre>
+            public  group1   group2   group3
+   master        3 users  2 users  2 users  2 users
+   model         0 users  2 users  2 users  2 users
+   tempdb        0 users  2 users  2 users  2 users
+   sybsecurity        0 users  2 users  2 users  2 users
+</pre>
+<P>
+ You would first write a query that looks like<P>
+<pre>
+   select  name, count(*), "users"
+   from    sysusers
+   etc etc....
+</pre>
+<P>
+ To Return<P>
+<pre>
+   public   4         users
+   group1   3         users
+</pre>
+<P>
+ Of course this only works in one database.  You then run your cross tab creator and it will create the crosstab.<P>
+<pre>
+  <A HREF=#link55>crosstab.pl</A> -Uxxx -Sxxx -Pxxx -D% -Q$QUERY -R0 -C1 -O2,3
+</pre>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+  <A HREF=#link55>crosstab.pl</A> [-dx] -USA_USER -SSERVER -PSA_PASS -D[DB,DB2,DB3]
+      -Q[Q1,Q2] -R[Row1,Row2...] -C[Col1,Col2] -O[Out1,Out2] -ih
+</pre>
+<P>
+<pre>
+      -D - Database list (may have wildcards)
+      -Q - Query List
+      -R - Rows
+      -C - Columns
+      -O - Output
+      -i - integer output (sum em up)
+      -h - html output
+</pre>
+<P>
+ Column number 0 is the database name you are running in - unless u dont pass a server/user/password and are working on all your servers as per the Repository module.  In that case, column number 0 is the server and column number 1 is the database.<P>
+<h3>EXAMPLES</h3>
+<P>
+<UL>
+<P>
+<LI><B>USER REPORT FOR YOUR SERVER</B>
+<P>
+ <A HREF=#link55>crosstab.pl</A> -D% -Qsp__helpuser -R1 -C0 -O4 -SSYBASE_QA3 -USYS_INSTALL -PPASSWORD<LI><B>OBJECT PROTECTIONS IN CERTAIN DATABASES</B>
+<P>
+ <A HREF=#link55>crosstab.pl</A> -Dxrm_db,xrm_sod% -Qsp__objprotect -R1,2 -C3 -O4 -SSYBASE_PROD -USYS_INSTALL -PPASSWORD > xxx.csv<P>
+</UL>
+<P>
+
+<A NAME=link56></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>custom_rpt.pl </H1>
+<H3> run precanned sybase report</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+ Usage: <A HREF=#link56>custom_rpt.pl</A>  -USA_USER -SSERVER -PSA_PASS -RREPORT_NUM<P>
+<pre>
+    -h html output, -x debug mode
+</pre>
+<P>
+<pre>
+    Custom reports
+</pre>
+<P>
+<pre>
+    1) Object Protections by Group (SIUDE)
+    2) Groups By Database
+    3) Users By Database
+    4) Num DBO Objects
+    5) Num Non DBO Objects
+    6) Login Report
+    7) Aliases By Database
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ Runs predefined crosstab reports.  Requires extended stored procedure library.
+<A NAME=link57></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>cvt_table_to_view.pl </H1>
+<H3> make a view on a table</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Simple utility to create byname views on tables<P>
+
+<A NAME=link58></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>data_mine.pl </H1>
+<H3> search data on tables</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ parses where clause and builds data extract of table data which it searches. so... you pass whereclause.  This gets parsed and tables with either all the appropriate keys are extracted UNION tables with one row after a subset of the keys is checked.  This data is then searched for column info with the preset values<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   ./data_mine.pl [-dx] -USA_USER -SSERVER -PSA_PASS -DDB -ooutfile -iinfile
+            -Wwhereclause -Ssearchclause
+</pre>
+<P>
+<pre>
+            -d debug mode
+</pre>
+<P>
+<pre>
+   you can create output file by putting -o (and no -s)
+   you can search with -s and -i
+</pre>
+<P>
+<h3>BUGS</h3>
+<P>
+ im going to rely on decent design - if you have int columns with the same layout as your char data - its gonna bomb (why do you have columns named the same thing with 2 different data types anyway).<P>
+ well data mining is kind of brute force<P>
+
+<A NAME=link59></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>data_mover.pl </H1>
+<H3> move data around!</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link59>data_mover.pl</A> -Ssrv -Uusr -Ppass -Ddb -Qquery -ssrv -uusr -ppass -ddb -ttbl -Kkey1,key2<P>
+ -O Outfile<P>
+<pre>
+ Source may be -FFile    or -U/-S/-P/-D and -Q
+ Target is -u/-s/-p/-d
+ Target Table is -t
+</pre>
+<P>
+ -K is the keys for the rows<P>
+ -Ilines_to_ignore<P>
+ -I1 would ignore the first line<P>
+ -I4 would ignore lines 1 to 4<P>
+ -TStartString<P>
+ -Cvals<P>
+ -Nnum_fields_min<P>
+ -Rdelimeter   This defaults to a comma but you can pass whatever you want<P>
+ -C -copy down first vals values if no value -istr1,str2 -> to ignore<P>
+<h3>SYNOPSIS</h3>
+<P>
+<pre>
+ Either pass -U/-P/-S or a -Ffile
+ Must pass -u/-p/-s of the target
+</pre>
+<P>
+ -t TABLE is the table you want to copy into or to copy from one server to another<P>
+
+<A NAME=link60></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>datacompare.pl </H1>
+<H3> database data comparison</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Compare the number of rows in two db's and print diffrences.  Note that only the number of rows are compared, not actual data differences.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+ <A HREF=#link60>datacompare.pl</A> [-xh]  -Ssrv [ -Uusr -Ppass -Ddb ] -ssrv
+      [ -uusr -ppass -ddb ]
+</pre>
+<P>
+<pre>
+ Shows tables with different number of rows between two servers
+</pre>
+<P>
+<pre>
+ B&lt;-h&gt; htmlize output
+ B&lt;-c&gt; show row counts instead of just summary info
+ B&lt;-x&gt; debug mode
+        B&lt;-x&gt; debug mode
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ Requires extended stored procedure library<P>
+
+<A NAME=link61></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>dbcompare.pl </H1>
+<H3> database comparison utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Compares two databases.  Checks the following things:<P>
+<UL>
+<P>
+<LI><B>object existence</B>
+<P>
+<LI><B>trigger names on tables</B>
+<P>
+<LI><B>Column definitions on table</B>
+<P>
+<LI><B>Object text if the object not a table</B>
+<P>
+</UL>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link61>dbcompare.pl</A> [-xh] -FFile -Ssrv -Uusr -Ppass -Ddb -ffile -ssrv -uusr -ppass -ddb<P>
+<pre>
+   Compare 2 Databases DDL.  Can be from File (use -F) or DB (-SUPD)
+   If both -SUPD and -F are supplied, file is written.
+   If you ignore one server (ie the lower case side), the values are copied from the other.  This saves typing
+</pre>
+<P>
+<pre>
+   -g no group permissions
+   -o object name
+   -h htmlize output
+   -i ignore identical output
+   -x debug mode
+</pre>
+<P>
+<h3>EXAMPLE</h3>
+<P>
+ I want to compare 2 databases (db1 and db1_bak) on one server:<P>
+ perl <A HREF=#link61>dbcompare.pl</A> -Usa -SSVR1 -Psrv1pass -Ddb1 -ddb1_bak -i<P>
+<h3>NOTES</h3>
+<P>
+ If a server is passed, it will connect to that server and use server data. If a file name is also passed, that data is written to the file.  If only a file name is passed, the file is read and used as the data source.  This allows you to compare stuff at remote sites to what is supposed to be in the database.<P>
+ Works only on DBO Objects.  Might have some bugs with non dbo object data (but i dont think so).<P>
+
+<A NAME=link62></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>dbschema </H1>
+<H3> a script to extract the schema from a Sybase ASE database.</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link63></A>
+<h1>Readme</h1>
+<p>
+<P>
+ <A HREF=#link62>dbschema</A>.pl is a Perl script that will extract a database structure from a Sybase ASE database utilising the Sybase::DBlib module.<P>
+
+<A NAME=link64></A>
+<h1>Description</h1>
+<p>
+<P>
+ Whilst schema extraction is what this is script is all about, it can do that one function in probably as flexible a manner as you could wish.<P>
+ It can extract a single database into a single file, a single file per object type (tables, procs, indexes etc) or a single file per actual object.  The number of options is getting so large that I am writing a Tk GUI to make it easier to manage, as well as the ability to extract single objects in a point and shoot fashion!<P>
+ To install Sybase::DBlib, you need to install the Sybperl package that can be obtained from CPAN or directly from Michael Peppler's site:<P>
+ http://www.mbay.net/~mpeppler<P>
+ There is an FAQ and a mailing list for Sybperl, details of which can be found on Michael's site.<P>
+ There is nothing to actually install in order to get <A HREF=#link62>dbschema</A>.pl to work.<P>
+ Home:         The latest release of <A HREF=#link62>dbschema</A>.pl can be obtained from<pre>
+              http://www.midsomer.org
+</pre>
+<P>
+ Maintainer:   David Owen (dowen@midsomer.org)<P>
+ Anyone interested in contributing, please get in touch.  If you find this script useful, then I would be grateful if you would send me details of your locality throughout the world so that I can add you to my xearth file.<P>
+ Thanks<P>
+ dowen<P>
+
+<A NAME=link65></A>
+<h1>Prerequisites</h1>
+<p>
+<P>
+ This script reuires the Sybase::DBlib module.<P>
+
+<A NAME=link66></A>
+<h1>Corequisites</h1>
+<p>
+<P>
+ None.<P>
+ =pod OSNAMES<P>
+ Any that support Sybase::DBlib.<P>
+ =pod SCRIPT CATEGORIES<P>
+ Databases/Sybase<P>
+
+<A NAME=link67></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>debug_one_server.pl </H1>
+<H3> utility to debug servers</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Check out your server!  Should audit as much as it can!<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link67>debug_one_server.pl</A> [-dh] -UUSER -PPASSWORD -SSERVER
+</pre>
+<P>
+<h3>DETAILS</h3>
+<P>
+<pre>
+   * Checks stored procedure library
+   * run sp__auditsecurity
+   * check wierd select_into/trunc option definition on databases
+   * checks sysprocesses for blocked, log suspend, infected, sleeping io,
+      or stopped status
+   * foreach database
+   -&gt;  space used (data&log) from sp__qspace
+   -&gt;  sp__auditdb
+   -&gt;  database options
+</pre>
+<P>
+<pre>
+  database options
+</pre>
+<P>
+<pre>
+  configuration (default memory, allow updates, connections, updates)
+    -&gt; not implemented
+</pre>
+
+<A NAME=link68></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>delete_db.pl </H1>
+<H3> delete all data in database</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Deletes all data in a database (using delete command).<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   USAGE: <A HREF=#link68>delete_db.pl</A> -UUSER -SSERVER -PPASS -DDB
+</pre>
+<P>
+<pre>
+   Deletes all data in a database (using delete command).
+           -E TABLES      (comma separated list of tables to EXCLUDE)
+           -I TABLES      (comma separated list of tables to INCLUDE)
+           -n (noexec)
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+<pre>
+   might blow up on ri.  If it does...  just run it again :)
+</pre>
+<P>
+
+<A NAME=link69></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>depends_analyze.pl </H1>
+<H3> sybase dependency analyzer</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>AUTHOR</h3>
+<P>
+<pre>
+        V1.0    1997-09-13 By Lars Karlsson bergkarl@algonet.se
+</pre>
+<P>
+<pre>
+        V1.1    1997-12-1   Ed Barlow did a major modification/cleanup job
+                                - build_db No longer Perl4 compatible, but more standard
+                                - Using Getopts for arguments
+                           - Making it a Package (gzip distribution)
+</pre>
+<P>
+<pre>
+        V1.2    1998-01-01 After getting the code from Edward
+                        - I did some rewriting, bug fixes
+        V1.3  1999-02-10
+                                - Complete Rewrite By EMB
+</pre>
+<P>
+<h3>FILES</h3>
+<P>
+<UL>
+<P>
+<LI><B>depends_get.pl</B>
+<P>
+ Script to extract and prettyprint dependencies<P>
+<LI><B>depends_analyze.pl</B>
+<P>
+ Script to build output file<P>
+</UL>
+<P>
+<h3>SYNTAX</h3>
+<P>
+ perl <A HREF=#link69>depends_analyze.pl</A> -S server -U user -P password [-D database] [-H output directory ] [-I $SYBASE] [-q]<pre>
+        -q for quiet mode
+        -Tsybase|sqlsvr
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This script extracts relationships (dependencies) for a server.  This can be used for impact analysis (show me the impact if i change an object).  It also works to help understand all relationships between triggers, procedures, tables, views.<P>
+<h3>DETAILS</h3>
+<P>
+ Output File Named is created in directory named depends.\$DSQUERY<P>
+<h3>FEATURES</h3>
+<P>
+ Hides password from most ps sniffers.<P>
+ Handles references to objects in other databases.<P>
+ This script is not built on sysdepends, the unreliable table, but on analysing the objects' texts.<P>
+ Smart enough to follow trigger only if apropriate.<P>
+ Handles the problem with sp_helptext sometimes truncating spaces.<P>
+<h3>BUGS</h3>
+<P>
+ Constraints Not Implemented.<P>
+ update #tr set PX_LAST=isnull(b.PX_LAST,-1) from #tr a, riskdb..BLOOMBERG_SECMSTR b where a.ID_BB_UNIQUE = b.ID_BB_UNIQUE<P>
+ Parses Wrongly<P>
+
+<A NAME=link70></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>depends_get.pl </H1>
+<H3> parse dependencies for an object and print output</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SEE</h3>
+<P>
+ See <A HREF=#link69>depends_analyze.pl</A><P>
+
+<A NAME=link71></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>do_release.pl </H1>
+<H3> release management utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Release Manager - Loads database based on ddl files.<P>
+ This is a nice way to install your ddl while preserving table data.  Behavior is dependent on file name (tables, for example, should have .tbl). Unknown extensions get treated as generic sql scripts.  You may pass the objects in to the script or can list them (in order) in a control file (defined with -c).<P>
+ The utility manages tables by archiving the data and then copying it back. This is a great tool to manage upgrades of databases.<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link71>do_release.pl</A> -UUSER -PPASSWD -SSVR -DDB [ FLAGS ] -VDIR/-c CTLFILE/PROCEDUREs<P>
+ Installs scripts into your server, preserving data for tables.  The scripts to be installed are based on a control file located in the same directory that contains the scripts (default for -c is do_release.ctl). If neither -V and -c procedures are read from the command line.  The DB parameter can contain sybase wildcards.<P>
+ <b>-s#</b> - start at proc # (between 1 & 999)<P>
+ <b>-e#</b> - end at proc #  (between 1 & 999)<P>
+ <b>-N</b> - New Objects Only<P>
+ <b>-n</b> - noexec do not run the isql<P>
+ <b>-r</b> - ignore rules (.rul or type=R) and defaults (.def or type=D)<P>
+ <b>-T</b> - install stored procedures only (.prc or type=P)...<P>
+ <b>-b</b> - batch mode - no waits or delays (and dont die on error)<P>
+ <b>-x</b> - batch mode - no waits or delays (but do die on error)<P>
+ <b>-s</b> - Dont Save Table Data<P>
+<h3>NOTES</h3>
+<P>
+ If u do a use XXX statement as a batch, your db will be set to that database<P>
+
+<A NAME=link72></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>document_db.pl </H1>
+<H3> database documentation utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Self document your database!  Uses source code and the stuff in the system tables.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+ <A HREF=#link72>document_db.pl</A> -dcodedir -SSRVR -UUSR -PPASS -DDATABASE [-x]
+</pre>
+<P>
+<pre>
+        -x debug mode
+</pre>
+<P>
+<pre>
+ Document a database based on source code and ddl
+</pre>
+<P>
+<pre>
+ Retrieves from server:
+        procedures  - uses sp__syntax
+        tables          - uses sp__helpcolumn & sp__helpindex
+ Retrieves from code directory and its subdirectories:
+        - object & type based on file endings (must be in in %okext hash)
+        - object comments excluding predefined strings in @ignorestrings
+        - code directories can be ; separated
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ Pretty good output.  Kind of loses shape if the comments in your ddl are ugly.   They probably are though.  One concept here is that you can document stuff inline FOR PURPOSES of this type of utility. Reformat your stuff so you can see what your tables do etc...  Simple and Somewhat useful.<P>
+
+<A NAME=link73></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>drop_all_objects.pl </H1>
+<H3> drop all objects in the database</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ drop all objects from a database<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        USAGE: ./drop_all_objects.pl -UUSER -SSERVER -PPASS -DDB
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ does not handle failure well.  RI issues?<P>
+
+<A NAME=link74></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>dump_sybase_mon_tables.pl </H1>
+<H3> dump sybase monitoring tables out to .csv files for investigation</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link74>dump_sybase_mon_tables.pl</A> -USER=USER -SERVER=SERVER -PASSWORD=PASS -OUTDIR=dir
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Creates about 10 files in .csv format that can be used to interogate server state in the event of an emergency.  Basically it creates a set of .csv files that you can browse (with excel ) to see what was going on at the time of the “incident”.  This includes very detailed process information – like showplans and the sql for all running processes.  It creates a lot of output that needs to be pieced together – but when something weird happens and you have no time for diagnostics because you need to fix production, this is the program to run (quickly) – before you fix the problem.  Takes about 10 seconds to run.<P>
+ The program requires MDA tables to be set up and should be tested PRIOR to trying it in an emergency.  Run it on a production server tho or you will have limited results.<P>
+
+<A NAME=link75></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>dump_sybase_rep_server.pl </H1>
+<H3> dump sybase rep server state for investigation</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link75>dump_sybase_rep_server.pl</A> -USER=USER -SERVER=SERVER -PASSWORD=PASS -OUTDIR=dir
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Creates dump of rep server info in .csv format that can be used to interogate server state in the event of an emergency.  Basically it creates a set of .csv files that you can browse (with excel) to see what was going on at the time of the “incident”.  This includes very detailed process information – like admin who,sqt and other basic rep server queries.  It creates output that needs to be pieced together – but when something weird happens and you have no time for diagnostics because you need to fix production, this is the program to run (quickly) – before you fix the problem.  Takes about 1 seconds to run.<P>
+
+<A NAME=link76></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>email_query.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link77></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+ <A HREF=#link76>email_query.pl</A> parfile {test|live}<P>
+
+<A NAME=link78></A>
+<h1>Description</h1>
+<p>
+<P>
+ With "live", sends email as per the parfile.<P>
+ With "test", writes the contents of the email to stdout, prefixed by the interpreted contents of parfile.  The result (written to a file) can be viewed by a browser.<P>
+
+<A NAME=link79></A>
+<h1>Parameter file layout</h1>
+<p>
+<P>
+<pre>
+  EMAIL_TO     &lt;"to"     email addresses&gt;          [space separated]
+  EMAIL_FROM   &lt;"from"   email address&gt;
+  EMAIL_RETURN &lt;"return" email address&gt;
+  SUBJECT      &lt;subject&gt;
+</pre>
+<P>
+<pre>
+  SERVER   &lt;server&gt;
+  DATABASE &lt;database&gt;
+</pre>
+<P>
+<pre>
+  PRETEXT &lt;end-of-text-string&gt;  [optional text preceding the table]
+  ...
+  ...
+  ...
+  &lt;end-of-text-string&gt;
+</pre>
+<P>
+<pre>
+  TITLE &lt;table title&gt;           [optional]
+</pre>
+<P>
+<pre>
+  QUERY &lt;end-of-text-string&gt;
+  ...
+  ...
+  ...
+  &lt;end-of-text-string&gt;
+</pre>
+<P>
+<pre>
+  POSTTEXT &lt;end-of-text-string&gt; [optional text following the table]
+  ...
+  ...
+  ...
+  &lt;end-of-text-string&gt;
+</pre>
+<P>
+<pre>
+  ZEROTEXT &lt;end-of-text-string&gt; [optional text to replace the table, in case the
+  ...                            query returns nothing]
+  ...
+  ...
+  &lt;end-of-text-string&gt;
+</pre>
+<P>
+
+<A NAME=link80></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RepositoryRun.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link81></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+
+<A NAME=link82></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>extract_ddl.pl </H1>
+<H3> extract_ddl utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Extract DDL for object and print it.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+ <A HREF=#link82>extract_ddl.pl</A> [-dx] -UUSER -SSERVER -PSA_PASS -DDB -Oobject
+</pre>
+<P>
+<pre>
+ Extracts object ddl.  Fully qualify object to get a users stuff.
+ You may ignore -U and -P options if you have set up password file
+</pre>
+<P>
+
+<A NAME=link83></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>file_loader.pl </H1>
+<H3> generic utility to load a file</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This program actually reads a fixed format file and runs a stored procedure on each row.  The stored procedure can, if you want, insert into a table.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+ USAGE: <A HREF=#link83>file_loader.pl</A> --LOGFILE=file --REJECTFILE=rfile --PROC=proc -SERVER=srv -USER-usr -PASSWORD=pass -DATABASE=db -FILE=file -DEFFILE=def --SKIPTAIL=rows --SKIPHEAD=rows [-NOEXEC] [-DEBUG]
+</pre>
+<P>
+<h3>MANDATORY ARGUMENTS</h3>
+<P>
+<pre>
+ SERVER   : TARGET SERVER INFORMAITON
+ USER     : TARGET SERVER INFORMAITON
+ PASSWORD : TARGET SERVER INFORMAITON
+ DATABASE : TARGET SERVER INFORMAITON
+ FILE     : Input File
+ PROC     : Stored procedure to call on each row of the file
+ DEFFILE  : Definition File : $colname,$startcol,$lth,$type
+            type = c: character field
+            type = cu: character field, go to upper case
+       type = c-: character field, "-" gets removed
+       type = yyyymmdd: date field in the form yyyymmdd
+       type = mmddyyyy: date field in the form mmddyyyy
+       type = yyyy-mm-dd: date field in the form yyyy-mm-dd
+       type = mmddyy: date field in the form mmddyy
+       type = nD where D is a number of 1 or more digits:
+              number field written with implied decimal point
+              before the last D-many digits
+       type = n: plain number field (possibly with decimal point)
+              blank field is mapped to 0
+</pre>
+<P>
+<h3>OPTIONAL ARGUMENTS</h3>
+<P>
+<pre>
+ FIXEDLENGTH: fixed length records (argument is the length)
+ DEBUG      : Call the program in diagnostic mode
+ DODELETE   : run query before you load the
+              delete $DODELETE where FILENAME='".basename($FILE)."
+              or if $LABEL is defined
+              delete $DODELETE where FILENAME'$LABEL
+ SKIPHEAD   : skip this number of rows from the head of the file
+ SKIPTAIL   : skip this number of rows from the end of the file
+ REJECTFILE : File name for rows that dont load correctly
+ NODETAILS  : Dont print the query that you run
+ NOEXEC     : No Exec Mode - Just print the queries
+</pre>
+<P>
+<h3>ALGORITHM</h3>
+<P>
+<pre>
+ Logs In To Target Db
+ opens $DEFFILE and reads each non comment (^# or blank) line
+    - format ColumnId, StartColumn, Length, Type
+    - push @ORDER,ColumnId
+ delete $DODELETE where FILENAME='".basename($FILE)."'";
+ reads FILE into an array
+    - skips head or tail if SKIPHEAD or SKIPTAIL
+ foreach row in the array
+   my($query)="exec $PROC ";
+   foreach (@ORDER) {
+      $val = substring of data as appropriate
+      process based on type
+         type='c'
+         type='yyyymmdd'
+         etc based on perldoc
+      run query
+</pre>
+<P>
+<h3>EXAMPLE</h3>
+<P>
+<pre>
+  C:\Perl\bin\perl.exe G:/gem/ADMIN_SCRIPTS/bin/file_loader.pl --DODELETE=NA_table
+   --PROC=load_NA_sp --SKIPHEAD=0 --SKIPTAIL=0
+   --SERVER=MYDB --PASSWORD=mypass --USER=mylogin --DATABASE=mydb
+   --DEFFILE=code/loader/StdNA.def --FILE=X:/FILENAME.TXT --REJECTFILE=data/loader.REJ
+   --NODETAILS --LOGFILE=data/Loader.log
+</pre>
+<P>
+<h3>SAMPLE DEFFILE</h3>
+<P>
+<pre>
+   RecordType      1   1  c
+   AcctNum         2   8  c
+   Name            22  30 c
+   SSN             52  9  c
+   AcctName        61  80 c
+   FName           141  20 c
+   LName           161 30 c
+   CreateDate      191 8  yyyymmdd
+   YYYYMMDD        199 8  c
+   PrimarySSN      207 9  c
+   NA1             222 80 c
+   NA2             302 80 c
+   City            382 26 c
+   State           408 4  c
+   Zip             412 10 c
+   EmplId          422 10 c
+</pre>
+<P>
+
+<A NAME=link84></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>fix_db.pl </H1>
+<H3> fix up your databases</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Fixes up your databases.  Right now it will perform the following operations which i believe should be non destructive.<P>
+<pre>
+ If data and log on same device         -&gt; set truncate log on checkpoint
+ If Select Into/Bulk Copy set   -&gt; set truncate log on checkpoint
+ Turns off sp_configure allow updates if set
+ removes objects  owned by users with no uid
+ Deletes  sysusers where there is no suid ( and removes their objects )
+</pre>
+<P>
+ I believe these rules are non destructive<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        ./fix_db -USA_USER -SSERVER -PSA_PASS
+</pre>
+<P>
+ or<P>
+<pre>
+        ./fix_db -A
+</pre>
+<P>
+ if you have your password file defined to go through all your servers<P>
+<pre>
+ -x noexec
+</pre>
+<P>
+
+<A NAME=link85></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>full_analysis.pl </H1>
+<H3> Analyze a whole database using showplans</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This program acts as driver to the analyze.pl program, which performs a showplan analysis on a single stored procedure.  Runing this program will analyzes a whole database.  Output can be ascii or html, but the program runs best if used with html output (that is how it is tested and html lets me do pretty things).<P>
+ Information is summarized into a nice web page which gives a synopsis of your database.  This includes analysis that helps you identify table scans. You can drill down into your procedures and see detailed analysis of these procedures.<P>
+ This procedure loops through all stored procs in a db and runs the analyze package on each of them.  Output is placed in files in a subdirectory SERVER/DB in either the document area (if <b>-h</b> is passed) or the data subdirectory of the current directory.<P>
+ An index.htm file is placed in .../analysis/SERVER/DB with appropriate pointers to the other files created.  If analysis is not in your tree it is created (must have write permissions) as are the subdirectories.<P>
+<h3>INSTALLATION</h3>
+<P>
+ The extended stored procedure library must be installed<P>
+ User defined data types should be set up in the full_analysis.dat file. What this means is that the program will substitute values for parameters to each of the stored procedures it runs.  It does this by making something up.  For strings, it usually uses "str", unless it is less than a varchar(3), in which case it will use "X".  One problem here is user defined data types.  Obviously the program needs to know whether the type is a string... Sometimes your stored procs expect certain values for particular parameters.  You can set these values also.  After you do a run, you will see errors, which can be fixed by editing the full_analysis.cfg file.  As you work with this tool, you will build a database of default values for your procs.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        ./full_analysis [-ds -hdir] -UUSER -SSERVER -PPASS -Ddb
+</pre>
+<P>
+<pre>
+        -d debug mode
+        -h document root of optional web server
+        -s summarize only (dont run procs)
+        -v verbose ( more verbose than normal less than -d )
+</pre>
+<P>
+ This procedure loops through all stored procs in a db and runs the analyze package on each of them.  Output is placed in files or can be html.<P>
+ Output is in SERVER/DB in either the document area (if <b>-h</b>) or data subdirectory.<P>
+ You may ignore <b>-U</b> and <b>-P</b> options if you have set up password file<P>
+
+<A NAME=link86></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>get_comments.pl </H1>
+<H3> utility to extract comments from file</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Extracts comments of the style /* */, --, and #<P>
+
+<A NAME=link87></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>get_interfaces.pl </H1>
+<H3> print interfaces file utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Pretty Interfaces file entries.  Works on both unix and nt.  On NT it reads $SYBASE/sql/ini.  On unix it reads $SYBASE/interfaces.  If you pass an argument it only shows server with that string in it.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link87>get_interfaces.pl</A> [search_argument] [-i interfacesfile ]<P>
+ -c - reformat column order or it will go 1 2 3<P>
+<h3>SAMPLE OUTPUT</h3>
+<P>
+<pre>
+ BARLONTSERVER                  barlontserver                  5000
+ BARLONTSERVER_BS               barlontserver                  5001
+ BARLONTSERVER_HS               barlontserver                  5003
+ BARLONTSERVER_MS               barlontserver                  5002
+ BARLONTSERVER_XP               barlontserver                  5004
+</pre>
+<P>
+
+<A NAME=link88></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>kill_pid.pl </H1>
+<H3> kills a pid</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link88>kill_pid.pl</A> -USA_USER -SSERVER -PSA_PASS
+</pre>
+<P>
+
+<A NAME=link89></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>log_file_filter.pl </H1>
+<H3> Generic Error Log Filter</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This program filters log files.  It can filter out garbage messages based on data it reads from an exclude file, which is a list of messages and what to do with them (pretty simple).  It can also filter to only print messages from today or from yesterday & today. Since dates are of many formats, you pass in a format string for the date.<P>
+ A patern file can be used.  This file is used to only see new messages (after the patern). The patern file is of the format [byte_count\tstring].  If the string is in the file at that byte count (ie it is not a new file), then the filter will only print messages after that line.  If not it will read the whole file.  You can use this to see only new messages (messages since the last run of log_file_filter).<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <b>log_file_filter</b> <b>-i</b> infile [ <b>-e</b> file <b>-s</b> pat|pat <b>-p</b> file <b>-f</b> fmt <b>-odyt</b> ]<P>
+ <b>-d</b>         - run in debug mode<P>
+ <b>-b</b>         - ignore blank lines on input<P>
+ <b>-i file</b>    - input file name<P>
+ <b>-e file</b>    - exclude file (see program header for rules)<P>
+ <b>-s pat|pat</b> - patern that all output lines must have<P>
+ <b>-p file</b>    - patern file containing print print after patern<P>
+ <b>-P file</b>    - same as <b>-p</b> but does not write patern file<P>
+ <b>-o</b>         - print a message if no rows are found<P>
+ <b>-f fmt</b>     - format for date strings<P>
+ <b>-y</b>         - print yesterdays messages<P>
+ <b>-t</b>         - print todays messages<P>
+ <b>-D dir</b>     - run on all files in directory (cant also use <b>-i</b> or <b>-p</b>)<P>
+ <b>-T</b>         - with <b>-D</b>  only files modified today<P>
+ <b>-Y</b>         - with <b>-D</b>  only files modified yesterday<P>
+ <b>-S pat</b>     - with <b>-D</b>  filter on files with patern in name<P>
+ <b>-m cnt</b>     - only print up to m lines<P>
+ The format string may include spaces, /, mm, yy, dm, dd, mon. dd will prepend a 0 to days 1-9, ds will prepend space to 1-9<P>
+<h3>EXAMPLES</h3>
+<P>
+ To read the whole sybase errorlog<P>
+ <em>log_file_filter -i $SYBASE/install/errorlog</em><P>
+ to read errors in that errorlog<P>
+ <em>log_file_filter -i $SYBASE/install/errorlog -e sybase10.excl</em><P>
+ to read errors since the last run<P>
+ <em>log_file_filter -i $SYBASE/install/errorlog -e sybase10.excl -p tmp</em><P>
+ to read todays errors<P>
+ <em>log_file_filter -i $SYBASE/install/errorlog -e sybase10.excl -t -f"yy/mm/dd"</em><P>
+ to read todays and yesterdays errors<P>
+ <em>log_file_filter -i $SYBASE/install/errorlog -e sybase10.excl -yt -f"yy/mm/dd"</em><P>
+ and finally, to read only today & yesterdays messages that occurred since the last<P>
+<h3>FILTER FILES</h3>
+<P>
+ Currently, the following files can be used for filter purposes:<P>
+<pre>
+        aix.excl                                - aix system log
+        backupsrvr.excl - sybase backup server messages
+        hpux.excl                       - hpux system log
+        linux.excl                      - linux system log
+        solaris.excl            - solaris system log
+        sunos.excl                      - sunos system log
+        sybase10.excl           - sybase log
+</pre>
+<P>
+<h3>DETAILS</h3>
+<P>
+ This probably needs some explanation.  Fundamentally the program takes an input file (from <b>-i</b>) and prints it after filtering.  It uses an excludefile to define what is an error (actually the file defines what is ok).  You can also filter on recent messages using the <b>-t</b> or <b>-y</b> flags in conjunction with the <b>-f</b> date format option (log files have different date formats and you need to specify what you want to search for).<P>
+ Another major way to search through this file is to use a patern file (<b>-p</b>).  If a patern file is specified, only lines after the patern (if found) are printed, and the patern in the file is updated with the last line from the errorlog.  This is useful to see errors that have occurred since the last time you ran the filter.<P>
+ The exclusion file is self documented but basically uses lines of of the format XXX=patern and excludes based on exclusion type as follows:<P>
+<pre>
+   EXCLUDE=pat      - excludes lines with pat in them
+   ML_START=pat     - excludes lines until patern specified by ML_END
+                     (next) is found. Will print ML_END line.
+   ML_END=pat       - stop ML_START block
+   EXCLNEXT=pat     - excludes line with patern AND next line
+   EXCLSTART=pat    - exclude only if patern starts line
+</pre>
+<P>
+ The <b>-D</b> option is a new feature, allowing the browsing of error log directories.  This is very different from normal browsing.  The <b>-t</b> and <b>-y</b> flags still work, but they refer to files from today and yesterday.  The <b>-s</b> flag operates on file names (not patern strings in the file).<P>
+ This general parser should be good enough for most patern parsing of log files. Output is to standard output.<P>
+<h3>BUGS</h3>
+<P>
+ Converts all * characters to a - to deal with perl wildcarding. This should only be noticable on the output prints<P>
+
+<A NAME=link90></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>monitor_a_table.pl </H1>
+<H3> track a single tables size and incremental</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+  <A HREF=#link90>monitor_a_table.pl</A> -TABLE=tbl -DATABASE=database [-OUTFILE=filename]
+   --USER=SA_USER -SERVER=SERVER -PASSWORD=SA_PASS [-debug] -TYPE=Sybase|ODBC
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+<pre>
+   Track size of a table.  Has a variety of uses.  Output format
+</pre>
+<P>
+<pre>
+   &lt;time&gt; &lt;rows&gt; &lt;num new rows&gt; &lt;new rate per minute&gt;
+</pre>
+<P>
+<h3>OPTIONS</h3>
+<P>
+ if --ADDDATE then it will put a yyyymmdd to end of the file<P>
+
+<A NAME=link91></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>monitor_errors.pl </H1>
+<H3> read files in monitor_data and compares to config file</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This program reads files from monitoring_data that have .err extesnsions and it will parse the standard format for specific types of errors.  These errors will then be handled.<P>
+
+<A NAME=link92></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>monitor_logfiles.pl </H1>
+<H3> generic log file monitor</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This program monitors logfiles.  Logfiles are produced when batch scripts run using the following format<P>
+ PROGRAM > program.log 2> program.err<P>
+ The program tests the .log file datestamp and if it is ><P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link92>monitor_logfiles.pl</A> --CTLFILE=FILE<P>
+ -or-<P>
+ <A HREF=#link92>monitor_logfiles.pl</A> --DIR=  --FILEROOT=  --BATCH_SUBKEY=  --MAX_NORUN_DAYS= --LOGEXT= --ERREXT<P>
+ --HOST=            (fetch from this host - must be on unix) --DIR= --FILEROOT= --BATCH_SUBKEY --MAX_NORUN_DAYS   (alert if logfile age > DAYS) --NOCOPY            (dont copy files - assumes --DIR available on curhost and --HOST) --LOGEXT            (extension for error files = dflt=.log) --ERREXT            (extension for error files = dflt=.err)<P>
+ --ctlfile=file : A control file can be used to automate multiple systems.  See conf/win32_cleanup.dat.sample. The controlfile basically contains the arguments to this program<P>
+<h3>BUGS</h3>
+<P>
+ -host only works on unix<P>
+ =cu
+<A NAME=link93></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>monitor_user.pl </H1>
+<H3> utility to debug servers</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Check out your server!  Should audit as much as it can!<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link93>monitor_user.pl</A> [-dh] -UUSER -PPASSWORD -SSERVER
+</pre>
+<P>
+<h3>DETAILS</h3>
+<P>
+<pre>
+   * Checks stored procedure library
+   * run sp__auditsecurity
+   * check wierd select_into/trunc option definition on databases
+   * checks sysprocesses for blocked, log suspend, infected, sleeping io,
+      or stopped status
+   * foreach database
+   -&gt;  space used (data&log) from sp__qspace
+   -&gt;  sp__auditdb
+   -&gt;  database options
+</pre>
+<P>
+<pre>
+  database options
+</pre>
+<P>
+<pre>
+  configuration (default memory, allow updates, connections, updates)
+    -&gt; not implemented
+</pre>
+
+<A NAME=link94></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_attachscript.pl </H1>
+<H3> create a set of sql statements to attach or detach your databases.</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ When moving your sql server files around, it is a pain to create the scripts to attach and detach the files.  This program will create a set of scripts capable of attaching files once you detach the database and the sql statements needed to detach them as well.<P>
+ The --GO option puts go's between lines<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link94>mssql_attachscript.pl</A> [--DATABASE=db] --DEBUG --SYSTEMS=system[,system] [-DETATCH] [-GO]<P>
+ --GO will print go's<P>
+
+<A NAME=link95></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>RepositoryRun.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link96></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+
+<A NAME=link97></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_cycle_eventlog.pl </H1>
+<H3> Cycle SQL Server Error Log Files</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   Usage: <A HREF=#link97>mssql_cycle_eventlog.pl</A> --DAYS=days --SYSTEM=system --DEBUG --BATCHID
+</pre>
+<P>
+
+<A NAME=link98></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_datapath_report.pl </H1>
+<H3> paths for your sql server</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ TBD<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link98>mssql_datapath_report.pl</A> --SYSTEMS=system[,system]<P>
+
+<A NAME=link99></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_fix_orphan_users.pl </H1>
+<H3> fix up your databases users</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link100></A>
+<h1>Synopsis</h1>
+<p>
+<P>
+ run sp_change_users_login 'Report' in all your servers<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Fixes orphaned users in your databases. checks for them via<P>
+ sp_change_users_login 'Report'<P>
+ and then fixes those ones with logins available via<P>
+ exec sp_change_users_login 'Auto_Fix',login<P>
+
+<A NAME=link101></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_gem_setup_report.pl </H1>
+<H3> analyze your sql servers and produce registration report</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Discovers your configuration based on interfaces and osql -L and then it will produce a report detailing what is registered and the server status.<P>
+
+<A NAME=link102></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_jobstatus_rpt.pl </H1>
+<H3> Print a job status report</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ You may specify all systems from the pc config file or specifiy the systems to use.<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link102>mssql_jobstatus_rpt.pl</A> --STDALARM --SYSTEMS=system[,system] --DOSHRINK<P>
+<h3>OPTIONS</h3>
+<P>
+<pre>
+ --SYSTEMS : comma separated list of systems.  Otherwise does em all
+</pre>
+<P>
+
+<A NAME=link103></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_logmaintplan.pl </H1>
+<H3> read logmaintplan table in mssql and save as heartbeats</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Reads the logmaintplan table in mssql - which stores sql server job states and stores the results as heartbeats.<P>
+
+<A NAME=link104></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_scheduled_job_rpt.pl </H1>
+<H3> get scheduled jobs report</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Run a program in all your servers.  This is useful with the other utilities provided in this directory.  It requires that the run utility take <b>-S</b>/<b>-U</b>/<b>-P</b> parameters.  The server should be in your password file as per Repository.<P>
+ In other words... if you wish to run a program to remove user paulr on a server you might type<P>
+<pre>
+        adduser -SSYBASE -Usa -PXXX -x -upaulr
+</pre>
+<P>
+ but with this utility, you could run that command on ALL your servers in one fell swoop with:<P>
+<pre>
+        AllSrv adduser -x -upaulr
+</pre>
+<P>
+ As you can see, the <b>-U</b>,<b>-P</b>, and <b>-S</b> parameters are added automatically<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        Usage: ./AllSrv Parameters
+</pre>
+<P>
+ Generic program  to run on all servers.  If you type<P>
+<pre>
+                "./AllSrv MY_PROG OTHER_PARM"
+</pre>
+<P>
+ you will end up executing<P>
+<pre>
+                "MY_PROG -SSRV -PPASS -UUSR OTHER_PARM"
+</pre>
+<P>
+ for all the servers in your password file.<P>
+
+<A NAME=link105></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_shrinklogs.pl </H1>
+<H3> shrink data/log files on sql server</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Shrinks your data/log files on your sql servers.  This is a much faster shrink than you would get if you were using a shrink database.  The program also allows you to shrink your data files if you pass --DATATOO.<P>
+ You may specify all systems from the pc config file or specifiy the systems to use.  Be careful tho.  This will confuse the tran log dump/load programs if you pass the --DUMPTRANNOLOG option to truncate the log.<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link106>mssql_shrinklogs.pl</A> --DATATOO --STDALARM --DEBUG --SYSTEMS=system[,system] -<pre>
+ -DOSHRINK --DUMPTRANNOLOG --MAXSIZE=MB --DATABASE=DBLIST
+</pre>
+<P>
+<h3>OPTIONS</h3>
+<P>
+<pre>
+ --DUMPTRANNOLOG : dump tran with nolog prior to shrinking (dangerous?)
+ --DOSHRINK      : do the shrink
+ --SYSTEMS       : comma separated list of systems.  Otherwise does em all
+ --MAXSIZE        : maximum file size for files to shrink (does not to larger ones)
+</pre>
+<P>
+
+<A NAME=link106></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>mssql_shrinklogs.pl </H1>
+<H3> shrink data/log files on sql server</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Shrinks your data/log files on your sql servers.  This is a much faster shrink than you would get if you were using a shrink database.  The program also allows you to shrink your data files if you pass --DATATOO.<P>
+ You may specify all systems from the pc config file or specifiy the systems to use.  Be careful tho.  This will confuse the tran log dump/load programs if you pass the --DUMPTRANNOLOG option to truncate the log.<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link106>mssql_shrinklogs.pl</A> --DATATOO --STDALARM --DEBUG --SYSTEMS=system[,system] -<pre>
+ -DOSHRINK --DUMPTRANNOLOG --MAXSIZE=MB --DATABASE=DBLIST
+</pre>
+<P>
+<h3>OPTIONS</h3>
+<P>
+<pre>
+ --DUMPTRANNOLOG : dump tran with nolog prior to shrinking (dangerous?)
+ --DOSHRINK      : do the shrink
+ --SYSTEMS       : comma separated list of systems.  Otherwise does em all
+ --MAXSIZE        : maximum file size for files to shrink (does not to larger ones)
+</pre>
+<P>
+
+<A NAME=link107></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>SqlPortScan.pl </H1>
+<H3> sql port scan</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ This program uses a variety of methods to discover your sql server configuration.  No guessing is done for passwords, native authentication only.<P>
+<h3>USAGE</h3>
+<P>
+ [G:/dev/ADMIN_SCRIPTS/bin] perl <A HREF=#link107>SqlPortScan.pl</A> --? Usage Error : <A HREF=#link107>SqlPortScan.pl</A><P>
+ Current Argument List:<pre>
+        UPDATE_GEM   updates the gem confiugraiton files
+        USECACHE     dont reping servers - use cache from last run (faster)
+        SILENT       dont show progress prints
+        DEBUG        diagnostic mode
+        BATCH_ID     alert using this BATCH_ID key
+        DOSQLPING    run sqlping3cl.exe - this takes time  - default is to use osql -L
+</pre>
+<P>
+<h3>CONFIG FILES</h3>
+<P>
+ The discovery directive will end up holding files named<P>
+<pre>
+ a) ${HOSTNAME}_SqlPing3cl.out      - output of SqlPing3cl.exe
+ b) ${HOSTNAME}_sqlportscan.out      - cached data from internal pings
+</pre>
+<P>
+ This program writes the following system managed configuration files<P>
+<pre>
+   Win32Cluster.dat
+   Win32Aliases.dat
+</pre>
+<P>
+<h3>SQLPING3 NOTES</h3>
+<P>
+ This utility uses SqlPing3cl.exe which is shipped with GEM.  A standalone version can be found at http://www.sqlsecurity.com/Tools/FreeTools/tabid/65/Default.aspx<P>
+ Copied from http://www.sqlsecurity.com/Tools/FreeTools/tabid/65/Default.aspx<P>
+ Here is the alpha release of the command-line version of SQLPing3. Please provide any feedback here at the download area for any errors or comments you have concerning this version. Keep in mind that this alpha release only contains the high-level switches. The ability to disable or alter the scan options will come later once the application is stabilized. For now the command-line switches are as follows:<P>
+ SQLPing3cl - SQLPing3 Command Line version - alpha release<P>
+ Syntax: SqlPing3cl.exe -scantype [range,list,stealth] -StartIP [IP] -EndIP [IP] -IPList [FileName] -UserList [FileName] -PassList [FileName] -Output [FileName]<P>
+ Currently -scantype is the only required parameter. IPs will default to 127.0.0.1 if nothing is provided. The default output file is output.txt.<P>
+
+<A NAME=link108></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>optdiag_analyze.pl </H1>
+<H3> anlyze optdiag output and reorg rebuild if cluster ratio sucks</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link108>optdiag_analyze.pl</A> -USER=SA_USER [-FILE=file] [--NOSTDOUT] --OUTFILE=File --OPTDIAG=optdiag -DATABASE=db -SERVER=SERVER -PASSWORD=SA_PASS [-debug] [-REBUILD] [-NOEXEC]<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Analyzes optdiag output and produces a fragmentation report as per the algorithms described at 2006 techwave.  Need to validate this by lock scheme.  Uses the following keys:<P>
+ Data page cluster ratio: Index page cluster ratio: Data row cluster ratio: Space utilization: Large I/O efficiency:<P>
+
+<A NAME=link109></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>parse_a_file.pl </H1>
+<H3> Parse a file into parts</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Very useful for finding problems with your bcp files...<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link109>parse_a_file.pl</A> -FFilename -Rrow_delimeter -Ccol_delimter<P>
+<h3>NOTES</h3>
+<P>
+
+<A NAME=link110></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>parse_hosts.pl </H1>
+<H3> Parse hosts files that have been collected</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link110>parse_hosts.pl</A> -FFile -DDir -hd -OFile -BBatchDesignator
+</pre>
+<P>
+
+<A NAME=link111></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>passwd_rpt.pl </H1>
+<H3> multi server report sa/sso/oper roles utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Print Roles By Server/User In Nice Format.  Has a variety of ways to decode and print role info.  Servers must be defined in password file for this to work. See documentation on Repository.pm library.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+    ./passwd_rpt [-ousxh]
+        -o oper roles only
+        -s sa roles only
+        -x sso roles only
+        -h htmlize output
+        -u print by user not server
+</pre>
+<P>
+<h3>EXAMPLE</h3>
+<P>
+<pre>
+  &gt; PRINT A LIST OF SA USERS BY USER
+  $ passwd_rpt -us
+</pre>
+<P>
+<pre>
+  ***********************************************************
+  *              SA OUTPUT          *
+  ***********************************************************
+  kent       SYBASE_INT
+  robp       SYBASE_NT
+  chikki         SYBASE_DEV
+  TestTrigger    SYBASE_DEV
+  SYS_OPER       SYBASE_VALQA SYBASE_RRDEV SYBASE_QA SYBASE_DEV
+         SYBASE_PROD SYBASE_INT SYBASE_NT SYBASE_Y2K
+  paulr      SYBASE_VALQA SYBASE_RRDEV SYBASE_QA SYBASE_DEV
+         SYBASE_PROD SYBASE_INT
+  sa         SYBASE_VALQA SYBASE_RRDEV SYBASE_QA SYBASE_DEV
+         SYBASE_PROD SYBASE_INT SYBASE_NT SYBASE_Y2K
+  psr        SYBASE_INT
+  SYS_INSTALL    SYBASE_VALQA SYBASE_RRDEV SYBASE_QA SYBASE_DEV
+         SYBASE_PROD SYBASE_INT SYBASE_NT SYBASE_Y2K
+  Shimizu        SYBASE_INT
+  yury       SYBASE_VALQA SYBASE_RRDEV SYBASE_QA SYBASE_DEV
+         SYBASE_PROD SYBASE_INT SYBASE_NT
+</pre>
+<P>
+
+<A NAME=link112></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>ping_server.pl </H1>
+<H3> utility to ping databases</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link112>ping_server.pl</A> -SERVER=list -NOLOG
+   <A HREF=#link112>ping_server.pl</A>
+</pre>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ pings all servers in your password files.  Returns number of servers that cant be connected to.  Prints status of your servers.  Has no embedded error handling.<P>
+ IF -SERVER is passed, you can specify a comma separated list of servers<P>
+
+<A NAME=link113></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>process_statistics.pl </H1>
+<H3> compare server to saved statistics file(s)</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link113>process_statistics.pl</A> -USER=USER -SERVER=SERVER -PASSWORD=PASS
+         -DATABASE=DATABASE -ACTION=action -FILE1=file -FILE2=file ...
+         -TITLE1=title -TITLE2=title...
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+<pre>
+   if ACTION=save
+      saves statistics for a database in a file
+   if ACTION=compare
+      compares statistics to files.  Hilighting divergences
+</pre>
+<P>
+
+<A NAME=link114></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>purge_files.pl </H1>
+<H3> purge old unix and windows files</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ A core dba task is directories space management.  This excellent utility provides you exactly that. It is smart enough to do it right - parsing your files so you control exactly what the program does.   The program either works on full spec windows path names (//server/share/dir/file - note forward slashes as backslashes have special meaning in perl) or, on unix, where you can pass in a --hostname<h3>USAGE</h3>
+<P>
+ To CHECK file existence<P>
+ <A HREF=#link114>purge_files.pl</A> --hours=<hours> --days=<days> --dir=<dir><pre>
+             [--done] [--donothing] [--report=file] --compress=progname --ctlfile=&lt;file&gt;
+</pre>
+<P>
+ To PURGE older files<P>
+ <A HREF=#link114>purge_files.pl</A> --hours=<hours> --days=<days> --dir=<dir> --del<pre>
+             [--done] [--donothing] [--report=file] --compress=progname --ctlfile=&lt;file&gt;
+</pre>
+<P>
+ or<P>
+ <A HREF=#link114>purge_files.pl</A> --dir=<dir> --del --version=<num><pre>
+             [--done] [--donothing] [--report=file] --compress=progname --ctlfile=&lt;file&gt;
+</pre>
+<P>
+<h3>ARGUMENTS</h3>
+<P>
+ --ctlfile=file : A control file can be used to automate multiple systems.  See conf/win32_cleanup.dat.sample. The controlfile basically contains the arguments to this program<P>
+<pre>
+   # DR01 Cleanup
+   #
+   --days=2 --dir=//ad001/e$/logshipbuffer --del --done
+   --days=10 --dir=//ad001/e$/logshipbuffer --del
+</pre>
+<P>
+ --hours or --days : controls the time for the comparison<P>
+ --del or --donothing : what do you want to do - delete the files or dont<P>
+ --done : only work on files with a .done or .done.gz or .done.Z extension.  These files are created by our log shipping system AFTER they have been applied successfully to the log shipping target.<P>
+ --days switches meanings based on the --del flag.  If --del is set, then days means delete everything OLDER than the argument, while if --del is not set, it means you are checking for files NEWER than --days.<P>
+ -compress=<comprssprogram> compresses the files<P>
+ -versions=num : keep only num versions of the file.  Because backup files are normally datestamped, this option removes all sequences of 2+ numbers from the filename<P>
+<h3>FILECHECKONLY</h3>
+<P>
+ if the FILE flag is passed, the program will look for specific files in the directory and alert if older than --DAYS<P>
+<h3>POPULATION</h3>
+<P>
+ you can use console/find_win32_files_for_monitoring.pl to create the controlfile
+<A NAME=link115></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>query_compare.pl </H1>
+<H3> Compare Query Results in Two DB's</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This perl script runs a query in two servers and then compares the output.  This could be quite useful in a variety of situations, specifically when you want to regression test a new procedure.<P>
+ Query does not care about the order of the output<P>
+ Unless you use the <b>-h</b> (html flag), output columns are separated by the pipe | character which might be slightly confusing.<P>
+<h3>USAGE</h3>
+<P>
+ Usage: query_compare -X -Uusr -Ssrv -Ppass -uusr -ppass -ssrv -Ddb -ddb -Qquery<P>
+ If you ignore the <b>-s</b> parameter, it is assumed that you want to use the same dataserver for both sides of the comparison.<P>
+<h3>Output Table</h3>
+<P>
+ If you have -t<TBL> defined, the output will be sored specially in a table named <TBL> in the source server/database.  The format of this table and its creation are up to you but should be of the following syntax<P>
+ create table XXX (<pre>
+  mon_time        datetime not null,
+  dsn_source      varchar(30) not null,
+  dsn_secondary   varchar(30) not null,
+  rslts_source    int not null,
+  rslts_secondary int not null
+</pre>
+ )<P>
+ the query obviously must return one and only one row containing an int.  a count(*) query or max(id) query is appropriate.<P>
+<h3>SAMPLE RUNS</h3>
+<P>
+ The following query compares servers SYBASE_QA and SYBASE_INT in database xrm_db to see which tables are in one server but not in the other<P>
+ query_compare -SSYBASE_QA -sSYBASE_INT -Dxrm_db -Qselect name from sysobjects  where type="U" uid=1 order by name<P>
+ The following shell program compares data in  $1 on two servers<P>
+<pre>
+   #!/bin/sh
+   TBLS="tbl1 tbl2 tbl3"
+   SRV1=SYBASE_INT
+   SRV2=SYBASE_QA
+   for tbl in $TBLS
+   do
+   query_compare -Usa -S$SRV1 -PPASSWORD -Dxrm_db -usa \
+      -s$SRV2 -pPASSWORD -dxrm_db -Q"select * from $tbl"
+   mv data/outS data/$tbl.$SRV1
+   mv data/outs data/$tbl.$SRV2
+   done
+</pre>
+<P>
+
+<A NAME=link116></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>rebuild.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ <A HREF=#link116>rebuild.pl</A> - Rebuild Hashbang And use lib statements<P>
+<h3>COPYRIGHT</h3>
+<P>
+<pre>
+ Copyright (c) 2002-3 By Edward Barlow
+ All Rights Reserved
+ Explicit right to use can be found at www.edbarlow.com
+ This software is released as free software and should be shared and enjoyed
+</pre>
+<P>
+<h3>USAGE</h3>
+<P>
+ Usage: G:\dev\AHMR52~F\bin\rebuild.pl [--UNSET] --OVERRIDE --LIBDIR=DIRECTORY,DI RECTORY --FILENAME=FILENAME,FILENAME --DIRECTORY=DIRECTORY,DIRECTORY [--DEBUG] - -PERL=PERL<pre>
+   USE --UNSET to reset your perl to default hashbangs
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Resets the perl hashbang lines at the top of the file. If the first line starts with a hashbang #! then the next part is a command to reformat_file.  This can either be of the format<P>
+<pre>
+    #!/usr/local/bin/perl
+</pre>
+<P>
+ or if you pass --UNSET<P>
+<pre>
+   : # use perl
+       eval 'exec perl -S $0 "$@"'
+       if $running_under_some_shell;
+</pre>
+<P>
+ These lines are reformated correctly based on the perl in your path or based on the perl you pass<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link116>rebuild.pl</A> file file file...
+</pre>
+ or<pre>
+   <A HREF=#link116>rebuild.pl</A> *
+</pre>
+ or<pre>
+   <A HREF=#link116>rebuild.pl</A> -D.
+</pre>
+ or<pre>
+   <A HREF=#link116>rebuild.pl</A> -u
+</pre>
+<P>
+<pre>
+      to undo changes to generic format
+</pre>
+<P>
+<pre>
+ --OVERRIDE will work on restricted file types
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ Reset perl on first or first 3 lines as necessary.  If the first line starts with a hashbang #! then that word is reformatted as necessary.  If the first 3 lines looks like:<P>
+<pre>
+   : # use perl
+   eval 'exec perl -S $0 "$@"'
+   if $running_under_some_shell;
+</pre>
+<P>
+ skips files named configure.pl or <A HREF=#link116>rebuild.pl</A>.  Those should always be full path name to the perl executable using the above syntax.<P>
+
+<A NAME=link117></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>readate.pl </H1>
+<H3> archiver </H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ copies all files passed on command line to save/filename.yymmdd<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        ./redate.pl file1 file2 file3 file4
+</pre>
+<P>
+
+<A NAME=link118></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>reperl.pl</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ <A HREF=#link118>reperl.pl</A> - Rebuild Hashbang And use lib statements<P>
+<h3>COPYRIGHT</h3>
+<P>
+<pre>
+ Copyright (c) 2002-3 By Edward Barlow
+ All Rights Reserved
+ Explicit right to use can be found at www.edbarlow.com
+ This software is released as free software and should be shared and enjoyed
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Resets the perl hashbang lines at the top of the file.  If the first line starts with a hashbang #! then the next part is a command to reformat_file.  This can either be of the format<P>
+<pre>
+    #!/usr/local/bin/perl
+</pre>
+<P>
+ or<P>
+<pre>
+   : # use perl
+       eval 'exec perl -S $0 "$@"'
+       if $running_under_some_shell;
+</pre>
+<P>
+ These lines are reformat_fileted correctly based on the perl in your path<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link118>reperl.pl</A> file file file...
+</pre>
+ or<pre>
+   <A HREF=#link118>reperl.pl</A> *
+</pre>
+ or<pre>
+   <A HREF=#link118>reperl.pl</A> -D.
+</pre>
+ or<pre>
+   <A HREF=#link118>reperl.pl</A> -u
+</pre>
+<P>
+<pre>
+      to undo changes to generic format
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ Reset perl on first or first 3 lines as necessary.  If the first line starts with a hashbang #! then that word is reformatted as necessary.  If the first 3 lines looks like:<P>
+<pre>
+   : # use perl
+   eval 'exec perl -S $0 "$@"'
+   if $running_under_some_shell;
+</pre>
+<P>
+ skips files named configure.pl or <A HREF=#link118>reperl.pl</A>.  Those should always be full path name to the perl executable using the above syntax.<P>
+
+<A NAME=link119></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>replicator.pl </H1>
+<H3> simple sybase replicator</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Simple database replicator. Implemented by a trigger on source tables which saves data into a separate replication database.  The <A HREF=#link119>replicator.pl</A> program sweeps data from this replication database to the destination server / database, and should always be running during production hours.  A configuration file contains the details of the replication, so multiple replications can occur, run by different processes. <A HREF=#link119>replicator.pl</A> contains the code to define the replication tables and triggers as well as performing the actual replication.<P>
+ you probably should read the whole code line before implementing ... its not complex.<P>
+<h3>HOW IT WORKS</h3>
+<P>
+ The source tables have triggers on them for insert, update, and delete which save data into a replication database in a table of the same name with an r_ prepended. As an example, the mydb..mytable table would have triggers that take changes and put them into the repldb..r_mytable table from where <A HREF=#link119>replicator.pl</A> would sweep them to targetdb..mytable. The triggers supports user defined triggers on the source table.  When <A HREF=#link119>replicator.pl</A> -d is run, it defines triggers which start with r_, but does not modify and user generated triggers (which should not start with r_).  The user is responsible for modifying their own triggers to conform to the replication spec.  Triggers in the source db with a name starting with r_ are system managed.  The replication db must be dedicated to the replication system and will contain tables identical to the source tables with the addition of a char(1) r_trig_type column, a char(1) r_xfer column, and a timestamp r_trig_time column (first 3 columns).<P>
+ The replicator moves data from the replication db to the target db in a safe manner using transactions.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   ./replicator.pl [-c configfile ] -snl
+</pre>
+<P>
+<pre>
+   -c cfg,cfg     configuration file name (default replicate.cfg)
+                  multiple configuration files allow multiple replications
+   -D             define the triggers if they are not allready there
+   -u             uninstall
+   -S             starts the configuration
+   -l             active configuration and statistics report
+   -d             debug mode
+</pre>
+<P>
+<pre>
+   one of -d,S,or l must be specified
+</pre>
+<P>
+<h3>DEFINE OPTION</h3>
+<P>
+ The -D option will create the tables and triggers necessary to run the system.  Triggers are created in the source database and tables are created in the replication database (using the information found in the config file).<P>
+ The -d option presumes that objects starting with r_ are system created and can be managed internally.  It also presumes that if there are no triggers on a table, it is safe to create one.<P>
+ User triggers will need to be changed to add statements that manage the r_tablename table in the replication database.<P>
+<pre>
+   select r_trig_type=' ',r_xfer=' ',r_trig_time=NULL,*
+   into   orig_table
+   from     yyy..orig_table
+   where  1=2
+</pre>
+<P>
+ You are welcome to put your own triggers in with your own replication definition so long as you dont start the trigger name with r_.<P>
+<h3>SPECIAL COLUMN DEFINITION</h3>
+<P>
+ The r_trig_type column contains the following values<P>
+<pre>
+   "I" - inserted
+   "D" - deleted
+   "d" - deleted rows in update trigger
+   "i" - inserted rows in update trigger
+</pre>
+<P>
+ The r_trig_time column is a timestamp (insert null into this column)<P>
+ The r_xfer column should be 'x' for columns being transfered and ' ' otherwise.<P>
+<h3>CONFIG FILE</h3>
+<P>
+ The configuration file is in replicator.cfg which has the following format:<P>
+ [<pre>
+  SRCSRV  = DSQUERY
+  SRCUSR  = LOGIN
+  SRCPASS = PASSWORD
+  SRCDB   = DB
+  SRCREPL = DB
+  DESTSRV = DSQUERY,DSQUERY,DSQUERY
+  DESTDB  = DB,DB,DB
+  TABLES  = tbla,tblb,tblc
+  POLLTIME= num_seconds
+</pre>
+ ]<P>
+ ORIG_DB is the original database and is only used by the -d create option.<P>
+<h3>TODO</h3>
+<P>
+ Must create index on tables for optimal tuning (hmmmm how...)<P>
+ Destination server EXPECTED to be consistent when startup.  This might be a problem.<P>
+ Sanity Checker?<P>
+
+<A NAME=link120></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>rev_db.pl </H1>
+<H3> Reverse engineer sql to individual files</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Reverse engineer  objects to individual files.  If you dont pass a set<h3>USAGE</h3>
+<P>
+ <A HREF=#link120>rev_db.pl</A> -USA_USER -SSERVER -PSA_PASS -DDB_LIST -OOutDir [-E] [objects...]<P>
+<pre>
+      -E - no permissions
+      if no objects passed, then it will do all objects except built
+         in constraints that are found in the database.
+      DB_LIST may include wildcards - but you probably dont want this as
+         there is only one output directory and the files will overwrite
+         each other.
+      directory passed with -O must exist
+</pre>
+<P>
+<pre>
+   Reverse Engineer To Files... Extensions based on object name
+</pre>
+<P>
+
+<A NAME=link121></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>sample_db_script.pl </H1>
+<H3> sample utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link121>sample_db_script.pl</A> -USA_USER -SSERVER -PSA_PASS -debug
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+<pre>
+   [ insert your description here ]
+</pre>
+<P>
+
+<A NAME=link122></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>setup.pl </H1>
+<H3> install patch to an application as appropriate</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This is a customized package.  Installations must be customized for each server / environment you wish to work with.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link122>setup.pl</A> ENVIRONMENT<P>
+ For a list of valid environments, run the command without any arguments. Valid environments must be setup by editing this script.  See the CUSTOMIZATION section.  You may run with the environment ALL which runs in all environments.<P>
+<h3>IMPLEMENTATION DETAILS</h3>
+<P>
+ This program lives in the root directory of the patch release.    Database objects get installed based on the directory right above them.<P>
+<h3>CUSTOMIZATION</h3>
+<P>
+ You must edit this script to define what the environments are.   Specifically, you must add your environment to the perl hashes to identify installation info.<P>
+<UL>
+<P>
+<LI><B>%SERVER_DIR</B>
+<P>
+ Target directory for installation<P>
+<LI><B>%SERVER_DSQUERY</B>
+<P>
+ DSQUERY of server for db objects<P>
+<LI><B>%SERVER_LOGIN</B>
+<P>
+ LOGIN of server for db objects<P>
+<LI><B>%SERVER_PASS</B>
+<P>
+ PASSWORD of server for db objects<P>
+</UL>
+<P>
+ Use of environments allows you to install into remote directories and servers transparently without specifying everything on the command line.<P>
+<h3>REQUIREMENTS</h3>
+<P>
+ Requires do_release_func.pl and syb_func.pl to be installed either in the current directory, the subdirectory utilities, or the LOCAL root.<P>
+<h3>TO DO</h3>
+<P>
+ Should upgrade platinum  and gold whenever a release is made<P>
+ Should do a better job checking for existing patches<P>
+ Perhaps we should have a facility to see which patch upgrade we are at from<pre>
+        the gui
+</pre>
+<P>
+ Perhaps it should keep track of individual object upgrades in its own database<pre>
+        On a per server/db/object/version basis.
+</pre>
+<P>
+
+<A NAME=link123></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>showplan_analyze.pl </H1>
+<H3> showplan analyzer</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Analyze will analyze ddl by using showplan.  It can runs the program in an optional transaction and rolls back the query when it is done.  Its primary purpose is to reformat the showplan output, It produces color coded output files that contain query results, statistics io, showplan information, and readable summary output.<P>
+ Analyze can output html directly, which is the best way to view results.<P>
+ The best way to tell you what this tool does is to demonstrate.  If you are a unix user, the files example1, example2, and example3 contain code/stored procedures in them that can be run by the run_examples script (requires pubs). Please look at the example* files after you run the script (change the script so it has appropriate passwords.  Thats all there is to it.<P>
+ Note this package requires perl 5.002 or later.  The software will work under all versions of sybase. The software requires sybperl.<P>
+<h3>USAGE</h3>
+<P>
+ USAGE: analyze [-dL] <b>-o</b> FILE <b>-U</b> USER <b>-P</b> PASSWORD <b>-S</b> SERVER <b>-D</b> DATABASE [ <b>-F</b> FILE or <b>-C</b> CMD ]<P>
+ Showplan Analyzer Copyright (c) 1996-8 by Edward Barlow<P>
+ <b>-d</b> : debug mode<P>
+ <b>-L</b> : do lock analysis.  The session is trapped inside a 'BEGIN TRAN' and locks are measured.  The tran is rolled back after.  This aborts on operations that cant handle a tran (select into...), but should be set by default.<P>
+ <b>-h</b> : html'ize output<P>
+ <b>-n</b> : set noexec on - will work poorly if running a stored proc<P>
+ <b>-i</b> : show statistics io<P>
+ <b>-l</b> : show lock stuff<P>
+ <b>-o</b> : output to this file as well as to screen<P>
+ <b>-t</b> : show procedure text (proc name is first word after exec) <b>-r</b> : show raw showplan output<P>
+ <b>-e</b> : show sql the analyze program executes<P>
+<h3>FUNCTIONS</h3>
+<pre>
+   THE FOLLOWING SUBROUTINES HAVE BEEN DEFINED AT THIS POINT:
+</pre>
+<P>
+<pre>
+       sub usage()
+       sub message_handler_mine()
+       sub parse_showplan_output()
+       sub parse_stats_io_output()
+       sub lock_print()
+       sub normal_print()
+       sub results_print()
+       sub io_print()
+       sub output_print()
+       sub format_page()
+       sub title()
+       sub print_toc()
+       sub db_colorize_sql()
+       sub row_output()
+       sub format_output_row()
+       sub reset_tbl_row_vals()
+       sub sql_exec()
+       sub error_handler_mine()
+</pre>
+<P>
+
+<A NAME=link124></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>size_monitor.pl </H1>
+<H3> monitor database (size or performance)</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+        <A HREF=#link124>size_monitor.pl</A> -USA_USER -SSERVER -PSA_PASS -DDB_LIST -ccnt -ld -tsec
+                -c count - times to repeat - if no count then loops forever
+                -t sleep time in seconds between run
+                -l show log space   (defaults to -ld)
+                -d show data space
+                -s space (data and log)
+                -q quick statistics
+</pre>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Monitors a db size or summary statistics.<P>
+<h3>SAMPLE OUTPUT</h3>
+<P>
+<pre>
+  <A HREF=#link124>size_monitor.pl</A> -d -USYS_INSTALL -PPASSWORD -SSYBASE_LOCAL -Dxrm%db -c3
+</pre>
+<P>
+<pre>
+  Database Allocation: xrm_db Size=20480 (40MB) Log=5120 (10MB)
+  Database Allocation: xrm_security_db Size=10240 (20MB) Log=2560 (5MB)
+  Database Allocation: xrm_sod01_db Size=20480 (40MB) Log=5120 (10MB)
+  ----------------------|----------------------|----------------------|
+                  xrm_db|       xrm_security_db|          xrm_sod01_db|
+  ----------------------|----------------------|----------------------|
+  Db:             35.8MB|Db:              5.2MB|Db:             28.9MB|
+  Db:             35.8MB|Db:              5.2MB|Db:             28.9MB|
+  Db:             35.8MB|Db:              5.2MB|Db:             28.9MB|
+</pre>
+<P>
+
+<A NAME=link125></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>sysmon_analysis.pl </H1>
+<H3> SP_SYSMON SYSTEM ANALYZER</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>AUTHOR</h3>
+<P>
+ Copyright &copy; 1998 by Edward Barlow<P>
+ This work is a complete rewrite of code by Lars Kaarlson, who created a prototype that analyzed sp_sysmon output.<P>
+<h3>SUMMARY</h3>
+<P>
+ There are several sources of information that can be used to audit systems. This code attempts to do a rules based check of your servers and to identify problems that may be in existance on the servers.  The rules are based on experience and sp_sysmon output is analyzed according to the (very loose) rules defined by Sybase in their system 11 documentation.  They should, hopefully allow you to better understand your server performance without wading through tons of paper.<P>
+ This analyzer is based on my experiences tuning a variety of servers.  I intend to use it to assist me on contracts and as a part of the webmonitor package.  You are welcome to use this code to analyze your servers, either as a part of webmonitor or as a stand alone package.  If you notice any testable information that is missing from this analyzer, please contact the author and I will endeavor to put those rules into the system.<P>
+ Successful analysis in many production environments is the only way this rules base can converge on a stable point, and ideas that you have can greatly help others.  Please note that many of the thresholds are completely made up by me, and while they seem to work, i would appreciate feedback on how to come up with better numbers.<P>
+<h3>INSTALLATION</h3>
+<P>
+ The extended stored procedure library must be installed in your servers for that part of the auditing to work.  This can be accomplished by downloading the library from<P>
+ http://www.edbarlow.com<P>
+<h3>PARSER RULES</h3>
+<P>
+ The following are the rules the parser uses to store data from sp_sysmon into variables.  The actual subroutine name is s_read_sysmon_inline.<P>
+<pre>
+  *) ignore blank lines or lines with -----------
+  *) a line of === is a new section.  The first 2 sections are headings.
+     and are treated separately.
+  *) the first non blank line after --- is section heading
+     (section_line==1)
+  *) Indented 1 or 2 Characters and we are an item (within a section)
+     parse down to first field (or set of words - the key)
+    - set item_name
+      - set section_count{sctn} = ++
+      - item_count{sctn:itemnm}= 1
+      - item_data{sctn:itemnm}= $msg\n
+  *) otherwise must have an item
+     $section_count{$section_name}++;
+     $item_count{$section_name.":".$item_name}++;
+     $item_data{$section_name.":".$item_name} .= $msg."\n";
+</pre>
+<P>
+<h3>THE RULES</h3>
+<P>
+ The main body of rules is included as a fairly easy to read perl code file and in the audit stored procedures.  Either may be modified.  You should not need to modify other programs.  Note the simple interface to the output of sp_sysmon, provided by Data() and get_lines().  A section (the first parameter is the highest level ("Kernel Utilization")  and an item ("Engine Busy Utilization:") is indented by two spaces in showplan info.  The third item of the Data function is the line info, the fourth the column id, and the last is a flag that determines if the code should produce an error if it is unable to find that data element (not all elements are always produced by sp_sysmon).  The format should be simple enough for any decent programmer to understand and change.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link125>sysmon_analysis.pl</A> [-s$SYBASE] -SDSQUERY -UUSER -PPASSWORD [-ifile -hayc -ttime -ofile]<P>
+<pre>
+ -d      : debug mode
+ -i file : file name of sp_sysmon input (sets -y)
+ -x      : run sp_sysmon
+ -y      : analyze sp_symon
+ -a      : run audit analyzer
+ -c      : run sysconfigure monitor
+ -r      : print raw sysmon output too (defined automatically if -o used)
+ -h      : html'ize output for a web browser to view
+ -o file : output file for raw sysmon output
+ -q      : quiet mode - print little to screen
+ -t time : time is the time interval for sp_sysmon (default = 10 minutes)
+</pre>
+<P>
+ The SYBASE,DSQUERY,USER, and PASSWORD items are taken from variables by the the same name if they are not passed directly into the program.<P>
+
+<A NAME=link126></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>ThresholdManager.pl </H1>
+<H3> Manage Sybase Thresholds</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This program is a warning system for out of space conditions on sybase.  It does this by installing sybase threshold stored procedures named sp_gemthresholdaction_<number> that allow you to monitor the peak usage percentage of each of the segments in your database.   This is an effective method of monitoring your sybase log and data space.<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link126>ThresholdManager.pl</A> --ACTION=INSTALL|UNINSTALL|REPORT|CHECK<pre>
+   [--SERVER=xxx] [--DEBUG] [--OUTFILE=file]
+</pre>
+<P>
+ If server is not provided it will loop through all servers<P>
+ ACTIONS<pre>
+   if --ACTION=INSTALL will install into the server
+   if --ACTION=UNINSTALL will remove created thresholds from the server
+   if --ACTION=CHECK will check your installation
+   if --ACTION=REPORT will create a report
+      - will print data for --REPORT_HOURS hours
+      - will only show rows &gt; --TIME_THRESH hours (default 24x7 hours)
+      - will print HTML output if --HTML is passed
+</pre>
+<P>
+<h3>NOTES</h3>
+<P>
+ ONLY USE THIS UTILITY IF YOU DO NOT ACTIVELY USE DATA SEGMENTS... CURRENTLY SEGMENTS ARE NOT CHECKED FOR AND WE ONLY DEAL WITH logsegment and default.  The reports will be off if you use segments.<P>
+ Basically what this tool does is create a bunch of thresholds in your databases that are very simple one liners, saving info into a table in sybsystemprocs.  The goal here is so that you can see when the logsegment is getting full.  It also allows you to see if the default segment is getting full - which might be useful in the case where data is rapidly growing and shrinking during the course of the day and you cant rely on the once per day space monitoring.  Fundamentally this is a light weight method of doing that... active space monitoring is a big performance hog and runs the risk of system table locks - while this does not.<P>
+ So you an INSTALL the stuff easily into all your sybase servers and then rely on the console to report peak usages and to make recommendations on how to grow your log files.<P>
+ After you extend your databases, rerun the -ACTION=INSTALL procedure to reset your thresholds.<P>
+ Tempdb is 50% error and 80% critical always<P>
+ Only alerts if the value was from today - dont care that much about historical stuff =end
+<A NAME=link127></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>trunctate_db.pl </H1>
+<H3> truncate database utility</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ truncate all tables in a database.  Does not handle ri, but you can probably run 2 times in a row to get through that.  The user must have permission to truncate.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+       USAGE: truncate_db.pl -UUSER -SSERVER -PPASS -DDB
+</pre>
+<P>
+<pre>
+        -E TABLES      (comma separated list of tables to EXCLUDE)
+        -I TABLES      (comma separated list of tables to INCLUDE)
+        -n (noexec)
+</pre>
+<P>
+
+<A NAME=link128></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>win32_backupreport.pl </H1>
+<H3> SQL Server Backup Report</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Scans the event log and creates a backup and restore history for a server. There are two types of reports here.  The first is the Backup Report, which simply prints backup details for a server.  The second is a Restore report which is more cmoplicated and shows restore mappings to the primary server<P>
+<h3>USAGE</h3>
+<P>
+ Usage: PC_BA~RP.PL --OUTFILE=file --HTMLFILE=file --SYSTEM=system --HOURS=hours --USER=sa --PASSWORD=password --SRVNAME=ODBCID --NOSTDOUT --REPORT=<backup|restore> --PRIMARY=<primary host if restore> --DEBUG --HTMLDETAIL=file --LISTEVENTS<P>
+<h3>EXAMPLE</h3>
+<P>
+ To see whats going on in a server<P>
+<pre>
+   <A HREF=#link128>win32_backupreport.pl</A> --SYSTEM=S1 --HOURS=96
+</pre>
+<P>
+ To put results in a file<P>
+<pre>
+   <A HREF=#link128>win32_backupreport.pl</A> --SYSTEM=S1 --HOURS=96 --NOSTDOUT --OUTFILE=my_report.txt
+</pre>
+<P>
+ Since the ascii report sucks - an heml file can be generated by<P>
+<pre>
+   <A HREF=#link128>win32_backupreport.pl</A> --SYSTEM=S1 --HOURS=96 --NOSTDOUT --HTMLFILE=my_report.html
+</pre>
+<P>
+ If you are using log shipping, a new report opens up.  Say your server is BACKUP1 which does log loads from PRIMARY1<P>
+<pre>
+   <A HREF=#link128>win32_backupreport.pl</A> --SYSTEM=BACKUP1 --PRIMARY=PRIMARY1 --HOURS=96 --NOSTDOUT
+     --HTMLFILE=main.html --REPORT=restore --HTMLDETAIL=details.html
+</pre>
+<P>
+ The above creates a linked pair of reports - with a summary in HTMLFILE and details of the shipping and loading in HTMLDETAIL.  Note that some times your report will be out of sync... the Behind time explains this - its possible that the lsn's dont match up intentionally.<P>
+ =end<P>
+
+<A NAME=link129></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>win32_diskspace.pl </H1>
+<H3> NT Diskspace Report</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Uses Win32 Libraries to check out a list of disks on remote NT servers.<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link129>win32_diskspace.pl</A> --OUTFILE=file --ERRFILE=file --SYSTEMS=system[,system] [--DEBUG] --ALARMWHO=netsend[,netsend] --ALARMTHRESH=pct --WARNTHRESH=pct --SLEEPTIME=seconds [--NOSTDOUT]<P>
+<pre>
+ OUTFILE:      Output Report File
+ ERRFILE:      Output Report for just errors
+ SYSTEMS:      List of systems to work on - comma separated
+ ALARMWHO:      Comma separated list of netsend addresses to send to (built in)
+ ALARMTHRESH:  Alarm percent
+ WARNTHRESH:   Warning percent
+ SLEEPTIME:      Seconds in a loop
+ DEBUG:         Debug
+ NOSTDOUT:   Dont print stuff to stdout
+</pre>
+<P>
+<h3>CONFIG</h3>
+<P>
+ Reads win32_password.cfg (from sw directory or one above it) file which contains lines as follows<P>
+<pre>
+   ADSRV060 C$ D$ E$ F$
+   ADSRV088 C$ D$ E$ F$
+   ADSRV089 C$ D$ E$ F$
+   ADSRV056 C$ D$ E$ F$
+   PLATINUM C$ D$ E$ F$
+   ADSRV061 C$ D$ E$ F$
+</pre>
+
+<A NAME=link130></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>win32_eventlog.pl </H1>
+<H3> NT Event Log Parser</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Uses Win32 Libraries to check out eventlogs on remote NT servers.  Output is saved using alarming functions.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+  Usage: <A HREF=#link130>win32_eventlog.pl</A> --OUTFILE=file --ERRORFILE=file --SYSTEM=system
+   --HOURS=hours --SERVICE=service[,service] [--CONFIGFILE=filename]
+   [--DEBUG] [--LOGEVENTS]  [--LOOPSLEEPTIME] [--NOINFOMSGS]
+</pre>
+<P>
+<pre>
+ OUTFILE:      Output Report File
+ ERRORFILE:      Output Report for just errors
+ SYSTEM:       List of systems to work on - comma separated
+ HOURS:
+ DEBUG:         Debug
+ LOGEVENTS:      Save Heartbeats using MlpAdmin
+ LOOPSLEEPTIME
+</pre>
+<P>
+<h3>CONFIG</h3>
+<P>
+ Reads Repository data file which looks like:<P>
+<h3>IGNORE LIST</h3>
+<P>
+ The program reads the __DATA__ section at the bottom of the program to find out messages that it can ignore by service, severity, and error number.  Each service can specify by Error/Warning/Info whether it wants to ignore all messages (wildcard %) or a specific list of messages to ignore.<P>
+
+<A NAME=link131></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>win32_get_file.pl </H1>
+<H3> Get File From Each Win32 System Out there</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Used to copy file to local system - usually into html_output dir.<P>
+ This is an excellent program and can be used as a template for other little batches you wish to use.<P>
+ It probably will mostly be called from other batches - the one i have in mind right now is to get win32 task scheduler jobs log files from all my systems.  That would be something like <A HREF=#link131>win32_get_file.pl</A> --INDIR=/winnt,/windows --INFILE=SchedLgu.txt I will also add one for hosts.<P>
+
+<A NAME=link132></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>win32_ipconfig_report.pl </H1>
+<H3> Create Ip Configuration Report For Windows</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link132>win32_ipconfig_report.pl</A>
+</pre>
+<P>
+
+<A NAME=link133></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>win32_service.pl </H1>
+<H3> service manager for NT</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ Usage: <A HREF=#link133>win32_service.pl</A> Usage: <A HREF=#link133>win32_service.pl</A> service Usage: <A HREF=#link133>win32_service.pl</A> START|STOP service<P>
+ SERVICE:                             Alerter   SERVICE RUNNING SERVICE:                              Apache   SERVICE RUNNING SERVICE:                   COM+ Event System   SERVICE STOPPED SERVICE:                     ClipBook Server   SERVICE STOPPED SERVICE:                    Computer Browser   SERVICE RUNNING etc...<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Show NT services.  Filters service if service passed (one argument). Starts & Stops services if second argument is STOP or START.<P>
+<h3>USAGE</h3>
+<P>
+ show all services<P>
+<pre>
+ <A HREF=#link133>win32_service.pl</A>
+</pre>
+<P>
+ start service<P>
+<pre>
+ <A HREF=#link133>win32_service.pl</A> START service_name
+</pre>
+<P>
+ stop service<P>
+<pre>
+ <A HREF=#link133>win32_service.pl</A> STOP service_name
+</pre>
+<P>
+ filter services<P>
+<pre>
+ win32_service service_name
+</pre>
+<P>
+ show running/stopped services<P>
+<pre>
+ win32_service running|stopped
+</pre>
+<P>
+
+<A NAME=link134></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>win32_shutdown.pl </H1>
+<H3> shutdown windows system</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Shutdown an windows system. Only works if you have administrator priviliges.<P>
+
+<A NAME=link135></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>win32_system_report.pl </H1>
+<H3> Create System Reports For Windows</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+   <A HREF=#link135>win32_system_report.pl</A> -SYSRPT=file --SWRPT=file
+</pre>
+<P>
+<hr><br>
+This output is documentation for the SQL Technologies GEM UTILITIES GUIDE.
+<ADDRESS>copyright &#169 1998-2011 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

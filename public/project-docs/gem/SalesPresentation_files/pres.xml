@@ -1,0 +1,136 @@
+<xml xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+ xmlns:oa="urn:schemas-microsoft-com:office:activation">
+ <p:presentation sizeof="screen" notessizey="5783" gridspacingx="49152"
+  gridspacingy="49152" omittitleplace="t">
+  <p:master id="35" slidesn="1C00D86,24460040" type="main" href="master35.htm"
+   xmlhref="master35.xml" template="Shimmer" layout="title_body"
+   slots="title,body,dateTime,footer,slideNumber">
+   <p:schemes>
+    <p:colorscheme
+     colors="#721e1e,#ffffff,#bd3737,#ffcc00,#ff6600,#cc3300,#f7cc2f,#c7c6b1"/>
+    <p:colorscheme
+     colors="#000066,#ffffff,#000099,#eaeaea,#66ccff,#0066ff,#ffffcc,#99cc00"/>
+    <p:colorscheme
+     colors="#4b0096,#ffffff,#6600cc,#cdd7df,#9999ff,#7850ba,#00ccff,#0796b3"/>
+    <p:colorscheme
+     colors="#375f2f,#ffffff,#55863c,#d1efb3,#00cc66,#8eac66,#b4ef7f,#f8f6ac"/>
+    <p:colorscheme
+     colors="#486768,#ffffff,#588073,#dddddd,#33cccc,#008871,#00cc99,#a8a8a8"/>
+    <p:colorscheme
+     colors="#575863,#ffffff,#6b6c75,#ffffcc,#677481,#697e5e,#e9e77f,#d3a44f"/>
+    <p:colorscheme
+     colors="#c4d6be,#000000,#effbf0,#339966,#dddddd,#ccff99,#009900,#336600"/>
+    <p:colorscheme
+     colors="#d6dae4,#000000,#ffffff,#000099,#bfdee3,#c0c0c0,#3333cc,#5e93c9"/>
+    <p:colorscheme
+     colors="#c2c0ba,#4a2500,#f4f4ec,#788569,#e1dfc1,#a5a7af,#9c9800,#666633"/>
+   </p:schemes>
+  </p:master>
+  <p:master id="36" slidesn="1C00D86,24460040" type="title" href="master36.htm"
+   xmlhref="master36.xml" layout="title_subtitle"
+   slots="centerTitle,subTitle,dateTime,footer,slideNumber"/>
+  <p:master id="1" slidesn="1C54B4A,C4C2C8D0" type="notes" href="master01.htm"
+   layout="notes" slots="header,dateTime,slideImage,body,footer,slideNumber"/>
+  <p:master id="2" slidesn="1C54B4A,C4C75CB0" type="handout" href="master02.htm"
+   layout="handout" slots="header,dateTime,footer,slideNumber"/>
+  <p:slide id="1" slidesn="0,0" href="slide0001.htm" masterhref="master36.htm"
+   layout="title_subtitle" slots="centerTitle,subTitle" collapseoutline="t"/>
+  <p:slide id="3" slidesn="0,0" href="slide0003.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="6" slidesn="0,0" href="slide0006.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="199" slidesn="1CC3907,93AAA450" href="slide0199.htm"
+   layout="title_body" slots="title,body"/>
+  <p:slide id="157" slidesn="0,0" href="slide0157.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="189" slidesn="1C562EA,B0CFB9C0" href="slide0189.htm"
+   layout="title_body" slots="title,body" collapseoutline="t"/>
+  <p:slide id="190" slidesn="0,0" href="slide0190.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="159" slidesn="0,0" href="slide0159.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="12" slidesn="0,0" href="slide0012.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="200" slidesn="1CC3908,2C9E8690" href="slide0200.htm"
+   layout="title_body" slots="title,body"/>
+  <p:slide id="30" slidesn="0,0" href="slide0030.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="192" slidesn="0,0" href="slide0192.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="193" slidesn="0,0" href="slide0193.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="194" slidesn="0,0" href="slide0194.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="195" slidesn="0,0" href="slide0195.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="178" slidesn="0,0" href="slide0178.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="185" slidesn="0,0" href="slide0185.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="187" slidesn="0,0" href="slide0187.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="174" slidesn="0,0" href="slide0174.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="175" slidesn="0,0" href="slide0175.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="176" slidesn="0,0" href="slide0176.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="23" slidesn="0,0" href="slide0023.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="177" slidesn="0,0" href="slide0177.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="164" slidesn="0,0" href="slide0164.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="165" slidesn="0,0" href="slide0165.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="163" slidesn="0,0" href="slide0163.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="25" slidesn="0,0" href="slide0025.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="146" slidesn="0,0" href="slide0146.htm" layout="title_body"
+   slots="title,body"/>
+  <p:slide id="145" slidesn="0,0" href="slide0145.htm" layout="title_body"
+   slots="title,body"/>
+  <p:slide id="132" slidesn="0,0" href="slide0132.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="201" slidesn="1CC3CCF,AE056DF0" href="slide0201.htm"
+   layout="title_body" slots="title,body"/>
+  <p:slide id="186" slidesn="0,0" href="slide0186.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="167" slidesn="0,0" href="slide0167.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="202" slidesn="1CC3CD3,D138FA40" href="slide0202.htm"
+   layout="title_body" slots="title,body"/>
+  <p:slide id="179" slidesn="1C4DC7A,F1FD80E0" href="slide0179.htm"
+   layout="title_body" slots="title,body"/>
+  <p:slide id="184" slidesn="0,0" href="slide0184.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="34" slidesn="0,0" href="slide0034.htm" layout="title_body"
+   slots="title,body" collapseoutline="t"/>
+  <p:slide id="198" slidesn="1CC319C,1DEB4980" href="slide0198.htm"
+   masterhref="master36.htm" layout="title_subtitle"
+   slots="centerTitle,subTitle"/>
+  <p:viewstate type="slideView" slidehref="slide0179.htm" scale="100"
+   restoredleft="345" restoredtop="863" vertbarstate="0" horizbarstate="2"
+   manualadjustleft="t" manualadjusttop="t"/>
+  <p:slideshowsettings pencolor="schemeText" hidescrollbar="t"/>
+  <p:kinsoku language="Japanese" level="levelOne"/>
+  <p:font name="Times New Roman" charset="0" type="4"/>
+  <p:font name="Tahoma" charset="0" type="4"/>
+  <p:font name="Wingdings" charset="2" type="4" family="2"/>
+  <p:font name="Arial" charset="0" type="4"/>
+  <p:font name="Book Antiqua" charset="0" type="4" family="18"/>
+  <p:headersfooters slidenumber="t"
+   footerstr="Copyright  © 2002-2011  by Edward Barlow" formatid="0"
+   nouserdate="t" noheader="t" todaydate="t"/>
+  <p:headersfooters notes="t" headerstr="Generic Enterprise Manager"
+   formatid="0" nouserdate="t" nofooter="t" todaydate="t"/>
+  <p:pptdocumentsettings framecolors="WhiteTextOnBlack" hideslideanimation="t"
+   browsersupport="v4"/>
+ </p:presentation>
+ <o:shapedefaults v:ext="edit" spidmax="1211396" style='mso-wrap-style:none'>
+  <o:colormru v:ext="edit" colors="#f96,#099,teal,#369,#039,#020001,#010002,red"/>
+  <o:colormenu v:ext="edit" strokecolor="none [3]"/>
+ </o:shapedefaults></xml

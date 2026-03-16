@@ -1,0 +1,41 @@
+All software in this release is Copyright (c) 1996-2002 Edward Barlow and
+SQL Technologies. All rights reserved.
+
+You have the right to use and redistribute this software as you wish with
+the following stipulations:
+
+	1) If you intend to release any part of this package as a part of a
+		commercial package, you must contact the author for permission and
+		a redistribution license.  Basically, figure out a fair price for
+		use of this software and send me a check.
+	2) If you use any of the packages labeled as shareware for more than
+		a month in a commercial enterprise, you are required to purchase a
+		license for that product.  A license is not required for educational
+		or home use.
+	3) You may redistribute and/or modify these programs under the same terms
+		as Perl itself.   As a courtesy, i ask that you notify me of changes
+		so i can include your changes in the baseline package.
+	4) Submission of suggestions, bug fixes, or enhancements does not alter the
+		copyright on this package in any way.  By notifying me, you give up any
+		legal rights to your ideas.  I will maintain copyright notices that you
+		place in your code and will give credit where due, but will have the
+		right to redistribute changes under whatever terms I choose.
+
+In english, this is "mostly free" software - i dont make much money off
+it - but reserve the right to do so.  If you wish the software to get better,
+make suggestions and send me code modifications (its all open source).  I'll
+happily incorporate any and all ideas - but I will not giving up rights to the
+(paltry) revenue stream I get from this work.  I am somewhat motivated by
+making this package a commercial success - and my supporting and enhancment
+of these tools is directly related to their commercial viability - so if you
+find the freeware and shareware aspects of this software useful - please
+support me by purchasing a shareware license (its not like its expensive).
+
+Please review the file Artistic.txt.
+
+There is absolutely and totally no waranty on any kind on this software.
+
+Ed Barlow
+January 2001
+www.edbarlow.com
+barlowedward@hotmail.com

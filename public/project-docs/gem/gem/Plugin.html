@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Plugin.pm - Base Class For GEM Plugins</title>
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<ul>
+
+		<li><a href="#usage">USAGE</a></li>
+		<li><a href="#synopsis">SYNOPSIS</a></li>
+		<li><a href="#top_of_file">TOP OF FILE</a></li>
+		<li><a href="#bottom_of_file">BOTTOM OF FILE</a></li>
+		<li><a href="#other_functions">OTHER FUNCTIONS</a></li>
+		<li><a href="#plugin_builtin_functions">PLUGIN BUILTIN FUNCTIONS</a></li>
+		<li><a href="#plugin_utility_functions">PLUGIN UTILITY FUNCTIONS</a></li>
+		<li><a href="#print_functions">PRINT FUNCTIONS</a></li>
+		<li><a href="#plugin_callbacks">PLUGIN CALLBACKS</a></li>
+		<li><a href="#plugin_documentation">PLUGIN DOCUMENTATION</a></li>
+		<li><a href="#event_functions">Event Functions</a></li>
+		<li><a href="#fixed_reactions">Fixed Reactions</a></li>
+	</ul>
+
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>Plugin.pm - Base Class For GEM Plugins</p>
+<p>
+</p>
+<h2><a name="usage">USAGE</a></h2>
+<p>This Document Describes how plugins work and how to write them.</p>
+<p>Plugins are the objects within the generic enterprise manager that perform all the functionality.
+This class provides core functionality and is inheirited by .pm files that reside in the plugins
+subdirectory.  This is the documentation on how to write a plugin.</p>
+<p>
+</p>
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<p>Generic Enterprise Manager plugins are written to provide users features through the
+GEM.  A plugin is a perl module (extension .pm) that inheirits from the base class Plugin. The .pm file
+and a .xml file which identifies associated data (author, copyright notice...) are placed in the plugins
+subdirecory of the application where they will automatically be loaded at run time.   Plugins should
+conform to this specification.  If a plugin does not compile, it not loaded at run time ( you
+will see error messages ).  Plugins are called by and run from the PluginManager module.</p>
+<p>
+</p>
+<h2><a name="top_of_file">TOP OF FILE</a></h2>
+<p>It is recommended that the top of a plugin file named xyz follow the following template:</p>
+<pre>
+        package xyz;
+        @ISA = qw(Plugin);
+        use strict;
+        use vars qw($VERSION);
+        $VERSION = &quot;.01&quot;;</pre>
+<p>
+</p>
+<h2><a name="bottom_of_file">BOTTOM OF FILE</a></h2>
+<p>As with all perl modules, the plugin must return a 1 and of
+course you are encouraged to embed embed perldoc documentation after that line.</p>
+<pre>
+  1;
+  __END__</pre>
+<pre>
+  =head1 NAME</pre>
+<pre>
+  eventviewer.pm -  Module for viewing events</pre>
+<pre>
+  =head2 DESCRIPTION</pre>
+<pre>
+  The event viewer can be viewed as an example plugin.
+  etc...</pre>
+<p>
+</p>
+<h2><a name="other_functions">OTHER FUNCTIONS</a></h2>
+<p>After that, the plugin should contain subroutines that override the
+subroutines in its parent Plugin.pm.  These will be used to define user interface elements and to
+handle functionality. You can create and paint a notebook tab if you wish to use one.
+You can create explorer buttons (lower left side), bitmaps for the upper left side, can
+add items to the main explorer tree, and
+can create the functionality that occurs when you right click items on an element of that tree.
+You can also create menu items for the menu bar.  The heirarchy is that the explorer
+buttons, when clicked, will populate the explorer tree.  The tree is painted and right click items
+added to elements.  When a user selects
+an element on this tree, selects a menu item, or right clicks on one of the right click items, a call back to
+<a href="#item_event_handler"><code>event_handler()</code></a> will be performed.</p>
+<p>
+</p>
+<h2><a name="plugin_builtin_functions">PLUGIN BUILTIN FUNCTIONS</a></h2>
+<p>This section lists functions that your plugin must NOT override.  These are automatically called
+from GEM.  In other words... theses functions should not be defined by the plugin.</p>
+<ul>
+<li><strong><a name="item_new__2d_called_by_pluginmanager">new				- called by PluginManager</a></strong><br />
+</li>
+<li><strong><a name="item_initialize__2d_called_by_pluginmanager">initialize	- called by PluginManager</a></strong><br />
+</li>
+</ul>
+<p>
+</p>
+<h2><a name="plugin_utility_functions">PLUGIN UTILITY FUNCTIONS</a></h2>
+<p>The following functions are available to you to use in your plugin:</p>
+<ul>
+<li><strong><a name="item_refresh_tree">$plugin-&gt;refresh_tree - refreshes the left side window tree</a></strong><br />
+</li>
+<li><strong><a name="item_messagebox">$plugin-&gt;messageBox(-message=&gt;$str, -title=&gt;$ttl)</a></strong><br />
+</li>
+Calls a <a href="#item_messagebox"><code>messageBox($str)</code></a>
+<p></p>
+<li><strong><a name="item_dialogbox">$plugin-&gt;DialogBox    - return a <code>DialogBox(@_)</code> using normal DialogBox arguments</a></strong><br />
+</li>
+<li><strong><a name="item_make_button">$plugin-&gt;<code>make_button()</code></a></strong><br />
+</li>
+<ul>
+<li><strong><a name="item__2dwidget_3d_3e_24frame">-widget=&gt;$frame</a></strong><br />
+</li>
+<li><strong><a name="item__2dtext_3d_3e_24bstr">-text=&gt;$bstr</a></strong><br />
+</li>
+<li><strong><a name="item__2dhelp_3d_3e_24help_string">-help=&gt;$help_string</a></strong><br />
+</li>
+<li><strong><a name="item__2dcommand_3d_3e_24func">-command=&gt;$func</a></strong><br />
+</li>
+</ul>
+<li><strong><a name="item_clear_tab">$package-&gt;<code>clear_tab($tabname)</code></a></strong><br />
+</li>
+<pre>
+        $current_main_frame = $package-&gt;clear_tab($tabname);</pre>
+<p>Clears the notebook tab named by $tabname. The cleared frame is then
+raised and returned to the calling program and can be used as a base frame.</p>
+<li><strong><a name="item_global_data">$package-&gt;<code>global_data()</code></a></strong><br />
+</li>
+calls gemdata-&gt;<a href="#item_global_data"><code>global_data()</code></a> to get/set values from the gem.xml configuration file
+<p></p>
+<li><strong><a name="item_show_html">$package-&gt;<code>show_html()</code></a></strong><br />
+</li>
+show a html frame
+<p></p>
+<li><strong><a name="item_unimplemented">$package-&gt;<code>unimplemented()</code></a></strong><br />
+</li>
+pops up a dialog box that says ... unimplemented...
+<p></p>
+<li><strong><a name="item_write_xmldata">$package-&gt;<code>write_XMLDATA()</code></a></strong><br />
+</li>
+save the <code>globaldata()</code> if needed
+<p></p>
+<li><strong><a name="item_get_last_event_info">$package-&gt;<code>get_last_event_info()</code></a></strong><br />
+</li>
+<li><strong><a name="item_ignore_events">$package-&gt;<code>ignore_events()</code></a></strong><br />
+</li>
+<li><strong><a name="item_browse">$package-&gt;<code>browse()</code></a></strong><br />
+</li>
+<li><strong><a name="item_get_config">$package-&gt;<code>get_CONFIG()</code></a></strong><br />
+</li>
+</ul>
+<p>
+</p>
+<h2><a name="print_functions">PRINT FUNCTIONS</a></h2>
+<p>You also have 3 print functions.</p>
+<ul>
+<li><strong><a name="item_statusmsg">$package-&gt;<code>statusmsg(@msg)</code></a></strong><br />
+</li>
+a normal/status message that will print to the console, log, and logfile
+<p></p>
+<li><strong><a name="item_notifymsg">$package-&gt;<code>notifymsg(@msg)</code></a></strong><br />
+</li>
+a status message  that will not print to the console
+<p></p>
+<li><strong><a name="item_debugmsg">$package-&gt;<code>debugmsg(@msg)</code></a></strong><br />
+</li>
+a debug message that will print to the log and console if --DEBUG passed and will always print to the logfile
+<p></p></ul>
+<p>The following example line will set the statusbar and print to stdout</p>
+<pre>
+        $package-&gt;statusmsg( &quot;[navigator.pm] menuclick($menuitem)\n&quot; );</pre>
+<p>
+</p>
+<h2><a name="plugin_callbacks">PLUGIN CALLBACKS</a></h2>
+<p>The callbacks define the look and feel of the application.
+The buttons on the lower left side determines which tree is selected in the explorer
+type menu above it.  This function returns an array of buttons to place in that corner.</p>
+<ul>
+<li><strong><a name="item_init">$package-&gt;<code>init()</code></a></strong><br />
+</li>
+This user defined function will be called to initialize the plugin during startup
+<p></p>
+<li><strong><a name="item_event_handler">$package-&gt;<code>event_handler()</code></a></strong><br />
+</li>
+This function takes an event and processes it.  The event
+are categorized.  The -eventtype argument defines what type
+of event is being sent.  The following list describes the options
+that each eventtype can have.  Note that the one confusion here is the
+difference between a tab and a page.  A tab is the high level notebook
+tab (monitoring, log, welcome...).  A page is a screen within the tab.
+Im not really sure how to work pages - how to navigate on them.  But
+the idea is that you have a fixed number of tabs and rather than requiring
+each plugin to create their own, the plugins can share the tabs.  This will
+make things less crowded.
+<pre>
+        &lt;TABLE&gt;
+        &lt;TR&gt;&lt;TH&gt;EVENT TYPE&lt;/TH&gt;&lt;TH&gt;ARGUMENT&lt;/TH&gt;&lt;/TR&gt;
+        &lt;TR&gt;&lt;TD&gt;menu&lt;/TD&gt;&lt;TD&gt;
+                -menuitem&lt;/TD&gt;&lt;/TR&gt;
+        &lt;TR&gt;&lt;TD&gt;tabchange&lt;/TD&gt;&lt;TD&gt;
+                -oldtab&lt;br&gt;
+                -curtab&lt;/TD&gt;&lt;/TR&gt;
+        &lt;TR&gt;&lt;TD&gt;pagechange&lt;/TD&gt;&lt;TD&gt;
+                -oldpage&lt;br&gt;
+                -newpage&lt;/TD&gt;&lt;/TR&gt;
+        &lt;TR&gt;&lt;TD&gt;treebrowse&lt;/TD&gt;&lt;TD&gt;
+                -entrypath&lt;br&gt;
+                -curtab1&lt;/TD&gt;&lt;/TR&gt;
+        &lt;TR&gt;&lt;TD&gt;treertclick&lt;/TD&gt;&lt;TD&gt;
+                -entrypath&lt;br&gt;
+                -clicktext&lt;/TD&gt;&lt;/TR&gt;
+        &lt;TR&gt;&lt;TD&gt;expbutton&lt;/TD&gt;&lt;TD&gt;
+                -context&lt;/TD&gt;&lt;/TR&gt;
+        &lt;TR&gt;&lt;TD&gt;imgbutton&lt;/TD&gt;&lt;TD&gt;
+                -text&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;
+
+=item * $package-&gt;getExplorerButtons()</pre>
+<p>return a hash of buttons that will go in the lower left corner.</p>
+<p></p>
+<li><strong><a name="item_getmenuitems">$package-&gt;<code>getMenuItems()</code></a></strong><br />
+</li>
+Returns an array of menu items (slash delimited) to be displayed in the menu bar.  If the parents for the menu item
+do not exist, they will be created.  Thus, if you return /a/b/c you will get 'a' on the menubar
+and b on its submenu.  Placing the mouse on b will show a further submenu of c.
+<p></p>
+<li><strong><a name="item_getpluginpanes">$package-&gt;<code>getPluginPanes($package)</code></a></strong><br />
+</li>
+Defines the tabs the plugin wishes to create.  The tab names are based on the keys returned
+in a hash. and the values indicate pointer to functions to run when the tab is raised
+<p></p>
+<li><strong><a name="item_menuclick">$package-&gt;<code>menuclick($package,$Frame,$entryPath)</code></a></strong><br />
+</li>
+This function is called with the full path name to the menu (see getMenuItems) when a user clicks on a menu item.
+<p></p>
+<li><strong><a name="item_gettreecolorfunc">$package-&gt;<code>getTreeColorFunc($package,$curTreeType)</code></a></strong><br />
+</li>
+Return function pointer to colorize the tree
+<p></p>
+<li><strong><a name="item_gettreeitems">$package-&gt;<code>getTreeItems($package,$curTreeType)</code></a></strong><br />
+</li>
+Return an array of Tree Items for the current tree type.  The tree type is related to the explorer
+button that is pressed and this function is called every time you press one of these buttons.
+You should obviously test for tree type and not return anything if the tree type is not of your
+creation.
+<p></p>
+<li><strong><a name="item_getbitmaps">$package-&gt;<code>getBitMaps($package)</code></a></strong><br />
+</li>
+Called on initialization to get bitmaps that might want to show in upper left side of window
+<p></p>
+<li><strong><a name="item_bitmapclick">$package-&gt;<code>bitmapclick($package,$Frame,$entryPath)</code></a></strong><br />
+</li>
+Called when the bitmap is clicked.
+<p></p>
+<li><strong><a name="item_gettreertclk">$package-&gt;<code>getTreeRtclk($package,$curTreeType,$treeitmptr)</code></a></strong><br />
+</li>
+Native callback that allows you to add right click items in the current tree.
+Basically you get a tree type in $curTreeType and a pointer to an array of items in
+the tree ($treeitmptr).  You return an array of arrays where the outer array
+matches the items in $treeitmptr and the inner array is a list of the popup right
+clicks.
+<p></p>
+<li><strong><a name="item_rtclick">$package-&gt;rtclick($package, $entryPath, $clktext)</a></strong><br />
+</li>
+This function is called when a user selects a right click item.  The entry path is the full
+path to the item and will match that which was specified in getTreeRtclk. The clktext is
+the subitem on that menu that was clicked.
+<p></p></ul>
+<p>
+</p>
+<h2><a name="plugin_documentation">PLUGIN DOCUMENTATION</a></h2>
+<p>Plugin documentation is contained in an xml file in the plugins directory that has the same root name as the
+.pm file.  I suggest you browse a few of them for functionality.</p>
+<pre>
+ &lt;package name=&quot;MDA_tables&quot; version=&quot;.01&quot;&gt;
+   &lt;copyright type=&quot;gpl&quot; key=&quot;&quot; expires=&quot;never&quot; notice=&quot;copyright (c) 2005 by edward barlow&quot; /&gt;
+   &lt;help_url&gt;<a href="http://www.edbarlow.com/plugins/MDA_tables.html&lt;/help_url&gt">http://www.edbarlow.com/plugins/MDA_tables.html&lt;/help_url&gt</a>;
+   &lt;long_description&gt;Monitoring Table Viewer&lt;/long_description&gt;
+   &lt;short_description&gt;Monitoring Table Viewer&lt;/short_description&gt;
+   &lt;author_name&gt;Edward Barlow&lt;/author_name&gt;
+   &lt;author_mail&gt;barlowedward@hotmail.com&lt;/author_mail&gt;
+ &lt;/package&gt;</pre>
+<p>
+</p>
+<h2><a name="event_functions">Event Functions</a></h2>
+<p>GEM communicates with the plugins using the function 	$pluginname-&gt;send_event(%args).  This function sends
+the event to each <a href="#item_event_handler"><code>event_handler()</code></a> function in loaded plugins.  These functions, on a plugin by plugin basis,
+will handle the event.</p>
+<p>
+</p>
+<h2><a name="fixed_reactions">Fixed Reactions</a></h2>
+<p>Clicking on the buttons in the lower left corner will always <code>redraw_tree()</code> in addition to
+anything else you want it to do.</p>
+
+</body>
+
+</html>

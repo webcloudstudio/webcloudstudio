@@ -1,0 +1,1085 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+<!-- Copyright (c) 2005-2011 By SQL Technologies - All Rights Reserved -->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM The GEM Console</title>
+  <link rel="stylesheet" type="text/css" href="../styles/mystyle.css">
+  <meta name="author" content="Edward Barlow">
+	<meta name="Description" content="The GEM Console Is a Low Cost Complete Auditing and Server Reporting Solution for Microsoft Sql Server and Sybase database servers.  It is a part of GEM, the Generic Enterprise Manager.">
+	<meta name="keywords" content="sybase, sql server, tools, audit, configuration reporting, database, html, monitoring, administrator, free, freeware, GEM, server administration, auditing, perl">
+</head>
+<body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>The GEM Console</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
+ <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
+<A NAME=link2></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>The GEM Console Guide</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The <span style="font-weight: bold;">GEM CONSOLE</span> is a set web pages that allow you to see a consolidated set of system reports. These reports range from fairly static configuration reports to very dynamic reports (system monitoring, batch job state, performance reports).  The console can be viewed with a standard web browser.<P>
+ The GEM Console is assembled and managed by the GEM batch scripts.  This is a batch reporting system - designed intentionally that way to minimize production system impact.   This means that some of the console reports will be assembled in the middle of the night and some will be reassembled every few minutes using the data collected by the monitoring system.  The console is designed with several goals in mind.<P>
+ <ol> <li>Completely document your environment</li> <li>Provide configuration auditing & security reports</li> <li>Historical reporting </li> <li>Assist Disaster Recovery</li> <li>System sanity check for misconfigurations, space problems etc...</li> <li>Advanced Reporting on the state of your backups</li> <li>Provide extensive morning review reports</li> <li>Monitor GEM and specifically monitor GEM Batch Jobs</li> <li>Provide trivial customization to YOUR specific needs.</li> </ol><P>
+ The GEM Console also had a design goal.  It was designed over time, as a freely available open architecture system.  It was specifically designed to be easily extendible into my consulting clients site specific needs.  The customization features of the console are simple, elegant, and do pretty much whatever you might need to monitor or report on specific things with your systems.  It will work very well with your existing monitoring, auditing, and reporting.<P>
+ This document explains the Console with the aim of permiting you to install, use, and maintain it.<P>
+ Documented separately are the GEM batch jobs.  These batch jobs are integral to the workings of the Console.  To synopsize, the configuration utility creates a set of batch jobs.  Jobs for your unix systems exist in the unix_batch_scripts directory and win32 jobs exist in the win32_batch_scripts directory. You are responsible for scheduling these jobs (although we do provide help on this).  If you have a hybrid win32/unix environment, each batch job should be scheduled in one and only one spot.  The batch jobs perform system monitoring and collect information into the data subdirectory of the GEM installation.  There are a few batch jobs that can be considered "Console" batch jobs.  These jobs either put together and manage the console or create specific console reports.  One final job takes all the "pre-prepared" console parts and assembles them into a final set of web pages.  The GEM configuration utility will build an initial set of Console pages, but a working console requires you to schedule your batch jobs.  While installing, you will end up with a minimal console, but that console will be fleshed out with more information as the batch jobs you sheduled run. The console is built in the data/CONSOLE_REPORTS directory of the GEM root.  The console can optionally be published to another system or directory.   This feature allows you and your co-administrators to view the console over the company intranet.  Be aware - the console publishes detailed configuration reports about your systems that you may not want revealed for security reasons.  It is normal to publish the console on a shared drive (not a web server) that can be controlled with standard file access permissions. The batch jobs also produce output.  Job standard output and standard error is stored in <span style="font-weight: bold;">data/GEM_BATCHJOB_LOGS</span> and and <span style="font-weight: bold;">data/batchjob_errors</span>.  As mentioned earlier,  <span style="font-weight: bold;">data/CONSOLE_REPORTS</span> is where the console is assembled. The <span style="font-weight: bold;">data/BACKUP_LOGS</span> directory is read for output of your backup scripts. The data/html_output directory is a place you can put your own reports for inclusion in the Console.<P>
+ This package needs to be installed through the master configuration utility of GEM. It is not supported as a standalone utility.<P>
+
+<A NAME=link3></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>CONSOLE ARCHITECTURE</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The following table summarizes the locations mentioned in the introduction. <p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"> <span style="font-weight: bold;">DIRECTORY</span></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"> <span style="font-weight: bold;">USAGE</span></td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ADMIN_SCRIPTS/console</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Perl Code Location</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">data/CONSOLE_REPORTS</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Final Web Browsable Output</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">data/GEM_BATCHJOB_LOGS</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Source Of Batch Job Log Files</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">data/batchjob_errors</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Source Of Batch Job Error Logs</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">data/html_output</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Where you put user assembled log files/reports</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">data/system_information_data</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Spot GEM places collected server logs and configuration data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">unix_batch_scripts/batch</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">The Unix Batch Scripts That Create The Console</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">win32_batch_scripts/batch</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">The Win32 Batch Scripts That Create The Console</td> </tr> </table><P>
+ The above table reveals a lot about the order of activities.  Scheduled batch scritps in the unix_batch_scripts and win32_batch_scripts call perl programs that reside in ADMIN_SCRIPTS/console. These programs perform a variety of tasks but many of them collect data into data/system_information_data. All Batch jobs create log files in data.  A few of the batch jobs collect data and create the actual console.<P>
+ The console also gives you additional protection by crosschecking your backup files to ensure that your backups were really created. Backups are perhaps the most critical database administration task. The critical nature of the success of your backup strategy has not been considered by the major vendors - it is left as an exercise for the DBA to validate their backups. GEM changes this. It checks that your backups actually happened and that everything looks reasonable.  Of course, we can not KNOW what you intend in terms of backups.  Should the database "test" on your production server be backed up?  Do you have log shipping?  The console creates reports describing your backup state and uses heuristic rules to figure out if everything is ok.  A human must read these reports to ascertain that everything is working and to investigate any failures. This will prevent you from running with inadequate backups or inadequate transaction log loads (in hot backup systems). Surprisingly, while you may think that your backups are reliable, stuff will happen... This system protects you.<P>
+ The GEM console specific batch jobs are as follows.<P>
+ <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><span style="font-weight: bold;">BATCH JOB NAME</span></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><span style="font-weight: bold;">DESCRIPTION</span></td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ConsoleArchiver.ksh</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Saves a copy of the console.  Recommended that this is run once per month to give you a historical configuration audit for your servers.</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ConsoleBuildAndFtp.ksh</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembles Console And Copies/Ftp's Final Output Directory To Final Destination<br> Calls ADMIN_SCRIPTS/console/console_build_and_ftp.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ConsoleUnixWeekly.ksh<br> ConsoleWin32Weekly.ksh</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Performs Task That Should Be Done 1ce Per Week<br> Calls ADMIN_SCRIPTS/console/console_weekly.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ConsoleUnixNightly.ksh<br> ConsoleWin32Nightly.ksh</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Performs Task That Should Be Done 1ce Per Night<br> Calls ADMIN_SCRIPTS/console/console_nightly.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ConsoleUnixHourly.ksh<br> ConsoleWin32Hourly.ksh</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Performs Task That Should Be Done Hourly<br> Calls ADMIN_SCRIPTS/console/console_hourly.pl</td> </tr> </table><P>
+
+<A NAME=link4></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>CUSTOMIZING REPORTS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ Gem allows you to create your own reports that will be directly incorporated into the console.  These reports are defined in the file <FONT COLOR=RED>conf/console.dat</FONT>.  The following is the online help for this file.  This file is used to easily incorporate custom business logic into your console.<P>
+<pre>
+   # THIS FILE CONTROLS THE REPORTS FOUND IN THE CUSTOM SITE REPORTS
+   #
+   # NOTE: anything found in the log directory AUTOMATICALLY gets reported
+   #  under the log files section of the web page.
+   #
+   # MAIN PURPOSE: Custom Reports section of the server documenter
+   #
+   # You can create custom reports here and set up a list of messages to
+   # ignore.  Reports can be queries run on one server, commands that
+   # return html, and external commands that return txt.
+   #
+   # Sometimes you will explicity wish to ignore some messages from the
+   # reports (like user with no login messages from databases that
+   # have been copied from an other server).  Do that here as well.
+   #
+   # The format for this file is (one row per report)
+   #   REPORT_NAME SERVER Database QUERY
+   #   REPORT_NAME html &lt;command to run returning html results&gt;
+   #   REPORT_NAME cmd &lt;command to run returning ascii/txt results&gt;
+   #   REPORT_NAME sql server login pass &lt;sql command&gt;
+   #   REPORT_NAME file host &lt;filename&gt;
+   #    IGNORE server database &lt;message ids (space separated)&gt;
+   #
+   # Queries can be run on individual servers with the sql and null keywords.
+   #
+   # Use the sql keyword to run on non ASE servers (like HISTORICAL and BACKUP
+   # servers) that are not in the password file for whatever reason.
+   #
+   # For file reports - host may be the word null in which case the file is local.
+   #
+   # External commands can be called using the cmd (ascii output) and html
+   # (formatted html output) keywords.
+</pre>
+<P>
+<pre>
+   # The IGNORE line ignores particular messages on the Server Analysis For
+   # Problems report by server/db.  The message ids should be numbers (eg. 31008)
+   # from that report.
+   #
+   # ALL underscores in REPORT_NAME will be replaced with spaces when printing
+   #
+   # sql is a special query for HIST/BACKUP/REPORT servers that are not
+   # in the password file for whatever reason
+   #
+   # Database name can be the word 'null' if that is needed (no quotes)
+   #
+   # ALL underscores in REPORT_NAME will be replaced with spaces on output
+   #
+   # STORED PROCEDURES
+   # ------
+   # When you run a stored procedure that returns some stuff it is embedded
+   # into the html report as is
+   #
+   # example to run 2 queries on BPSAPROD database bpsadata:
+   #
+   # Bpsa_Status BPSAPROD bpsadata exec bpsadata..show_bpsa_load_status
+   # Bpsa_Transaction_Row_Count BPSAPROD bpsadata exec bpsadata..show_trans_row_counts
+   #
+   # RUN SYSTEM COMMAND (PERL MUST BE IN PATH or PREPENDED)
+   # ------
+   # If you are running a perl command and you are on NT, you will need to
+   # have C:/program_files/perl (or whatever your perl is) prepended
+   # to your program path so it can interpret it ok.  ie.
+   #    Rsh_Program_Type cmd C:/program_files/perl /optapp2/syb_admin/x.pl -cx
+   #
+   # this code checks for core dumps on 3 systems
+   #
+   # examples:
+   # Core_Dump_Checker_On_Prod html /optapp2/syb_admin/development/ADMIN_SCRIPTS/console/core_dump_checker.pl  2&gt;/dev/null
+   # Core_Dump_Checker_On_Sybprod html rsh -l sybase sybprod /opt2/sybdump/MONITORING_SCRIPTS/core_dump_checker.pl -o.  2&gt;/dev/null
+   #
+   # run file command on rsh and ftp on all hosts in password file so that i can
+   # see if they have been appropriately modified for my current site (we use
+   # shell wrappers on development/qa so these systems cant go to our production.
+   #
+   # Rsh_Program_Type cmd /optapp2/syb_admin/development/ADMIN_SCRIPTS/rdist/run_cmd_on_all_hosts.pl -c"file /usr/bin/rsh"
+   # Ftp_Program_Type cmd /optapp2/syb_admin/development/ADMIN_SCRIPTS/rdist/run_cmd_on_all_hosts.pl -c"file /usr/bin/ftp"
+   #
+   # we also have a program that identifies recently modified files and their
+   # differences within a set of servers
+   #
+   # Recently_Changed_Files html /scripts/chksum_compare.pl  -hx  -pappprod
+   # Oracle_Backups cmd rsh -l oracle sybint1 'ls -l /optapp1/oracle/tools/*'
+</pre>
+<P>
+
+<A NAME=link5></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>LIST OF CONSOLE REPORTS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tr><th style="background-color: rgb(51, 102, 255);">Html File</th><th style="background-color: rgb(51, 102, 255);">Menu Item</th><th style="background-color: rgb(51, 102, 255);">Report Name</th><th style="background-color: rgb(51, 102, 255);">Batch Name</th></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Win32_Hosts_Report.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYHOST</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Servers Hosts Files</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">MssqlScheduledJobRpt.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sql Server Jobs With Errors</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Win32_Scheduler.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Task Scheduler</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">mssql_jobstatus_rpt.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sql Server Job Scheduler</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PcDiskspace.txt</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Disk Space Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">SybRepMonReport.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Replication Latency</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybRepSvrLogRpt.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Replication Log Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybMonSvrLogRpt.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Mon Server Log Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybHistSvrLogRpt.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Hist Server Log Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybErrLogRpt.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Error Log - Filtered</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybErrLogAllRpt.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Error Log - UnFiltered</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybErrLogAlarm.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Error Log - Recent</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">OptdiagAnalyze.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Fragmentation Analysis</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybaseRepServer.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Sybase Replication Logs</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybaseBackupServer.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Sybase Backup Logs</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybaseASE.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Sybase ASE Error Logs</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_ProductionOvernight.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Production Errors</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_ProductionWarnings.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Production Warnings</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_PCEventlog.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Windows Event Log Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_PCDiskspace.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Windows Disk Space Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_UnixWarnings.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Unix Warnings Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_UnixErrors.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYAMREVIEW</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Unix Errors Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GetBackupStateSybase.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BACKUP</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Get Backup Info - Sybase</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GetBackupStateMssql.txt</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BACKUP</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Get Backup Info - MS SQL</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BackupErrorReport.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BACKUP</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Backup CrossCheck - Possible Errors</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BackupReport.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BACKUP</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Backup CrossCheck - All Systems</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">SybaseBackupFileReport.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BACKUP</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Backup Configuration</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_BackupReport.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BACKUP</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Backup Manager Summary</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_Backups.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BACKUP</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Backup Manager Job State</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">SybRepMonAgent.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Replication Latency Monitor</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybRepSvrLogFetch.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Replication Log Fetch</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybRepSvrConfig.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Replication Log Configuration</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybRepSvrSaveAlarms.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Replication Log Save</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybMonSvrLogFetch.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Mon Server Log Fetch</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybMonSvrConfig.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Mon Server Log Configuration</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybHistSvrLogFetch.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Hist Server Log Fetch</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybHistSvrConfig.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Hist Server Log Configuration</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybErrLogFetch.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Error Log Fetch</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybErrLogConfig.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Error Log Configuration</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_BlackoutReport.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Ignore / Blackout Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_ProductionList.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Production Servers Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_AgentReport.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">BYGEMLOG</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Agents Run At Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> <tr><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_WinSecurityRpt.html</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">SECURITY</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Windows Security Report</td><td style="vertical-align: top; background-color: rgb(255, 204, 102);">PROGNAME</td></tr> </table><P>
+
+<A NAME=link6></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>CONSOLE ASSEMBLED REPORTS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The console will generate reports on its own when it runs.  The console can run (by default) in Hourly, Nightly, and Weekly flavors, with SYBASE and SQL Server options.<P>
+ <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><span style="font-weight: bold;">Page</span></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><span style="font-weight: bold;">Report Name</span></td> <td style="vertical-align: top; font-weight: bold; background-color: rgb(51, 102, 255);">File Name</td> <td style="vertical-align: top; font-weight: bold; background-color: rgb(51, 102, 255);">Assembled?</td> <td style="vertical-align: top; font-weight: bold; background-color: rgb(51, 102, 255);">Notes On Creation</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Server Names &amp; Ports</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">interfaces.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Y</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Internally assembled by <A HREF=#link23>document_all.pl</A> if DO_SYBASE=1</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Interface File Conflicts</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">interfaces_conflicts.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Y1</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">console/interfaces_file_rpt.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Database Use Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">dbuserpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ALL</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Server Overview</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">server_summary.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ALL</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Server Version Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">server_version.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ALL</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Server Sysconfig Values</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">server_configures.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">2</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">BROKEN! console/sysconfigures_rpt.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Space By Database (Sybase)</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">space_by_db_syb.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">DO_SYBASE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Space By Database (SQL Server)</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">space_by_db_sql.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">DO_SQLSVR</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Server by database (Sybase)</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">server_by_db_syb.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">All</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td></tr> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Server by database (SQL Server)</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">server_by_db_sql.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">All</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Devices By Servers</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">server_devices.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">2</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">console/devices_html_rpt.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Space Used By Database (Sybase)</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">space_used_syb.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">All</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Space Used By Database (SQL Server)</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">space_used_sql.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">All</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Version/Restart Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">win32_getversion.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">W5</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by bin/win32_getversion.pl --DAYS=7</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">SQL Server Data Paths</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">sql_path_report.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">S5</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">bin/mssql_datapath_report.pl --HTML</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MAIN PAGE</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Space Used History</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">space_report.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">9</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">bin/space_report.pl</td> </tr><P>
+ <tr><td colspan=5>&nbsp</td></tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ByServer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">[Click ]</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">by_server.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Always</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Assembled by <A HREF=#link23>document_all.pl</A> - This page is a container</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ByServer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Overview</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">byserver/$srvr.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ALL</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ByServer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Config</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">$srvr.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Server Type</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">config_report.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ByServer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Login Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">$svr_logins.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">6 + Server Type</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">custom_rpt.pl -Ssvr -h -R6</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ByServer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Users</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">$svr_users.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">6 + Server Type</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">custom_rpt.pl -Ssvr -h -R6</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ByServer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Largest 20 Tables</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">$svr_largetables.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">22</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">biggest_table.pl -h -S$srvr -U$login -P$password -n20 -s</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ByServer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Debug</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">$svr_debug.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">4</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">debug_one_server -h -Ssvr</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">ByServer </td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">$srvr_dbschema.txt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">$svr_dbschema.txt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">(NEVER?)</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">dbschema.pl -Ssvr -km -Dmaster</td> </tr><P>
+ <tr><td colspan=5>&nbsp</td></tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Bad Symbolic Links</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">bad_symbolic_links.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">20 and !nt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">core_dump_checker.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ByHost</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Database Disk Usage</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">disk_report.html<br> </td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">6</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Assembled by <A HREF=#link23>document_all.pl</A> From Stored XML Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Host Network Setup</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ip_info.txt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">U13</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">run_cmd_on_all_hosts.pl -c"/usr/sbin/ifconfig -a" -C"/sbin/ifconfig -a" -n</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Host Operating System</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">sys_info.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">U11</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">run_cmd_on_all_hosts.pl -c"uname -a" -f1,3,4,5,6,7,8 -o</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Host Uptime</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">rup.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">12</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">/usr/bin/rup -t</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Hosts File</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">host_info.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">U13</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">bin/build_hosts.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows IP Configuration Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">win32_ipconfig.htm</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">W11</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">bin/win32_ipconfig_report.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Hardware Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">win32_hardware_report.htm</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">W11</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">bin/win32_system_report.pl -SYSRPT</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Server Hosts File</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Win32_Hosts_Report.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Software Config Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">win32_software_report.htm</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">W11</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">bin/win32_system_report.pl -SWRPT</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Core Dumps Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">you_have_mail.txt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">U15<br> </td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">run_cmd_on_all_hosts.pl -cls -l /var/mail -n</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Large File Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">large_files.txt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">15</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">core_dump_checker.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Users With Crontabs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">core_dump_checker.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">15</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">core_dump_checker.pl</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">By Host</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Users With Mail</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">you_have_crontab.txt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">U15</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">./rdist/run_cmd_on_all_hosts.pl -c'ls -l /var/spool/cron/crontabs' -n</td> </tr><P>
+ <tr><td colspan=5>&nbsp</td></tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Security</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Access By Logins - SQL Server</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">sql_suid_by_server.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">W5</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">crosstab.pl -C0 -R2 -O3...</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Security</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Access By Logins - Sybase</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">syb_suid_by_server.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Y3</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">crosstab.pl -C0 -R2 -O3...</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Security</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Windows Security Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_WinSecurityRpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Security</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Object Creation Time - SQL Server</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">sql_crdate.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">S5</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">crdate_report.pl -PRODONLY --HTML --TYPE=sqlsvr</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Security</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Object Creation Time - Sybase</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">syb_crdate.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Y5</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">crdate_report.pl -PRODONLY --HTML --TYPE=sybase</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Security</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Role Report - Sql Server</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">sql_role.txt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">S5</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">passwd_rpt.pl -h -Tsqlsvr</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Security</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Role Report - Sybase</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">syb_role.txt</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Y5</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">passwd_rpt.pl -h -Tsybase</td> </tr><P>
+ <tr><td colspan=5>&nbsp</td></tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Dbcc Results Summary</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">check_dbcc_output.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">16</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">check_dbcc_output.pl -D14</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Production Errors</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_ProductionOvernight.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Production Warnings</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_ProductionWarnings.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Sybase ASE Error Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybaseASE.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Sybase Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybaseBackupServer.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Sybase Replication Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybaseRepServer.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Unix Errors Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_UnixErrors.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Unix Warnings Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_UnixWarnings.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Server Analysis for Problems</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">error.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">4</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Internally Generated From Stored Data</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sql Server Job Scheduler</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">mssql_jobstatus_rpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sql Server Jobs With Errors</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">MssqlScheduledJobRpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">SqlServer Db Configuration Fixer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">fix_db_sqlsvr.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">S4</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">fix_db.pl -x -Tsqlsvr</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Db Configuration Fixer</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">fix_db_sybase.html </td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Y4</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">fix_db.pl -x -Tsybase</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Error Log Filtered</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybErrLogRpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Error Log - Recent</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybErrLogAlarm.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Error Log - UnFiltered</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybErrLogAllRpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Hist Server Log </td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">  GemRpt_SybHistSvrLogRpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Mon Server Log Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybMonSvrLogRpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Replication Latency</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">SybRepMonReport.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Replication Log Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GemRpt_SybRepSvrLogRpt.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Space Errors Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">space_errors.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">9</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">space_errors.pl -H</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Thresholds Crossed Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase_Threshold_Report.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Y9</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">threshold_manager.pl --DEBUG --HTML --ACTION=REPORT</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Unix Disk Space</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">unix_df_info.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">U14</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">unix_space_monitor_via_rsh.pl -A</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Disk Space Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">PcDiskspace.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Windows Task Scheduler</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Win32_Scheduler.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Windows Disk Space Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">GEM Windows Event Log Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Morning Review</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase Fragmentation Analysis</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);"></td> </tr><P>
+ <tr><td colspan=5>&nbsp</td></tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">BATCH FILE EXECUTION LOGS</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">by_logs.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Internally Assembled</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Agents Run At Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_AgentReport.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM File Sources Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">gem_file_manager.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">21</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">gem_file_manger.pl -mh</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Ignore / Blackout Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_BlackoutReport.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Production Servers Report</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_ProductionList.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Error Log Configuration</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybErrLogConfig.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Error Log Fetch</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybErrLogFetch.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Hist Server Log Configuration</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybHistSvrConfig.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Hist Server Log Fetch</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybHistSvrLogFetch.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Mon Server Log Configuration</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybMonSvrConfig.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);"></td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Mon Server Log Fetch</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybMonSvrLogFetch.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Replication Latency Monitor</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">SybRepMonAgent.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Replication Log Configuration</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybRepSvrConfig.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Replication Log Fetch</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybRepSvrLogFetch.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Replication Log Save</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_SybRepSvrSaveAlarms.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr><td colspan=5>&nbsp</td></tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">Custom Reports</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">ALL</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">$custom_report_name{$count}.*</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">17</td> <td style="vertical-align: top; background-color: rgb(255, 204, 102);">$custom_report_query{$count}</td> </tr><P>
+ <tr><td colspan=5>&nbsp</td></tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Batch Logs: Errors</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">by_backuperrs.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Internally Assembled</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Batch Logs: Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">by_backuplogs.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);"></td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Internally Assembled</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup CrossCheck - All Systems</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">BackupReport.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup CrossCheck - Possible Errors</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">BackupErrorReport.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Backup Manager Job State</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_Backups.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GEM Backup Manager Summary</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GemRpt_BackupReport.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Get Backup Info - MS SQL</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GetBackupStateMssql.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Get Backup Info - Sybase</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">GetBackupStateSybase.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ <tr> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Backup Logs</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">Sybase Backup Configuration</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">SybaseBackupFileReport.html</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">N.A.</td> <td style="vertical-align: top; background-color: rgb(255, 204, 255);">EXTERNAL REPORT (See ABOVE)</td> </tr><P>
+ </tbody> </table><P>
+
+<A NAME=link7></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>The gem.xml Database</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The system uses a variety of configuration information including the conf/gem.xml library which is managed by the GemData.pm perl module. This file stores, in xml, static configuration data about your environment - data often collected using the internal RosettaStone.pm module. This seems a superior approach to creating flat files for everything or to the approach of discovering all configuration informaton in real time. The main program that loads this database is called <A HREF=#link22>discover.pl</A>. The actual file gem.xml is stored in the conf subdirectory of your appliation.<P>
+
+<A NAME=link8></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Information Collected</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The tool kind of gets everything i could think of. It collects: <ol> <li> Sybase Error Logs </li> <li> Sybase Backup Server Logs </li> <li> Sybase Run Files </li> <li> Sybase Configuration Information From the server </li> </ol> The specific set of files collected is governed by the toolkit configuration files ( sybase_passwords.dat and unix_passwords.dat ) which identify the sybase directories on your remote systems, the servers you own, etc...<P>
+
+<A NAME=link9></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Cron</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ You will need to schedule your batch jobs.  Luckily, the GEM configuration utility will create the crontab file that you will need to schedule. Here are some samples of a crontab file.<br> <br> <span style="font-family: monospace;">10 1 * * 0&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; /apps/sybmon/dev/unix_batch_scripts/batch/console_weekly.ksh</span><br style="font-family: monospace;"> <span style="font-family: monospace;">37 5 * * 1-6&nbsp; &nbsp;&nbsp;&nbsp; /apps/sybmon/dev/unix_batch_scripts/batch/console_nightly.ksh</span><br style="font-family: monospace;"> <span style="font-family: monospace;">24,32,48,4 8-16 * * 1-5&nbsp; /apps/sybmon/dev/unix_batch_scripts/batch/console_hourly.ksh </span> <br style="font-family: monospace;"> <span style="font-family: monospace;">41 7-19 * * 1-6&nbsp;&nbsp; /apps/sybmon/dev/unix_batch_scripts/batch/space_monitor.ksh</span><br style="font-family: monospace;"> <span style="font-family: monospace;">33 * * * *&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /apps/sybmon/dev/unix_batch_scripts/batch/get_unix_diskspace.ksh</span><br><P>
+
+<A NAME=link10></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>PRE BUILT MONITORING SYSTEM REPORTS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ Gem contains numerous pre built reports that are derived from the monitoring system data. These reports are named with the string “GEM” at the beginning of them. For example, a report named $REPORTNAME is created by the GemRpt_${REPORTNAME}.ksh  script (or GemRpt_${REPORTNAME}.bat on Win32) and appears in the Console as “GEM $REPORTNAME Report”.<P>
+ Under the covers, the batch file calls the perl script RunMimiReport.pl – which in turn calls mimi.pl the CGI version of the monitoring interface. In other words – the prebuilt reports are a static (point in time) snapshot of the dynamic alarm system monitor. The exact syntax under the covers would be :<P>
+ <b><i>RunMimiReport.pl –REPORT=$REPORTNAME --OUTFILE=$GemRpt_INSTALL_DIR/data/html_output/$REPORTNAME.html --BATCHID=$REPORTNAME</b></i><P>
+ The above command generates a report based on dynamic data stored in the alarming database. RunMimiReport.pl calls mimi.pl with a set of arguments associated to $REPORTNAME that are fetched from the ReportArgs table. You can, therefore create your own reports!  RunMimiReport.pl has many associated features (like mailing the output to someone!) allowing you to say – mail an hourly snapshot of just the systems zen_app_1, zen_app_3, and zen_manager to bob, the zen guy every hour!  This report can include EVERY thing monitored on any set of systems, servers, processes, or whatever… Send the pre built Unix_Errors and Unix_Warnings reports by mail to your harried unix guy.  Send the Win32_Errors report to your frantic windows guy.<P>
+ So… Backtracking… Let us assume you want a report… First you would create it in the monitoring page, which allows you to set all kinds of filters - then you note the URL – which (due to CGI conventions) contains the report arguments. The next thing you do is enter them into the ReportArgs table using a syntax like:<P>
+<pre>
+   delete ReportArgs where reportname = 'GemRpt_Backups'
+   insert ReportArgs values  ('GemRpt_Backups','filter_severity','All')
+   insert ReportArgs values   ('GemRpt_Backups','filter_container','All')
+   insert ReportArgs values   ('GemRpt_Backups','filter_time','1 Day')
+   insert ReportArgs values   ('GemRpt_Backups','ShowProgram','NO')
+   insert ReportArgs values   ('GemRpt_Backups','ReportTitle','All Backup    Messages')
+   insert ReportArgs values   ('GemRpt_Backups','progname','BACKUPS')
+</pre>
+<P>
+ Then create/run your batchfile.  I recommend using the –DEBUG argument to RunMimiReport.pl and saving the results into a .html file that you can view in brilliant color and magnificence in your web browser.  When I run the above report with –DEBUG I see within the output the fact that the essential query was:<P>
+<pre>
+   select {stuff}
+   from Heartbeat
+   where monitor_program
+   in ('backup.pl', 'BackupFull', 'BackupTran', 'LoadAllTranlogs','FixLogship')
+   and ( reviewed_time is null or reviewed_until and internal_state!='D'
+   order by t.system,subsystem}
+</pre>
+<P>
+ To debug a report (say the example GemRpt_Backups report which comes prepackaged with the system) you can try something like:<P>
+<pre>
+   /usr/local/bin/perl /apps/sybmon/dev/ADMIN_SCRIPTS/monitoring/RunMimiReport.pl --BATCHID=GemRpt_Backups --REPORT=GemRpt_Backups --OUTFILE=/apps/sybmon/dev/data/html_output/GemRpt_Backups.html --DEBUG --MAILTO=ebarlow@home.com
+</pre>
+<P>
+ Which will send you a mail report with the output of the report!  The --DEBUG optional arg will give additional diagnostics.<P>
+
+<A NAME=link11></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>STANDARD REPORTS PROVDIED WITH GEM</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The following report is generated by <b><i>RunMimiReport.pl --GENREPORT</b></i> and lists the arguments that are passed for each of the pre built reports.<P>
+ <TABLE BORDER=1><TR><TH>Reportname</TH><TH>ProdChkBox</TH> <TH>ReportTitle</TH> <TH>ShowProgram</TH> <TH>admin</TH> <TH>filter_container</TH> <TH>filter_severity</TH> <TH>filter_time</TH> <TH>progname</TH> <TH>radio_screen</TH> <TH>subsystem</TH> </TR><TR><TD>Backups</TD>   <TD>NO&nbsp;</TD> <TD>Backup Error Report&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>BACKUP&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>ExchangeFiles</TD>   <TD>YES&nbsp;</TD> <TD>Exchange Files&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>ExchangeFiles&nbsp;</TD> <TD>All&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>ExchangeFiles2</TD>   <TD>YES&nbsp;</TD> <TD>Exchange Files&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>ExchangeFiles&nbsp;</TD> <TD>Errors&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>FeedDf</TD>   <TD>NO&nbsp;</TD> <TD>Market Data Disk Space&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>FEED&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>5 Days&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>Feeds</TD>   <TD>NO&nbsp;</TD> <TD>Feed Error Report&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>Feeds&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_AgentReport</TD>   <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>Agents&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_BackupReport</TD>   <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>Backups&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_BlackoutReport</TD>   <TD>&nbsp;</TD> <TD>GEM Blackout Report&nbsp;</TD> <TD>&nbsp;</TD> <TD>Blackout Report&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Ignorelist</TD>   <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>Ignore List&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_ProductionErrors</TD>   <TD>YES&nbsp;</TD> <TD>Production Overnight Report&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Errors&nbsp;</TD> <TD>Since 4PM&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_ProductionList</TD>   <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>Production&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_ProductionWarnings</TD>   <TD>YES&nbsp;</TD> <TD>Production Warnings&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>Since 4PM&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Sql_Server_Errors</TD>   <TD>NO&nbsp;</TD> <TD>Sql Server Errors&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>SQL_SERVER&nbsp;</TD> <TD>Errors&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Sybase_ASE</TD>   <TD>&nbsp;</TD> <TD>Sybase ASE Error Logs&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>Sybase_ASE_Log&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Sybase_BackupServer</TD>   <TD>&nbsp;</TD> <TD>Sybase Backup Logs&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>Sybase_Backup_Log&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Sybase_Errorlog</TD>   <TD>&nbsp;</TD> <TD>Sybase Error Logs&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>SybaseErrorlog&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Sybase_Errors</TD>   <TD>NO&nbsp;</TD> <TD>Sybase Errors&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>SYBASE&nbsp;</TD> <TD>Errors&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Sybase_RepServer</TD>   <TD>&nbsp;</TD> <TD>Sybase Replication Logs&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>Sybase_Replication_Log&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Unix_2Hour</TD>   <TD>NO&nbsp;</TD> <TD>GemRpt_Unix_2Hour&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>UNIX&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Unix_Errors</TD>   <TD>NO&nbsp;</TD> <TD>Unix Error Report&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Errors&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>UnixLogmon&nbsp;</TD> <TD>Events&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Unix_Warnings</TD>   <TD>&nbsp;</TD> <TD>Unix Warning Report&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>UnixLogmon&nbsp;</TD> <TD>Events&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Win32_Diskspace</TD>   <TD>&nbsp;</TD> <TD>Windows Disk Space&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>PcDiskspace&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Win32_Errors</TD>   <TD>NO&nbsp;</TD> <TD>Win32 Errors&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>WIN32&nbsp;</TD> <TD>Errors&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Win32_Eventlog</TD>   <TD>&nbsp;</TD> <TD>Windows Event Logs&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>PcEventlog&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>GemRpt_Win32_SecurityRpt</TD>   <TD>&nbsp;</TD> <TD>Windows Security Events&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Errors&nbsp;</TD> <TD>1 Day&nbsp;</TD> <TD>PcEventlog&nbsp;</TD> <TD>Events&nbsp;</TD> <TD>Security&nbsp;</TD> </TR> <TR><TD>Imagine</TD>   <TD>NO&nbsp;</TD> <TD>Imagine Error Report&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>IMAGINE SYSTEM&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>ProdOvernight</TD>   <TD>YES&nbsp;</TD> <TD>    ProdOvernight&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Errors&nbsp;</TD> <TD>Since 4PM&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>ProdWarnings</TD>   <TD>YES&nbsp;</TD> <TD>Production Warnings&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>All&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> <TR><TD>Unix2Hour</TD>   <TD>NO&nbsp;</TD> <TD>Unix2Hour&nbsp;</TD> <TD>NO&nbsp;</TD> <TD>&nbsp;</TD> <TD>Unix&nbsp;</TD> <TD>Warnings&nbsp;</TD> <TD>2 Hours&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> <TD>&nbsp;</TD> </TR> </TABLE><P>
+
+<A NAME=link12></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GEM ALARM CONTAINERS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ A container is a set of servers or programs that can be used to filter stuff for particular users.  This system is not totally flexible - you can choose a container to include a set of other containers, systems, or monitoring programs - but you can not restrict it further.  For most users this is acceptable.<P>
+ Users will probably be interested either in a set of servers (APP1, APP2, DB1) or a set of monitor programs (ie all the unix monitoring programs for your unix admin).<P>
+ As a note: we should probably should rename ContainerMap to ContainerProgram and ContainerOverride to ContainerSystem<P>
+<h3>Container Definition via mimi.pl</h3>
+<pre>
+   Program -&gt; Container Mapping (Program=Sybase_ASE_Log) Container=DELETEME
+      Note: Must add container by hand or it wont show
+      Insert ContainerMap Values ('Sybase_ASE_Log','DELETEME')
+   System -&gt; Container Mapping (CONTAINER=DELETEME, SYSTEM=mlpsyb)
+      if exists ( select * from Container where name='mlpsyb' )
+            Insert ContainerOverride Values ('DELETEME','c','mlpsyb',null)
+      else    Insert ContainerOverride Values ('DELETEME','s','mlpsyb',null)
+</pre>
+<P>
+<h3>TABLE:       ContainerMap</h3>
+<pre>
+            fields monitor_program,container
+</pre>
+<h3>TABLE:       Container_full</h3>
+<pre>
+            fields name,element
+</pre>
+<h3>TABLE:       ContainerOverride</h3>
+<pre>
+            fields name, type, element, owner
+</pre>
+<h3>TABLE:       Container</h3>
+<pre>
+            fields name (container), type (s=system, c=container, p=program), element, owner (unused)
+</pre>
+<P>
+<h3>PROCEDURE: build_container</h3>
+<P>
+<pre>
+   delete Container
+</pre>
+<P>
+<pre>
+   -- First map containers from ContainerMap
+   INSERT Container
+      select cm.container,'s',e.system,null
+      from ContainerMap cm, Event e
+      where e.monitor_program = cm.monitor_program
+   union
+      select cm.container,'s',e.system,null
+      from ContainerMap cm, Heartbeat e
+      where e.monitor_program = cm.monitor_program
+      and e.batchjob is null
+</pre>
+<P>
+<pre>
+   delete Container
+   FROM Container c1,  ContainerOverride c2
+   where c1.name=c2.name
+   and   c1.type=c2.type
+   and   c1.element=c2.element
+</pre>
+<P>
+<pre>
+   INSERT Container
+   select * from ContainerOverride
+</pre>
+<P>
+<pre>
+   delete Container_full
+</pre>
+<P>
+<pre>
+   INSERT Container_full
+      select 'All',e.system from Event e
+      where monitor_program!='Monitor'
+   union
+      select 'All',e.system from Heartbeat e
+      where monitor_program!='Monitor'
+      and e.batchjob is null
+</pre>
+<P>
+<pre>
+   INSERT  Container_full
+   select  distinct name, element
+   from    Container
+   where     type = 's'
+ union
+   select  c1.name, c2.element
+   from    Container c1, Container c2
+   where   c1.type = 'c'
+   and     c2.type = 's'
+   and     c1.element = c2.name
+</pre>
+ union<pre>
+   select  c1.name, c3.element
+   from    Container c1, Container c2, Container c3
+   where   c1.type = 'c'
+   and   c2.type = 'c'
+   and   c3.type = 's'
+   and   c1.element = c2.name
+   and   c2.element = c3.name
+</pre>
+ union<pre>
+   select  c1.name, c4.element
+   from    Container c1, Container c2, Container c3, Container c4
+   where   c1.type = 'c'
+   and   c2.type = 'c'
+   and   c3.type = 'c'
+   and   c4.type = 's'
+   and   c1.element = c2.name
+   and   c2.element = c3.name
+   and   c3.element = c4.name
+</pre>
+<P>
+<pre>
+   INSERT    Container_full
+   select    distinct 'All',e.system
+   from    IgnoreList e
+   where    e.system not in ( select element from Container_full )
+</pre>
+<P>
+<pre>
+   INSERT ProductionServers
+   select distinct element,0
+   from   Container_full
+   where  element not in ( select system from ProductionServers )
+</pre>
+<P>
+<h3>REPORTS: Containers</h3>
+<P>
+<pre>
+   select    name,
+         Type=case when type='c' then 'Container'   when type='s' then 'Server'   else 'unknown'      end,
+         element
+   from Container order by name,type"
+</pre>
+<P>
+<h3>REPORTS: System->Container</h3>
+<P>
+<pre>
+      select    name,   element from ContainerOverride order by name,type
+</pre>
+<P>
+<h3>REPORTS: Program->Container</h3>
+<P>
+<pre>
+      select    monitor_program, container from ContainerMap order by monitor_progra
+</pre>
+
+<A NAME=link13></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>OneQueryPerServerReport.pl </H1>
+<H3> report on system configurations</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link13>OneQueryPerServerReport.pl</A><P>
+ Generic procedure runner.  Will run a single query on each of your servers, formatting output correctly.<P>
+ REQUIRED ARGUMENTS<P>
+<pre>
+        -QUERY=QUERY
+        -PROGRAMNAME=PROGRAMNAME        (default to BATCHID)
+        -TITLE=TITLE
+</pre>
+<P>
+ OPTIONAL ARGUMENTS<P>
+<pre>
+        -HTML
+        -NOLOCK                 (ignore lock file to prevent repeat runs)
+        -BATCHID=batchid
+        -NOHEADER               (ignore header rows from results)
+        -PREREQ                 (prerequisite query - only continue if this returns something)
+        -NOPRINTMSGS    (ignore messages from the server)
+        -DEBUG                  (debug)
+        -NOLOCK
+        -SYSTEMS=systems
+        -SERVER=Server
+        -PROGRAMNAME
+        -TITLE
+        -PRINTSERVERLABEL       (pretty print a nice label for each server)
+        -TYPE=(DB Type - sqlsvr / sybase / both)
+</pre>
+<P>
+
+<A NAME=link14></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>core_dump_checker.pl </H1>
+<H3> utility to find core dumps on unix systems</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link14>core_dump_checker.pl</A> -o outdir<P>
+
+<A NAME=link15></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>console_build_and_ftp.pl </H1>
+<H3> Rebuild the console and copy it</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNTAX</h3>
+<P>
+ perl <A HREF=#link15>console_build_and_ftp.pl</A> $SYBASE<P>
+<h3>SCHEDULING</h3>
+<P>
+ This program should be scheduled frequenly.  It rebuilds the console from saved pages and can ftp it to remote sites.<P>
+
+<A NAME=link16></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>console_hourly.pl </H1>
+<H3> Run GEM console routine hourly tasks</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNTAX</h3>
+<P>
+ perl <A HREF=#link19>console_hourly.pl</A> $SYBASE<P>
+<h3>SCHEDULING</h3>
+<P>
+ This program should be scheduled about once an hour.  It does needed maintenance on the web pages.<P>
+
+<A NAME=link17></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>console_nightly.pl </H1>
+<H3> GEM Console Nightly Batch</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNTAX</h3>
+<P>
+ perl <A HREF=#link20>console_nightly.pl</A> $SYBASE<P>
+<h3>SCHEDULING</h3>
+<P>
+ This program should be scheduled about once a night.  It does needed maintenance on the web pages for static stuff.  Specifically it does the following<P>
+<pre>
+  1.  Log itself with the alarming system.
+  2.  Run <A HREF=#link23>document_all.pl</A> -I10,15,18
+</pre>
+<P>
+<pre>
+     Rebuild all your web pages - heck its the middle of the night.  For a variety of reasons, the
+     following 3 reports are NOT run (thats what the -I means = IGNORE)
+</pre>
+<P>
+<pre>
+     Report #10 - schema report
+     Report #15 - File system checks
+     Report #18- hourly server logs - format a recent error logs report
+</pre>
+<P>
+<pre>
+  3.  Run <A HREF=#link27>ftp_to_website.pl</A> to copy the resulting web pages if you have decided that you want
+      them to be copied to another web site.
+</pre>
+<P>
+
+<A NAME=link18></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>console_weekly.pl </H1>
+<H3> Resurvey the environment </H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNTAX</h3>
+<P>
+ perl <A HREF=#link21>console_weekly.pl</A> $SYBASE<P>
+<h3>SCHEDULING</h3>
+<P>
+ This program should be scheduled once a week.  It does a survey on the whole world and rebuilds the whole web site.  This is basically <A HREF=#link22>discover.pl</A> plus all the functionality of the <A HREF=#link20>console_nightly.pl</A>.<P>
+
+<A NAME=link19></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>console_hourly.pl </H1>
+<H3> Run routine hourly tasks</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNTAX</h3>
+<P>
+ perl <A HREF=#link19>console_hourly.pl</A> $SYBASE<P>
+<h3>SCHEDULING</h3>
+<P>
+ This program should be scheduled about once an hour.  It does needed maintenance on the web pages.<P>
+
+<A NAME=link20></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>console_nightly.pl </H1>
+<H3> GEM Console Nightly Batch</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNTAX</h3>
+<P>
+ perl <A HREF=#link20>console_nightly.pl</A> $SYBASE<P>
+<h3>SCHEDULING</h3>
+<P>
+ This program should be scheduled about once a night.  It does needed maintenance on the web pages for static stuff.  Specifically it does the following<P>
+<pre>
+  1.  Log itself with the alarming system.
+  2.  Run <A HREF=#link23>document_all.pl</A> -I10,15,18
+</pre>
+<P>
+<pre>
+     Rebuild all your web pages - heck its the middle of the night.  For a variety of reasons, the
+     following 3 reports are NOT run (thats what the -I means = IGNORE)
+</pre>
+<P>
+<pre>
+     Report #10 - schema report
+     Report #15 - File system checks
+     Report #18- hourly server logs - format a recent error logs report
+</pre>
+<P>
+<pre>
+  3.  Run <A HREF=#link27>ftp_to_website.pl</A> to copy the resulting web pages if you have decided that you want
+      them to be copied to another web site.
+</pre>
+<P>
+
+<A NAME=link21></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>console_weekly.pl </H1>
+<H3> Resurvey the environment </H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNTAX</h3>
+<P>
+ perl <A HREF=#link21>console_weekly.pl</A> $SYBASE<P>
+<h3>SCHEDULING</h3>
+<P>
+ This program should be scheduled once a week.  It does a survey on the whole world and rebuilds the whole web site.  This is basically <A HREF=#link22>discover.pl</A> plus all the functionality of the <A HREF=#link20>console_nightly.pl</A>.<P>
+
+<A NAME=link22></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>discover.pl </H1>
+<H3> Master Survey Program</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Survey your servers and store the results in gem.xml.<P>
+<h3>USAGE</h3>
+<P>
+<pre>
+  <A HREF=#link22>discover.pl</A> -Ssys1,sys2,sys3 -Tunix,oracle,sqlsvr -d
+</pre>
+<P>
+ where sys1..3 are systems and -T represents the 5 types currently supported (unix,oracle,sqlsvr,win32servers,sybase).<P>
+ -O to print diagnostic Output dump<P>
+
+<A NAME=link23></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>document_all.pl </H1>
+<H3> GEM Console Generator</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ The GEM COnsole is a web system with html documentation on all your servers.  The input (server names, passwords, report definitions) comes from your configuration files.<P>
+ <A HREF=#link23>document_all.pl</A> is the main script called by the GEM batch jobs in order to create your console.  The scheduled batch scripts are simply drivers around this script. <A HREF=#link23>document_all.pl</A> is responsible for creating html output reports.<P>
+ This program integrates with the Alarming library to save alarms as approriate.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link23>document_all.pl</A> -OUTDIR=outdir -REPORT=1,2,3... -IGNOREREPORT=1,2,3<pre>
+        -OUTDIR dir       : output directory
+        -QUICK                          : dont do the glue stuff
+        -IGNOREREPORT=list: list of reports to ignore (comma separated)
+        -REPORT=list      : list of reports to run (comma separated)
+        -PRINTTIMING      : print timing information for reports
+        -NOREPORTS        : no rebuild of pages
+        -ALARM            : use mlp alarms
+        -DO_SQLSVR        : run sql servers
+        -DO_SYBASE        : run sybase servers
+        -DO_ORACLE                      : run oracle servers
+        -BATCHID          : label of which batch this was run by
+        -CONSOLE_REBUILD  : quick run - just reformat main web site
+</pre>
+<P>
+ Report numbers are identified as follows<pre>
+        1)  Interfaces file report
+        4)  Create Debug/error report (by reading _debug.html files)
+        5)  Weekly Security Reports
+        6)  Disk usage report
+        7)  Get backup server logs
+        8)  Sybase server error logs
+        9)  Space report
+        10) Schema report
+        11) Host os info (some reports require rsh setup)
+        12) Host uptime info (requires rsh setup for rup command)
+        13) ifconfig -a (requires rsh setup for rup command)
+        14) Unix disk space (requires rsh for df -k)
+        15) File checks (cores, crontabs, failed links, mail -&gt; unix only)
+        16) Dbcc & Backup reports
+        17) User defined reports (see console.dat)
+        18) Unused
+        19) Unused
+        20) Core Dump Checker (local, long)
+        21) Gem Reports
+        22) By Server Pages
+        23) Weekly Updates (need this on windows or unix)
+        24) Nighly Updates (need this on windows or unix)
+        25) Database Debugger - Calls CheckServerDaily.pl
+        26) Standard Internal Reports
+</pre>
+<P>
+ The program rebuilds your main web page automatically based on whatever output files exist in the output directory, so you do not need to run all reports every night.<P>
+ This program should be totally config file driven.<P>
+<h3>FILES</h3>
+<P>
+ Console_Info.dat = identify console report layout<pre>
+   these reports are found in $gem_root_dir."/data/html_output"
+   when found they are reformatted and moved
+   file format is comma separated ($FILENAME,$MENU,$TITLE,$IS_OPTIONAL)
+   These reports are placed in $MENU/$TITLE with link referring to $FILENAME
+</pre>
+<P>
+ CONSOLE.dat<pre>
+   These are custom reports processed by run_custom_defined and read_custom_defined_reports
+</pre>
+<P>
+<h3>OUTPUT DIRECTORY</h3>
+<P>
+ The output directory is set via the driver scripts but is normaly data/CONSOLE_REPORTS.  This directory contains a variety of subdirectories as needed.<P>
+<h3>RELATED BATCH JOBS</h3>
+<P>
+ ConsoleArchiver.ksh<pre>
+   /usr/local/bin/perl /apps/sybmon/dev/ADMIN_SCRIPTS/bin/ConsoleArchiver.pl --BATCHID=ConsoleArchiver $*
+</pre>
+<P>
+ ConsoleBuildAndFtp.ksh<pre>
+   /usr/local/bin/perl  /apps/sybmon/dev/ADMIN_SCRIPTS/console/console_build_and_ftp.pl $*
+</pre>
+<P>
+ ConsoleUnixHourly.ksh<pre>
+   /usr/local/bin/perl  /apps/sybmon/dev/ADMIN_SCRIPTS/console/console_hourly.pl $*
+</pre>
+<P>
+ ConsoleUnixNightly.ksh<pre>
+   /usr/local/bin/perl  /apps/sybmon/dev/ADMIN_SCRIPTS/console/console_nightly.pl $*
+</pre>
+<P>
+ ConsoleUnixWeekly.ksh<pre>
+   /usr/local/bin/perl  /apps/sybmon/dev/ADMIN_SCRIPTS/console/console_weekly.pl $*
+</pre>
+<P>
+ ConsoleWin32Hourly.ksh<pre>
+   C:/perl/bin/perl.exe  //samba666/sybmon/dev/ADMIN_SCRIPTS/console/console_win32_hourly.pl $*
+</pre>
+<P>
+ ConsoleWin32Nightly.ksh<pre>
+   C:/perl/bin/perl.exe  //samba666/sybmon/dev/ADMIN_SCRIPTS/console/console_win32_nightly.pl $*
+</pre>
+<P>
+ ConsoleWin32Weekly.ksh<pre>
+   C:/perl/bin/perl.exe  //samba666/sybmon/dev/ADMIN_SCRIPTS/console/console_win32_weekly.pl $*
+</pre>
+<P>
+<h3>UNDERLYING FUNCTIONALITY OF THESE BATCH JOBS</h3>
+<P>
+ The following convenience batche jobs are provided.  They map 1:1 to batch jobs set up by the scheduler.  The win32 jobs should be run on windows, the others only on unix. <A HREF=#link15>console_build_and_ftp.pl</A> should be run either on windows or unix (but not both).<P>
+ <A HREF=#link15>console_build_and_ftp.pl</A>   => <A HREF=#link23>document_all.pl</A> --BATCHID=ConsoleBuildAndFtp --PRINTTIMING -CONSOLE_REBUILD <A HREF=#link19>console_hourly.pl</A>            => <A HREF=#link23>document_all.pl</A> --BATCHID=ConsoleUnixHourly -PRINTTIMING -REPORT=7,8,9 -ALARM -NATIVE <A HREF=#link20>console_nightly.pl</A>         => <A HREF=#link23>document_all.pl</A> -BATCHID=ConsoleUnixNightly -IGNOREREPORT=10,15,18,20,22 -PRINTTIMING -NATIVE -ALARM <A HREF=#link21>console_weekly.pl</A>            => <A HREF=#link22>discover.pl</A> -Tunix,oracle,sybase<pre>
+                           =&gt; <A HREF=#link29>space_monitor.pl</A> --BATCHID=WeeklyTablespaceWrite --REWRITE --NOGEMXMLWRITE --DOHELPTABLE
+                           =&gt; <A HREF=#link23>document_all.pl</A> -BATCHID=ConsoleUnixWeekly -IGNOREREPORT=100 -PRINTTIMING -ALARM -NATIVE
+</pre>
+ console_win32_hourly.pl      => <A HREF=#link23>document_all.pl</A> -BATCHID=ConsoleWin32Hourly -PRINTTIMING -REPORT=7,8,9 -ALARM -NATIVE console_win32_nightly.pl   => <A HREF=#link23>document_all.pl</A> -BATCHID=ConsoleWin32Nightly -IGNOREREPORT=10,15,18,20,22 -PRINTTIMING -ALARM -NATIVE console_win32_weekly.pl      => <A HREF=#link22>discover.pl</A> -Twin32servers,sqlsvr<pre>
+                           =&gt; <A HREF=#link29>space_monitor.pl</A> --BATCHID=WeeklyTablespaceWrite --REWRITE--NOGEMXMLWRITE
+                           =&gt; <A HREF=#link23>document_all.pl</A> --BATCHID=ConsoleWin32Weekly -IGNOREREPORT=100 -PRINTTIMING -ALARM  -NATIVE
+</pre>
+<P>
+<h3>NATIVE SETTINGS</h3>
+<P>
+ The GEM Console is designed to identify your environment and set the standard variables as appropriate when --NATIVE is passed in.  Specifically --NATIVE will set -DO_SQLSVR, -DO_SYBASE, -DO_ORACLE and --PRIMARY.<P>
+<pre>
+   if( $GemConfig-&gt;{INSTALLTYPE} == WINDOWS and is_nt() ) {
+         $DO_SQLSVR=1 if $GemConfig-&gt;{USE_SQLSERVER} eq "Y";
+         $DO_SYBASE=1 if $GemConfig-&gt;{USE_SYBASE_ASE} eq "Y";
+         $DO_ORACLE=1 if $GemConfig-&gt;{USE_ORACLE} eq "Y";
+   } elsif( $GemConfig-&gt;{INSTALLTYPE} == UNIX & ! is_nt() ) {
+         $DO_SYBASE=1 if $GemConfig-&gt;{USE_SYBASE_ASE} eq "Y";
+         $DO_ORACLE=1 if $GemConfig-&gt;{USE_ORACLE} eq "Y";
+   } elsif( $GemConfig-&gt;{INSTALLTYPE} == SAMBA and is_nt() ) {
+         $DO_SQLSVR=1 if $GemConfig-&gt;{USE_SQLSERVER} eq "Y";
+         $DO_SYBASE=0;
+         $DO_ORACLE=1 if $GemConfig-&gt;{USE_ORACLE} eq "Y";
+   } elsif( $GemConfig-&gt;{INSTALLTYPE} == SAMBA and ! is_nt() ) {
+         $DO_SYBASE=1 if $GemConfig-&gt;{USE_SYBASE_ASE} eq "Y";
+   }
+</pre>
+<P>
+
+<A NAME=link24></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>gem_file_manager.pl </H1>
+<H3> print file saved information</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Optionally Fetch files or Print File Information From gem.xml.<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link24>gem_file_manager.pl</A> -SERVERNAME=sys1,sys2,sys3 -DEBUG -DOREPORT -DOANALYSIS -DOF ETCH -OUTFILE=file -FILETYPE=FILE_TYPE<P>
+ This is the main program Retrieve, Parse, and Handle Files From Your Systems<P>
+ Required: -FILETYPE=FILE TYPE<pre>
+      BACKUP_SERVER or ASE_SERVER or HISTORICAL_SERVER or MONITOR_SERVER
+         or REP_SERVER or Envronment File, Errorlog, Interfaces File, Run File
+</pre>
+<P>
+ Required: One of these 3 operations<pre>
+   -DOREPORT      print a report of files to fetch
+   -DOANALYSIS    analyze the files you have collected
+   -DOFETCH       fetch files
+</pre>
+<P>
+ Optional:<pre>
+    -HTML               html output
+    -SAVE_TO_ALARMDB    save to alarm database
+    -OUTFILE=outputfile
+    -BATCHID=BATCHID    key for the alarms system (internal)
+    -PATFILE=paternfile patern files allows restart for logging
+    -SERVERNAME=Svrs    to work on (default is all of appropriate type)
+    -TODAYYESTERDAYONLY filter for today/yesterday errors (10000 messages)
+    -NOERRORFILTER      dont filter non errors out (show all)
+    -PURGESIZE=&lt;size&gt;   purge source files larger than &lt;size&gt; bytes (after fetch
+</pre>
+ )<P>
+<pre>
+    The Default Filter will filter to a maximum 1000 messages per file
+</pre>
+
+<A NAME=link25></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>interfaces_file_rpt.pl </H1>
+<H3> report on interfaces files</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link25>interfaces_file_rpt.pl</A> [--PORTLIST] [--DEBUG] [--HTML]<P>
+
+<A NAME=link26></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>find_win32_files_for_monitoring.pl </H1>
+<H3> find files for monitoring*/</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link26>find_win32_files_for_monitoring.pl</A> -i sourcedir,dir,dir<P>
+<pre>
+   -r - format output for purgefiles
+</pre>
+<P>
+
+<A NAME=link27></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>ftp_to_website.pl </H1>
+<H3> copy reports to target directory</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ This program copys the files to your web site - as specified in the GEM configuration utility.  Sometimes, the local directory is not where you wish to publish your console.  This program does the copy, or ftp if needed, to your actual web site. This modified version of ftp_to_website.dist is customized during the configuration process to include your server information.<P>
+
+<A NAME=link28></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>space_errors.pl </H1>
+<H3> report on space</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link28>space_errors.pl</A> -i sourcedir  -A -N<P>
+<pre>
+   -d debug mode
+   -N dont use html
+</pre>
+<P>
+
+<A NAME=link29></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>space_monitor.pl </H1>
+<H3> space monitor for sybase and sql server</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USED BY</h3>
+<P>
+ SybSpaceMonitor SpaceMonitorSqlsvr<P>
+<h3>DESCRIPTION</h3>
+<P>
+ This utility monitors database space<P>
+ It also monitors space history into ascii files.  This utility will save table space information the first time it is run every day. These files are named helptable.SERVER.DB.DATE.TIME. It will also save database level space information so that can be tracked. Data is saved in the gem/data directory in ascii file format.<P>
+ You may need to run two batches of this job - one for sqlserver (only works from windows) and one for sybase (works both windows and sql).<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link29>space_monitor.pl</A> -outdir=outdir<P>
+ MONITOR SPACE USAGE ON YOUR SYBASE/SQL SERVER DATABASES<P>
+ -BATCHID=batchid -DEBUG          (debug) -SERVER=Server -DATABASE=Database -TYPE=(DB Type - sqlsvr / sybase / both) -DOHELPTABLE       ( table space ) -REWRITE      (Rewrite) -ALARM         (Alarm appropriately)<P>
+ With --DOHELPTABLE saves sp_helptable into output directory in files named<pre>
+   helptable.SERVER.DB.DATE.TIME
+</pre>
+<P>
+ This directory output is useful for the program plot_tablespace.pl This program works with <A HREF=#link30>space_report.pl</A><P>
+<h3>OVERRIDES</h3>
+<P>
+ The program uses threshold_overrides.dat for override information.<P>
+
+<A NAME=link30></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>space_report.pl </H1>
+<H3> report on space</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>USAGE</h3>
+<P>
+ <A HREF=#link30>space_report.pl</A> -i outdir -d<P>
+<h3>NOTES</h3>
+<P>
+ looks through the system_information_data tree and gets files starting with "dbspace_".  These files contain space used information - one line per day.  This data is parsed and put into a reasonable report.<P>
+ The files are created by <A HREF=#link29>space_monitor.pl</A>
+<A NAME=link31></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>unix_space_monitor_via_rsh.pl </H1>
+<H3> monitor space on your unix systems</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ Monitor Unix Disk Space on all servers tagged COMM_METHOD=RSH or SSH and then store results using the alarming subsystem. Should be run frequently. When run from GEM console, the report created is put onto web pages.<P>
+<h3>ARGUMENTS</h3>
+<P>
+ Use -A to save heartbeats.<P>
+<h3>SYNTAX</h3>
+<P>
+ <A HREF=#link31>unix_space_monitor_via_rsh.pl</A> -o outdir  -A<pre>
+                        -A use mlp alarms
+                        -t test mode - additional prints
+                        -S hostname (comma separated)
+</pre>
+<P>
+ Monitor Unix Disk Space on all servers tagged with COMM_METHOD=SSH or RSH and STORE results using the alarming subsystem. Should be run frequently. When run from GEM console, the report created is put onto web pages.<hr><br>
+This output is documentation for the SQL Technologies The GEM Console.
+<ADDRESS>copyright &#169 2002-2011 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

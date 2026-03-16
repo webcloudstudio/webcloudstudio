@@ -1,0 +1,173 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Inventory.pm - inventory system perl function api</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#functions">FUNCTIONS</a></li>
+	<ul>
+
+		<li><a href="#invypcathosts__"><code>InvYpcatHosts()</code></a></li>
+		<li><a href="#invupdsystem__"><code>InvUpdSystem()</code></a></li>
+		<li><a href="#invgetsystem__"><code>InvGetSystem()</code></a></li>
+		<li><a href="#invsetsacreds__"><code>InvSetSACreds()</code></a></li>
+		<li><a href="#invgetallsacreds__"><code>InvGetAllSACreds()</code></a></li>
+		<li><a href="#invgetsacredbydsnandmonhost__"><code>InvGetSACredByDSNandMonhost()</code></a></li>
+		<li><a href="#invgettypebyname__"><code>InvGetTypeByName()</code></a></li>
+		<li><a href="#invrelatetwo__"><code>InvRelateTwo()</code></a></li>
+		<li><a href="#invsetrelationship__"><code>InvSetRelationship()</code></a></li>
+		<li><a href="#invreportdisplay__"><code>InvReportDisplay()</code></a></li>
+		<li><a href="#invdictionaryload__"><code>InvDictionaryLoad()</code></a></li>
+		<li><a href="#invpromote__"><code>InvPromote()</code></a></li>
+		<li><a href="#invupdatebusinesssystem__"><code>InvUpdateBusinessSystem()</code></a></li>
+	</ul>
+
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>Inventory.pm - inventory system perl function api</p>
+<p>
+</p>
+<hr />
+<h1><a name="functions">FUNCTIONS</a></h1>
+<p>
+</p>
+<h2><a name="invypcathosts__"><code>InvYpcatHosts()</code></a></h2>
+<pre>
+   loads ypcat hosts if you are on unix into table INV_aliases
+
+</pre>
+<p>
+</p>
+<h2><a name="invupdsystem__"><code>InvUpdSystem()</code></a></h2>
+<pre>
+   -system_name=&gt;                 # required
+   -system_type=&gt;                 # required
+   -attribute_category=&gt;          # your key for this data set
+   -attributes =&gt;                 # hashref with key value pairs
+                                  # sets keys matching a column in INV_system
+                                  # table in preference to INV_system_attribute
+   -delete=&gt;                      # optional. if set delete the system
+   -clearattributes=&gt;             # optional. if set delete all attributes
+                                  # matching attribute_category
+
+</pre>
+<p>
+</p>
+<h2><a name="invgetsystem__"><code>InvGetSystem()</code></a></h2>
+<pre>
+   fetch one or more systems plus optionally their data
+
+</pre>
+<pre>
+ my($hashref)=InvGetSystem( -whereclause=&gt; )
+ -or-
+ my($hashref)=InvGetSystem( -system_name=&gt; -and- -system_type=&gt; )
+
+</pre>
+<pre>
+ Additional/Optional Args:
+
+</pre>
+<pre>
+   -attribute_category:    Only returns atts of that category
+   -getattributes:         Returns attributes
+                           Default only the key rows in INV_system
+   -bsystem                Business sytem
+   -simple                 SINGLETON return hash and its in upper case
+
+
+InvGetSystem(-whereclause=&gt;is_infra_monitored=Y, -host_type=&gt;linux) would return a
+hashref with keys of system_name:system_type and values which are a hash ref of existing values.
+
+</pre>
+<p>
+</p>
+<h2><a name="invsetsacreds__"><code>InvSetSACreds()</code></a></h2>
+<pre>
+   - REQUIRED ARGS: -DSN / -monitor_host
+
+   - OPTIONAL ARGS:
+      -state
+      -system_name/-system_type
+      -login/-password
+      -hostname/-port
+
+</pre>
+<p>
+</p>
+<h2><a name="invgetallsacreds__"><code>InvGetAllSACreds()</code></a></h2>
+<pre>
+   - sets $sfetched=TRUE
+   - caches all sa creds into @sacreds
+   - each element of @sacreds is a hash of all the values in the GEM_sacred table
+
+</pre>
+<p>
+</p>
+<h2><a name="invgetsacredbydsnandmonhost__"><code>InvGetSACredByDSNandMonhost()</code></a></h2>
+<pre>
+   - arguments -DSN, monitor_host
+   - gets password for a given DSN/monitor_host
+   - returns (login,pass,state,sysname,systype,hostname,port
+
+</pre>
+<p>
+</p>
+<h2><a name="invgettypebyname__"><code>InvGetTypeByName()</code></a></h2>
+<pre>
+   - returns type for a passed in system name and 'database' or 'host'
+
+</pre>
+<p>
+</p>
+<h2><a name="invrelatetwo__"><code>InvRelateTwo()</code></a></h2>
+<pre>
+     - Relates Two Servers Together - returns relationship id that was used
+     - Arguments: $server1,$server1_type,$server2,$server2_type,$role1, $role2
+
+</pre>
+<p>
+</p>
+<h2><a name="invsetrelationship__"><code>InvSetRelationship()</code></a></h2>
+<pre>
+   <span class="operator">-</span> <span class="variable">Set</span> <span class="variable">a</span> <span class="variable">relationship</span> <span class="operator">-</span> <span class="variable">can</span> <span class="variable">pass</span> <span class="variable">null</span> <span class="variable">rid</span><span class="operator">...</span>
+   <span class="operator">-</span> <span class="variable">Arguments</span><span class="operator">;</span> <span class="variable">$rid</span><span class="operator">,</span><span class="variable">$sysid</span><span class="operator">,</span><span class="variable">$sysname</span><span class="operator">,</span><span class="variable">$systype</span><span class="operator">,</span><span class="variable">$ip</span><span class="operator">,</span><span class="variable">$description</span><span class="operator">,</span><span class="variable">$relationship</span>
+</pre>
+<p>
+</p>
+<h2><a name="invreportdisplay_____generic_table_display_widget_that_uses_html__dashboard___takes__col_headers_and__data_arguments"><code>InvReportDisplay()</code>
+	- Generic Table Display Widget that uses Html::Dashboard
+	- takes -col_headers and -data arguments</a></h2>
+<p>
+</p>
+<h2><a name="invdictionaryload__"><code>InvDictionaryLoad()</code></a></h2>
+<p>
+</p>
+<h2><a name="invpromote__"><code>InvPromote()</code></a></h2>
+<p>
+</p>
+<h2><a name="invupdatebusinesssystem__"><code>InvUpdateBusinessSystem()</code></a></h2>
+
+</body>
+
+</html>

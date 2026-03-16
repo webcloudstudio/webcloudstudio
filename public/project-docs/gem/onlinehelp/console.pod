@@ -1,0 +1,17 @@
+=head1 The Console Tab
+
+PURPOSE: Define Console Republishing
+
+=over 4
+
+=item * For an initial setup or trial, you can ignore this section
+
+=item * This page allows you to copy the console to another location.
+
+The console, created in data/CONSOLE_REPORTS may be republished (copied) to another location.
+You may be interested in doing this for security reasons, but most users will NOT wish to do this and can
+leave this page blank.
+
+=back
+
+

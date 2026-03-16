@@ -1,0 +1,933 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (WinNT; U) [Netscape]">
+</head>
+<body background="sybase_back.gif">
+&nbsp;
+<center><table BORDER=2 CELLPADDING=5 WIDTH="60%" BGCOLOR="#FFFFFF" >
+<tr>
+<td ALIGN=CENTER VALIGN=CENTER WIDTH="100%">
+<h2>
+<b><font face="Arial Black"><font color="#663300"><font size=+3>SyDump&nbsp;<br CLEAR="LEFT">
+</font>&nbsp;&nbsp;&nbsp; Sybase Backup Scripts&nbsp;<br CLEAR="LEFT">
+<font size=+0>by Edward Barlow</font></font></font></b></h2>
+&nbsp;</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<table CELLSPACING=0 CELLPADDING=7 WIDTH="100%" >
+<tr>
+<td ALIGN=CENTER VALIGN=TOP WIDTH="20%"><a href="#INTRODUCTION">Introduction</a></td>
+
+<td ALIGN=CENTER VALIGN=TOP WIDTH="20%"><a href="#FEATURES">Features</a></td>
+
+<td ALIGN=CENTER VALIGN=TOP WIDTH="20%"><a href="#DIRECTORY_LAYOUT">Directory
+Layout</a></td>
+
+<td ALIGN=CENTER VALIGN=TOP WIDTH="20%"><a href="#PROGRAM_SYNTAX">Program
+Syntax</a></td>
+
+<td ALIGN=CENTER VALIGN=TOP WIDTH="20%"><a href="#RIGHTS">Rights and Redistribution</a></td>
+</tr>
+
+<tr>
+<td ALIGN=CENTER VALIGN=TOP><a href="#INSTALLATION">Installation</a></td>
+
+<td ALIGN=CENTER VALIGN=TOP><a href="#NOTES">Frequently Asked Questions</a></td>
+
+<td ALIGN=CENTER VALIGN=TOP><a href="#COMPRESSION">Compression</a></td>
+
+<td ALIGN=CENTER VALIGN=TOP><a href="#MENU">User Interfaces</a></td>
+
+<td ALIGN=CENTER VALIGN=TOP><a href="#SECURITY">Security</a></td>
+</tr>
+</table>
+
+<h2>
+<a NAME="INTRODUCTION"></a>INTRODUCTION</h2>
+This package is a low cost commercial backup facility for the Sybase SQL
+Server that can run on both WinNT and UNIX. The package includes all the
+facilities you will require to perform <b>basic</b> <b>data server management
+</b>and
+is written in perl for maximum portability. The individual scripts are
+small and easy to understand and, as with all perl code, are released as
+source code.
+<p>In addition to a command line interface, the package provides a user
+interface through an ascii menu (<i>menu.pl</i>) and from a web page (<i>cgi.pl).</i>
+The web page interface requires that you have a web server on the same
+machine that you are running your backups from or that you have rsh access
+(unix only) between your systems. Normal backup operations will be started
+automatically from your scheduling system (cron on UNIX or any of a number
+of windows schedulers) using the command line interface.&nbsp; The menuing
+systems will provide you the ability to view problems, and to recover from
+disasters.
+<p>This package is released as commercial software from <a href="http://www.edbarlow.com"> the
+Sybase shareware web site</a> and this site should be checked periodically
+to find any future releases.&nbsp; The latest version of the package can
+be
+< A HREF=http://www.edbarlow.com/download/latest.tar.gz>
+download as a gzipped tar file</a>.&nbsp; Note that some older browsers strip off
+multiple extension names.&nbsp; If the file does not open once it is downloaded,
+check that the file contains the extension .tar.gz (compressed tar file)
+and rename the file if it does not. After you have downloaded, follow instructions
+in the <a href="#INSTALLATION">installation</a> section. If you have any
+comments, please <a href="http://www.mail.com/mailcom/writemail.jhtml?to=barlowedward@hotmail.com&doclear=yes">contact
+SQL Technologies.</a>
+<p>This package is intended for "normal" Sybase installations. Specifically,
+it relies on dumping the databases to disk.&nbsp; Your system administrator
+is then responsible for backing up to tape.&nbsp; No provision is made
+by this package for very large databases.&nbsp; If you have huge databases
+and, for example, require table level dbcc, you will need to create your
+own scripts to perform these operations.&nbsp; All operations performed
+by this package (except rebuilding indexes and bcp_out) are performed on
+a&nbsp; full database level.
+<h2>
+<a NAME="FEATURES"></a>FEATURES</h2>
+The following are some of the features of these scripts:
+<ol>
+<li>
+Standard backup processing: including <b>full database dumps</b>, <b>transaction
+log dumps</b>, <b>update statistics (with sp_recompile)</b>, <b>standard
+DBCC's</b>, and <b>rebuild indexes</b>.</li>
+
+<li>
+<b>Configuration reports</b> that give you an archive of necessary information
+that can be used for disaster recovery.</li>
+
+<li>
+Optional <b>Object Level BCP Backups</b> of critical databases and tables</li>
+
+<li>
+Extensible error handler that will interface with your error management
+system</li>
+
+<li>
+Optional Backup files compression</li>
+
+<li>
+Graphical menu system that both operators and administrators can use to
+load backups</li>
+
+<li>
+Simple installation</li>
+
+<li>
+Trackable operations log file that allows you to understand what events
+occurred and when they occurred</li>
+
+<li>
+Output into an easily understood clean directory structure</li>
+</ol>
+
+<h2>
+<a NAME="DIRECTORY_LAYOUT"></a>DIRECTORY LAYOUT</h2>
+All output is placed in a nice directory structure, identified to the system
+when you run the configure command.&nbsp; The directory identified to configure
+will be composed of the following sub directories:
+<br>&nbsp;
+<table CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0 height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Base Backup Directory&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>e.g. C:/backups (on NT) or /dbdumps (on UNIX)
+per config file&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftln.gif" ALT="ftln.gif (64 bytes)" BORDER=0 height=22 width=16 align=BOTTOM><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0 height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>.../$SERVER&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Sub directory for your Server&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftb.gif" ALT="ftb.gif (135 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftn.gif" ALT="ftn.gif (70 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0  height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>.../audits&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Directory to put audit results (optional)&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftb.gif" ALT="ftb.gif (135 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftn.gif" ALT="ftn.gif (70 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0  height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>.../bcp&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Directory to put bcp level backups (optional)&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftb.gif" ALT="ftb.gif (135 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftn.gif" ALT="ftn.gif (70 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0 height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>.../dbcc&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Directory for raw dbcc output&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftb.gif" ALT="ftb.gif (135 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftn.gif" ALT="ftn.gif (70 bytes)" BORDER=0 height=22 width=16 align=BOTTOM><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0 height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>.../dbdumps&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Directory for local server dumps&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftb.gif" ALT="ftb.gif (135 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftn.gif" ALT="ftn.gif (70 bytes)" BORDER=0 height=22 width=16 align=BOTTOM><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0 height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>.../errors</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Directory for error messages&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftb.gif" ALT="ftb.gif (135 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftn.gif" ALT="ftn.gif (70 bytes)" BORDER=0 height=22 width=16 align=BOTTOM><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0 height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>.../logdumps&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Directory for local server tran log dumps&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><img SRC="ftb.gif" ALT="ftb.gif (135 bytes)" BORDER=0  height=22 width=16 align=BOTTOM><img SRC="ftln.gif" ALT="ftln.gif (64 bytes)" BORDER=0 height=22 width=16 align=BOTTOM><img SRC="ftfo.gif" ALT="ftfo.gif (126 bytes)" BORDER=0  height=16 width=16 align=BOTTOM></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>.../sessionlog&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER>Directory for run logs (necessary if you are
+running from a scheduler like cron)&nbsp;</td>
+</tr>
+</table>
+
+<p>Note the beauty of this layout.&nbsp; Because error messages are written
+to files in an error directory, you only need to peruse this directory
+on a daily basis.&nbsp; If any files are in this directory there is a problem!&nbsp;
+The other directories contain enough information to resolve the problem
+(i.e.. a full log of the session is in the sessionlog sub directory and
+the raw dbcc output is in the dbcc directory...).&nbsp; The administrator
+is responsible for cleaning the error directory after reading the files
+it contains. Remember, files are only created in the error directory if
+a problem is encountered. Session logs and dbcc output are kept in sessionlog
+and dbcc sub directories, but will probably never need to be used unless
+you are debugging a problem. The dbdumps and logdumps sub directories contain
+the actual dumps. The audits sub directory contains the output of the server
+configuration reports, and contain system configuration information sufficient
+to rebuild your server after a system failure.&nbsp;<a NAME="RIGHTS"></a>
+<h2>
+RIGHTS AND REDISTRIBUTION</h2>
+This package and related programs is copyright &copy; 1996-2000 by SQL
+Technologies and Edward Barlow. All Rights to this program are reserved.
+The software is released as a shareware product and if the software is
+used in a production environment, it requires a license for each server
+it is used on.&nbsp; The license charge per server is $199 (USD).&nbsp;
+If this software is used in commercial environments, you are required to
+contact SQL Technologies at www.edbarlow.com and pay the license charge.&nbsp;
+If you do not wish to pay the license charge, you may use the free shell
+script backup facility available at www.edbarlow.com or you may write your
+own backup facility, but you may not legally use this software.
+<p>To the best of my knowledge this program works as specified, but there
+is expressly no warranty with the software. It is ok for you to modify
+any of the programs (so long as you don't remove any of the copyright notices).&nbsp;
+If you make any changes that make the tool better, send the changes to
+me so all can have them.&nbsp;<a NAME="PROGRAM_SYNTAX"></a>
+<h2>
+PROGRAM SYNTAX</h2>
+
+<h3>
+<a NAME="bkup"></a>backup.pl</h3>
+backup.pl is the main driver script for your operations and will appropriately
+call the other scripts in this package to get its work done.&nbsp; It is
+probably the only program you will add to your scheduler. It reads the
+configuration file and process servers based on the options you have specified.
+Operations are performed in the following order:
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purge Old
+Dumps (if necessary use rsh)</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dbcc Databases</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dump Tran
+Log</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Full Dump</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Check
+for Required Database Loads</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Update
+Statistics</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Run Audit</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Optional
+Table Level Bcps</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Compress
+The Dumps (if necesary use rsh)</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rebuild
+Indexes</font></tt><b></b>
+<p><b>Usage:</b>&nbsp; Usage: backup_pl -JJOB -t|-f [-dh]&nbsp;<br>
+<br>
+This is the master driver for the backup scripts.&nbsp; It relies on the
+Job being defined in the configure.cfg (located in backup scripts directory
+or one level above it).&nbsp; It follows instructions and performs the
+appropriate tasks as needed.&nbsp; -t for transaction log dumps only, -f
+for full backups. -d is debug mode and -h is html output.<br>
+<br>
+You can also specify -DDB_LIST to restrict databases operations are performed
+on further.
+<h4>
+Notes</h4>
+
+<ul>
+<li>
+A transaction log dump (with no_log) is always done prior to the full dump.</li>
+
+<li>
+tempdb and model are NEVER dumped</li>
+
+<li>
+Optionally Compress the dumps</li>
+
+<li>
+Update Statistics and Recompile will never work on tempdb/model</li>
+
+<li>
+Audit Reports require extended procs to be installed</li>
+
+<br>On production servers, you will also wish to run <b><i>backup.pl -l</i></b>.
+This does a transaction log dump on SOME of your databases. The databases
+that are dumped are those that are "production", which means that "trunc.
+log on checkpoint" is off and "select into/bcp" is also off. Of course,
+master, model, and tempdb are never transaction log dumped.&nbsp; Log dumps
+are placed in dated files in the .../logdumps sub directory.</ul>
+backup.pl will make system calls to the following programs:
+<br>&nbsp;
+<table CELLSPACING=0 WIDTH="100%" >
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER ROWSPAN="8" WIDTH="10%">&nbsp;</td>
+
+<td ALIGN=LEFT VALIGN=CENTER WIDTH="36%"><b><a href="#dbcc">dbcc_db.pl</a></b></td>
+
+<td ALIGN=LEFT VALIGN=CENTER WIDTH="36%">a utility to run dbcc's&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><b><a href="#load">load_database.pl</a></b></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>load your databases&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><b><a href="#stop">stop_sybase.pl</a></b></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>stop Sybase&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><b><a href="#upda">update_stats.pl</a></b></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>run update statistics&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><b><a href="#dump">dump_database.pl</a></b></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>dump databases&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=LEFT VALIGN=CENTER><b><a href="#conf">config_report.pl</a></b></td>
+
+<td ALIGN=LEFT VALIGN=CENTER>configuration reports&nbsp;</td>
+</tr>
+
+<tr>
+<td><b><a href="#rebuild">rebuild_index.pl</a></b></td>
+
+<td>Rebuild your indexes</td>
+
+<td></td>
+</tr>
+</table>
+
+<h3>
+<a NAME="dbcc"></a>dbcc_db.pl</h3>
+Runs dbcc checkdb, checkalloc, and checkcatalog on your databases. Only
+prints output if there is a problem.
+<p><tt><b>Usage:</b>&nbsp; dbcc_db.pl -USA_USER -SSERVER -PSA_PASS -DDB_LIST</tt><tt></tt>
+<p><tt>&nbsp;&nbsp; -D DB_LIST&nbsp;&nbsp;&nbsp; (pipe separated list with
+wildcards of databases)</tt>
+<br><tt>&nbsp;&nbsp; -d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(debug mode)</tt>
+<br><tt>&nbsp;&nbsp; -h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(html output)</tt>
+<br><tt>&nbsp;&nbsp; -e errorlog&nbsp;&nbsp; (optional)</tt>
+<br><tt>&nbsp;&nbsp; -l sessionlog (optional)</tt>
+<br><tt></tt>&nbsp;
+<h3>
+<a NAME="load"></a>load_database.pl</h3>
+Loads a database from either a full backup or a transaction log dump.&nbsp;
+The file root of the command is the path name to the dump file.&nbsp; It
+should exclude the .S[num] extension for striped dumps. The program attempts
+to be intelligent about what file to load.&nbsp; If a tran log is implied
+and no file exactly matches the file_root, the -i option identifies a file
+root and ALL files that match the root are loaded in order of timestamp
+(from the file name).&nbsp; If there is no file with exactly the correct
+root on a full load, the LATEST file matching the root of the command will
+be loaded.&nbsp; The -r prefix can be used to rename files when they are
+done loading.&nbsp; For example, you may use -rloaded to rename SRVR.MYDB.dbdump.20001109.022233
+to SRVR.MYDB.loaded.20001109.022233. The database name may NOT contain
+wildcards.&nbsp;&nbsp;
+<p>Standard naming for dump files should be
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {SERVER}.{DATABASE}.dbdump.yyyymmdd-hhmmss
+<br>&nbsp;&nbsp; or
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {SERVER}.{DATABASE}.dbdump.yyyymmdd.hhmmss.S1
+<br>&nbsp;&nbsp;&nbsp;&nbsp; through
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {SERVER}.{DATABASE}.dbdump.yyyymmdd.hhmmss.SN
+<br>if the backups are striped.
+<p><tt><b>Usage:</b>&nbsp; load_database.pl -nnum_stripes -USA_USER -SSERVER</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-PSA_PASS -Ddb -ifile_root -tdhk</tt><tt></tt>
+<p><tt>&nbsp;&nbsp; -n Num stripes (.SX appendended to dump name)</tt>
+<br><tt>&nbsp;&nbsp; -D DB_LIST&nbsp;&nbsp;&nbsp;&nbsp; (pipe separated
+list with wildcards of databases)</tt>
+<br><tt>&nbsp;&nbsp; -i DIR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(input file root)</tt>
+<br><tt>&nbsp;&nbsp; -t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(Dump Transaction Log only)</tt>
+<br><tt>&nbsp;&nbsp; -d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(debug mode)</tt>
+<br><tt>&nbsp;&nbsp; -h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(html output)</tt>
+<br><tt>&nbsp;&nbsp; -r extension&nbsp;&nbsp; (rename file extension (dbdump
+part of name) when done)</tt>
+<br><tt>&nbsp;&nbsp; -e errorlog&nbsp;&nbsp;&nbsp; (optional)</tt>
+<br><tt>&nbsp;&nbsp; -l sessionlog&nbsp; (optional)</tt>
+<br><tt></tt>&nbsp;
+<h3>
+<a NAME="stop"></a>set_dboption.pl</h3>
+This program can reset database options.
+<p><tt><b>Usage:</b> set_dboption.pl -USA_USER -SSERVER -PSA_PASS -DDB_LIST
+-Ooption -Vvalue</tt><tt></tt>
+<p><tt>&nbsp;&nbsp; -D DB_LIST: may include wildcards or pipe separated
+list of databases</tt>
+<br><tt>&nbsp;&nbsp; -d debug mode</tt>
+<br><tt>&nbsp;&nbsp; -h html output</tt>
+<br><tt>&nbsp;&nbsp; -l logfile</tt>
+<br><tt>&nbsp;&nbsp; -e errorfile</tt>
+<br><tt>&nbsp;&nbsp; -V value true or false</tt>
+<h3>
+<a NAME="stop"></a>stop_sybase.pl</h3>
+Stops your Sybase server
+<pre><b>Usage:</b>&nbsp; stop_sybase.pl -USA_USER -Sopt_S -PSA_PASS</pre>
+
+<h3>
+<a NAME="upda"></a>update_statistics.pl</h3>
+This program will run update statistics and sp_recompile on tables in the
+passed in database(s).&nbsp; If no database name is passed in, it defaults
+to work on all user databases in the server.&nbsp; Pass -s if you want
+no output, otherwise it will print 1 line for each update statistics and
+sp_recompile line run (which can be quite verbose).&nbsp; This program
+only works on dbo objects, because you can not sp_recompile a user object..
+<pre><tt><b>USAGE: </b>update_stats.pl -UUSER -SSERVER -PPASS [-DDB]
+
+&nbsp;&nbsp; -D DB_LIST&nbsp;&nbsp;&nbsp;&nbsp; (pipe separated list with wildcards of databases)
+&nbsp;&nbsp; -s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (silent mode)
+&nbsp;&nbsp; -d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (debug mode)
+&nbsp;&nbsp; -h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (html output)
+&nbsp;&nbsp; -e errorlog&nbsp;&nbsp;&nbsp; (optional)
+&nbsp;&nbsp; -l sessionlog&nbsp; (optional)</tt></pre>
+
+<h3>
+<a NAME="dump"></a>dump_database.pl</h3>
+Backs up database or does a transaction log dump. Can be set for tran log
+dumps with -t or will, by default, perform full database dumps. Places
+database dumps in DIRECTORY/$SERVER.$(database)_dbdump.yyyymmdd.hhmmss
+and tran log dumps into DIRECTORY/$SERVER.$(database).logdump.yyyymmdd.hhmmss
+It will ignore databases as appropriate, following the following rules:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1) It will not perfore a transaction log dump if "trunc. log on chkpt"
+set
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2) model,tempdb, and sybsyntax are not dumped unless specifically identified
+with -d option
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3) It will not dump transaction logs if data and log on the same device
+<p>It will also warn if user databases have select into set but do not
+have trunc. log on chkpt set.&nbsp; The dump files will have a .tmp in
+them until the dump is completed, at which point they will be renamed with
+the .dbdump or .logdump extension if the -r option is specified.
+<p><tt><b>Usage:&nbsp;&nbsp;&nbsp; </b>dump_database.pl -nnum_stripes -USA_USER
+-SSERVER -PSA_PASS</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-DDB_LIST -oDIRECTORY -tdhf</tt><tt></tt>
+<p><tt>&nbsp;&nbsp; -n Num stripes (.SX appendended to dump name)</tt>
+<br><tt>&nbsp;&nbsp; -D DB_LIST&nbsp;&nbsp;&nbsp;&nbsp; (pipe separated
+list with wildcards of databases)</tt>
+<br><tt>&nbsp;&nbsp; -o DIR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(output directory)</tt>
+<br><tt>&nbsp;&nbsp; -t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(Dump Transaction Log only)</tt>
+<br><tt>&nbsp;&nbsp; -f&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(Full Dump - default)</tt>
+<br><tt>&nbsp;&nbsp; -d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(debug mode)</tt>
+<br><tt>&nbsp;&nbsp; -h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(html output)</tt>
+<br><tt>&nbsp;&nbsp; -e errorlog&nbsp;&nbsp;&nbsp; (optional)</tt>
+<br><tt>&nbsp;&nbsp; -l sessionlog&nbsp; (optional)</tt>
+<br><tt>&nbsp;</tt>
+<br><tt>&nbsp;&nbsp; Dump a database to the specified directory in with
+the name</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {SERVER}.{DATABASE}.dbdump.yyyymmdd.hhmmss</tt>
+<br><tt>&nbsp;&nbsp; or</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {SERVER}.{DATABASE}.dbdump.yyyymmdd.hhmmss.S?</tt>
+<br><tt>&nbsp;&nbsp; where ? is a number 1 to the number of stripes if
+the backups are striped</tt>
+<br><tt></tt>&nbsp;
+<h3>
+<a NAME="conf"></a>config_report.pl</h3>
+This program creates a configuration report for a server that can be used
+to recreate that server from scratch. This is intended as documentation
+for use by the system administrator in case your server crashes or has
+a problem. This program should produce virtually everything about your
+server that you might care about except user object DDL.
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp; WHAT IT PRINTS</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+SERVER:&nbsp; srvname</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+@@version</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helpdb</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+configure</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helpmirror</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+vdevno</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helpdevice</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helplogin</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helpuser by db</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+all the reverse engineering routines"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+SERVER:&nbsp; srvname</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+@@version</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helpdb</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+configure</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helpmirror</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+vdevno</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helpdevice</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helplogin</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+helpuser by db</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+all the reverse engineering routines</tt>
+<p><b>Requires:</b> Requires the extended stored procedure library
+<p><tt><b>Usage</b>: config_report.pl -USA_USER -SSERVER -PSA_PASS -oFILE</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -o FILE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(output file)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(output in html format)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -e errorlog&nbsp;&nbsp; (optional)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -l sessionlog (optional)</tt>
+<br><tt></tt>&nbsp;
+<h3>
+<a NAME="upda"></a>rebuild_index.pl</h3>
+Rebuild indexes on your database based on an extract file.&nbsp; This extract
+file can be created from rebuild_index.pl using the -o option and is basically
+a set of create index statements that you wish to run.&nbsp; With -r, it
+will report problems, and with -c it will rebuild indexes.&nbsp; If duplicate
+data is found, it will delete the duplicate row.
+<pre><b>Usage</b>: rebuild_index.pl -UUSER -PPASS -SSERVER -DDB [-oOUTFILE|-iINFILE] -c
+
+Index Comparator.&nbsp; Extracts indexes for a DB and then allows you to compare
+the saved indexes to the indexes on your servers.
+
+&nbsp;-o : if outfile specified then creates a file with the indexes from the
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; server.&nbsp; This file can be used as an infile for further comparisons.
+&nbsp;-c : correct duplicate keys in indexes.&nbsp; Deletes duplicate data.&nbsp; One random
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; row in unique indexes will be kept.
+&nbsp;-r : report only - this will report missing indexes&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; as well as duplicate data but will not rebuild any indexes.
+
+note that this program requires sp__revindex (extended stored proc library)</pre>
+
+<h2>
+<a NAME="INSTALLATION"></a>INSTALLATION</h2>
+This program is instaled through the general SQL Technologies Shareware
+package installer. See documentation on that package for directions.
+<h3>
+Additional Required Steps</h3>
+You should install this package as the Sybase account (or whatever account
+you will use for the backups). The reason for this is so that you have
+appropriate permissions on dump files (for renaming, compressing, and removing...).
+<h3>
+Set Up Configuration File</h3>
+All utilities in this system read the configuration file configure.cfg
+in the directory that contains the backup scripts themselves (or in the
+directory directly above them).. This configuration file is composed of
+key-value pairs of the form VARIABLE=VALUE.&nbsp; The following is a list
+of the variables with appropriate comments on how to set them up.
+<p>The colors in this section indicate what type of variables they are.&nbsp;
+Most variables are shown in <font color="#CC33CC">purple</font> and&nbsp;
+can be set up on a per server basis by preding an underscore and server
+name to the variable. Only the last encountered instance of a key will
+be used.&nbsp; This overrides the general option. e.g.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SYBPROD_IGNORE_LIST=model|tempdb|sybsyntax|testdb|testdb23
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SYBPROD_NUM_BACKUPS_TO_KEEP=4
+<p>Finally, the following variables MUST be set only on a per server basis.
+The following example will copy prod_db1 to copy_of_prod_db1 and will copy
+prod_db2 to copy_of_prod_db2 from SERVER SYBPRODUCTION to SERVER COPYSERV.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; COPYSERV_ XFER_FROM_SERVER=SYBPRODUCTION
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; COPYSERV_XFER_FROM_DB=prod_db1|prod_db2
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; COPYSERV_XFER_TO_DB=copy_of_prod_db1|copy_of_prod_db2
+<p>The BASE_BACKUP DIR should have adequate space for all your backups.
+If you need multiple file systems for this (due to a system 2GB file system
+limitation), dont worry at this point. Let the configure script (next step)
+create the directory tree under the base directory created in this step
+- and then mount additional file systems into the mount points created
+by configure. If you have specific error handling in mind, edit on_error.pl,
+which is the script that handles all errors.&nbsp; This script is easily
+modifiable.
+<br>You can make special weekend jobs and other special jobs by creating
+multiple jobs that do that work.
+<p><tt>#=============================================================================</tt>
+<br><tt>#</tt>
+<br><tt># PERL BACKUP SCRIPTS CONFIGURATION VARIABLES</tt>
+<br><tt>#</tt>
+<br><tt># Most of these can be overridden on a per "job" basis by prepending
+the</tt>
+<br><tt># job name at the beginning of the variable.&nbsp; You can then
+run backup.pl -Sjob</tt>
+<br><tt># to get that configuration.&nbsp; This way you can have multiple
+schedules for</tt>
+<br><tt># a single server (eg.&nbsp; call the backup of SYBPROD on a nightly
+basis</tt>
+<br><tt># SYBPROD_NIGHTLY and on weekengs SYBPROD_WEEKEND)</tt>
+<p><tt># SYBASE=[ Sybase Directory On This Machine ]</tt>
+<br><tt>#&nbsp; - cant be overridden on a per job basis</tt>
+<br><tt>#&nbsp; - not currently used</tt>
+<br><tt><font color="#3366FF">SYBASE=/opt/sybase</font></tt>
+<p><tt># IGNORE_SERVER</tt>
+<br><tt># Pipe separated list of servers to ignore</tt>
+<p><tt># DSQUERY=[ A Sybase DSQUERY ]</tt>
+<br><tt># The dsquery for the given server.&nbsp; Defaults, if unset, to
+the server name.</tt>
+<br><tt># You will want to override this (ie. SYBPROD_NIGHTLY_DSQUERY=SYBPROD
+)</tt>
+<br><tt># in the case where&nbsp; the server name is not the same as the
+job name</tt>
+<br><tt><font color="#CC33CC">DSQUERY=</font></tt>
+<p><tt># BASE_BACKUP_DIR=[ Root Directory of Backup Tree ]</tt>
+<br><tt># this is the directory on the local system to store logs and backups
+in.</tt>
+<br><tt># if it is not a remote system, it also is the place where backups
+go</tt>
+<br><tt># if it is a remote system, the rsh_dir is that location</tt>
+<br><tt>#&nbsp; - cant be overridden on a per job basis</tt>
+<br><tt><font color="#CC33CC">BASE_BACKUP_DIR=/optapp2/syb_admin</font></tt>
+<p><tt># REMOTE_DIR=[ directory ]</tt>
+<br><tt># directory as seen by the Sybase Server that is equivalent to
+BASE_BACKUP_DIR.</tt>
+<br><tt># If not set it defaults to BASE_BACKUP_DIR (it assumes the server
+is local).</tt>
+<br><tt># If local, keep it = to BASE_BACKUP_DIR</tt>
+<br><tt># If Remote and NFS cross mounted drives, set this and keep IS_REMOTE=n</tt>
+<br><tt># If Remote w/no NFS, then set to where you want backups and be
+sure to</tt>
+<br><tt># set up rsh access as per instructions.</tt>
+<br><tt># - This will be overridden for remote servers</tt>
+<br><tt><font color="#CC33CC">REMOTE_DIR=</font></tt>
+<br><tt><font color="#CC33CC">PORTIA30_REMOTE_DIR=/opt2/sybdump</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2_REMOTE_DIR=/opt2/sybdump</font></tt>
+<br><tt><font color="#CC33CC">SYBPROD2_REMOTE_DIR=/opt2/sybdump</font></tt>
+<p><tt># IGNORE_SERVER= [ Servers to ignore cause you want backups stopped
+on em ]</tt>
+<br><tt># these servers will not be run with backup.pl -Ssrv And will not
+be loaded</tt>
+<br><tt># from any machines</tt>
+<br><tt># - pipe separated as in server1|server2...</tt>
+<p><tt># NUM_BACKUPS_TO_KEEP=[ A Number >=1 ]</tt>
+<br><tt><font color="#CC33CC">NUM_BACKUPS_TO_KEEP=1</font></tt>
+<br><tt><font color="#CC33CC">SYBPROD2_NUM_BACKUPS_TO_KEEP=2</font></tt>
+<p><tt># NUM_DAYS_TO_KEEP</tt>
+<br><tt>#&nbsp; For other backup files (log files etc), this is the number
+of days</tt>
+<br><tt>#&nbsp; to keep stuff for prior to removing it)</tt>
+<br><tt><font color="#CC33CC">NUM_DAYS_TO_KEEP=7</font></tt>
+<p><tt># NUMBER_OF_STRIPES=[ A Number ]</tt>
+<br><tt># number of stripes for the backups.</tt>
+<br><tt><font color="#CC33CC">NUMBER_OF_STRIPES=5</font></tt>
+<p><tt># COMPRESS=[ external compression program e.g. /usr/local/bin/gzip
+]</tt>
+<br><tt># should be a full path name on whatever system the backups live
+on so</tt>
+<br><tt># remote systems might have other locations.&nbsp; i prefer gzip
+to compress.</tt>
+<br><tt><font color="#CC33CC">COMPRESS=/usr/local/bin/gzip</font></tt>
+<p><tt># UNCOMPRESS=[ external uncompression program e.g. /usr/local/bin/gunzip
+]</tt>
+<br><tt># Exact opposite of the above</tt>
+<br><tt><font color="#CC33CC">UNCOMPRESS=/usr/local/bin/gunzip</font></tt>
+<p><tt># IGNORE_LIST=[ pipe separated list of databases to ignore ]</tt>
+<br><tt># e.g. model|tempdb|sybsyntax</tt>
+<br><tt># you will override this on a per job basis with useless/test dbs
+that you</tt>
+<br><tt># dont want to backup or dbcc</tt>
+<br><tt><font color="#CC33CC">IGNORE_LIST=model|tempdb|sybsyntax</font></tt>
+<br><tt><font color="#CC33CC">SYBPROD2_IGNORE_LIST=model|tempdb|sybsyntax|portia50h_old|sybsystemprocs</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2_IGNORE_LIST=model|tempdb|sybsyntax|wpg_portia</font></tt>
+<br><tt><font color="#CC33CC">PORTIA30_IGNORE_LIST=model|tempdb|sybsyntax|wpg_portia|dbtest1|dbtest2</font></tt>
+<br><tt><font color="#CC33CC">SYBPROD2WEEKLY_IGNORE_LIST=model|tempdb|sybsyntax|portia50h_old|sybsystemprocs</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2WEEKLY_IGNORE_LIST=model</font>|tempdb|sybsyntax|wpg_portia</tt>
+<br><tt><font color="#CC33CC">PORTIA30WEEKLY_IGNORE_LIST=model|tempdb|sybsyntax|wpg_portia|dbtest1|dbtest2</font></tt>
+<p><tt># MAIL_TO is comma separated list of email addresses to alert when
+there is</tt>
+<br><tt># a problem.</tt>
+<br><tt><font color="#CC33CC">MAIL_TO='ebarlow@a.com,barlowedward@hotmail.com'</font></tt>
+<p><tt># DO_COMPRESS=[y|n]&nbsp; - should you do compression on backups</tt>
+<br><tt><font color="#CC33CC">DO_COMPRESS=y</font></tt>
+<p><tt># DO_UPDSTATS=[y|n]&nbsp; - should you do update statistics as part
+of normal backup</tt>
+<br><tt><font color="#CC33CC">DO_UPDSTATS=n</font></tt>
+<br><tt><font color="#CC33CC">SYBPROD2WEEKLY_DO_DBCC=y</font></tt>
+<br><tt><font color="#CC33CC">PORTIA30WEEKLY_DO_DBCC=y</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2WEEKLY_DO_DBCC=y</font></tt>
+<p><tt># DO_AUDIT=[y|n]&nbsp; - should you do audit as part of normal backup</tt>
+<br><tt><font color="#CC33CC">DO_AUDIT=y</font></tt>
+<p><tt># DO_DBCC=[y|n]&nbsp; - should you do dbcc's as part of normal backup</tt>
+<br><tt><font color="#CC33CC">DO_DBCC=n</font></tt>
+<br><tt><font color="#CC33CC">SYBPROD2WEEKLY_DO_DBCC=y</font></tt>
+<br><tt><font color="#CC33CC">PORTIA30WEEKLY_DO_DBCC=y</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2WEEKLY_DO_DBCC=y</font></tt>
+<p><tt># DO_BCP=[y|n]&nbsp; - should you do bcp's as part of normal backup</tt>
+<br><tt><font color="#CC33CC">DO_BCP=n</font></tt>
+<p><tt># if DO_BCP=y then this is a | separated list of tables to bcp out</tt>
+<br><tt><font color="#CC33CC">BCP_TABLES=</font></tt>
+<p><tt># DO_INDEXES=[y|n]&nbsp; - should you do indexes as part of normal
+backup</tt>
+<br><tt><font color="#CC33CC">DO_INDEXES=y</font></tt>
+<p><tt># DO_DUMP=[y|n]&nbsp; - should you do backups as part of normal
+backup</tt>
+<br><tt><font color="#CC33CC">DO_DUMP=y</font></tt>
+<p><tt># DO_LOAD=[y|n]&nbsp; - should you do loads (if defined) as part
+of normal backup</tt>
+<br><tt><font color="#CC33CC">DO_LOAD=y</font></tt>
+<p><tt># DO_PURGE=[y|n]&nbsp; - should you do purges as part of normal
+backup</tt>
+<br><tt><font color="#CC33CC">DO_PURGE=y</font></tt>
+<p><tt># IS_REMOTE=[y|n]&nbsp; - is this system remote.&nbsp; ie.&nbsp;
+the current machine does</tt>
+<br><tt>#&nbsp; not have direct access to the disks that will store the</tt>
+<br><tt><font color="#CC33CC">IS_REMOTE=n</font></tt>
+<br><tt><font color="#CC33CC">PORTIA30_IS_REMOTE=y</font></tt>
+<br><tt><font color="#CC33CC">PORTIA30WEEKLY_IS_REMOTE=y</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2_IS_REMOTE=y</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2WEEKLY_IS_REMOTE=y</font></tt>
+<br><tt><font color="#CC33CC">SYBPROD2_IS_REMOTE=y</font></tt>
+<br><tt><font color="#CC33CC">SYBPROD2WEEKLY_IS_REMOTE=y</font></tt>
+<p><tt>#</tt>
+<br><tt>#RSH_HOST=host</tt>
+<br><tt># The host this server lives on that you can rsh to.&nbsp; Only
+useful if IS_REMOTE</tt>
+<br><tt># and only used in conjunction with REMOTE_DIR</tt>
+<br><tt><font color="#CC33CC">RSH_HOST=</font></tt>
+<br><tt><font color="#CC33CC">PORTIA30_RSH_HOST=customer2</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2_RSH_HOST=customer2</font></tt>
+<br><tt><font color="#CC33CC">PORTIA30WEEKLY_RSH_HOST=customer2</font></tt>
+<br><tt><font color="#CC33CC">CLEARPROD2WEEKLY_RSH_HOST=customer2</font></tt>
+<p><tt>#</tt>
+<br><tt># REBUILD_INDEX_DB=db|db|db - list of databases to rebuild indexes
+on</tt>
+<br><tt># REBUILD_INDEX_FILE=file|file|file File to rebuild indexes for
+given database</tt>
+<br><tt><font color="#CC33CC">REBUILD_INDEX_DB=</font></tt>
+<br><tt><font color="#CC33CC">REBUILD_INDEX_FILE=</font></tt>
+<p><tt># END CONFIGURATION OF BACKUP SCRIPTS</tt>
+<br><tt>#</tt>
+<br><tt>#=============================================================================</tt>
+<br>&nbsp;
+<h2>
+<a NAME="COMPRESSION"></a>REMOTE PURGING AND COMPRESSION</h2>
+If you are scheduling your dumps out of a central location and are, therefore,
+dumping on to systems that are remote, you will have problems with purging
+and compression.&nbsp; Two solutions to this are provided.&nbsp; The first
+is to cross mount the dump directories using NFS (or windows networking).&nbsp;
+You can then directly purge/compress files created by the backup server.&nbsp;
+To do this, simply identify the server as local (IS_LOCAL=y) and set up
+a REMOTE_DIR to the appropriate directory path.&nbsp; Note, under windows
+you do not need to map drives, you may simply specify the full drive path
+in the REMOTE_DIR specification. The drawback here is that the remote dump
+directories must be mounted read/write across the network and that compression
+is done over the network.&nbsp; The other option is to use rsh to issue
+the compress command.&nbsp; This will require UNIX and will require you
+to create a .rhost file on each of your remote systems in the Sybase account.
+<p>Compression is optional.&nbsp; There are some gotcha's if you do compression.&nbsp;
+Firstly, to compress you need double the disk space of the dump files (it
+makes a copy).&nbsp; This can cause all&nbsp; kinds of disk errors if you
+are not careful.&nbsp; Secondly, the compression will fail on UNIX due
+to permission violations when run by any account except Sybase or root
+(not recommended).&nbsp; The error will be : permission violation (cant
+modify to file).
+<h2>
+SETTING UP YOUR CRONTAB</h2>
+Add your script to sybase's crontab on UNIX (or whatever scheduler you
+use).&nbsp; On unix this is done with <i>crontab -e<b>.&nbsp; </b></i>If
+your editor doesn't work here, set the environment variable EDITOR (e.g.
+<i>export</i>
+<i>EDITOR=/bin/vi</i>).&nbsp; If you get a permission violation when running
+<i>crontab -e</i>, contact your unix support person and have them set you
+up to run cron jobs.&nbsp; A sample cron can be found in crontab.sample.&nbsp;
+Note that you must run the scripts as the SYBASE account.&nbsp; As the
+output of backup.pl already goes to the session file,&nbsp; redirect cron
+output to /dev/null so you dont get voluminous mail. (ie.<i> /home/programs/bin/backup.pl
+-JMYSERVER >/dev/null)</i>. You probably want to dump tran logs every ten-twenty
+minutes on production systems.
+<p>You probably want it to run as a user in group Sybase (so you can use
+Sybase for something else). If this is the case, test starting a server
+- you could easily bomb on permissions. To set up as a member of group
+Sybase, remember that permissions should be set for group.
+<h2>
+ERROR HANDLING</h2>
+These scripts use an easily configured error handler to do error handling.&nbsp;
+The scripts run the perl module Log::Dispatcher out of the file on_error.pl.&nbsp;
+If you wish to modify the default behavior of this error handler (which
+is to put errors in the errors sub directory and session logs in the sessionlog
+sub directory, and then to mail errors to a specified set of users), you
+simply need modify the on_error.pl.&nbsp; Log::Dispatcher is easy to use
+and supports a variety of log and error handling options.
+<h2>
+<a NAME="NOTES"></a>FREQUENTLY ASKED QUESTIONS</h2>
+<b><i>The package does not work from your scheduler, but runs fine from
+the command line:</i></b> There could well be some environmental difference
+that is breaking things.&nbsp; Specifically, check that the environment
+variable SYBASE is defined.
+<p><b><i>I get permission violations when running</i></b>: The scheduler
+should run out of the same account that runs the Sybase server.&nbsp; On
+UNIX it should not run as root (if you run out of root, you should do a
+"su - Sybase -c" but this is not recommended).&nbsp; In fact to make this
+a little more clear, almost every real problem I have ever encountered
+with the scripts has been by people using "su - Sybase -c..." instead of
+running out of sybase's crontab (so just dont do it).
+<p><b><i>How can i find if there were problems last night</i></b>: A session
+log AND a separate error log are created for each run.&nbsp; The error
+log is removed after the run if it is empty.&nbsp; So, to tell if there
+were problems just look in the errors subdirectories in the output file
+tree.&nbsp; If there are any files there, there were problems.&nbsp; Remove
+these files each day and you will know if there are any events that need
+attention.&nbsp; Additionally, the default error handler sends you mail
+with any problems.
+<p><b><i>I need to set up paging for problems</i></b>:&nbsp; You will need
+a script that sends pages and to add it to the on_error.pl file.&nbsp;
+See the section on error handling.
+<p><b><i>The cood looks funny (tabbing is wierd)</i></b>: All scripts can
+be viewed and edited best with tabstop=3.
+<p><b><i>Are there any bad table names?</i></b> If you have tables with
+the string corrupt in it, you may have trouble with the dbcc program. corrupt
+is a keyword for dbcc errors.
+<h2>
+<a NAME="MENU"></a>MENU.PL / CGI.PL</h2>
+The user interface for this program is provided either from the command
+line or from a cgi script.&nbsp; The basic menu flow is:
+<p>IF THERE ARE MULTIPLE SERVERS DEFINED
+<dl>
+<dd>
+WELCOME SCREEN</dd>
+</dl>
+
+<ol>
+<li>
+SELECT SERVER XXX</li>
+
+<li>
+SELECT SERVER YYY</li>
+</ol>
+IF ONLY ONE SERVER IS DEFINED OR YOU HAVE SELECTED A SERVER FROM THE ABOVE
+LIST
+<dl>
+<dd>
+SERVER XXX BACKUP MENU</dd>
+</dl>
+
+<ol>
+<li>
+<font size=-1>Test Connectivity</font></li>
+
+<li>
+<font size=-1>Test RSH Access</font></li>
+
+<li>
+<font size=-1>Check Configuration</font></li>
+
+<li>
+<font size=-1>Perform Full Server Backups</font></li>
+
+<li>
+<font size=-1>Backup A Single Database</font></li>
+
+<li>
+<font size=-1>Restore A Database</font></li>
+
+<li>
+<font size=-1>Start Database Server</font></li>
+
+<li>
+<font size=-1>Stop Database Server</font></li>
+
+<li>
+<font size=-1>Start Backup Server</font></li>
+
+<li>
+<font size=-1>Stop Backup Server</font></li>
+
+<li>
+<font size=-1>View Backup Error Logs</font></li>
+
+<li>
+<font size=-1>Cleanup Backup Log Files</font></li>
+
+<li>
+<font size=-1>Show Database Server Error Log (Filtered)</font></li>
+
+<li>
+<font size=-1>Show Database Server Error Log (Filtered, Last 2 Days Only)</font></li>
+
+<li>
+<font size=-1>Show Backup Server Errorlog</font></li>
+
+<li>
+<font size=-1>Debug This Server</font></li>
+
+<li>
+<font size=-1>QUIT</font></li>
+</ol>
+
+<h2>
+<a NAME="SECURITY"></a>SECURITY</h2>
+Keep these scripts secure using unix permissioning - they should be owned
+by Sybase and NOT accessible by group other. Everything should run as Sybase
+(the user or the group) for safety. If you do not pass a User or Password,
+those values are looked up with the GetPassword perl library. This will
+prevent people using buggy versions of 'ps' can not discover them.
+<h2>
+TODO</h2>
+Queryable Log File of All operations
+<br>Dump File Renaming for Multi Server Configuration
+<br>MENU.PL
+<br>BCP LEVEL BACKUPS
+<p>
+<hr>
+<br>Author: <a href="mailto: barlowedward@hotmail.com">Ed Barlow</a>
+<br>barlowedward@hotmail.com
+<br>The current home for future releases is:&nbsp; <a href="http://www.mail.com/mailcom/ext_link.jhtml?goto=http%3A%2F%2Fwww.edbarlow.com" >http://www.edbarlow.com</a>
+<br>&nbsp;
+</body>
+</html>

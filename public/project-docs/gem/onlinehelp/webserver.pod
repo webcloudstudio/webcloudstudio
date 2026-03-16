@@ -1,0 +1,20 @@
+=head1 The Web Server Definition Tab
+
+PURPOSE: Define your web server
+
+A web server is required for the alarm monitoring.  You main monitoring program is named mimi.pl.  You will need
+to define the url you want to use for this script as well as the machine and path to that file.  So for example, if
+you have a web server named web1 that contains a script enabled virtual directory named gem that is in fact
+/dat/web1/gem you could set the
+
+URL=http://web1/gem/mimi.pl
+
+Filename=/dat/web1/gem/mimi.pl
+
+The Web Server Hostname field need only be filled out if the web server is on unix.  This should be obvious, because
+the scripts directory on a win32 web server should be accessible from a win32 monitoring server using full UNC path.
+
+If the above example was a win32 web server, the Filename would look like  \\web1\d$\gem\mimi.pl
+
+Poplulate a local version of your cgi-bin with 'Populate Local cgi-bin' and copy it to your web server
+with 'Copy local cgi-bin to Web Server'.

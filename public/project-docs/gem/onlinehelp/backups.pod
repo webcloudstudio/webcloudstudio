@@ -1,0 +1,12 @@
+=head1 The Backups Tab
+
+When you create your servers, it will also create two backup plans for you: one that has the same name as the server
+and the other which has _WEEKEND appended to the server name.  Data on your plans is stored in the configure.cfg
+file and is hand editable.  Please see documentation on the GEM Maintenance And Backup System.
+
+=over 4
+
+=item * For initial setup, you can ignore this section
+
+=back
+

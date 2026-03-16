@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<TITLE>MlpAlarm - Alarming And Monitoring Library</TITLE>
+<LINK REV="made" HREF="mailto:">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#summary">SUMMARY</A></LI>
+	<LI><A HREF="#the gory details">THE GORY DETAILS</A></LI>
+	<UL>
+
+		<LI><A HREF="#system/subsystem values">System/Subsystem Values</A></LI>
+		<LI><A HREF="#containers">Containers</A></LI>
+		<LI><A HREF="#state/severity values">State/Severity Values</A></LI>
+	</UL>
+
+	<LI><A HREF="#monitoring function calls">Monitoring Function Calls</A></LI>
+	<UL>
+
+		<LI><A HREF="#mlpheartbeat()"><CODE>MlpHeartbeat()</CODE></A></LI>
+		<LI><A HREF="#mlpperformance()"><CODE>MlpPerformance()</CODE></A></LI>
+		<LI><A HREF="#mlpevent()"><CODE>MlpEvent()</CODE></A></LI>
+		<LI><A HREF="#agent and batch functions">Agent and Batch Functions</A></LI>
+	</UL>
+
+	<LI><A HREF="#reporting functions">Reporting Functions</A></LI>
+	<LI><A HREF="#example">Example</A></LI>
+	<UL>
+
+		<LI><A HREF="#example 1. write event log">Example 1.  Write Event Log</A></LI>
+		<LI><A HREF="#example 2. a simple monitor">Example 2. A Simple Monitor</A></LI>
+		<LI><A HREF="#example 3. a complex multistep batch">Example 3. A Complex Multistep Batch</A></LI>
+	</UL>
+
+	<LI><A HREF="#notes">NOTES</A></LI>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>MlpAlarm - Alarming And Monitoring Library</P>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>This perl module provides a generic mechanism to manage alarms and monitoring. The tool is distributed as a perl module with several associated programs (a web based GUI, an alarm router, and some monitoring programs).   The library contains several simple functions to monitor your systems and some back end functions used by the reporting user interface.  Alarm data is stored in a database (Sybase or SQL Server).</P>
+<P>
+<HR>
+<H1><A NAME="summary">SUMMARY</A></H1>
+<P>MlpAlarm provides a simple mechanism to manage alarming and reporting.  Functions use a by name interface with consistent parameters for simplicity and ease of use.  It has the following features</P>
+<P>The system supports 5 types of ``data''</P>
+<UL>
+<LI><STRONG><A NAME="item_Heartbeat_Data">Heartbeat Data</A></STRONG><BR>
+
+Heartbeats are frequent up/down type messages regarding state.  It is usually considered a warning if a heartbeat is not recieved every a few minutes.  Examples of programs that generate heartbeats include ping and a database disk space monitor which alarms based on space used.  Heartbeats are saved with a -severity argument which can be EMERGENCY, CRITICAL, ALERT, ERROR, WARNING, or OK.  Because we expect heartbeats frequently, it is considered a problem if a heartbeat is not generated in a timely manner. Heartbeats are stored using the <CODE>MlpHeartbeat()</CODE> function.
+<P></P>
+<LI><STRONG><A NAME="item_Batch_Job_Data">Batch Job Data</A></STRONG><BR>
+
+Batch jobs typically run infrequently but regularly.  They can thus be treated as Heartbeats with a low frequency.  The system identifies batch jobs by the -batchjob argment to MlpHeartbeat.  Because some batch jobs have a frequency as low as once per month, it is not considered a warning when a Heartbeat message is not generated in a timely manner.
+<P>Because the system does not care how long it is between batch job heartbeats, heartbeat messages for batch jobs may include three states in adition to the normal Heartbeat states.   These are RUNNING, and COMPLETED.  Batch jobs, when started, should set their state to RUNNING, and when finished should set their state to COMPLETED (which is the same as OK) or one of the error states.</P>
+<P></P>
+<LI><STRONG><A NAME="item_Agent_Data">Agent Data</A></STRONG><BR>
+
+The system uses monitoring agents (which you build) to monitor your systems.  These monitoring agents should obviously be running.   Special calls allow you to have heartbeats for your Monitoring Agents which are stored separately from the normal heartbeats that users see.  You can separately view these heartbeats to ensure that your agents are running appropriately.
+<P>There are several convenience functions starting with MlpBatch...() that can be used to store Agent and Batch Job data.  These routines are simple wrappers on MlpHeartbeat().</P>
+<P></P>
+<LI><STRONG><A NAME="item_Event_Data">Event Data</A></STRONG><BR>
+
+Events are incidents on our systems for which we care about the time they occurred.  Event logs for your servers are an example.  Because we care what time they occurred, The system keeps a history of all the events you have saved and a cleanup program will run to purge this data.  Events are stored using the <CODE>MlpEvent()</CODE> function.
+<P></P>
+<LI><STRONG><A NAME="item_Performance_Data">Performance Data</A></STRONG><BR>
+
+Performance data can be stored and using built in graphics functions.  (not implemented yet). Performance data will be stored using the <CODE>MlpPerformance()</CODE> function
+<P></P></UL>
+<P>Fundamentally, from the perspective of a user of this module, the system consists of 3 functions named MlpHeartbeat, MlpEvent, and MlpPerformance.  These functions can be considered Black Boxes to transmit, store, and route your messages appropriately.</P>
+<P>
+<HR>
+<H1><A NAME="the gory details">THE GORY DETAILS</A></H1>
+<P>

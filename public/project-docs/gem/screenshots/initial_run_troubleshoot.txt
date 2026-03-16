@@ -1,0 +1,32 @@
+<pre>
+$ /usr/local/bin/perl-5.8.2 troubleshoot.pl
+/apps/perl/linux/perl-5.8.2/bin/perl  -I/apps/sybmon/gem/lib -I/apps/sybmon/gem/plugins -I/apps/sybmon/lib  /apps/sybmon/gem/bin/troubleshoot.pl
+troubleshoot.pl - Generic Enterprise Manager troubleshooter
+
+STARTING MODULE TESTS
+   Your perl version is 5.008002
+   Your Perl Library Include Path is
+	/apps/sybmon/gem/lib
+	/apps/sybmon/gem/plugins
+	/apps/sybmon/lib
+	/apps/perl/linux/perl-5.8.2/lib/5.8.2/i686-linux
+	/apps/perl/linux/perl-5.8.2/lib/5.8.2
+	/apps/perl/linux/perl-5.8.2/lib/site_perl/5.8.2/i686-linux
+	/apps/perl/linux/perl-5.8.2/lib/site_perl/5.8.2
+	/apps/perl/linux/perl-5.8.2/lib/site_perl
+	.
+   Testing Perl Builtin Package Integrity
+         OK: All Required Builtin Perl Packages Found!!
+   Testing Perl Database Connectivity Package Integrity
+         OK: All Required Perl/DBI Packages Found!!
+         OK: DBI Version is (1.39)
+         OK: DBD::Sybase Version is (1.02)
+   Testing Perl/Tk Package Integrity
+         OK: All Required Perl/Tk Packages Found!!
+         OK: Tk Version is (804.026)
+   Testing Gem Add On Module Integrity
+         OK: All Gem Packages Found!!
+   Testing Toolkit Built In Module Integrity
+         OK: All Builtin Packages Found!!
+
+</pre>

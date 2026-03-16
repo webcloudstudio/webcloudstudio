@@ -1,0 +1,12 @@
+=head1 The Extended Stored Procedures Tab
+
+PURPOSE: Manage The Extended Stored Procedure Library
+
+The extended stored procedure library for Sybase and Sql Server is a
+widely used free software package that is considered essential to effective
+server management.  This library is documented on www.edbarlow.com.
+
+The "Install Procedure Library" button upgrades the stored procedure library on your Databases.
+
+If "Dont Skip" box is checked, "Install Procedure Library" performs a full re-install (default
+behavior is to not install if the libaray is allready installed at the correct version)

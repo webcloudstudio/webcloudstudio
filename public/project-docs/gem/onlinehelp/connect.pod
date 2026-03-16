@@ -1,0 +1,20 @@
+=head1 The Connect Tab
+
+PURPOSE: Test connectivity and survey your systems.
+
+=over 4
+
+=item * Page-Side Buttons
+allow you to can see your registered servers by type
+
+=item * Connect To Buttons
+will test connectivity from the current monitoring server.  GEM uses odbc for database connectivity from Windows and
+native access from Unix.  Unix connectivity should be via no-password ssh but can be by rsh or ftp.  Test your connectivity
+and fix any errors.
+
+=item * Survey Buttons
+run survey on your servers.  GEM Normally schedules surveys  = this is to gather for initial data.  UnClick "Skip if Ok" to not skip
+servers which have been recently surveyed.
+
+=back
+

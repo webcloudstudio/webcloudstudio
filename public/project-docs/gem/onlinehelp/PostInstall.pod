@@ -1,0 +1,14 @@
+=head1 The Post Install Tasks Tab
+
+=over 4
+
+=item * Create a crontab file for your unix installation and schedule it.
+
+=item * Snapshot your windows servers services
+to create conf/win32_service.dat.  This basically creates a list of all the running services
+on all your windows boxes for future monitoring.  You will be notified if any services go down.  Assuming
+your environement is currently stable, a current snapshot will give you a pretty good listing of what
+needs to be monitored.
+
+=back
+

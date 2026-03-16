@@ -1,0 +1,28 @@
+=head1 The Database Tab
+
+PURPOSE: Set Up Alarm & Monitoring System
+
+GEM uses a centralized alarm database which must be called gemalarms. This small database must allready exist and be set up
+as per the installation instructions.  The Install/Upgrade Database button creates the tables & procedures in that db.
+
+The database must be accessible from all your monitoring servers.  This implies that sql server can only be used for an
+alarm db when you are in a win32 only environment.  You are responsible for the unixodbc setup required for sql server
+connectivity from unix if you insist on using sql server.  As sql server does not run on unix, this should not be a problem.
+Use Sybase for unix only and samba installs.
+
+=over 4
+
+=item * Fill in the Alarm Database Server Info
+with information about the preconfigured alarm database.  The Alarm System Mail Address is arbitrary
+and alerts are be mailed using that as a reply-to address.  It is ok to use an INVALID mail address
+as you wont ever reply to the alerts.
+
+=item * Install/Upgrade Alarm Database
+creates your alarm database tables & procedures
+
+=item * Validate Alarm Database
+checks the database for sanity and version.
+
+
+=back
+

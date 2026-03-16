@@ -1,0 +1,102 @@
+/* website styles */
+#irequest .show, #irequest .show td ,  #irequest .show th{
+	border-color:#bd9d6c;
+}
+/*adds shadow bottom to homecenter sections*/
+.tabbottom {
+	background: url(../img/MillenniumTab.gif) repeat-x;
+}
+/*puts gradient at top of center table sections*/
+.linkheader {
+	background-image: url(../img/biglinkheader_grad.jpg);
+	background-repeat: repeat-x;
+	text-align: center;
+	height: 16px;
+}
+/*formats blank cell betweeen admin & trader tools-jm*/
+.spacer {
+	width: 10px;
+	background-color: #f0e9d9;
+}
+/*adds arrow on indents on admin & trader tools-jm*/
+td.indent {
+	background-image: url(../img/indentarrow.gif);
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+
+/*adds left and right border to header-jm*/
+.container {
+	border-left: 1px solid #bd9d6c;
+	border-right: 1px solid #bd9d6c;
+}
+.bordercolor {
+	background-color:#f0e9d9;
+	border:0;
+	width:100%;
+}
+/* added top border on center content-jm*/
+.ctrbordercolor {
+	background-color: #f0e9d9;
+	border-top: 1px solid #bd9d6c;
+}
+.basecolor {
+	background-color:#bd9d6c;
+}
+/* added gradient for menuheader-jm*/
+.menuheader {
+	background:#f0e9d9 url(../img/MillenniumMenuheader.gif) repeat-x;
+}
+.fontcolor {
+	color: #8c6239;
+}
+.textcolor, .nonlink {
+	color:#8c6239;
+}
+.warningtext {
+	color:#FF0099;
+}
+.ProductNameFormat {
+	padding:5px;
+	width:100%;
+	font-size:16px;
+	font-weight:bold;
+	color:/*#8c6239*/ #663300;
+	background-color:#fff;
+}
+h1,h2,h3,h4,h5,h6 {
+	color:#bd9d6c;
+}
+a:link, a:visited ,a:hover{
+	color: #8c6239;
+}
+/* Styling flyout menu */
+/* Body is added to make these styles have more priority to overwite default */
+
+body .sf-menu {
+	float:			left;
+	margin-bottom:	0;
+}
+/*changes to menu style-jm*/
+body .sf-menu a {
+	border-left:	1px solid #fff;
+	border-top:		1px dotted #d6c3a5;
+	padding: 		.5em 1em;
+	font: 12px Arial, Helvetica, sans-serif;
+}
+body .sf-menu a, body .sf-menu a:visited { /* visited pseudo selector so IE6 applies text colour*/
+	color:			#8c6239;
+	text-decoration:none;
+}
+body .sf-menu li,body .sf-menu li li,body .sf-menu li li li {
+	background:		#fff;
+}
+body .sf-menu li:hover, body .sf-menu li.sfHover, body .sf-menu a:focus, body .sf-menu a:hover, body .sf-menu a:active {
+	background:		#f0e9d9;
+	color:			#8c6239;
+	outline:		0;
+}
+/* Doc styling */
+#DocMenu > li {
+	background:	#f0e9d9;
+

@@ -1,0 +1,266 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CheckServer.pl - Utility to check database servers</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<ul>
+
+		<li><a href="#synopsis">SYNOPSIS</a></li>
+		<li><a href="#usage">USAGE</a></li>
+		<li><a href="#command_line_arguments__standard_arguments">COMMAND LINE ARGUMENTS - STANDARD ARGUMENTS</a></li>
+		<li><a href="#command_line_arguments__server_selection">COMMAND LINE ARGUMENTS - SERVER SELECTION</a></li>
+		<li><a href="#command_line_arguments__behavior">COMMAND LINE ARGUMENTS - BEHAVIOR</a></li>
+		<li><a href="#notes">NOTES</a></li>
+	</ul>
+
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>CheckServer.pl - Utility to check database servers</p>
+<p>
+</p>
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<p>This flexible program checks Sybase and MSSQL servers.</p>
+<p>Things that are always monitored:</p>
+<pre>
+  Server Availablility
+  &quot;Zombie&quot; processes (Sybase only)
+  Blocked processes
+  Processes that are in bad state (&quot;infected&quot;, &quot;log suspend&quot;, &quot;bad&quot;, etc.)</pre>
+<p>These conditions are considered CRITICAL or ERROR. email alerts will be sent to both --MAILTO and --WARN_MAILTO recepients.
+</p>
+<pre>
+
+Things that are monitored based on command line arguments:</pre>
+<pre>
+  Long running transactions
+  Processes with high CPU or I/O
+  High number of runnable processes
+  Blocked processes (and circular deadlocks)</pre>
+<p>These conditions are considered WARNINGs. eMails will be sent to --WARN_MAILTO recepients only.</p>
+<p>
+</p>
+<h2><a name="usage">USAGE</a></h2>
+<p>The program can operate in two modes:</p>
+<dl>
+<dt><strong><a name="item_persistent_mode">Persistent mode</a></strong>
+
+<dd>
+<p>Persistent mode simply connects to all your servers and loops through them running a small, quick, query.
+The program then sleeps --SLEEPTIME seconds and continues.  This will test whether your connection is
+broken, and if it is, will alert.  To allow configuration via older perl modules that have number of
+connection limits, you can use command line arguments to cycle through your registered servers.  For example,
+--FIRSTSERVER=21 --LASTSERVER=40 will loop through servers 21-40 within your password file.</p>
+</dd>
+<dd>
+<p>CheckServer.pl -BATCH_ID=id --PERSIST [--SLEEPTIME=120] [--FIRSTSERVER=n --LASTSERVER=m] [--[NON]PRODUCTION] [--PERSIST_MAIL_DELAY=300] [--DOALL] -OUTFILE=Outfile --MAILTO=a,b,c --WARN_MAILTOTO=x,y,z ...</p>
+</dd>
+</li>
+<dt><strong><a name="item_regular_mode">Regular mode</a></strong>
+
+<dd>
+<p>Regular mode (No --PERSIST) will attempt to connect to your server, check it, and alert if it detects a problem.</p>
+</dd>
+<dd>
+<p>CheckServer.pl -BATCH_ID=id -USER=SA_USER -SERVER=SERVER_NAME -PASSWORD=SA_PASS -OUTFILE=Outfile --MAILTO=a,b,c --WARN_MAILTO=x,y,z ...</p>
+</dd>
+</li>
+</dl>
+<p>
+</p>
+<h2><a name="command_line_arguments__standard_arguments">COMMAND LINE ARGUMENTS - STANDARD ARGUMENTS</a></h2>
+<dl>
+<dt><strong><a name="item__2d_2ddebug">--DEBUG</a></strong>
+
+<dd>
+<p>Instructs program to run with informational printout</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dbatch_id_3dbatch_id">--BATCH_ID=batch_ID</a></strong>
+
+<dd>
+<p>Unique identifie of this particular program - used to track alerts and runtimes</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dnolock">--NOLOCK</a></strong>
+
+<dd>
+<p>To avoid ``spam'', the program is not allowed to run against the same
+server until ``threshold timeout'' (120 sec) between the runs expires.
+--NOLOCK switch overrides this restriction</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2doutfile_3dlog_file_name">--OUTFILE=log_file_name</a></strong>
+
+<dd>
+<p>Specifies log file name</p>
+</dd>
+</li>
+</dl>
+<p>
+</p>
+<h2><a name="command_line_arguments__server_selection">COMMAND LINE ARGUMENTS - SERVER SELECTION</a></h2>
+<p>The following arguments define which servers the program will run on:</p>
+<dl>
+<dt><strong><a name="item__2d_2ddoall_3d_7bsybase_7csqlsvr_7d">--DOALL={sybase|sqlsvr}</a></strong>
+
+<dd>
+<p>Request to monitor either:
+--DOALL=sybase - Sybase database servers only
+--DOALL=sqlsvr - MSSQL database servers only</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dfirstserver_3dnumber__2d_2dlastserver_3dnumb">--FIRSTSERVER=number --LASTSERVER=number</a></strong>
+
+<dd>
+<p>Request to monitor only servers in range (x - y)</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2d_5bnon_5dproduction">--[NON]PRODUCTION</a></strong>
+
+<dd>
+<p>Request to monitor only production (--PRODUCTION), or non -production (--NOPRODUCTION) servers</p>
+</dd>
+</li>
+</dl>
+<p>-or-</p>
+<dl>
+<dt><strong><a name="item__2dpassword_3d_2e_2e_2e_2e_2e_2e">-PASSWORD=......</a></strong>
+
+<dd>
+<p>Password for Server login ID</p>
+</dd>
+</li>
+<dt><strong><a name="item__2dserver_3dserver_name">-SERVER=server_name</a></strong>
+
+<dd>
+<p>Name of the server to monitor</p>
+</dd>
+</li>
+<dt><strong><a name="item__2duser_3dlogin_id">-USER=login_ID</a></strong>
+
+<dd>
+<p>Login ID (with sa and sso roles) to be used to
+login to server</p>
+</dd>
+</li>
+</dl>
+<p>
+</p>
+<h2><a name="command_line_arguments__behavior">COMMAND LINE ARGUMENTS - BEHAVIOR</a></h2>
+<p>The following command line arguments can be specified:</p>
+<dl>
+<dt><strong><a name="item__2d_2dblocktime_3d30">--BLOCKTIME=30</a></strong>
+
+<dd>
+<p>Specifies blocked process time threshold (sec). Default is 30 sec.</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dhighcpu_3d5000">--HIGHCPU=5000</a></strong>
+
+<dd>
+<p>Specifies high CPU utilization threshold.
+By default high CPU utilization is not monitored (--HIGHCPU=0)</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dhighio_3d50000">--HIGHIO=50000</a></strong>
+
+<dd>
+<p>Specifies high I/O threshold
+By default high I/O is not monitored (--HIGHIO=0)</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dlongrunning_3d120">--LONGRUNNING=120</a></strong>
+
+<dd>
+<p>Specifies long running transaction threshold
+Default is 120 min (2 hours)</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dmailto_3da_2cb_2cc">--MAILTO=a,b,c</a></strong>
+
+<dd>
+<p>Comma separated list of eMail recepients that will be notified in case of
+Critical or Error conditions only</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dnomonitor">--NOMONITOR</a></strong>
+
+<dd>
+<p>If specified, only server availability and ``bad'' statuses are being monitored.</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dnosa">--NOSA</a></strong>
+
+<dd>
+<p>Supresses checks for processes initiated by user with privileged roles:
+sa, sso, oper</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dpersist">--PERSIST</a></strong>
+
+<dd>
+<p>Specifies the persistent mode of operation</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dpersist_mail_delay_3d300">--PERSIST_MAIL_DELAY=300</a></strong>
+
+<dd>
+<p>(Persistent mode). Specifies mail delays in sec. (to avoid spam).
+The default is 300 sec</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2drunnable_3dxxx">--RUNNABLE=xxx</a></strong>
+
+<dd>
+<p>Specifies runnable process count threshold as multiplier of the number of
+engines on the monitored server.
+By default runnable process count is not monitored (--RUNNABLE=0)</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dsleeptime_3d120">--SLEEPTIME=120</a></strong>
+
+<dd>
+<p>(Persistent mode). Specifies inactivity time between the consecutive runs.
+The default is 120 sec (--SLEEPTIME=120)</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dwarn_mailto_3dx_2cy_2cz">--WARN_MAILTO=x,y,z</a></strong>
+
+<dd>
+<p>Comma separated list of eMail recepients that will be notified in case of
+Critical, Error or Warning condition</p>
+</dd>
+</li>
+<dt><strong><a name="item__2d_2dzombie_3d60">--ZOMBIE=60</a></strong>
+
+<dd>
+<p>``zombie'' process time thresholdi (in minutes).
+Default is 60 min.</p>
+</dd>
+</li>
+</dl>
+<p>
+</p>
+<h2><a name="notes">NOTES</a></h2>
+<p>To supress server monitoring, add NOT_MONITORED=1 clause to the server password file.</p>
+
+</body>
+
+</html>

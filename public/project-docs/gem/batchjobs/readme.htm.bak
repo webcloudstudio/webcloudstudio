@@ -1,0 +1,862 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM A Guide To GEM Batch Jobs</title>
+  <meta name="author" content="Edward Barlow">
+  <meta name="Description" content="GEM - The Generic Enterprise Manager">
+  <meta name="keywords" content="sybase, sql server, oracle,  tools,  utilities,  shareware,  database, monitoring, administration, reporting, configuration">
+</head>
+<body background="http://www.edbarlow.com/sybase_back.gif" topmargin="0"
+ marginheight="0">
+<table border=1 cellpadding=3 cols=1 bgcolor=black width=100%>
+  <tbody>
+    <tr>
+	<b>
+	<span style="font-size: 32pt; color: #33ccff; font-family: Verdana; ">A Guide To GEM Batch Jobs</span>
+	</b>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>GEM Documentation</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ Welcome to the Generic Enterprise Manager (aka GEM). This documentation is generated from the code line and should reflects  the latest code in use. "The Complete GEM Documentation" contains all other chapters (except the Powerpoint Presentation).  After reading, you can download the GEM <A HREF=http://www.edbarlow.com/download.pl>Download the GEM</A><P>
+ <TABLE WIDTH=100%> <TR BGCOLOR=BEIGE><TH COLSPAN=2>Document</TH></TR> <TR><TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Powerpoint Overview Slide Show</a></TD></TR> <TR><TD>&nbsp;</TD></TR> <TR><TD><a TARGET=_top href="../gem_intro/index.htm">Start Guide, FAQ, Change Log</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">GEM Installation Guide</a></TD></TR> <TR><TD><a TARGET=_top href="../batchjobs/index.htm">A Guide To GEM Batch Jobs</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD></TR> <TR><TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> <TD><a TARGET=_top href="../bin/index.htm">GEM Utilities Guide</A></TD></TR> <TR><TD><a TARGET=_top href="../console/index.htm">The GEM Console</A></TD> <TD><a TARGET=_top href="../procs/index.htm">The GEM Extended Stored Procedure Library</A></TD></TR> </TABLE>
+<A NAME=link2></A>
+<br><br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>GUIDE TO GEM BATCH JOBS
+</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION
+</h3>
+<P>
+ Batch jobs are created by the GEM configuration program and are used to monitor your servers and to
+ create the GEM Console.  These scripts are organized into 8 directories with duplicate scripts common.  The
+ batch jobs should be named the same as the Program identifier used by the monitoring system.
+<P>
+ The directory structure is
+<P>
+<pre>
+   nt_batch_scripts or
+       batch
+       interactive
+       plan_batch
+       plan_interactive
+   unix_batch_scripts
+       batch
+       interactive
+       plan_batch
+       plan_interactive
+<P>
+</pre>
+ Files will only be created as needed.  For example, if you have a windows only system, the unix scripts will not
+ be created.  Batch jobs are creeated with a .ksh and / or .bat extensions.  This allows you to schedule jobs as
+ appropriate.
+<P>
+ The major difference between the plan and interactive directories is the redirection of standard output.  Scheduled
+ jobs should use the "batch" directories which redirect standard output and standard error into the data directory in
+ the batchjob_logs and batchjob_errors directories.  These files can be veiwed through the console.
+<P>
+ You are responsible to schedule these jobs.  The configure.pl GEM Configuration utility will auto schedule these
+ jobs if running under windows (using Win32::Scheduler).  It will also create a crontab.sample file that you can use
+ to manually schedule on unix.  On Win32, you have the option to run the .ksh or .bat versions of the scripts.
+ You will need some form of shell interpreter (MKS toolkit) to run the .ksh scripts.
+<P>
+<h3>TO RUN INTERACTIVELY
+</h3>
+<P>
+ The interactive subdirectory is the place to look to run stuff by hand.  The batch jobs there are identical to the
+ jobs in the parent directory, but do NOT redirect standard output and standard error.
+<P>
+
+<A NAME=link3></A>
+<br><br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>SUMMARY OF BATCH JOBS
+</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The following table is a summary of the jobs.  OkTypes is Unix/Nt/Both.  Frequency is the recommended
+ run interval.  frequently should be considered every 5-15 minutes.
+<P>
+<pre>
+                      Name     OkTypes     JobType        Freq
+            AlarmCleanupDB        both  monitoring       daily
+         AlarmRoutingAgent        both  monitoring  frequently
+            AnalyzeDepends        both  monitoring      weekly
+         Backup_&lt;PLANNAME&gt;          nt      backup       daily
+        BuildConsoleHourly        both     console      hourly
+       BuildConsoleNightly        both     console       daily
+        BuildConsoleWeekly        both     console      weekly
+         BuildConsoleWin32          nt     console      hourly
+      CheckServer_&lt;SERVER&gt;          nt  monitoring      hourly
+     FixLogship_&lt;PLANNAME&gt;          nt      backup       never
+               GEM_Backups        both     console      hourly
+           GEM_PCDiskspace        both     console      hourly
+            GEM_PCEventlog        both     console      hourly
+   GEM_ProductionOvernight        both     console      hourly
+    GEM_ProductionWarnings        both     console      hourly
+             GEM_SybaseASE        both     console      hourly
+    GEM_SybaseBackupServer        both     console      hourly
+       GEM_SybaseRepServer        both     console      hourly
+       GetBackupStateMssql          nt  monitoring      hourly
+      GetBackupStateSybase        both  monitoring      hourly
+          GetUnixDiskSpace        unix  monitoring  frequently
+   LoadTranlogs_&lt;PLANNAME&gt;          nt      backup       never
+       MssqlCycleEventlogs          nt  monitoring       daily
+         MssqlJobStatusRpt          nt  monitoring       daily
+         MssqlLogMaintPlan          nt  monitoring      hourly
+      MssqlScheduledJobRpt          nt  monitoring       daily
+           MssqlShrinklogs          nt  monitoring      hourly
+                 PcCleanup          nt  monitoring       daily
+               PcDiskspace          nt  monitoring  frequently
+                PcEventlog          nt  monitoring  frequently
+                PcGetHosts          nt  monitoring       daily
+                PcHostsRpt          nt  monitoring       daily
+          PcServiceChecker          nt  monitoring  frequently
+      PcServiceCheckerInit          nt  monitoring       never
+           PcTaskScheduler          nt  monitoring      hourly
+                PingSqlsvr          nt  monitoring  frequently
+                PingSybase        both  monitoring  frequently
+               PingSystems        both  monitoring  frequently
+               PortMonitor        both   reporting  frequently
+        SpaceMonitorSqlsvr          nt  monitoring      hourly
+        SpaceMonitorSybase        both  monitoring      hourly
+              SurveyOracle        both      survey       daily
+           SurveySqlServer          nt      survey       daily
+              SurveySybase        both      survey       daily
+                SurveyUnix        unix      survey       daily
+             SurveyWindows          nt      survey       daily
+            SybErrLogAlarm        both  monitoring      hourly
+           SybErrLogAllRpt        both  monitoring      hourly
+           SybErrLogConfig        both  monitoring       daily
+            SybErrLogFetch        both  monitoring      hourly
+              SybErrLogRpt        both  monitoring      hourly
+          SybHistSvrConfig        both  monitoring       daily
+        SybHistSvrLogFetch        both  monitoring      hourly
+          SybHistSvrLogRpt        both  monitoring      hourly
+           SybMonSvrConfig        both  monitoring       daily
+         SybMonSvrLogFetch        both  monitoring      hourly
+           SybMonSvrLogRpt        both  monitoring      hourly
+            SybRepSvrAlarm        both  monitoring      hourly
+           SybRepSvrConfig        both  monitoring       daily
+         SybRepSvrLogFetch        both  monitoring      hourly
+           SybRepSvrLogRpt        both  monitoring      hourly
+    SybaseBackupFileReport        both  monitoring       daily
+         SybaseRepMonAgent        both  monitoring      hourly
+        SybaseRepMonReport        both  monitoring  frequently
+                TraceRoute        both  monitoring      hourly
+       Trandump_&lt;PLANNAME&gt;          nt      backup      hourly
+<P>
+</pre>
+
+<A NAME=link4></A>
+<br><br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>Survey Scripts
+</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The survey scripts discover information about your servers and store
+ the results in the gem.xml data file. The scritps are broken up by type for scheduling convenience.
+ The Sql Server and Windows surveys must be run from a Win32 scheduler, but the Oracle and Sybase jobs
+ can be run on either unix or windows.  I personally prefer to run these jobs on unix.
+<P>
+<h3>SurveyOracle
+</h3>
+<P>
+<pre>
+  Package:  Gem Console
+  Synopsis: Surveys your oracle servers - collects configuration information
+  Executes: &lt;CODEDIR&gt;/server_documenter/discover.pl -Toracle
+<P>
+</pre>
+<h3>SurveySqlServer
+</h3>
+<P>
+<pre>
+  Package:  Gem Console
+  Synopsis: Surveys your sql servers - collects configuration information
+  Executes: &lt;CODEDIR&gt;/server_documenter/discover.pl -Tsqlsvr
+<P>
+</pre>
+<h3>SurveySybase
+</h3>
+<P>
+<pre>
+  Package:  Gem Console
+  Synopsis: Surveys your sybase servers - collects configuration information
+  Executes: &lt;CODEDIR&gt;/server_documenter/discover.pl -Tsybase
+<P>
+</pre>
+<h3>SurveyWindows
+</h3>
+<P>
+<pre>
+  Package:  Gem Console
+  Synopsis: Surveys your windows servers - collects configuration information
+  Executes: &lt;CODEDIR&gt;/server_documenter/discover.pl -Tpcdisks
+<P>
+</pre>
+
+<A NAME=link5></A>
+<br><br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>MAINTENANCE PLAN JOBS
+</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ These jobs, stored in plan_batch and plan_interactive are used for your nightly maintenance.  Each plan you created will
+ have its own associated set of scripts.  There will either 2 or 4 batches created for each plan,
+ depending on whether log shipping is enabled.
+<P>
+<h3>Backup_{PLANNAME}
+</h3>
+<P>
+<pre>
+  Package:  Gem Backup Jobs
+  Synopsis: Backs up your databases
+  Executes: &lt;CODEDIR&gt;/dbi_backup_scripts/backup.pl -J&lt;JOB&gt;
+<P>
+</pre>
+<h3>FixLogship_{PLANNAME}
+</h3>
+<P>
+<pre>
+  Package:  Gem Backup Jobs
+  Synopsis: Copy transaction logs for log shipping
+  Executes: &lt;CODEDIR&gt;/dbi_backup_scripts/fix_logship.pl -J&lt;JOB&gt;
+<P>
+</pre>
+<h3>LoadTranlogs_{PLANNAME}
+</h3>
+<P>
+<pre>
+  Package:  Gem Backup Jobs
+  Synopsis: Cleans up old events and heartbeats from your GEM Alarms Database
+  Executes: &lt;CODEDIR&gt;/dbi_backup_scripts/load_all_tranlogs.pl -JOB=&lt;JOB&gt;
+<P>
+</pre>
+<h3>Trandump_{PLANNAME}
+</h3>
+<P>
+<pre>
+  Package:  Gem Backup Jobs
+  Synopsis: Cleans up old events and heartbeats from your GEM Alarms Database
+  Executes: &lt;CODEDIR&gt;/dbi_backup_scripts/backup.pl -t -J&lt;JOB&gt;
+<P>
+</pre>
+
+<A NAME=link6></A>
+<br><br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>CONSOLE BATCH JOBS
+</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ These jobs create and manage the console
+<P>
+<h3>BuildDocHourly
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: builds the console documentation tree with recently changed stuff
+  Executes: &lt;CODEDIR&gt;/server_documenter/consoler_hourly.pl
+<P>
+</pre>
+<h3>BuildDocNightly
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: builds the console documentation tree - overnight rebuild
+  Executes: &lt;CODEDIR&gt;/server_documenter/console_nightly.pl
+<P>
+</pre>
+<h3>BuildDocWeekly
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: builds the console documentation tree - complete rebuild (slow)
+  Executes: &lt;CODEDIR&gt;/server_documenter/console_weekly.pl
+<P>
+</pre>
+<h3>BuildDocWin32
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: builds the console documentation tree - augment windows pages if you are running other jobs on unix
+  Executes: &lt;CODEDIR&gt;/server_documenter/console_win32_add.pl
+<P>
+</pre>
+
+<A NAME=link7></A>
+<br><br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>CONSOLE BATCH REPORTS
+</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ These reports use the alarm viewer to create pre-designed reports about your servers.  These reports are stored in
+ <DATADIR>/html_output.  When any of the Console build utilities run, they search for these reports and copy them in
+ to the GEM menu heirarchy.  These reports are, in other words, batched.  As you will probably be rebuilding the
+ console hourly, they may be up to 1 hour delayed (it depends on how often you schedule the job).  Note that the same
+ command executable (RunMimiReport.pl) takes other arguments including email addresses for direct mailing of reports to
+ specific email addresses.
+<P>
+<h3>GEM_Backups
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: Creates Custom Report GEM_Backups.html
+  Executes: &lt;CODEDIR&gt;/monitoring/RunMimiReport.pl --REPORT=GEM_Backups --OUTFILE=&lt;DATADIR&gt;/html_output/GEM_Backups.html
+<P>
+</pre>
+<h3>GEM_PCDiskspace
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: Creates Custom Report GEM_PCDiskspace.html
+  Executes: &lt;CODEDIR&gt;/monitoring/RunMimiReport.pl --REPORT=GEM_PCDiskspace --OUTFILE=&lt;DATADIR&gt;/html_output/GEM_PCDiskspace.html
+<P>
+</pre>
+<h3>GEM_PCEventlog
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: Creates Custom Report GEM_PCEventlog.html
+  Executes: &lt;CODEDIR&gt;/monitoring/RunMimiReport.pl --REPORT=GEM_PCEventlog --OUTFILE=&lt;DATADIR&gt;/html_output/GEM_PCEventlog.html
+<P>
+</pre>
+<h3>GEM_ProductionOvernight
+</h3>
+<P>
+<pre>
+   Package:  GEM Console
+   Synopsis: Creates Custom Report GEM_ProductionOvernight.html
+   Executes: &lt;CODEDIR&gt;/monitoring/RunMimiReport.pl --BATCHID=GEM_ProductionOvernight --REPORT=GEM_ProductionOvernight --OUTFILE=&lt;DATADIR&gt;/html_output/GEM_ProductionOvernight.html
+<P>
+</pre>
+<h3>GEM_ProductionWarnings
+</h3>
+<pre>
+   Package:  GEM Console
+   Synopsis: Creates Custom Report GEM_ProductionWarnings.html
+   Executes: &lt;CODEDIR&gt;/monitoring/RunMimiReport.pl --BATCHID=GEM_ProductionWarnings --REPORT=GEM_ProductionWarnings --OUTFILE=&lt;DATADIR&gt;/html_output/GEM_ProductionWarnings.html
+<P>
+</pre>
+<h3>GEM_SybaseASE
+</h3>
+<pre>
+   Package:  GEM Console
+   Synopsis: Creates Custom Report GEM_SybaseASE.html
+   Executes: &lt;CODEDIR&gt;/monitoring/RunMimiReport.pl --BATCHID=GEM_SybaseASE --REPORT=GEM_SybaseASE --OUTFILE=&lt;DATADIR&gt;/html_output/GEM_SybaseASE.html
+<P>
+</pre>
+<h3>GEM_SybaseBackupServer
+</h3>
+<pre>
+   Package:  GEM Console
+   Synopsis: Creates Custom Report GEM_SybaseBackupServer.html
+   Executes: &lt;CODEDIR&gt;/monitoring/RunMimiReport.pl --BATCHID=GEM_SybaseBackupServer --REPORT=GEM_SybaseBackupServer --OUTFILE=&lt;DATADIR&gt;/html_output/GEM_SybaseBackupServer.html
+<P>
+</pre>
+<h3>GEM_SybaseRepServer
+</h3>
+<pre>
+   Package:  GEM Console
+   Synopsis: Creates Custom Report GEM_SybaseRepServer.html
+   Executes: &lt;CODEDIR&gt;/monitoring/RunMimiReport.pl --BATCHID=GEM_SybaseRepServer --REPORT=GEM_SybaseRepServer --OUTFILE=&lt;DATADIR&gt;/html_output/GEM_SybaseRepServer.html
+<P>
+</pre>
+
+<A NAME=link8></A>
+<br><br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>NORMAL JOBS
+</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ These jobs, stored in the batch and interactive subdirectories are used for normal maintenance.
+<P>
+<h3>AlarmCleanup
+</h3>
+<P>
+<pre>
+  Package:  Gem Maintenance
+  Synopsis: Cleans up old events and heartbeats from your GEM Alarms Database
+  Executes: &lt;CODEDIR&gt;/monitoring/MlpAlarmCleanupDB.pl --DAYS=7
+<P>
+</pre>
+<h3>AlarmRoutingAgent
+</h3>
+<P>
+<pre>
+  Package:  Gem Maintenance
+  Synopsis: Reads GEM Alarms and routes them via pager and email as appropriate
+  Executes: &lt;CODEDIR&gt;/monitoring/MlpAlarmRoutingAgent.pl --FROM=MonitorAdm@hotmail.com --MAXHOURS=24
+<P>
+</pre>
+<h3>AnalyzeDepends
+</h3>
+<P>
+<pre>
+  Package:  Gem Console / Utilities
+  Synopsis: Builds a real ddl dependency tree for your servers
+  Executes: &lt;CODEDIR&gt;/bin/depends_analyze.pl
+<P>
+</pre>
+<h3>CheckServer_{SERVER}
+</h3>
+<P>
+<pre>
+  Package:  GEM Console / Monitoring
+  Monitor:  CheckForBlocks
+  Synopsis: Checks a single server for blocks.  Will have --MAILTO if it is a production server.  Optional Arguments of --TIME=secs and
+  --MAILTO=a@b,c@d  can be used for higher granualarity monitoring.k
+  Executes: &lt;CODEDIR&gt;/monitoring/CheckServer.pl -TYPE=sqlsvr -TIME=300 --SERVER={SERVER} -MICROSOFT
+  Executes: &lt;CODEDIR&gt;/monitoring/CheckServer.pl -TYPE=sqlsvr -TIME=60 --SERVER={SERVER} -MICROSOFT --MAILTO=&quot;barlowedward@hotmail.com&quot;
+<P>
+</pre>
+<h3>PcGetHosts
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: Collects hosts files from your windows boxes
+  Executes: &lt;CODEDIR&gt;/bin/pc_get_file.pl --BATCH_ID=PcGetHosts --INDIR=/winnt/system32/drivers/etc,/windows/system32/drivers/etc,/windows,/winnt --INFILE=hosts -OUTDIR=&lt;DATADIR&gt;/system_information_data/hosts
+<P>
+</pre>
+<h3>PcTaskScheduler
+</h3>
+<P>
+<pre>
+  Package:  GEM Console
+  Synopsis: Collects windows task scheduler log files from your windows boxes
+  Executes: &lt;CODEDIR&gt;/bin/pc_get_file.pl --BATCH_ID=PcTaskScheduler --INDIR=/winnt,/windows --INFILE=Schedlgu.txt --NEWLABEL=Win32_Job_Scheduler_Log -OUTDIR=&lt;DATADIR&gt;/system_information_data/schedlgu
+<P>
+</pre>
+<h3>MssqlJobStatusRpt
+</h3>
+<P>
+<pre>
+  Executes: &lt;CODEDIR&gt;/bin/mssql_jobstatus_rpt.pl --HTML --OUTFILE=&lt;DATADIR&gt;/html_output/mssql_jobstatus_rpt.html
+<P>
+</pre>
+ This creates the file html_output/mssql_jobstatus_rpt.html which lists failed sql server jobs that
+ are enabled.  To remove rows from this report you should disable the failed job.
+<P>
+<h3>MssqlLogMaintPlan
+</h3>
+<P>
+<pre>
+  Monitor: MssqlLogMaintPlan
+  Executes: &lt;CODEDIR&gt;/bin/mssql_logmaintplan.pl -CONFIGFILE=&lt;DATADIR&gt;/logmaintplan.dat
+<P>
+</pre>
+ This saves maintenance plan information as heartbeats with the monitor_key=LogMaintPlan.  This filters
+ only system maintenance plans for SQL Server.
+<P>
+<h3>PcCleanup
+</h3>
+<P>
+ This is the most important of the maintenance scripts.  The only issue is that you need to set it
+ up by hand.  Every directory you want purged should have lines added to it.  Maintain this program
+ and you wont ever need to run out of disk space again.
+<P>
+<pre>
+  Package: Normal Maintenance
+  Synopsis: Cleans up directories on windows.  You should edit your conf/Win32_Cleanup.dat file
+  Monitor: PcCleanup
+  Executes: &lt;CODEDIR&gt;/bin/purge_old_files.pl --BATCH_ID=PcCleanup --ctlfile=//samba/sybmon/dev/conf/Win32_Cleanup.dat
+<P>
+</pre>
+<h3>PcDiskspace
+</h3>
+<P>
+<pre>
+  Package:  Gem Console
+  Monitor:  PcDiskspace
+  Synopsis: Monitor and Report on Windows Diskspace
+  Executes: &lt;CODEDIR&gt;/bin/pc_diskspace.pl --ALARMTHRESH=95 --WARNTHRESH=90  --LOGALARM --OUTFILE=&lt;DATADIR&gt;/html_output/pc_diskspace.txt
+<P>
+</pre>
+ pc_diskspace.bat will save space usage information for your servers
+ with embedded alarm thresholds of 90 for warning and 95% for errors.  The output is placed
+ in html_output/pc_diskspace.txt to be picked up later.
+<P>
+<h3>PcEventlog
+</h3>
+<P>
+<pre>
+  Package:  Gem Console
+  Monitor:  PcEventlog
+  Synopsis: Monitor and Report on Windows System Event Logs
+  Executes: &lt;CODEDIR&gt;/bin/pc_eventlog.pl --HOURS=2 --LOGEVENTS --CONFIGFILE=&lt;DATADIR&gt;/pc_eventlog.dat --SHOWINFOMSGS
+<P>
+</pre>
+ pc_eventlog.bat will save slightly reduced list of event log messages into
+ the alarm manager.  Several specific services are filtered out - the type can be adjusted
+ by editing the pc_eventlog.pl script (which gives directions).
+<P>
+ pc_eventlog.bat uses the file data/pc_eventlog.dat for its base configuration information.  It should
+ run frequently (every 1-2 hours). Messages are saved in the alarm system with monitor_program = PcEventlog
+<P>
+<h3>PcScheduledJobRpt
+</h3>
+<P>
+<pre>
+  Executes: &lt;CODEDIR&gt;/bin/pc_scheduled_job_rpt.pl --HTMLFILE=&lt;DATADIR&gt;/html_output/pc_scheduled_job.html
+<P>
+</pre>
+ Job scheduler reports will be generated.  The mechanism for this is
+ pc_scheduled_job_rpt.*.  and sqlsvr_backupreport.ksh.  These call the
+ primitive routines pc_backupreport.pl and pc_scheduled_job_rpt.pl and
+ result in html_output of pc_scheduled_job.html.
+<P>
+ The primitive for this is pc_scheduled_job_rpt.pl and pc_backupreprot.pl
+<P>
+<h3>PcServiceChecker
+</h3>
+<P>
+<pre>
+  Package:  Gem Console
+  Synopsis: Monitor and Report on Windows Services
+  Monitor:  PcServiceChecker
+  Executes: &lt;CODEDIR&gt;/bin/pc_service.pl --ACTION=VALIDATE
+<P>
+</pre>
+ Checks service availability on all your windows servers and compares results to a
+ snapshot of services that should be running.  The results are saved in the
+ alarms database.  This snapshot is not
+ created by default (yet).   The snapshot is stored in the conf/pc_service.dat
+ file.  The first thing to do is to run the following
+ which creates a snapshot file of all running services on all your defined
+ Win32 servers
+<P>
+<pre>
+  pc_service_checker_init.bat
+<P>
+</pre>
+ The above command should probably not be scheduled, or scheduled only once per week.
+ The init routine writes the pc_service.dat configuration file and will clear your
+ alarm database.
+ If you wish to reset the services for a particular system (perhaps it was rebuilt)
+ you should add --SYSTEMS=server. In other words you should run either
+<P>
+<pre>
+   pc_service_checker_init --SYSTEMS=winhost1
+<P>
+</pre>
+ which is the same as running the primitive
+<P>
+<pre>
+   pc_service.pl --SYSTEMS=winhost1 --ACTION=SNAPSHOT
+<P>
+</pre>
+ pc_service_checker.bat should probably be run fairly frequently.  The primitive for this is pc_service.pl
+<P>
+<h3>PcServiceCheckerInit
+</h3>
+<P>
+<pre>
+  Package:  Gem Console
+  Synopsis: One off batch - takes a snapshot of services on all your windows boxes for use by PcServiceChecker
+  Executes: &lt;CODEDIR&gt;/bin/pc_service.pl --ACTION=SNAPSHOT
+<P>
+</pre>
+<h3>PcShrinklogs
+</h3>
+<P>
+<pre>
+  Package:  Maintenance
+  Synopsis: Shrink the transactionlogs on all your windows servers
+  Executes: &lt;CODEDIR&gt;/bin/mssql_shrinklogs.pl --DOSHRINK --SYSTEMS=ALL
+<P>
+</pre>
+ The pc_shrinklogs.bat script will shrink all logs in all your sql servers using the mssql_shrinklogs.pl
+ primitive.
+<P>
+<h3>PingSqlsvr
+</h3>
+<P>
+<pre>
+  Monitor: PingSqlsvr
+  Executes: &lt;CODEDIR&gt;/bin/ping_server.pl -TYPE=SQLSVR
+<P>
+</pre>
+ The Ping* scripts ping your database
+ servers and save the results in the alarms database
+<P>
+<h3>PingSybase
+</h3>
+<P>
+<pre>
+  Monitor: PingSybase
+  Executes: &lt;CODEDIR&gt;/bin/ping_server.pl -TYPE=SYBASE
+<P>
+</pre>
+ The Ping* scripts ping your database
+ servers and save the results in the alarms database
+<P>
+<h3>PingSystems
+</h3>
+<P>
+<pre>
+  Monitor: PingSystems
+  Executes: &lt;CODEDIR&gt;/bin/ping_systems.pl -TYPE=SYBASE
+<P>
+</pre>
+ The Ping* scripts ping your database
+ servers and save the results in the alarms database
+<P>
+<h3>PortMonitor
+</h3>
+<P>
+<pre>
+  Monitor: PortMonitor
+  Executes: &lt;CODEDIR&gt;/monitoring/port_monitor.pl --LOGALARM
+<P>
+</pre>
+ The port monitor uses the file conf/port_monitor.dat for data.  It does a "ping" on ports of your servers for a response.
+ To initialize this file from known port data,  run
+<P>
+<pre>
+   PortMonitor.ksh --GENERATE
+<P>
+</pre>
+ Additionally, the first time you run PortMonitor.ksh, it will generate the file based on your sybase interfaces file and
+ GEM configuration data.
+ Since your interface file may contain junk servers, it will comment out servers that are not up at the time of the
+ run by placing a # in front of the line.
+<P>
+ You should add other servers/services to the config file.  The initialization only monitors databases, but the
+ pgogram can monitor everything that is based on sockets.  Note windows NT services are allready handled.
+<P>
+ To remove a service that generates a warning or error, simply comment it out or remove it from the configuraiton file.
+<P>
+<h3>PcHostsRpt
+</h3>
+<P>
+<pre>
+  Monitor: PcHostsRpt
+  Executes: &lt;CODEDIR&gt;/bin/parse_hosts.pl -BPcHostsRpt -h -O&lt;DATADIR&gt;/html_output/Win32_Hosts_Report.html -D&lt;DATADIR&gt;/system_information_data/hosts
+<P>
+</pre>
+<h3>SpaceMonitorSqlsvr
+</h3>
+<P>
+<pre>
+  Monitor: SpaceMonitorSqlsvr
+  Executes: &lt;CODEDIR&gt;/server_documenter/space_monitor.pl -AR -Tsqlsvr
+<P>
+</pre>
+<h3>SpaceMonitorSybase
+</h3>
+<P>
+<pre>
+  Monitor: SpaceMonitorSqlsvr
+  Executes: &lt;CODEDIR&gt;/server_documenter/space_monitor.pl -AR -Tsybase
+<P>
+</pre>
+<h3>TraceRoute
+</h3>
+<P>
+<pre>
+  Monitor: TraceRoute
+  Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS\monitoring\tracert.pl -BATCH_ID=TraceRoute
+<P>
+</pre>
+<h3>SybaseRepMonAgent
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/monitoring/SybaseRepMonitor.pl --ACTION=MONITOR --ITERATIONS=5 --FREQUENCY=30 --OUTFILE=&lt;DATADIR&gt;/html_output/SybaseRepMonAgent.html $*
+<P>
+</pre>
+<h3>SybaseRepMonReport
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/monitoring/SybaseRepMonitor.pl --ACTION=REPORT --HTML --OUTFILE=&lt;DATADIR&gt;/html_output/SybaseRepMonReport.html $*
+<P>
+</pre>
+
+<A NAME=link9></A>
+<br><br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>Log File Monitors
+</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ These files will collect error logs for your servers.  There are multiple reports for each log type.  These reports are
+ a Configuration Report (what it should do), a Fetch Report (how the file fetch went), a Report (usually giving 48 hours
+ of log messages), and a SaveAlarms report, which uses a patern file and saves recent alarms into the alarm database.  The
+ SaveAlarms report will ensure that duplicates are not stored.
+<P>
+<h3>SybErrLogAllRpt
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybErrLogAllRpt -TASE_SERVER -hrtF -O&lt;DATADIR&gt;/html_output/GEM_SybErrLogAllRpt.html $*
+<P>
+</pre>
+<h3>SybErrLogConfig
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybErrLogConfig -TASE_SERVER -hm -O&lt;DATADIR&gt;/html_output/GEM_SybErrLogConfig.html $*
+<P>
+</pre>
+<h3>SybErrLogFetch
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybErrLogFetch -TASE_SERVER -hf -O&lt;DATADIR&gt;/html_output/GEM_SybErrLogFetch.html $*
+<P>
+</pre>
+<h3>SybErrLogRpt
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybErrLogRpt -TASE_SERVER -hrt -O&lt;DATADIR&gt;/html_output/GEM_SybErrLogRpt.html $*
+<P>
+</pre>
+<h3>SybErrLogSaveAlarms
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybErrLogSaveAlarms -TASE_SERVER -hrpA -O&lt;DATADIR&gt;/html_output/GEM_SybErrLogAlarm.html $*
+<P>
+</pre>
+<h3>SybHistSvrConfig
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybHistSvrConfig -THISTORICAL_SERVER -hm -O&lt;DATADIR&gt;/html_output/GEM_SybHistSvrConfig.html $*
+<P>
+</pre>
+<h3>SybHistSvrLogFetch
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybHistSvrLogFetch -THISTORICAL_SERVER -hf -O&lt;DATADIR&gt;/html_output/GEM_SybHistSvrLogFetch.html $*
+<P>
+</pre>
+<h3>SybHistSvrLogRpt
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybHistSvrLogRpt -THISTORICAL_SERVER -htr -O&lt;DATADIR&gt;/html_output/GEM_SybHistSvrLogRpt.html $*
+<P>
+</pre>
+<h3>SybMonSvrConfig
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybMonSvrConfig -TMONITOR_SERVER -hm -O&lt;DATADIR&gt;/html_output/GEM_SybMonSvrConfig.html $*
+<P>
+</pre>
+<h3>SybMonSvrLogFetch
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybMonSvrLogFetch -TMONITOR_SERVER -hf -O&lt;DATADIR&gt;/html_output/GEM_SybMonSvrLogFetch.html $*
+<P>
+</pre>
+<h3>SybMonSvrLogRpt
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybMonSvrLogRpt -TMONITOR_SERVER -htr -O&lt;DATADIR&gt;/html_output/GEM_SybMonSvrLogRpt.html $*
+<P>
+</pre>
+<h3>SybRepSvrConfig
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybRepSvrConfig -TREP_SERVER -hm -O&lt;DATADIR&gt;/html_output/GEM_SybRepSvrConfig.html $*
+<P>
+</pre>
+<h3>SybRepSvrLogFetch
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybRepSvrLogFetch -TREP_SERVER -hf -O&lt;DATADIR&gt;/html_output/GEM_SybRepSvrLogFetch.html $*
+<P>
+</pre>
+<h3>SybRepSvrLogRpt
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybRepSvrLogRpt -TREP_SERVER -htr -O&lt;DATADIR&gt;/html_output/GEM_SybRepSvrLogRpt.html $*
+<P>
+</pre>
+<h3>SybRepSvrSaveAlarms
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybRepSvrSaveAlarms -TREP_SERVER -hrpA -O&lt;DATADIR&gt;/html_output/GEM_SybRepSvrAlarm.html $*
+<P>
+</pre>
+<h3>SybaseBackupFileReport
+</h3>
+<P>
+<pre>
+   Executes: &lt;CODEDIR&gt;/ADMIN_SCRIPTS/console/gem_file_manager.pl -BSybaseBackupFileReport -TBACKUP_SERVER -hm -O&lt;DATADIR&gt;/html_output/SybaseBackupFileReport.html $*
+<P>
+</pre>
+<h3>OTHER
+</h3>
+<P>
+<pre>
+  check_sybase_repserver.pl     CheckSybaseReplication
+  documenter report 14          UnixDiskspace
+</pre>
+<hr><br>
+This output is documentation for the SQL Technologies A Guide To GEM Batch Jobs.
+<ADDRESS>copyright &#169 1998-2005 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

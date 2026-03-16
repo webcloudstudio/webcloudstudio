@@ -1,0 +1,32 @@
+$ cd w:/dev
+$ perl configure.pl
+Generic Enterprise Manager Setup Driver
+
+        Use 'perl configure.pl --DEBUG' to see diagnostic messages.
+        Messages will be logged to configure.log
+
+Testing commands that should be in your path
+Running ping -?
+        ping -? succeeded
+Running osql -?
+   ***************************************
+   * ERROR:  osql -? appears to not be runnable/in your path
+   * 'osql' is not recognized as an internal or external command,
+   * operable program or batch file.
+   * C:\Perl\bin;C:\sybase\JS-12_5\bin;C:\sybase\OLEDB;C:\sybase\ODBC;C:\sybase\
+OCS-12_5\lib3p;C:\sybase\OCS-12_5\dll;C:\sybase\OCS-12_5\bin;C:\Program Files\MK
+S Toolkit\mksnt;C:\Perl\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\
+Wbem;C:\Program Files\Common Files\Roxio Shared\DLLShared;"C:\Program Files\Nort
+on SystemWorks\Norton Ghost\";C:\Program Files\IDM Computer Solutions\UltraEdit-
+32
+   ***************************************
+Running isql -v
+        isql -v succeeded
+ERROR: Not all Commands succeeded
+
+******************************
+* configure.pl can not continue.
+* Please check that the required commands are in your path.
+* If you believe everything is ok, you can run configure.pl --OVERRIDE
+******************************
+<Hit Enter Key To Continue

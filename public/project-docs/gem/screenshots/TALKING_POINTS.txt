@@ -1,0 +1,95 @@
+GEM OVERVIEW / BULLET POINTS
+
+	Typical Client
+		4-30 Databases
+			- larger is too hard a sale (although good for name dropping)
+			- smaller the product is useless
+		SQL Server and/or Sybase (Oracle, DB2 in Release 2)
+		Windows or Unix or Mixed
+		Lights out / Outsourcers
+	Ideal Client
+		smart guy with limited db expertise
+		guys who are hiring a dba!
+		consultanting firms
+		companies that outsource
+	Market Size
+		Very Large - Automation of commercial back end databases is a LARGE untapped market
+			with a variety of large tool vendors - all of which  compete in a different
+			space
+		Difficult to penetrate
+			historically most products were "small" and gui driven
+				( GEM is a big product )
+			client side products very successful
+				dbartisan/cast at 3000/workstation
+				these are easier to distribute and maintain
+	Typical Sale
+		Extreme willingness to pay
+			- cost is no object (think percent of salary)
+			- Moderate Cost To Install ( 4-8 hours on site for a large client )
+				must make installation cost billable
+			- Ideal is $3,000 to $30,000 for the sale (1000$ per database?)
+			- Support contract is where the money is !!!
+				30-50% of initial sale as recurring revenue
+	Current Objectives
+		A Plan
+		Reference Clients
+		Proof Of Concept
+			- Feedback
+		Business Plan
+		Marketing Blurbs
+		Talking Points
+
+Talking points
+	Completely automate your db administration workflow
+		- Cut time required for routine administration in a third
+			( save 2/3rds by automating everything )
+		- Dba's can focus on proactive systems management
+			( just fix the problem - no need to figure out what it is )
+		- Morning review process enables proactive server management
+		- Significantly lower your risk of outages
+
+	Complete Database Administration Toolkit
+		- 15 years providing dba solutions
+		- This is the ONLY DBA Automation Environment designed specifically for Sybase and Sql Server dba's
+		- Synergy with vendor solutions
+		- Provide a microsoft level automation for a sybase shop (if they are sybase)
+		- Provide sybase level customization for a microsoft shop
+
+	System Monitoring & Management Environment
+		- comfort level
+
+	Low Risk
+		- agentless
+		- central workstation/server
+		- 1-2 hours to set you up and get you working
+
+The following are my notes on pricing plans
+
+Project GEM is a major effort designed to help you manage business critical infrastructure at commercial organizations.
+It is expected that commercial users will support the project financially.  Non profit organizations and indviduals
+are welcome to use this software for free.
+
+Two pricing plans are under consideration.  The first entails making GEM free, but only including 'core' functionality.
+Output reports will contain a non-removable 'shareware' notice stating that commercial organizations with more than 5
+database servers are expected to purchase a commercial license after a 30 day trial period.  The commercial license
+will remove the shareware notice and enables product support.  The downside here is that installation is by far the
+most complex part of GEM and this plan can provide no installation support.
+
+	+ might be able to get shareware base
+	- can not provide support
+	- doubt it will maximise revenue
+
+The second plan is to use licensed consultants / distributors to resell GEM directly.  These 'Certified Product
+Specialists' will be paid percentage of the sales and support fees in return for installation and production support.
+Training will be available for qualified individuals who are interested in being Certified. If you are a consultant
+or distributor and are interested in reselling GEM, please contact us.
+
+	+ best approach
+	+ 2-3 hours for training
+
+One strong target market is companies that outsource databse operations.  These guys typically have a high workload
+and will benefit from automation.
+
+GEM permits easy expansion and incorporation of your own monitoring and reporting tools. SQL Technologies can
+customize GEM to your systems management environment and can create monitoring specific to your business applications.
+Contact us for more information

@@ -1,0 +1,530 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><meta name="Generator" content="Microsoft Word 97"><meta name="GENERATOR" content="Mozilla/4.7 [en] (Win95; I) [Netscape]"><meta name="Author" content="Ed Barlow">
+  <title>Webmonitor Features List</title>
+</head>
+<body background="sybase_back.gif">
+<br>
+<img src="product.gif" alt="NEW PRODUCT!" height="74" width="200" align="Left">
+<div align="Right">
+<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Webmonitor II Product
+Sheet</h1>
+</div>
+<hr>
+<h2>OVERVIEW</h2>
+This document briefly describes the features of
+<b>Webmonitor II</b>, a web
+ based way of monitoring and managing your sybase servers.
+All information
+ &nbsp; in this document is copyright &copy; 1997-2002 By SQL Technologies.
+All Rights
+ &nbsp; Reserved. For further information, please read our <a href="http://www.edbarlow.com/document/utilities_web/index.htm" target="top">On
+ &nbsp;&nbsp; Line&nbsp; Documentation</a>,&nbsp; or you may download the <a href="http://www.edbarlow.com/download/latest.tar.gz">demo version of Webmonitor</a>as a compressed (.gz) tar file - follow the installation
+instructions in the On Line Documentation to install.
+<p><b>Webmonitor II </b>is a web based utility toolkit for Sybase DBA's and Administrators. It is designed to provide Sybase DBAs and Developers many
+ new tools to manage their servers. <b>Webmonitor
+II</b>provides analysis
+ and new ways to view the server environment and helps
+perform database administration
+ tasks. The software includes a suprisingly
+large number of easily understood,
+ easily used utilities that will help
+you do your job.
+</p>
+<p><b>Webmonitor II </b>has a robust feature
+set geared specifically to Sybase.
+ We believe that you will find webmonitor
+useful and that for the price,
+ it cant be beat. We offer a money&nbsp; back guarantee
+and respectfully suggest
+ that you try our software before you purchase
+it.
+</p>
+<p>The product runs on both Windows NT and UNIX servers. A &nbsp; normal setup
+ is for an administrator to install webmonitor on their local NT&nbsp; workstation
+ and then to use it as an enterprise manager for all their UNIX&nbsp; and NT Sybase
+ servers.&nbsp; Administration and browsing is performed using your&nbsp; web browser.
+ &nbsp; Reports can be generated across your enterprise. For example,&nbsp; the Morning
+ Review facility allows you to see any problems on your servers&nbsp; when you
+ come in in the morning. This report includes filtered versions&nbsp; of your
+ errorlogs, confirmation of your backups, and the output of a server&nbsp; debugger
+ that looks for common sybase server problems.&nbsp; <b>Webmonitor II</b>allows&nbsp;
+ access to this kind of information from your workstation, through a bookmark,&nbsp;
+ without the requirement
+to ever telnet to your systems.</p>
+<p>The intranet connects your database environment, so it is a simple leap
+to
+ envision managing your sybase environment from a web browser.
+There are
+ several big benefits of tools that use web browser / web servers.Firstly,
+ all the action takes place on your servers (where your log files, backup
+ files, and processing is actually occurring) but the only normal interface
+ to your servers is through command line (shell prompts). Web servers are
+ designed to serve information that resides on your servers to remote clients.
+ Secondly, the web is transparent.  You can look at information that exists
+ in multiple servers trivially over the web (the url simply changes to point
+ to another machine).  Thirdly, there is no client software required.  You
+ install and manage your software in one spot, and anybody in your company
+ can use it.  This means that you can provide real time system state information
+ customized to your user community with very little effort.  Fourth, the
+ web is open, so you can (with some tweaking of your corporate firewall)
+ permit access to your environment to specific IP addresses from outside
+ your company.  This means you can check if your batches ran, and even correct
+ / restart them from your home pc, with virtually no security risk and with
+ no custom software required at home.  Finally, the web is easy to program
+ - and the use of the Webify.pm perl library (available for free on our web
+ site) allows easy customization of your Webmonitor to include your nightly
+ batches and any other specific monitoring that you are interested in.
+</p>
+<p><b>Webmonitor II</b>provides interfaces to quite a&nbsp; few of the freely
+ available utilities that have been developed and distributed by&nbsp; <b>SQL</b><b>Technologies</b>over
+ the past 6 years.&nbsp; It provides a nice,&nbsp; easy to use,&nbsp; interface to the <i>Extended
+ Stored Procedure Library</i>and&nbsp; to the <i>Sybase Perl Utilities</i><i>Toolkit</i>.&nbsp;
+ These tools were built&nbsp; to automate virtually every task that the author,
+ as an adminstrator, performed&nbsp; to manage, tune, and install a variety of
+ database servers at numerous companies&nbsp; where he worked.&nbsp; <b>Webmonitor
+ II </b>provides a user interface that allows&nbsp; administrators to perform
+ operations (like moving data from one server to&nbsp; another) that should be
+ easy but which are actually non trivial because&nbsp; no simple software is available
+ to assist the implementation of these tasks. &nbsp; Some of the facilities in
+ <b>Webmonitor II </b>(like the database design&nbsp; analysis tool and the database
+ comparison tool) are reasonably complex and&nbsp; offer tremendous value because
+ they are not available in any other sybase&nbsp; tools (none that i am aware
+ of - commercial or non commercial). Other features&nbsp; are more mundane (like
+ a color coded object explorer with <i>hyperlinks</i>between&nbsp; objects and
+ a simple front end to sybase's internal auditing), but offer&nbsp; no less value.
+ Actually - the hyperlink object reporter is very useful -&nbsp; it allows you
+ to navigate from a stored procedure to the tables and procedures&nbsp; it calls
+ without requiring complex navigation - so you can follow the flow
+of the
+ DDL.</p>
+<p>Use of the Webify perl library allows users to&nbsp; easily customize their
+ version of <b>Webmonitor</b><b>II</b>to incorporate&nbsp; existing command line
+ monitors and utilities into one user interface.&nbsp; For
+example,&nbsp; one client
+ designed and implemented a control panel for their custom data&nbsp; transfers
+ (it took about a day of custom work - total).</p>
+<p><b>Webmonitor</b><b>II</b><b></b>is inexpensive when compared to&nbsp; its
+ feature set and when compared to its competition.&nbsp; This is because I&nbsp; fundamentally
+ have a philosophy to share code for free.&nbsp; In fact, the components&nbsp; (the
+ <i>Webify</i>library, <i>perl</i>, <i>apache</i>, the <i>extended</i><i>stored</i><i>procedure</i><i>library</i>,&nbsp;
+ and the <i>sybase</i><i>utilities</i><i>toolkit</i>) are all freely available.&nbsp;
+ On the other hand,&nbsp; <b>Webmonitor II</b>&nbsp; has been designed as
+a commercial
+ &nbsp; package - and contains several man-years of development effort. &nbsp; Significant&nbsp;
+ effort has been placed into making it a helpful tool in your sybase environments.
+ &nbsp; We hope you will consider using Webmonitor II
+in your enterprise and that&nbsp;
+ you will spread the word if you are happy with
+this product.</p>
+<p>Download and try the shareware version of the&nbsp; product.&nbsp; This version
+ contains most of the features that the commercial&nbsp; version
+has, excluding
+ the very useful enterprise monitoring tool and the&nbsp; software&nbsp; that permits
+ you to look at backups and log files on other systems.&nbsp; If&nbsp; you are in the
+ New York Region, I recommend that you call (914) 632 0222 and have us come
+ in and give you a demonstration
+of the&nbsp; software.</p>
+<h2>
+<hr>PRODUCT FEATURES</h2>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>WEB
+/
+ INTRANET BASED</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Webmonitor II provides a web browser based front end to your Sybase
+and
+ Microsoft SQL Server database systems and (with simple customization)
+to
+ your batch applications. This means that Webmonitor users can be used
+by
+ clients, support staff, developers, or end users with no client set
+up.
+ Monitoring, performance reporting, and system tuning information is
+delivered
+ to users using their existing desktop software.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>EXTENSIVE
+LOGIN
+ AND FEATURE SECURITY</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>SYSTEMS
+/
+ SERVER MONITORING</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Webmonitor provides an enterprise level stoplight type view of
+ your
+servers.</td>
+    </tr>
+    <tr>
+      <td><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>MORNING
+REVIEW
+ REPORTING</b></td>
+      <td><br>
+      </td>
+    </tr>
+    <tr>
+      <td><br>
+      </td>
+      <td><br>
+      </td>
+      <td>Error logs are scanned, Dbcc output checked, Servers are analyzed
+ for
+common problems. Output is viewable throught the browser </td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>DATABASE
+COMPARISON</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Webmonitor contains a robust facility to compare the DDL and data
+ in any two databases. This is very useful to compare development systems
+ to your QA and Production environments.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>SYSTEM
+DIAGNOSIS</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Webmonitor includes a facility to debug your servers. There are
+ many things that can get internally inconsistent within your servers and
+ this facility will find most of them - ranging from simple setup issues
+ to more complicated issues that might relate to system security and miss
+ configuration.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>INTERFACE
+TO
+ THE SYBASE AUDITING SYSTEM</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>The sybase auditing system is hard to use. Webmonitor simplifies
+ auditing setup and reporting.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>DATABASE
+COPY</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Data and DDL copying between databases is a time consuming task.
+ Webmonitor
+solves this for you.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>INTEGRATED
+CUSTOMIZED
+  REPORTING / APPLICATION MANAGEMENT</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>You can set up predefined reports for end users to allow access
+  to
+application status data.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>SIMPLE
+SERVER
+ OVERVIEW</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>End users can see basic server information through either an English
+(show
+  users) or technical (sp__who) interface. This allows business users
+to
+ identify  problems before escalating them to Level 2 tech support.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>DATA
+SERVER
+  REPORTING</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Many reports that are not available through any other tools are
+  included
+in the system. These include simple yet useful cross database
+ reports  on
+things like users (login access to databases database by group).
+ Cross
+server  reports will be available in the next release.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>EXTENSIVE
+DDL
+ SCHEMA GENERATION AND REPORTING</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Color coded with hyperlinks between your objects</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>PERFORMANCE
+OPTIMIZATION</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Several performance tuning tools are available with <b>webmonitor</b>including
+ a full database showplan analyzer that color codes showplan output
+and rates
+ your stored procedure based.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>DEPENDENCY
+ANALYSIS</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Find cross database relationships between objects using either a simple search method or using a robust object relationship analyzer.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>FILTERED ERROR LOG ANALYSIS</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>BACKUP AND RECOVERY </b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Webmonitor provides an integrated enterprise wide view of your backups and  dbcc's.  It also provides a nice server report that contains all the information you need in case of a crash.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>SEPARATE
+GUI
+ AND APPLICATION ARCHITECTURE</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Webmonitoris designed with separate User Interface and Functional
+components.  Command line programs are available for all features. Customer designed programs (nightly data feeds, application specific monitoring, and user defined backup scripts) can be integrated into the User Interface with minimal
+ effort.</td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td colspan="2"><img src="bullet.gif" height="12" width="12"><b>OPEN ARCHITECTURE</b></td>
+    </tr>
+    <tr>
+      <td width="30"><br>
+      </td>
+      <td width="40"><br>
+      </td>
+      <td>Webmonitor is provided with source code and with documentation
+on
+ how
+to extend the application. It is, in fact, designed to be easily
+extensible
+so
+ users can monitor and operate programs in a manner specific
+to their
+application
+ and system environment. Customization can be performed
+by the
+client or
+ by SQL Technologies.</td>
+    </tr>
+  </tbody>
+</table>
+<h2>
+<hr>COMPETITIVE ADVANTAGES OF WEBMONITOR</h2>
+Compared with competing products, <b>Webmonitor</b>offers the following:
+ &nbsp; &nbsp;
+<ol>
+  <li>Price/Performance</li>
+  <li>Architecture: <b>Webmonitor</b>has an open simple centralized architecture
+that
+ greatly simplifies software administration .</li>
+  <li>Command Line Interface: All commands are also available from the command
+line
+ with extensive on line help.</li>
+  <li>Sybase Features: Most enterprise monitors are general system or database
+monitors&nbsp;
+ with some Sybase specific features. <b>Webmonitor</b>provides
+significant
+Sybase
+ specific features, based on popular freely available
+proprietary&nbsp; Sybase
+ software.</li>
+  <li>Simple User Interface: <b>Webmonitor's</b>user interface is significantly
+simpler
+ &nbsp;&nbsp; &nbsp; than the competition. Web scripts are easy to use and can be run
+from
+ any &nbsp;&nbsp; &nbsp; workstation.</li>
+  <li>Source code - easy to read and understand source code is available
+ with
+the package.</li>
+</ol>
+<h2>
+<hr></h2>
+<h2>SCREEN SHOTS (from build 87)</h2>
+<ul>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-1.jpg">LOGIN SCREEN</a>- this
+is what users see when they connect to the system</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-2.jpg">CONFIGURATION ANALYZER</a>- this can debug
+and analyze your configuration</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-3.jpg">AUDITING</a>- an interface to sybase auditing</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-4.jpg">BACKUP</a>- The main backup screen shows
+backup health for all servers and allows you to drill down</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-6.jpg">BACKUP</a>- Drilldown To Server - Allows
+you to perform operations on a server and see details</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-7.jpg">DATABASE COPY</a>- Allows you to copy ddl
+and data between servers/databases</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-8.jpg">COMPARE</a>- main screen where you select
+servers to compare</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-9.jpg">COMPARE</a>- comparison options</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-10.jpg">DEPENDS</a>- full featured tool that finds ALL dependencies between objects</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-11.jpg">MONITOR</a>- system monitor overview giving
+stop light view of your servers</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-12.jpg">MONITOR</a>- morning review - reports on errors collected every morning</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-13.jpg">OBJECTS</a>- an interface to view ddl using a nice hypertext color - coded viewer</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-14.jpg">OBJECTS</a>- view object</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-15.jpg">OVERVIEW</a>- simple screen perfect for tier 1 support</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-16.jpg">REPORTS</a>- System level reports</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-17.jpg">REPORTS</a>- Database level reports</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-18.jpg">REPORTS</a>- Other reports</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-19.jpg">QUERIES</a>- Ad Hoc query generator</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-20.jpg">SHOWPLAN</a>- Full database showplan and
+colorized showplan analysis</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-21.jpg">FULL DB ANALYSIS</a>- Full database showplan in action</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-22.jpg">LOGS</a>- a viewer for errorlogs</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-23.jpg">CONFIGURE</a>- the webmonitor configuration
+screen</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-24.jpg">CONFIGURE SERVER</a>- a drilldown to show
+you how to add servers</li>
+  <li><a href="http:/www.edbarlow.com/webmonitor/WM-25.jpg">HELP</a>- our built in help sysem is built right from the code - this means you can (if you are a hacker) go in and see well commented perl about what is happening</li>
+</ul>
+<h2>
+<hr>PRICING</h2>
+The utilities that compose <b>Webmonitor</b>and the extended Sybase stored
+procedure
+ library are currently available for free.&nbsp; The webmonitor
+software is available
+ with only the custom ad hoc reporting and multi server
+monitoring software
+ 'turned off'.&nbsp; You can download and evaluate the
+software.&nbsp; If you decide
+ to purchase a copy, contact SQL Technologies
+and we will invoice you as
+ follows:<br>
+<p><tt>On site Installation TBD (cheap in NY, expensive
+elsewhere)
+<br>
+399$ US per server (includes telephone installation
+support)
+<br>
+199$ US per server for 1 year Annual Support
+<br>
+20% Discount if more than 10 servers
+<br>
+Site license pricing available by request
+<br>
+Money Back Guarantee if you are not satisfied with
+our product</tt></p>
+<p>We are happy to discuss our feature set and to provide any support you
+need
+to
+ get our software to
+be a useful part of your environment.  </p>
+<p>To contact
+SQL Technologies :
+</p>
+<address>barlowedward@hotmail.com<br>
+Phone 914 632 0222
+<br>
+151 Centre Ave 6C
+<br>
+New Rochelle
+<br>
+NY 10805
+</address>
+<br>
+</body>
+</html>

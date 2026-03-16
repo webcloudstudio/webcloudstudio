@@ -1,0 +1,651 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+<!-- Copyright (c) 2005-2011 By SQL Technologies - All Rights Reserved -->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM GEM FAQ and Change Log</title>
+  <link rel="stylesheet" type="text/css" href="../styles/mystyle.css">
+  <meta name="author" content="Edward Barlow">
+	<meta name="Description" content="The GEM FAQ answers questions about GEM, the generic enterprise manager.">
+	<meta name="keywords" content="sybase, sql server, FAQ, questions, tools, audit, configuration reporting, database, html, monitoring, administrator, free, freeware, GEM, server administration, auditing, perl">
+</head>
+<body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GEM FAQ and Change Log</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
+ <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
+<A NAME=link2></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>CHANGE LOG </H1>
+<H3> List of changes</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'><P>
+<h3>DESCRIPTION</h3>
+<P>
+ This file lists known bugs and contains the latest release notes, create dynamically by our source code control system.<P>
+<h3>MAJOR OUTSTANDING ISSUES</h3>
+<P>
+ None known<P>
+<h3>MINOR OUTSTANDING ISSUES</h3>
+<P>
+<pre>
+ * doesn't check alarm db prerequesits (like truncate log on checkpoint...)
+ * troubleshoot is still a bit sloppy
+ * Installer does put stuff in your web server cgi-bin
+ * historical server reporter packaged separately
+ * monitor lacks drill down and integrated windows perfmon
+ * oracle
+ * unix logs need be set up manually.  recommend central syslogd
+</pre>
+<P>
+<h3>Fixed Bugs</h3>
+<P>
+ Build 723 (Oct 25 2011) gem.pl Alpha Version<P>
+ Build 722 (Oct 25 2011) Gem.pl Alpha - Completed<P>
+ Build 721 (Oct 17 2011) More ISOLATION TO WIN321<P>
+ Build 720 (Oct 17 2011) cleanup of <P>
+ Build 718 (Oct  7 2011) Move To Separate Dev Environment<P>
+ Build 717 (Jul 12 2011)<P>
+ Build 716 (Jul 12 2011) dropped Blackout<P>
+ Build 715 (Jul  5 2011) Final Update Of New Test Codeline<P>
+ Build 714 (Jun 13 2010) CLEANUP RELEASE - DEPRICATING OLD FILES<P>
+ Build 713 (May 23 2010) Major Upgrade<P>
+ Build 712 (Jun  8 2009) install test<P>
+ Build 711 (May 11 2009) prior to xml removal<P>
+ Build 710 (Nov  6 2008) Pre Final Wiszard Modifications - Configure.pl Done! Finally!<P>
+ Build 709 (Oct 24 2008) Pass on the c onfigure.pl<P>
+ Build 708 (Aug 22 2008) win32 eventlog.dat<P>
+ Build 707 (Jul 18 2008) Rewrite of configgure.pl<P>
+ Build 705 (Apr  9 2008)<P>
+ Build 705 (Apr  9 2008)<P>
+ Build 704 (Apr  9 2008)<P>
+ Build 703 (Apr  9 2008) ROllup Release. Lots of doc changes. Oteher stuff too.<P>
+ Build 702 (Mar 18 2008) documentation on batch jbos<P>
+ Build 701 (Mar 14 2008) another release<P>
+ Build 700 (Feb  7 2008) backup scripts updated<P>
+ Build 699 (Nov 14 2007) doc updates for procs & backups srcripts<P>
+ Build 698 (Nov 12 2007) Another RRelease<P>
+ Build 697 (Nov 11 2007) LATEST & GREATEST BETA<P>
+ Build 696 (Nov  7 2007) user interface changes - freegem ssh/rsh/ftp toggles etc<P>
+ Build 695 (Nov  1 2007) FONT FIX FOR LARGER DEISPLAYS<P>
+ Build 694 (Oct 23 2007)<P>
+ Build 693 (Oct 23 2007) FULL VERSION TR<P>
+ Build 692 (Oct  1 2007) Lots of minor things - too numerous to remember<P>
+ Build 690 (Jun 20 2007) Lots of misc cleanup - i need to keep better notes<P>
+ Build 689 (May 29 2007) Release Build<P>
+ Build 688 (May 15 2007) Variety of upgrades focused on data collection and logging<P>
+ Build 687 (Mar 30 2007) New Upload release<P>
+ Build 686 (Mar 17 2007) Rollup Release<P>
+ Build 685 (Dec 22 2006) might as well release something<P>
+ Build 684 (Dec 14 2006) ROLLUP RELEASE - SEE LATEST_NEWS<P>
+ Build 683 (Dec  5 2006) Major Release - See To Do List<P>
+ Build 682 (Nov  1 2006) November Port For Linux - Try #1<P>
+ Build 681 (Sep 25 2006) rollup release<P>
+ Build 680 (Sep 12 2006) Sqlsvr sp__dbspace update, documentation<P>
+ Build 679 (Sep  8 2006) many. sql audits werent working. multiple minor fixes.<P>
+ Build 678 (Aug 25 2006) Rollup Release - Minor Tweaks & Doc Fixes<P>
+ Build 677 (Aug  3 2006) Final Pre Techwave Build (???)<P>
+ Build 676 (Aug  1 2006) MLpReports.pm was calling MlpAlarms too soon...<P>
+ Build 675 (Aug  1 2006) Removed extraneous DBG DBG prints from old diagnostic messages<P>
+ Build 674 (Aug  1 2006) osql/isql check on configure.pl startup now reflects db picklist appropriately<P>
+ Build 673 (Aug  1 2006) New Reports & Report Manager, New screen for reports on configure.pl<P>
+ Build 672 (Jul 24 2006) Continuing console cleanup<P>
+ Build 671 (Jul 22 2006) Significant Console Cleanup for consistency<P>
+ Build 670 (Jul 13 2006) SQL Server Only Build - Removed dies for $SYBASE, Tightened Prints & Error Messages<P>
+ Build 669 (Jul 13 2006) Added Server Type Checkboxes to Configure.pl & Console<P>
+ Build 668 (Jul  6 2006) Failed the last build<P>
+ Build 667 (Jul  6 2006) Threshold Report/Frag Report on Console werent displaying right<P>
+ Build 666 (Jun 13 2006) RELEASE VERSION<P>
+ Build 665 (Jun 13 2006) Prep for Release Beta2<P>
+ Build 664 (Jun  9 2006) minor revisions - working on hourglass consistency<P>
+ Build 663 (Jun  8 2006) Moved configure.pl to one RegisterServer() and made console header changes for clarity<P>
+ Build 662 (Jun  7 2006) working on autodetection...<P>
+ Build 661 (Jun  6 2006) Full build - apparently some of the libs were not passed correctly to subshells<P>
+ Build 660 (Jun  6 2006) Updated Rep Monitoring, Updated Batch Script/Console Documentation<P>
+ Build 659 (Jun  1 2006) Release version - fixed up some gotchas in unix-autodetect (was leaving comm path as SSH even if it could only get to the system via FTP)<P>
+ Build 658 (May 31 2006) Rotate Large Files, Do_RSH has better quoting, port_monitor.pl is signlethreaded by default<P>
+ Build 657 (May 30 2006) more none...<P>
+ Build 656 (May 30 2006) none<P>
+ Build 655 (May 30 2006) no notes<P>
+ Build 654 (May 23 2006) errr... aborted the last one - same - minor perl -w cleanup, fixed win32 configure.pl freezeups<P>
+ Build 653 (May 23 2006) perl -w testing. win32 configure.pl freezeups fixed<P>
+ Build 652 (May 18 2006) mod to autogen purge_files cfg files, sample cfg file redocumented<P>
+ Build 651 (May 17 2006) Final Alarms Screen Work, Updated Replication Monitor to better handle multiple rep servers<P>
+ Build 650 (May 16 2006) Some bug fixes in initial surveys to deal with multiple external SYBASE directories<P>
+ Build 649 (May 12 2006) added $SYBASE predefineds to surveys, more maint plan stuff<P>
+ Build 648 (May 11 2006) Plan Wizard Logic Added<P>
+ Build 647 (May  5 2006) Major Release<P>
+ Build 646 (May  4 2006) if SSH fails in configure.pl wizard - it trys FTP mode<P>
+ Build 645 (May  3 2006) Massive checks that METHOD is appropriately used in myFTP<P>
+ Build 644 (May  3 2006) CommonHeader.pm syntax error, removed junk docs<P>
+ Build 643 (May  3 2006) added dont_skip button<P>
+ Build 642 (May  3 2006) Auto Sybase Env in CommonHeader.pm, Version Report Updated, Handles Multiple Tempdb's better, Custom Titles in cgi-script, New cgi-script build process<P>
+ Build 641 (May  1 2006) bunch of minor stuff - not sure what<P>
+ Build 640 (Apr 27 2006) backup updates, bug fixes, puttering<P>
+ Build 639 (Apr 19 2006) updated backup docs, reorg moved before updstats, troubleshoot.pl halfway ported to gui mode (its broken now tho)<P>
+ Build 638 (Apr 17 2006) Added InstallState File To Clean Errors [D[D[D[D[D[D[D[D[D<P>
+ Build 637 (Apr 17 2006) Update docs (pricing). Depricate --OVERRIDE. Add Facilities for Install State<P>
+ Build 636 (Apr 13 2006) Updated configure.pl to make a better console plus minor stuff<P>
+ Build 635 (Apr 12 2006) Added DUMP_FILES_PER_SUBDIR option to backup.pl/dump-database.pl/load_datbase.pl<P>
+ Build 634 (Apr 10 2006) MDA procs update / pod update for these procs<P>
+ Build 633 (Apr  7 2006) 2 syntax errors in backup.pl<P>
+ Build 632 (Apr  7 2006) Build and Copy Console added to configure.pl<P>
+ Build 631 (Apr  7 2006) Print Handlers added to myFTP and do_rsh<P>
+ Build 630 (Apr  7 2006) Some Win32 Stuff Ended Up Running in Unix Only Build<P>
+ Build 629 (Apr  6 2006) Another Test Release - AM/PM fix within load_all_tranlogs.pl (was giving spurious error messages)<P>
+ Build 628 (Apr  6 2006) Test Version<P>
+ Build 627 (Apr  4 2006) bug fix to ssh code<P>
+ Build 626 (Apr  4 2006) SSH features added<P>
+ Build 625 (Mar 20 2006) renamed nt_batch_scripts to win32_batch_scripts<P>
+ Build 624 (Mar 17 2006) Console Update - Broke it up into clearer batch jobs<P>
+ Build 623 (Feb 21 2006) added perlargs env variable. Modified ping for linux versions<P>
+ Build 622 (Feb 17 2006) reorg_rebuild.pl optdiag_analyze.pl mssql_attachscript.pl minor mods<P>
+ Build 621 (Feb 14 2006)<P>
+ Build 620 (Feb 14 2006) oopsie rebuilding configure.pl<P>
+ Build 619 (Feb 14 2006) Updated thresholds_overrides.dat<P>
+ Build 618 (Feb  8 2006) Backup Script Documentation, ping_systems.pl only alarms if reping fails, tracert.pl minor formatting<P>
+ Build 617 (Feb  2 2006) 2 more updates to monitor.pl, df -k changed to df -kl<P>
+ Build 616 (Feb  2 2006) update to monitor.pl, update blackout reports<P>
+ Build 615 (Jan 23 2006) none<P>
+ Build 614 (Jan 23 2006) none<P>
+ Build 613 (Jan 20 2006) console changes; threshold manager; port monitor generator; stored proc changes<P>
+ Build 612 (Jan 13 2006) pass on wizard for installs - removing messages. nothing big<P>
+ Build 611 (Jan  9 2006) Test For Full Release. COnsole Changes. Audit Changes.<P>
+ Build 610 (Dec 21 2005) yes its build 610<P>
+ Build 609 (Dec 13 2005) full installer unit test<P>
+ Build 608 (Dec 10 2005) Mostly Done - All But The Plan Manager Reverse Engineering<P>
+ Build 607 (Dec  8 2005) again<P>
+ Build 606 (Dec  8 2005) oops - needed a tarbal<P>
+ Build 605 (Dec  8 2005) more bug fixes<P>
+ Build 604 (Dec  6 2005) Almost Done...<P>
+ Build 603 (Dec  5 2005) More minor configure.pl updates<P>
+ Build 602 (Nov 30 2005) Updates to the configuration utility<P>
+ Build 601 (Nov 22 2005) disabled buttons, new browser buttons for the configuration utility<P>
+ Build 600 (Nov 18 2005) updated runcommand to a window. broke out post-configure tasks in configure.lp<P>
+ Build 599 (Nov 10 2005) troubleshoot.pl rewrite<P>
+ Build 598 (Nov  4 2005) A few new reports and fixed logshipping full db resync<P>
+ Build 597 (Nov  3 2005) updated docs. worked on configure.pl.<P>
+ Build 596 (Nov  2 2005) Add Server Wizard<P>
+ Build 595 (Oct 28 2005) rename mlpalarms to gemalarms. fixed 2 batch jobs. added 2 new batch jobs<P>
+ Build 594 (Oct 27 2005) forgot 2 batch jobs, sql svr stored proc mods<P>
+ Build 593 (Oct 19 2005) upgrade.pl working and tested<P>
+ Build 592 (Oct 19 2005) Proc Lib Mods for Win32, 3 New Console Reports, Sys15 finished?<P>
+ Build 591 (Oct 14 2005) internals in configure.pl for backup_plan simplification<P>
+ Build 590 (Oct 13 2005) Final Testing Completed on System 15 - procs and alarm installer (probably need to do a full test on it but thats for later)<P>
+ Build 589 (Oct 12 2005) Phew... more and more documentation! pass 1 of the doc is done<P>
+ Build 588 (Oct  7 2005) New Standard GEM Reports, very minor look and feel tweaks<P>
+ Build 587 (Oct  5 2005) Documentation Upgrade<P>
+ Build 586 (Sep 30 2005) minor pg1 doc changes for configure.pl<P>
+ Build 585 (Sep 30 2005) PcCleanup made hourly; Post Install Tasks Doc Mod; Text change for Scheduled Task Manager<P>
+ Build 584 (Sep 29 2005) Updated Unix Log FIle Monitor<P>
+ Build 583 (Sep 23 2005) Documentation Bundle, Rep Server Screens Redone, Mostly a repackaging for shipping to the web site<P>
+ Build 582 (Sep 21 2005) system 15 modifications for Extended Stored Procedure Library<P>
+ Build 581 (Sep 19 2005) minor chg to a few reports, replication monitoring<P>
+ Build 580 (Sep  9 2005) FINAL VERSION FOR HOME TESTING<P>
+ Build 579 (Sep  8 2005) Test Version For Full Release! Console changes, Server Registration. Docs.<P>
+ Build 578 (Sep  2 2005) Pre Final - Redoing Server Entry Screens, Sybase Replication<P>
+ Build 577 (Aug 27 2005) pre vacation. console changes. working on data entry<P>
+ Build 576 (Aug 22 2005) Updated Console Reports (major upgrade). Many minor edits.<P>
+ Build 575 (Aug  1 2005) August Distribution<P>
+ Build 574 (Aug  1 2005) Final Backup Tab Changes, Minor weekend tweaks<P>
+ Build 573 (Jul 31 2005) UPgrade Documentation - console changes - finishing backup tab on config Jcombobox<P>
+ Build 572 (Jun 14 2005) Update of Console Layout, Directory Structure Changes, Minor Fixes<P>
+ Build 571 (May 29 2005) Version for Release - Full Beta 1<P>
+ Build 570 (May 26 2005) crontab creation mods for clarity<P>
+ Build 569 (May 21 2005) Test unix and windows install - modified a few cosmetics<P>
+ Build 568 (May 19 2005) Retest Unix Installer; Updated Documentation; Javascript Console Menus<P>
+ Build 553<pre>
+ * update the files tab to be clearer - save the files information into xml in better format
+ * Setup.pl - needs a check on Win32 perl if you are on samba - but i dont do it
+ * fix the fonts so stuff is readable - make them user defined
+ * Add SQL Servers to Auto Documentation Schema
+ * how wierd... wrong sa password works fine for odbc sql server connections.  Guess windows networking
+   is used by default.  hmmm....
+ * use the internal connection for the stored procedure library installer instead of osql.  Fact is... trusted
+   connections work.
+   move configure.pl for procs into a library
+   add $* to .ksh interactive scripts
+   Separate Validation and Installation Tabs
+      - validation should have step by step validation
+   Test Each button press in configure.pl
+   Validate Alarm Installation Unimplemented
+</pre>
+<P>
+ Build 552<pre>
+ * whole list of configure.pl cosmetic fixes.
+ * win32 version freezes when you expand the friggin databases (click on plus)  need my debugger
+</pre>
+<P>
+ Build 543<pre>
+ * blocked process monitor was failing to detect log suspend
+ * better mimi install
+ * Worked on Win32 Batch scripts
+</pre>
+<P>
+ Build 541<pre>
+ * setup process will build empty directories - apparently winzip does not create them
+ * worked on documentation
+ * integrated RosettaStone.pm
+ * refresh explorer colors to reflect connection status
+ * modified maint plans plugin - expanded navigator name and added rtclicks
+ * modified the monitoring plugin to remove bug that occurred when you changed pages
+</pre>
+<P>
+ Build 540 This release is the "porting release".  I have attempted to run the *same* code line under multiple windows and unix boxes using multiple versions of perl.  There were a several nightmares with Tk libraries causing freeze ups - and what i learned is that there is tight coupling between the versioning of the Tk add on libraries.  This means that you cant just add perl modules like i had been doing and expect it to work every time every where.  The solution is to require a reasonably recent version of Tk.pm to be installed so i dont need to provide the missing functionality. To summarize, i am removing the dependencies on perl and adding a dependency on your having a somewhat recent version of Tk.<P>
+ I also had to remove some features that were screwing things up.  Specifically, i removed the Bitmap images that were on the top left of the page.  They were nice and allowed future features to be put in as image clicks, but unneeded since the buttons were not tied to anything useful.<P>
+<pre>
+ * worked on right clicks some more
+</pre>
+<P>
+ Build 539<pre>
+ * turn off stdout prints - save instead to log file (it freees screen)
+ * test the servers on the validation page of configure.pl
+ * search and remove print statements - replace with _statusmsg()
+ * prefetch DBI DSNs
+ * remove choice of DSN for servers -&gt; auto choose and require odbc
+ * remove std output prints unless ur talking debug or god mode
+</pre>
+<P>
+ Build 537<pre>
+ * rebuild of installer and testing
+ * sp__stat2 prints error in procs/configure.pl
+ * menuitems seem to function ok
+ * added mda table viewing for ASE
+ * need hourglass for busy
+ * added Win32 and unix html viewing
+ * helpdbdev - was incorrectly formatting
+</pre>
+<P>
+ Build 536<pre>
+ * sp__lock page number not fitting in char(8) field
+   Msg 265, Level 16, State 1
+   Server 'IMAGSYB1', Procedure 'sp__lock', Line 82
+   Insufficient result space for explicit conversion of INT value '106949706' to a CHAR field.
+ * need a run_cmd module that works interactively instead of freezing TK
+ * finished download capability for plugins
+ * colorize the servers in explorer window
+ * Added Copyright Notice
+ * minor mod to sqlsvr sp__whodo
+ * added error handling to rtclick
+</pre>
+<P>
+ Build 535<pre>
+ * check adjustment of Mlpalarm.pm based on config falues
+ * rebuild configure.pl
+ * Cant install sql server stuff from unix (of course) - annotate
+ * make a survey/discover function that works from setup better and shows result
+ * rearchitected surveys
+ * use connectionmanager in configure.pl
+ * added RunCommand module
+ * added sp__helpdb for sql server
+ * added event model
+ * modified backup scripts for -J options on a few other things
+ * configure.pl for procedures seems to print use and dump statements
+</pre>
+<P>
+ Build 534<pre>
+ * Added File Tab to configure.pl
+</pre>
+<P>
+ Build 532<pre>
+ * Finish Backups Tab
+ * reinvented cron jobs yet again
+ * modified some code so dynamic repathing validation works better
+ * add config screens cross tools so configure.pl is in gem.pl etc...
+ * if NT the use ODBC, if Unix then Use Sybase... its that simple
+ * Numerous fixes to a variety of things.
+ * Integration of configure.pl and gem.pl
+ * Color Coded Tree
+ * Worked on Monitoring and Backups Plugin
+</pre>
+<P>
+ Build 531<pre>
+ * build nt_local_scripts and unix_local_scripts correctly
+ * fix translator for read_configfile to handle things correctly
+ * dual perl includes - so it works both nt and unix
+ * Finalize the configure.pl
+ * dual environment stuff for shared Unix/Nt  on samba drives
+</pre>
+<P>
+ Build 530<pre>
+ * Mondified monitor_appslog to use File::Tail instead of File::Multitail
+</pre>
+<P>
+ Build 529 (Sep  7 2005)<pre>
+ * modified version string in gem.pl - was showing wrong.
+ * several integration changes
+ * removed all Win32 calls from bin/gem.pl - they were getting called even
+   though they were in an eval block
+ * Changed error message when creating crontab with bad file structure.
+ * Added dist subdirectory to the conf subdirectory for raw files (saved)
+ * documenter - changed default output destination to data/DAILY_REPORTS
+ * change lock file location to data/lockfiles in CommonFunc.pm
+</pre>
+<P>
+ Build 528 (Sep  7 2005)<P>
+<pre>
+ * Final Alpha Cleanup
+ * MlpAlarms.pm has hard coded server in it
+ * Significant FInal Cleanup
+ * Add Mlpalarms to screen
+ * Test Brand New Install
+ * Use CONFIG{SYBASE} instead of $SYBASE
+</pre>
+<P>
+ Build 526:  Tue Jun 12 10:38:52 EDT 2001<pre>
+    remote symlinks for directories now supported better.  Logdumps were not
+      being purged when the directory was a symlink because the ftp fspec
+      would return the symlink info not the info on the directory contents.
+</pre>
+ Build 526: Mon Jun  4 10:42:59 EDT 2001<pre>
+    changed #BEIGE to BEIGE so odd colors not showing up in reports
+    modifed config_report.pl so that image data from syscharsets not dumped
+    added bin/newsuid.pl program to change suids on a server
+    removed underscores in titles on documenter reports
+</pre>
+ Build 306:  Fri May 25 14:49:46 EDT 2001<pre>
+    modified server documenter look and feel
+    modified config report to add some new tables to those being selected
+</pre>
+ Build 305:  Tue Mar 27 16:09:26 EST 2001<pre>
+    modified backup procedures to enhance hot backups via ftp
+    modified several server documenter reports (minor)
+</pre>
+ Build 304:  Wed Feb 21 16:13:48 EST 2001<pre>
+    modified procedures.pl - was not taking DDL reports database as argument
+</pre>
+ Build 303:  Tue Feb 20 12:16:00 EST 2001<pre>
+    modified helpdb - for some reason status2&0x01=0x01 does not work where
+       status2&1=1 does....  this inaccuratly showed some db options
+</pre>
+ Build 302:  Tue Feb 13 13:42:49 EST 2001<pre>
+    Modified troubleshoot.pl to change order of includes and to remove
+       TERM::ANSIColor
+</pre>
+ Build 301:  Thu Feb  8 12:35:21 EST 2001<pre>
+    dbcc checker - reverse order of days shown
+    core dump checker - summary report at end
+    modified width of non formated sp__diskdevice - somehow it got&gt;80 characters
+</pre>
+ Build 293<pre>
+    fixed format of dbcc checker
+    added check for login without legit def db
+</pre>
+ Build 292<pre>
+    added dbcc checker
+</pre>
+ Build 291 Mon Jan 29 14:24:02 EST 2001<pre>
+    Much cleanup on webmonitor screens
+    added test for logins without default database
+</pre>
+ Build 289 Tue Jan 23 10:16:46 EST 2001<pre>
+    renamed rsh_run_cmd.pl to run_cmd_on_all_hosts.pl
+    modified messages for configuration problems with backup scripts
+    added -o option for dbcc - output directory for raw output
+    timestamped remote agent messages (remote_agent.pl)
+    modified format on webmonitor procedures.pl screen
+    modified version identification in webmonitor
+    fixed webmonitor backup screen
+    fixed debugging comment for greyed out buttons in webmonitor
+    fixed problem ftping on nt servers (pwd() function in myFTP.pm)
+    modified webmonitor screen selection for default users
+    modified monitor screen comments when remote_agent is not up
+    modified badindex stored procedure - changed defn of bad index to 90 bytes
+    put $^X stmts into document_all.pl - there was a problem on pc's without it
+    modified startup comment in dbcompare.pl utilitiy
+    modified check_sybase_for_blocks for cleanliness of output
+    modified format on configure screen
+    added in sh.exe - a nt /bin/sh (had been omitted accidentally from release)
+</pre>
+<P>
+ Sat Jan 20 15:53:28 EST 2001<pre>
+    modified server documenter for pc environment - put $^X so interpreter
+      can deal etc...
+    myFTP.pm modified for pwd() for local host (needed on pc's).
+</pre>
+<P>
+ Fri Jan 19 10:31:12 EST 2001<pre>
+    broke sym link checker into separate report from
+    added mail report to server_documenter
+    added crontab report to server_documenter
+    changed rdist/rsh_run_cmd.pl - had backwards logic for RSH_OK test
+    modified space error report to make prettier
+</pre>
+<P>
+ Thu Jan 18 11:38:38 EST 2001<pre>
+    removed rule in debug_one_server.pl regarding select into being on if
+           data and log on same device
+    fixed bad link on main html page
+    added copy_syslogins.pl
+    modified core_dump_checker.pl to format page top according to doc standards
+          and to report date in a &lt;PRE&gt; block.  Also report bad symlinks.
+</pre>
+<P>
+ Wed Nov 28 17:38:31 EST 2001<pre>
+    Changed sybfunc for table defn error
+</pre>
+<P>
+ Tue Feb  5 14:51:17 EST 2002<pre>
+    Worked On dependency analyzer
+</pre>
+<P>
+ Thu Feb 14 11:56:07 EST 2002<pre>
+    Added First 100 Rows to extracter
+</pre>
+<P>
+ Thu Mar  7 14:24:33 EST 2002<pre>
+    Changed sp__helpcolumn so that decimals printed ok
+</pre>
+<P>
+ Wed Mar 13 20:45:57 EST 2002<pre>
+ Multitude of install simplifications for the bad values in the config
+      file situations.
+    changed rev_db to output additional space between end and go.
+ changed sp_addalias to remove aliases in model
+ removed update stats bad message from
+</pre>
+<P>
+ Wed Apr 16 11:50:45 EDT 2003<pre>
+    added sybase vbl as parameter on documenter jobs
+    moved custom .dat to main directory
+    custom reports dying dont abort server documenter now
+    modified sp__block for very large blocked times (in the days)
+    documentation changes
+</pre>
+<P>
+ Fri May 16 10:04:14 EDT 2003<pre>
+    added monitoring software monitord.pl/monitor.pl
+</pre>
+<P>
+ Thu May 29 08:49:45 EDT 2003<pre>
+ removed sybsystemdb from the list of 10011 error db's (data&log on same device)
+</pre>
+<P>
+ Mon Jun 23 08:40:03 EDT 2003<pre>
+    modified nightly/weekly/hourly batches to require sybase environment
+    variable to be set.
+</pre>
+
+<A NAME=link3></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>FREQUENTLY ASKED QUESTIONS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'><P>
+<h3>DESCRIPTION</h3>
+<P>
+ q) <b>i just want to install your stored procedure library... what should i do.</b><P>
+ a) just go to the ADMIN_SCRIPTS/procs subdirectory and run <your perl>/configure.pl.<pre>
+   The main issue you will in counter with this perl script is your perl setup and
+   your perl library path.  If you get missing module messages it is likely that this
+   is the problem.  The script uses the GEM library DBIFunc.pm, which is located in the
+   lib directory.  The configure.pl script should find it automatically, if it does not,
+   please contact SQL Technologies.  configure.pl will prompt you for Server, Login (an
+   sa login) and Password - it will then autodetect if you are on Microsoft SQL Server
+   or Sybase and install the procedures as appropriate.
+</pre>
+<P>
+ q) <b>i cant run "perl configure.pl" or "perl gem.pl" to start the application.</b><P>
+ a) Well... thats pretty general... i would love some more information.  The first thing<pre>
+   to do is run "perl troubleshoot.pl".
+</pre>
+<P>
+ q) <b>i want my data subdirectory to exist somewhere besides data...</b><P>
+ a) use symbolic links.  There are currently dependencies on the path to this directory<pre>
+   that are not completely flexible - hence the lack of a GemRpt_DATA_DIR configuration
+   variable in configure.cfg.  This may change in future versions.
+</pre>
+<P>
+ q) <b>i wish to run from unix</b><P>
+ a) this is an x windows application from windows - you need to set your display and have an x emulator like exceed running on your pc.<P>
+<pre>
+   export DISPLAY=10.5.103.51:0.0
+   /usr/local/bin/perl-5.8.1 gem.pl
+</pre>
+<P>
+ q) <b>the screen freezes when running some commands</b><P>
+ a) check the background screen, the screen you called the GEM or configure.pl programs from, for output.<pre>
+   the lack of fork() functionality on Windows implies that sometimes there are issues like this.  It is
+   being worked.  The solution to this is often to just hit return a few times in the background screen.
+</pre>
+<P>
+ q) <b>i get the following message at startup</b><pre>
+  junk after document element at line 6050, column 0, byte 933251 at C:/Perl/site/
+  lib/XML/Parser.pm line 168
+  &lt;Hit Enter Key To Continue&gt;
+</pre>
+<P>
+ a) you have a screwed up xml configuration file.  The above file is screwed up at line 6050.  You will need to edit the file and fix it or to roll back to one of the dated backups.<P>
+ q) <b>why dont some of the perl scripts run stand alone???  </b><P>
+<pre>
+ for example i run &lt;i&gt;perl fix_db.pl -AX&lt;/i&gt; and i get
+</pre>
+<P>
+<pre>
+  Can't locate Repository.pm in @INC (@INC contains:
+     /apps/gem/perl/lib/5.8.4/sun4-solaris-thread-multi
+     /apps/gem/perl/lib/5.8.4
+     /apps/gem/perl/lib/site_perl/5.8.4/sun4-solaris-thread-multi
+     /apps/gem/perl/lib/site_perl/5.8.4
+     /apps/gem/perl/lib/site_perl .) at fix_db.pl line 21.
+</pre>
+ BEGIN failed--compilation aborted at fix_db.pl line 21.<P>
+ a) GEM libraries in perl are NOT stored in the normal perl library locations.  They are stored in the lib subdirectory of the GEM install.  If you installed into /apps/gem, you need to run <i>perl -I/apps/gem/lib fix_db.pl -AX</i><P>
+ To get around this problem, we use lines like<P>
+<pre>
+   &lt;i&gt;use lib qw(/apps/gem/lib);&lt;/i&gt;
+</pre>
+<P>
+ Which are touched / updated by the GEM  Configuration Utility when you run the reformatter option.<P>
+ If the code does not work, you can also run <P>
+<pre>
+   &lt;i&gt;perl -I/apps/gem/lib fix_db.pl -AX&lt;/i&gt;
+</pre>
+<P>
+ q) <b>I keep getting these pop up screens from my scheduled tasks</b><P>
+ a) run your windows scheduled tasks using a different account from your interactive account.  <P>
+ q) <b>My windows graphical application gets stuck/frozen</b><P>
+ a) this is one of those silly windows'isms.  If you have tabbed into the console window and scrolled, the application can get frozen.   Of course, all the information (plus more) that you see in this window is actually saved into the log file and can be viewed from there.   <b> HIT RETURN IN YOUR CONSOLE WINDOW TO CONTINUE</b>.<P>
+ q) <b>I have a problem installing... help!!!</b><P>
+ a) well... im sorry to hear that... but the right thing to do is report it to sql technologies and to attach the log file to your error report.  This file is the application name with a .log extension - so configure.log is the configure.pl log file.  This log file does contain lots of details on your install and should hopefully help us solve your problem.  Thanks!<P>
+ q) <b>Rep Server Error Log Contains:</b><P>
+ E. 2006/04/25 12:04:04. ERROR #14024 USER(sa) - /execint.c(1038) Executor does not allow the entered command in the current mode.<P>
+ a) Sadly, this appears to be intrinsic to the DBD::Sybase library.  It must do some under the covers sql commands to verify the connection.  This message means a "normal" sql command was sent to the rep server - which of course will not handle it because the rep server has no sql language handler.  Ignore the messages.<P>
+ q) i keep getting messages "no statement executing at ...."<P>
+ a) this comes from older versions of DBD::Sybase and has been fixed in the latest version.  Ignore the messages or upgrade <P>
+ q) ok i scheduled all these jobs - what if something goes wrong?<P>
+ a) the console contains the contents of all your log files!  Basically the jobs in your crontab all use a similar syntax to : <P>
+<pre>
+  $ cat TraceRoute.ksh
+  umask 000
+  /apps/gem/perl/bin/perl /apps/gem/gem/ADMIN_SCRIPTS/monitoring/tracert.pl -BATCH_ID=TraceRoute $* &gt; /apps/gem/gem/data/GEM_BATCHJOB_LOGS/Unix_TraceRoute.log 2&gt; /apps/gem/gem/data/batchjob_errors/Unix_TraceRoute.log
+</pre>
+<P>
+ Of course this is all customized ... the perl, the file locations etc...<P>
+ So how do you see what happened!!! just look at the console under "GEM Logs" -> "BATCH FILE EXECUTION LOGS".  Do this every few days to make sure things are working (or whenever you notice a problem.o<P>
+ q) when i install the stored procedure library, i get language mismatch messages like : <pre>
+   Msg 2401, Level 11, State 2:
+   Server 'CALYPSODB':
+   Character set conversion is not available between client character set 'utf8'
+   and server character set 'iso_1'.
+   No conversions will be done.
+<P>
+</pre>
+ a) set the LANG environment variable as appropriate<P>
+<pre>
+   export LANG=C
+<P>
+</pre>
+ q) I have an Installation failure on some kind of _BAK table<P>
+<pre>
+   &gt; perl upgrade.pl
+</pre>
+<P>
+<pre>
+   [ snip ]
+    TABLE      ContainerMap                   SAVE  drop  Install Restore
+    TABLE      ContainerOverride              SAVE  drop  Install Restore
+    TABLE      Container_full                 SAVE  drop  Install Restore
+</pre>
+<P>
+<pre>
+   *****************************************************
+   Cant Backup Table Event.  Event_BAK allready exists! This indicates that a prior release failed.  Event_BAK is a backup of Event prior to the upgrade - make sure that the data is ok, dr
+   op Event_BAK, and rerun this command
+   *****************************************************
+   /apps/gem/perl/bin/perl  -I/apps/gem/gem/lib  /apps/gem/gem/bin/configure.pl --LOGFILE=logs/upgrade_part2.log --UPGRADE
+<P>
+</pre>
+ a) You have a prior failed upgrade and a table archive (with the _BAK extension) exists.  You are probably ok to just drop the<pre>
+   _BAK table but you would be better served to
+<P>
+      insert Event select * from Event_BAK
+      drop table Event_BAK
+</pre>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ The following describes the major processes involved within the GEM system<P>
+<h3>SYBASE BACKUP CROSSCHECK</h3>
+<h3>SQL SVR BACKUP CROSSCHECK</h3>
+<P>
+ The following batches read event log info and store the results in the database.  After storing the results, they run the script UpdateBackupStateStaticInfo.pl to fix up static info (like the list of working databases in the system) and then will run a reporting tool Backup_Crosscheck_Report.pl which reads crosscheck.dat and compares the results to the saved values in the BackupState table.<P>
+<pre>
+   MssqlBackupCrosscheck.ksh
+   MssqlBackupCrosscheckWeekly.ksh
+<P>
+</pre>
+ To collect data initially, we suggest you run the above with --NOALARM so you dont get totally spammed with alarms about databases you dont care about.  Once you do the initial run (with --NOALARM) look at the standard output for the job and appropriately edit crosscheck.dat to remove any databases for which you dont care about backups and to appropriately have the system handle/manage your log shipping.  By setting up the directives in this config file, you can inform GEM that systems should be log-shipped and it will intelligently understand that means that tran dumps must happen on primary and loads happen on secondary and that the database names must match between the systems.<P>
+<h3>SYBASE LOG FILE CHECKS</h3>
+<P>
+ The following Jobs Relate To Fetching Sybase Log Files<P>
+ SybErrLogAllRpt.ksh           Generates "Sybase Error Log - UnFiltered" SybErrLogFetch.ksh              Fetch The Logs & Generate Console Sybase Error Log Fetch Report SybErrLogSaveAlarms.ksh         Save Alarms From Prefetched Files - Report in "Sybase Error Log - Recent" SybErrLogConfig.ksh           Generates The Console Sybase Error Log Configuration Report SybErrLogRpt.ksh               Generates "Sybase Error Log - Filtered"<P>
+ The best mechanism to approach this process is to look at the Configuration Report and to remove any log files that are irrelevant -> the way we do this is to actually mark the RUN files associated with the log files as bad.<P>
+<h3>SQL SVR LOG FILE CHECKS</h3>
+<h3>CONFIGURATION CHECKER</h3>
+<P>
+ allsrv_query_long.pl --QUERY=select @@SERVERNAME,value,comment from sysconfigures where comment="procedure cache size" --TYPE=SYBASE<P>
+<h3>REPLICATION MONITOR</h3>
+<h3>CLEANING UP FILES</h3>
+<hr><br>
+This output is documentation for the SQL Technologies GEM FAQ and Change Log.
+<ADDRESS>copyright &#169 1998-2011 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

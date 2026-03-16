@@ -1,0 +1,663 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+<!-- Copyright (c) 2005-2011 By SQL Technologies - All Rights Reserved -->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM Getting Started With GEM</title>
+  <link rel="stylesheet" type="text/css" href="../styles/mystyle.css">
+  <meta name="author" content="Edward Barlow">
+  <meta name="Description" content="GEM - The Generic Enterprise Manager">
+  <meta name="keywords" content="sybase, sql server, oracle,  tools,  utilities,  shareware,  database, monitoring, administrator, tool, CURRENT_TILE, GEM, free, administration, reporting, configuration">
+</head>
+<body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Getting Started With GEM</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
+ <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE><center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>Getting Started Guide</H1>
+<H3>for the GEM</H3>
+        					</font>
+</TD></TR>
+</TABLE></CENTER>
+  <a name="Getting_Started_Guide"></a>
+  <span style='font-size:14.0pt;font-family:Arial'>
+  <div style="text-align: justify;">
+    <p>This guide will give information on how to get started with the Generic
+      Enterprise Manger (<em><strong>GEM</strong></em>).  This document describes the structure of the
+      code line and introduces you to the basic concepts and describes how the application works.<br>
+      <br>
+      <em><strong>GEM</strong></em> provides a framework to manage multiple database systems. The system is built upon a set of common perl
+      libraries. The concept is that the various monitoring and administration programs provided with gem be simple, clear, documented, and small.
+      To implement this concept, the majority of the work is relegated to the library modules. One side benefit of this architecture, is that
+      you can copy the monitoring code line and change it, customizing it for your environment.  These programs, by and large, are small and
+      this kind of customization is fairly easy if you understand perl.
+      </strong></p>
+    <p><em><strong>GEM</strong></em> is designed for simplicity. The goal is
+      to put code, data, and libraries in locations where a reasonable administrator would expect them to be found.
+      After you extract GEM, please poke around and familiarize yourself with the product.
+      Look for utilities in the ADMIN_SCRIPTS subdirectory and configuration files in the conf subdirectory.
+      Knowledge of the layout is essential to maintaining and operating
+      <em><strong>GEM </strong></em>as your production server managment interface.</p>
+   <p>This document provides an overview of GEM layout.
+  	</div>
+  <p>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+Directory Structure</H2></font></TD></TR></TABLE></CENTER>
+<p>
+	<a name="GEM Directory Structure"></a>
+  <div style="text-align: justify;">The first thing to understand is the basic
+    directory structure of the installation. The command line programs that implement
+    most of the functionality exist in the ADMIN_SCRIPTS subdirectory, which
+    is further subdividied by package. Configuration files are stored in the conf
+    subdirectory. Data and formatted html reports is stored in the data subdirectory. Three examples of
+    data stored in the data subdirectory are the GEM File Repository (where we keep collected files and system log files), the GEM
+    Console (in CONSOLE_REPORTS) where we keep static html report output, and the historical information about your servers.
+    The main <em><strong>GEM</strong></em> programs (gem.pl, troubleshoot.pl, and configure.pl) are in the the root directory. The rest of the heirarchy is for support files.
+    <br>
+    <br>
+  </div>
+  <table cellpadding="2" cellspacing="0">
+    <tbody>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >GEM Base Directory</td>
+        <td align="left" valign="top" >This is where you extracted
+          the software. <br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>ADMIN_SCRIPTS<br> </td>
+        <td>Command line programs reside here. </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>doc<br> </td>
+        <td>Directory of <em><strong>GEM</strong></em> documentation<br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>unix_batch_scripts<br> </td>
+        <td>This is where batch scritps that work with Unix reside<br>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>win32_batch_scripts<br> </td>
+        <td>This is where batch scripts that work with Windows
+          reside<br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>lib<br> </td>
+        <td>Perl Module Library<br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>plugins<br> </td>
+        <td>Location for <em><strong>GEM</strong></em> Manager plugins<br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>conf<br> </td>
+        <td>Configuration Files (these are human editable and must
+          be kept secure)<br> </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+			</td>
+        <td align="left" valign="top">data</td>
+        <td align="left" valign="top">Sub directory for discovered
+          and generated data - this directory can get big</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+GEM User Interfaces</H2></font></TD></TR></TABLE></CENTER>
+	<p>
+	<a name="GEM User Interfaces Directory"></a>
+  <table cellpadding="2" cellspacing="0">
+    <tbody>
+      <tr>
+        <td align="left" valign="top" >
+
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+        </td>
+        <td>GEM Base Directory</td>
+        <td align="left" valign="top" >This is where you extracted
+          the software. <br> </td>
+      </tr>
+      <tr>
+        <td>
+        		<img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title=""></td>
+        <td>gem.pl<br> </td>
+        <td>The post installation tasks manager
+        </td>
+      </tr>
+      <tr>
+        <td>
+        		<img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title=""></td>
+        <td>configure.pl<br> </td>
+        <td>This is the <em><strong>GEM</strong></em> setup utility<br>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        		<img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title=""></td>
+        <td>troubleshoot.pl<br> </td>
+        <td>This is the diagnostic utility. It is used to diagnose  configuration and setup problems.<br> </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+  <center>
+  		<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff>
+  			<H2>The ADMIN SCRIPTS Directory</H2></font></TD></TR>
+  		</TABLE>
+  </CENTER>
+	<p>
+	<a name="The_ADMIN_SCRIPTS_Directory"></a>
+  The main command line programs of the <em><strong>GEM</strong></em> are stored in ADMIN_SCRIPTS and broken down into subdirectories by category<br>
+  <br>
+  <table cellpadding="2" cellspacing="0" width="100%">
+    <tbody>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >GEM Base Directory</td>
+        <td align="left" valign="top" >This is where you extracted the software. <br> </td>
+      </tr>
+      <tr>
+        <td><img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>ADMIN_SCRIPTS<br> </td>
+        <td>Command line programs reside here. </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">bin<br> </td>
+        <td>Miscellaneous utilities<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">database_queries<br>
+        	 </td>
+        <td>Database Queries for the Reporting and Performance Reporting in the Console<br> </td>
+      </tr>
+
+       <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">cgi-bin<br>
+        	 </td>
+        <td>Code for the web console user interface<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">gemalarms<br>
+        	 </td>
+        <td>Database For Gem<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">inventory_manager<br>
+        	 </td>
+        <td>CMDB asset manager code for GEM<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)"  style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img  src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">dbi_backup_scripts
+        	 <br>
+        </td>
+        <td>Sybase and Sql Server Backup Scripts<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+        </td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">MDA_procs<br>
+        </td>
+        <td>Sybase MDA Table monitoring procedures<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+        </td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">monitoring<br>
+        </td>
+        <td>Programs designed for monitoring <br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">oracle<br> </td>
+        <td>Oracle Scripts<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">procs<br> </td>
+        <td>Sybase and Sql Server Extended Stored Procedure Library<br>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img  src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">console<br>
+        </td>
+        <td>Scripts that manage the <em><strong>GEM</strong></em> Console<br> </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+  <a name="The_Data_Directory_Layout"></a>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+The Data Directory</H2></font></TD></TR></TABLE></CENTER>
+	<p>
+  The data directory is where information is stored about your systems.  <p>
+  <table cellpadding="2" cellspacing="0">
+    <tbody>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >data</td>
+        <td align="left" valign="top" >Sub directory for generated data - this directory can get big
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ft2vertlineb.gif" alt="|" style="border: 0px solid ; height: 22px; width: 16px;" title=""><br>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ft2vertlineb.gif" alt="|" style="border: 0px solid ; height: 22px; width: 16px;" title=""> </td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">GEM_BACKUP_LOGS</td>
+        <td align="left" valign="top" >The output from your maintenance plan        </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td><img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">batchjob_errors
+        </td>
+        <td>Standard Error from the maintenance scripts </td>
+      </tr>
+      <tr>
+        <td><img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	<img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">GEM_BATCHJOB_LOGS
+        </td>
+        <td>Standard Output from the maintenance scripts </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">CONSOLE_REPORTS
+        </td>
+        <td align="left" valign="top" >This is the console.  You point your browser here to see it. </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">depends </td>
+        <td>Files required for the dependency analyzer </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">cronlogs
+        </td>
+        <td align="left" valign="top" >Logs of your scheduled jobs
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">html_output
+        </td>
+        <td align="left" valign="top" >Output of any html reports
+          you want auto included in documentation </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">lockfiles</td>
+        <td align="left" valign="top" >Lock Files for programs that
+          can be overscheduled </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">system_information_data
+        </td>
+        <td align="left" valign="top" >Monitoring data and configuration information by server</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+  <a name="The_conf_Directory"></a>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+The conf Directory</H2></font></TD></TR></TABLE></CENTER>
+<p>
+  The conf directory contains system configuration files. The following are the
+  main configuration files<br>
+  <ul>
+    <table width="95%" Border=1>
+      <tr>
+        <td><strong>FILE NAME</strong></td>
+        <td><strong>FILE DESCRIPTION</strong></td>
+      </tr>
+      <tr>
+        <td><strong><span>configure.cfg</span>
+          </strong></td>
+        <td>this file is the main configuration file for the backup
+          scripts </td>
+      </tr>
+
+      <tr>
+        <td><strong><span>gem.dat</span>
+          </strong></td>
+        <td>Main config file for gem - all options and locations etc...</td>
+      </tr>
+
+
+      <tr>
+        <td><strong><span>oracle_passwords.dat</span></strong></td>
+        <td>Oracle Password File</td>
+      </tr>
+
+      <tr>
+        <td><strong>port_monitor.dat</strong></td>
+        <td>File listing systems/ports to monitor</td>
+      </tr>
+
+      <tr>
+        <td><strong>sqlsvr_password.dat</strong></td>
+        <td>Sql Server Password file&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td><strong>sybase_passwords.dat</strong></td>
+        <td>Sybase Password file&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td><strong>threshold_overrides.dat</strong></td>
+        <td>Disk space thresholds for alerting</td>
+      </tr>
+
+      <tr>
+        <td><strong>unix_passwords.dat</strong></td>
+        <td>Unix password file&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td><strong><span>win32_cleanup.dat</span>
+          </strong></td>
+        <td>Directories under Windows for routine purge/cleanup</td>
+      </tr>
+
+      <tr>
+        <td><strong>win32_backupdirs.dat</strong></td>
+        <td>Autogenerated listing of all directories used for backups in the past 2 weeks</td>
+      </tr>
+
+      <tr>
+        <td><strong>win32_service.dat</strong></td>
+        <td>File listing services on Windows that must be up</td>
+      </tr>
+
+      <tr>
+        <td><strong><span>win32_service.dat</span>
+          </strong></td>
+        <td>List of services auto-collected from your windows systems</td>
+      </tr>
+    </table>
+  </ul>
+</div>
+<div class="Section1"></div>
+<div class="Section1">Files are shiped in the distribution with .sample extensions
+  - these are the templates with standard comments. No files are shipped with
+  .dat, .xml, or .cfg extensions. This permits you to perform an upgrade by extracting
+  the new tarball over the existing code line with no problems.
+</div>
+<div class="Section1">
+<p>
+<a name="GemRpt_Scheduled_Tasks_Directories"></a>
+<center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+GEM Scheduled Tasks</H2></font></TD></TR></TABLE></CENTER>
+<p>
+
+  <div style="text-align: justify;">One of the core features of <em><strong>GEM</strong></em> is its monitoring
+    and maintenance scripts. These scripts perform the systems monitoring and
+    alarming and provide useful routine maintenance activities. The
+    scripts are customized to your environment by the <em><strong>GEM</strong></em> configuration manager.
+    Some of these scripts user your configuration file, for example several batch jobs are created on a server
+    by server basis. <br>
+    <br>
+    The gem.pl program will create scheduled tasks for these jobs using
+    your Windows scheduler, and will create a Unix crontab file for jobs you need to run on Unix.
+    Each batch job is basically a call to a command line scripts located in the ADMIN_SCRIPTS directory.
+    Output is redirected to error files in a standard location.
+    <em><strong>GEM</strong></em> creates a set of .bat and .ksh driver scripts that
+    have obvious names to be the scripts that you actually run or schedule. <br>
+    <br>
+    Batch Job scripts are stored in the win32_batch_scripts and Unix_batch_scritpts directories.
+    Within those directories are 4 subdirectories as follows: </div>
+  <br>
+  <table cellpadding="2" cellspacing="0" border="0">
+    <tbody>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+			</td>
+        <td>GEM Base</td>
+        <td><br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+				<img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+		  </td> <td>unix_batch_scripts</td>
+        <td>This is where .ksh scripts that run under Unix exist. Output redirected.</td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+</td>
+        <td>interactive</td>
+        <td>Output not redirected</td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+ </td>
+        <td>batch</td>
+        <td>Scheduled scripts.  Output redirected.</td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+</td>
+        <td>plan_interactive</td>
+        <td>Scripts for backups. Output not redirected.</td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>plan_batch</td>
+        <td>Scripts for backups. Output redirected.</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  The above tree is duplicated in the win32_batch_scripts subdirectory.<br>
+  <br>
+  <div style="text-align: justify;">Each script is created as a .ksh
+    on Unix and as both a .bat and .ksh script on Windows. Copies of the script
+    exist in an interactive and batch directory. The batch scripts redirect output to locations in the data tree
+    (so you cant see output when run interactively) but are identical to the interactive scripts. When you
+    run a scheduled task, the version in the batch directory is what is scheduled. When you wish to run a
+    program interactively,
+    you should use the interactive version - because you want to see output.
+    The plan_* directories store pregenerated maintenance plan scritps. The plan
+    directories were separated from the regular directories because the tree becomes
+    hard to navigate when you get large numbers of servers (and a large number
+    of maintenance plans).
+	<a name="Backup_and_Maintenance_Plans"></a> </div>
+		<p>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+Backup and Maintenance Plans</H2></font></TD></TR></TABLE></CENTER>
+<p>
+  <em><strong>GEM</strong></em> offers a maintenance plan based system maintenace facility.&nbsp;
+  Plans are set up in the file configure.cfg.&nbsp; All normal features related to systems maintenance
+  are covered including Backups, DBCC, Update Statistics, and Log Shipping.&nbsp;
+  Additionally, backup compression for SQL Server, notification, and extensive
+  reporting are provided.&nbsp; The command line interface provides a level of
+  flexibility not available with native SQL Server facilities.  These scripts can be run on
+  all versions of sybase & sql server, but for routine backups, they are best suited for sybase
+  and sql server 2000 only, as the native log shipping and mirroring in sql server 2005 and 2008 work well.
+  If you want to reorg a database or run update statistics, these scripts provide value for all versions.<a name="GemRpt_Enterprise_Manager"></a>
+
+  <p>
+<a name="GemRpt_Enterprise_Manager"></a>
+<center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+GEM Post Install Tasks Manager</H2></font></TD></TR></TABLE></CENTER>
+<p>
+
+  <div style="text-align: justify;">The <em><strong>GEM</strong></em> Enterprise Manager (gem.pl) is the simple
+    user interface for GEM post installation tasks. Basically, it calls other perl programs with the
+    appropriate command line paths.  These tasks might be to rebuild your batch jobs or to reschedule them.
+
+  	<p>
+<a name="Documentation_and_Diagnostics"></a>
+<center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+Documentation and Diagnostics</H2></font></TD></TR></TABLE></CENTER>
+<p>
+
+  All system documentation uses the standard perldoc format. Perldoc is a utility
+  provided with perl to extract documentation from programs. To get full documentation
+  on a program, simply run <span style="font-style: italic;">perldoc program.
+  </span>The majority of the <em><strong>GEM</strong></em> documentation is composed from the embedded perldoc.
+  You can see a short version of the help by simply running <span style="font-style: italic;">perl
+  program.pl -?, </span>which will provide useful syntax help.&nbsp; <br>
+  <br>
+  Older database programs use the standard syntax of <span style="font-style: italic;">-Uuser -Ppassword -Sserver -Ddatabase</span> for
+  arguments. Newer programs use <span style="font-style: italic;">--USER=username
+  --PASSWORD=password --SERVER=servername --DATABASE=database</span> convention.
+  <br>
+  <br>
+  If you have problems with a programs, try running with <span style="font-style: italic;">-d</span> or <span style="font-style: italic;">--DEBUG </span>flags set. These will run the program
+  in verbose/diagnostic mode and the program will print useful diagnostic information.
+  This is the standard way of debugging problems. <br>
+  <div style="text-align: justify;">
+<hr><br>
+This output is documentation for the SQL Technologies Getting Started With GEM.
+<ADDRESS>copyright &#169 1998-2011 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

@@ -1,0 +1,1704 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<!-- Start Standard Header - Your License explicitly prohibits you from modifying this file - Get a License - Its cheap-->
+<!-- Copyright (c) 2005-2011 By SQL Technologies - All Rights Reserved -->
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>GEM The Complete GEM Documentation</title>
+  <link rel="stylesheet" type="text/css" href="../styles/mystyle.css">
+  <meta name="author" content="Edward Barlow">
+  <meta name="Description" content="GEM - The Generic Enterprise Manager">
+  <meta name="keywords" content="sybase, sql server, oracle,  tools,  utilities,  shareware,  database, monitoring, administrator, tool, CURRENT_TILE, GEM, free, administration, reporting, configuration">
+</head>
+<body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
+
+<A NAME=link1></A>
+
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>The Complete GEM Documentation</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
+ <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
+<A NAME=link2></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Introduction To GEM </H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <i><b>GEM</b></i> is an open source server management toolkit for Database Administrators.  <i><b>GEM</b></i> is a solution to manage many Database Servers without a lot of stress. <P>
+<UL>
+<LI><B>Server Monitoring And Alarming</B>
+<LI><B>Ensure Your Backups Work</B>
+<LI><B>Configuration Reporting and Auditing</B>
+<LI><B>Monitoring And Alarming</B>
+<LI><B>Historical Reporting And Trending</B>
+<LI><B>Credential Management, Reporting, Approval</B>
+<LI><B>Best Practices Automation</B>
+<LI><B>Extended System Stored Procedure Library</B>
+<LI><B>Swiss army knife set of command line utilities </B>
+<LI><B>Agentless Architecture</B>
+<LI><B>Database Support for Sybase &amp; SQL Server </B>
+<LI><B>Host Support for Windows, Linux, and Unix systems</B>
+<LI><B>Based on 15+ years of free software</B>
+<LI><B>Open source perl</B>
+</UL>
+<P>
+ <i><b>GEM</b></i> is a <u>feature rich</u>, <u>low cost</u> systems administration package tailored for database administrators. It uses a <u>small footprint</u>, <u>centralized</u>, <u>agent less</u> architecture that has minimal server impact and will revolutionize the way you perform system administration.<P>
+ The Generic Enterprise Manager or <i><b>GEM</b></i> automates the routine parts of server management. It monitors your systems and notifies you of problems in a proactive manner, allowing you to fix problems before your users notice.  <i><b>GEM</b></i> is designed to provide you with the information you need to manage your servers with zero downtime - for example it will mail you Error level events from your datbases event logs and will warn you when space is getting tight on your servers. <i><b>GEM</b></i> configuration auditing can reveal serious issues before they become a problem. For example, a database backup checker reads system logs to ensure your backups succeed. <i><b>GEM</b></i> gives small and mid sized companies the tools that up until now only the very largest companies possessed. <P>
+ <i><b>GEM</b></i> provides a simple, complete solution to help you manage your Database Servers and associated Windows, Unix, and Linux systems. While <i><b>GEM</b></i> provides comprehensive operating system level monitoring and alarming, the strength of <i><b>GEM</b></i> is database infrastructure management. <i><b>GEM</b></i> is designed for database administrators, by database administrators.<P>
+ <i><b>GEM</b></i> is a non-invasive, agent less system that runs on a central monitoring station. Nothing runs on your remote systems. Even our backup solution runs centrally.  <i><b>GEM</b></i> will install our excellent system stored procedure library on all your database servers.<P>
+
+<A NAME=link3></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>What Is the Generic Enterprise Manager</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The Generic Enterprise Manager (<i><b>GEM</b></i>) is a systems management package designed specifically for Database  Administrators.  <i><b>GEM</b></i> provides a simple, complete solution to help you manage your Database Servers and  associated Windows, Unix, and Linux systems.  While <i><b>GEM</b></i> provides comprehensive operating system level  monitoring and alarming, the strength of <i><b>GEM</b></i> is its simple proven mechanisms to help you manage your database infrastructure.  <i><b>GEM</b></i> is designed for database administrators, by database administrators. <P>
+ The Generic Enterprise Manager is written in open source perl. It is broken into several component packages, each consisting of small, self-documenting, easy to read perl programs.  These packages use common libraries, a common directory structure, and common configuration files.<P>
+
+<A NAME=link4></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>The Benefits of GEM</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ Fundamentally, <i><b>GEM</b></i> benefits your users by reducing systems problems.  <i><b>GEM</b></i> effectively automates  cumbersome tasks like collecting and parsing database error logs and delivers that information to the administrators in a clear,  concise manner.  This dramatically increases your ability to spot problems - <i><b>GEM</b></i> helps you find  issues before they become problems and allows you to proactively manage your servers.   <P>
+ By effectively delivering system health information, <i><b>GEM</b></i> decreases the time spent on routine tasks and  increase quality of service provided.  <i><b>GEM</b></i> will both reduce downtime and decreasing the time you spend on system maintenance.   GEM dramatically increases the information about each server that administrators have at their fingertips. <P>
+ <i><b>GEM</b></i> protects your servers by guaranteeing your server backups and by providing the configuration audit information you need to restore in the event of an emergency. <P>
+ <i><b>GEM</b></i> monitors important services in your database infrastructure and alarms operators if there is a problem.  <P>
+ <i><b>GEM</b></i> is most effective for organizations that support 10-300 database servers.  <i><b>GEM</b></i> requires administrator access to your databases, so a DBA must be responsible for installing and running it. <P>
+ <i><b>GEM</b></i> contains numerous features for both developers and administrators. <i><b>GEM</b></i> provides a Database Utilities Toolkit of command line tools and contains an excellent library of new system stored procedures.<P>
+
+<A NAME=link5></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>The Power of GEM</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The power of <i><b>GEM</b></i> is based on its open architecture.  Fundamentally, <i><b>GEM</b></i> is an open source set of libraries and management programs that are used by numerous tiny programs (300 line is pretty typical)  designed to monitor and analyze your environment. The underlying components, the libraries and standard configuration  files are designed to be  easily understood and well documented, but most importantly, hundreds of working example programs are readily available.  Because all the scripts that do work are simple and small, you can troubleshoot and customize  <i><b>GEM</b></i> with minimal effort.  <P>
+ It is easy to create your own custom alerts using the <i><b>GEM</b></i> libraries.   Just take your existing perl monitoring script, add a few lines of perl from our open alarm interface api,  and your alarms will automatically be routed and managed from <i><b>GEM</b></i>. <P>
+ <i><b>GEM</b></i> is an open ARCHITECTURE that includes a complete set of open source programs.  This allows you to make <i><b>GEM</b></i> a complete solution to both your infrastructure and your business monitoring and reporting needs.  <P>
+
+<A NAME=link6></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Component Packages</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <ul><P>
+ <li><b><u>The <i><b>GEM</b></i> Configuration Utility</u></b>, <A HREF=#link13>configure.pl</A> sets up the main gem.dat configuration file. <li><b><u>The <i><b>GEM</b></i> Console</u></b> is our web interface.  <li><b><u>The <i><b>GEM</b></i> Batch Scripts</u></b> provide monitoring, data collection, and analytics on your systems.   <li><b><u>The <i><b>GEM</b></i> Manager</u></b>, <A HREF=#link21>gem.pl</A>, is a simple interface to run admin tasks like creating and scheduling the Batch Scripts <li><b><u>The <i><b>GEM</b></i> Maintenance Scripts</u></b> are a complete solution for scheduled database administration (mostly for Sybase). <li><b><u>The <i><b>GEM</b></i> Stored Procedure Library</u></b> provides numerous new system stored procedures.  <li><b><u>The <i><b>GEM</b></i> Database Utilities</u></b> consist of numerous well-documented command line utilities.   <li><b><u>The <i><b>GEM</b></i> File Repository</u></b> stores information collected from your system, log files, and other data. <li><b><u>The <i><b>GEM</b></i> Monitoring Database</u></b> is a database to store monitoring and alarming information.  <li><b><u>The <i><b>GEM</b></i> Configuration Files</u></b> contain a list of all monitored systems and servers.  </ul><P>
+
+<A NAME=link7></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Architecture Overview</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <i><b>GEM</b></i> is a non-invasive agent less system that runs on a central monitoring station.  Nothing runs on your remote systems.  Even our backup solution is runs centrally.  You will need a Windows monitoring station if you are using <i><b>GEM</b></i> with Windows systems/databases, and a Unix monitoring station if you are using <i><b>GEM</b></i> for Unix systems/databases. <P>
+ <i><b>GEM</b></i> will install our popular <A target=_top HREF=http://www.edbarlow.com/gem/procs_only/index.htm>system stored procedure library</A> on all servers.<P>
+ <i><b>GEM</b></i> provides a  <A target=_top HREF=http://www.edbarlow.com/gem/backup_scripts_only/index.htm>database maintenance package</A> which can optionally be used for server back ups and maintenance.  This is a separate free software package that is mostly used for Sybase servers and SQL Server 2000 databases.<P>
+ The <i><b>GEM</b></i> Configuration Utility, <A HREF=#link21>gem.pl</A>, is a basic user interface for tasks you may wish to run post-installation. It does things like load LDAP information, create and schedule our customized <i><b>GEM</b></i> Batch Scripts. Information is collected in the <i><b>GEM</b></i> File Repository and the <i><b>GEM</b></i> Monitoring Database, from which it is reformatted and delivered via the <i><b>GEM</b></i> Console.<P>
+ If you have both Windows and Unix Systems, <i><b>GEM</b></i> is normally installed on a samba shared drive.   We call this a "Hybrid" environment. A samba share permits the same code to be used on your windows, Linux, and Unix systems. The  windows monitoring system will run scheduled tasks on your windows domain and the Unix/Linux server will use cron to  schedule jobs in your Unix domain.<P>
+ <i><b>GEM</b></i> is written in open source perl.  Perl is regarded as the language of choice for systems administrators and your administrators will find it easy to understand <i><b>GEM</b></i>.  With a normal level of perl experience, you can troubleshoot any problems that arise.  <i><b>GEM</b></i> uses standard perl/DBI for database independent connectivity and perl/Tk and perl/CGI for user interfaces.  Programs are self-documented using the standard perldoc format (i.e. See documentation via perldoc program.pl) and follow standard best practices.  The <i><b>GEM</b></i> documentation is created from this same perldoc.<P>
+ The core of <i><b>GEM</b></i> is a set of flexible perl library modules. Use of this library interfaces permits the majority of <i><b>GEM</b></i> programs to be short and simple.  This has the benefit of simplified systems maintenance.  The combination of an API and practical examples allows users great flexibility in terms of customization. <P>
+ Every environment has numerous specific needs. <i><b>GEM</b></i> is specifically designed for easy expansion to meet your needs. <P>
+
+<A NAME=link8></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GEM Prerequisites</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <i><b>GEM</b></i> is a server administration tool, and it is therefore expected that you have administrator access (sa, sa_role)  to your databases. For your Unix systems/databases, you will need access to a Unix account with read permission on your Sybase/Mysql error logs.  To monitor windows systems, you need to schedule batch jobs using an account with read access to the event logs and services. In practice this means BUILTIN/administrator access. <P>
+ <i><b>GEM</b></i> requires one or two monitoring stations.   You need a Windows monitoring station if you wish to monitor Windows servers/databases and a Unix monitoring station if you  wish to monitor Unix servers/databases.    <P>
+ You will also need a small monitoring database.  This monitoring database can be SQL Server you are running all Windows or  Sybase for other configurations. The free version of sybase on linux is recommended. For cleanliness, it is recommended that this server be running on one of your monitoring stations.<P>
+ The <i><b>GEM</b></i> monitoring stations require a recent version of perl.   The DBI module and the appropriate DBD modules (DBD::ODBC or DBD::Sybase) must be installed. <P>
+ Finally, you will need access to a Web Server that can run cgi scripts. <center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+<TR><TD><CENTER><font color=#33ccff><H1>Getting Started Guide</H1>
+<H3>for the GEM</H3>
+        					</font>
+</TD></TR>
+</TABLE></CENTER>
+  <a name="Getting_Started_Guide"></a>
+  <span style='font-size:14.0pt;font-family:Arial'>
+  <div style="text-align: justify;">
+    <p>This guide will give information on how to get started with the Generic
+      Enterprise Manger (<em><strong>GEM</strong></em>).  This document describes the structure of the
+      code line and introduces you to the basic concepts and describes how the application works.<br>
+      <br>
+      <em><strong>GEM</strong></em> provides a framework to manage multiple database systems. The system is built upon a set of common perl
+      libraries. The concept is that the various monitoring and administration programs provided with gem be simple, clear, documented, and small.
+      To implement this concept, the majority of the work is relegated to the library modules. One side benefit of this architecture, is that
+      you can copy the monitoring code line and change it, customizing it for your environment.  These programs, by and large, are small and
+      this kind of customization is fairly easy if you understand perl.
+      </strong></p>
+    <p><em><strong>GEM</strong></em> is designed for simplicity. The goal is
+      to put code, data, and libraries in locations where a reasonable administrator would expect them to be found.
+      After you extract GEM, please poke around and familiarize yourself with the product.
+      Look for utilities in the ADMIN_SCRIPTS subdirectory and configuration files in the conf subdirectory.
+      Knowledge of the layout is essential to maintaining and operating
+      <em><strong>GEM </strong></em>as your production server managment interface.</p>
+   <p>This document provides an overview of GEM layout.
+  	</div>
+  <p>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+Directory Structure</H2></font></TD></TR></TABLE></CENTER>
+<p>
+	<a name="GEM Directory Structure"></a>
+  <div style="text-align: justify;">The first thing to understand is the basic
+    directory structure of the installation. The command line programs that implement
+    most of the functionality exist in the ADMIN_SCRIPTS subdirectory, which
+    is further subdividied by package. Configuration files are stored in the conf
+    subdirectory. Data and formatted html reports is stored in the data subdirectory. Three examples of
+    data stored in the data subdirectory are the GEM File Repository (where we keep collected files and system log files), the GEM
+    Console (in CONSOLE_REPORTS) where we keep static html report output, and the historical information about your servers.
+    The main <em><strong>GEM</strong></em> programs (gem.pl, troubleshoot.pl, and <A HREF=#link13>configure.pl</A>) are in the the root directory. The rest of the heirarchy is for support files.
+    <br>
+    <br>
+  </div>
+  <table cellpadding="2" cellspacing="0">
+    <tbody>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >GEM Base Directory</td>
+        <td align="left" valign="top" >This is where you extracted
+          the software. <br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>ADMIN_SCRIPTS<br> </td>
+        <td>Command line programs reside here. </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>doc<br> </td>
+        <td>Directory of <em><strong>GEM</strong></em> documentation<br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>unix_batch_scripts<br> </td>
+        <td>This is where batch scritps that work with Unix reside<br>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>win32_batch_scripts<br> </td>
+        <td>This is where batch scripts that work with Windows
+          reside<br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>lib<br> </td>
+        <td>Perl Module Library<br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>plugins<br> </td>
+        <td>Location for <em><strong>GEM</strong></em> Manager plugins<br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>conf<br> </td>
+        <td>Configuration Files (these are human editable and must
+          be kept secure)<br> </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+			</td>
+        <td align="left" valign="top">data</td>
+        <td align="left" valign="top">Sub directory for discovered
+          and generated data - this directory can get big</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+GEM User Interfaces</H2></font></TD></TR></TABLE></CENTER>
+	<p>
+	<a name="GEM User Interfaces Directory"></a>
+  <table cellpadding="2" cellspacing="0">
+    <tbody>
+      <tr>
+        <td align="left" valign="top" >
+
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+        </td>
+        <td>GEM Base Directory</td>
+        <td align="left" valign="top" >This is where you extracted
+          the software. <br> </td>
+      </tr>
+      <tr>
+        <td>
+        		<img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title=""></td>
+        <td>gem.pl<br> </td>
+        <td>The post installation tasks manager
+        </td>
+      </tr>
+      <tr>
+        <td>
+        		<img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title=""></td>
+        <td>configure.pl<br> </td>
+        <td>This is the <em><strong>GEM</strong></em> setup utility<br>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        		<img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title=""></td>
+        <td>troubleshoot.pl<br> </td>
+        <td>This is the diagnostic utility. It is used to diagnose  configuration and setup problems.<br> </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+  <center>
+  		<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff>
+  			<H2>The ADMIN SCRIPTS Directory</H2></font></TD></TR>
+  		</TABLE>
+  </CENTER>
+	<p>
+	<a name="The_ADMIN_SCRIPTS_Directory"></a>
+  The main command line programs of the <em><strong>GEM</strong></em> are stored in ADMIN_SCRIPTS and broken down into subdirectories by category<br>
+  <br>
+  <table cellpadding="2" cellspacing="0" width="100%">
+    <tbody>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >GEM Base Directory</td>
+        <td align="left" valign="top" >This is where you extracted the software. <br> </td>
+      </tr>
+      <tr>
+        <td><img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>ADMIN_SCRIPTS<br> </td>
+        <td>Command line programs reside here. </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">bin<br> </td>
+        <td>Miscellaneous utilities<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">database_queries<br>
+        	 </td>
+        <td>Database Queries for the Reporting and Performance Reporting in the Console<br> </td>
+      </tr>
+
+       <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">cgi-bin<br>
+        	 </td>
+        <td>Code for the web console user interface<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">gemalarms<br>
+        	 </td>
+        <td>Database For Gem<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">inventory_manager<br>
+        	 </td>
+        <td>CMDB asset manager code for GEM<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)"  style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img  src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">dbi_backup_scripts
+        	 <br>
+        </td>
+        <td>Sybase and Sql Server Backup Scripts<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+        </td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">MDA_procs<br>
+        </td>
+        <td>Sybase MDA Table monitoring procedures<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+        </td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">monitoring<br>
+        </td>
+        <td>Programs designed for monitoring <br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">oracle<br> </td>
+        <td>Oracle Scripts<br> </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">procs<br> </td>
+        <td>Sybase and Sql Server Extended Stored Procedure Library<br>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+        	 <img  src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">console<br>
+        </td>
+        <td>Scripts that manage the <em><strong>GEM</strong></em> Console<br> </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+  <a name="The_Data_Directory_Layout"></a>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+The Data Directory</H2></font></TD></TR></TABLE></CENTER>
+	<p>
+  The data directory is where information is stored about your systems.  <p>
+  <table cellpadding="2" cellspacing="0">
+    <tbody>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >data</td>
+        <td align="left" valign="top" >Sub directory for generated data - this directory can get big
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ft2vertlineb.gif" alt="|" style="border: 0px solid ; height: 22px; width: 16px;" title=""><br>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ft2vertlineb.gif" alt="|" style="border: 0px solid ; height: 22px; width: 16px;" title=""> </td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">GEM_BACKUP_LOGS</td>
+        <td align="left" valign="top" >The output from your maintenance plan        </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td><img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">batchjob_errors
+        </td>
+        <td>Standard Error from the maintenance scripts </td>
+      </tr>
+      <tr>
+        <td><img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	<img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">GEM_BATCHJOB_LOGS
+        </td>
+        <td>Standard Output from the maintenance scripts </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">CONSOLE_REPORTS
+        </td>
+        <td align="left" valign="top" >This is the console.  You point your browser here to see it. </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">depends </td>
+        <td>Files required for the dependency analyzer </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">cronlogs
+        </td>
+        <td align="left" valign="top" >Logs of your scheduled jobs
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">html_output
+        </td>
+        <td align="left" valign="top" >Output of any html reports
+          you want auto included in documentation </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">lockfiles</td>
+        <td align="left" valign="top" >Lock Files for programs that
+          can be overscheduled </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td align="left" valign="top" >
+        	 <img src="http://www.edbarlow.com/ftb.gif" alt="ftb.gif (135 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">system_information_data
+        </td>
+        <td align="left" valign="top" >Monitoring data and configuration information by server</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+  <a name="The_conf_Directory"></a>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+The conf Directory</H2></font></TD></TR></TABLE></CENTER>
+<p>
+  The conf directory contains system configuration files. The following are the
+  main configuration files<br>
+  <ul>
+    <table width="95%" Border=1>
+      <tr>
+        <td><strong>FILE NAME</strong></td>
+        <td><strong>FILE DESCRIPTION</strong></td>
+      </tr>
+      <tr>
+        <td><strong><span>configure.cfg</span>
+          </strong></td>
+        <td>this file is the main configuration file for the backup
+          scripts </td>
+      </tr>
+
+      <tr>
+        <td><strong><span>gem.dat</span>
+          </strong></td>
+        <td>Main config file for gem - all options and locations etc...</td>
+      </tr>
+
+
+      <tr>
+        <td><strong><span>oracle_passwords.dat</span></strong></td>
+        <td>Oracle Password File</td>
+      </tr>
+
+      <tr>
+        <td><strong>port_monitor.dat</strong></td>
+        <td>File listing systems/ports to monitor</td>
+      </tr>
+
+      <tr>
+        <td><strong>sqlsvr_password.dat</strong></td>
+        <td>Sql Server Password file&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td><strong>sybase_passwords.dat</strong></td>
+        <td>Sybase Password file&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td><strong>threshold_overrides.dat</strong></td>
+        <td>Disk space thresholds for alerting</td>
+      </tr>
+
+      <tr>
+        <td><strong>unix_passwords.dat</strong></td>
+        <td>Unix password file&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td><strong><span>win32_cleanup.dat</span>
+          </strong></td>
+        <td>Directories under Windows for routine purge/cleanup</td>
+      </tr>
+
+      <tr>
+        <td><strong>win32_backupdirs.dat</strong></td>
+        <td>Autogenerated listing of all directories used for backups in the past 2 weeks</td>
+      </tr>
+
+      <tr>
+        <td><strong>win32_service.dat</strong></td>
+        <td>File listing services on Windows that must be up</td>
+      </tr>
+
+      <tr>
+        <td><strong><span>win32_service.dat</span>
+          </strong></td>
+        <td>List of services auto-collected from your windows systems</td>
+      </tr>
+    </table>
+  </ul>
+</div>
+<div class="Section1"></div>
+<div class="Section1">Files are shiped in the distribution with .sample extensions
+  - these are the templates with standard comments. No files are shipped with
+  .dat, .xml, or .cfg extensions. This permits you to perform an upgrade by extracting
+  the new tarball over the existing code line with no problems.
+</div>
+<div class="Section1">
+<p>
+<a name="GemRpt_Scheduled_Tasks_Directories"></a>
+<center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+GEM Scheduled Tasks</H2></font></TD></TR></TABLE></CENTER>
+<p>
+
+  <div style="text-align: justify;">One of the core features of <em><strong>GEM</strong></em> is its monitoring
+    and maintenance scripts. These scripts perform the systems monitoring and
+    alarming and provide useful routine maintenance activities. The
+    scripts are customized to your environment by the <em><strong>GEM</strong></em> configuration manager.
+    Some of these scripts user your configuration file, for example several batch jobs are created on a server
+    by server basis. <br>
+    <br>
+    The <A HREF=#link21>gem.pl</A> program will create scheduled tasks for these jobs using
+    your Windows scheduler, and will create a Unix crontab file for jobs you need to run on Unix.
+    Each batch job is basically a call to a command line scripts located in the ADMIN_SCRIPTS directory.
+    Output is redirected to error files in a standard location.
+    <em><strong>GEM</strong></em> creates a set of .bat and .ksh driver scripts that
+    have obvious names to be the scripts that you actually run or schedule. <br>
+    <br>
+    Batch Job scripts are stored in the win32_batch_scripts and Unix_batch_scritpts directories.
+    Within those directories are 4 subdirectories as follows: </div>
+  <br>
+  <table cellpadding="2" cellspacing="0" border="0">
+    <tbody>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+			</td>
+        <td>GEM Base</td>
+        <td><br> </td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+				<img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+		  </td> <td>unix_batch_scripts</td>
+        <td>This is where .ksh scripts that run under Unix exist. Output redirected.</td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+</td>
+        <td>interactive</td>
+        <td>Output not redirected</td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+ </td>
+        <td>batch</td>
+        <td>Scheduled scripts.  Output redirected.</td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftn.gif" alt="ftn.gif (70 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title="">
+</td>
+        <td>plan_interactive</td>
+        <td>Scripts for backups. Output not redirected.</td>
+      </tr>
+      <tr>
+        <td>
+        	 <img src="http://www.edbarlow.com/ftln.gif" alt="ftln.gif (64 bytes)" style="border: 0px solid ; height: 22px; width: 16px;" title="">
+        	 <img src="http://www.edbarlow.com/ftfo.gif" alt="ftfo.gif (126 bytes)" style="border: 0px solid ; height: 16px; width: 16px;" title=""></td>
+        <td>plan_batch</td>
+        <td>Scripts for backups. Output redirected.</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  The above tree is duplicated in the win32_batch_scripts subdirectory.<br>
+  <br>
+  <div style="text-align: justify;">Each script is created as a .ksh
+    on Unix and as both a .bat and .ksh script on Windows. Copies of the script
+    exist in an interactive and batch directory. The batch scripts redirect output to locations in the data tree
+    (so you cant see output when run interactively) but are identical to the interactive scripts. When you
+    run a scheduled task, the version in the batch directory is what is scheduled. When you wish to run a
+    program interactively,
+    you should use the interactive version - because you want to see output.
+    The plan_* directories store pregenerated maintenance plan scritps. The plan
+    directories were separated from the regular directories because the tree becomes
+    hard to navigate when you get large numbers of servers (and a large number
+    of maintenance plans).
+	<a name="Backup_and_Maintenance_Plans"></a> </div>
+		<p>
+  <center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+Backup and Maintenance Plans</H2></font></TD></TR></TABLE></CENTER>
+<p>
+  <em><strong>GEM</strong></em> offers a maintenance plan based system maintenace facility.&nbsp;
+  Plans are set up in the file configure.cfg.&nbsp; All normal features related to systems maintenance
+  are covered including Backups, DBCC, Update Statistics, and Log Shipping.&nbsp;
+  Additionally, backup compression for SQL Server, notification, and extensive
+  reporting are provided.&nbsp; The command line interface provides a level of
+  flexibility not available with native SQL Server facilities.  These scripts can be run on
+  all versions of sybase & sql server, but for routine backups, they are best suited for sybase
+  and sql server 2000 only, as the native log shipping and mirroring in sql server 2005 and 2008 work well.
+  If you want to reorg a database or run update statistics, these scripts provide value for all versions.<a name="GemRpt_Enterprise_Manager"></a>
+
+  <p>
+<a name="GemRpt_Enterprise_Manager"></a>
+<center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+GEM Post Install Tasks Manager</H2></font></TD></TR></TABLE></CENTER>
+<p>
+
+  <div style="text-align: justify;">The <em><strong>GEM</strong></em> Enterprise Manager (gem.pl) is the simple
+    user interface for GEM post installation tasks. Basically, it calls other perl programs with the
+    appropriate command line paths.  These tasks might be to rebuild your batch jobs or to reschedule them.
+
+  	<p>
+<a name="Documentation_and_Diagnostics"></a>
+<center><TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc><TR><TD><CENTER><font color=#33ccff><H2>
+Documentation and Diagnostics</H2></font></TD></TR></TABLE></CENTER>
+<p>
+
+  All system documentation uses the standard perldoc format. Perldoc is a utility
+  provided with perl to extract documentation from programs. To get full documentation
+  on a program, simply run <span style="font-style: italic;">perldoc program.
+  </span>The majority of the <em><strong>GEM</strong></em> documentation is composed from the embedded perldoc.
+  You can see a short version of the help by simply running <span style="font-style: italic;">perl
+  program.pl -?, </span>which will provide useful syntax help.&nbsp; <br>
+  <br>
+  Older database programs use the standard syntax of <span style="font-style: italic;">-Uuser -Ppassword -Sserver -Ddatabase</span> for
+  arguments. Newer programs use <span style="font-style: italic;">--USER=username
+  --PASSWORD=password --SERVER=servername --DATABASE=database</span> convention.
+  <br>
+  <br>
+  If you have problems with a programs, try running with <span style="font-style: italic;">-d</span> or <span style="font-style: italic;">--DEBUG </span>flags set. These will run the program
+  in verbose/diagnostic mode and the program will print useful diagnostic information.
+  This is the standard way of debugging problems. <br>
+  <div style="text-align: justify;">
+
+<A NAME=link9></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>INSTALLATION GUIDE</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'> The following guide describes how to install GEM.<P>
+ If you are planning to using GEM, please contact Sql Technologies by email.  We are interested in making your <em><strong>GEM</strong></em> Installation a success, and will provide installation support.  We are aiming for full customer satisfaction and will work with you to make this product a success.<P>
+
+<A NAME=link10></A>
+<h1>Pre-install check list</h1>
+<p>
+<P>
+<UL>
+<P>
+<LI><B>PICK 1 or 2 SYSTEM(s) TO USE AS GEM MONITORING SERVER(s)</B>
+<P>
+ <em><strong>GEM</strong></em>  manages your systems from central monitoring systems.  A Windows systems is used to manage your Windows databases.  A Unix or Linux server is used for your Unix servers.  If you have both (a "Hybrid Environment") Windows and  Unix based databases, you will need 2 monitoring systems.  <P>
+ These systems run a lot of perl batch jobs.  It is recommended that you use dedicated systems for your production  <em><strong>GEM</strong></em> monitoring servers. For your initial trial setup, you can use a development system as a monitoring station as the system does not have high requirements. <p> On Windows monitoring systems, we suggest you have access to a Windows login other than the login you normally use for login.  On Windows, scheduled <em><strong>GEM</strong></em> batch jobs  might result in the pop up of dos cmd boxes (which is annoying).  Scheduling the jobs using a 'batch' Windows account prevents this. <P>
+ You will need appropriate SQL Server and/or Sybase/Oracle client software to be installed on your monitoring servers.<P>
+<LI><B>PICK A HOME FOR THE GEM CODE</B>
+<P>
+ Identify the directory you are going to install <em><strong>GEM</strong></em> into.   This is only tricky if you have a Hybrid Environment, in which case your admins  need to create a <span><u><b>samba share</b></u></span> such that a single directory appear in both Unix/Linux and Windows.   When <em><strong>GEM</strong></em> is installed on a samba share, the same  code works unchanged to monitor both your Unix and Windows environments seamlessly.<P>
+<LI><B>INSTALL & VERIFY perl 5.8.1 OR LATER</B>
+<P>
+ Each monitoring station requires perl to be installed at version 5.8.1 or later.   This can be verified by running the command <font color=red><em>perl -v</em></font>  (prints the version number). <P>
+ On Windows, we recommend the latest Activestate Perl  from <A href=http://www.activestate.com>http://www.activestate.com</A>.   Use the default installation options.<P>
+ On UNIX, binary releases can be downloaded from <A href=http://www.cpan.org>http://www.cpan.org</A>. You can have your Unix admins install/provide perl for you or can  install your own version of perl in your own home directory.   The second approach has the advantage that you have control, and will not need permission of the Unix administrators to add/update modules.<P>
+<LI><B>ADD PERL MODULES (WINDOWS MONITORING STATIONS)</B>
+<P>
+ <font color=red>Note perl module installation on windows systems is now done via <A HREF=#link13>configure.pl</A></font><P>
+ Verify availability of the perl DBI module and associated DBD perl modules.   DBI and DBD::ODBC are required on Windows servers.  <P>
+ On Windows, install these modules via :  <p> [StartKey] -> [Run] and then type <font color=red>ppm install DBI</font>  <br>and  <br> [StartKey] -> [Run] and then type <font color=red> ppm install DBD::ODBC </font>.   <P>
+ <font color=blue>If your company has a firewall/proxy set up such that the ppm commands fail we suggest:<P>
+ Bring up a browser and go to http://ppm.activestate.com/PPMPackages/zips/ - select your version and go to the Windows subdirectoy and download the latest zip file.  The file will contain 3 files when extracted - a .ppd file, a readme, and a .tar.gz file.   To install this ActiveState PPM package, run the following command in the current directory:<P>
+ ppm install DBD-ODBC.ppd<P>
+ You should download both the DBD::ODBC and DBI libraries. The latest versions (as of October 2007 are 1.13 and 1.58 respectively. </font><P>
+<LI><B>ADD PERL MODULES (UNIX MONITORING STATIONS)</B>
+<P>
+ Verify availability of the perl DBI module and associated DBD perl modules.   DBI and native drivers DBD::Sybase, DBD::Mysql or DBD::Oracle are required for the perl on your Unix monitoring servers.<P>
+ On Unix, the DBI and DBD::Sybase modules must be installed by hand.  You may also wish to install DBD::Oracle, although oracle support is currently limited with full support scheduled for 3Q08. Module installation on Unix may require administrator help (the make install step requires write access to the perl library directories which are write protected unless you are using a local version of perl. <P>
+<LI><B>IDENTIFY SCRIPT CAPABLE DIRECTORY ON YOUR WEB SERVER </B>
+<P>
+ <em><strong>GEM</strong></em> uses perl/cgi for its primary user interface.  To run these scripts, you must create a 'script enabled' directory on your web server. We recommend an IIS server be used for this because of the native security features within IIS tie into the security features within the <em><strong>GEM</strong></em> user interface and allow provisioning on a screen by screen basis. You should secure this web directory as you see fit for information of that type.   <P>
+<LI><B>CREATE A MONITORING DATABASE</B>
+<P>
+ <em><strong>GEM</strong></em> requires a <strong><u>small  monitoring database</u></strong>. Place this database on Sybase if you have a 'Hybrid' or 'Unix Only' environment.  The free version of sybase for linux is appropriate. The database can be placed on Microsoft SQL Server in Windows only environments.  <font color=red>Be forwarned that the software is primarily run on a Sybase/Linux database and is currently untested on Sql Server.  This should not pose a problem as the code should be 100% compatible.</font>.  This database will store  enterprise monitoring information and must be accessible from all your monitoring servers.   If you have Unix Systems yet wish (for some reason) to use a SQL Server as your  repository, you can install FreeTds and the Unix verison of DBD::ODBC. <p><P>
+<LI><B>MONITORING DATABASE CREATION (Sybase)</B>
+ <ul> <li>Create A Database Named gemalarms with size >= 200MB </li> <li>Turn on select into and truncate log on checkpoint database options </li> <li>Create login named gemalarms with password gemalarms </li> <li>Add login gemalarms to database gemalarms in group public (not a dbo account) </li> </ul><P>
+ <FONT color=RED> use master<br> --create devices (for example purposes only)<br> disk init name='gemdata',physname='/export/home/sybase/data/gemdata.dat',vdevno=5, size=1024000<br> disk init name='gemlog', physname='/export/home/sybase/data/gemlog.dat', vdevno=6, size= 256000<br> go<br> create database gemalarms on gemdata=300 log on gemlog=100<br> go<br> exec sp_dboption gemalarms,"select",true<br> exec sp_dboption gemalarms,"trunc",true<br> go<br> sp_addlogin "gemalarms","gemalarms","gemalarms"<br> go<br> use gemalarms<br> go<br> checkpoint<br> go<br> sp_adduser gemalarms<br> go<br> </font><p><P>
+<LI><B>MONITORING DATABASE CREATION (Sql Server)</B>
+ <ul> <li>Create A Database Named gemalarms</li> <li>Turn on simple recovery mode</li> <li>Create login named gemalarms with password gemalarms </li> <li>Add login gemalarms to database gemalarms with datareader/datawriter permission </li> </ul><P>
+<LI><B>IDENTIFY THE DATABASE SERVERS YOU WANT TO MONITOR</B>
+<P>
+ If you are trialing <em><strong>GEM</strong></em>, we recommend installing on 4-6 database servers on 4-6 separate sytems and that the trial be either 'all Unix' or 'all Windows' databases.   You will require the following rights on these database servers:<P>
+ You need Windows administrator access your Windows database servers - needed to monitor disk space, server processes, and event logs<P>
+ You will require sa_role access for all your Sybase database servers to installation the stored procedure library.  You can use a non-sa access for monitoring<P>
+ You will require "no-password" access via ssh for your Unix systems for access to log files<P>
+ You will require sybase Unix account access for your Sybase database servers. this is used to read sybase event logs<P>
+<LI><B>SET UP YOUR ODBC DATA SOURCES OR interfaces FILE</B>
+<P>
+ Ensure that all the database servers identified in the last step have <u><b>ODBC entries</b></u>  (Windows Monitoring Box),  and have appropriate Sybase interfaces file (and Oracle tnsnames.ora) entries. The configuration process (configure.pl) will automatically discover your servers based on these values. <p><P>
+<LI><B>SET UP SECURE INTRA SYSTEM COMMUNICATIONS (UNIX)</B>
+<P>
+ All UNIX systems involved with GEM must be accessible from the Unix monitoring system by ssh/scp with no password.   The account you will be using to schedule the batch jobs and to run gem must be able to  get into these systems without passwords.  <P>
+ <FONT color=RED> monitor ebarlow: ssh sybase@sybprod<br> Last login: Wed Apr  2 11:37:29 2008 from monitor<br> $<br> </FONT><P>
+</UL>
+<P>
+
+<A NAME=link11></A>
+<h1>Suggestions on your first implementation</h1>
+<p>
+<P>
+ Database administrators can be, and should be, a cautious lot.  We obviously would like to roll out a tool like <em><strong>GEM</strong></em> to monitor a single test box.  This would obviously be the lowest risk configuration.  An installation like that totally and completely buys you nothing.  <em><strong>GEM</strong></em> will be of no value. That is <b>totally and completely the wrong way to roll out</b> <em><strong>GEM</strong></em>.  <P>
+ The correct way to roll out <em><strong>GEM</strong></em> is to implement it on between 4 and 6 test and dev servers.  Obviously dont trial  <em><strong>GEM</strong></em> on anything production (that includes your workstation). Your Trial needs this many systems to let you to see how the <em><strong>GEM</strong></em> software works.  Plus, <em><strong>GEM</strong></em> is a LOT of effort to implement, so you might as well get some use out of your <em><strong>GEM</strong></em> trial. <P>
+ We do recommend using a 'server' class machine as monitoring station, iis server, and database.  It can be an older system - but this does insulate you from any side effects on performance that can be caused by using your personal workstation for any of these tasks. You can, if you so choose, use your personal workstation to run the required database and web server as well as making that personal workstation the dedicated monitoring  station. This sort of works - it is fairly lightweight application on modern boxes - but you WILL see some impact.  You must use an windows account other than your own to run the batch scripts - or you will see annoying pop up screens. <P>
+ Ensure that you have defined ALL items on the <em><strong>GEM</strong></em> pre-install check list.   For example, <em><strong>GEM</strong></em> loses half its value in a Unix environment if you dont have 'no password'  access via ssh connectivity to your Unix systems. Simarly, "ADMINSITRATOR GROUP" rights are required for direct access to your Windows servers log files.  You need these.   Additionally, it is highly strongly very suggested that you have a web server with a script capable directory into which you can place our cgi perl interface.  While we do have a TK version of the interface, the web interface is the one you should use. <P>
+ Presuming you have a reasonable network configuration, <em><strong>GEM</strong></em> has a pretty low footprint on everything  but the monitoring host system.  Network impact is mostly semi hourly fetches of your database error logs.  <em><strong>GEM</strong></em> does install our system stored procedures on all your database servers.  They are a nice package and you will like them.  On the monitoring system, <em><strong>GEM</strong></em> runs a bunch of perl batch jobs - and frequently  multiple jobs will run at the same time.  We recommend multi processor systems as your monitoring systems, but most 2-4 year old server class systems will be fine (find some depricated system).  Linux is a good choice for a monitoring system to monitor Unix database. <P>
+ As far as your database servers go, <em><strong>GEM</strong></em> has the experience to be a good citizen.  <em><strong>GEM</strong></em>  is designed by active dbas, not a lab by developers. Your developers and users should have not have any noticable degredation in performance  as a result of <em><strong>GEM</strong></em>.  <P>
+ <FONT COLOR=PURPLE>A good solid burn in environment for <em><strong>GEM</strong></em> should have between 4 and 6 database servers and 4 to 6 different host systems (of course nothing production should be touched).</FONT> It would be slightly simpler to implement the trial if running all Windows or all Unix databases.<P>
+
+<A NAME=link12></A>
+<h1>Download & initial setup</h1>
+<p>
+<P>
+<UL>
+<P>
+<LI><B>DOWNLOAD AND EXTRACT GEM</B>
+<P>
+ You should now download and extract the <em><strong>GEM</strong></em> software  from <A HREF="http://www.edbarlow.com/download.pl">http://www.edbarlow.com/download.pl</A>.<P>
+ You will need a passcode to download the software which can be recieved by mail from SQL Technolgies.<P>
+ Extract into the directory identified in the pre-install checklist. You should need to install into only one location regardless of whether you have a hybrid or non-hybrid environment.<P>
+ The <em><strong>GEM</strong></em> download file is a standard compressed tar file and can be extracted with winzip (Windows), gnu tar (<code>tar xvzf gem.tgz</code>), or with <code>gzip -d gem.tgz; tar xvf gem.tar</code>. If you install <em><strong>GEM</strong></em> into a subdirectory, do not use a directory that includes space characters (ie. Program Files). White space in the directory name is not a tested option.<P>
+<LI><B>SET YOUR DISPLAY ENVIRONMENT VARIABLE (Unix)</B>
+<P>
+ Many of the <em><strong>GEM</strong></em> tools use perl/Tk for a user interface.  On Windows this works without support, but on Unix this requires some type of X terminal manager (like exceed).  On UNIX, you must set the environment variable DISPLAY correctly.<P>
+ <font color=RED>EXPORT DISPLAY=your_ip_address:0.0.</font></p><P>
+ Unix users will also require an X terminal manager installed on their workstation.  Your infrastructure support can help you install this if you are not allready set up.<P>
+<LI><B>VERIFY YOUR PERL INSTALLATION</B>
+<P>
+ <p><em><font color=RED>perl troubleshoot.pl</FONT></em></p><P>
+ Use the program troubleshoot.pl in the root of the installation tree to test for the presence of necessary perl libraries.   troubleshoot.pl is the <em><strong>GEM</strong></em> installation trouble shooting program  and it can be run to diagnose any <em><strong>GEM</strong></em> issues - a successful run indicates that  your configuration is stable. <P>
+<LI><B>RUN <A HREF=#link13>configure.pl</A></B>
+<P>
+ See the section on <A HREF=#link13>configure.pl</A> for details on what this program does. <P>
+</UL>
+<P>
+
+<A NAME=link13></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>configure.pl </H1>
+<H3> GEM Configuration Tool</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <A HREF=#link13>configure.pl</A> is the <EM><STRONG>GEM</STRONG></EM> configuration utility.   This utility will build the configuration files (stored in the conf subdirectory) and runs some basic setup tasks for GEM.  The GEM Configuration Tool is quite intelligent, and will survey your systems to give you a good baseline that should require minimal tuning to work within your environment.  <P>
+ Some of the things <A HREF=#link13>configure.pl</A> does include:<P>
+<UL>
+<P>
+<LI><B>Create Configuration Files</B>
+<P>
+ One primary output of <A HREF=#link13>configure.pl</A> is the configuration files stored in the conf directory.  These files can be hand edited once GEM is set up.<P>
+<LI><B>Rebuild of all the code</B>
+<P>
+ Changing the hashbangs (the first line of the file on unix is known as a hashbang and defines the command line interpreter to use),  removing Control-M (dos newline) characters from the files, and modifying library paths.<P>
+<LI><B>Monitoring Setup</B>
+<P>
+ The initial database installation is done via <A HREF=#link13>configure.pl</A><P>
+<LI><B>Initial Build</B>
+<P>
+ This program also will generate an initial version of the <EM><STRONG>GEM</STRONG></EM> console and prepopulate  the alarm system with alerts and reports relevant to your environment.  <P>
+
+<A NAME=link14></A>
+<h1>Important notes</h1>
+<p>
+<P>
+<UL>
+<P>
+<LI><B>configure.pl and <A HREF=#link21>gem.pl</A> create log files in the logs subdirectory, </B>
+ which includes both console messages AND diagnostic messages.  If you have a problem please look at this file.  It contains all output including output that should be only produced with <A HREF=#link13>configure.pl</A> --DEBUG.<P>
+<LI><B>Work through the tabs from left to right.</B>
+<P>
+<LI><B>"Save Configuration Changes"</B>
+ writes your configuration files.  While some operations (adding stored procedures to servers) are permanent once completed, the majority are not. It is important to save before you quit.<P>
+</UL>
+<P>
+
+<A NAME=link15></A>
+<h1>How to run <A HREF=#link13>configure.pl</A></h1>
+<p>
+<P>
+ <p><font color=RED>perl <A HREF=#link13>configure.pl</A></FONT></p><P>
+ If you wish to see diagnostic messages, you may run <font color=RED>perl <A HREF=#link13>configure.pl</A> --DEBUG</FONT></p><P>
+ <FONT SIZE=+1 COLOR=RED>FOLLOW THE FOLLOWING STEP BY STEP INSTRUCTIONS TO COMPLETE YOUR INSTALLATION</FONT><P>
+ After you run <A HREF=#link13>configure.pl</A>, it will bring you through a set of screens designed to validate your perl installation and to run a basic sanity check.<P>
+ The first screen:<P>
+ <PRE><pre>
+ ************************************
+ * Generic Enterprise Manager Setup *
+ ************************************
+<P>
+ Welcome to GEM.   <A HREF=#link13>configure.pl</A> sets up GEM configuration files.
+<P>
+ No changes are made to any of your servers from <A HREF=#link13>configure.pl</A>
+  - exception the web application is copied to a directory you will identify.
+<P>
+ *****************************
+ *** This process is safe  ***
+ *****************************
+<P>
+ Hit Enter To Continue, CTRL-C to Exit
+<P>
+</pre>
+ </PRE> Hit enter and work through the screens. After the first few screens it will start running programs<P>
+ For Example: <i>C:\Perl\bin\perl.EXE  -IG:/gem/Win32_perl_lib_5_8 -IG:/gem/lib  G:/gem/bin/test_perl_modules.pl</i> which tests your perl libraries and<P>
+ For Example: <i>C:\Perl\bin\perl.EXE  -IG:/gem/Win32_perl_lib_5_8 -IG:/gem/lib  G:/gem/bin/test_copy_configfiles.pl</i> which copies the .dat.sample extension configuration files to .dat files (if those .dat files do not exist)<P>
+ For Example <i>C:\Perl\bin\perl.EXE  -IG:/gem/Win32_perl_lib_5_8 -IG:/gem/lib  G:/gem/bin/test_required_commands.pl</i> which tests that the rquired commands are in your path.  After this, it will start up the <A HREF=#link13>configure.pl</A> user interface.
+<A NAME=link16></A>
+<h1>The welcome tab</h1>
+<p>
+<P>
+ GENERAL: Navigate the configuration utility tabs from left to right.  Online help is available on our web site.<P>
+ PURPOSE: Introduction, License Details, License Acceptance<P>
+ This tab explains GEM and details licensing options.  New users will want to use our Free GEM License to trial the product - and switch to the Full GEM License after they are comfortable.  <P>
+ Select "I AGREE WITH THE LICENSE" to continue<P>
+ The GEM Help pages provide help to guide you through your install.  Each page has a separate help section.
+<A NAME=link17></A>
+<h1>The register tab</h1>
+<p>
+<P>
+ PURPOSE: Basic setup plus product registration<P>
+<UL>
+<P>
+<LI><B>Enter Your Information:</B>
+ This info is never shared so you might as well make it correct. Your Email address will be used as a target for some GEM Reports. <P>
+<LI><B>Describe Your Environment & Databases</B>
+<P>
+<LI><B>Select Gem License Type</B>
+ Details on the differences between the Free and Full License can be found on the welcome page.  <P>
+<LI><B>Select Connectivity Options</B>
+ GEM requires no password ssh access between your UNIX GEM monitoring system and your database hosts.  If this is set up, use the defaults (Allow SSH on the Unix to Unix line - nothing else selected).  Alternate access (rsh and ftp) methods are available but some features may be disabled.  Leave the Win32 Monitor connectivity options unchecked.<P>
+<LI><B>Click "REGISTER YOUR VERSION"</B>
+ to register your product.<P>
+</UL>
+<P>
+
+<A NAME=link18></A>
+<h1>The paths tab</h1>
+<p>
+<P>
+ PURPOSE: Define your possible SYBASE and ORAHOME directories<P>
+ Enter all possible locations for the SYBASE and ORAHOME variables in your preferred order.  This will be used by the server  discovery process.  <P>
+ For example, you might put C:/sybase D:/sybase /export/home/sybase /apps/sybase as 4 entries on a samba install for your sybase directories.<P>
+ The system actually supports 10 instances of each variable - you will need to manually edit gem.dat if you have more than 5 though.
+<A NAME=link19></A>
+<h1>The mail tab</h1>
+<p>
+<P>
+ PURPOSE: Ensure Mail Connectivity <P>
+ This tab is tests mail connectivity from your monitoring server.  You can test mail on windows and on unix.  The windows  montioring workstation will require that you define your SMTP Mail Server.  <P>
+ Both "Test Mail Install" buttons will result in a mail being sent to your GEM Administrator Mail Address (entered earlier).  This tab is important as electronic mail is fundamental way we communicate server problems to you.<P>
+
+<A NAME=link20></A>
+<h1>The database tab</h1>
+<p>
+<P>
+ PURPOSE: Set Up Alarm & Monitoring System<P>
+ GEM uses a centralized alarm database which must be called gemalarms. This small database must allready exist and be set up as per the installation instructions.  The Install/Upgrade Database button creates the tables & procedures in that db.<P>
+ The database must be accessible from all your monitoring servers.  This implies that sql server can only be used for an alarm db when you are in a win32 only environment.  You are responsible for the unixodbc setup required for sql server connectivity from unix if you insist on using sql server.  As sql server does not run on unix, this should not be a problem. Use Sybase for unix only and samba installs.<P>
+<UL>
+<P>
+<LI><B>Fill in the Alarm Database Server Info</B>
+ with information about the preconfigured alarm database.  The Alarm System Mail Address is arbitrary and alerts are be mailed using that as a reply-to address.  It is ok to use an INVALID mail address  as you wont ever reply to the alerts.<P>
+<LI><B>Install/Upgrade Alarm Database</B>
+ creates your alarm database tables & procedures <P>
+<LI><B>Validate Alarm Database</B>
+ checks the database for sanity and version. <P>
+</UL>
+<P>
+
+<A NAME=link21></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>gem.pl </H1>
+<H3> GEM Post Installation Task Manager</H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <A HREF=#link21>gem.pl</A> is the <EM><STRONG>GEM</STRONG></EM> post configuration tasks manager.   This utility will run tasks that you might want to repeatedly run after an installation.   For example, every time you add a server, you should rebuild your batch scripts and reschedule them - because the tasks are customized to your list of servers.<P>
+
+<A NAME=link22></A>
+<h1>Post installation tasks manager - unix</h1>
+<p>
+<P>
+ Once you are done with your <EM><STRONG>GEM</STRONG></EM> installation, there are a variety of post-installation tasks .   This checklist is designed to help you with these tasks.  <P>
+<pre>
+ <A HREF=#link21>gem.pl</A> - version 1
+  -- started at Sat Jun 25 07:27:10 2011 on server sybmon as user sybase
+ Appending environment variable perlargs (-I/apps/sybmon/lib) to includepath
+ You are running on sybmon, the registered Alternate Unix Monitor Station
+</pre>
+<P>
+<pre>
+ ****************************************************
+ * Gem Administrator v1.000                         *
+ ****************************************************
+     1] Discover Sybase Servers From Interfaces File
+     2] Test SSH connectivity to your unix systems
+     3] Map Credentials To Users
+     4] Batch Jobs: Create Unix GEM Batch Scripts
+     5] Batch Jobs: Create Crontab To Schedule Unix Batch Jobs
+     6] Batch Jobs: Show GEM Batch Jobs
+     7] Run Promotion
+     8] Test Default Unix Connectivity
+     9] Reformat Codeline
+     l] Load static data
+     d] Start or End diagnostic mode
+ q or x] exit
+</pre>
+<P>
+<pre>
+   INPUT:
+</pre>
+<P>
+
+<A NAME=link23></A>
+<h1>Post installation tasks manager - windows</h1>
+<p>
+<P>
+<pre>
+ [G:/gem] perl <A HREF=#link21>gem.pl</A>
+ <A HREF=#link21>gem.pl</A> - version 1
+  -- started at Sat Jun 25 07:38:45 2011 on server adwte506 as user ebarlow
+ You are running on adwte506, the registered Alternate Win32 Monitor Station
+</pre>
+<P>
+<pre>
+ ****************************************************
+ * Gem Administrator v1.000                         *
+ ****************************************************
+     1] Load Configfiles To Database (must promote)
+     2] Discover Sybase Sql Servers From Interfaces File
+     3] Load Active Directory Computers
+     4] Fetch Windows Credentials
+     5] Fetch LDAP User Information
+     6] Map Credentials To Users
+     7] Snapshot Win32 Services
+     8] Batch Jobs: Create Win32 GEM Batch Scripts
+     9] Batch Jobs: Schedule Win32 Batch Jobs
+    10] Batch Jobs: Show GEM Batch Jobs
+    11] Run Promotion
+     l] Load static data
+     d] Start or End diagnostic mode
+ q or x] exit
+</pre>
+<P>
+<pre>
+   INPUT:
+<P>
+</pre>
+
+<A NAME=link24></A>
+<h1>Reformat codeline (unix only)</h1>
+<p>
+<P>
+ Removes Control-M's and Sets Hashbangs<P>
+
+<A NAME=link25></A>
+<h1>Batch jobs: create unix gem batch scripts</h1>
+<p>
+<P>
+ Creates a Crontab file named crontab.txt file in the gem home directory that is appropriate for unix cron.   To install into cron:<P>
+<pre>
+   export EDITOR=vi
+   crontab -e
+   &lt;vi window pops up&gt;
+   :r crontab.txt
+</pre>
+<P>
+ Be sure that the account you schedule this on has a .forward file so any errors will not be routed! A .forward file is a file in your HOME directory that contains mail addresses.<P>
+ You can put the following type line at the head of your crontab.  It applies to all commands in the crontab<P>
+ PATH=/apps/sybase.linux/12.5.1b/OCS-12_5/bin:/usr/bin/:/bin<P>
+
+<A NAME=link26></A>
+<h1>Batch jobs: create win32 gem batch scripts</h1>
+<p>
+<P>
+ Creates batch jobs for your windows monitoring station<P>
+
+<A NAME=link27></A>
+<h1>Batch jobs: schedule win32 batch jobs</h1>
+<p>
+<P>
+ provides a native interface to the windows task scheduler.  Provide an account & password  which has access to windows event logs,  windows disk administrative shares, and windows services (probably requires adminstrator).
+<A NAME=link28></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>POST INSTALLATION STEPS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+
+<A NAME=link29></A>
+<h1>Other things to do</h1>
+<p>
+<P>
+ Once you are done with your <EM><STRONG>GEM</STRONG></EM> installation, there are a variety of post-installation tasks .  <P>
+<h3>Modify your Password Files</h3>
+<P>
+ The password files are located in <font color=red>conf/*_password.dat</font> and are hand editable.<P>
+<pre>
+   sybase_passwords.dat
+   oracle_password.dat
+   win32_password.dat
+   unix_passwords.dat
+   sqlsvr_password.dat
+<P>
+</pre>
+ All configuration files are self documented. <P>
+ If you add new databases or systems, recreate & reschedule your Batch Scripts.  Most scripts work against all servers in the configuration files,  but some scripts work on a specific database (specifically the ones with the Database name in the file name).<P>
+<h3>Windows Directory Cleaner</h3>
+<P>
+ One of the harder tasks of the Windows DBA is disk space cleanup. Something is *always* running out of space...  <EM><STRONG>GEM</STRONG></EM> automates this task for you.<P>
+ The file <font color=red>conf/win32_cleanup.dat</font> contains a list of disk space Cleanup instructions for the Windows cleanup batch job.   It is suggested that you customize this file to include your tran/archive log directories, your application log directories, and any other directories that fill up on your systems. A best practice is to add rows to this file over time, every time the Windows disk space monitor spots a directory that is filling up. The lines in this file conform to the arguments of ADMIN_SCRIPTS/bin/purge_old_files.pl, and include --hours and --days to identify the keep times, --dir to identify the directory to purge, and either --compress=<compress program> or --del (to identify what to do with the old files).  See the syntax of purge_old_files.pl for other options. <font size=-1><P>
+<pre>
+   # FILENAME: win32_cleanup.dat
+   #
+   # USED BY:  Batch job Win32FileCleanup
+   #
+   # SYNOPSIS: Directives for cleaning up win32 drives.  This file is
+   #    identical to Unix_Cleanup.dat but for the --compress (Win32 only)
+   #    argument which is missing and the required --host argument (Unix Only).
+   #
+   #
+   # FORMAT  : HOSTNAME drive drive drive.
+   #
+   # DETAILS : The arguments are the arguments to purge_old_win32_files.pl
+   #
+   #  --host=&lt;host&gt;
+   #  --hours=&lt;hours&gt;
+   #  --days=&lt;days&gt;
+   #  --dir=&lt;dir&gt;
+   #  [--del]                - do you wish to delete the file?
+   #  [--done]             - only work on files with .done extension
+   #
+   # EXAMPLE FORMATS:
+   #
+   # Delete 14+ day old files on host h1
+   # --days=14 --dir=//adsrv012/c$/oracle/admin/SCPROD/udump --del
+   #
+   # Delete files with .done extension older than 2 days old
+   # Note: this will delete .done.gz files and .done files
+   # --days=2 --dir=//SRVR001/d$/logshipbuffer --del --done
+   #
+   #######################################################################
+   #
+   # START RECOMMENDED PURGES
+   # --days=7 --dir=C:/gem/data/logs -del
+   # --days=7 --dir=C:/gem/data/batchjob_errors -del
+   # --days=7 --dir=C:/gem/data/GEM_BATCHJOB_LOGS -del
+   # --days=7 --dir=C:/gem/data/CONSOLE_REPORTS -del
+   # --days=7 --dir=C:/gem/data/cronlogs -del
+   # --days=7 --dir=C:/gem/data/errors -del
+   # --days=7 --dir=C:/gem/data/backup_reports -del
+   # --days=7 --dir=C:/gem/data/html_output -del
+   # --days=30 --dir=C:/gem/data/BACKUP_LOGS\*\sessionlog -del
+   # --days=30 --dir=C:/gem/data/BACKUP_LOGS\*\errors -del
+   # END RECOMMENDED PURGES
+</pre>
+<P>
+ </font><P>
+<h3>Unix Directory Cleaner</h3>
+<P>
+ The Unix_Cleanup.dat file will control Unix file/directory cleanups.  It is similar to the Windows cleanup file but for the addition of the --hostname argument.<P>
+<h3>port_monitor.dat</h3>
+<P>
+ Port Monitoring is a quick availability test - and a good way to find out if a database or system is down.   The file <font color=red>conf/port_monitor.dat</font> contains a list of Hosts and Ports to Monitor.  <P>
+ This file is autogenerated by one of the batch scripts.<P>
+ Simple format:<P>
+ <font size=-1><P>
+<pre>
+  # hostname                      PORT SERVER   DESCRIPTION
+  SRVR001                        1433 SRVR001   Microsoft SQL Server
+  SRVR007                        1433 SRVR007   Microsoft SQL Server
+  brokersql                      1433 BROKERSQL Microsoft SQL Server
+  mail1                            25   Sendmail on mail1
+</pre>
+<P>
+ </font><P>
+<h3>Sybase Replication Monitoring</h3>
+<P>
+ The File <font color=red>conf/Replication.dat</font> is used by the Sybase replication server monitoring scripts and will need to be popluated with your Rep Servers and Routes. <font size=-1><P>
+<pre>
+   # FILENAME: replication.dat
+   #
+   # SYNOPSIS: Lists your sybase replication server information
+   #
+   # FORMAT:
+   #
+   # REPSERVER $NAME $LOGIN $PASSWORD $THRESHOLD_MB
+   # REPROUTE  $SOURCE_SVR $SOURCE_DB $DEST_SVR $DEST_DB $REPSERVER
+   #
+   # EXAMPLES (350MB Thresholds):
+   #
+   #  REPSERVER REP1DR_RS sa &lt;pass&gt; 350
+   #  REPSERVER REP2_RS   sa &lt;pass&gt; 350
+   #  REPSERVER REP1_RS   sa &lt;pass&gt; 350
+   #
+   #  REPROUTE  SYB1 my_db SYB2   my_db REP2_RS
+   #  REPROUTE  SYB1 my_db SYB1DR my_db REP2_RS
+   #
+   # ONCE YOU SET THIS FILE UP - PLEASE RUN
+   #      ADMIN_SCRIPTS/monitoring/SybRepMonitor.pl --ACTION=INSTALL
+   # MONITORING IS HANDLED AUTOMATICALLY BY THE GEM BATCH SybRepMonAgent
+   ##############################
+</pre>
+<P>
+ </font> There are two programs that check replication. The batch SybRepServerChecker will check all your rep servers to be sure that no routes are suspended, that disk space is reasonable, and that there are no other serious errors.  There are also three batches, SybRepMonAgent, SybRepMonCheck, and SybRepMonReport that compute latencies of your replication, and will warn you when replication falls behind.  These three batch programs call SybRepMonitor.pl.  This program takes an argument --ACTION. <P>
+ To initialize this system, you need to set up your configuration file and then run  <font color=red>myperl SybRepMonitor.pl --ACTION=INSTALL</font><P>
+<h3>Adjust Diskspace Alarm Thresholds</h3>
+<P>
+ You may not wish all your alarms to work at the same thresholds - preferring to set some thresholds individually.  Generally speaking, this is most needed when some resourse is  nearing "full" and generating alarms, but you can not fix the problem immediately - intending to fix the problem later.  The <font color=red>conf/threshold_overrides.dat</font> file allows you that control.   <font size=-1><P>
+<pre>
+   # FILENAME: threshold_overrides.dat
+   #
+   # SYNOPSIS: Monitoring Thresholds
+   #
+   # DETAILS : This file permits you to turn off alarms and to control their
+   # severity.  This is a Comma Separated File
+   #
+   # SAMPLE FORMAT:
+   # &lt;system&gt; &lt;monitor_program&gt; &lt;level&gt; &lt;threshold&gt; &lt;optional subsystem&gt;
+   #
+   # monitor_program=UnixDiskspace|PcDiskspace|SybSpaceMonitor
+   #                         |SpaceMonitorSqlsvr|ThresholdManager
+   # level=CRITICAL|ERROR|WARNING
+   #
+   # remember to reset higher priority thresholds so there is no overlap - ie if you
+   # set ERROR to 98%, then you should set critical to something larger (say 99%).
+   # The programs may act wierd if the CRITICAL threshold was less than the ERROR threshold.
+   #
+   # By default - SybSpaceMonitor & SpaceMonitorSqlsvr will use 90/92/95% as
+   # their default thresholds
+   #
+   # Replication thresholds are in minutes.  For replication,  you can put a
+   # blank target name in if you want but not a blank source name
+   #
+   # EXAMPLES
+   # eg.  directfeed,UnixDiskspace,WARNING,80,Disk: /var
+   # eg.  direct1,UnixDiskspace,WARNING,80,Disk: /var
+   # eg.  direct2 ,UnixDiskspace,WARNING,80,Disk: /var
+   #
+   # eg.  SYBSVR1,SybSpaceMonitor,WARNING,80,db1
+   # eg.  SYB1,SybSpaceMonitor,ERROR,95
+   # eg.  SYB1,SybSpaceMonitor,ERROR,95,clientdb
+   #
+   # eg.  ADSRV057,PcDiskspace,ERROR,98,d$
+   # eg.  ADSRV057,PcDiskspace,CRITICAL,99,d$
+   #
+   # eg.  SERVERNM,ThresholdManager,CRITICAL,99,logsegment|default
+   #
+   # EXAMPLE REPLICATION STUFF
+   # eg.  SOURCESVR,SybRepMonCheck,CRITICAL,30,TARGETNM
+   # eg.  SOURCESVR,SybRepMonCheck,ERROR,15,TARGETNM
+   # eg.  SYB1,SybRepMonCheck,CRITICAL,80,IMAGSYB2
+   # eg.  SYB1,SybRepMonCheck,CRITICAL,80,
+   # eg.  SYB1,SybRepMonCheck,ERROR,60
+   #
+   #########################################
+</pre>
+<P>
+ </font><h3>The sybase threshold manager</h3>
+<P>
+ Another <EM><STRONG>GEM</STRONG></EM>  component is the Sybase threshold manager. This program (ADMIN_SCRIPTS/bin/threshold_manager.pl) installs customized  sp_thresholdaction procedures into your databases and allows you to find peak usage (most important for log file sizes).   This proactive utility will hopefully prevent you from running out of log space - because you will have been warned in advance in such a way that you can expand capacity before there is a production alert.<P>
+ The sp_thresholdaction procedures we install are simple reporting versions that insert peak usage data into a small table in sybsystemprocs.   You can run a report showing peak usage of data and log segments in your databases which is the Threshold Report you can view in the console.<P>
+ This procedure needs to be installed manually by running the threshold manager reinstall batch script<P>
+ <font color=red>ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=INSTALL</font><P>
+ after you have registered your servers.  One warning.  If you increase the *size* of any of your databases,  you will need to rerun the above installation command. Sybase thresholds are based on free pages and the percentages are therefore set when you run the installation.  So, if you double the size of a database, your 60% threshold will be firing at 30% and recording it as 60% full!  Just reinstall and you will be ok!.   <P>
+ Other commands of interest:<P>
+ <font color=red>ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=CHECK</font><P>
+ <font color=red>ADMIN_SCRIPTS/bin/threshold_manager.pl --ACTION=REPORT</font><P>
+ This feature only works with Sybase<P>
+<h3>Snapshot Win32 Services</h3>
+<P>
+ This information is stored in <font color=red>conf/win32_service.dat</font> and can be created from <A HREF=#link21>gem.pl</A> using "Snapshot Win32 Services".  This script will survey all your windows servers and  create a snapshot of their services in the above file.  From this point on, a weekly routine will snapshot services for any NEW services, and another routine will test for the availability of those services.  Currently only a few, sql related, services are alertable.<P>
+
+<A NAME=link30></A>
+<h1>Install web server scripts</h1>
+<p>
+<P>
+ You need to copy the ../gem/lib subdirectory and the ../gem/ADMIN_SCRIPTS/cgi-bin directories to the web server directory.  <P>
+ From <A HREF=#link21>gem.pl</A>, run Rollout Web Server Code<P>
+
+<A NAME=link31></A>
+<h1>Your own scheduled tasks</h1>
+<p>
+<P>
+ You can alert on the output of your scripts by following our conventions.  Our convention is to have normal script output in .out files (standard output) and .err files for alarmable messages (standared error).   YOu can put these files into the data/html_output or data/cronlogs directories.<P>
+<pre>
+  script.pl &gt; /apps/gem/data/cronlogs/script.out  2&gt; /apps/gem/data/cronlogs/script.err
+</pre>
+<P>
+
+<A NAME=link32></A>
+<h1>Directory security</h1>
+<p>
+<P>
+ <EM><STRONG>GEM</STRONG></EM>  is an administrative tool, designed for system administrators.  As such, the conf directory contains all your passwords.  You need to protect this data via operating system permissions.<P>
+ I suggest 'chmod -R 770 *' on unix to be run in your gem home directory<P>
+
+<A NAME=link33></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>How To Upgrade GEM</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <em><strong>GEM</strong></em> is designed for simple upgrades.  The steps are as follows<P>
+<UL>
+<P>
+<LI><B>Download the latest codeline</B>
+<P>
+<LI><B>Extract on top of your existing distribution!!!</B>
+<P>
+ No configuration files are shipped with the installation so there should be no problems. All configuration files are shipped with a .sample extension.  <P>
+ On your Windows monitoring server, you may not be able to extract the code because the task scheduler is running a batch job that calls one of the perl scripts.  Windows will not let you overwrite a program that is running.  This does not happen under Unix.  You can either go into the task scheduler, stop all running jobs before rerunning the extract, or kill the jobs and then stop the task scheduler process.  I normally just stop the jobs, but sometimes  (because end task does not work cleanly) i am forced to stop the scheduler process for the duration of the extract.  <P>
+<LI><B>Run <font color=red><code>perl <A HREF=#link21>gem.pl</A></code></font></B>
+<P>
+ And select the upgrade your version option.<P>
+ The new downloaded code will have *OUR* hashbangs, library paths, and sybase environment. The upgrade option updates these files automatically. It will also re-installing your alarm database.   During the period you are upgrading - your <em><strong>GEM</strong></em> batch jobs will probably fail and send you alarm mail.   Ignore these failures notifications.<P>
+ <font color=red>ONCE YOU HAVE SUCCESSFULLY RUN upgrade.pl YOU ARE DONE</FONT><P>
+</UL>
+<P>
+
+<A NAME=link34></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>GUIDE TO GEM BATCH JOBS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>DESCRIPTION</h3>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'>   Batch jobs are created by the GEM configuration program and are used to monitor your servers and to create the GEM Console.  These scripts are organized into 8 directories that contain duplicate scripts.   The batch jobs name is the "monitor program" shown by the monitoring system.<P>
+ The directory structure is<P>
+<pre>
+   win32_batch_scripts
+       batch
+       interactive
+       plan_batch
+       plan_interactive
+   unix_batch_scripts
+       batch
+       interactive
+       plan_batch
+       plan_interactive
+</pre>
+<P>
+ Files are created in these directories as needed by <A HREF=#link21>gem.pl</A>.  For example, if you tell <A HREF=#link21>gem.pl</A> that you have only windows based systems,  the subdirectories under unix_batch_scripts will not be populated.  Similarly, if you are in an all-sybase environment, the oracle and sql server scripts will not be created. Batch jobs are created with a .ksh extension.  Additionally, the win32_batch_scripts tree will contain duplicates with a .bat extension.  This simplfies scheduling.<P>
+ The major difference between the "*_batch" and "*_interactive" directories is the redirection of standard output.  Scheduled jobs use the "batch" directories which differ from the "interactive" directories only in that they redirect standard output and standard error into the GEM_HOME/data/GEM_BATCHJOB_LOGS  directory.  These files can be viewed through the Console.<P>
+ You are responsible for scheduling these jobs (sort of).   If you are running on windows, <A HREF=#link21>gem.pl</A> (the GEM Configuration utility) can auto schedule your jobs in the windows task scheduler.  If unix, <A HREF=#link21>gem.pl</A> can create a customized GEM_HOME/crontab.txt file for your inclusion in your unix crontab (via crontab -e; set the variable 'EDITOR=vi' if 'crontab -e' leaves you in 'ed' mode.  On Win32, GEM provides both .ksh and .bat versions of all scripts to  support those who use a unix emulator like cygwin or MKS toolkit.<P>
+<h3>TO RUN THE JOBS INTERACTIVELY</h3>
+<P>
+ When running batch jobs by hand (for example to test), always use the files in the 'interactive' or 'plan_interactive' subdirectory trees.  If you use the scripts in batch or plan_batch, you wont be able to view the output because it is redirected to files!!!  <P>
+
+<A NAME=link35></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>SUMMARY OF BATCH JOBS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The following table is a summary of the jobs that can be created by GEM's configuration utility. <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Batch Job Spec For Inventory Manager (CMDB)</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Win32 or<br>Unix</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Description</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Recommended<br>Frequency</b></td> </tr><TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                INV_GetEtcPasswd</TD><TD>                Unix</TD><TD>Get /etc/password files </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              INV_LoadYpcatHosts</TD><TD>                Unix</TD><TD>        Ypcat Hosts </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">        INV_MysqlDatabaseAuditor</TD><TD>                Unix</TD><TD>Change Auditor for Mysql </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">       INV_OracleDatabaseAuditor</TD><TD>                 Win</TD><TD>Change Auditor for Oracle </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">       INV_SqlSvrDatabaseAuditor</TD><TD>                 Win</TD><TD>Change Auditor for Sql Server </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">       INV_SybaseDatabaseAuditor</TD><TD>                Unix</TD><TD>Change Auditor for Sybase </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                    INV_WinDsget</TD><TD>                 Win</TD><TD>              Dsget </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            INV_WinDsgetComputer</TD><TD>                 Win</TD><TD>     Dsget Computer </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           INV_WinGetSystemUsers</TD><TD>                 Win</TD><TD>  Get Windows Users </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              INV_YpcatExtractor</TD><TD>                Unix</TD><TD>        Ypcat Hosts </TD><TD>               Daily</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Code Executed By Inventory Manager (CMDB) Scripts</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Command</b></td> </tr><TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                INV_GetEtcPasswd</TD><TD>inventory_manager/INV_get_etcpasswd.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              INV_LoadYpcatHosts</TD><TD>inventory_manager/INV_load_ypcat_hosts.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">        INV_MysqlDatabaseAuditor</TD><TD>inventory_manager/INV_database_auditor.pl --DOALL=mysql </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">       INV_OracleDatabaseAuditor</TD><TD>inventory_manager/INV_database_auditor.pl --DOALL=oracle </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">       INV_SqlSvrDatabaseAuditor</TD><TD>inventory_manager/INV_database_auditor.pl --DOALL=sqlsvr </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">       INV_SybaseDatabaseAuditor</TD><TD>inventory_manager/INV_database_auditor.pl --DOALL=sybase </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                    INV_WinDsget</TD><TD>inventory_manager/INV_dsget.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            INV_WinDsgetComputer</TD><TD>inventory_manager/INV_dsget_computer.pl --RUNADFIND </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           INV_WinGetSystemUsers</TD><TD>inventory_manager/INV_win_getsystemusers.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              INV_YpcatExtractor</TD><TD>inventory_manager/INV_unix_ypcat_extractor.pl </TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Batch Job Spec For Sql Server Databases</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Win32 or<br>Unix</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Description</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Recommended<br>Frequency</b></td> </tr><TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                   Mssql_Auditor</TD><TD>                 Win</TD><TD>        Audit Mysql </TD><TD>         Saturday-am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_BkpChk_ByProc</TD><TD>                 Win</TD><TD>Check Backups - By Stored Procedure </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_BkpChk_Evening</TD><TD>                 Win</TD><TD>Check Backups - Evening Procedure </TD><TD>           Daily-8pm</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_BkpChk_Hourly</TD><TD>                 Win</TD><TD>Check Backups - Hourly Procedure </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_BkpChk_Morning</TD><TD>                 Win</TD><TD>Check Backups - Morning Procedure </TD><TD>           Daily-4am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_BkpChk_Report</TD><TD>                 Win</TD><TD>Check Backups - Create Report  </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_BkpChk_Weekly</TD><TD>                 Win</TD><TD>Check Backups - Weekly Procedure </TD><TD>         Saturday-am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           Mssql_CheckPersistent</TD><TD>                Both</TD><TD>Persistent Monitor for Sql Server </TD><TD>           Daily-2am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">          Mssql_CheckServerDaily</TD><TD>                 Win</TD><TD>Config Audit - Daily </TD><TD>           Daily-2am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_CheckServer_*</TD><TD>          Every15Min</TD><TD>  Is your server ok?</TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_ClusterManager</TD><TD>                 Win</TD><TD>Check its still running on the same cluster </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">        Mssql_ClusterManagerInit</TD><TD>                 Win</TD><TD>Detect New clusters </TD><TD>              Weekly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_CycleEventLogs</TD><TD>                 Win</TD><TD>   Cycle Event Logs </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                 Mssql_DrChecker</TD><TD>                 Win</TD><TD>Check DR Configuration </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Mssql_JobStatusRpt</TD><TD>                 Win</TD><TD>Sql Server Job Scheduler Check </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Mssql_LogMaintPlan</TD><TD>                 Win</TD><TD>Look at log maint plans </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                      Mssql_Ping</TD><TD>                 Win</TD><TD> Ping MSSQL servers </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           Mssql_ScheduledJobRpt</TD><TD>                 Win</TD><TD>     SCheduled Jobs </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                Mssql_Shrinklogs</TD><TD>                 Win</TD><TD>        Shrink Logs </TD><TD>             Nightly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Mssql_SpaceMonitor</TD><TD>                 Win</TD><TD>     Space Monitor    </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">         Mssql_StoredProcUpdater</TD><TD>                 Win</TD><TD>Ensure that all stored procedure libraries are at the latest revision    </TD><TD>           Daily-2am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_TruncateMaster</TD><TD>                 Win</TD><TD>Truncate Master Logs </TD><TD>           Daily-4am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           Mssql_UpdateStatsMsdb</TD><TD>                 Win</TD><TD>Update Stats on MSDB    </TD><TD>         Saturday-am</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Code Executed By Sql Server Databases Scripts</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Command</b></td> </tr><TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                   Mssql_Auditor</TD><TD>dbi_backup_scripts/config_report.pl --TYPE=sqlsvr --OUTDIR=__CODELOCATION__/data/server_audits</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_BkpChk_ByProc</TD><TD>bin/BkpChk_Mssql_Proc.pl --DOALL=sqlsvr </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_BkpChk_Evening</TD><TD>bin/BkpChk_Mssql_Logs.pl -HOURS=24 --OUTFILE=__CODELOCATION__/data/html_output/MssqlBkpChk.txt </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_BkpChk_Hourly</TD><TD>bin/BkpChk_Mssql_Logs.pl -HOURS=24 --OUTFILE=__CODELOCATION__/data/html_output/MssqlBkpChk.txt </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_BkpChk_Morning</TD><TD>bin/BkpChk_Mssql_Logs.pl -HOURS=24 --OUTFILE=__CODELOCATION__/data/html_output/MssqlBkpChk.txt </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_BkpChk_Report</TD><TD>bin/BkpChk_Report.pl --SQLSVRONLY --ERROR_REPORT=__CODELOCATION__/data/html_output/Mssql_BkpChk_Errors.html --ALL_REPORT=__CODELOCATION__/data/html_output/Mssql_BkpChk_Report.html --HTML --TRANHOURS=2</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_BkpChk_Weekly</TD><TD>bin/BkpChk_Mssql_Logs.pl -DAYS=7 --OUTFILE=__CODELOCATION__/data/html_output/MssqlBkpChkWeekly.txt </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           Mssql_CheckPersistent</TD><TD>monitoring/CheckServer.pl --BATCH_ID=Mssql_CheckPersistent --PERSIST</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">          Mssql_CheckServerDaily</TD><TD>monitoring/CheckServerDaily.pl --DOALL=sqlsvr </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Mssql_CheckServer_*</TD><TD>/monitoring/CheckServer.pl --BATCH_ID=CheckServer_<$svr> -TIME=<TIME> --SERVER=<$svr>  </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_ClusterManager</TD><TD>monitoring/cluster_manager.pl  --BATCH_ID=MssqlClusterManager</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">        Mssql_ClusterManagerInit</TD><TD>monitoring/cluster_manager.pl --INITIALIZE --BATCH_ID=MssqlClusterManagerInit</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_CycleEventLogs</TD><TD>bin/mssql_cycle_eventlog.pl --DAYS=7 </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                 Mssql_DrChecker</TD><TD>bin/DR_Checker.pl --TOGEMCONSOLE</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Mssql_JobStatusRpt</TD><TD>bin/mssql_jobstatus_rpt.pl --NOSTDOUT --HTML --OUTFILE=__CODELOCATION__/data/html_output/mssql_jobstatus_rpt.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Mssql_LogMaintPlan</TD><TD>bin/mssql_logmaintplan.pl -CONFIGFILE=__CODELOCATION__/data/logmaintplan.dat </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                      Mssql_Ping</TD><TD>bin/ping_server.pl -BATCH_ID=MssqlPing -TYPE=SQLSVR</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           Mssql_ScheduledJobRpt</TD><TD>bin/mssql_scheduled_job_rpt.pl --HTMLFILE=__CODELOCATION__/data/html_output/MssqlScheduledJobRpt.html </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                Mssql_Shrinklogs</TD><TD>bin/mssql_shrinklogs.pl --DOSHRINK --SYSTEMS=ALL</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Mssql_SpaceMonitor</TD><TD>console/space_monitor.pl --alarm --WRITEHISTORY -BATCHID=__BATCHID__ -TYPE=sqlsvr</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">         Mssql_StoredProcUpdater</TD><TD>procs/configure.pl --UPGRADE_TO_LATEST --SQLSERVERS</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Mssql_TruncateMaster</TD><TD>bin/allsrv_query_long.pl --TYPE=sqlsvr --SHOWQUERIES --QUERY="dump tran master with no_log"</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           Mssql_UpdateStatsMsdb</TD><TD>bin/RunCommandOnSystems.pl --DOALL=sqlsvr --BATCH_ID=__BATCH_ID__ --COMMAND="__PERL__ __CODELOCATION__/ADMIN_SCRIPTS/dbi_backup_scripts/update_stats.pl -Dmsdb -Uxxx -Pxxx -SSERVERNAME"</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Batch Job Spec For Mysql Databases</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Win32 or<br>Unix</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Description</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Recommended<br>Frequency</b></td> </tr></TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Code Executed By Mysql Databases Scripts</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Command</b></td> </tr></TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Batch Job Spec For Oracle Databases</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Win32 or<br>Unix</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Description</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Recommended<br>Frequency</b></td> </tr><TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">          Oracle_CheckPersistent</TD><TD>                Both</TD><TD>Persistent Monitor For Oracle </TD><TD>           Daily-2am</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Code Executed By Oracle Databases Scripts</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Command</b></td> </tr><TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">          Oracle_CheckPersistent</TD><TD>monitoring/CheckOracle.pl --BATCH_ID=Oracle_CheckPersistent --PERSIST</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Batch Job Spec For Sybase Databases</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Win32 or<br>Unix</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Description</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Recommended<br>Frequency</b></td> </tr><TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                      Sybase_ASE</TD><TD>                Both</TD><TD>                    </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Sybase_Auditor</TD><TD>                Both</TD><TD>       Audit Sybase </TD><TD>         Saturday-am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Sybase_BackupServer</TD><TD>                Both</TD><TD>Check Sybase Backup Servers </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">          Sybase_BkpCheck_Report</TD><TD>                Unix</TD><TD>Sybase Backup Server Output Report </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">          Sybase_CheckPersistent</TD><TD>                Both</TD><TD>Check Persistent Sybase </TD><TD>           Daily-2am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">         Sybase_CheckServerDaily</TD><TD>                Unix</TD><TD>Daily Check of Sybase - Configuration Audit </TD><TD>           Daily-2am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_CheckServer_*</TD><TD>          Every15Min</TD><TD>  Is your server ok?</TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_FetchLogFiles</TD><TD>                Both</TD><TD>    Fetch Lob FIles </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">      Sybase_LockedLoginDetector</TD><TD>                Unix</TD><TD>Checks for locked logins and alerts on new ones       </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                     Sybase_Ping</TD><TD>                Both</TD><TD>Monitor Your Sybase Servers via ping    </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">               Sybase_RepCompare</TD><TD>                Both</TD><TD>Compare Production Replication To Target </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sybase_RepMonAgent</TD><TD>                Both</TD><TD>   Check Rep Agents </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sybase_RepMonCheck</TD><TD>                Both</TD><TD>  Check Replication </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Sybase_RepMonReport</TD><TD>                Both</TD><TD>Report On Replication </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                Sybase_RepServer</TD><TD>                Both</TD><TD>Check Sybase REplication Server State </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">         Sybase_RepServerChecker</TD><TD>                Both</TD><TD>Check Latency Of Replication </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor1</TD><TD>                Both</TD><TD>Sybase Space Monitor    </TD><TD>           Daily-5am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor2</TD><TD>                Both</TD><TD>Sybase Space Monitor    </TD><TD>           Daily-9am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor3</TD><TD>                Both</TD><TD>Sybase Space Monitor    </TD><TD>           Daily-1pm</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor4</TD><TD>                Both</TD><TD>Sybase Space Monitor    </TD><TD>           Daily-4pm</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor5</TD><TD>                Both</TD><TD>Sybase Space Monitor    </TD><TD>           Daily-9pm</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           Sybase_SpaceMonitorRW</TD><TD>                Both</TD><TD>Sybase Space Monitor   - Write historical info </TD><TD>           Daily-2am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">        Sybase_StoredProcUpdater</TD><TD>                Unix</TD><TD>Ensure that all stored procedure libraries are at the latest revision    </TD><TD>           Daily-2am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">         Sybase_ThresholdManager</TD><TD>                Both</TD><TD>Run Threshold Manager    </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase_ThresholdManagerReinstall</TD><TD>                Both</TD><TD>Reinstall Threshold Manager for databases that have changed in size    </TD><TD>         Saturday-am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           Sybase_TruncateMaster</TD><TD>                Unix</TD><TD>Truncate logs of the master db </TD><TD>           Daily-4am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">      Sybase_TruncateSybsystemdb</TD><TD>                Unix</TD><TD>Truncate logs of the sysbsystemdb db </TD><TD>           Daily-4am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">   Sybase_TruncateSybsystemprocs</TD><TD>                Unix</TD><TD>Truncate logs of the sybsystemprocs db </TD><TD>           Daily-4am</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Code Executed By Sybase Databases Scripts</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Command</b></td> </tr><TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                      Sybase_ASE</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sybase_ASE --OUTFILE=__CODELOCATION__/data/html_output/Sybase_ASE.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Sybase_Auditor</TD><TD>dbi_backup_scripts/config_report.pl --TYPE=sybase --OUTDIR=__CODELOCATION__/data/server_audits</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Sybase_BackupServer</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sybase_BackupServer --OUTFILE=__CODELOCATION__/data/html_output/Sybase_BackupServer.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">          Sybase_BkpCheck_Report</TD><TD>bin/BkpChk_Report.pl --SYBASEONLY --ERROR_REPORT=__CODELOCATION__/data/html_output/Sybase_BkpCheck_Errors.html --ALL_REPORT=__CODELOCATION__/data/html_output/Sybase_BkpCheck_Report.html --HTML --TRANHOURS=2</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">          Sybase_CheckPersistent</TD><TD>monitoring/CheckServer.pl --BATCH_ID=Sybase_CheckPersistent --PERSIST</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">         Sybase_CheckServerDaily</TD><TD>monitoring/CheckServerDaily.pl --DOALL=sybase </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_CheckServer_*</TD><TD>/monitoring/CheckServer.pl --BATCH_ID=CheckServer_<$svr> -TIME=<TIME> --SERVER=<$svr>  </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_FetchLogFiles</TD><TD>console/fetch_unix_files.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">      Sybase_LockedLoginDetector</TD><TD>bin/LockedLoginDetector.pl --DOALL=SYBASE --BATCH_ID=Sybase_LockedLoginDetector</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                     Sybase_Ping</TD><TD>bin/ping_server.pl -BATCH_ID=SybPing -TYPE=SYBASE</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">               Sybase_RepCompare</TD><TD>monitoring/SybRepMonitor.pl --ACTION=COMPARE --HTML --OUTFILE=__CODELOCATION__/data/html_output/SybRepCompare.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sybase_RepMonAgent</TD><TD>monitoring/SybRepMonitor.pl --ACTION=MONITOR --ITERATIONS=13 --FREQUENCY=60 --HTML --OUTFILE=__CODELOCATION__/data/html_output/SybRepMonAgent.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sybase_RepMonCheck</TD><TD>monitoring/SybRepMonitor.pl --ACTION=CHECK  --THRESHFILE=__CODELOCATION__/conf/threshold_overrides.dat --ALARM_MINS=15</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Sybase_RepMonReport</TD><TD>monitoring/SybRepMonitor.pl --ACTION=REPORT --HTML --OUTFILE=__CODELOCATION__/data/html_output/SybRepMonReport.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                Sybase_RepServer</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sybase_RepServer --OUTFILE=__CODELOCATION__/data/html_output/Sybase_RepServer.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">         Sybase_RepServerChecker</TD><TD>monitoring/check_sybase_repserver.pl --RUNALL </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor1</TD><TD>console/space_monitor.pl --alarm -BATCHID=Sybase_SpaceMonitor -TYPE=sybase</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor2</TD><TD>console/space_monitor.pl --alarm -BATCHID=Sybase_SpaceMonitor -TYPE=sybase</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor3</TD><TD>console/space_monitor.pl --alarm -BATCHID=Sybase_SpaceMonitor -TYPE=sybase</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor4</TD><TD>console/space_monitor.pl --alarm -BATCHID=Sybase_SpaceMonitor -TYPE=sybase</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sybase_SpaceMonitor5</TD><TD>console/space_monitor.pl --alarm -BATCHID=Sybase_SpaceMonitor -TYPE=sybase</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           Sybase_SpaceMonitorRW</TD><TD>console/space_monitor.pl --WRITEHISTORY -BATCHID=__BATCHID__ -TYPE=sybase</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">        Sybase_StoredProcUpdater</TD><TD>procs/configure.pl --UPGRADE_TO_LATEST --SYBSERVERS</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">         Sybase_ThresholdManager</TD><TD>bin/threshold_manager.pl --HTML --ACTION=REPORT --THRESHFILE=__CODELOCATION__/conf/threshold_overrides.dat --OUTFILE=__CODELOCATION__/data/html_output/Sybase_Threshold_Report.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">Sybase_ThresholdManagerReinstall</TD><TD>bin/threshold_manager.pl --HTML --ACTION=INSTALL</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           Sybase_TruncateMaster</TD><TD>bin/allsrv_query_long.pl --TYPE=sybase --SHOWQUERIES --QUERY="dump tran master with no_log"</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">      Sybase_TruncateSybsystemdb</TD><TD>bin/allsrv_query_long.pl --TYPE=sybase --SHOWQUERIES --QUERY="dump tran sybsystemdb with no_log"</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">   Sybase_TruncateSybsystemprocs</TD><TD>bin/allsrv_query_long.pl --TYPE=sybase --SHOWQUERIES --QUERY="dump tran sybsystemprocs with no_log"</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Batch Job Spec For GEM</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Win32 or<br>Unix</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Description</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Recommended<br>Frequency</b></td> </tr><TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                       Sys_Agent</TD><TD>                Both</TD><TD>       Agent Report </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sys_AlarmDbCleanup</TD><TD>                Both</TD><TD>Internal cleanup of the gemalarms database           </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           Sys_AlarmRoutingAgent</TD><TD>                Both</TD><TD>Read Alerts & Route Them           </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                Sys_BackupReport</TD><TD>                Both</TD><TD>General Backup Report </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                     Sys_Backups</TD><TD>                Both</TD><TD>Collect Backup Infor </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sys_BlackoutReport</TD><TD>                Both</TD><TD>Report On blacked out servers </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Sys_ConsoleArchiver</TD><TD>                Both</TD><TD>Archive the console  </TD><TD>         Saturday-am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sys_DirectoryChecker</TD><TD>                Both</TD><TD>  Check Directories </TD><TD>           Daily-6am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Sys_DnsMonitor</TD><TD>                Both</TD><TD>Monitor Dns Servers </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">               Sys_MailGemErrors</TD><TD>                Both</TD><TD>Mail Gem Error Report to the Admin </TD><TD>           Daily-2am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                 Sys_PortMonitor</TD><TD>                Both</TD><TD>Test Services (sybase servers, win32 services...)    </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sys_ProductionErrors</TD><TD>                Both</TD><TD>Report on Production Server Errors </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sys_ProductionList</TD><TD>                Both</TD><TD>Report on prodcution Servers </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">          Sys_ProductionWarnings</TD><TD>                Both</TD><TD>Report on Production Server Warnings </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">        Sys_TestDfltConnectivity</TD><TD>                Both</TD><TD>Test SSH Connectivity </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Sys_TraceRoute</TD><TD>                Both</TD><TD>         TraceRoute </TD><TD>               Daily</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Code Executed By GEM Scripts</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Command</b></td> </tr><TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                       Sys_Agent</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sys_Agent --OUTFILE=__CODELOCATION__/data/html_output/Sys_Agent.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sys_AlarmDbCleanup</TD><TD>monitoring/MlpAlarmCleanupDB.pl --DAYS=7</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           Sys_AlarmRoutingAgent</TD><TD>monitoring/MlpAlarmRoutingAgent.pl --SLEEPTIME=10 --MAXTIME=14</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                Sys_BackupReport</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sys_BackupReport --OUTFILE=__CODELOCATION__/data/html_output/Sys_BackupReport.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                     Sys_Backups</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sys_Backups --OUTFILE=__CODELOCATION__/data/html_output/Sys_Backups.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sys_BlackoutReport</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sys_BlackoutReport --OUTFILE=__CODELOCATION__/data/html_output/Sys_BlackoutReport.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Sys_ConsoleArchiver</TD><TD>bin/ConsoleArchiver.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sys_DirectoryChecker</TD><TD>bin/directory_checker.pl --GEM </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Sys_DnsMonitor</TD><TD>monitoring/dnsmonitor.pl --DOALARM</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">               Sys_MailGemErrors</TD><TD>monitoring/MailGemErrors.pl</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                 Sys_PortMonitor</TD><TD>monitoring/port_monitor.pl --LOGALARM --SLEEPTIME=120 --ITERATIONS=6</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Sys_ProductionErrors</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sys_ProductionErrors --OUTFILE=__CODELOCATION__/data/html_output/Sys_ProductionErrors.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Sys_ProductionList</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sys_ProductionList --OUTFILE=__CODELOCATION__/data/html_output/Sys_ProductionList.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">          Sys_ProductionWarnings</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Sys_ProductionWarnings --OUTFILE=__CODELOCATION__/data/html_output/Sys_ProductionWarnings.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">        Sys_TestDfltConnectivity</TD><TD>bin/TestDfltUnixConnectivity.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Sys_TraceRoute</TD><TD>monitoring/tracert.pl -BATCH_ID=TraceRoute</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Batch Job Spec For Unix Systems</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Win32 or<br>Unix</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Description</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Recommended<br>Frequency</b></td> </tr><TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">      Unix_BackupStateStaticInfo</TD><TD>                Unix</TD><TD>Fill BackupState table for Unix Databases </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">               Unix_CleanupFiles</TD><TD>                Unix</TD><TD>      Cleanup Files </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Unix_Console_15min</TD><TD>                Unix</TD><TD>Console Jobs - every 15 minutes </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Unix_Console_Daily</TD><TD>                Unix</TD><TD>Console Jobs - Daily </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Unix_Console_Hourly</TD><TD>                Unix</TD><TD>Console Jobs - Hourly </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Unix_Console_Promote</TD><TD>                Both</TD><TD>Console Jobs - Promote </TD><TD>           Daily-6am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Unix_Console_Weekly</TD><TD>                Unix</TD><TD>Console Jobs - Weekly </TD><TD>         Saturday-am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                     Unix_Errors</TD><TD>                Both</TD><TD>Report on Unix Errors </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Unix_FileCheck</TD><TD>                Unix</TD><TD>Check File Existence </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                Unix_FileCleanup</TD><TD>                Unix</TD><TD>      Cleanup FIles </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">               Unix_GetDiskSpace</TD><TD>                Unix</TD><TD>Get Unix Disk Space via df -k </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                       Unix_Ping</TD><TD>                Both</TD><TD>  Ping Unix Systems </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                   Unix_Warnings</TD><TD>                Both</TD><TD>Unix Warnings Report </TD><TD>              Hourly</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Code Executed By Unix Systems Scripts</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Command</b></td> </tr><TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">      Unix_BackupStateStaticInfo</TD><TD>bin/BkpChk_UpdateStaticInfo.pl  --TYPE=sybase --BATCH_ID=Unix_BackupStateStaticInfo</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">               Unix_CleanupFiles</TD><TD>monitoring/CleanupFiles.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Unix_Console_15min</TD><TD>console/console_v2.pl --TENMINUTE --PRINTTIMING --RUN_DBQUERIES   --RUN_COMMANDS</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Unix_Console_Daily</TD><TD>console/console_v2.pl --DAILY --PRINTTIMING --RUN_DBQUERIES   --RUN_COMMANDS </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Unix_Console_Hourly</TD><TD>console/console_v2.pl --HOURLY --PRINTTIMING --RUN_DBQUERIES   --RUN_COMMANDS</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Unix_Console_Promote</TD><TD>console/console_v2.pl --PROMOTE --ROLLUP --PRINTTIMING </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Unix_Console_Weekly</TD><TD>console/console_v2.pl --WEEKLY --PRINTTIMING --RUN_DBQUERIES   --RUN_COMMANDS</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                     Unix_Errors</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Unix_Errors --OUTFILE=__CODELOCATION__/data/html_output/Unix_Errors.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Unix_FileCheck</TD><TD>bin/purge_files.pl --html --reportfile=__CODELOCATION__/data/html_output/Unix_FileCheck_GemRpt.html --BATCH_ID=Unix_FileCheck --ctlfile=__CODELOCATION__/conf/unix_file_check.dat</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                Unix_FileCleanup</TD><TD>bin/purge_files.pl --html --reportfile=__CODELOCATION__/data/html_output/UnixFileCleanup_GemRpt.html --BATCH_ID=UnixFileCleanup --ctlfile=__CODELOCATION__/conf/unix_cleanup.dat</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">               Unix_GetDiskSpace</TD><TD>console/unix_space_monitor_via_rsh.pl -Ah -BUnix_GetDiskSpace -O__CODELOCATION__/data/html_output/Unix_GetDiskSpace.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                       Unix_Ping</TD><TD>bin/ping_systems.pl --TYPE=unix</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                   Unix_Warnings</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Unix_Warnings --OUTFILE=__CODELOCATION__/data/html_output/Unix_Warnings.html</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Batch Job Spec For Windows Systems</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Win32 or<br>Unix</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Description</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Recommended<br>Frequency</b></td> </tr><TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">     Win32_BackupStateStaticInfo</TD><TD>                 Win</TD><TD>Fill BackupState table for Windows Databases </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           Win32_CheckBackupDirs</TD><TD>                 Win</TD><TD>Check Backup Directories </TD><TD>         Saturday-pm</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Win32_CleanupFiles</TD><TD>                 Win</TD><TD>Cleanup windows files </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Win32_Console_15min</TD><TD>                 Win</TD><TD>Console Jobs - every 15 minutes </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Win32_Console_Daily</TD><TD>                 Win</TD><TD>Console Jobs - Daily </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Win32_Console_Hourly</TD><TD>                 Win</TD><TD>Console Jobs - Hourly </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">           Win32_Console_Promote</TD><TD>                 Win</TD><TD>Console Jobs - Promote </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Win32_Console_Weekly</TD><TD>                 Win</TD><TD>Console Jobs - Weekly </TD><TD>         Saturday-am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">          Win32_CreateBackupDirs</TD><TD>                 Win</TD><TD>Create Backup Directories as needed </TD><TD>         Saturday-am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                 Win32_Diskspace</TD><TD>                 Win</TD><TD>Monitor Windows Diskspace </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Win32_Diskspace_Rpt</TD><TD>                 Win</TD><TD>Report on Windows Diskspace </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Win32_Eventlog</TD><TD>                 Win</TD><TD>    Read Event logs </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Win32_Eventlog_Rpt</TD><TD>                 Win</TD><TD>Report On Eventlogs </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                 Win32_FileCheck</TD><TD>                 Win</TD><TD>Check FIle existence Based On Configfile </TD><TD>           Daily-6am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">               Win32_FileCleanup</TD><TD>                 Win</TD><TD>Cleanup Files Based On ConfigFIle </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Win32_GetHosts</TD><TD>                 Win</TD><TD>Get Hosts on windows </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Win32_HostsRpt</TD><TD>                 Win</TD><TD>Fetch Win32 Host Information    </TD><TD>               Daily</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">                      Win32_Ping</TD><TD>                 Win</TD><TD>Pings your Win32 Hosts    </TD><TD>          Every15Min</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">              Win32_Security_Rpt</TD><TD>                 Win</TD><TD>Static Windows Server Security Report </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">            Win32_ServiceChecker</TD><TD>                 Win</TD><TD>Monitors Windows Services    </TD><TD>              Hourly</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">      Win32_ServiceCheckerUpdate</TD><TD>                 Win</TD><TD>Append to Services List for any new servers    </TD><TD>           Daily-6am</TD></TR> <TR><TD style="vertical-align: top; background-color: rgb(255, 204, 102);">             Win32_TaskScheduler</TD><TD>                 Win</TD><TD>Monitors Windows Task Scheduler    </TD><TD>              Hourly</TD></TR> </TABLE><p> <table cellpadding="2" cellspacing="2" border="1" style="text-align: left; width: 100%;"> <tbody> <tr><td colspan=4 style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Code Executed By Windows Systems Scripts</b></td></tr> <tr> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Job Name</b></td> <td style="vertical-align: top; background-color: rgb(51, 102, 255);"><b>Command</b></td> </tr><TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">     Win32_BackupStateStaticInfo</TD><TD>bin/BkpChk_UpdateStaticInfo.pl --TYPE=sqlsvr --BATCH_ID=Win32_BackupStateStaticInfo</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           Win32_CheckBackupDirs</TD><TD>bin/Win32_CheckBackupDirs.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Win32_CleanupFiles</TD><TD>monitoring/CleanupFiles.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Win32_Console_15min</TD><TD>console/console_v2.pl --TENMINUTE --PRINTTIMING --RUN_DBQUERIES   --RUN_COMMANDS</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Win32_Console_Daily</TD><TD>console/console_v2.pl --DAILY --PRINTTIMING --RUN_DBQUERIES   --RUN_COMMANDS </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Win32_Console_Hourly</TD><TD>console/console_v2.pl --HOURLY --PRINTTIMING --RUN_DBQUERIES   --RUN_COMMANDS</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">           Win32_Console_Promote</TD><TD>console/console_v2.pl --PROMOTE --ROLLUP --PRINTTIMING </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Win32_Console_Weekly</TD><TD>console/console_v2.pl --WEEKLY --PRINTTIMING --RUN_DBQUERIES   --RUN_COMMANDS</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">          Win32_CreateBackupDirs</TD><TD>bin/Win32_CreateBackupDirs.pl </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                 Win32_Diskspace</TD><TD>bin/win32_diskspace.pl --ALARMTHRESH=95 --WARNTHRESH=90  --LOGALARM --OUTFILE=__CODELOCATION__/data/html_output/Win32Diskspace.txt --THRESHFILE=__CODELOCATION__/conf/threshold_overrides.dat --BATCHNAME=Win32Diskspace</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Win32_Diskspace_Rpt</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Win32_Diskspace --OUTFILE=__CODELOCATION__/data/html_output/Win32_Diskspace.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Win32_Eventlog</TD><TD>bin/win32_eventlog.pl --HOURS=2 --LOGEVENTS --CONFIGFILE=__CODELOCATION__/data/win32_eventlog.dat --NOINFOMSGS --BATCHNAME=Win32Eventlog</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Win32_Eventlog_Rpt</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Win32_Eventlog --OUTFILE=__CODELOCATION__/data/html_output/Win32_Eventlog.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                 Win32_FileCheck</TD><TD>bin/purge_files.pl --html --reportfile=__CODELOCATION__/data/html_output/Win32_FileCheck.html --BATCH_ID=Win32FileCheck --ctlfile=__CODELOCATION__/conf/win32_file_check.dat</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">               Win32_FileCleanup</TD><TD>bin/purge_files.pl --html --reportfile=__CODELOCATION__/data/html_output/Win32_FileCleanup.html --BATCH_ID=Win32FileCleanup --ctlfile=__CODELOCATION__/conf/win32_cleanup.dat</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Win32_GetHosts</TD><TD>bin/win32_get_file.pl --BATCH_ID=Win32_GetHosts --INDIR=/winnt/system32/drivers/etc,/windows/system32/drivers/etc,/windows,/winnt --INFILE=hosts -OUTDIR=__CODELOCATION__/data/system_information_data/hosts</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                  Win32_HostsRpt</TD><TD>bin/parse_hosts.pl -BWin32HostsRpt -h -O__CODELOCATION__/data/html_output/Win32_Hosts_Report.html -D__CODELOCATION__/data/system_information_data/hosts</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">                      Win32_Ping</TD><TD>bin/ping_systems.pl --TYPE=win32 --SLEEPTIME=60 --MAXTIME=14 --ITERATIONS=12</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">              Win32_Security_Rpt</TD><TD>monitoring/RunMimiReport.pl --REPORT=GEM_Win32_Security --OUTFILE=__CODELOCATION__/data/html_output/Win32_Security.html</TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">            Win32_ServiceChecker</TD><TD>bin/win32_service.pl --ACTION=VALIDATE </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">      Win32_ServiceCheckerUpdate</TD><TD>bin/win32_service.pl --ACTION=SNAPSHOTUPDATE </TD></TR> <TR><TD  style="vertical-align: top; background-color: rgb(255, 204, 102);">             Win32_TaskScheduler</TD><TD>bin/win32_get_file.pl --BATCH_ID=Win32TaskScheduler --INDIR=/winnt,/windows --INFILE=Schedlgu.txt --NEWLABEL=Win32_Job_Scheduler_Log -OUTDIR=__CODELOCATION__/data/system_information_data/schedlguNEWLINE__PERL__ __CODELOCATION__/ADMIN_SCRIPTS/bin/parse_schedlgu.pl -BWin32TaskScheduler -h -O__CODELOCATION__/data/html_output/Win32_Scheduler.html -D__CODELOCATION__/data/system_information_data/schedlgu</TD></TR> </TABLE><p>
+<A NAME=link36></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>Miscelaneous Batch Job Notes</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>MssqlJobStatusRpt   </h3>
+<P>
+ This creates the file html_output/mssql_jobstatus_rpt.html which lists failed sql server jobs that are enabled.  To remove rows from this report you should disable the failed job. MssqlLogMaintPlan   This saves maintenance plan information as heartbeats with the monitor_key=LogMaintPlan.  This filters only system maintenance plans for SQL Server.<P>
+<h3>Win32FileCleanup   </h3>
+<P>
+ This is the most important of the maintenance scripts.  The only issue is that you need to set it up by hand.  Every directory you want purged should have lines added to it.  Maintain this program and you wont ever need to run out of disk space again.<P>
+<h3>Win32Diskspace   </h3>
+<P>
+ win32_diskspace.bat will save space usage information for your servers with embedded alarm thresholds of 90 for warning and 95% for errors.  The output is placed in html_output/win32_diskspace.txt to be picked up later.<P>
+<h3>PcEventlog   </h3>
+<P>
+ win32_eventlog.bat will save slightly reduced list of event log messages into the alarm manager.  Several specific services are filtered out - the type can be adjusted by editing the win32_eventlog.pl script (which gives directions).<p>win32_eventlog.bat uses the file data/win32_eventlog.dat for its base configuration information.  It should run frequently (every 1-2 hours). Messages are saved in the alarm system with monitor_program = PcEventlog<P>
+<h3>Win32ScheduledJobRpt   </h3>
+<P>
+ Job scheduler reports will be generated.  The mechanism for this is win32_scheduled_job_rpt.*.  and sqlsvr_backupreport.ksh.  These call the primitive routines win32_backupreport.pl and win32_scheduled_job_rpt.pl and result in html_output of win32_scheduled_job.html.<p>The primitive for this is win32_scheduled_job_rpt.pl and win32_backupreprot.pl<P>
+<h3>Win32ServiceChecker</h3>
+<P>
+ Checks service availability on all your windows servers and compares results to a snapshot of services that should be running.  The results are saved in the alarms database.  This snapshot is not created by default (yet).   The snapshot is stored in the conf/win32_service.dat file.  The first thing to do is to run the following which creates a snapshot file of all running services on all your defined Win32 servers<P>
+<h3>Win32_service_checker_init</h3>
+<P>
+ The above command should probably not be scheduled, or scheduled only once per week. The init routine writes the win32_service.dat configuration file and will clear your alarm database.<P>
+ If you wish to reset the services for a particular system (perhaps it was rebuilt) you should add --SYSTEMS=server. In other words you should run either<P>
+<pre>
+   Win32_service_checker_init --SYSTEMS=winhost1
+</pre>
+<P>
+ which is the same as running the primitive<P>
+<pre>
+   win32_service.pl --SYSTEMS=winhost1 --ACTION=SNAPSHOT
+</pre>
+<P>
+ win32_service_checker.bat should probably be run fairly frequently.  The primitive for this is win32_service.pl<P>
+ Win32ServiceCheckerInit<P>
+<pre>
+  One off batch - takes a snapshot of services on all your windows boxes for use by Win32ServiceChecker
+<P>
+</pre>
+<h3>Win32ShrinkLogs   </h3>
+<P>
+ The win32_shrinklogs.bat script will shrink all logs in all your sql servers using the mssql_shrinklogs.pl primitive.<P>
+<h3>PingSqlsvr   </h3>
+<P>
+ The Ping* scripts ping your database   servers and save the results in the alarms database<P>
+<h3>PingSybase   </h3>
+<P>
+ The Ping* scripts ping your database   servers and save the results in the alarms database<P>
+<h3>PingSystems   </h3>
+<P>
+ The Ping* scripts ping your database servers and save the results in the alarms database<P>
+<h3>PortMonitor</h3>
+<P>
+ The port monitor uses the file conf/port_monitor.dat for data.  It does a "ping" on ports of your servers for a response. To initialize this file from known port data,  run PortMonitor.ksh --GENERATE Additionally, the first time you run PortMonitor.ksh, it will generate the file based on your sybase interfaces file and GEM configuration data. Since your interface file may contain junk servers, it will comment out servers that are not up at the time of the run by placing a # in front of the line.<P>
+<h3>MssqlCycleEventLogs</h3>
+<P>
+<pre>
+   Cycles the sql server event logs
+</pre>
+<P>
+<h3>MssqlShrinklogs</h3>
+<P>
+<pre>
+   Shrinks the sql server log files on all your servers
+</pre>
+<P>
+
+<A NAME=link37></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>THE WIN32 BACKUP CROSSCHECK PROCESS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+<h3>Process</h3>
+<P>
+ The win32 backup crosscheck process is an extensive monitor within GEM that determines whether your SQL Server  databases are appropriately backed up.  This process consists of the following batch processes<P>
+<h3>Batch Jobs Involved</h3>
+<P>
+<pre>
+      MssqlBackupCrosscheck
+      MssqlBackupCrosscheckWeekly
+      UpdateBackupStateStaticInfo
+<P>
+</pre>
+<h3>What Happens</h3>
+<P>
+ Event log records are read on all your sql servers and stored in a table in the gemalarms database named BackupState.   The MssqlBackupCrosscheckWeekly batch reads 1 full week of records while the MssqlBackupCrosscheck just reads a few hours worth of records. This table contains the last time  any backup events happened - the last time the db was dumped, loaded, tran dumped etc...  The table can, of course be non-representative of what your actual environment is.  For example, you could drop a database named AA.  Your event logs would show a backup of AA from last week - which would trigger an alarm because the db has not been backed up in a week!  The  UpdateBackupStateStaticInfo should run nightly to remove (actually mark deleted) information that is not current.<P>
+ The final part of this process is the crosscheck reporting.  The --REPORT arg (normally set in the batches) will produce reports and alarm based on the info collected in the table.  The reporting process uses crosscheck.dat config file to determine thresholds for what and how to alarm.<P>
+<h3>Diagnostics Procedure</h3>
+<P>
+ MssqlBackupCrosscheck.ksh --DEBUG or --DIAGNOSTICS select * from BackupState perl Backup_Crosscheck_Report.pl --SQLSVRONLY --TRANHOURS=2 --NOALARM     # use noalarm to avoid a flood of emails
+<A NAME=link38></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>CONSOLE TROUBLESHOOTING AND ALERTS GUIDE</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ The following document lists common events and errors, and the appropriate responses.
+<A NAME=link39></A>
+<br>
+<center>
+<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
+	<TR><TD><CENTER><font color=#33ccff><H1>FREQUENTLY ASKED QUESTIONS</H1>
+<H3></H3></font>
+</TD></TR>
+</TABLE></CENTER>
+<P>
+ <span style='font-size:14.0pt;font-family:Arial'><P>
+<h3>DESCRIPTION</h3>
+<P>
+ q) <b>i just want to install your stored procedure library... what should i do.</b><P>
+ a) just go to the ADMIN_SCRIPTS/procs subdirectory and run <your perl>/configure.pl.<pre>
+   The main issue you will in counter with this perl script is your perl setup and
+   your perl library path.  If you get missing module messages it is likely that this
+   is the problem.  The script uses the GEM library DBIFunc.pm, which is located in the
+   lib directory.  The <A HREF=#link13>configure.pl</A> script should find it automatically, if it does not,
+   please contact SQL Technologies.  <A HREF=#link13>configure.pl</A> will prompt you for Server, Login (an
+   sa login) and Password - it will then autodetect if you are on Microsoft SQL Server
+   or Sybase and install the procedures as appropriate.
+</pre>
+<P>
+ q) <b>i cant run "perl <A HREF=#link13>configure.pl</A>" or "perl <A HREF=#link21>gem.pl</A>" to start the application.</b><P>
+ a) Well... thats pretty general... i would love some more information.  The first thing<pre>
+   to do is run "perl troubleshoot.pl".
+</pre>
+<P>
+ q) <b>i want my data subdirectory to exist somewhere besides data...</b><P>
+ a) use symbolic links.  There are currently dependencies on the path to this directory<pre>
+   that are not completely flexible - hence the lack of a GemRpt_DATA_DIR configuration
+   variable in configure.cfg.  This may change in future versions.
+</pre>
+<P>
+ q) <b>i wish to run from unix</b><P>
+ a) this is an x windows application from windows - you need to set your display and have an x emulator like exceed running on your pc.<P>
+<pre>
+   export DISPLAY=10.5.103.51:0.0
+   /usr/local/bin/perl-5.8.1 <A HREF=#link21>gem.pl</A>
+</pre>
+<P>
+ q) <b>the screen freezes when running some commands</b><P>
+ a) check the background screen, the screen you called the GEM or <A HREF=#link13>configure.pl</A> programs from, for output.<pre>
+   the lack of fork() functionality on Windows implies that sometimes there are issues like this.  It is
+   being worked.  The solution to this is often to just hit return a few times in the background screen.
+</pre>
+<P>
+ q) <b>i get the following message at startup</b><pre>
+  junk after document element at line 6050, column 0, byte 933251 at C:/Perl/site/
+  lib/XML/Parser.pm line 168
+  &lt;Hit Enter Key To Continue&gt;
+</pre>
+<P>
+ a) you have a screwed up xml configuration file.  The above file is screwed up at line 6050.  You will need to edit the file and fix it or to roll back to one of the dated backups.<P>
+ q) <b>why dont some of the perl scripts run stand alone???  </b><P>
+<pre>
+ for example i run &lt;i&gt;perl fix_db.pl -AX&lt;/i&gt; and i get
+</pre>
+<P>
+<pre>
+  Can't locate Repository.pm in @INC (@INC contains:
+     /apps/gem/perl/lib/5.8.4/sun4-solaris-thread-multi
+     /apps/gem/perl/lib/5.8.4
+     /apps/gem/perl/lib/site_perl/5.8.4/sun4-solaris-thread-multi
+     /apps/gem/perl/lib/site_perl/5.8.4
+     /apps/gem/perl/lib/site_perl .) at fix_db.pl line 21.
+</pre>
+ BEGIN failed--compilation aborted at fix_db.pl line 21.<P>
+ a) GEM libraries in perl are NOT stored in the normal perl library locations.  They are stored in the lib subdirectory of the GEM install.  If you installed into /apps/gem, you need to run <i>perl -I/apps/gem/lib fix_db.pl -AX</i><P>
+ To get around this problem, we use lines like<P>
+<pre>
+   &lt;i&gt;use lib qw(/apps/gem/lib);&lt;/i&gt;
+</pre>
+<P>
+ Which are touched / updated by the GEM  Configuration Utility when you run the reformatter option.<P>
+ If the code does not work, you can also run <P>
+<pre>
+   &lt;i&gt;perl -I/apps/gem/lib fix_db.pl -AX&lt;/i&gt;
+</pre>
+<P>
+ q) <b>I keep getting these pop up screens from my scheduled tasks</b><P>
+ a) run your windows scheduled tasks using a different account from your interactive account.  <P>
+ q) <b>My windows graphical application gets stuck/frozen</b><P>
+ a) this is one of those silly windows'isms.  If you have tabbed into the console window and scrolled, the application can get frozen.   Of course, all the information (plus more) that you see in this window is actually saved into the log file and can be viewed from there.   <b> HIT RETURN IN YOUR CONSOLE WINDOW TO CONTINUE</b>.<P>
+ q) <b>I have a problem installing... help!!!</b><P>
+ a) well... im sorry to hear that... but the right thing to do is report it to sql technologies and to attach the log file to your error report.  This file is the application name with a .log extension - so configure.log is the <A HREF=#link13>configure.pl</A> log file.  This log file does contain lots of details on your install and should hopefully help us solve your problem.  Thanks!<P>
+ q) <b>Rep Server Error Log Contains:</b><P>
+ E. 2006/04/25 12:04:04. ERROR #14024 USER(sa) - /execint.c(1038) Executor does not allow the entered command in the current mode.<P>
+ a) Sadly, this appears to be intrinsic to the DBD::Sybase library.  It must do some under the covers sql commands to verify the connection.  This message means a "normal" sql command was sent to the rep server - which of course will not handle it because the rep server has no sql language handler.  Ignore the messages.<P>
+ q) i keep getting messages "no statement executing at ...."<P>
+ a) this comes from older versions of DBD::Sybase and has been fixed in the latest version.  Ignore the messages or upgrade <P>
+ q) ok i scheduled all these jobs - what if something goes wrong?<P>
+ a) the console contains the contents of all your log files!  Basically the jobs in your crontab all use a similar syntax to : <P>
+<pre>
+  $ cat TraceRoute.ksh
+  umask 000
+  /apps/gem/perl/bin/perl /apps/gem/gem/ADMIN_SCRIPTS/monitoring/tracert.pl -BATCH_ID=TraceRoute $* &gt; /apps/gem/gem/data/GEM_BATCHJOB_LOGS/Unix_TraceRoute.log 2&gt; /apps/gem/gem/data/batchjob_errors/Unix_TraceRoute.log
+</pre>
+<P>
+ Of course this is all customized ... the perl, the file locations etc...<P>
+ So how do you see what happened!!! just look at the console under "GEM Logs" -> "BATCH FILE EXECUTION LOGS".  Do this every few days to make sure things are working (or whenever you notice a problem.o<P>
+ q) when i install the stored procedure library, i get language mismatch messages like : <pre>
+   Msg 2401, Level 11, State 2:
+   Server 'CALYPSODB':
+   Character set conversion is not available between client character set 'utf8'
+   and server character set 'iso_1'.
+   No conversions will be done.
+<P>
+</pre>
+ a) set the LANG environment variable as appropriate<P>
+<pre>
+   export LANG=C
+<P>
+</pre>
+ q) I have an Installation failure on some kind of _BAK table<P>
+<pre>
+   &gt; perl upgrade.pl
+</pre>
+<P>
+<pre>
+   [ snip ]
+    TABLE      ContainerMap                   SAVE  drop  Install Restore
+    TABLE      ContainerOverride              SAVE  drop  Install Restore
+    TABLE      Container_full                 SAVE  drop  Install Restore
+</pre>
+<P>
+<pre>
+   *****************************************************
+   Cant Backup Table Event.  Event_BAK allready exists! This indicates that a prior release failed.  Event_BAK is a backup of Event prior to the upgrade - make sure that the data is ok, dr
+   op Event_BAK, and rerun this command
+   *****************************************************
+   /apps/gem/perl/bin/perl  -I/apps/gem/gem/lib  /apps/gem/gem/bin/configure.pl --LOGFILE=logs/upgrade_part2.log --UPGRADE
+<P>
+</pre>
+ a) You have a prior failed upgrade and a table archive (with the _BAK extension) exists.  You are probably ok to just drop the<pre>
+   _BAK table but you would be better served to
+<P>
+      insert Event select * from Event_BAK
+      drop table Event_BAK
+</pre>
+<P>
+<h3>SYNOPSIS</h3>
+<P>
+ The following describes the major processes involved within the GEM system<P>
+<h3>SYBASE BACKUP CROSSCHECK</h3>
+<h3>SQL SVR BACKUP CROSSCHECK</h3>
+<P>
+ The following batches read event log info and store the results in the database.  After storing the results, they run the script UpdateBackupStateStaticInfo.pl to fix up static info (like the list of working databases in the system) and then will run a reporting tool Backup_Crosscheck_Report.pl which reads crosscheck.dat and compares the results to the saved values in the BackupState table.<P>
+<pre>
+   MssqlBackupCrosscheck.ksh
+   MssqlBackupCrosscheckWeekly.ksh
+<P>
+</pre>
+ To collect data initially, we suggest you run the above with --NOALARM so you dont get totally spammed with alarms about databases you dont care about.  Once you do the initial run (with --NOALARM) look at the standard output for the job and appropriately edit crosscheck.dat to remove any databases for which you dont care about backups and to appropriately have the system handle/manage your log shipping.  By setting up the directives in this config file, you can inform GEM that systems should be log-shipped and it will intelligently understand that means that tran dumps must happen on primary and loads happen on secondary and that the database names must match between the systems.<P>
+<h3>SYBASE LOG FILE CHECKS</h3>
+<P>
+ The following Jobs Relate To Fetching Sybase Log Files<P>
+ SybErrLogAllRpt.ksh           Generates "Sybase Error Log - UnFiltered" SybErrLogFetch.ksh              Fetch The Logs & Generate Console Sybase Error Log Fetch Report SybErrLogSaveAlarms.ksh         Save Alarms From Prefetched Files - Report in "Sybase Error Log - Recent" SybErrLogConfig.ksh           Generates The Console Sybase Error Log Configuration Report SybErrLogRpt.ksh               Generates "Sybase Error Log - Filtered"<P>
+ The best mechanism to approach this process is to look at the Configuration Report and to remove any log files that are irrelevant -> the way we do this is to actually mark the RUN files associated with the log files as bad.<P>
+<h3>SQL SVR LOG FILE CHECKS</h3>
+<h3>CONFIGURATION CHECKER</h3>
+<P>
+ allsrv_query_long.pl --QUERY=select @@SERVERNAME,value,comment from sysconfigures where comment="procedure cache size" --TYPE=SYBASE<P>
+<h3>REPLICATION MONITOR</h3>
+<h3>CLEANING UP FILES</h3>
+<hr><br>
+This output is documentation for the SQL Technologies The Complete GEM Documentation.
+<ADDRESS>copyright &#169 1998-2011 By
+<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+</ADDRESS></BODY></html>

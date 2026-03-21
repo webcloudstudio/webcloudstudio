@@ -28,26 +28,25 @@ import Layout from '../../layouts/Layout.astro';
 
           <div class="card-actions">
             <a href="/webcloudstudio/project-docs/EdBarlowsStoredProcs/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
-            <a href="https://github.com/webcloudstudio/Ed_Barlows_Stored_Procedures" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
+            <a href="https://webcloudstudio.github.io/webcloudstudio/project-docs/EdBarlowsStoredProcs/index.html" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
           </div>
         </article>
 
-        <!-- CARD: GAME — Agent Management -->
+        <!-- CARD: GAME — Project Framework -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="/webcloudstudio/images/GAME.webp" alt="GAME — Agent Management" class="card-image"/>
+            <img src="/webcloudstudio/images/GAME.webp" alt="GAME — Project Framework" class="card-image"/>
           </div>
 
           <div class="card-content">
             <div class="tags">
-              <span class="tag tag--neutral">dashboard</span>
-            <span class="tag tag--neutral">tool</span>
-            <span class="tag tag--neutral">platform</span>
+              <span class="tag tag--py">Python</span>
+            <span class="tag tag--neutral">Project Framework</span>
             </div>
 
-            <h3 class="card-title">GAME — Agent Management</h3>
+            <h3 class="card-title">GAME — Project Framework</h3>
 
-            <p class="card-desc">My Best Practice Environment Based on GEM Tooling. Useful for any project types.</p>
+            <p class="card-desc">Full Featured Operations Framework For Projects. Based on GEM Enterprise Manager Rules and Standards. I use it for ALL my projects (writing, finance, code).</p>
           </div>
 
           <div class="card-actions">
@@ -71,7 +70,7 @@ import Layout from '../../layouts/Layout.astro';
 
             <h3 class="card-title">Herpes Hearts</h3>
 
-            <p class="card-desc">A full-featured community dating platform built for the HSV+ community. Features OAuth-only authentication (Google), custom profiles, messaging, likes, blocking, and profile search.</p>
+            <p class="card-desc">Completely Free Django dating platform built for the HSV+ community.</p>
           </div>
 
           <div class="card-actions">
@@ -103,25 +102,50 @@ import Layout from '../../layouts/Layout.astro';
           </div>
         </article>
 
-        <!-- CARD: Conquer -->
+        <!-- CARD: Specifications -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="/webcloudstudio/images/conquer_2026.webp" alt="Conquer" class="card-image"/>
+            <img src="/webcloudstudio/images/prototyper.webp" alt="Specifications" class="card-image"/>
           </div>
 
           <div class="card-content">
             <div class="tags">
-              <span class="tag tag--db">C++</span>
-            <span class="tag tag--neutral">Multi-Player Game</span>
+              
             </div>
 
-            <h3 class="card-title">Conquer</h3>
+            <h3 class="card-title">Specifications</h3>
 
-            <p class="card-desc">Conquer is a multi player C game published in the 80s and Early 90s</p>
+            <p class="card-desc">Project Prototyper And Business Rules Integration - One Shot framework with integration of business standards. Pairs with GAME command, control, and observability framework.</p>
           </div>
 
           <div class="card-actions">
+            <a href="/webcloudstudio/project-docs/Specifications/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
             
+          </div>
+        </article>
+
+        <!-- CARD: conquer_2026 -->
+        <article class="card">
+          <div class="card-image-wrapper">
+            <img src="/webcloudstudio/images/conquer_2026.webp" alt="conquer_2026" class="card-image"/>
+          </div>
+
+          <div class="card-content">
+            <div class="tags">
+              <span class="tag tag--neutral">Strategy Game</span>
+            <span class="tag tag--neutral">Multi-Player</span>
+            <span class="tag tag--fe">React</span>
+            <span class="tag-break"></span>
+            <span class="tag tag--neutral">FastAPI</span>
+            </div>
+
+            <h3 class="card-title">conquer_2026</h3>
+
+            <p class="card-desc">Modern port of the classic 1990s multi-player hex-map strategy game</p>
+          </div>
+
+          <div class="card-actions">
+            <a href="/webcloudstudio/project-docs/conquer_2026/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
             
           </div>
         </article>
@@ -136,12 +160,14 @@ import Layout from '../../layouts/Layout.astro';
             <div class="tags">
               <span class="tag tag--db">Perl</span>
             <span class="tag tag--neutral">CMDB</span>
-            <span class="tag tag--neutral">Enterprise Monitoring</span>
+            <span class="tag tag--neutral">Opertions</span>
+            <span class="tag-break"></span>
+            <span class="tag tag--db">Monitoring</span>
             </div>
 
             <h3 class="card-title">GEM Enterprise Manager</h3>
 
-            <p class="card-desc">Full featured system management utility utilized to manage on-prem production databases (~200) and hosts (~10000) at Millennium Partners (top 5 hedge fund) circa 2012. Best of Breed Alerting/Monitoring/Batch Cycle Management. Configuration Management.  CMDB.  Service Now Equivalent.</p>
+            <p class="card-desc">Enterprise Managemer utilized to manage on-prem production databases (~200) and hosts (~10000) at top 5 hedge funds and banks circa 2012. Configuration Management, Alerting & Monitoring, Operations, Batch Cycle.  Service Now Equivalent.</p>
           </div>
 
           <div class="card-actions">
@@ -172,9 +198,13 @@ import Layout from '../../layouts/Layout.astro';
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       column-gap: 1.5rem;
       row-gap: 1.5rem;
+    }
+
+    @media (max-width: 1280px) {
+      .cards-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 1024px) {

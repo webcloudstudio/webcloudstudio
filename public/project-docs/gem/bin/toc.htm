@@ -1,143 +1,145 @@
-<HTML><HEAD><TITLE>GEM UTILITIES GUIDE</TITLE>
-<META NAME=AUTHOR CONTENT="Edward Barlow"> </HEAD>
-<BODY TEXT=BLACK BGCOLOR=WHITE><FONT SIZE=2>
-<B>GEM UTILITIES GUIDE</B><BR>
-<BR><B>NAVIGATION</B><BR>
-<A HREF=readme.htm#link1 TARGET=basefrm>Document Navigation</A><BR>
-<BR><B>GEM UTILITIES INTRO</B><BR>
-<A HREF=readme.htm#link2 TARGET=basefrm>DatabaseUtilitiesToolkit</A><BR>
-<A HREF=readme.htm#link3 TARGET=basefrm>Description</A><BR>
-<A HREF=readme.htm#link4 TARGET=basefrm>On line documentation</A><BR>
-<A HREF=readme.htm#link5 TARGET=basefrm>Supported systems</A><BR>
-<A HREF=readme.htm#link6 TARGET=basefrm>System requirements</A><BR>
-<A HREF=readme.htm#link7 TARGET=basefrm>Html</A><BR>
-<A HREF=readme.htm#link8 TARGET=basefrm>Notes</A><BR>
-<BR><B>GEM UTILITIES</B><BR>
-<A HREF=readme.htm#link9 TARGET=basefrm>BkpChk Mssql Logs.pl</A><BR>
-<A HREF=readme.htm#link10 TARGET=basefrm>RepositoryRun.pl</A><BR>
-<A HREF=readme.htm#link11 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link12 TARGET=basefrm>BkpChk Report.pl</A><BR>
-<A HREF=readme.htm#link13 TARGET=basefrm>Backup crosscheck procedures</A><BR>
-<A HREF=readme.htm#link14 TARGET=basefrm>BkpChk UpdateStaticInfo.pl</A><BR>
-<A HREF=readme.htm#link15 TARGET=basefrm>Updatebackupstatestaticinfo.pl</A><BR>
-<A HREF=readme.htm#link16 TARGET=basefrm>monitor tables.pl</A><BR>
-<A HREF=readme.htm#link17 TARGET=basefrm>ConsoleArchiver.pl</A><BR>
-<A HREF=readme.htm#link18 TARGET=basefrm>QueryToCsv.pl</A><BR>
-<A HREF=readme.htm#link19 TARGET=basefrm>Dr checker.pl</A><BR>
-<A HREF=readme.htm#link20 TARGET=basefrm>Getsybmdasqltext.pl</A><BR>
-<A HREF=readme.htm#link21 TARGET=basefrm>HistServerMonitor.pl</A><BR>
-<A HREF=readme.htm#link22 TARGET=basefrm>LockedLoginDetector.pl</A><BR>
-<A HREF=readme.htm#link23 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link24 TARGET=basefrm>QueryToCsv.pl</A><BR>
-<A HREF=readme.htm#link25 TARGET=basefrm>RepositoryRun.pl</A><BR>
-<A HREF=readme.htm#link26 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link27 TARGET=basefrm>RunCommandOnSystems.pl</A><BR>
-<A HREF=readme.htm#link28 TARGET=basefrm>runquery.pl</A><BR>
-<A HREF=readme.htm#link29 TARGET=basefrm>RepositoryRun.pl</A><BR>
-<A HREF=readme.htm#link30 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link31 TARGET=basefrm>RepositoryRun.pl</A><BR>
-<A HREF=readme.htm#link32 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link33 TARGET=basefrm>RepositoryRun.pl</A><BR>
-<A HREF=readme.htm#link34 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link35 TARGET=basefrm>adduser.pl</A><BR>
-<A HREF=readme.htm#link36 TARGET=basefrm>alldb.pl</A><BR>
-<A HREF=readme.htm#link37 TARGET=basefrm>allsrv.pl</A><BR>
-<A HREF=readme.htm#link38 TARGET=basefrm>allsrv query.pl</A><BR>
-<A HREF=readme.htm#link39 TARGET=basefrm>allsrv query long.pl</A><BR>
-<A HREF=readme.htm#link40 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link41 TARGET=basefrm>audit fetch.pl</A><BR>
-<A HREF=readme.htm#link42 TARGET=basefrm>bcp out.pl</A><BR>
-<A HREF=readme.htm#link43 TARGET=basefrm>bcp in.pl</A><BR>
-<A HREF=readme.htm#link44 TARGET=basefrm>bcp out.pl</A><BR>
-<A HREF=readme.htm#link45 TARGET=basefrm>bcp out.pl</A><BR>
-<A HREF=readme.htm#link46 TARGET=basefrm>check app cksum.pl</A><BR>
-<A HREF=readme.htm#link47 TARGET=basefrm>clean ctrl char.pl</A><BR>
-<A HREF=readme.htm#link48 TARGET=basefrm>clean ctrl M.pl</A><BR>
-<A HREF=readme.htm#link49 TARGET=basefrm>brdcst interfaces.pl</A><BR>
-<A HREF=readme.htm#link50 TARGET=basefrm>copy statistics.pl</A><BR>
-<A HREF=readme.htm#link51 TARGET=basefrm>copy syslogins.pl</A><BR>
-<A HREF=readme.htm#link52 TARGET=basefrm>crdate report.pl</A><BR>
-<A HREF=readme.htm#link53 TARGET=basefrm>create dflt groups.pl</A><BR>
-<A HREF=readme.htm#link54 TARGET=basefrm>create ins script.pl</A><BR>
-<A HREF=readme.htm#link55 TARGET=basefrm>crosstab.pl</A><BR>
-<A HREF=readme.htm#link56 TARGET=basefrm>custom rpt.pl</A><BR>
-<A HREF=readme.htm#link57 TARGET=basefrm>cvt table to view.pl</A><BR>
-<A HREF=readme.htm#link58 TARGET=basefrm>data mine.pl</A><BR>
-<A HREF=readme.htm#link59 TARGET=basefrm>data mover.pl</A><BR>
-<A HREF=readme.htm#link60 TARGET=basefrm>datacompare.pl</A><BR>
-<A HREF=readme.htm#link61 TARGET=basefrm>dbcompare.pl</A><BR>
-<A HREF=readme.htm#link62 TARGET=basefrm>dbschema</A><BR>
-<A HREF=readme.htm#link63 TARGET=basefrm>Readme</A><BR>
-<A HREF=readme.htm#link64 TARGET=basefrm>Description</A><BR>
-<A HREF=readme.htm#link65 TARGET=basefrm>Prerequisites</A><BR>
-<A HREF=readme.htm#link66 TARGET=basefrm>Corequisites</A><BR>
-<A HREF=readme.htm#link67 TARGET=basefrm>debug one server.pl</A><BR>
-<A HREF=readme.htm#link68 TARGET=basefrm>delete db.pl</A><BR>
-<A HREF=readme.htm#link69 TARGET=basefrm>depends analyze.pl</A><BR>
-<A HREF=readme.htm#link70 TARGET=basefrm>depends get.pl</A><BR>
-<A HREF=readme.htm#link71 TARGET=basefrm>do release.pl</A><BR>
-<A HREF=readme.htm#link72 TARGET=basefrm>document db.pl</A><BR>
-<A HREF=readme.htm#link73 TARGET=basefrm>drop all objects.pl</A><BR>
-<A HREF=readme.htm#link74 TARGET=basefrm>dump sybase mon tables.pl</A><BR>
-<A HREF=readme.htm#link75 TARGET=basefrm>dump sybase rep server.pl</A><BR>
-<A HREF=readme.htm#link76 TARGET=basefrm>email query.pl</A><BR>
-<A HREF=readme.htm#link77 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link78 TARGET=basefrm>Description</A><BR>
-<A HREF=readme.htm#link79 TARGET=basefrm>Parameter file layout</A><BR>
-<A HREF=readme.htm#link80 TARGET=basefrm>RepositoryRun.pl</A><BR>
-<A HREF=readme.htm#link81 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link82 TARGET=basefrm>extract ddl.pl</A><BR>
-<A HREF=readme.htm#link83 TARGET=basefrm>file loader.pl</A><BR>
-<A HREF=readme.htm#link84 TARGET=basefrm>fix db.pl</A><BR>
-<A HREF=readme.htm#link85 TARGET=basefrm>full analysis.pl</A><BR>
-<A HREF=readme.htm#link86 TARGET=basefrm>get comments.pl</A><BR>
-<A HREF=readme.htm#link87 TARGET=basefrm>get interfaces.pl</A><BR>
-<A HREF=readme.htm#link88 TARGET=basefrm>kill pid.pl</A><BR>
-<A HREF=readme.htm#link89 TARGET=basefrm>log file filter.pl</A><BR>
-<A HREF=readme.htm#link90 TARGET=basefrm>monitor a table.pl</A><BR>
-<A HREF=readme.htm#link91 TARGET=basefrm>monitor errors.pl</A><BR>
-<A HREF=readme.htm#link92 TARGET=basefrm>monitor logfiles.pl</A><BR>
-<A HREF=readme.htm#link93 TARGET=basefrm>monitor user.pl</A><BR>
-<A HREF=readme.htm#link94 TARGET=basefrm>mssql attachscript.pl</A><BR>
-<A HREF=readme.htm#link95 TARGET=basefrm>RepositoryRun.pl</A><BR>
-<A HREF=readme.htm#link96 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link97 TARGET=basefrm>mssql cycle eventlog.pl</A><BR>
-<A HREF=readme.htm#link98 TARGET=basefrm>mssql datapath report.pl</A><BR>
-<A HREF=readme.htm#link99 TARGET=basefrm>mssql fix orphan users.pl</A><BR>
-<A HREF=readme.htm#link100 TARGET=basefrm>Synopsis</A><BR>
-<A HREF=readme.htm#link101 TARGET=basefrm>mssql gem setup report.pl</A><BR>
-<A HREF=readme.htm#link102 TARGET=basefrm>mssql jobstatus rpt.pl</A><BR>
-<A HREF=readme.htm#link103 TARGET=basefrm>mssql logmaintplan.pl</A><BR>
-<A HREF=readme.htm#link104 TARGET=basefrm>mssql scheduled job rpt.pl</A><BR>
-<A HREF=readme.htm#link105 TARGET=basefrm>mssql shrinklogs.pl</A><BR>
-<A HREF=readme.htm#link106 TARGET=basefrm>mssql shrinklogs.pl</A><BR>
-<A HREF=readme.htm#link107 TARGET=basefrm>SqlPortScan.pl</A><BR>
-<A HREF=readme.htm#link108 TARGET=basefrm>optdiag analyze.pl</A><BR>
-<A HREF=readme.htm#link109 TARGET=basefrm>parse a file.pl</A><BR>
-<A HREF=readme.htm#link110 TARGET=basefrm>parse hosts.pl</A><BR>
-<A HREF=readme.htm#link111 TARGET=basefrm>passwd rpt.pl</A><BR>
-<A HREF=readme.htm#link112 TARGET=basefrm>ping server.pl</A><BR>
-<A HREF=readme.htm#link113 TARGET=basefrm>process statistics.pl</A><BR>
-<A HREF=readme.htm#link114 TARGET=basefrm>purge files.pl</A><BR>
-<A HREF=readme.htm#link115 TARGET=basefrm>query compare.pl</A><BR>
-<A HREF=readme.htm#link116 TARGET=basefrm>rebuild.pl</A><BR>
-<A HREF=readme.htm#link117 TARGET=basefrm>readate.pl</A><BR>
-<A HREF=readme.htm#link118 TARGET=basefrm>reperl.pl</A><BR>
-<A HREF=readme.htm#link119 TARGET=basefrm>replicator.pl</A><BR>
-<A HREF=readme.htm#link120 TARGET=basefrm>rev db.pl</A><BR>
-<A HREF=readme.htm#link121 TARGET=basefrm>sample db script.pl</A><BR>
-<A HREF=readme.htm#link122 TARGET=basefrm>setup.pl</A><BR>
-<A HREF=readme.htm#link123 TARGET=basefrm>showplan analyze.pl</A><BR>
-<A HREF=readme.htm#link124 TARGET=basefrm>size monitor.pl</A><BR>
-<A HREF=readme.htm#link125 TARGET=basefrm>sysmon analysis.pl</A><BR>
-<A HREF=readme.htm#link126 TARGET=basefrm>ThresholdManager.pl</A><BR>
-<A HREF=readme.htm#link127 TARGET=basefrm>trunctate db.pl</A><BR>
-<A HREF=readme.htm#link128 TARGET=basefrm>win32 backupreport.pl</A><BR>
-<A HREF=readme.htm#link129 TARGET=basefrm>win32 diskspace.pl</A><BR>
-<A HREF=readme.htm#link130 TARGET=basefrm>win32 eventlog.pl</A><BR>
-<A HREF=readme.htm#link131 TARGET=basefrm>win32 get file.pl</A><BR>
-<A HREF=readme.htm#link132 TARGET=basefrm>win32 ipconfig report.pl</A><BR>
-<A HREF=readme.htm#link133 TARGET=basefrm>win32 service.pl</A><BR>
-<A HREF=readme.htm#link134 TARGET=basefrm>win32 shutdown.pl</A><BR>
-<A HREF=readme.htm#link135 TARGET=basefrm>win32 system report.pl</A><BR>
-</FONT> </BODY>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
+<title>Navigation</title>
+</head>
+<body class="gem-sidebar">
+<div class="gem-toc-title">Navigation</div>
+<a href="readme.htm#link2" target="basefrm">Database Utilities Toolkit</a>
+<a href="readme.htm#link3" target="basefrm">Description</a>
+<a href="readme.htm#link4" target="basefrm">On line documentation</a>
+<a href="readme.htm#link5" target="basefrm">Supported systems</a>
+<a href="readme.htm#link6" target="basefrm">System requirements</a>
+<a href="readme.htm#link7" target="basefrm">Html</a>
+<a href="readme.htm#link8" target="basefrm">Notes</a>
+<a href="readme.htm#link9" target="basefrm">BkpChk Mssql Logs.pl</a>
+<a href="readme.htm#link10" target="basefrm">RepositoryRun.pl</a>
+<a href="readme.htm#link11" target="basefrm">Synopsis</a>
+<a href="readme.htm#link12" target="basefrm">BkpChk Report.pl</a>
+<a href="readme.htm#link13" target="basefrm">Backup crosscheck procedures</a>
+<a href="readme.htm#link14" target="basefrm">BkpChk UpdateStaticInfo.pl</a>
+<a href="readme.htm#link15" target="basefrm">Updatebackupstatestaticinfo.pl</a>
+<a href="readme.htm#link16" target="basefrm">monitor tables.pl</a>
+<a href="readme.htm#link17" target="basefrm">ConsoleArchiver.pl</a>
+<a href="readme.htm#link18" target="basefrm">QueryToCsv.pl</a>
+<a href="readme.htm#link19" target="basefrm">Dr checker.pl</a>
+<a href="readme.htm#link20" target="basefrm">Getsybmdasqltext.pl</a>
+<a href="readme.htm#link21" target="basefrm">HistServerMonitor.pl</a>
+<a href="readme.htm#link22" target="basefrm">LockedLoginDetector.pl</a>
+<a href="readme.htm#link23" target="basefrm">Synopsis</a>
+<a href="readme.htm#link24" target="basefrm">QueryToCsv.pl</a>
+<a href="readme.htm#link25" target="basefrm">RepositoryRun.pl</a>
+<a href="readme.htm#link26" target="basefrm">Synopsis</a>
+<a href="readme.htm#link27" target="basefrm">RunCommandOnSystems.pl</a>
+<a href="readme.htm#link28" target="basefrm">runquery.pl</a>
+<a href="readme.htm#link29" target="basefrm">RepositoryRun.pl</a>
+<a href="readme.htm#link30" target="basefrm">Synopsis</a>
+<a href="readme.htm#link31" target="basefrm">RepositoryRun.pl</a>
+<a href="readme.htm#link32" target="basefrm">Synopsis</a>
+<a href="readme.htm#link33" target="basefrm">RepositoryRun.pl</a>
+<a href="readme.htm#link34" target="basefrm">Synopsis</a>
+<a href="readme.htm#link35" target="basefrm">adduser.pl</a>
+<a href="readme.htm#link36" target="basefrm">alldb.pl</a>
+<a href="readme.htm#link37" target="basefrm">allsrv.pl</a>
+<a href="readme.htm#link38" target="basefrm">allsrv query.pl</a>
+<a href="readme.htm#link39" target="basefrm">allsrv query long.pl</a>
+<a href="readme.htm#link40" target="basefrm">Synopsis</a>
+<a href="readme.htm#link41" target="basefrm">audit fetch.pl</a>
+<a href="readme.htm#link42" target="basefrm">bcp out.pl</a>
+<a href="readme.htm#link43" target="basefrm">bcp in.pl</a>
+<a href="readme.htm#link44" target="basefrm">bcp out.pl</a>
+<a href="readme.htm#link45" target="basefrm">bcp out.pl</a>
+<a href="readme.htm#link46" target="basefrm">check app cksum.pl</a>
+<a href="readme.htm#link47" target="basefrm">clean ctrl char.pl</a>
+<a href="readme.htm#link48" target="basefrm">clean ctrl M.pl</a>
+<a href="readme.htm#link49" target="basefrm">brdcst interfaces.pl</a>
+<a href="readme.htm#link50" target="basefrm">copy statistics.pl</a>
+<a href="readme.htm#link51" target="basefrm">copy syslogins.pl</a>
+<a href="readme.htm#link52" target="basefrm">crdate report.pl</a>
+<a href="readme.htm#link53" target="basefrm">create dflt groups.pl</a>
+<a href="readme.htm#link54" target="basefrm">create ins script.pl</a>
+<a href="readme.htm#link55" target="basefrm">crosstab.pl</a>
+<a href="readme.htm#link56" target="basefrm">custom rpt.pl</a>
+<a href="readme.htm#link57" target="basefrm">cvt table to view.pl</a>
+<a href="readme.htm#link58" target="basefrm">data mine.pl</a>
+<a href="readme.htm#link59" target="basefrm">data mover.pl</a>
+<a href="readme.htm#link60" target="basefrm">datacompare.pl</a>
+<a href="readme.htm#link61" target="basefrm">dbcompare.pl</a>
+<a href="readme.htm#link62" target="basefrm">dbschema</a>
+<a href="readme.htm#link63" target="basefrm">Readme</a>
+<a href="readme.htm#link64" target="basefrm">Description</a>
+<a href="readme.htm#link65" target="basefrm">Prerequisites</a>
+<a href="readme.htm#link66" target="basefrm">Corequisites</a>
+<a href="readme.htm#link67" target="basefrm">debug one server.pl</a>
+<a href="readme.htm#link68" target="basefrm">delete db.pl</a>
+<a href="readme.htm#link69" target="basefrm">depends analyze.pl</a>
+<a href="readme.htm#link70" target="basefrm">depends get.pl</a>
+<a href="readme.htm#link71" target="basefrm">do release.pl</a>
+<a href="readme.htm#link72" target="basefrm">document db.pl</a>
+<a href="readme.htm#link73" target="basefrm">drop all objects.pl</a>
+<a href="readme.htm#link74" target="basefrm">dump sybase mon tables.pl</a>
+<a href="readme.htm#link75" target="basefrm">dump sybase rep server.pl</a>
+<a href="readme.htm#link76" target="basefrm">email query.pl</a>
+<a href="readme.htm#link77" target="basefrm">Synopsis</a>
+<a href="readme.htm#link78" target="basefrm">Description</a>
+<a href="readme.htm#link79" target="basefrm">Parameter file layout</a>
+<a href="readme.htm#link80" target="basefrm">RepositoryRun.pl</a>
+<a href="readme.htm#link81" target="basefrm">Synopsis</a>
+<a href="readme.htm#link82" target="basefrm">extract ddl.pl</a>
+<a href="readme.htm#link83" target="basefrm">file loader.pl</a>
+<a href="readme.htm#link84" target="basefrm">fix db.pl</a>
+<a href="readme.htm#link85" target="basefrm">full analysis.pl</a>
+<a href="readme.htm#link86" target="basefrm">get comments.pl</a>
+<a href="readme.htm#link87" target="basefrm">get interfaces.pl</a>
+<a href="readme.htm#link88" target="basefrm">kill pid.pl</a>
+<a href="readme.htm#link89" target="basefrm">log file filter.pl</a>
+<a href="readme.htm#link90" target="basefrm">monitor a table.pl</a>
+<a href="readme.htm#link91" target="basefrm">monitor errors.pl</a>
+<a href="readme.htm#link92" target="basefrm">monitor logfiles.pl</a>
+<a href="readme.htm#link93" target="basefrm">monitor user.pl</a>
+<a href="readme.htm#link94" target="basefrm">mssql attachscript.pl</a>
+<a href="readme.htm#link95" target="basefrm">RepositoryRun.pl</a>
+<a href="readme.htm#link96" target="basefrm">Synopsis</a>
+<a href="readme.htm#link97" target="basefrm">mssql cycle eventlog.pl</a>
+<a href="readme.htm#link98" target="basefrm">mssql datapath report.pl</a>
+<a href="readme.htm#link99" target="basefrm">mssql fix orphan users.pl</a>
+<a href="readme.htm#link100" target="basefrm">Synopsis</a>
+<a href="readme.htm#link101" target="basefrm">mssql gem setup report.pl</a>
+<a href="readme.htm#link102" target="basefrm">mssql jobstatus rpt.pl</a>
+<a href="readme.htm#link103" target="basefrm">mssql logmaintplan.pl</a>
+<a href="readme.htm#link104" target="basefrm">mssql scheduled job rpt.pl</a>
+<a href="readme.htm#link105" target="basefrm">mssql shrinklogs.pl</a>
+<a href="readme.htm#link106" target="basefrm">mssql shrinklogs.pl</a>
+<a href="readme.htm#link107" target="basefrm">SqlPortScan.pl</a>
+<a href="readme.htm#link108" target="basefrm">optdiag analyze.pl</a>
+<a href="readme.htm#link109" target="basefrm">parse a file.pl</a>
+<a href="readme.htm#link110" target="basefrm">parse hosts.pl</a>
+<a href="readme.htm#link111" target="basefrm">passwd rpt.pl</a>
+<a href="readme.htm#link112" target="basefrm">ping server.pl</a>
+<a href="readme.htm#link113" target="basefrm">process statistics.pl</a>
+<a href="readme.htm#link114" target="basefrm">purge files.pl</a>
+<a href="readme.htm#link115" target="basefrm">query compare.pl</a>
+<a href="readme.htm#link116" target="basefrm">rebuild.pl</a>
+<a href="readme.htm#link117" target="basefrm">readate.pl</a>
+<a href="readme.htm#link118" target="basefrm">reperl.pl</a>
+<a href="readme.htm#link119" target="basefrm">replicator.pl</a>
+<a href="readme.htm#link120" target="basefrm">rev db.pl</a>
+<a href="readme.htm#link121" target="basefrm">sample db script.pl</a>
+<a href="readme.htm#link122" target="basefrm">setup.pl</a>
+<a href="readme.htm#link123" target="basefrm">showplan analyze.pl</a>
+<a href="readme.htm#link124" target="basefrm">size monitor.pl</a>
+<a href="readme.htm#link125" target="basefrm">sysmon analysis.pl</a>
+<a href="readme.htm#link126" target="basefrm">ThresholdManager.pl</a>
+<a href="readme.htm#link127" target="basefrm">trunctate db.pl</a>
+<a href="readme.htm#link128" target="basefrm">win32 backupreport.pl</a>
+<a href="readme.htm#link129" target="basefrm">win32 diskspace.pl</a>
+<a href="readme.htm#link130" target="basefrm">win32 eventlog.pl</a>
+<a href="readme.htm#link131" target="basefrm">win32 get file.pl</a>
+<a href="readme.htm#link132" target="basefrm">win32 ipconfig report.pl</a>
+<a href="readme.htm#link133" target="basefrm">win32 service.pl</a>
+<a href="readme.htm#link134" target="basefrm">win32 shutdown.pl</a>
+<a href="readme.htm#link135" target="basefrm">win32 system report.pl</a>
+</body>
+</html>

@@ -9,20 +9,9 @@
   <meta name="author" content="Edward Barlow">
   <meta name="Description" content="GEM - The Generic Enterprise Manager">
   <meta name="keywords" content="sybase, sql server, oracle,  tools,  utilities,  shareware,  database, monitoring, administrator, tool, CURRENT_TILE, GEM, free, administration, reporting, configuration">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
 </head>
 <body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
-
-<A NAME=link1></A>
-
-<center>
-<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
-	<TR><TD><CENTER><font color=#33ccff><H1>GEM LIBRARIES</H1>
-<H3></H3></font>
-</TD></TR>
-</TABLE></CENTER>
-<P>
- <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
- <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
 <A NAME=link2></A>
 <br>
 <center>
@@ -561,7 +550,7 @@
 <P>
 </pre>
  $jobscheduler is a hash of hashes.
-<A NAME=link10></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -665,7 +654,7 @@
  PATERN=[perlpat] EXCLUDE=[string to exclude]<P>
 </UL>
 
-<A NAME=link11></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -742,7 +731,7 @@
 </pre>
 <P>
 
-<A NAME=link12></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -819,7 +808,7 @@
 </pre>
 <P>
 
-<A NAME=link13></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -892,7 +881,7 @@
 <P>
  If a batch job aborts/fails, the status should not be COMPLETED (it should be one of the other states from above).  Note that you can have the batch job submit many RUNNING heartbeats, with different message texts, to identifying the exact position in the batch.<P>
 
-<A NAME=link14></A>
+
 <h1>Monitoring api</h1>
 <p>
 <P>
@@ -976,7 +965,7 @@
 </UL>
 <P>
 
-<A NAME=link15></A>
+
 <h1>Monitoring reporting</h1>
 <p>
 <P>
@@ -1021,7 +1010,7 @@
 </UL>
 <P>
 
-<A NAME=link16></A>
+
 <h1>Monitoring coding</h1>
 <p>
 <P>
@@ -1134,7 +1123,7 @@
 <P>
 </pre>
 
-<A NAME=link17></A>
+
 <h1>Monitoring notes</h1>
 <p>
 <P>
@@ -1172,7 +1161,7 @@
 <P>
  In addition to Heartbeats and Events, the system will handle batch jobs and agents.  Agents are the programs that collect Heartbeats and Events.  Agents are stored with by setting -monitor_program=>1 in the functions.  This saves heartbeat data with batchjob=AGENT.  Batchjobs are considered all data with batchjob!=AGENT but not null. The functions MlpBatchStart, MlpBatchDone, MlpBatchJobErr, and MlpBatchRunning and MlpBatchStep.<P>
 
-<A NAME=link18></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -1316,7 +1305,7 @@
 <P>
  Sybase Monitor servers behave slightly differently.  These servers are stored in monitorserver.dat and represent a map of monitor server -> sybase server.  When you run get_password(-type=>monitor_server) you get a hash with keys of MONITOR.$MON_SERVER or HISTORICAL.$HIST_SERVER and values of the ASE Sybase SQL Server associated with the monitor server. When you run get_password(-type=>monitor_server,-name=XXX_MON) you recieve the login and password information for the sybase server associated with that monitor server...<P>
 
-<A NAME=link19></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -1690,5 +1679,7 @@
 <hr><br>
 This output is documentation for the SQL Technologies GEM LIBRARIES.
 <ADDRESS>copyright &#169 1998-2011 By
-<A HREF=http://www.edbarlow.com>SQL Technologies</A>
-</ADDRESS></BODY></html>
+SQL Technologies
+</ADDRESS>
+<div class="gem-page-footer">Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.</div>
+</body></html>

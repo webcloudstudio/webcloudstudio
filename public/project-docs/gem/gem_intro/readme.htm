@@ -9,20 +9,9 @@
   <meta name="author" content="Edward Barlow">
   <meta name="Description" content="GEM - The Generic Enterprise Manager">
   <meta name="keywords" content="sybase, sql server, oracle,  tools,  utilities,  shareware,  database, monitoring, administrator, tool, CURRENT_TILE, GEM, free, administration, reporting, configuration">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
 </head>
 <body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
-
-<A NAME=link1></A>
-
-<center>
-<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
-	<TR><TD><CENTER><font color=#33ccff><H1>Getting Started With GEM</H1>
-<H3></H3></font>
-</TD></TR>
-</TABLE></CENTER>
-<P>
- <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
- <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
 <A NAME=link2></A>
 <br>
 <center>
@@ -118,8 +107,8 @@
 </TABLE></CENTER>
 <P>
  <i><b>GEM</b></i> is a non-invasive agent less system that runs on a central monitoring station.  Nothing runs on your remote systems.  Even our backup solution is runs centrally.  You will need a Windows monitoring station if you are using <i><b>GEM</b></i> with Windows systems/databases, and a Unix monitoring station if you are using <i><b>GEM</b></i> for Unix systems/databases. <P>
- <i><b>GEM</b></i> will install our popular <A target=_top HREF=http://www.edbarlow.com/gem/procs_only/index.htm>system stored procedure library</A> on all servers.<P>
- <i><b>GEM</b></i> provides a  <A target=_top HREF=http://www.edbarlow.com/gem/backup_scripts_only/index.htm>database maintenance package</A> which can optionally be used for server back ups and maintenance.  This is a separate free software package that is mostly used for Sybase servers and SQL Server 2000 databases.<P>
+ <i><b>GEM</b></i> will install our popular system stored procedure library on all servers.<P>
+ <i><b>GEM</b></i> provides a  database maintenance package which can optionally be used for server back ups and maintenance.  This is a separate free software package that is mostly used for Sybase servers and SQL Server 2000 databases.<P>
  The <i><b>GEM</b></i> Configuration Utility, gem.pl, is a basic user interface for tasks you may wish to run post-installation. It does things like load LDAP information, create and schedule our customized <i><b>GEM</b></i> Batch Scripts. Information is collected in the <i><b>GEM</b></i> File Repository and the <i><b>GEM</b></i> Monitoring Database, from which it is reformatted and delivered via the <i><b>GEM</b></i> Console.<P>
  If you have both Windows and Unix Systems, <i><b>GEM</b></i> is normally installed on a samba shared drive.   We call this a "Hybrid" environment. A samba share permits the same code to be used on your windows, Linux, and Unix systems. The  windows monitoring system will run scheduled tasks on your windows domain and the Unix/Linux server will use cron to  schedule jobs in your Unix domain.<P>
  <i><b>GEM</b></i> is written in open source perl.  Perl is regarded as the language of choice for systems administrators and your administrators will find it easy to understand <i><b>GEM</b></i>.  With a normal level of perl experience, you can troubleshoot any problems that arise.  <i><b>GEM</b></i> uses standard perl/DBI for database independent connectivity and perl/Tk and perl/CGI for user interfaces.  Programs are self-documented using the standard perldoc format (i.e. See documentation via perldoc program.pl) and follow standard best practices.  The <i><b>GEM</b></i> documentation is created from this same perldoc.<P>
@@ -142,5 +131,7 @@
  Finally, you will need access to a Web Server that can run cgi scripts. <hr><br>
 This output is documentation for the SQL Technologies Getting Started With GEM.
 <ADDRESS>copyright &#169 1998-2011 By
-<A HREF=http://www.edbarlow.com>SQL Technologies</A>
-</ADDRESS></BODY></html>
+SQL Technologies
+</ADDRESS>
+<div class="gem-page-footer">Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.</div>
+</body></html>

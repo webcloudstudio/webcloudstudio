@@ -9,22 +9,9 @@
   <meta name="author" content="Edward Barlow">
 	<meta name="Description" content="The GEM Server Maintenanance Scripts Provide a complete free, easy to use, perl command line,  backup solution to microsoft sql server and Sybase database servers">
 	<meta name="keywords" content="sybase, sql server, tools, backup, maintenance, reorg, dbcc, administrator, free, freeware, GEM, server administration, auditing, perl">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
 </head>
 <body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
-
-<A NAME=link1></A>
-
-<center>
-<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
-	<TR><TD><CENTER><font color=#33ccff><H1>GEM Server Maintenance Scripts</H1>
-<H3></H3></font>
-</TD></TR>
-</TABLE></CENTER>
-<P>
- <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
- <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
-<P>
-
 <A NAME=link2></A>
 
 <center>
@@ -39,8 +26,8 @@
  The package is written in perl,  runs on WinNT, Linux, and UNIX platforms, and include all the facilities you will require to perform basic data server routine maintenance.  The individual scripts are small and easy to understand and, as with all perl code, are released as source code. The scripts work identically on all varieties of Windows, Linux, and Unix systems. The primary interface to these scripts is command line based for flexibility and power. Electronic mail is used for notification as appropriate.<P>
  This package has been tested on the following databases<P>
      SQL SERVER 2000     SQL SERVER 2005     SQL SERVER 2008     SQL SERVER 2008r2     Sybase 4.9     Sybase 10     Sybase 11     Sybase 12.5     Sybase 15<P>
- This package is released as Free software from the <A HREF=http://www.edbarlow.com>GEM web site</A> under a standard <A HREF=http://www.gnu.org/copyleft/gpl.html>GPL</A> license. The license will be updated to GPL v3 when that draft is finished.<P>
- <b>Backup Manager Package Links</b>. <a href="http://www.edbarlow.com">Home Page</a> &nbsp; <a href="http://www.edbarlow.com/download/backup_scripts.tgz">Standalone Download</a> &nbsp; <a href="http://www.edbarlow.com/download.pl">GEM Download</a><P>
+ This package is released as Free software from the GEM web site under a standard <A HREF=http://www.gnu.org/copyleft/gpl.html>GPL</A> license. The license will be updated to GPL v3 when that draft is finished.<P>
+ <b>Backup Manager Package Links</b>. Home Page &nbsp; Standalone Download &nbsp; GEM Download<P>
 
 <P>
 
@@ -155,7 +142,7 @@
 </TABLE></CENTER>
 <p>
 <P>
- These backup scripts are shipped as an <a href="http://www.edbarlow.com/download.pl">integrated part of <b>GEM</b></a>, our commercial enterprise management solution for DBA's.  They are also shipped as a standalone package and can be downloaded in <a href="http://www.edbarlow.com/download/backup_scripts.tgz">compressed tar format (.tgz)</a>. <P>
+ These backup scripts are shipped as an <a href="http://www.edbarlow.com/download.pl">integrated part of <b>GEM</b></a>, our commercial enterprise management solution for DBA's.  They are also shipped as a standalone package and can be downloaded in compressed tar format (.tgz). <P>
  The one minor difference between the two layouts is that the standalone release creates the three directories (conf, lib, and dbi_backup_scripts) under the directory "backup_scripts", while the GEM release puts the scripts in "ADMIN_SCRIPTS/dbi_backup_scripts".  Other than that, the releases are identical.<P>
  We distribute the software (remember its source code!) as .tgz files (compressed tarbals). A compressed tar file is a native unix format that is also the format used by Windows utilities like WinZip.<P>
  On unix, uncompress the distribution using <font color=red><i>tar xvzf backup_scripts.gtz</i></font>. Older versions of tar may not have the 'z' uncompress option - you can also uncompress via <font color=red><i>gunzip backup_scripts.gtz</i></font> or <font color=red><i>gzip -d backup_scripts.gtz</i></font> and then extract with <font color=red><i>tar xvf backup_scripts.tar</font></i>.  Note the change in file endings - the uncompression programs will change the .tgz extension to a .tar one.<P>
@@ -200,7 +187,7 @@
 
 <P>
 
-<A NAME=link10></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -228,7 +215,7 @@
 
 <P>
 
-<A NAME=link11></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -245,7 +232,7 @@
 
 <P>
 
-<A NAME=link12></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -261,7 +248,7 @@
 
 <P>
 
-<A NAME=link13></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -276,7 +263,7 @@
 
 <P>
 
-<A NAME=link14></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -299,7 +286,7 @@
 
 <P>
 
-<A NAME=link15></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -313,7 +300,7 @@
 
 <P>
 
-<A NAME=link16></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -352,7 +339,7 @@
 
 <P>
 
-<A NAME=link17></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -434,7 +421,7 @@
 
 <P>
 
-<A NAME=link18></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -451,7 +438,7 @@
 
 <P>
 
-<A NAME=link19></A>
+
 
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -1518,6 +1505,8 @@ when a huge table is being reorged, that reorg can runs well past the max time s
 <p>Run ALTER INDEX command with SET (ALLOW_PAGE_LOCK = ON)</p>
 <p>May need from sysindexes where allow_page_locks=0</p>
 
+
+<div class="gem-page-footer">Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.</div>
 </body>
 
 </html>
@@ -1722,5 +1711,5 @@ when a huge table is being reorged, that reorg can runs well past the max time s
 <hr><br>
 This output is documentation for the SQL Technologies GEM Server Maintenance Scripts.
 <ADDRESS>copyright &#169 1998-2011 By
-<A HREF=http://www.edbarlow.com>SQL Technologies</A>
+SQL Technologies
 </ADDRESS></BODY></html>

@@ -9,50 +9,9 @@
   <meta name="author" content="Edward Barlow">
 	<meta name="Description" content="Sybase and Sql Server Extended Stored Procedure Library - new and useful extensions to the system procedures">
 	<meta name="keywords" content="Extended Stored Procedures, System Procedures, Sql Server, Sybase,  Microsoft, Tools ">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
 </head>
 <body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
-
-<P>
-
-<A NAME=link1></A>
-
-<center>
-<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
-<TR><TD><CENTER><font color=#ff99cc><H1>Stored procedure library</H1>
-</font>
-</TD></TR>
-</TABLE></CENTER>
-<p>
-<P>
- The following is a guide to a FREE set of stored procedures that extend the Sybase and Microsoft SQL Server provided system procedures. These procedures provide additional functionality and new ways to look at the data provided in the System Tables. They also provide new formats that allows users, developers, and administrators to see the data they want in the format they want. This collection has been developed by several authors, and is maintained by Edward Barlow.  This package is intended to be a professional  tool suitable for general use on all your servers.<P>
- These procedures are installed into sybsystemprocs on Sybase and into master on Microsoft Sql Server. All procedure names start with "sp__" (two underscores). This naming convention ensures that the procedures, when run, will be available from any database and that, when they are run, the database context will be the current database. This naming convention also ensures that there are no naming conflicts with Sybase's internal procedures.  Thus, if you want to see space in the statsdb database, you can run:<P>
-<pre>
-  use statsdb
-  exec <A HREF=#link21>sp__dbspace</A>
-<P>
-</pre>
- Most of these procedures can be passed the parameter @dont_format='Y' to produce unformatted output.  One goal was to produce output that is readable in 80 column mode for convenience in isql/osql.  This is done by truncating some fields (dbname, username etc), which can result in truncated output.  If you need more detail or are using a graphical query analyzer you can pass the @dont_format='y' argument and it will show all fields at full length (no column truncation).<P>
-<pre>
-   <A HREF=#link87>sp__who</A> @dont_format='Y'
-<P>
-</pre>
- <P><B>Extended Stored Procedure Library Links</B>. <A HREF="http://www.edbarlow.com">Home Page</A> &nbsp; <A HREF="http://www.edbarlow.com/download/procs.tgz">Standalone Download</A> &nbsp; <A HREF="http://www.edbarlow.com/download.pl">GEM Download</A><P>
- These stored procedures are released as Free software under a standard <A HREF=http://www.gnu.org/copyleft/gpl.html>GPL</A> license.<P>
- These procedures have been tested under<P>
-<pre>
-  SQL SERVER 2000
-  SQL SERVER 2005
-  SQL SERVER 2008
-  SQL SERVER 2008r2
-  SYBASE 4.9
-  SYBASE 10
-  SYBASE 11
-  SYBASE 12
-  SYBASE 15
-</pre>
-
-<P>
-
 <A NAME=link2></A>
 
 <center>
@@ -442,7 +401,7 @@
    Group Public access to object pbcattbl type=U
 </pre>
 
-<A NAME=link10></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -494,7 +453,7 @@
   (No Trusted Remote Logins)
 </pre>
 
-<A NAME=link11></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -526,7 +485,7 @@
  comn_syscolumns.XPKcomn_syscol Length = 94            &gt;30 Byte Index
 </pre>
 
-<A NAME=link12></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -576,7 +535,7 @@
         bcp master..spt_values out spt_values.dat -Usa -Pxxx -SSYBASE
 </pre>
 
-<A NAME=link13></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -613,7 +572,7 @@
   45           iampoor                            7
 </pre>
 
-<A NAME=link14></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -668,7 +627,7 @@
 </pre>
 <P>
 
-<A NAME=link15></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -711,7 +670,7 @@
  group_name           model                char(30)        null
 </pre>
 
-<A NAME=link16></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -748,7 +707,7 @@
   benchmark       int             null              4 Tables
 </pre>
 
-<A NAME=link17></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -792,7 +751,7 @@
  crdate               comn_database        datetime        null
 </pre>
 
-<A NAME=link18></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -831,7 +790,7 @@
  Languages                    default language          0
 </pre>
 
-<A NAME=link19></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4460,7 +4419,7 @@
  imagvue.rules                                     0           0           0           0
 </pre>
 
-<A NAME=link100></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4490,7 +4449,7 @@
 <P>
  1> <A HREF=#link100>sp__monopenobj</A><P>
  SPID   ObjName                           PhyReads   LogReads   apfReads 98     clientmlp.hts_profit_loss         0          2835       0 98     tempdb.#set_portf___000009800091587 0        97780      0 381    clientmlp.hts_ord_control         0          307        0 481    master.monProcessObject           0          0          0 653    clientmlp.hts_profit_loss         0          2128       0 863    clientmlp.hts_profit_loss         0          21786      0 863    tempdb.#set_portf___000086300093785 0        375914     0 906    clientmlp.hts_profit_loss         0          24485      0 906    tempdb.#set_portf___000090600094598 0        211256     0 1126   clientmlp.hts_profit_loss         0          9556       0 1126   tempdb.#set_portf___000112600064828 0        82461      0 1163   clientmlp.hts_ord_control         270        5881       384 1163   clientmlp.hts_exec_control        6697       40707      113
-<A NAME=link101></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4541,7 +4500,7 @@
  waiting for incoming network data               5100           0
 </pre>
 
-<A NAME=link102></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4573,7 +4532,7 @@
  kdb_trds                346 calcCharge_sp                  clientmlp                                 1680
 </pre>
 
-<A NAME=link103></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4595,7 +4554,7 @@
 <h3>SAMPLE OUTPUT</h3>
 <P>
  run it and see
-<A NAME=link104></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4662,7 +4621,7 @@
 <P>
  Recent ------------------ select * from hts_yc_sp where ycsp_ycsph_id = 10001672 union select * from shared1..hts_yc_sp where ycsp_ycsph_id = 10001672<P>
  select * from hts_yc_sp_hdr where ycsph_id = 10001673 union select * from shared1..hts_yc_sp_hdr where ycsph_id = 10001673
-<A NAME=link105></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4702,7 +4661,7 @@
 </pre>
 <P>
 
-<A NAME=link106></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4784,7 +4743,7 @@
  dbo.spt_values                 spt_valuesclust                          94        2388        6191           1.0
 </pre>
 
-<A NAME=link107></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4820,7 +4779,7 @@
              4         26337              0                  0
 </pre>
 
-<A NAME=link108></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4856,7 +4815,7 @@
  spt_mda.spt_mda_ind                                             Y       mdinfo,mdaver_end,srvver_end
 </pre>
 
-<A NAME=link109></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4933,7 +4892,7 @@
  spt_values                            1745           0           0           0       150647       15054
 </pre>
 
-<A NAME=link110></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#cc0066>
@@ -4991,5 +4950,7 @@
 <hr><br>
 This output is documentation for the SQL Technologies EXTENDED STORED PROCEDURES.
 <ADDRESS>copyright &#169 1994-2011 By
-<A HREF=http://www.edbarlow.com>SQL Technologies</A>
-</ADDRESS></BODY></html>
+SQL Technologies
+</ADDRESS>
+<div class="gem-page-footer">copyright &#169 1994-2011 By</div>
+</body></html>

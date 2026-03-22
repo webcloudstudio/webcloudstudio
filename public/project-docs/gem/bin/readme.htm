@@ -9,20 +9,9 @@
   <meta name="author" content="Edward Barlow">
 	<meta name="Description" content="these useful perl utilities for sybase and sql server use DBI and DBD">
 	<meta name="keywords" content="sybase, sql server, microsoft, utilities, perl, command line, administration, tools, free, GEM, useful">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
 </head>
 <body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
-
-<A NAME=link1></A>
-
-<center>
-<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
-	<TR><TD><CENTER><font color=#33ccff><H1>GEM UTILITIES GUIDE</H1>
-<H3></H3></font>
-</TD></TR>
-</TABLE></CENTER>
-<P>
- <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
- <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
 <A NAME=link2></A>
 <br>
 <center>
@@ -126,7 +115,7 @@
 </pre>
 <P>
 
-<A NAME=link10></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -136,12 +125,12 @@
 </TABLE></CENTER>
 <P>
 
-<A NAME=link11></A>
+
 <h1>Synopsis</h1>
 <p>
 <P>
 
-<A NAME=link12></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -182,7 +171,7 @@
 <P>
  The above creates a linked pair of reports - with a summary in HTMLFILE and details of the shipping and loading in HTMLDETAIL.  Note that some times your report will be out of sync... the Behind time explains this - its possible that the lsn's dont match up intentionally.<P>
 
-<A NAME=link13></A>
+
 <h1>Backup crosscheck procedures</h1>
 <p>
 <P>
@@ -205,7 +194,7 @@
 <P>
  =end<P>
 
-<A NAME=link14></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -224,7 +213,7 @@
 <P>
  This program interrogates the msdb tables in order to create variables that can be used by the GEM backup scripts or whatever.  Basically, it dumps the msdb tables in a reasonable ascii format that you can read.<P>
 
-<A NAME=link15></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -248,7 +237,7 @@
 <P>
  This program needs be run rarely (weekly?) and will be spawned by the Weekly Console Rebuild.<P>
 
-<A NAME=link16></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -264,7 +253,7 @@
 </pre>
 <P>
 
-<A NAME=link17></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -296,7 +285,7 @@
 <P>
  This will be run from a weekly batch, but only the first week of the month will actually do the overwrite.  After that it just exits out...<P>
 
-<A NAME=link18></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -315,7 +304,7 @@
 <P>
 </pre>
 
-<A NAME=link19></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2334,7 +2323,7 @@
 </TABLE></CENTER>
 <P>
 
-<A NAME=link100></A>
+
 <h1>Synopsis</h1>
 <p>
 <P>
@@ -2346,7 +2335,7 @@
  and then fixes those ones with logins available via<P>
  exec sp_change_users_login 'Auto_Fix',login<P>
 
-<A NAME=link101></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2359,7 +2348,7 @@
 <P>
  Discovers your configuration based on interfaces and osql -L and then it will produce a report detailing what is registered and the server status.<P>
 
-<A NAME=link102></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2381,7 +2370,7 @@
 </pre>
 <P>
 
-<A NAME=link103></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2394,7 +2383,7 @@
 <P>
  Reads the logmaintplan table in mssql - which stores sql server job states and stores the results as heartbeats.<P>
 
-<A NAME=link104></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2435,7 +2424,7 @@
 <P>
  for all the servers in your password file.<P>
 
-<A NAME=link105></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2464,7 +2453,7 @@
 </pre>
 <P>
 
-<A NAME=link106></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2493,7 +2482,7 @@
 </pre>
 <P>
 
-<A NAME=link107></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2540,7 +2529,7 @@
  Syntax: SqlPing3cl.exe -scantype [range,list,stealth] -StartIP [IP] -EndIP [IP] -IPList [FileName] -UserList [FileName] -PassList [FileName] -Output [FileName]<P>
  Currently -scantype is the only required parameter. IPs will default to 127.0.0.1 if nothing is provided. The default output file is output.txt.<P>
 
-<A NAME=link108></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2557,7 +2546,7 @@
  Analyzes optdiag output and produces a fragmentation report as per the algorithms described at 2006 techwave.  Need to validate this by lock scheme.  Uses the following keys:<P>
  Data page cluster ratio: Index page cluster ratio: Data row cluster ratio: Space utilization: Large I/O efficiency:<P>
 
-<A NAME=link109></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2575,7 +2564,7 @@
 <h3>NOTES</h3>
 <P>
 
-<A NAME=link110></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2591,7 +2580,7 @@
 </pre>
 <P>
 
-<A NAME=link111></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2644,7 +2633,7 @@
 </pre>
 <P>
 
-<A NAME=link112></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2665,7 +2654,7 @@
  pings all servers in your password files.  Returns number of servers that cant be connected to.  Prints status of your servers.  Has no embedded error handling.<P>
  IF -SERVER is passed, you can specify a comma separated list of servers<P>
 
-<A NAME=link113></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2692,7 +2681,7 @@
 </pre>
 <P>
 
-<A NAME=link114></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2742,7 +2731,7 @@
 <h3>POPULATION</h3>
 <P>
  you can use console/find_win32_files_for_monitoring.pl to create the controlfile
-<A NAME=link115></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2792,7 +2781,7 @@
 </pre>
 <P>
 
-<A NAME=link116></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2868,7 +2857,7 @@
 <P>
  skips files named configure.pl or <A HREF=#link116>rebuild.pl</A>.  Those should always be full path name to the perl executable using the above syntax.<P>
 
-<A NAME=link117></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2887,7 +2876,7 @@
 </pre>
 <P>
 
-<A NAME=link118></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -2953,7 +2942,7 @@
 <P>
  skips files named configure.pl or <A HREF=#link118>reperl.pl</A>.  Those should always be full path name to the perl executable using the above syntax.<P>
 
-<A NAME=link119></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3037,7 +3026,7 @@
  Destination server EXPECTED to be consistent when startup.  This might be a problem.<P>
  Sanity Checker?<P>
 
-<A NAME=link120></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3066,7 +3055,7 @@
 </pre>
 <P>
 
-<A NAME=link121></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3088,7 +3077,7 @@
 </pre>
 <P>
 
-<A NAME=link122></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3143,7 +3132,7 @@
 </pre>
 <P>
 
-<A NAME=link123></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3198,7 +3187,7 @@
 </pre>
 <P>
 
-<A NAME=link124></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3241,7 +3230,7 @@
 </pre>
 <P>
 
-<A NAME=link125></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3306,7 +3295,7 @@
 <P>
  The SYBASE,DSQUERY,USER, and PASSWORD items are taken from variables by the the same name if they are not passed directly into the program.<P>
 
-<A NAME=link126></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3343,7 +3332,7 @@
  After you extend your databases, rerun the -ACTION=INSTALL procedure to reset your thresholds.<P>
  Tempdb is 50% error and 80% critical always<P>
  Only alerts if the value was from today - dont care that much about historical stuff =end
-<A NAME=link127></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3368,7 +3357,7 @@
 </pre>
 <P>
 
-<A NAME=link128></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3409,7 +3398,7 @@
  The above creates a linked pair of reports - with a summary in HTMLFILE and details of the shipping and loading in HTMLDETAIL.  Note that some times your report will be out of sync... the Behind time explains this - its possible that the lsn's dont match up intentionally.<P>
  =end<P>
 
-<A NAME=link129></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3448,7 +3437,7 @@
    ADSRV061 C$ D$ E$ F$
 </pre>
 
-<A NAME=link130></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3485,7 +3474,7 @@
 <P>
  The program reads the __DATA__ section at the bottom of the program to find out messages that it can ignore by service, severity, and error number.  Each service can specify by Error/Warning/Info whether it wants to ignore all messages (wildcard %) or a specific list of messages to ignore.<P>
 
-<A NAME=link131></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3500,7 +3489,7 @@
  This is an excellent program and can be used as a template for other little batches you wish to use.<P>
  It probably will mostly be called from other batches - the one i have in mind right now is to get win32 task scheduler jobs log files from all my systems.  That would be something like <A HREF=#link131>win32_get_file.pl</A> --INDIR=/winnt,/windows --INFILE=SchedLgu.txt I will also add one for hosts.<P>
 
-<A NAME=link132></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3516,7 +3505,7 @@
 </pre>
 <P>
 
-<A NAME=link133></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3560,7 +3549,7 @@
 </pre>
 <P>
 
-<A NAME=link134></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3573,7 +3562,7 @@
 <P>
  Shutdown an windows system. Only works if you have administrator priviliges.<P>
 
-<A NAME=link135></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -3591,5 +3580,7 @@
 <hr><br>
 This output is documentation for the SQL Technologies GEM UTILITIES GUIDE.
 <ADDRESS>copyright &#169 1998-2011 By
-<A HREF=http://www.edbarlow.com>SQL Technologies</A>
-</ADDRESS></BODY></html>
+SQL Technologies
+</ADDRESS>
+<div class="gem-page-footer">Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.</div>
+</body></html>

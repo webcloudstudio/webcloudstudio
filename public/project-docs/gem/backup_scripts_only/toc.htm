@@ -1,55 +1,57 @@
-<HTML><HEAD><TITLE>GEM Server Maintenance Scripts</TITLE>
-<META NAME=AUTHOR CONTENT="Edward Barlow"> </HEAD>
-<BODY TEXT=BLACK BGCOLOR=WHITE><FONT SIZE=2>
-<B>GEM Server Maintenance Scripts</B><BR>
-<BR><B>Server Maintenance Scripts</B><BR>
-<A HREF=readme.htm#link1 TARGET=basefrm>Server maintenance scripts</A><BR>
-<A HREF=readme.htm#link2 TARGET=basefrm>Package overview</A><BR>
-<A HREF=readme.htm#link3 TARGET=basefrm>Features</A><BR>
-<A HREF=readme.htm#link4 TARGET=basefrm>Requirements</A><BR>
-<A HREF=readme.htm#link5 TARGET=basefrm>How it works</A><BR>
-<A HREF=readme.htm#link6 TARGET=basefrm>Installation</A><BR>
-<A HREF=readme.htm#link7 TARGET=basefrm>Where to install</A><BR>
-<A HREF=readme.htm#link8 TARGET=basefrm>Log shipping for disaster recovery</A><BR>
-<A HREF=readme.htm#link9 TARGET=basefrm>Source directory layout</A><BR>
-<A HREF=readme.htm#link10 TARGET=basefrm>Data directory layout</A><BR>
-<A HREF=readme.htm#link11 TARGET=basefrm>Rights and redistribution</A><BR>
-<A HREF=readme.htm#link12 TARGET=basefrm>Security</A><BR>
-<A HREF=readme.htm#link13 TARGET=basefrm>The password files</A><BR>
-<A HREF=readme.htm#link14 TARGET=basefrm>Installing and testing</A><BR>
-<A HREF=readme.htm#link15 TARGET=basefrm>Configure.cfg</A><BR>
-<A HREF=readme.htm#link16 TARGET=basefrm>Plan variables</A><BR>
-<A HREF=readme.htm#link17 TARGET=basefrm>Remote purging and compression</A><BR>
-<A HREF=readme.htm#link18 TARGET=basefrm>Setting up your crontab</A><BR>
-<A HREF=readme.htm#link19 TARGET=basefrm>Error handling</A><BR>
-<A HREF=readme.htm#link20 TARGET=basefrm>Frequently asked questions</A><BR>
-<A HREF=readme.htm#link21 TARGET=basefrm>Integration with gem</A><BR>
-<A HREF=readme.htm#link22 TARGET=basefrm>Menu.pl / cgi.pl</A><BR>
-<BR><B>Configuration Files</B><BR>
-<A HREF=readme.htm#link23 TARGET=basefrm>Sample configuration directives</A><BR>
-<BR><B>Script Details</B><BR>
-<A HREF=readme.htm#link24 TARGET=basefrm>backup.pl</A><BR>
-<A HREF=readme.htm#link25 TARGET=basefrm>config report.pl</A><BR>
-<A HREF=readme.htm#link26 TARGET=basefrm>dbcc db.pl</A><BR>
-<A HREF=readme.htm#link27 TARGET=basefrm>dbcc checktable.pl</A><BR>
-<A HREF=readme.htm#link28 TARGET=basefrm>dbcc db.pl</A><BR>
-<A HREF=readme.htm#link29 TARGET=basefrm>dump database.pl</A><BR>
-<A HREF=readme.htm#link30 TARGET=basefrm>fix logship.pl</A><BR>
-<A HREF=readme.htm#link31 TARGET=basefrm>get latest filedate.pl</A><BR>
-<A HREF=readme.htm#link32 TARGET=basefrm>kill users db.pl</A><BR>
-<A HREF=readme.htm#link33 TARGET=basefrm>load all tranlogs.pl</A><BR>
-<A HREF=readme.htm#link34 TARGET=basefrm>load database.pl</A><BR>
-<A HREF=readme.htm#link35 TARGET=basefrm>rebuild.pl</A><BR>
-<A HREF=readme.htm#link36 TARGET=basefrm>rebuild index.pl</A><BR>
-==>&nbsp;&nbsp;<FONT SIZE=-1><A HREF=readme.htm#__index__ TARGET=basefrm> Index</A><BR>
-</FONT><A HREF=readme.htm#name TARGET=basefrm>Name</A><BR>
-<A HREF=readme.htm#usage TARGET=basefrm>Usage</A><BR>
-<A HREF=readme.htm#config_file TARGET=basefrm>Config File</A><BR>
-<A HREF=readme.htm#additional_command_line_args TARGET=basefrm>Additional Command Line Args</A><BR>
-<A HREF=readme.htm#to_do TARGET=basefrm>To Do</A><BR>
-<A HREF=readme.htm#link37 TARGET=basefrm>reorg.pl</A><BR>
-<A HREF=readme.htm#link38 TARGET=basefrm>set dboption.pl</A><BR>
-<A HREF=readme.htm#link39 TARGET=basefrm>show configvars.pl</A><BR>
-<A HREF=readme.htm#link40 TARGET=basefrm>Stop Sybase.pl</A><BR>
-<A HREF=readme.htm#link41 TARGET=basefrm>update stats.pl</A><BR>
-</FONT> </BODY>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
+<title>Navigation</title>
+</head>
+<body class="gem-sidebar">
+<div class="gem-toc-title">Navigation</div>
+<a href="readme.htm#link2" target="basefrm">Package overview</a>
+<a href="readme.htm#link3" target="basefrm">Features</a>
+<a href="readme.htm#link4" target="basefrm">Requirements</a>
+<a href="readme.htm#link5" target="basefrm">How it works</a>
+<a href="readme.htm#link6" target="basefrm">Installation</a>
+<a href="readme.htm#link7" target="basefrm">Where to install</a>
+<a href="readme.htm#link8" target="basefrm">Log shipping for disaster recovery</a>
+<a href="readme.htm#link9" target="basefrm">Source directory layout</a>
+<a href="readme.htm#link10" target="basefrm">Data directory layout</a>
+<a href="readme.htm#link11" target="basefrm">Rights and redistribution</a>
+<a href="readme.htm#link12" target="basefrm">Security</a>
+<a href="readme.htm#link13" target="basefrm">The password files</a>
+<a href="readme.htm#link14" target="basefrm">Installing and testing</a>
+<a href="readme.htm#link15" target="basefrm">Configure.cfg</a>
+<a href="readme.htm#link16" target="basefrm">Plan variables</a>
+<a href="readme.htm#link17" target="basefrm">Remote purging and compression</a>
+<a href="readme.htm#link18" target="basefrm">Setting up your crontab</a>
+<a href="readme.htm#link19" target="basefrm">Error handling</a>
+<a href="readme.htm#link20" target="basefrm">Frequently asked questions</a>
+<a href="readme.htm#link21" target="basefrm">Integration with gem</a>
+<a href="readme.htm#link22" target="basefrm">Menu.pl / cgi.pl</a>
+<a href="readme.htm#link23" target="basefrm">Sample configuration directives</a>
+<a href="readme.htm#link24" target="basefrm">backup.pl</a>
+<a href="readme.htm#link25" target="basefrm">config report.pl</a>
+<a href="readme.htm#link26" target="basefrm">dbcc db.pl</a>
+<a href="readme.htm#link27" target="basefrm">dbcc checktable.pl</a>
+<a href="readme.htm#link28" target="basefrm">dbcc db.pl</a>
+<a href="readme.htm#link29" target="basefrm">dump database.pl</a>
+<a href="readme.htm#link30" target="basefrm">fix logship.pl</a>
+<a href="readme.htm#link31" target="basefrm">get latest filedate.pl</a>
+<a href="readme.htm#link32" target="basefrm">kill users db.pl</a>
+<a href="readme.htm#link33" target="basefrm">load all tranlogs.pl</a>
+<a href="readme.htm#link34" target="basefrm">load database.pl</a>
+<a href="readme.htm#link35" target="basefrm">rebuild.pl</a>
+<a href="readme.htm#link36" target="basefrm">rebuild index.pl</a>
+<a href="readme.htm#__index__" target="basefrm">Index</a>
+<a href="readme.htm#name" target="basefrm">Name</a>
+<a href="readme.htm#usage" target="basefrm">Usage</a>
+<a href="readme.htm#config_file" target="basefrm">Config File</a>
+<a href="readme.htm#additional_command_line_args" target="basefrm">Additional Command Line Args</a>
+<a href="readme.htm#to_do" target="basefrm">To Do</a>
+<a href="readme.htm#link37" target="basefrm">reorg.pl</a>
+<a href="readme.htm#link38" target="basefrm">set dboption.pl</a>
+<a href="readme.htm#link39" target="basefrm">show configvars.pl</a>
+<a href="readme.htm#link40" target="basefrm">Stop Sybase.pl</a>
+<a href="readme.htm#link41" target="basefrm">update stats.pl</a>
+</body>
+</html>

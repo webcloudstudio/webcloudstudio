@@ -1,122 +1,122 @@
-<HTML><HEAD><TITLE>EXTENDED STORED PROCEDURES</TITLE>
-<META NAME=AUTHOR CONTENT="Edward Barlow"> </HEAD>
-<BODY TEXT=BLACK BGCOLOR=WHITE><FONT SIZE=2>
-<B>EXTENDED STORED PROCEDURES</B><BR>
-<BR><B>NAVIGATION</B><BR>
-<A HREF=readme.htm#link1 TARGET=basefrm>Document Navigation</A><BR>
-<BR><B>Procedure Overview</B><BR>
-<A HREF=readme.htm#link2 TARGET=basefrm>Stored procedure library</A><BR>
-<A HREF=readme.htm#link3 TARGET=basefrm>Installation</A><BR>
-<A HREF=readme.htm#link4 TARGET=basefrm>Special thanks</A><BR>
-<A HREF=readme.htm#link5 TARGET=basefrm>Right to use, resale and copyright</A><BR>
-<A HREF=readme.htm#link6 TARGET=basefrm>Uninstall</A><BR>
-<A HREF=readme.htm#link7 TARGET=basefrm>Warranty</A><BR>
-<BR><B>Procedure List</B><BR>
-<A HREF=readme.htm#link8 TARGET=basefrm>List of procedures</A><BR>
-<A HREF=readme.htm#link9 TARGET=basefrm>Auditing error codes</A><BR>
-<BR><B>System Proc Details</B><BR>
-<A HREF=readme.htm#link10 TARGET=basefrm>Auditing error codes</A><BR>
-<A HREF=readme.htm#link11 TARGET=basefrm>sp  auditdb</A><BR>
-<A HREF=readme.htm#link12 TARGET=basefrm>sp  auditsecurity</A><BR>
-<A HREF=readme.htm#link13 TARGET=basefrm>sp  badindex</A><BR>
-<A HREF=readme.htm#link14 TARGET=basefrm>sp  bcp</A><BR>
-<A HREF=readme.htm#link15 TARGET=basefrm>sp  block</A><BR>
-<A HREF=readme.htm#link16 TARGET=basefrm>sp  checkkey</A><BR>
-<A HREF=readme.htm#link17 TARGET=basefrm>sp  colconflict</A><BR>
-<A HREF=readme.htm#link18 TARGET=basefrm>sp  collist</A><BR>
-<A HREF=readme.htm#link19 TARGET=basefrm>sp  colnull</A><BR>
-<A HREF=readme.htm#link20 TARGET=basefrm>sp  configure</A><BR>
-<A HREF=readme.htm#link21 TARGET=basefrm>sp  date</A><BR>
-<A HREF=readme.htm#link22 TARGET=basefrm>sp  datediff</A><BR>
-<A HREF=readme.htm#link23 TARGET=basefrm>sp  dbspace</A><BR>
-<A HREF=readme.htm#link24 TARGET=basefrm>sp  dbuse</A><BR>
-<A HREF=readme.htm#link25 TARGET=basefrm>sp  depends</A><BR>
-<A HREF=readme.htm#link26 TARGET=basefrm>sp  diskdevice</A><BR>
-<A HREF=readme.htm#link27 TARGET=basefrm>sp  dumpdevice</A><BR>
-<A HREF=readme.htm#link28 TARGET=basefrm>sp  find missing index</A><BR>
-<A HREF=readme.htm#link29 TARGET=basefrm>sp  flowchart</A><BR>
-<A HREF=readme.htm#link30 TARGET=basefrm>sp  grep</A><BR>
-<A HREF=readme.htm#link31 TARGET=basefrm>sp  groupprotect</A><BR>
-<A HREF=readme.htm#link32 TARGET=basefrm>sp  help</A><BR>
-<A HREF=readme.htm#link33 TARGET=basefrm>sp  helpcolumn</A><BR>
-<A HREF=readme.htm#link34 TARGET=basefrm>sp  helpdb</A><BR>
-<A HREF=readme.htm#link35 TARGET=basefrm>sp  helpdbdev</A><BR>
-<A HREF=readme.htm#link36 TARGET=basefrm>sp  helpdefault</A><BR>
-<A HREF=readme.htm#link37 TARGET=basefrm>sp  helpdevice</A><BR>
-<A HREF=readme.htm#link38 TARGET=basefrm>sp  helpgroup</A><BR>
-<A HREF=readme.htm#link39 TARGET=basefrm>sp  helpindex</A><BR>
-<A HREF=readme.htm#link40 TARGET=basefrm>sp  helplogin</A><BR>
-<A HREF=readme.htm#link41 TARGET=basefrm>sp  helpmirror</A><BR>
-<A HREF=readme.htm#link42 TARGET=basefrm>sp  helpobject</A><BR>
-<A HREF=readme.htm#link43 TARGET=basefrm>sp  helpproc</A><BR>
-<A HREF=readme.htm#link44 TARGET=basefrm>sp  helprotect</A><BR>
-<A HREF=readme.htm#link45 TARGET=basefrm>sp  helprule</A><BR>
-<A HREF=readme.htm#link46 TARGET=basefrm>sp  helpsegment</A><BR>
-<A HREF=readme.htm#link47 TARGET=basefrm>sp  helptable</A><BR>
-<A HREF=readme.htm#link48 TARGET=basefrm>sp  helptext</A><BR>
-<A HREF=readme.htm#link49 TARGET=basefrm>sp  helptrigger</A><BR>
-<A HREF=readme.htm#link50 TARGET=basefrm>sp  helptype</A><BR>
-<A HREF=readme.htm#link51 TARGET=basefrm>sp  helpuser</A><BR>
-<A HREF=readme.htm#link52 TARGET=basefrm>sp  helpview</A><BR>
-<A HREF=readme.htm#link53 TARGET=basefrm>sp  id</A><BR>
-<A HREF=readme.htm#link54 TARGET=basefrm>sp  indexspace</A><BR>
-<A HREF=readme.htm#link55 TARGET=basefrm>sp  iostat</A><BR>
-<A HREF=readme.htm#link56 TARGET=basefrm>sp  isactive</A><BR>
-<A HREF=readme.htm#link57 TARGET=basefrm>sp  lock</A><BR>
-<A HREF=readme.htm#link58 TARGET=basefrm>sp  lockt</A><BR>
-<A HREF=readme.htm#link59 TARGET=basefrm>sp  ls</A><BR>
-<A HREF=readme.htm#link60 TARGET=basefrm>sp  noindex</A><BR>
-<A HREF=readme.htm#link61 TARGET=basefrm>sp  objprotect</A><BR>
-<A HREF=readme.htm#link62 TARGET=basefrm>sp  proclib version</A><BR>
-<A HREF=readme.htm#link63 TARGET=basefrm>sp  qspace</A><BR>
-<A HREF=readme.htm#link64 TARGET=basefrm>sp  quickstats</A><BR>
-<A HREF=readme.htm#link65 TARGET=basefrm>sp  read write</A><BR>
-<A HREF=readme.htm#link66 TARGET=basefrm>sp  revalias</A><BR>
-<A HREF=readme.htm#link67 TARGET=basefrm>sp  revbindings</A><BR>
-<A HREF=readme.htm#link68 TARGET=basefrm>sp  revdb</A><BR>
-<A HREF=readme.htm#link69 TARGET=basefrm>sp  revdevice</A><BR>
-<A HREF=readme.htm#link70 TARGET=basefrm>sp  revgroup</A><BR>
-<A HREF=readme.htm#link71 TARGET=basefrm>sp  revindex</A><BR>
-<A HREF=readme.htm#link72 TARGET=basefrm>sp  revkey</A><BR>
-<A HREF=readme.htm#link73 TARGET=basefrm>sp  revlogin</A><BR>
-<A HREF=readme.htm#link74 TARGET=basefrm>sp  revmirror</A><BR>
-<A HREF=readme.htm#link75 TARGET=basefrm>sp  revrole</A><BR>
-<A HREF=readme.htm#link76 TARGET=basefrm>sp  revrule</A><BR>
-<A HREF=readme.htm#link77 TARGET=basefrm>sp  revsegment</A><BR>
-<A HREF=readme.htm#link78 TARGET=basefrm>sp  revtable</A><BR>
-<A HREF=readme.htm#link79 TARGET=basefrm>sp  revtype</A><BR>
-<A HREF=readme.htm#link80 TARGET=basefrm>sp  revuser</A><BR>
-<A HREF=readme.htm#link81 TARGET=basefrm>sp  segment</A><BR>
-<A HREF=readme.htm#link82 TARGET=basefrm>sp  server</A><BR>
-<A HREF=readme.htm#link83 TARGET=basefrm>sp  size</A><BR>
-<A HREF=readme.htm#link84 TARGET=basefrm>sp  stat</A><BR>
-<A HREF=readme.htm#link85 TARGET=basefrm>sp  syntax</A><BR>
-<A HREF=readme.htm#link86 TARGET=basefrm>sp  trigger</A><BR>
-<A HREF=readme.htm#link87 TARGET=basefrm>sp  uptime</A><BR>
-<A HREF=readme.htm#link88 TARGET=basefrm>sp  vdevno</A><BR>
-<A HREF=readme.htm#link89 TARGET=basefrm>sp  who</A><BR>
-<A HREF=readme.htm#link90 TARGET=basefrm>sp  whoactive</A><BR>
-<A HREF=readme.htm#link91 TARGET=basefrm>sp  whodo</A><BR>
-<A HREF=readme.htm#link92 TARGET=basefrm>sp  whoe</A><BR>
-<BR><B>MDA Proc Details</B><BR>
-<A HREF=readme.htm#link93 TARGET=basefrm>sp  monbackup</A><BR>
-<A HREF=readme.htm#link94 TARGET=basefrm>sp  moncache</A><BR>
-<A HREF=readme.htm#link95 TARGET=basefrm>sp  mondump</A><BR>
-<A HREF=readme.htm#link96 TARGET=basefrm>sp  monengine</A><BR>
-<A HREF=readme.htm#link97 TARGET=basefrm>sp  monio</A><BR>
-<A HREF=readme.htm#link98 TARGET=basefrm>sp  monlock</A><BR>
-<A HREF=readme.htm#link99 TARGET=basefrm>sp  monlocksql</A><BR>
-<A HREF=readme.htm#link100 TARGET=basefrm>sp  monnet</A><BR>
-<A HREF=readme.htm#link101 TARGET=basefrm>sp  monobj</A><BR>
-<A HREF=readme.htm#link102 TARGET=basefrm>sp  monopenobj</A><BR>
-<A HREF=readme.htm#link103 TARGET=basefrm>sp  monpwaits</A><BR>
-<A HREF=readme.htm#link104 TARGET=basefrm>sp  monrunning</A><BR>
-<A HREF=readme.htm#link105 TARGET=basefrm>sp  monserver</A><BR>
-<A HREF=readme.htm#link106 TARGET=basefrm>sp  monspid</A><BR>
-<A HREF=readme.htm#link107 TARGET=basefrm>sp  monsql</A><BR>
-<A HREF=readme.htm#link108 TARGET=basefrm>sp  montableusage</A><BR>
-<A HREF=readme.htm#link109 TARGET=basefrm>sp  montopn</A><BR>
-<A HREF=readme.htm#link110 TARGET=basefrm>sp  monunusedindex</A><BR>
-<A HREF=readme.htm#link111 TARGET=basefrm>sp  monusedtables</A><BR>
-<A HREF=readme.htm#link112 TARGET=basefrm>sp  monwaits</A><BR>
-</FONT> </BODY>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
+<title>Navigation</title>
+</head>
+<body class="gem-sidebar">
+<div class="gem-toc-title">Navigation</div>
+<a href="readme.htm#link2" target="basefrm">Stored procedure library</a>
+<a href="readme.htm#link3" target="basefrm">Installation</a>
+<a href="readme.htm#link4" target="basefrm">Special thanks</a>
+<a href="readme.htm#link5" target="basefrm">Right to use, resale and copyright</a>
+<a href="readme.htm#link6" target="basefrm">Uninstall</a>
+<a href="readme.htm#link7" target="basefrm">Warranty</a>
+<a href="readme.htm#link8" target="basefrm">List of procedures</a>
+<a href="readme.htm#link9" target="basefrm">Auditing error codes</a>
+<a href="readme.htm#link10" target="basefrm">Auditing error codes</a>
+<a href="readme.htm#link11" target="basefrm">sp  auditdb</a>
+<a href="readme.htm#link12" target="basefrm">sp  auditsecurity</a>
+<a href="readme.htm#link13" target="basefrm">sp  badindex</a>
+<a href="readme.htm#link14" target="basefrm">sp  bcp</a>
+<a href="readme.htm#link15" target="basefrm">sp  block</a>
+<a href="readme.htm#link16" target="basefrm">sp  checkkey</a>
+<a href="readme.htm#link17" target="basefrm">sp  colconflict</a>
+<a href="readme.htm#link18" target="basefrm">sp  collist</a>
+<a href="readme.htm#link19" target="basefrm">sp  colnull</a>
+<a href="readme.htm#link20" target="basefrm">sp  configure</a>
+<a href="readme.htm#link21" target="basefrm">sp  date</a>
+<a href="readme.htm#link22" target="basefrm">sp  datediff</a>
+<a href="readme.htm#link23" target="basefrm">sp  dbspace</a>
+<a href="readme.htm#link24" target="basefrm">sp  dbuse</a>
+<a href="readme.htm#link25" target="basefrm">sp  depends</a>
+<a href="readme.htm#link26" target="basefrm">sp  diskdevice</a>
+<a href="readme.htm#link27" target="basefrm">sp  dumpdevice</a>
+<a href="readme.htm#link28" target="basefrm">sp  find missing index</a>
+<a href="readme.htm#link29" target="basefrm">sp  flowchart</a>
+<a href="readme.htm#link30" target="basefrm">sp  grep</a>
+<a href="readme.htm#link31" target="basefrm">sp  groupprotect</a>
+<a href="readme.htm#link32" target="basefrm">sp  help</a>
+<a href="readme.htm#link33" target="basefrm">sp  helpcolumn</a>
+<a href="readme.htm#link34" target="basefrm">sp  helpdb</a>
+<a href="readme.htm#link35" target="basefrm">sp  helpdbdev</a>
+<a href="readme.htm#link36" target="basefrm">sp  helpdefault</a>
+<a href="readme.htm#link37" target="basefrm">sp  helpdevice</a>
+<a href="readme.htm#link38" target="basefrm">sp  helpgroup</a>
+<a href="readme.htm#link39" target="basefrm">sp  helpindex</a>
+<a href="readme.htm#link40" target="basefrm">sp  helplogin</a>
+<a href="readme.htm#link41" target="basefrm">sp  helpmirror</a>
+<a href="readme.htm#link42" target="basefrm">sp  helpobject</a>
+<a href="readme.htm#link43" target="basefrm">sp  helpproc</a>
+<a href="readme.htm#link44" target="basefrm">sp  helprotect</a>
+<a href="readme.htm#link45" target="basefrm">sp  helprule</a>
+<a href="readme.htm#link46" target="basefrm">sp  helpsegment</a>
+<a href="readme.htm#link47" target="basefrm">sp  helptable</a>
+<a href="readme.htm#link48" target="basefrm">sp  helptext</a>
+<a href="readme.htm#link49" target="basefrm">sp  helptrigger</a>
+<a href="readme.htm#link50" target="basefrm">sp  helptype</a>
+<a href="readme.htm#link51" target="basefrm">sp  helpuser</a>
+<a href="readme.htm#link52" target="basefrm">sp  helpview</a>
+<a href="readme.htm#link53" target="basefrm">sp  id</a>
+<a href="readme.htm#link54" target="basefrm">sp  indexspace</a>
+<a href="readme.htm#link55" target="basefrm">sp  iostat</a>
+<a href="readme.htm#link56" target="basefrm">sp  isactive</a>
+<a href="readme.htm#link57" target="basefrm">sp  lock</a>
+<a href="readme.htm#link58" target="basefrm">sp  lockt</a>
+<a href="readme.htm#link59" target="basefrm">sp  ls</a>
+<a href="readme.htm#link60" target="basefrm">sp  noindex</a>
+<a href="readme.htm#link61" target="basefrm">sp  objprotect</a>
+<a href="readme.htm#link62" target="basefrm">sp  proclib version</a>
+<a href="readme.htm#link63" target="basefrm">sp  qspace</a>
+<a href="readme.htm#link64" target="basefrm">sp  quickstats</a>
+<a href="readme.htm#link65" target="basefrm">sp  read write</a>
+<a href="readme.htm#link66" target="basefrm">sp  revalias</a>
+<a href="readme.htm#link67" target="basefrm">sp  revbindings</a>
+<a href="readme.htm#link68" target="basefrm">sp  revdb</a>
+<a href="readme.htm#link69" target="basefrm">sp  revdevice</a>
+<a href="readme.htm#link70" target="basefrm">sp  revgroup</a>
+<a href="readme.htm#link71" target="basefrm">sp  revindex</a>
+<a href="readme.htm#link72" target="basefrm">sp  revkey</a>
+<a href="readme.htm#link73" target="basefrm">sp  revlogin</a>
+<a href="readme.htm#link74" target="basefrm">sp  revmirror</a>
+<a href="readme.htm#link75" target="basefrm">sp  revrole</a>
+<a href="readme.htm#link76" target="basefrm">sp  revrule</a>
+<a href="readme.htm#link77" target="basefrm">sp  revsegment</a>
+<a href="readme.htm#link78" target="basefrm">sp  revtable</a>
+<a href="readme.htm#link79" target="basefrm">sp  revtype</a>
+<a href="readme.htm#link80" target="basefrm">sp  revuser</a>
+<a href="readme.htm#link81" target="basefrm">sp  segment</a>
+<a href="readme.htm#link82" target="basefrm">sp  server</a>
+<a href="readme.htm#link83" target="basefrm">sp  size</a>
+<a href="readme.htm#link84" target="basefrm">sp  stat</a>
+<a href="readme.htm#link85" target="basefrm">sp  syntax</a>
+<a href="readme.htm#link86" target="basefrm">sp  trigger</a>
+<a href="readme.htm#link87" target="basefrm">sp  uptime</a>
+<a href="readme.htm#link88" target="basefrm">sp  vdevno</a>
+<a href="readme.htm#link89" target="basefrm">sp  who</a>
+<a href="readme.htm#link90" target="basefrm">sp  whoactive</a>
+<a href="readme.htm#link91" target="basefrm">sp  whodo</a>
+<a href="readme.htm#link92" target="basefrm">sp  whoe</a>
+<a href="readme.htm#link93" target="basefrm">sp  monbackup</a>
+<a href="readme.htm#link94" target="basefrm">sp  moncache</a>
+<a href="readme.htm#link95" target="basefrm">sp  mondump</a>
+<a href="readme.htm#link96" target="basefrm">sp  monengine</a>
+<a href="readme.htm#link97" target="basefrm">sp  monio</a>
+<a href="readme.htm#link98" target="basefrm">sp  monlock</a>
+<a href="readme.htm#link99" target="basefrm">sp  monlocksql</a>
+<a href="readme.htm#link100" target="basefrm">sp  monnet</a>
+<a href="readme.htm#link101" target="basefrm">sp  monobj</a>
+<a href="readme.htm#link102" target="basefrm">sp  monopenobj</a>
+<a href="readme.htm#link103" target="basefrm">sp  monpwaits</a>
+<a href="readme.htm#link104" target="basefrm">sp  monrunning</a>
+<a href="readme.htm#link105" target="basefrm">sp  monserver</a>
+<a href="readme.htm#link106" target="basefrm">sp  monspid</a>
+<a href="readme.htm#link107" target="basefrm">sp  monsql</a>
+<a href="readme.htm#link108" target="basefrm">sp  montableusage</a>
+<a href="readme.htm#link109" target="basefrm">sp  montopn</a>
+<a href="readme.htm#link110" target="basefrm">sp  monunusedindex</a>
+<a href="readme.htm#link111" target="basefrm">sp  monusedtables</a>
+<a href="readme.htm#link112" target="basefrm">sp  monwaits</a>
+</body>
+</html>

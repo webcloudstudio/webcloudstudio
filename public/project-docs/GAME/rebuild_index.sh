@@ -11,23 +11,18 @@ python3 - <<'PYEOF'
 import json, os
 
 docs = {
-    'METHODOLOGY':                       'METHODOLOGY.md',
-    'THE-CONTRACT':                      'THE-CONTRACT.md',
-    'PERSISTENCE':                       'PERSISTENCE.md',
-    'OPERATIONS':                        'OPERATIONS.md',
-    'LOGGING':                           'LOGGING.md',
-    'features/CONTROL-PANEL':            'features/CONTROL-PANEL.md',
-    'features/PROJECT-DISCOVERY':        'features/PROJECT-DISCOVERY.md',
-    'features/OPERATIONS-ENGINE':        'features/OPERATIONS-ENGINE.md',
-    'features/PROCESS-MONITOR':          'features/PROCESS-MONITOR.md',
-    'features/GITHUB-PUBLISHER':         'features/GITHUB-PUBLISHER.md',
-    'features/TAG-MANAGEMENT':           'features/TAG-MANAGEMENT.md',
-    'features/USAGE-ANALYTICS':          'features/USAGE-ANALYTICS.md',
-    'features/CONFIGURATION-MANAGEMENT': 'features/CONFIGURATION-MANAGEMENT.md',
-    'features/GIT-INTEGRATION':          'features/GIT-INTEGRATION.md',
-    'features/WORKFLOW-STATES':          'features/WORKFLOW-STATES.md',
-    'features/MONITORING-HEARTBEATS':    'features/MONITORING-HEARTBEATS.md',
-    'features/PROJECT-DOCUMENTATION':    'features/PROJECT-DOCUMENTATION.md',
+    'GAME/CONTROL-PANEL':            'GAME/CONTROL-PANEL.md',
+    'GAME/PROJECT-DISCOVERY':        'GAME/PROJECT-DISCOVERY.md',
+    'GAME/OPERATIONS-ENGINE':        'GAME/OPERATIONS-ENGINE.md',
+    'GAME/PROCESS-MONITOR':          'GAME/PROCESS-MONITOR.md',
+    'GAME/GITHUB-PUBLISHER':         'GAME/GITHUB-PUBLISHER.md',
+    'GAME/TAG-MANAGEMENT':           'GAME/TAG-MANAGEMENT.md',
+    'GAME/USAGE-ANALYTICS':          'GAME/USAGE-ANALYTICS.md',
+    'GAME/CONFIGURATION-MANAGEMENT': 'GAME/CONFIGURATION-MANAGEMENT.md',
+    'GAME/GIT-INTEGRATION':          'GAME/GIT-INTEGRATION.md',
+    'GAME/WORKFLOW-STATES':          'GAME/WORKFLOW-STATES.md',
+    'GAME/MONITORING-HEARTBEATS':    'GAME/MONITORING-HEARTBEATS.md',
+    'GAME/PROJECT-DOCUMENTATION':    'GAME/PROJECT-DOCUMENTATION.md',
 }
 
 content = {}

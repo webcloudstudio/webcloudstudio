@@ -1,9 +1,46 @@
-<BODY bgcolor=#0066cc>
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0><TR><TD>
-<font face=sans-serif size=+1 color=#33ccff>
-The Complete GEM Documentation
-</TD><TD ALIGN=RIGHT>
-<font face=sans-serif size=+1 color=#33ccff>
-Copyright &#169 1998-2011 by SQL Technologies
-</TD></TR></TABLE>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
+<title>GEM Documentation</title>
+</head>
+<body class="gem-topbar">
+<div class="gem-header">
+  <div class="gem-header-left">
+    <span class="gem-header-logo">GEM</span>
+    <span class="gem-header-version">Build 758 &bull; Dec&nbsp;2012</span>
+    <span class="gem-header-title">GEM Documentation</span>
+  </div>
+  <nav class="gem-header-nav">
+    <a href="../gem/index.htm" target="_top">Overview</a>
+    <a href="../gem_intro/index.htm" target="_top">Introduction</a>
+    <a href="../getting_started/index.htm" target="_top">Getting Started</a>
+    <a href="../installation_guide/index.htm" target="_top">Installation</a>
+    <a href="../batchjobs/index.htm" target="_top">Batch Jobs</a>
+    <a href="../backup_scripts/index.htm" target="_top">Backup</a>
+    <a href="../procs/index.htm" target="_top">Stored Procs</a>
+    <a href="../console/index.htm" target="_top">Console</a>
+    <a href="../lib/index.htm" target="_top">Library</a>
+    <a href="../faq/index.htm" target="_top">FAQ</a>
+    <a href="../screenshots/index.htm" target="_top">Screenshots</a>
+    <a href="../pricing/index.htm" target="_top">Pricing</a>
+  </nav>
+  <div class="gem-header-copyright">Copyright &#169 1998-2011 by SQL Technologies</div>
+</div>
+<script>
+/* Resize the parent frameset's top row to match our actual rendered height.
+   Required so multi-row nav (on narrow windows) is not clipped by the frame. */
+window.addEventListener('load', function() {
+  try {
+    var h = document.body.scrollHeight || document.documentElement.scrollHeight;
+    if (h > 0 && window.parent && window.parent !== window) {
+      var fs = window.parent.document.querySelector('frameset[rows]');
+      if (fs) { fs.setAttribute('rows', h + ',*'); }
+    }
+  } catch(e) {}
+});
+</script>
 </body>
+</html>

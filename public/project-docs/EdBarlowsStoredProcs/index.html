@@ -4,98 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ed Barlow's Extended Stored Procedure Library</title>
+<link rel="stylesheet" type="text/css" href="styles/gem.css">
 <style>
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-       font-size: 15px; line-height: 1.6; color: #222; display: flex;
-       min-height: 100vh; }
-
-/* ── Sidebar ── */
-#sidebar {
-  width: 240px; min-width: 240px; background: #1a2940; color: #cdd9ea;
-  height: 100vh; position: sticky; top: 0; overflow-y: auto;
-  padding: 0 0 2rem 0;
-}
-#sidebar-header {
-  background: #111d2e; padding: 1rem 1rem 0.75rem;
-  border-bottom: 1px solid #2d4060;
-}
-#sidebar-header h1 { font-size: 0.95rem; font-weight: 700; color: #fff;
-  line-height: 1.3; }
-#sidebar-header p { font-size: 0.75rem; color: #7a98be; margin-top: 0.25rem; }
-
-nav { padding: 0.5rem 0; }
-.nav-section { padding: 0.6rem 1rem 0.2rem;
-  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.08em; color: #5a7a9a; }
-nav a { display: block; padding: 0.22rem 1rem 0.22rem 1.2rem;
-  color: #b0c8e0; text-decoration: none; font-size: 0.82rem;
-  transition: background 0.15s; white-space: nowrap; overflow: hidden;
-  text-overflow: ellipsis; }
-nav a:hover { background: #243650; color: #fff; }
-nav a.section-link { padding-left: 1rem; color: #8fb8d8; font-weight: 500; }
-
-/* ── Main content ── */
-#content { flex: 1; padding: 2rem 3rem; max-width: 900px; overflow-x: auto; }
-
-#content h1 { font-size: 1.6rem; font-weight: 700; margin: 2rem 0 0.5rem;
-  color: #1a2940; border-bottom: 2px solid #d0dae8; padding-bottom: 0.4rem; }
-#content h1:first-child { margin-top: 0; }
-#content h2 { font-size: 1.15rem; font-weight: 600; margin: 1.4rem 0 0.4rem;
-  color: #2c4a70; }
-#content h3 { font-size: 1rem; font-weight: 600; margin: 1rem 0 0.3rem;
-  color: #3a5a80; }
-#content p { margin: 0.5rem 0; }
-#content ul, #content ol { margin: 0.4rem 0 0.4rem 1.8rem; }
-#content li { margin: 0.15rem 0; }
-
-/* HTML tables from PROCEDURES.pod */
-#content table { border-collapse: collapse; margin: 0.5rem 0; }
-#content td { padding: 0.2rem 1rem 0.2rem 0; vertical-align: top; }
-#content td:first-child { white-space: nowrap; }
-#content td a { color: #2060a0; font-weight: 500; text-decoration: none; }
-#content td a:hover { text-decoration: underline; }
-#content H3 { font-size: 1rem; font-weight: 600; margin: 1.2rem 0 0.3rem;
-  color: #2c4a70; }
-
-/* Code */
-#content pre { background: #f4f6f9; border: 1px solid #d8e0eb;
-  border-radius: 4px; padding: 0.75rem 1rem; overflow-x: auto;
-  margin: 0.6rem 0; }
-#content code { font-family: 'Cascadia Code', 'Consolas', 'Menlo', monospace;
-  font-size: 0.85rem; }
-#content pre code { font-size: 0.82rem; color: #1a2940; }
-
-/* Proc sections */
-.proc-section { border-top: 1px solid #e8ecf2; padding-top: 0.5rem;
-  margin-top: 0.5rem; }
-
-/* Back-to-top */
-.proc-section h1::after { content: " ↑"; font-size: 0.7rem; color: #aaa;
-  font-weight: 400; }
+/* Proc section separator and back-to-top indicator */
+.proc-section { border-top: 1px solid var(--c-td-border); padding-top: 0.5rem; margin-top: 0.5rem; }
+.proc-section h1::after { content: " ↑"; font-size: 0.7rem; color: #aaa; font-weight: 400; }
 .proc-section h1 a { color: inherit; text-decoration: none; }
-
 </style>
 </head>
-<body>
-<div id="sidebar">
-<div id="sidebar-header">
-<h1>Ed Barlow's<br>Stored Proc Library</h1>
-<p>v7.06 &mdash; Sybase &amp; SQL Server</p>
-</div>
-<nav>
-<div class="nav-section">Documentation</div>
-<a class="section-link" href="#overview">Overview</a>
-<a class="section-link" href="#installation">Installation</a>
-<a class="section-link" href="#uninstall">Uninstall</a>
-<a class="section-link" href="#procedures">Procedure List</a>
-<a class="section-link" href="#errors">Audit Error Codes</a>
-<a class="section-link" href="#license">License</a>
-<a class="section-link" href="#warranty">Warranty</a>
-<a class="section-link" href="#thanks">Acknowledgements</a>
-<div class="nav-section">Procedures</div>
-<div class="nav-section" style="padding-top:0.4rem">Server &amp; Session</div>
+<body class="gem-page">
+<nav class="gem-sidebar-panel">
+<div class="gem-toc-title">Ed Barlow's Stored Proc Library</div>
+<div class="gem-toc-subtitle">v7.06 &mdash; Sybase &amp; SQL Server</div>
+<div class="gem-toc-section">Documentation</div>
+<a href="#overview">Overview</a>
+<a href="#installation">Installation</a>
+<a href="#uninstall">Uninstall</a>
+<a href="#procedures">Procedure List</a>
+<a href="#errors">Audit Error Codes</a>
+<a href="#license">License</a>
+<a href="#warranty">Warranty</a>
+<a href="#thanks">Acknowledgements</a>
+<div class="gem-toc-section">Procedures</div>
+<div class="gem-toc-section">Server &amp; Session</div>
 <a href="#sp__who">sp__who</a>
 <a href="#sp__whodo">sp__whodo</a>
 <a href="#sp__whoactive">sp__whoactive</a>
@@ -104,11 +35,11 @@ nav a.section-link { padding-left: 1rem; color: #8fb8d8; font-weight: 500; }
 <a href="#sp__server">sp__server</a>
 <a href="#sp__id">sp__id</a>
 <a href="#sp__isactive">sp__isactive</a>
-<div class="nav-section" style="padding-top:0.4rem">Locking &amp; Blocking</div>
+<div class="gem-toc-section">Locking &amp; Blocking</div>
 <a href="#sp__lock">sp__lock</a>
 <a href="#sp__lockt">sp__lockt</a>
 <a href="#sp__block">sp__block</a>
-<div class="nav-section" style="padding-top:0.4rem">Space &amp; Devices</div>
+<div class="gem-toc-section">Space &amp; Devices</div>
 <a href="#sp__dbspace">sp__dbspace</a>
 <a href="#sp__qspace">sp__qspace</a>
 <a href="#sp__helpdb">sp__helpdb</a>
@@ -121,7 +52,7 @@ nav a.section-link { padding-left: 1rem; color: #8fb8d8; font-weight: 500; }
 <a href="#sp__helpsegment">sp__helpsegment</a>
 <a href="#sp__indexspace">sp__indexspace</a>
 <a href="#sp__vdevno">sp__vdevno</a>
-<div class="nav-section" style="padding-top:0.4rem">Object Info</div>
+<div class="gem-toc-section">Object Info</div>
 <a href="#sp__help">sp__help</a>
 <a href="#sp__helptable">sp__helptable</a>
 <a href="#sp__helpcolumn">sp__helpcolumn</a>
@@ -135,27 +66,27 @@ nav a.section-link { padding-left: 1rem; color: #8fb8d8; font-weight: 500; }
 <a href="#sp__helptype">sp__helptype</a>
 <a href="#sp__helptrigger">sp__helptrigger</a>
 <a href="#sp__helprule">sp__helprule</a>
-<div class="nav-section" style="padding-top:0.4rem">Permissions</div>
+<div class="gem-toc-section">Permissions</div>
 <a href="#sp__helpgroup">sp__helpgroup</a>
 <a href="#sp__helplogin">sp__helplogin</a>
 <a href="#sp__helpuser">sp__helpuser</a>
 <a href="#sp__groupprotect">sp__groupprotect</a>
 <a href="#sp__objprotect">sp__objprotect</a>
 <a href="#sp__helprotect">sp__helprotect</a>
-<div class="nav-section" style="padding-top:0.4rem">Column Analysis</div>
+<div class="gem-toc-section">Column Analysis</div>
 <a href="#sp__collist">sp__collist</a>
 <a href="#sp__colconflict">sp__colconflict</a>
 <a href="#sp__colnull">sp__colnull</a>
-<div class="nav-section" style="padding-top:0.4rem">Index Analysis</div>
+<div class="gem-toc-section">Index Analysis</div>
 <a href="#sp__badindex">sp__badindex</a>
 <a href="#sp__noindex">sp__noindex</a>
 <a href="#sp__read_write">sp__read_write</a>
 <a href="#sp__find_missing_index">sp__find_missing_index</a>
-<div class="nav-section" style="padding-top:0.4rem">Auditing</div>
+<div class="gem-toc-section">Auditing</div>
 <a href="#sp__auditdb">sp__auditdb</a>
 <a href="#sp__auditsecurity">sp__auditsecurity</a>
 <a href="#sp__checkkey">sp__checkkey</a>
-<div class="nav-section" style="padding-top:0.4rem">Reverse Engineering</div>
+<div class="gem-toc-section">Reverse Engineering</div>
 <a href="#sp__revdb">sp__revdb</a>
 <a href="#sp__revtable">sp__revtable</a>
 <a href="#sp__revindex">sp__revindex</a>
@@ -171,7 +102,7 @@ nav a.section-link { padding-left: 1rem; color: #8fb8d8; font-weight: 500; }
 <a href="#sp__revrule">sp__revrule</a>
 <a href="#sp__revkey">sp__revkey</a>
 <a href="#sp__revtype">sp__revtype</a>
-<div class="nav-section" style="padding-top:0.4rem">Miscellaneous</div>
+<div class="gem-toc-section">Miscellaneous</div>
 <a href="#sp__grep">sp__grep</a>
 <a href="#sp__depends">sp__depends</a>
 <a href="#sp__flowchart">sp__flowchart</a>
@@ -188,8 +119,7 @@ nav a.section-link { padding-left: 1rem; color: #8fb8d8; font-weight: 500; }
 <a href="#sp__configure">sp__configure</a>
 <a href="#sp__proclib_version">sp__proclib_version</a>
 </nav>
-</div>
-<div id="content">
+<main class="gem-content-panel">
 <section id="overview">
 <h1 id="overview">STORED PROCEDURE LIBRARY</h1>
 <p>The following is a guide to a FREE set of stored procedures that extend the Sybase and Microsoft SQL Server provided system procedures. These procedures provide additional functionality and new ways to look at the data provided in the System Tables. They also provide new formats that allows users, developers, and administrators to see the data they want in the format they want. This collection has been developed by several authors, and is maintained by Edward Barlow.  This package is intended to be a professional  tool suitable for general use on all your servers.</p>
@@ -2806,6 +2736,7 @@ nav a.section-link { padding-left: 1rem; color: #8fb8d8; font-weight: 500; }
 <h2>SAMPLE OUTPUT</h2>
 <pre><code> 1&gt; exec sp__whoe</code></pre>
 </section>
-</div>
+<div class="gem-page-footer">Copyright &copy; 1994&ndash;2025 Ed Barlow / SQL Technologies. All rights reserved.</div>
+</main>
 </body>
 </html>

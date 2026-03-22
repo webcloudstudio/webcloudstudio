@@ -6,7 +6,7 @@ layout: ../layouts/Resume.astro
 
 > My **AI Best Practices Framework** Can Enable Your Small or Mid-Sized Business.
 
-**West Chester, PA | (914) 837-4798**  
+**West Chester, PA | (914) 837-4798**
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**
 
 ## PROFESSIONAL SUMMARY

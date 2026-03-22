@@ -9,20 +9,9 @@
   <meta name="author" content="Edward Barlow">
 	<meta name="Description" content="Installation GUIDE for GEM.">
 	<meta name="keywords" content="sybase, sql server, install guide, tools, audit, configuration reporting, database, html, monitoring, administrator, free, freeware, GEM, server administration, auditing, perl">
+<link rel="stylesheet" type="text/css" href="../styles/gem.css">
 </head>
 <body BGCOLOR=WHITE TEXT=BLACK topmargin="0" marginheight="0">
-
-<A NAME=link1></A>
-
-<center>
-<TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
-	<TR><TD><CENTER><font color=#33ccff><H1>Installation Guide</H1>
-<H3></H3></font>
-</TD></TR>
-</TABLE></CENTER>
-<P>
- <span style='font-size:14.0pt;font-family:Arial'> GEM Documentation Navigation Page. Documentation is also available at <A TARGET=_top HREF=http://www.edbarlow.com>The GEM Home Page</A>. Documentation and Code are both Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.<P>
- <TABLE WIDTH=100%> <TR> <TD><A TARGET=_top HREF="../gem/index.htm">The Complete GEM Documentation</A></TD> <TD><a TARGET=_top href="../SalesPresentation.htm">Slide Show: What Is GEM</a></TD> <TD><A TARGET=_top HREF=http://www.edbarlow.com/download.pl>Download GEM</A></TD> </TR> <TR> <TD>&nbsp;</TD> </TR> <TR> <TD><a TARGET=_top href="../gem_intro/index.htm">An Introduction To GEM</a></TD> <TD><a TARGET=_top href="../installation_guide/index.htm">How To Install</a></TD> <TD><a TARGET=_top href="../getting_started/index.htm">Getting Started Guide</a></TD> </TR> <TR> <TD><a TARGET=_top href="../batchjobs/index.htm">Batch Jobs Overview</a></TD> <TD><a TARGET=_top href="../screenshots/index.htm">GEM Screenshots</a></TD> <TD><a TARGET=_top href="../backup_scripts/index.htm">Server Backup and Maintenance</A></TD> </TR> <TR> <TD><a TARGET=_top href="../faq/index.htm">FAQ and Change Log</A></TD> <TD><a TARGET=_top href="../lib/index.htm">Common Perl Libraries</A></TD> <TD><a TARGET=_top href="../procs/index.htm">New System Stored Procedures</A></TD> </TR> <TR> <TD><a TARGET=_top href="../GemDatabase.htm">GemDatabase</A></TD> <TD><a TARGET=_top href="../pricing/index.htm">Pricing & Right To Use</A></TD> </TR> </TABLE>
 <A NAME=link2></A>
 <br>
 <center>
@@ -115,7 +104,7 @@
 <P>
 <LI><B>DOWNLOAD AND EXTRACT GEM</B>
 <P>
- You should now download and extract the <em><strong>GEM</strong></em> software  from <A HREF="http://www.edbarlow.com/download.pl">http://www.edbarlow.com/download.pl</A>.<P>
+ You should now download and extract the <em><strong>GEM</strong></em> software  from http://www.edbarlow.com/download.pl.<P>
  You will need a passcode to download the software which can be recieved by mail from SQL Technolgies.<P>
  Extract into the directory identified in the pre-install checklist. You should need to install into only one location regardless of whether you have a hybrid or non-hybrid environment.<P>
  The <em><strong>GEM</strong></em> download file is a standard compressed tar file and can be extracted with winzip (Windows), gnu tar (<code>tar xvzf gem.tgz</code>), or with <code>gzip -d gem.tgz; tar xvf gem.tar</code>. If you install <em><strong>GEM</strong></em> into a subdirectory, do not use a directory that includes space characters (ie. Program Files). White space in the directory name is not a tested option.<P>
@@ -214,7 +203,7 @@
  This tab explains GEM and details licensing options.  New users will want to use our Free GEM License to trial the product - and switch to the Full GEM License after they are comfortable.  <P>
  Select "I AGREE WITH THE LICENSE" to continue<P>
  The GEM Help pages provide help to guide you through your install.  Each page has a separate help section.
-<A NAME=link10></A>
+
 <h1>The register tab</h1>
 <p>
 <P>
@@ -234,7 +223,7 @@
 </UL>
 <P>
 
-<A NAME=link11></A>
+
 <h1>The paths tab</h1>
 <p>
 <P>
@@ -242,7 +231,7 @@
  Enter all possible locations for the SYBASE and ORAHOME variables in your preferred order.  This will be used by the server  discovery process.  <P>
  For example, you might put C:/sybase D:/sybase /export/home/sybase /apps/sybase as 4 entries on a samba install for your sybase directories.<P>
  The system actually supports 10 instances of each variable - you will need to manually edit gem.dat if you have more than 5 though.
-<A NAME=link12></A>
+
 <h1>The mail tab</h1>
 <p>
 <P>
@@ -250,7 +239,7 @@
  This tab is tests mail connectivity from your monitoring server.  You can test mail on windows and on unix.  The windows  montioring workstation will require that you define your SMTP Mail Server.  <P>
  Both "Test Mail Install" buttons will result in a mail being sent to your GEM Administrator Mail Address (entered earlier).  This tab is important as electronic mail is fundamental way we communicate server problems to you.<P>
 
-<A NAME=link13></A>
+
 <h1>The database tab</h1>
 <p>
 <P>
@@ -268,7 +257,7 @@
 </UL>
 <P>
 
-<A NAME=link14></A>
+
 <br>
 <center>
 <TABLE WIDTH=100% BORDER CELLPADDING=3 COLS=1 BGCOLOR=#0066cc>
@@ -279,7 +268,7 @@
 <P>
  <A HREF=#link14>gem.pl</A> is the <EM><STRONG>GEM</STRONG></EM> post configuration tasks manager.   This utility will run tasks that you might want to repeatedly run after an installation.   For example, every time you add a server, you should rebuild your batch scripts and reschedule them - because the tasks are customized to your list of servers.<P>
 
-<A NAME=link15></A>
+
 <h1>Post installation tasks manager - unix</h1>
 <p>
 <P>
@@ -314,7 +303,7 @@
 </pre>
 <P>
 
-<A NAME=link16></A>
+
 <h1>Post installation tasks manager - windows</h1>
 <p>
 <P>
@@ -350,13 +339,13 @@
 <P>
 </pre>
 
-<A NAME=link17></A>
+
 <h1>Reformat codeline (unix only)</h1>
 <p>
 <P>
  Removes Control-M's and Sets Hashbangs<P>
 
-<A NAME=link18></A>
+
 <h1>Batch jobs: create unix gem batch scripts</h1>
 <p>
 <P>
@@ -372,7 +361,7 @@
  You can put the following type line at the head of your crontab.  It applies to all commands in the crontab<P>
  PATH=/apps/sybase.linux/12.5.1b/OCS-12_5/bin:/usr/bin/:/bin<P>
 
-<A NAME=link19></A>
+
 <h1>Batch jobs: create win32 gem batch scripts</h1>
 <p>
 <P>
@@ -629,5 +618,7 @@
 <hr><br>
 This output is documentation for the SQL Technologies Installation Guide.
 <ADDRESS>copyright &#169 1998-2011 By
-<A HREF=http://www.edbarlow.com>SQL Technologies</A>
-</ADDRESS></BODY></html>
+SQL Technologies
+</ADDRESS>
+<div class="gem-page-footer">Copyright &copy; 1995-2011 by Sql Technologies.  All Rights are Reserved.</div>
+</body></html>

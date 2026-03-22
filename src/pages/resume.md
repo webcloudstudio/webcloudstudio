@@ -4,24 +4,28 @@ layout: ../layouts/Resume.astro
 
 # Edward Barlow - AI Adoption Consultant
 
-> My **AI Best Practices Framework** Can Enable Your Small or Mid-Sized Business.
+> Active **AI Enabled Developer** with solid understanding of the latest trends and best practices
 
 **West Chester, PA | (914) 837-4798**
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**
 
 ## PROFESSIONAL SUMMARY
 
-**Senior Principal Engineer with 30+ years of experience** delivering business solutions, critical infrastructure, and data platforms for leading financial institutions, insurance companies, and startups. People and process-first technology leader specializing in backend platform architecture, data engineering, distributed systems, and growth-enabling infrastructure.
+**Senior Principal Engineer with 30+ years of hands on leadership** delivering business solutions, critical infrastructure, and data platforms for leading financial companies, insurance companies, and startups. Full Stack Engineering Leader and Early Adopter with deep technical expertise across the data and data engineering stack. 
 
-**Leadership approach:** Active listener who translates business concepts into actionable technical plans and execution. Trusted communicator bridging stakeholder needs and engineering teams. Drives vision, execution, quality, and collaborative IT culture through digital transformation. Published author with expert technical writing skills. I drive operational excellence by fixing problems the right way.
+**Leadership approach:** Active listener and communicator who translates business concepts into actionable technical plans and execution to drive vision, quality execution, and a collaborative culture. Detail oriented. 
+
+---
 
 ## CORE COMPETENCIES
 
-**Leadership & Delivery:** Platform Architecture • Technical Strategy • Cross-Team Alignment • Agile/SAFe • Digital Transformation • Process & Governance • Roadmaps • Platform Modernization
+**Leadership & Delivery:** Communication • Team Leadership • Agile/SAFe • Platform Modernization • Process & Governance • Roadmaps 
 
-**Technical Expertise:** Backend Platform Development • Distributed Systems • Microservices & APIs • Data Quality • Security • CI/CD/DevOps • System Design • Monitoring & Observability • Technical Documentation
+**Technical Expertise:** Backend Platform Development • Database and Data Architecture • Microservices & APIs • Data Quality • Security • CI/CD/DevOps • Analytics/KPIs/Reporting • Technical Documentation
 
-**Data & Scale:** Highly Available Systems • ETL/ELT Pipelines • Streaming • Data Warehousing • Database Architecture • Performance at Scale
+**Data & Scale:** ETL/ELT Data at Size & Speed • Streaming • Data Warehousing • Internet Of Things
+
+---
 
 ## TECHNICAL SKILLS
 

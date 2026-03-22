@@ -8,7 +8,7 @@ short_description: Personal projects and portfolio site
 status: ACTIVE
 version: 2026-03-14.1
 updated: 20260316_120751
-image: images/My_Github.webp
+image: My_Github.webp
 health: /health
 show_on_homepage: false
 tags: GitHub, HomePage

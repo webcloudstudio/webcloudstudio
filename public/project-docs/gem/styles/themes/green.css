@@ -3,8 +3,8 @@
   --c-topbar-bg:     #071208;
   --c-side-bg:       #0C1E10;
   --c-side-border:   #1A4828;
-  --c-side-section:  #5A9868;   /* muted but readable on dark bg — was too dark */
-  --c-side-link:     #90C898;
+  --c-side-section:  #80A888;   /* muted sage — clearly secondary vs white links */
+  --c-side-link:     #FFFFFF;   /* WHITE — dark sidebar always gets white text */
 
   --c-accent:        #7AE890;   /* lighter bright green — badge + hover indicator */
   --c-accent-text:   #071208;
@@ -18,8 +18,8 @@
   --c-bg:            #F4FAF4;
   --c-text:          #0D2010;
 
-  --c-th-bg:         #1B5E20;
-  --c-th-text:       #E8F5E9;
+  --c-th-bg:         #C4DCC8;   /* light sage box — dark text on it */
+  --c-th-text:       #081A0C;
   --c-td-border:     #B8DFC0;
   --c-tr-alt:        #EDF7EE;
   --c-tr-hover:      #D4EDDA;
@@ -27,7 +27,7 @@
   --c-code-bg:       #DFF0E0;
   --c-code-text:     #1B5E20;
   --c-pre-bg:        #071208;
-  --c-pre-text:      #90C898;
+  --c-pre-text:      #C0DCC4;
 
   --c-callout-bg:    rgba(74,200,112,0.07);
   --c-callout-border:rgba(74,200,112,0.25);

@@ -7,46 +7,38 @@
 
 /* GEM Theme: Midnight Blue  |  gem-base.css must follow this file */
 :root {
-  /* Structural */
-  --c-topbar-bg:     #071420;   /* top bar + sidebar title — same color */
-  --c-side-bg:       #0F1C2E;   /* sidebar body — slightly lighter */
+  --c-topbar-bg:     #071420;
+  --c-side-bg:       #0F1C2E;
   --c-side-border:   #1E3A5F;
-  --c-side-section:  #4A7898;   /* muted section labels */
-  --c-side-link:     #A8C8E0;   /* sidebar link text */
+  --c-side-section:  #7A98B2;   /* muted steel — clearly secondary vs white links */
+  --c-side-link:     #FFFFFF;   /* WHITE — dark sidebar always gets white text */
 
-  /* Accent — used for: badge, h1, sidebar hover border, section divider accent */
   --c-accent:        #4DA8FF;
-  --c-accent-text:   #05111E;   /* text ON the badge */
+  --c-accent-text:   #05111E;
 
-  /* Content headings (on light bg — must be dark enough) */
   --c-h1:            #0D3B8E;
   --c-h1-border:     #C0D5F0;
   --c-h2:            #1565C0;
   --c-h2-border:     #D0E4F8;
   --c-h3:            #1E88E5;
 
-  /* Content area */
   --c-bg:            #F7FAFF;
   --c-text:          #1A2840;
 
-  /* Tables */
-  --c-th-bg:         #0D3B8E;
-  --c-th-text:       #E8F4FF;
+  --c-th-bg:         #BDCFE0;   /* light steel blue box — dark text on it */
+  --c-th-text:       #0A1828;
   --c-td-border:     #C0D8F0;
   --c-tr-alt:        #EEF4FF;
   --c-tr-hover:      #DAE8FF;
 
-  /* Code */
   --c-code-bg:       #EAF0FF;
   --c-code-text:     #0D3B8E;
   --c-pre-bg:        #071420;
-  --c-pre-text:      #A8C8E0;
+  --c-pre-text:      #C8DCF0;
 
-  /* Callout */
   --c-callout-bg:    rgba(77,168,255,0.07);
   --c-callout-border:rgba(77,168,255,0.25);
 
-  /* Footer */
   --c-foot-text:     #7A9AB8;
 }
 
@@ -72,8 +64,8 @@
 body.gem-topbar {
   background: var(--c-topbar-bg);
   border-bottom: 1px solid var(--c-side-border);
-  overflow: hidden;
-  height: 56px;
+  overflow: visible;
+  min-height: 56px;
   margin: 0;
   padding: 0;
 }
@@ -81,9 +73,10 @@ body.gem-topbar {
 .gem-header {
   display: flex;
   align-items: center;
-  height: 56px;
-  padding: 0 14px;
-  gap: 8px;
+  flex-wrap: wrap;           /* allow 2nd row on narrow windows */
+  min-height: 56px;
+  padding: 4px 14px;
+  gap: 4px 8px;
 }
 
 .gem-header-left {
@@ -110,14 +103,14 @@ body.gem-topbar {
 
 /* Version pill */
 .gem-header-version {
-  color: var(--c-side-link);
+  color: rgba(255,255,255,0.75);
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.4px;
   white-space: nowrap;
   padding: 2px 7px;
-  border: 1px solid var(--c-side-border);
+  border: 1px solid rgba(255,255,255,0.25);
   border-radius: 10px;
 }
 
@@ -125,7 +118,7 @@ body.gem-topbar {
 .gem-header-title {
   color: #FFFFFF;
   font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -136,98 +129,39 @@ body.gem-topbar {
 /* Horizontal nav — styled like sidebar links (not buttons) */
 .gem-header-nav {
   display: flex;
+  flex-wrap: wrap;           /* nav links wrap to 2nd row on narrow windows */
   gap: 0;
   flex: 1;
   justify-content: center;
-  overflow: hidden;
 }
 
 .gem-header-nav a {
-  color: var(--c-side-link);
+  color: #FFFFFF;
   text-decoration: none;
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 600;
   padding: 6px 10px;
   white-space: nowrap;
   border-bottom: 2px solid transparent;
 }
 .gem-header-nav a:hover {
   color: #FFFFFF;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.12);
   border-bottom-color: var(--c-accent);
   text-decoration: none;
 }
 
 .gem-header-copyright {
-  color: var(--c-side-link);
+  color: rgba(255,255,255,0.65);
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 10.5px;
+  font-size: 11.5px;
   flex-shrink: 0;
   white-space: nowrap;
   padding-left: 10px;
-  border-left: 1px solid var(--c-side-border);
+  border-left: 1px solid rgba(255,255,255,0.2);
 }
 
-/* ☰ dropdown menu button in top bar */
-.gem-header-menu-btn {
-  background: transparent;
-  border: 1px solid var(--c-side-border);
-  color: var(--c-side-link);
-  cursor: pointer;
-  font-size: 15px;
-  padding: 2px 9px 3px;
-  border-radius: 3px;
-  flex-shrink: 0;
-  margin-left: 4px;
-  transition: background 0.1s, color 0.1s;
-  line-height: 1;
-}
-.gem-header-menu-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
-
-/* Mega-menu panel — position:fixed overlays the content frame */
-.gem-header-menu-panel {
-  display: none;
-  position: fixed;
-  top: 56px; left: 0; right: 0;
-  background: var(--c-side-bg);
-  border-top: 2px solid var(--c-accent);
-  border-bottom: 1px solid var(--c-side-border);
-  padding: 16px 24px 18px;
-  z-index: 9999;
-  flex-direction: row;
-  gap: 32px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
-}
-.gem-header-menu-panel.gem-menu-open { display: flex; }
-.gem-header-menu-col {
-  display: flex;
-  flex-direction: column;
-  min-width: 150px;
-}
-.gem-header-menu-section {
-  color: var(--c-side-section);
-  font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding-bottom: 6px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid var(--c-side-border);
-}
-.gem-header-menu-panel a {
-  color: var(--c-side-link);
-  text-decoration: none;
-  font-size: 12.5px;
-  padding: 3px 0;
-  display: block;
-  border-left: none;
-}
-.gem-header-menu-panel a:hover {
-  color: #fff;
-  text-decoration: none;
-}
 
 /* ================================================================
    SIDEBAR  (toc.htm)
@@ -284,9 +218,9 @@ body.gem-sidebar a {
   color: var(--c-side-link);
   text-decoration: none;
   display: block;
-  padding: 3px 12px 3px 17px;
+  padding: 4px 12px 4px 17px;
   border-left: 3px solid transparent;
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.55;
   transition: background 0.1s, color 0.1s, border-color 0.1s;
 }
@@ -307,19 +241,32 @@ body:not(.gem-topbar):not(.gem-sidebar) {
   background: var(--c-bg);
   color: var(--c-text);
   font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.7;
   margin: 0;
-  padding: 20px 28px 32px 28px;
+  padding: 20px 32px 40px 32px;
 }
 body.gem-content {
   background: var(--c-bg);
   color: var(--c-text);
   font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.7;
   margin: 0;
-  padding: 20px 28px 32px 28px;
+  padding: 20px 32px 40px 32px;
+}
+
+/* ================================================================
+   FONT NORMALISATION — override legacy <font face="..."> elements
+   and <body TEXT=...> attributes that appear throughout the old HTML.
+   The !important is intentional: inline presentation attributes in
+   pre-HTML5 content cannot otherwise be overridden by an external sheet.
+   code/pre/tt are excluded so monospace blocks keep their fonts.
+   ================================================================ */
+body:not(.gem-topbar):not(.gem-sidebar) font,
+body:not(.gem-topbar):not(.gem-sidebar) basefont {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif !important;
+  color: inherit !important;
 }
 
 /* ================================================================
@@ -329,54 +276,54 @@ body.gem-content {
    ================================================================ */
 h1 {
   font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--c-h1);
   border-bottom: 2px solid var(--c-h1-border);
   padding-bottom: 5px;
-  margin: 22px 0 12px 0;
+  margin: 24px 0 14px 0;
 }
 h2 {
   font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--c-h2);
   border-bottom: 1px solid var(--c-h2-border);
   padding-bottom: 3px;
-  margin: 20px 0 9px 0;
+  margin: 22px 0 10px 0;
 }
 h3 {
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--c-h3);
-  margin: 16px 0 5px 0;
+  margin: 18px 0 6px 0;
   padding: 0;
   font-style: normal;
 }
 h4 {
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--c-h3);
-  margin: 12px 0 4px 0;
+  margin: 14px 0 4px 0;
   font-style: normal;
   text-decoration: none;
   text-transform: none;
 }
 h5 {
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--c-h3);
-  margin: 10px 0 3px 0;
+  margin: 12px 0 3px 0;
 }
 h6 {
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--c-h3);
-  margin: 8px 0 2px 0;
+  margin: 10px 0 2px 0;
 }
 
 /* ================================================================
@@ -481,7 +428,7 @@ table.MLPTable { border: 1px solid var(--c-td-border); border-collapse: collapse
    ================================================================ */
 code {
   font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
-  font-size: 12.5px;
+  font-size: 13px;
   background: var(--c-code-bg);
   color: var(--c-code-text);
   border: 1px solid var(--c-td-border);
@@ -490,7 +437,7 @@ code {
 }
 pre {
   font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
-  font-size: 12.5px;
+  font-size: 13px;
   background: var(--c-pre-bg);
   color: var(--c-pre-text);
   border: 1px solid var(--c-side-border);
@@ -536,7 +483,7 @@ p       { margin: 0 0 9px 0; }
   border-top: 1px solid var(--c-td-border);
   color: var(--c-foot-text);
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 11.5px;
+  font-size: 12.5px;
   text-align: center;
   line-height: 1.6;
 }
@@ -606,8 +553,8 @@ body.gem-page {
   background: var(--c-bg);
   color: var(--c-text);
   font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.7;
   margin: 0;
   padding: 0;
   display: flex;
@@ -652,9 +599,9 @@ body.gem-page {
   color: var(--c-side-link);
   text-decoration: none;
   display: block;
-  padding: 3px 12px 3px 17px;
+  padding: 4px 12px 4px 17px;
   border-left: 3px solid transparent;
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.55;
   transition: background 0.1s, color 0.1s, border-color 0.1s;
 }

@@ -3,8 +3,8 @@
   --c-topbar-bg:     #021510;
   --c-side-bg:       #082820;
   --c-side-border:   #0E3D2E;
-  --c-side-section:  #2A7060;
-  --c-side-link:     #80C0B0;
+  --c-side-section:  #6A9888;   /* muted sea-green — clearly secondary vs white links */
+  --c-side-link:     #FFFFFF;   /* WHITE — dark sidebar always gets white text */
 
   --c-accent:        #00C898;
   --c-accent-text:   #021510;
@@ -18,8 +18,8 @@
   --c-bg:            #F0FAF8;
   --c-text:          #081E18;
 
-  --c-th-bg:         #00755E;
-  --c-th-text:       #E0F5F0;
+  --c-th-bg:         #B0D8CC;   /* light sea-green box — dark text on it */
+  --c-th-text:       #041410;
   --c-td-border:     #A0D8C8;
   --c-tr-alt:        #E8F7F4;
   --c-tr-hover:      #C8ECDE;
@@ -27,7 +27,7 @@
   --c-code-bg:       #D8F2EC;
   --c-code-text:     #00755E;
   --c-pre-bg:        #021510;
-  --c-pre-text:      #80C0B0;
+  --c-pre-text:      #C0DCD4;
 
   --c-callout-bg:    rgba(0,200,152,0.07);
   --c-callout-border:rgba(0,200,152,0.25);

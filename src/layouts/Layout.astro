@@ -17,6 +17,8 @@ const base = import.meta.env.BASE_URL;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+    <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script is:inline>mermaid.initialize({ startOnLoad: false, theme: 'dark', flowchart: { curve: 'linear', nodeSpacing: 40, rankSpacing: 35, padding: 16 }, themeVariables: { darkMode: true, background: '#0f1117', lineColor: '#4a7fa0', fontSize: '14px' } });</script>
     <style is:global>
       :root {
         --bg:        #080810;
@@ -606,6 +608,7 @@ const base = import.meta.env.BASE_URL;
         <div class="nav-links">
           <a href={base}>Home</a>
           <a href={`${base}/projects/`}>Projects</a>
+          <a href={`${base}/project-docs/Specifications/white-paper.html`}>AI Process</a>
           <a href={`${base}/resume/`}>About Me</a>
           <div class="contact-trigger">
             <button class="nav-contact-btn">Contact</button>

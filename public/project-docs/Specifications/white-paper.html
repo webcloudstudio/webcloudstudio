@@ -43,54 +43,6 @@ body { background:var(--bg); color:var(--text); font-family:var(--font-body);
 
 <div id="wp-workflows"></div>
 
-<div class="gaps">
-  <h2>Gaps / Pending Corrections</h2>
-  <p class="gaps-sub">Items below are missing from diagrams or IO lists. Each is a discrete edit.</p>
-
-  <div class="gap-item">
-    <h4>W1 — One Shot Prototypes</h4>
-    <ul>
-      <li>Output: oneshot-prompt.md written to stdout/file — not shown</li>
-      <li>Output: SCORECARD.md written by agent after build, not by oneshot.sh</li>
-      <li>Input: ONESHOT_BUILD_RULES.md assembled into prompt alongside stack files</li>
-    </ul>
-  </div>
-  <div class="gap-item">
-    <h4>W2 — Application Iteration</h4>
-    <ul>
-      <li>Input: SPEC_COMMIT from prototype .env — replaces BUILD_TAG as baseline on subsequent runs</li>
-      <li>Output: iterate-prompt.md written to stdout/file — not shown</li>
-    </ul>
-  </div>
-  <div class="gap-item">
-    <h4>W3 — Technology Rules Propagation</h4>
-    <ul>
-      <li>Flow gap: summarize_rules.sh outputs a prompt, not CLAUDE_RULES.md directly — human-AI step missing</li>
-    </ul>
-  </div>
-  <div class="gap-item">
-    <h4>W4 — Automated Specification Iteration</h4>
-    <ul>
-      <li>Input: METADATA.md read by spec_iterate.sh — not shown</li>
-      <li>REFERENCE_GAPS.md is updated in place (input and output)</li>
-    </ul>
-  </div>
-  <div class="gap-item">
-    <h4>W5 — Session Capture</h4>
-    <ul>
-      <li>Input: .env (tran_logger reads prototype directory path from spec .env)</li>
-    </ul>
-  </div>
-  <div class="gap-item">
-    <h4>Cross-Workflow Connections Not Shown</h4>
-    <ul>
-      <li>W1 git tag → W2: oneshot tag is the diff baseline for iterate.sh</li>
-      <li>W5 PATCH-NNN-tl-*.md → W2: session-captured tickets feed the next iterate run</li>
-      <li>W4 SPEC_ITERATION.md → W1/W2: output is a ready-to-run build prompt</li>
-    </ul>
-  </div>
-</div>
-
 <script>
 window.addEventListener('DOMContentLoaded', function () {
   window.renderAllWorkflows(document.getElementById('wp-workflows'));

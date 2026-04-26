@@ -1,4 +1,4 @@
-# Step 6 — Document
+# Step 5 — Document
 
 Generate project documentation from specification files using AI summarization.
 

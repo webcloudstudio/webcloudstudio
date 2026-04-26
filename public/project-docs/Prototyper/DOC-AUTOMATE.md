@@ -1,4 +1,4 @@
-# Step 5 — Automate
+# Step 4 — Automate
 
 Let the AI identify specification gaps and generate focused iteration prompts
 without manual analysis.

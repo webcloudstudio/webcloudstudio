@@ -13,14 +13,13 @@ The specification directory is the source of truth. The code is a derived artifa
 ## The Pipeline
 
 ```
-Setup → OneShot → Iterate → Merge → Automate
+Setup → OneShot → Merge → Automate
 ```
 
 1. **Setup** — Scaffold specification files from templates, or reverse-engineer an existing project
-2. **OneShot** — Validate, assemble, and generate a complete AI build prompt
-3. **Iterate** — Author change tickets, generate focused iteration prompts
-4. **Merge** — Squash-merge the feature branch into the base branch
-5. **Automate** — AI-scored gap analysis feeds back into the pipeline
+2. **OneShot** — Validate, assemble, and build; `validate.sh` detects stale phases automatically; `tran_logger.sh` captures session output back into spec tickets
+3. **Merge** — Squash-merge the feature branch into the base branch
+4. **Automate** — AI-scored gap analysis feeds back into the pipeline
 
 ## What Makes It Work
 

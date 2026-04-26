@@ -11,7 +11,7 @@
     {
       id: 'decompose', navLabel: 'Decompose',
       num: 'Workflow #1', title: 'Reverse-Engineer Existing Applications',
-      desc: 'decompose.sh reads an existing project\'s source code, detects the technology stack, and generates an AI prompt that produces structured specification files — METADATA, ARCHITECTURE, DATABASE, SCREEN-*, FEATURE-*, and more. The output feeds directly into Workflow #2, bringing unspecified applications under specification control.',
+      desc: 'Reverse-engineers an existing codebase into structured specification files — METADATA, ARCHITECTURE, DATABASE, SCREEN-*, and FEATURE-*. Stack detection scopes the relevant technology rules automatically. Use this to bring unspecified projects under specification control before Workflow #2.',
       mermaid: `flowchart LR${D}
   PROJ(["Existing Project"]):::dir --> D["decompose.sh"]:::script
   RE(["RulesEngine/"]):::dir --> D
@@ -26,80 +26,71 @@
     {
       id: 'oneshot', navLabel: 'One Shot',
       num: 'Workflow #2', title: 'Build Projects From Specifications',
-      desc: 'Build projects from specifications - either in a single run or using a build plan. Build steps are fully traceable to the exact specification state that produced it.',
+      desc: 'Builds a project from specification files — single prompt for small projects, sequential AI phases for large ones. For phased builds, run build_plan.sh to generate BUILD_PLAN.md, then oneshot_phased.sh executes each phase in sequence. Every build is git-tagged to the exact specification commit. validate.sh detects stale spec files automatically before each build. Acceptance Criteria specification files allow test-driven design and a simple way to force specific behaviors across builds.',
       mermaid: `flowchart LR${D}
   S1["setup.sh"]:::script --> SPEC(["Specifications/"]):::dir
+  SPEC --> BP["build_plan.sh"]:::script --> BPF{{"BUILD_PLAN.md"}}:::md
   SPEC --> S2["validate.sh"]:::script
-  S2 --> S3["oneshot.sh /\noneshot_phased.sh"]:::script
-  BP["build_plan.sh"]:::script --> BPF{{"BUILD_PLAN.md"}}:::md --> S3
+  BPF --> S3["oneshot.sh /\noneshot_phased.sh"]:::script
+  S2 --> S3
   RE(["RulesEngine/"]):::dir --> S3
   PR(["prompts/"]):::dir --> S3
-  S3 --> PT(["Prompt"]):::prompt
-  S3 --> DL{{"deployments.jsonl"}}:::md
-  PT --> PT2(["Prototype"]):::output`,
+  S3 --> PT(["Prompt"]):::prompt --> PT2(["Prototype"]):::output
+  PT2 --> TL["tran_logger.sh"]:::script --> SPEC2(["Specifications/ ↺"]):::dir
+  PT2 --> SC["scorecard.sh"]:::script --> SMD{{"SCORECARD.md"}}:::md
+  PT2 --> MG["merge.sh"]:::script --> PROD(["Production"]):::output`,
       learnings: [
-        'Specification file architecture works BUT above 75K tokens and features are halucinated.',
-        'Specification Layering/Dependency enables build Sets optimization.',
-        'Opinionated stack — prescriptive patterns, not guidelines for additional build Set optimization.',
-        'Scorecards and Build Tracking provide directionality on build optimzation by token count & outcome.',
-        'Phased Iterative Build with scorecards and tests at each phase.',
+        'Prompts above 80KB cause hallucination — phased builds with BUILD_PLAN.md solve this.',
+        'validate.sh staleness check detects spec files modified since last build — no manual tracking needed.',
+        'FUNCTIONALITY.md is a Phase 1 context file only (scope orientation). All detail lives in individual FEATURE-*.md files.',
+        'Opinionated stack — prescriptive patterns, not guidelines — enables consistent single-shot phase builds.',
+        'Scorecards and build tags provide directionality on token count and outcome over time.',
       ],
       defn: {
         label: 'Specifications/',
         items: [
           ['METADATA.md', 'Service catalog entry'],
           ['INTENT.md', 'High impact on quality'],
-          ['DATABASE.md', 'Core persistence — data first'],
-          ['UI-GENERAL.md / SCREEN-*.md', 'UI defined separate from features'],
-          ['FUNCTIONALITY.md / FEATURE-*.md', 'Feature definitions'],
-          ['BUILD_PLAN.md', 'Phase plan for phased builds — produced by build_plan.sh'],
-          ['SCREEN-NNN-*.md / PATCH-NNN-*.md / AC-NNN-*.md', 'Typed tickets applied in order']
+          ['ARCHITECTURE.md', 'Modules, routes, directory layout — base context in every phase'],
+          ['DATABASE.md', 'Core persistence — always Phase 1'],
+          ['UI-GENERAL.md', 'Shared UI patterns — context in every screen phase'],
+          ['FUNCTIONALITY.md', 'Feature index only (one paragraph each) — Phase 1 context'],
+          ['FEATURE-*.md', 'Feature detail: routes (Provides), dependencies (Depends On), trigger, sequence, reads, writes'],
+          ['SCREEN-*.md', 'Per-screen: route, layout, interactions, Depends On FEATURE files'],
+          ['*-AC.md / AC-*.md / *-AC-*.md', 'Acceptance criteria — AC as a word in filename; guardrails permanent, positive facts reconcile into spec'],
+          ['BUILD_PLAN_INTENT.md', 'Ordered semantic bundles for priority-driven phasing — author this, build_plan.sh generates BUILD_PLAN.md'],
+          ['BUILD_PLAN.md', 'Phase plan — generated by build_plan.sh; consumed by oneshot_phased.sh']
         ]
       }
     },
     {
-      id: 'iterate', navLabel: 'Iterate',
-      num: 'Workflow #3', title: 'Iteration Projects with New Features',
-      desc: 'iterate.sh assembles changes using git diff into a prompt applied to the existing codebase.',
-      mermaid: `flowchart LR${D}
-  DL{{"deployments.jsonl"}}:::md --> S1["iterate.sh"]:::script
-  CH{{"Specification Diff"}}:::md --> S1
-  S1 --> PT(["Prompt"]):::prompt
-  S1 --> DL2{{"deployments.jsonl"}}:::md
-  PT --> PT2(["Prototype"]):::output
-  PT2 --> S2["merge.sh"]:::script
-  S2 --> PROJ(["Project"]):::output`,
-      learnings: [
-        'Updating specifications is far preferable to ad-hoc code edits. ',
-        'The scorecard tracks specification drift over time.'
-      ]
-    },
-    {
       id: 'tran', navLabel: 'Transaction Logs',
-      num: 'Workflow #4', title: 'Support Workflow - Capturing Claude Edit Sessions',
-      desc: 'Update projects with Claude edit sessions for supportability.  tran_logger.sh reads the Claude session and creates numbered specification tickets in Acceptance Criteria format.  This enables a reproducible build patterns.',
+      num: 'Workflow #3', title: 'Support Workflow - Capturing Claude Edit Sessions',
+      desc: 'Captures Claude edit sessions as AC tickets. tran_logger.sh reads session JSONL logs and extracts bugs, ideas, and acceptance criteria into AC-NNN-* files. Keeps ad-hoc code changes traceable and reproducible through the build system.',
       mermaid: `flowchart LR${D}
-  DL{{"deployments.jsonl"}}:::md --> TL["tran_logger.sh"]:::script
-  PT([".claude JSONL"]):::dir --> TL
+  PT([".claude JSONL"]):::dir --> TL["tran_logger.sh"]:::script
   GI(["git logs"]):::dir --> TL
   TL --> SPEC(["Specifications/"]):::dir`,
       learnings: [
         'Requires prompting the agent to produce acceptance criteria alongside feature changes.',
-        'Numbered PATCH-NNN-* and AC-NNN-* files give the best reproducible build patterns.'
+        'AC-NNN-* files (AC as a word in filename) are the standard for all acceptance criteria and targeted fixes.'
       ]
     },
     {
       id: 'techrules', navLabel: 'Technology Rules',
-      num: 'Workflow #5', title: 'Technology Rules Propagation',
-      desc: 'RulesEngine/ as the source of truth for technology rules. summarize_rules.sh generates a compact CLAUDE_RULES.md injected into projects via ProjectUpdate.sh. All projects share this  contract making them interoperable. ProjectValidate.sh verifies compliance.',
+      num: 'Workflow #4', title: 'Technology Rules Propagation',
+      desc: 'RulesEngine/ is the authoritative source for agent behavior and technology standards. summarize_rules.sh regenerates CLAUDE_RULES.md; ProjectUpdate.sh propagates it to all promoted projects. ProjectValidate.sh verifies compliance — all projects share the same contract, making them interoperable.',
       mermaid: `flowchart LR${D}
-  RULES(["RulesEngine/"]):::dir
-  --> S1["summarize_rules.sh"]:::script
-  --> CR{{"CLAUDE_RULES.md"}}:::md
-  --> S2["ProjectUpdate.sh"]:::script
-  --> PROJ(["Project"]):::output
-  --> S3["ProjectValidate.sh"]:::script
-  --> RPT(["Compliance Report"]):::output`,
+  RULES(["RulesEngine/"]):::dir --> S0["update_rules_engine.sh"]:::script
+  RULES --> S1["summarize_rules.sh"]:::script
+  S0 --> S1
+  S1 --> CR{{"CLAUDE_RULES.md"}}:::md
+  CR --> S2["ProjectUpdate.sh"]:::script
+  CR --> S4["ProjectInitialize.sh"]:::script
+  S2 --> PROJ(["Project"]):::output
+  S4 --> PROJ
+  PROJ --> S3["ProjectValidate.sh"]:::script
+  S3 --> RPT(["Compliance Report"]):::output`,
       learnings: [
         'CLAUDE_RULES injection works well out of the box — key insight: use a crafted AI summary.',
         'An opinionated prescribed stack gave working software first time.'
@@ -107,11 +98,13 @@
     },
     {
       id: 'speciterate', navLabel: 'Self Iteration',
-      num: 'Workflow #6', title: 'Automated Project Iteration',
-      desc: 'spec_iterate.sh uses AI to score specification quality across seven dimensions, identify 1–2 highest-priority gaps, and generate a focused iteration prompt. REFERENCE_GAPS.md and SPEC_SCORECARD.md are updated automatically, closing the loop between specification quality and build quality without manual review.',
+      num: 'Workflow #5', title: 'Automated Project Iteration',
+      desc: 'Uses AI to score specification quality across seven dimensions and identify the highest-priority gap. spec_iterate.sh updates REFERENCE_GAPS.md and SPEC_SCORECARD.md automatically, then generates a focused iteration prompt. Closes the loop between specification quality and build quality without manual review.',
       mermaid: `flowchart LR${D}
-  GAPS{{"REFERENCE_GAPS.md"}}:::md --> SI["spec_iterate.sh"]:::script
-  SPEC(["Specifications/"]):::dir  --> SI
+  SPEC(["Specifications/"]):::dir --> UR["update_reference_gaps.sh"]:::script
+  UR --> GAPS{{"REFERENCE_GAPS.md"}}:::md
+  GAPS --> SI["spec_iterate.sh"]:::script
+  SPEC --> SI
   SI --> GAPS2{{"REFERENCE_GAPS.md"}}:::md
   SI --> SCORE{{"SPEC_SCORECARD.md"}}:::md
   SI --> ITER{{"SPEC_ITERATION.md"}}:::prompt`,
@@ -121,8 +114,8 @@
     },
     {
       id: 'document', navLabel: 'Document',
-      num: 'Workflow #7', title: 'Auto Build Documentation from Specification',
-      desc: 'document.sh reads specification files and calls an AI agent (claude -p, sonnet) to curate DOC-*.md summaries for each documentation section. build_project_docs.py then assembles those summaries, along with discovered bin/ scripts, into a Prototyper-style single-page documentation app. The result is a versioned docs/index.html that can be rebuilt on demand from the specification files.',
+      num: 'Workflow #6', title: 'Auto Build Documentation from Specification',
+      desc: 'Generates project documentation from specification files in two phases: AI writes DOC-*.md summaries per section, then build_project_docs.py assembles them into a versioned docs/index.html. DOC-*.md files persist in the target project and are human-editable sources for future rebuilds.',
       mermaid: `flowchart LR${D}
   SPEC(["Specifications/"]):::dir --> D["document.sh"]:::script
   D --> PT(["Prompt"]):::prompt
@@ -183,7 +176,13 @@
 
   function renderWorkflowIndex() {
     const rows = window.WORKFLOWS.map(wf =>
-      `<tr><td class="wp-idx-num">${esc(wf.num)}</td><td><a class="wp-idx-link" href="#wf-${esc(wf.id)}">${esc(wf.title)}</a></td></tr>`
+      `<tr>
+        <td class="wp-idx-num">${esc(wf.num)}</td>
+        <td>
+          <a class="wp-idx-link" href="#wf-${esc(wf.id)}">${esc(wf.title)}</a>
+          <div class="wp-idx-desc">${esc(wf.desc)}</div>
+        </td>
+      </tr>`
     ).join('');
     return `
 <div class="wp-header">
@@ -297,6 +296,7 @@
 .wp-idx-num { font-family:Consolas,monospace; font-size:12px; color:#2cb67d; font-weight:800; white-space:nowrap; width:120px; }
 .wp-idx-link { font-size:17px; font-weight:800; color:#1E2328; text-decoration:none; }
 .wp-idx-link:hover { color:#2cb67d; text-decoration:underline; }
+.wp-idx-desc { font-size:12px; color:#6b7280; margin-top:3px; line-height:1.5; max-width:600px; }
 .wp-wf { scroll-margin-top:20px; }
 .wp-div { border:none; border-top:1px solid #D5D8DE; margin:20px 0; }
 .wf-tab-bar { display:flex; gap:6px; margin-bottom:18px; flex-wrap:wrap; padding-bottom:14px; border-bottom:1px solid #D5D8DE; }

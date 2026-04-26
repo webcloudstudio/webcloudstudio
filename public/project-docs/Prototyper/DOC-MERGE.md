@@ -1,4 +1,4 @@
-# Step 4 — Merge
+# Step 3 — Merge
 
 Promote a prototype to a project by squash-merging its feature branch into the base branch.
 

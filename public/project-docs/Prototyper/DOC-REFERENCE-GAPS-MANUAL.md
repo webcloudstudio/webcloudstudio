@@ -31,12 +31,12 @@ Review the gaps:
 cat ../Specifications/GAME/REFERENCE_GAPS.md | head -50
 ```
 
-Use in iteration workflow:
+Use in update workflow:
 ```bash
 bash bin/update_reference_gaps.sh GAME
 less ../Specifications/GAME/REFERENCE_GAPS.md
-bash bin/iterate.sh GAME > iterate-prompt.md
-cd /path/to/GAME && claude -p "$(cat ../Specifications/GAME/iterate-prompt.md)"
+bash bin/oneshot.sh GAME --update > GAME/update-prompt.md
+cd /path/to/GAME && claude -p "$(cat update-prompt.md)"
 bash bin/update_reference_gaps.sh GAME
 ```
 
@@ -52,7 +52,7 @@ Features in specification but missing from code:
 Missing Screen: SCREEN-SETTINGS-AUDIT-LOG.md
 - Defined in spec with full layout and interactions
 - Not found in prototype code
-- Action: Create SCREEN-NNN-AUDIT-LOG.md ticket; run iterate.sh
+- Action: Update SCREEN-SETTINGS-AUDIT-LOG.md spec; rerun oneshot --update
 ```
 
 ### Code-to-Spec Gaps
@@ -85,7 +85,7 @@ Code not following stack conventions:
 bin/start.sh uses nohup
 - Stack/common.md prescribes foreground under tee
 - Code violates: "nohup python3 run.py &"
-- Action: Create PATCH-NNN-FIX-START-SH.md; run iterate.sh
+- Action: Create PATCH-NNN-FIX-START-SH.md; rerun oneshot --update
 ```
 
 ## Workflow
@@ -93,8 +93,8 @@ bin/start.sh uses nohup
 1. Build prototype with `oneshot.sh` or `oneshot_phased.sh`
 2. Run `bash bin/update_reference_gaps.sh <ProjectName>`
 3. Review `REFERENCE_GAPS.md` to identify priority gaps
-4. Create numbered tickets (`SCREEN-NNN-*.md`, `FEATURE-NNN-*.md`, `PATCH-NNN-*.md`)
-5. Run `bash bin/iterate.sh <ProjectName>` to address gaps
+4. Update spec files or create `PATCH-NNN-*.md` tickets
+5. Run `bash bin/oneshot.sh <ProjectName> --update` to apply changes
 6. Re-run `update_reference_gaps.sh` to verify gaps are closed
 
 ## Integration with Other Tools

@@ -56,11 +56,12 @@ const base = import.meta.env.BASE_URL;
 
       /* ── NAV ── */
       header {
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
         z-index: 100;
-        background: #08081099;
-        backdrop-filter: blur(12px);
+        background: #080810;
         border-bottom: 1px solid var(--border);
       }
 
@@ -179,7 +180,7 @@ const base = import.meta.env.BASE_URL;
       .contact-item svg { flex-shrink: 0; color: var(--accent); }
 
       /* ── MAIN ── */
-      main { flex: 1; }
+      main { flex: 1; padding-top: 68px; }
 
       section {
         padding: 3rem 1.5rem;

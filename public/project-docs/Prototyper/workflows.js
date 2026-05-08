@@ -26,15 +26,15 @@
     {
       id: 'oneshot', navLabel: 'One Shot',
       num: 'Workflow #2', title: 'Build Projects From Specifications',
-      desc: 'Builds a project from specification files — single prompt for small projects, sequential AI phases for large ones. For phased builds, run build_plan.sh to generate BUILD_PLAN.md, then oneshot_phased.sh executes each phase in sequence. Every build is git-tagged to the exact specification commit. validate.sh detects stale spec files automatically before each build. Acceptance Criteria specification files allow test-driven design and a simple way to force specific behaviors across builds.',
+      desc: 'Builds a project from specification files — single prompt for small projects, sequential AI phases for large ones. For phased builds, run build_plan.sh to generate BUILD_PLAN.md, then oneshot_phased.sh executes each phase in sequence. Every build is git-tagged to the exact specification commit. validate.sh detects stale spec files automatically before each build. Non-foundation phases automatically use _compact.md siblings of rules and stack files — keeping per-phase prompts under 50KB for reliable Sonnet output. Acceptance Criteria specification files allow test-driven design and a simple way to force specific behaviors across builds.',
       mermaid: `flowchart LR${D}
   S1["setup.sh"]:::script --> SPEC(["Specifications/"]):::dir
   SPEC --> BP["build_plan.sh"]:::script --> BPF{{"BUILD_PLAN.md"}}:::md
   SPEC --> S2["validate.sh"]:::script
   BPF --> S3["oneshot.sh /\noneshot_phased.sh"]:::script
   S2 --> S3
-  RE(["RulesEngine/"]):::dir --> S3
-  PR(["prompts/"]):::dir --> S3
+  RE(["RulesEngine/\n(_compact.md)"]):::dir --> S3
+  PR(["prompts/\n(_compact.md)"]):::dir --> S3
   S3 --> PT(["Prompt"]):::prompt --> PT2(["Prototype"]):::output
   PT2 --> TL["tran_logger.sh"]:::script --> SPEC2(["Specifications/ ↺"]):::dir
   PT2 --> SC["scorecard.sh"]:::script --> SMD{{"SCORECARD.md"}}:::md
@@ -44,6 +44,7 @@
         'validate.sh staleness check detects spec files modified since last build — no manual tracking needed.',
         'FUNCTIONALITY.md is a Phase 1 context file only (scope orientation). All detail lives in individual FEATURE-*.md files.',
         'Opinionated stack — prescriptive patterns, not guidelines — enables consistent single-shot phase builds.',
+        'Non-foundation phases load _compact.md siblings — LLM-compacted rules and stack files at ~30-40% of source size — saving 10-26KB per phase without dropping build-critical content.',
         'Scorecards and build tags provide directionality on token count and outcome over time.',
       ],
       defn: {
@@ -79,12 +80,14 @@
     {
       id: 'techrules', navLabel: 'Technology Rules',
       num: 'Workflow #4', title: 'Technology Rules Propagation',
-      desc: 'RulesEngine/ is the authoritative source for agent behavior and technology standards. summarize_rules.sh regenerates CLAUDE_RULES.md; ProjectUpdate.sh propagates it to all promoted projects. ProjectValidate.sh verifies compliance — all projects share the same contract, making them interoperable.',
+      desc: 'RulesEngine/ is the authoritative source for agent behavior and technology standards. summarize_rules.sh regenerates CLAUDE_RULES.md; rulesengine_compact.sh produces _compact.md siblings of rules and stack files used by non-foundation build phases. ProjectUpdate.sh propagates rules to all promoted projects. ProjectValidate.sh verifies compliance — all projects share the same contract, making them interoperable.',
       mermaid: `flowchart LR${D}
   RULES(["RulesEngine/"]):::dir --> S0["update_rules_engine.sh"]:::script
   RULES --> S1["summarize_rules.sh"]:::script
   S0 --> S1
   S1 --> CR{{"CLAUDE_RULES.md"}}:::md
+  CR --> RC["rulesengine_compact.sh"]:::script
+  RC --> CRC{{"*_compact.md"}}:::md
   CR --> S2["ProjectUpdate.sh"]:::script
   CR --> S4["ProjectInitialize.sh"]:::script
   S2 --> PROJ(["Project"]):::output
@@ -93,7 +96,8 @@
   S3 --> RPT(["Compliance Report"]):::output`,
       learnings: [
         'CLAUDE_RULES injection works well out of the box — key insight: use a crafted AI summary.',
-        'An opinionated prescribed stack gave working software first time.'
+        'An opinionated prescribed stack gave working software first time.',
+        '_compact.md siblings are LLM-generated and never hand-edited — regenerate from source via rulesengine_compact.sh after any rules change.'
       ]
     },
     {

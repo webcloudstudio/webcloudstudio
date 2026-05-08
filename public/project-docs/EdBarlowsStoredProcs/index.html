@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ed Barlow's Extended Stored Procedure Library</title>
@@ -13,6 +14,61 @@
 </style>
 </head>
 <body class="gem-page">
+<style id="wcs-nav-style">
+  #wcs-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(8,8,16,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #252540;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  #wcs-nav nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  #wcs-nav .wcs-logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: #f1f5f9;
+    text-decoration: none;
+  }
+  #wcs-nav .wcs-logo:hover { opacity: 0.85; text-decoration: none; }
+  #wcs-nav .wcs-nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  #wcs-nav .wcs-nav-links a {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  #wcs-nav .wcs-nav-links a:hover { color: #f1f5f9; text-decoration: none; }
+</style>
+<header id="wcs-nav">
+  <nav>
+    <a href="https://webcloudstudio.github.io/webcloudstudio/" class="wcs-logo">Ed Barlow</a>
+    <div class="wcs-nav-links">
+      <a href="https://webcloudstudio.github.io/webcloudstudio/">Home</a>
+      <a href="https://webcloudstudio.github.io/webcloudstudio/projects/">Projects</a>
+      <a href="https://webcloudstudio.github.io/webcloudstudio/project-docs/Prototyper/index.html">AI Process</a>
+      <a href="https://webcloudstudio.github.io/webcloudstudio/project-docs/GAME/index.html">AI User Experience</a>
+      <a href="https://webcloudstudio.github.io/webcloudstudio/resume/">About Me</a>
+    </div>
+  </nav>
+</header>
 <nav class="gem-sidebar-panel">
 <div style="background:var(--c-topbar-bg);padding:12px 14px;border-bottom:1px solid var(--c-side-border);display:flex;align-items:center;gap:10px;">
 <span style="font-size:28px;line-height:1;flex-shrink:0">🗄️</span>

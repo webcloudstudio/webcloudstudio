@@ -151,10 +151,11 @@ section h2 { font-size: 18px; font-weight: 700; color: var(--c-h1);
 
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <style id="wcs-nav-style">
-  html, body { margin: 0 !important; padding: 0 !important; }
   #wcs-nav {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     background: #080810;
     border-bottom: 1px solid #252540;
@@ -191,6 +192,7 @@ section h2 { font-size: 18px; font-weight: 700; color: var(--c-h1);
     transition: color 0.2s;
   }
   #wcs-nav .wcs-nav-links a:hover { color: #f1f5f9; text-decoration: none; }
+  body { margin-top: 68px !important; height: calc(100vh - 68px) !important; }
 </style>
 </head>
 <body>

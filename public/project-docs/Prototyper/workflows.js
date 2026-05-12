@@ -65,8 +65,26 @@
       }
     },
     {
+      id: 'iterate', navLabel: 'Iterate',
+      num: 'Workflow #3', title: 'Iterate — Refine a Spec Scope and Apply to an Existing Project',
+      desc: 'Updates a single spec file and applies the change to an existing project in one claude session. Scope accepts a URL (/path/to/screen), keyword (colors, layout), or filename (SCREEN-FOO.md). Phase 1 edits the spec and commits to the spec repo; Phase 2 applies the change to application code referencing the Phase 1 hash — creating a clean audit trail. Base files (ARCHITECTURE, DATABASE, UI-GENERAL) are read-only; changes land in numbered patch files instead.',
+      mermaid: `flowchart LR${D}
+  SPEC(["Specifications/"]):::dir --> IT["iterate.sh"]:::script
+  SCOPE(["Scope\\n(URL / keyword / filename)"]):::dir --> IT
+  CHANGE(["Change description"]):::dir --> IT
+  IT --> P1(["Phase 1\\nSpec commit"]):::prompt
+  P1 --> SPEC2(["Specifications/ ↺"]):::dir
+  P1 --> P2(["Phase 2\\nCode commit"]):::prompt
+  P2 --> PROJ(["Project"]):::output`,
+      learnings: [
+        'Two-phase single-session design keeps spec and code changes atomic and traceable.',
+        'Base file protection prevents accidental overwrites of canonical specs — patch files accumulate changes safely.',
+        '--spec-only flag is useful for reviewing or staging spec changes before applying code.'
+      ]
+    },
+    {
       id: 'tran', navLabel: 'Transaction Logs',
-      num: 'Workflow #3', title: 'Support Workflow - Capturing Claude Edit Sessions',
+      num: 'Workflow #4', title: 'Support Workflow - Capturing Claude Edit Sessions',
       desc: 'Captures Claude edit sessions as AC tickets. tran_logger.sh reads session JSONL logs and extracts bugs, ideas, and acceptance criteria into AC-NNN-* files. Keeps ad-hoc code changes traceable and reproducible through the build system.',
       mermaid: `flowchart LR${D}
   PT([".claude JSONL"]):::dir --> TL["tran_logger.sh"]:::script
@@ -79,7 +97,7 @@
     },
     {
       id: 'techrules', navLabel: 'Technology Rules',
-      num: 'Workflow #4', title: 'Technology Rules Propagation',
+      num: 'Workflow #5', title: 'Technology Rules Propagation',
       desc: 'RulesEngine/ is the authoritative source for agent behavior and technology standards. summarize_rules.sh regenerates CLAUDE_RULES.md; rulesengine_compact.sh produces _compact.md siblings of rules and stack files used by non-foundation build phases. ProjectUpdate.sh propagates rules to all promoted projects. ProjectValidate.sh verifies compliance — all projects share the same contract, making them interoperable.',
       mermaid: `flowchart LR${D}
   RULES(["RulesEngine/"]):::dir --> S0["update_rules_engine.sh"]:::script
@@ -102,7 +120,7 @@
     },
     {
       id: 'speciterate', navLabel: 'Self Iteration',
-      num: 'Workflow #5', title: 'Automated Project Iteration',
+      num: 'Workflow #6', title: 'Automated Project Iteration',
       desc: 'Uses AI to score specification quality across seven dimensions and identify the highest-priority gap. spec_iterate.sh updates REFERENCE_GAPS.md and SPEC_SCORECARD.md automatically, then generates a focused iteration prompt. Closes the loop between specification quality and build quality without manual review.',
       mermaid: `flowchart LR${D}
   SPEC(["Specifications/"]):::dir --> UR["update_reference_gaps.sh"]:::script
@@ -118,7 +136,7 @@
     },
     {
       id: 'document', navLabel: 'Document',
-      num: 'Workflow #6', title: 'Auto Build Documentation from Specification',
+      num: 'Workflow #7', title: 'Auto Build Documentation from Specification',
       desc: 'Generates project documentation from specification files in two phases: AI writes DOC-*.md summaries per section, then build_project_docs.py assembles them into a versioned docs/index.html. DOC-*.md files persist in the target project and are human-editable sources for future rebuilds.',
       mermaid: `flowchart LR${D}
   SPEC(["Specifications/"]):::dir --> D["document.sh"]:::script

@@ -23,6 +23,7 @@ body { display: flex; flex-direction: column; height: 100vh; overflow: hidden;
 .sidebar { width: 220px; min-width: 220px; display: flex; flex-direction: column;
   background: var(--c-side-bg); border-right: 1px solid var(--c-side-border);
   overflow-y: auto; flex-shrink: 0; }
+.sidebar > * { flex-shrink: 0; }
 
 .sidebar-header { background: var(--c-topbar-bg); padding: 6px 10px;
   flex-shrink: 0; cursor: pointer; display: flex; align-items: center; gap: 9px; }
@@ -402,6 +403,7 @@ const SCRIPTS = {
   "common.py": {"desc": "Common operation context \u2014 sourced by Python operation scripts.", "sections": {"_desc": ""}},
   "generate_conquer2026_image.py": {"desc": "Generate the conquer_2026 card image (400x300 WebP).", "sections": {"_desc": ""}},
   "generate_edbarlowsstoredprocs_image.py": {"desc": "Composite Sybase + SQL Server logos into a 400x300 WebP card image.", "sections": {"_desc": ""}},
+  "generate_ezdocs_image.py": {"desc": "Generate the ezdocs card image (400x300 WebP) \u2014 cartoon smiling camera.", "sections": {"_desc": ""}},
   "generate_game_image.py": {"desc": "Generate the GAME card image (400x300 WebP).", "sections": {"_desc": ""}},
   "generate_gem_image.py": {"desc": "Generate the gem card image (400x300 WebP).", "sections": {"_desc": ""}},
   "generate_herpeshearts_image.py": {"desc": "Generate the HerpesHearts card image (400x300 WebP).", "sections": {"_desc": ""}},

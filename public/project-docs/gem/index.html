@@ -1,27 +1,67 @@
-<header id="wcs-nav">
-  <nav>
-    <a href="https://webcloudstudio.com/" class="wcs-logo">Ed Barlow</a>
-    <div class="wcs-nav-links">
-      <a href="https://webcloudstudio.com/">Home</a>
-      <a href="https://webcloudstudio.com/projects/">Projects</a>
-      <a href="https://webcloudstudio.com/project-docs/Prototyper/index.html">AI Process</a>
-      <a href="https://webcloudstudio.com/project-docs/GAME/index.html">AI User Experience</a>
-      <a href="https://webcloudstudio.com/resume/">About Me</a>
-      <div class="wcs-contact-trigger">
-        <button class="wcs-contact-btn">Contact</button>
-        <div class="wcs-contact-card">
-          <p class="wcs-contact-name">Ed Barlow</p>
-          <a href="mailto:edward.m.barlow@gmail.com" class="wcs-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>edward.m.barlow@gmail.com</a>
-          <a href="tel:+19148374798" class="wcs-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.4z"/></svg>(914) 837-4798</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
-<HTML>
- <HEAD>
- <TITLE>GENERIC ENTERPRISE MANAGER</TITLE>
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEM — Generic Enterprise Manager</title>
+<link rel="stylesheet" type="text/css" href="styles/gem.css">
+<style>
+/* ── Sidebar icon header ──────────────────────────────────────── */
+.gem-icon-header {
+  background: var(--c-topbar-bg);
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--c-side-border);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+}
+.gem-icon-header:hover { opacity: .9; }
+.gem-icon { font-size: 30px; line-height: 1; flex-shrink: 0; }
+.gem-icon-header-text { display: flex; flex-direction: column; gap: 2px; }
+.gem-icon-header-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.gem-icon-header-sub {
+  color: var(--c-side-section);
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* ── h2 — light accent tint, not a dark banner ────────────────── */
+.gem-content-panel h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-h2);
+  background: rgba(77,168,255,0.07);
+  border-left: 4px solid var(--c-accent);
+  border-bottom: none;
+  padding: 7px 14px;
+  margin: 28px 0 12px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ── Section nav active ───────────────────────────────────────── */
+.gem-sidebar-panel a.active {
+  color: #FFFFFF;
+  border-left-color: var(--c-accent);
+  background: rgba(255,255,255,0.07);
+}
+
+/* ── Module table ─────────────────────────────────────────────── */
+.module-table { width: 100%; }
+.module-table td:first-child {
+  font-family: 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  white-space: nowrap;
+  color: var(--c-h3);
+  width: 200px;
+}
+</style>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <style id="wcs-nav-style">
   #wcs-nav {
@@ -103,12 +143,348 @@
   #wcs-nav .wcs-contact-item svg { flex-shrink: 0; color: #4f9cf9; }
   body { margin-top: 68px !important; height: calc(100vh - 68px) !important; }
 </style>
-</HEAD>
-<FRAMESET ROWS="72,*" BORDER=NO SCROLLING=NO>
-	<FRAME SRC=top.htm NAME=top NORESIZE SCROLLING=NO>
-	<FRAMESET COLS="24%,*">
-	<FRAME SRC=toc.htm      NAME=contents>
-	<FRAME SRC=readme.htm NAME=basefrm>
-	</FRAMESET>
-</FRAMESET>
-</HTML>
+</head>
+<body class="gem-page">
+<header id="wcs-nav">
+  <nav>
+    <a href="https://webcloudstudio.com/" class="wcs-logo">Ed Barlow</a>
+    <div class="wcs-nav-links">
+      <a href="https://webcloudstudio.com/">Home</a>
+      <a href="https://webcloudstudio.com/projects/">Projects</a>
+      <a href="https://webcloudstudio.com/project-docs/Prototyper/index.html">AI Process</a>
+      <a href="https://webcloudstudio.com/project-docs/GAME/index.html">AI User Experience</a>
+      <a href="https://webcloudstudio.com/resume/">About Me</a>
+      <div class="wcs-contact-trigger">
+        <button class="wcs-contact-btn">Contact</button>
+        <div class="wcs-contact-card">
+          <p class="wcs-contact-name">Ed Barlow</p>
+          <a href="mailto:edward.m.barlow@gmail.com" class="wcs-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>edward.m.barlow@gmail.com</a>
+          <a href="tel:+19148374798" class="wcs-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.4z"/></svg>(914) 837-4798</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Sidebar ──────────────────────────────────────────────────── -->
+<nav class="gem-sidebar-panel">
+
+  <div class="gem-icon-header" onclick="scrollTo(0,0)">
+    <span class="gem-icon">⚙️</span>
+    <div class="gem-icon-header-text">
+      <div class="gem-icon-header-title">GEM</div>
+      <div class="gem-icon-header-sub">Generic Enterprise Manager</div>
+    </div>
+  </div>
+
+  <div class="gem-toc-section">Overview</div>
+  <a href="#overview">What is GEM?</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#platforms">Supported Platforms</a>
+
+  <div class="gem-toc-section">Core Systems</div>
+  <a href="#monitoring">Monitoring &amp; Alerting</a>
+  <a href="#inventory">Inventory &amp; CMDB</a>
+  <a href="#jobs">Scheduled Operations</a>
+  <a href="#reports">Reports</a>
+  <a href="#console">Console</a>
+
+  <div class="gem-toc-section">Reference</div>
+  <a href="#configuration">Configuration</a>
+  <a href="#database">Database Schema</a>
+  <a href="#modules">Module Reference</a>
+  <a href="#legacy">Full Documentation</a>
+
+</nav>
+
+<!-- ── Content ──────────────────────────────────────────────────── -->
+<main class="gem-content-panel">
+
+  <section id="overview">
+    <h1>GEM — Generic Enterprise Manager</h1>
+    <p>GEM is an enterprise infrastructure monitoring and inventory management platform
+    built for hedge funds and investment banks managing heterogeneous on-premises environments.
+    It provides a unified view of all databases and servers from a single web console.</p>
+
+    <h2>What GEM Does</h2>
+    <table>
+      <tr><th>Capability</th><th>Description</th></tr>
+      <tr><td>Configuration Management</td><td>Full CMDB — hosts, databases, applications, and service dependencies inventoried and tracked.</td></tr>
+      <tr><td>Monitoring &amp; Alerting</td><td>Continuous MDA-based collection with rule-driven alarm routing, escalation, and notification.</td></tr>
+      <tr><td>Operations Management</td><td>Scheduled batch jobs, on-demand operations, run history, and status tracking.</td></tr>
+      <tr><td>Reporting</td><td>Web-based reports covering space, performance, locking, blocking, and configuration drift.</td></tr>
+      <tr><td>Stored Procedure Library</td><td>Extended <code>sp__</code> procedures for Sybase and SQL Server — installed and managed by GEM.</td></tr>
+    </table>
+
+    <h2>Build &amp; Version</h2>
+    <p>Build 758 (Dec 4 2012). Legacy production codebase — Perl 5.8+, Sybase-backed, cross-platform
+    (Windows via <code>Win32_perl_lib_5_8/</code>, Unix native).</p>
+  </section>
+
+  <hr>
+
+  <section id="architecture">
+    <h1>Architecture</h1>
+    <p>GEM is a Perl application backed by a central Sybase database (<code>GEMDB</code> server,
+    <code>gemalarms</code> schema). All monitoring data, inventory records, alarm rules, and
+    configuration live in this schema.</p>
+
+    <h2>Stack</h2>
+    <table>
+      <tr><th>Layer</th><th>Technology</th></tr>
+      <tr><td>Language</td><td>Perl 5.8+</td></tr>
+      <tr><td>Database</td><td>Sybase — <code>GEMDB</code> server, <code>gemalarms</code> schema</td></tr>
+      <tr><td>Web Server</td><td>IIS (Windows) or Apache (Unix) — serves Perl CGI console</td></tr>
+      <tr><td>DBI Abstraction</td><td><code>DBIFunc.pm</code> — Sybase, SQL Server, Oracle, MySQL</td></tr>
+      <tr><td>Credentials</td><td>Encrypted password files under <code>conf/</code> via <code>Repository.pm</code></td></tr>
+    </table>
+
+    <h2>Key Directories</h2>
+    <table>
+      <tr><th>Directory</th><th>Contents</th></tr>
+      <tr><td><code>lib/</code></td><td>Core Perl modules — alarm engine, inventory, DBI, reports</td></tr>
+      <tr><td><code>conf/</code></td><td>Configuration and encrypted credential files</td></tr>
+      <tr><td><code>scripts/</code></td><td>Monitoring and data-collection scripts</td></tr>
+      <tr><td><code>bin/</code></td><td>Build tools, admin utilities, and test scripts</td></tr>
+      <tr><td><code>console/</code></td><td>Web console Perl CGI pages</td></tr>
+      <tr><td><code>doc/</code></td><td>Full documentation (frameset HTML)</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section id="platforms">
+    <h1>Supported Platforms</h1>
+    <p>GEM is designed to monitor heterogeneous environments. The collector runs on
+    any platform where Perl 5.8+ is available.</p>
+
+    <h2>Monitored Database Types</h2>
+    <table>
+      <tr><th>Database</th><th>DBD Driver</th></tr>
+      <tr><td>Sybase ASE</td><td><code>DBD::Sybase</code> (Unix) / <code>DBD::ODBC</code> (Windows)</td></tr>
+      <tr><td>Microsoft SQL Server</td><td><code>DBD::ODBC</code></td></tr>
+      <tr><td>Oracle</td><td><code>DBD::Oracle</code></td></tr>
+      <tr><td>MySQL</td><td><code>DBD::mysql</code></td></tr>
+    </table>
+
+    <h2>Monitored Host Types</h2>
+    <p>Windows servers, Unix/Linux hosts. Platform capability checks are gated
+    by <code>RunOn.pm</code> — controls which monitors execute on which platform/database combination.</p>
+  </section>
+
+  <hr>
+
+  <section id="monitoring">
+    <h1>Monitoring &amp; Alerting</h1>
+    <p>The alarm engine (<code>MlpAlarm.pm</code>, 287 KB) is the largest and most critical module.
+    It evaluates collected data against configured alarm rules, routes alerts, manages escalation,
+    and sends notifications.</p>
+
+    <h2>Data Collection</h2>
+    <p>Monitoring scripts under <code>scripts/</code> run on a schedule managed by
+    <code>JobScheduler.pm</code>. They collect MDA (Monitor and Diagnostic Architecture) metrics
+    and write results back to the <code>gemalarms</code> schema.</p>
+
+    <h2>Alarm Processing</h2>
+    <table>
+      <tr><th>Phase</th><th>Description</th></tr>
+      <tr><td>Evaluation</td><td>Collected metrics are compared against configured thresholds in <code>gemalarms</code></td></tr>
+      <tr><td>Routing</td><td>Alarms are routed to configured notification targets (email, pager, etc.)</td></tr>
+      <tr><td>Escalation</td><td>Unacknowledged alarms escalate through a defined severity chain</td></tr>
+      <tr><td>Notification</td><td>Alerts dispatched via configured channels; acknowledgement tracked in the database</td></tr>
+    </table>
+
+    <h2>Alarm Rule Storage</h2>
+    <p>All alarm rules, thresholds, routing logic, and notification targets are stored in
+    the <code>gemalarms</code> Sybase schema — not in flat config files. Changes take effect
+    without restarting any process.</p>
+  </section>
+
+  <hr>
+
+  <section id="inventory">
+    <h1>Inventory &amp; CMDB</h1>
+    <p><code>Inventory.pm</code> manages system inventory and attribute data. GEM maintains
+    a CMDB that covers all monitored systems and their relationships.</p>
+
+    <h2>Inventory Records</h2>
+    <table>
+      <tr><th>Entity Type</th><th>Description</th></tr>
+      <tr><td>Hosts</td><td>Windows and Unix servers — OS, hardware, role, status</td></tr>
+      <tr><td>Databases</td><td>Sybase, SQL Server, Oracle, MySQL instances — version, space, configuration</td></tr>
+      <tr><td>Applications</td><td>Applications and services running on monitored hosts</td></tr>
+      <tr><td>Dependencies</td><td>Service dependency relationships between systems</td></tr>
+    </table>
+
+    <p>Discovery scripts (<code>bin/discover_sybase.pl</code>, <code>bin/discover_sqlsvr.pl</code>,
+    <code>bin/unix_metadata.pl</code>, <code>bin/mysql_metadata.pl</code>) populate inventory
+    automatically.</p>
+  </section>
+
+  <hr>
+
+  <section id="jobs">
+    <h1>Scheduled Operations</h1>
+    <p><code>JobScheduler.pm</code> reads and writes <code>conf/jobscheduler.dat</code>,
+    which defines all scheduled monitoring and maintenance tasks.</p>
+
+    <h2>Job Types</h2>
+    <table>
+      <tr><th>Type</th><th>Description</th></tr>
+      <tr><td>Monitoring collectors</td><td>Periodic scripts that gather metrics from monitored systems</td></tr>
+      <tr><td>Maintenance jobs</td><td>Database maintenance, log rotation, configuration sync</td></tr>
+      <tr><td>Report generation</td><td>Scheduled report runs that populate the web console</td></tr>
+      <tr><td>Alarm sweeps</td><td>Periodic evaluation of alarm rules against collected data</td></tr>
+    </table>
+
+    <p>On Windows, jobs are registered as Scheduled Tasks via
+    <code>bin/schedule_tasks_on_win32.pl</code>. On Unix, they run via crontab
+    (managed by <code>bin/create_crontab.pl</code>).</p>
+  </section>
+
+  <hr>
+
+  <section id="reports">
+    <h1>Reports</h1>
+    <p>GEM generates web-based reports covering all aspects of the monitored environment.
+    Reports are rendered as HTML and accessed through the web console.</p>
+
+    <h2>Report Categories</h2>
+    <table>
+      <tr><th>Category</th><th>Examples</th></tr>
+      <tr><td>Space &amp; Capacity</td><td>Database space, device utilisation, growth trends</td></tr>
+      <tr><td>Performance</td><td>I/O stats, lock/block analysis, tempdb usage</td></tr>
+      <tr><td>Configuration</td><td>Config drift reports, parameter comparison across servers</td></tr>
+      <tr><td>Security</td><td>Login auditing, permission review, role assignment</td></tr>
+      <tr><td>Batch Jobs</td><td>Job run history, success/failure, duration trends</td></tr>
+      <tr><td>Incidents</td><td>Alarm history, escalation log, incident tickets</td></tr>
+    </table>
+
+    <p>Core report modules: <code>GemReport.pm</code> (base framework),
+    <code>MlpReports.pm</code> (extended report library).</p>
+  </section>
+
+  <hr>
+
+  <section id="console">
+    <h1>Console</h1>
+    <p>The GEM web console is a Perl CGI application served by IIS (Windows) or Apache (Unix).
+    It provides access to all monitoring data, reports, inventory, and alarm configuration
+    through a browser interface.</p>
+
+    <h2>Build &amp; Deploy</h2>
+    <table>
+      <tr><th>Script</th><th>Purpose</th></tr>
+      <tr><td><code>bin/build_the_console.pl</code></td><td>Assemble console pages from templates</td></tr>
+      <tr><td><code>bin/publish_the_console.pl</code></td><td>Deploy built console to web server root</td></tr>
+      <tr><td><code>bin/rollout_web_server.pl</code></td><td>Full web server configuration rollout</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section id="configuration">
+    <h1>Configuration</h1>
+    <p>GEM configuration is split between the <code>conf/</code> directory (flat files and
+    encrypted credentials) and the <code>gemalarms</code> database (alarm rules, thresholds,
+    routing). Run-time configuration is managed by <code>gem_conf_editor.pl</code>.</p>
+
+    <h2>Credential Management</h2>
+    <p><code>Repository.pm</code> / <code>RepositoryRun.pm</code> manage encrypted
+    password files stored under <code>conf/</code>. These files hold database login
+    credentials for all monitored systems. Credentials are never stored in plain text.</p>
+
+    <h2>Initial Setup</h2>
+    <table>
+      <tr><th>Step</th><th>Script</th></tr>
+      <tr><td>Configure monitoring targets</td><td><code>bin/mustedit_discover.pl</code> → edit then run <code>gem_conf_editor.pl</code></td></tr>
+      <tr><td>Set up GEM database</td><td><code>bin/setup_gem_database.pl</code></td></tr>
+      <tr><td>Install stored procs</td><td><code>bin/install_gemalarms.pl</code></td></tr>
+      <tr><td>Sync config to database</td><td><code>bin/sync_configfiles_and_db.pl</code></td></tr>
+      <tr><td>Test connectivity</td><td><code>bin/test_dbi_connectivity.pl</code></td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section id="database">
+    <h1>Database Schema</h1>
+    <p>All GEM data lives in a Sybase database server named <code>GEMDB</code>. The primary
+    schema is <code>gemalarms</code>. This is the single source of truth for all monitoring
+    state, inventory records, alarm rules, and configuration.</p>
+
+    <h2>Key Tables (gemalarms)</h2>
+    <table>
+      <tr><th>Table Area</th><th>Contents</th></tr>
+      <tr><td>Inventory</td><td>Hosts, databases, applications, and service dependencies</td></tr>
+      <tr><td>Alarm Rules</td><td>Thresholds, conditions, routing targets per monitored resource</td></tr>
+      <tr><td>Collected Data</td><td>Current and historical metrics from monitoring scripts</td></tr>
+      <tr><td>Alarm State</td><td>Active alarms, acknowledgement status, escalation chain state</td></tr>
+      <tr><td>Job Definitions</td><td>Scheduled job configuration (mirrored from <code>jobscheduler.dat</code>)</td></tr>
+      <tr><td>Incidents</td><td>Incident tickets raised from alarm escalations</td></tr>
+    </table>
+
+    <p>Schema creation: <code>bin/gemalarms_create_actual.sql</code> (production) /
+    <code>bin/gemalarms_create_template.sql</code> (template).</p>
+  </section>
+
+  <hr>
+
+  <section id="modules">
+    <h1>Module Reference</h1>
+    <p>All core Perl modules live in <code>lib/</code>.</p>
+
+    <h2>Core Modules</h2>
+    <table class="module-table">
+      <tr><th>Module</th><th>Purpose</th></tr>
+      <tr><td>MlpAlarm.pm</td><td>Master alarm routing engine (287 KB) — evaluation, routing, escalation, notification</td></tr>
+      <tr><td>Inventory.pm</td><td>System inventory and attribute management</td></tr>
+      <tr><td>DBIFunc.pm</td><td>Generic DBI abstraction across Sybase, SQL Server, Oracle, MySQL</td></tr>
+      <tr><td>Repository.pm</td><td>Encrypted credential file management</td></tr>
+      <tr><td>RepositoryRun.pm</td><td>Runtime credential access and caching</td></tr>
+      <tr><td>JobScheduler.pm</td><td>Reads/writes <code>conf/jobscheduler.dat</code>; controls scheduled jobs</td></tr>
+      <tr><td>RunOn.pm</td><td>Platform capability checks — gates which monitors run per platform/DB type</td></tr>
+      <tr><td>GemReport.pm</td><td>Base report generation framework</td></tr>
+      <tr><td>MlpReports.pm</td><td>Extended report library</td></tr>
+      <tr><td>Incident.pm</td><td>Incident ticket management</td></tr>
+      <tr><td>CommonFunc.pm</td><td>Shared utility functions</td></tr>
+      <tr><td>LogFunc.pm</td><td>Logging framework</td></tr>
+    </table>
+
+    <h2>Sybase-Specific</h2>
+    <table class="module-table">
+      <tr><th>Module</th><th>Purpose</th></tr>
+      <tr><td>lib/Sybase/SybFunc.pm</td><td>Sybase-specific helpers</td></tr>
+      <tr><td>lib/Sybase/DBISybFunc.pm</td><td>DBI+Sybase combination utilities</td></tr>
+      <tr><td>lib/Sybase/Login.pm</td><td>Sybase login and connection management</td></tr>
+      <tr><td>lib/Sybase/Release.pm</td><td>Sybase release/version detection</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section id="legacy">
+    <h1>Full Documentation</h1>
+    <p>The complete GEM documentation — installation guide, configuration reference,
+    console user guide, alarm configuration, and troubleshooting — is in the
+    legacy frameset documentation under <code>doc/</code>.</p>
+
+    <table>
+      <tr><th>Document</th><th>Link</th></tr>
+      <tr><td>Full Documentation (frameset)</td><td><a href="../doc/index.htm">doc/index.htm</a></td></tr>
+      <tr><td>Change Log</td><td><a href="../doc/CHANGE_LOG.html">CHANGE_LOG.html</a></td></tr>
+      <tr><td>FAQ</td><td><a href="../doc/FAQ.html">FAQ.html</a></td></tr>
+      <tr><td>Troubleshooting Guide</td><td><a href="../doc/Troubleshooting_Guide.htm">Troubleshooting_Guide.htm</a></td></tr>
+      <tr><td>GEM Database Schema</td><td><a href="../doc/GemDatabase.htm">GemDatabase.htm</a></td></tr>
+      <tr><td>Stored Procedure Library</td><td><a href="https://github.com/webcloudstudio/EdBarlowsStoredProcs">EdBarlowsStoredProcs</a></td></tr>
+    </table>
+  </section>
+
+  <div class="gem-page-footer">
+    GEM — Generic Enterprise Manager &nbsp;&bull;&nbsp; Build 758 &nbsp;&bull;&nbsp;
+    Copyright &copy; Ed Barlow / SQL Technologies
+  </div>
+
+</main>
+</body>
+</html>

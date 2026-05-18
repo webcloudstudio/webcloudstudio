@@ -22,6 +22,7 @@ body { display: flex; flex-direction: column; height: 100vh; overflow: hidden;
 .sidebar { width: 220px; min-width: 220px; display: flex; flex-direction: column;
   background: var(--c-side-bg); border-right: 1px solid var(--c-side-border);
   overflow-y: auto; flex-shrink: 0; }
+.sidebar > * { flex-shrink: 0; }
 
 .sidebar-header { background: var(--c-topbar-bg); padding: 6px 10px;
   flex-shrink: 0; cursor: pointer; display: flex; align-items: center; gap: 9px; }

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyRAG — Documentation</title>
+<link rel="stylesheet" href="styles/spec.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad:false, theme:'neutral', flowchart:{curve:'linear',nodeSpacing:40,rankSpacing:35,padding:16} });</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { display: flex; flex-direction: column; height: 100vh; overflow: hidden;
+  background: var(--c-bg); color: var(--c-text);
+  font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif; font-size: 14px; line-height: 1.65; }
+
+.layout { display: flex; flex: 1; overflow: hidden; }
+
+.page-header { background: var(--c-topbar-bg); border-bottom: 1px solid var(--c-side-border); }
+
+/* ── Sidebar ── */
+.sidebar { width: 220px; min-width: 220px; display: flex; flex-direction: column;
+  background: var(--c-side-bg); border-right: 1px solid var(--c-side-border);
+  overflow-y: auto; flex-shrink: 0; }
+
+.sidebar-header { background: var(--c-topbar-bg); padding: 6px 10px;
+  flex-shrink: 0; cursor: pointer; display: flex; align-items: center; gap: 9px; }
+.sidebar-header:hover { opacity: .88; }
+.sidebar-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+.sidebar-header img { width: 100px; height: 75px; object-fit: contain; display: block;
+  flex-shrink: 0; border-radius: 3px; }
+.sidebar-header h1 { color: #fff; font-size: 15px; font-weight: 700; line-height: 1.2;
+  letter-spacing: .4px; }
+
+.nav-section { font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--c-side-section); padding: 10px 16px 3px; }
+.nav-sep { border-top: 1px solid var(--c-side-border); margin: 5px 0; }
+
+.sn { display: block; padding: 3px 16px;
+  font-size: 13px; font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+  color: #fff; cursor: pointer; border-left: 3px solid transparent;
+  text-decoration: none; transition: background .1s, border-color .1s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn:hover { background: rgba(255,255,255,.07); border-left-color: var(--c-accent); }
+.sn.active { color: #fff; border-left-color: var(--c-accent); background: rgba(44,182,125,.12); }
+
+.sn-sub { display: block; padding: 2px 16px 2px 28px;
+  font-size: 11px; font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+  color: rgba(255,255,255,.8); cursor: pointer; border-left: 3px solid transparent;
+  text-decoration: none; transition: background .1s, border-color .1s, color .1s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn-sub:hover { color: #fff; background: rgba(255,255,255,.05); border-left-color: var(--c-accent); }
+.sn-sub.active { color: var(--c-accent); border-left-color: var(--c-accent); }
+
+.sn-grp-lbl { padding: 7px 16px 2px 24px; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .7px; color: var(--c-side-section);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn-grp-hd { font-weight: 600; color: rgba(255,255,255,.9); }
+
+.sn-sub2 { display: block; padding: 2px 16px 2px 40px;
+  font-size: 11px; font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+  color: rgba(255,255,255,.7); cursor: pointer; border-left: 3px solid transparent;
+  text-decoration: none; transition: background .1s, border-color .1s, color .1s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn-sub2:hover { color: #fff; background: rgba(255,255,255,.05); border-left-color: var(--c-accent); }
+.sn-sub2.active { color: var(--c-accent); border-left-color: var(--c-accent); }
+
+/* ── Content ── */
+main { flex: 1; overflow-y: auto; padding: 28px 36px 48px; position: relative; }
+.content-section { display: none; max-width: 860px; }
+.content-section.active { display: block; }
+
+/* ── Badges ── */
+.badge { display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 3px;
+  background: var(--c-code-bg); color: var(--c-code-text);
+  font-family: 'Cascadia Code', Consolas, monospace; }
+
+/* ── Rendered markdown ── */
+.md h1 { font-size: 22px; font-weight: 700; color: var(--c-accent);
+  border-bottom: 2px solid var(--c-accent); padding-bottom: 5px; margin: 24px 0 10px; }
+.md h1:first-child { margin-top: 0; }
+.md h2 { font-size: 14px; font-weight: 700; color: #fff;
+  background: var(--c-side-bg); border-left: 3px solid var(--c-accent);
+  padding: 5px 12px; margin: 18px 0 9px; border-radius: 0 4px 4px 0; }
+.md h3 { font-size: 14px; font-weight: 600; color: var(--c-h3); margin: 12px 0 5px; }
+.md p { margin: 7px 0; line-height: 1.65; }
+.md ul, .md ol { margin: 5px 0 5px 18px; }
+.md li { margin: 2px 0; }
+.md a { color: #1565C0; text-decoration: underline; }
+.md a:visited { color: #1565C0; }
+.md table { border-collapse: collapse; margin: 8px 0; font-size: 13px; width: 100%; }
+.md th { background: var(--c-th-bg); color: var(--c-th-text); font-weight: 500; font-size: 11px;
+  letter-spacing: .3px; text-transform: uppercase; padding: 4px 12px; text-align: left; }
+.md td { padding: 4px 12px; border-bottom: 1px solid var(--c-td-border); }
+.md tr:nth-child(even) td { background: var(--c-tr-alt); }
+.md pre { background: var(--c-pre-bg); color: var(--c-pre-text);
+  border: 1px solid var(--c-side-border); border-radius: 4px;
+  padding: 10px 14px; overflow-x: auto; margin: 8px 0;
+  font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; line-height: 1.5; }
+.md code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px;
+  background: var(--c-code-bg); color: var(--c-code-text);
+  padding: 1px 5px; border-radius: 3px; }
+.md pre code { background: none; padding: 0; color: inherit; }
+.md blockquote { border-left: 3px solid var(--c-accent); padding: 6px 14px;
+  margin: 8px 0; background: var(--c-callout-bg); border-radius: 0 4px 4px 0; }
+.md hr { border: none; border-top: 1px solid var(--c-td-border); margin: 16px 0; }
+
+/* ── Script man page ── */
+.sd-man { max-width: 740px; padding: 0;
+  font-family: 'Cascadia Code', Consolas, 'Courier New', monospace; font-size: 13px;
+  line-height: 1.55; color: var(--c-text); background: var(--c-bg); }
+.sd-man-header { display: flex; justify-content: space-between; align-items: baseline;
+  padding: 8px 0; border-bottom: 1px solid var(--c-td-border); margin-bottom: 16px; }
+.sd-man-header-left { font-weight: 700; font-size: 13px; text-transform: uppercase; }
+.sd-man-header-right { font-size: 11px; color: var(--c-h3); }
+.sd-sec { font-size: 13px; font-weight: 700; color: var(--c-h1);
+  margin: 22px 0 4px; padding: 0; text-transform: uppercase; letter-spacing: 0.5px; }
+.sd-sec:first-child { margin-top: 0; }
+.sd-body { padding-left: 28px; margin-bottom: 4px; }
+.sd-name-line { font-size: 14px; font-weight: 700; color: var(--c-accent); }
+.sd-name-dash { font-size: 13px; color: var(--c-text); font-weight: 400; }
+.sd-body p { margin: 3px 0 8px; color: var(--c-text); font-size: 13px; line-height: 1.6;
+  font-family: 'Segoe UI', Arial, sans-serif; }
+.sd-cmd { display: block; font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px;
+  color: var(--c-pre-text); background: var(--c-pre-bg); padding: 4px 10px; border-radius: 3px;
+  margin: 3px 0; border-left: 3px solid var(--c-accent); }
+.sd-item { font-size: 13px; color: var(--c-text); padding: 2px 0; line-height: 1.55; }
+.sd-empty { font-size: 13px; color: var(--c-h3); font-style: italic; }
+.sd-footer { display: flex; justify-content: space-between; align-items: baseline;
+  margin-top: 28px; padding-top: 8px; border-top: 1px solid var(--c-td-border);
+  font-size: 11px; color: var(--c-h3); }
+
+/* ── Page footer ── */
+.doc-footer { margin-top: 40px; padding-top: 12px; border-top: 1px solid var(--c-td-border);
+  font-size: 11px; color: var(--c-h3); display: flex; justify-content: space-between; }
+</style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style id="wcs-nav-style">
+  #wcs-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #080810;
+    border-bottom: 1px solid #252540;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  #wcs-nav nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  #wcs-nav .wcs-logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: #f1f5f9;
+    text-decoration: none;
+  }
+  #wcs-nav .wcs-logo:hover { opacity: 0.85; text-decoration: none; }
+  #wcs-nav .wcs-nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  #wcs-nav .wcs-nav-links a {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  #wcs-nav .wcs-nav-links a:hover { color: #f1f5f9; text-decoration: none; }
+  #wcs-nav .wcs-contact-trigger { position: relative; }
+  #wcs-nav .wcs-contact-btn {
+    background: none; border: none; cursor: pointer;
+    color: #94a3b8; font-size: 0.9rem; font-weight: 500;
+    font-family: inherit; padding: 0; transition: color 0.2s;
+  }
+  #wcs-nav .wcs-contact-btn:hover { color: #f1f5f9; }
+  #wcs-nav .wcs-contact-card {
+    position: absolute; top: calc(100% + 14px); right: 0;
+    background: #0e0e1a; border: 1px solid #252540; border-radius: 10px;
+    padding: 1rem 1.25rem; min-width: 230px;
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.18s, visibility 0.18s, transform 0.18s;
+    pointer-events: none; z-index: 200; box-shadow: 0 8px 32px #00000066;
+  }
+  #wcs-nav .wcs-contact-card::before {
+    content: ''; position: absolute; top: -6px; right: 16px;
+    width: 10px; height: 10px; background: #0e0e1a;
+    border-left: 1px solid #252540; border-top: 1px solid #252540;
+    transform: rotate(45deg);
+  }
+  #wcs-nav .wcs-contact-trigger:hover .wcs-contact-card,
+  #wcs-nav .wcs-contact-trigger:focus-within .wcs-contact-card {
+    opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
+  }
+  #wcs-nav .wcs-contact-name {
+    font-size: 0.8rem; font-weight: 700; color: #f1f5f9;
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;
+  }
+  #wcs-nav .wcs-contact-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.83rem; color: #94a3b8; padding: 0.35rem 0;
+    border-radius: 4px; transition: color 0.15s; text-decoration: none;
+  }
+  #wcs-nav .wcs-contact-item:hover { color: #4f9cf9; text-decoration: none; }
+  #wcs-nav .wcs-contact-item svg { flex-shrink: 0; color: #4f9cf9; }
+  body { margin-top: 68px !important; height: calc(100vh - 68px) !important; }
+</style>
+</head>
+<body>
+<header id="wcs-nav">
+  <nav>
+    <a href="https://webcloudstudio.com/" class="wcs-logo">Ed Barlow</a>
+    <div class="wcs-nav-links">
+      <a href="https://webcloudstudio.com/">Home</a>
+      <a href="https://webcloudstudio.com/projects/">Projects</a>
+      <a href="https://webcloudstudio.com/project-docs/Prototyper/index.html">AI Process</a>
+      <a href="https://webcloudstudio.com/project-docs/GAME/index.html">AI User Experience</a>
+      <a href="https://webcloudstudio.com/resume/">About Me</a>
+      <div class="wcs-contact-trigger">
+        <button class="wcs-contact-btn">Contact</button>
+        <div class="wcs-contact-card">
+          <p class="wcs-contact-name">Ed Barlow</p>
+          <a href="mailto:edward.m.barlow@gmail.com" class="wcs-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>edward.m.barlow@gmail.com</a>
+          <a href="tel:+19148374798" class="wcs-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.4z"/></svg>(914) 837-4798</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<header class="page-header gem-header">
+  <div class="gem-header-left">
+    <span class="gem-header-logo">MyRAG</span>
+    <span class="gem-header-title">Documentation</span>
+  </div>
+  <nav class="gem-header-nav">
+    <a href="index.html" style="border-bottom-color: var(--c-accent);">Documentation</a>
+  </nav>
+  <span class="gem-header-copyright"></span>
+</header>
+
+<div class="layout">
+
+<nav class="sidebar">
+  <div class="sidebar-header" onclick="showGuide('OVERVIEW')">
+    <img src="images/myrag.webp" alt="MyRAG">
+    <h1>MyRAG</h1>
+  </div>
+  <div class="nav-section">OVERVIEW</div>
+  <a class="sn" data-key="OVERVIEW" onclick="showGuide('OVERVIEW')">Overview</a>
+  <div class="nav-sep"></div>
+  <div class="nav-section">FEATURES</div>
+  <a class="sn" data-key="FEATURES" onclick="showGuide('FEATURES')">Features</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'launch-gui');">Launch GUI</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'scan-directories-tab-1');">Scan Directories (Tab 1)</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'select-files-tab-2');">Select Files (Tab 2)</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'index-selected-files-tab-3');">Index Selected Files (Tab 3)</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'pdf-text-extraction-with-ocr-fallback');">PDF Text Extraction with OCR Fallback</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'ask-questions-tab-4');">Ask Questions (Tab 4)</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'switch-llm-provider');">Switch LLM Provider</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'reset-index');">Reset Index</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES', 'inspect-chunks');">Inspect Chunks</a>
+  <div class="nav-sep"></div>
+  <div class="nav-section">SYSTEM</div>
+  <a class="sn" data-key="ARCHITECTURE" onclick="showGuide('ARCHITECTURE')">Architecture</a>
+  <a class="sn" data-key="DATABASE" onclick="showGuide('DATABASE')">Database</a>
+  <a class="sn" data-key="FLOWS" onclick="showGuide('FLOWS')">Flows</a>
+</nav>
+
+<main>
+
+  <!-- Home -->
+  <div id="home" class="content-section active">
+    <h2 style="font-size:22px;font-weight:700;color:var(--c-accent);border-bottom:2px solid var(--c-accent);padding-bottom:5px;margin:0 0 10px;">MyRAG</h2>
+<p style="font-size:15px;margin:0 0 16px;color:var(--c-text);">Local RAG desktop for all your Documents.  Clean directory picker, auto scanner, and ability to answers questions using Claude or OpenAI.</p>
+<div style="margin:0 0 20px;display:flex;gap:6px;flex-wrap:wrap;"><span class="badge">PROTOTYPE</span><span class="badge">Python</span><span class="badge">Tkinter</span><span class="badge">ChromaDB</span><span class="badge">sentence-transformers</span><span class="badge">v2026-05-17.1</span></div>
+<p style="font-size:13px;color:var(--c-h3);margin:0 0 20px;">9 features · 2 operations</p>
+<div id="home-overview" class="md"></div>
+    <div class="doc-footer">
+      <span>Generated: 2026-05-17 21:13 | Version: 20260517.1</span>
+      <span>Source: myrag specifications</span>
+    </div>
+  </div>
+
+  <!-- Guide viewer -->
+  <div id="guide" class="content-section">
+    <div id="guide-content" class="md"></div>
+    <div class="doc-footer">
+      <span>Generated: 2026-05-17 21:13 | Version: 20260517.1</span>
+      <span>Source: myrag specifications</span>
+    </div>
+  </div>
+
+  <!-- Script man page -->
+  <div id="script-detail" class="content-section">
+    <div id="sd-content"></div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const GUIDES = {
+  "OVERVIEW": "# MyRAG \u2014 Overview\n\n## What It Is\n\nMyRAG is a local Retrieval-Augmented Generation desktop application that puts your entire PDF library at the fingertips of an AI. It scans your directories, extracts and chunks document text, embeds every chunk using a local sentence-transformer model, and stores the results in a persistent ChromaDB vector database \u2014 all on-device with no data leaving your machine. When you ask a question, MyRAG retrieves the most relevant passages by cosine similarity and injects them directly into your Claude or OpenAI prompt, producing answers grounded in your own documents with full source attribution.\n\n## What It Can Do\n\n- **Incremental directory scanning** \u2014 walks configured source directories using mtime caching to skip unchanged subtrees, making repeat scans near-instant on large document libraries.\n- **Selective file indexing** \u2014 a tree-view UI lets you pick exactly which files and folders to embed; selection is persisted across sessions.\n- **Local CPU embeddings** \u2014 generates 384-dimensional vectors with `sentence-transformers all-MiniLM-L6-v2` entirely on-device; no embedding API costs.\n- **Persistent vector search** \u2014 ChromaDB stores chunk embeddings with cosine-similarity search, surviving restarts and supporting idempotent upserts.\n- **OCR fallback for scanned PDFs** \u2014 automatically detects image-only PDFs and runs Tesseract OCR page-by-page when normal text extraction yields nothing.\n- **Dual LLM support** \u2014 answers via Claude (using the `claude -p` CLI, no SDK tokens) or OpenAI (via API key); switchable per-query from the UI.\n- **Contextual fallback** \u2014 when no chunks pass the similarity threshold, the LLM is queried directly rather than fabricating sources.\n- **Per-query timing telemetry** \u2014 the Ask tab displays embed, retrieve, and LLM latencies separately so bottlenecks are immediately visible.\n\n## Quick Start\n\n| Command (WSL/Linux) | Command (Windows) | Description |\n|---------------------|-------------------|-------------|\n| `uv sync` | `uv sync` | Install all dependencies |\n| `cp config.ini.sample config.ini` | `copy config.ini.sample config.ini` | Create config from template |\n| `./bin/start.sh` | `bin\\start.bat` | Launch the GUI |\n| `./bin/reset_index.sh` | `bin\\reset_index.bat` | Wipe ChromaDB and scan index |\n| `./bin/inspect_chunks.sh` | `bin\\inspect_chunks.bat` | Search raw indexed chunks by keyword |\n| `./bin/test.sh` | \u2014 | Run test suite |\n\n## Architecture Overview\n\n```mermaid\nflowchart LR\n  User[\"User (Tkinter GUI)\"]\n  Scan[\"1. Scan\\nScanner\"]\n  Select[\"2. Select\\nTreeview\"]\n  Index[\"3. Index\\nIndexer\"]\n  Extract[\"TextExtractor\\n(pdfplumber / PyMuPDF / OCR)\"]\n  Chunk[\"Chunker\\n~512 words, 50 overlap\"]\n  Embed[\"Embedder\\nall-MiniLM-L6-v2\"]\n  Store[(\"ChromaDB\\nVectorStore\")]\n  Pipeline[\"RAGPipeline\"]\n  Claude[\"ClaudeProvider\\nclaude CLI\"]\n  OpenAI[\"OpenAIProvider\\nOpenAI API\"]\n\n  User --> Scan --> Select --> Index\n  Index --> Extract --> Chunk --> Embed --> Store\n  User --> Pipeline\n  Pipeline --> Embed\n  Pipeline --> Store\n  Pipeline --> Claude\n  Pipeline --> OpenAI\n```\n\n## Vision\n\nMyRAG is a working prototype for fully local, zero-cloud-cost document intelligence. The natural next step is expanding beyond PDFs to support `.txt`, `.docx`, and EPUB formats while adding a conversational history so follow-up questions carry context from prior turns \u2014 making it a genuine research assistant for any personal document archive.\n",
+  "FEATURES": "# MyRAG \u2014 Features\n\n## Launch GUI\n\n**Trigger:** `./bin/start.sh` (WSL/Linux) or `bin\\start.bat` (Windows)\n\nOpens the Tkinter desktop window with a 4-tab notebook. Tabs 2\u20134 are unlocked progressively as data becomes available; prior session state (scan index, file selection, and indexed chunks) is restored automatically on launch so you can continue where you left off.\n\n## Scan Directories (Tab 1)\n\n**Trigger:** Click **Scan** in the Scan tab after configuring source directories.\n\nWalks all configured source directories recursively, collecting PDF (and optionally TXT) file paths. Uses directory mtime caching: subtrees unchanged since the last scan are skipped in milliseconds. Results are persisted to `data/scan_index.json` and the Select tab is populated automatically.\n\n## Select Files (Tab 2)\n\n**Trigger:** Populated automatically after a scan completes.\n\nDisplays discovered files in a treeview grouped by directory, with per-file and per-directory checkboxes. Checking a directory selects all files beneath it. The saved selection is written to `data/selection.json` and persists across sessions.\n\n## Index Selected Files (Tab 3)\n\n**Trigger:** Click **Index** in the Index tab after making a selection.\n\nRuns the full indexing pipeline for every selected file: text extraction \u2192 chunking \u2192 embedding \u2192 ChromaDB upsert. Files that haven't changed since the last index run are skipped via `index_manifest.json` fingerprints (size + mtime). Progress is shown file-by-file with a summary on completion.\n\n## PDF Text Extraction with OCR Fallback\n\n**Trigger:** Automatically during indexing.\n\nExtracts text from PDFs using pdfplumber first, falling back to PyMuPDF if pdfplumber fails. If neither yields text (image-based scanned PDFs), rasterises each page at 200 DPI using PyMuPDF and runs Tesseract OCR, logging per-page timing and character counts so progress is visible for long documents.\n\n## Ask Questions (Tab 4)\n\n**Trigger:** Type a question and press Enter or click **Ask**.\n\nEmbeds the query using the local all-MiniLM-L6-v2 model, retrieves the top-N chunks from ChromaDB by cosine similarity, filters by the configured threshold (default 0.7), and sends the matching context to the selected LLM. If no chunks pass the threshold, the LLM is queried directly without fabricated sources. The answer, source filenames, chunk count, and per-step latencies (embed / retrieve / LLM) are displayed.\n\n## Switch LLM Provider\n\n**Trigger:** Select Claude or OpenAI radio button in the Ask tab before submitting.\n\nSwitches the active LLM mid-session without restarting. Claude uses the `claude -p` CLI subprocess (subscription-billed, no API token). OpenAI uses the official SDK with the key from `OPENAI_API_KEY`.\n\n## Reset Index\n\n**Trigger:** `./bin/reset_index.sh` (WSL/Linux) or `bin\\reset_index.bat` (Windows), or the Reset button in the Scan tab.\n\nPrompts for confirmation then deletes `data/chroma/` and `data/scan_index.json`, returning the app to a clean state. The file selection (`data/selection.json`) and `config.ini` are preserved.\n\n## Inspect Chunks\n\n**Trigger:** `./bin/inspect_chunks.sh` (WSL/Linux) or `bin\\inspect_chunks.bat` (Windows)\n\nPrompts for a search term, then dumps every indexed chunk for files whose path contains that term \u2014 including chunk index, character positions, and raw text. Useful for verifying extraction quality or debugging why a question isn't retrieving expected passages.\n",
+  "ARCHITECTURE": "# MyRAG \u2014 Architecture\n\n## Directory Layout\n\n```\nmyrag/\n\u251c\u2500\u2500 main.py                    # Entry point \u2014 wires ConfigManager and launches App\n\u251c\u2500\u2500 config.ini                 # User config (gitignored)\n\u251c\u2500\u2500 config.ini.sample          # Config template (committed)\n\u251c\u2500\u2500 pyproject.toml             # Dependencies and ruff config\n\u251c\u2500\u2500 uv.lock                    # Locked dependency tree (committed)\n\u251c\u2500\u2500 PIPELINE_DIAGRAM.txt       # ASCII data-flow reference\n\u251c\u2500\u2500 src/\n\u2502   \u251c\u2500\u2500 app.py                 # Tkinter root window, tab wiring, session restore\n\u2502   \u251c\u2500\u2500 config_manager.py      # config.ini reader/writer\n\u2502   \u251c\u2500\u2500 scanner.py             # Incremental file discovery with mtime caching\n\u2502   \u251c\u2500\u2500 extractor.py           # PDF/TXT text extraction with OCR fallback\n\u2502   \u251c\u2500\u2500 chunker.py             # Sentence-aware word-count chunker\n\u2502   \u251c\u2500\u2500 embedder.py            # Singleton sentence-transformers wrapper\n\u2502   \u251c\u2500\u2500 vector_store.py        # ChromaDB interface \u2014 upsert, query, delete\n\u2502   \u251c\u2500\u2500 indexer.py             # Orchestrates extract \u2192 chunk \u2192 embed \u2192 store\n\u2502   \u251c\u2500\u2500 rag_pipeline.py        # Orchestrates embed \u2192 retrieve \u2192 generate\n\u2502   \u251c\u2500\u2500 providers/\n\u2502   \u2502   \u251c\u2500\u2500 base.py            # LLMProvider ABC\n\u2502   \u2502   \u251c\u2500\u2500 claude_provider.py # Claude via subprocess claude -p\n\u2502   \u2502   \u2514\u2500\u2500 openai_provider.py # OpenAI via openai SDK\n\u2502   \u2514\u2500\u2500 tabs/\n\u2502       \u251c\u2500\u2500 tab_scan.py        # Tab 1 \u2014 directory picker and scan trigger\n\u2502       \u251c\u2500\u2500 tab_select.py      # Tab 2 \u2014 file tree with checkboxes\n\u2502       \u251c\u2500\u2500 tab_index.py       # Tab 3 \u2014 indexing progress and stats\n\u2502       \u2514\u2500\u2500 tab_ask.py         # Tab 4 \u2014 query input, provider selector, response\n\u251c\u2500\u2500 bin/\n\u2502   \u251c\u2500\u2500 start.sh / start.bat   # Launch GUI via uv run\n\u2502   \u251c\u2500\u2500 reset_index.sh/.bat    # Wipe data/chroma/ and data/scan_index.json\n\u2502   \u251c\u2500\u2500 inspect_chunks.sh/.bat # Interactive chunk search by keyword\n\u2502   \u251c\u2500\u2500 inspect_chunks.py      # ChromaDB chunk dump implementation\n\u2502   \u2514\u2500\u2500 test.sh                # Run test suite\n\u2514\u2500\u2500 data/                      # Generated at runtime (gitignored)\n    \u251c\u2500\u2500 scan_index.json         # Cached directory mtimes and file list\n    \u251c\u2500\u2500 selection.json          # Persisted file selection\n    \u251c\u2500\u2500 index_manifest.json     # Per-file size/mtime/chunk-count fingerprints\n    \u2514\u2500\u2500 chroma/                 # ChromaDB persistent collection files\n```\n\n## Modules\n\n| Module / File | Purpose |\n|---------------|---------|\n| `main.py` | Entry point; reads `config.ini`, sets up `data/` dir, creates and runs `App` |\n| `src/app.py` | Tkinter root window; instantiates all pipeline objects; wires 4-tab notebook; restores session state on launch |\n| `src/config_manager.py` | Reads and writes `config.ini`; exposes typed accessors for scan, provider, and RAG settings |\n| `src/scanner.py` | Walks source directories; caches directory mtimes to skip unchanged subtrees; persists file list to `scan_index.json` |\n| `src/extractor.py` | Extracts text from PDF (pdfplumber primary, PyMuPDF fallback) and TXT; auto-detects image-only PDFs and runs Tesseract OCR |\n| `src/chunker.py` | Splits text into ~512-word chunks with 50-word sentence-boundary-aware overlap |\n| `src/embedder.py` | Singleton wrapper around `sentence-transformers all-MiniLM-L6-v2`; lazy-loads model on first use |\n| `src/vector_store.py` | Wraps ChromaDB persistent collection; deterministic chunk IDs enable idempotent upserts |\n| `src/indexer.py` | Coordinates extract \u2192 chunk \u2192 embed \u2192 upsert; maintains `index_manifest.json` to skip unchanged files |\n| `src/rag_pipeline.py` | Embeds query, retrieves top-N chunks, filters by similarity threshold, calls LLM provider; returns `RAGResponse` with per-step timings |\n| `src/providers/base.py` | `LLMProvider` ABC defining `generate(query, context_chunks) \u2192 str` |\n| `src/providers/claude_provider.py` | Calls `claude -p <prompt>` via subprocess; no Anthropic SDK tokens used |\n| `src/providers/openai_provider.py` | Calls OpenAI chat completion API using `OPENAI_API_KEY` env var |\n| `src/tabs/tab_scan.py` | GUI for directory picker, scan button, progress display, and index reset |\n| `src/tabs/tab_select.py` | Treeview checkboxes grouped by directory; saves selection to `selection.json` |\n| `src/tabs/tab_index.py` | Triggers `Indexer.index_files()`; shows per-file progress bar and summary stats |\n| `src/tabs/tab_ask.py` | Query input with provider radio buttons; displays answer, per-step timing, chunk count, and source filenames |\n| `bin/inspect_chunks.py` | Dumps all indexed chunks for any file matching a keyword; useful for debugging index quality |\n\n## Configuration\n\n| Field | Default | Description |\n|-------|---------|-------------|\n| `[SCAN] source_directories` | \u2014 | Comma-separated root paths to scan for documents |\n| `[SCAN] directories_to_skip` | `.venv, node_modules, .git, \u2026` | Directory names to exclude from scanning |\n| `[SCAN] file_types` | `.pdf` | File extensions to collect (e.g. `.pdf, .txt`) |\n| `[PROVIDERS] default_provider` | `claude` | Default LLM: `claude` or `openai` |\n| `[CLAUDE] model` | `claude-sonnet-4-6` | Claude model name passed to the CLI |\n| `[OPENAI] model` | `gpt-4o` | OpenAI model for chat completions |\n| `[OPENAI] api_key_env` | `OPENAI_API_KEY` | Environment variable that holds the OpenAI key |\n| `[RAG] similarity_threshold` | `0.7` | Minimum cosine similarity for a chunk to enter the prompt |\n| `[RAG] max_context_chunks` | `5` | Maximum chunks injected into each LLM prompt |\n| `[RAG] chunk_size` | `512` | Approximate words per chunk |\n| `[RAG] chunk_overlap` | `50` | Overlap words between consecutive chunks |\n",
+  "DATABASE": "# MyRAG \u2014 Database\n\nMyRAG uses ChromaDB as its vector database, stored on disk at `data/chroma/`. All data is local \u2014 nothing leaves the machine.\n\n## ChromaDB Collection: `myrag_docs`\n\nStores embedded text chunks for every indexed document. The collection uses cosine similarity (`hnsw:space: cosine`) for nearest-neighbour retrieval.\n\n| Field | Type | Purpose |\n|-------|------|---------|\n| `id` | string | Deterministic chunk ID: `sha256(file_path)[:8]_{chunk_index}` \u2014 enables idempotent upserts |\n| `document` | string | Raw chunk text (~512 words) |\n| `embedding` | float[384] | Dense vector from `all-MiniLM-L6-v2` |\n| `file_path` | string (metadata) | Absolute path to the source file |\n| `chunk_index` | int (metadata) | Zero-based position of this chunk within the document |\n| `char_start` | int (metadata) | Character offset where the chunk begins in the extracted text |\n| `char_end` | int (metadata) | Character offset where the chunk ends in the extracted text |\n\n## JSON State Files\n\nThree JSON files in `data/` complement the vector store:\n\n### `data/scan_index.json`\n\nCaches the result of the last directory scan.\n\n| Field | Type | Purpose |\n|-------|------|---------|\n| `version` | int | Schema version |\n| `dirs` | object | Map of directory path \u2192 last-seen mtime; used to skip unchanged subtrees |\n| `files[].path` | string | Absolute file path |\n| `files[].mtime` | float | File modification time at scan time |\n| `files[].size` | int | File size in bytes |\n| `files[].file_type` | string | File extension (e.g. `.pdf`) |\n\n### `data/selection.json`\n\nPersists the user's file selection across sessions \u2014 a flat JSON array of absolute file paths.\n\n### `data/index_manifest.json`\n\nTracks which files have been indexed and their fingerprints, so unchanged files are skipped on re-index.\n\n| Field | Type | Purpose |\n|-------|------|---------|\n| `<file_path>.size` | int | File size at index time |\n| `<file_path>.mtime` | float | File mtime at index time |\n| `<file_path>.indexed_at` | string | ISO 8601 timestamp of last indexing |\n| `<file_path>.chunks` | int | Number of chunks produced |\n",
+  "FLOWS": "# MyRAG \u2014 Flows\n\n## Indexing Flow (Tabs 1\u20133)\n\n**Trigger:** User launches the app, scans directories, selects files, then clicks Index.\n\n**Reads:** PDF/TXT files from configured source directories.\n**Writes:** `data/scan_index.json`, `data/selection.json`, `data/index_manifest.json`, `data/chroma/`.\n\nThe indexing path is the one-time (or incremental) pipeline that builds the searchable knowledge base. Scanning is incremental \u2014 directory mtimes are compared against `scan_index.json` to skip unchanged subtrees, so rescanning a large library after adding a few files takes seconds. Indexing is also incremental \u2014 `index_manifest.json` fingerprints (size + mtime) ensure only new or modified files are re-embedded.\n\n```mermaid\nsequenceDiagram\n  participant User\n  participant Scanner\n  participant Select as File Selector\n  participant Indexer\n  participant Extractor as TextExtractor\n  participant Chunker\n  participant Embedder\n  participant VectorStore as ChromaDB\n\n  User->>Scanner: Click Scan\n  Scanner->>Scanner: Walk source_directories<br/>(skip unchanged subtrees via mtime cache)\n  Scanner-->>User: Discovered files list \u2192 Tab 2 unlocked\n\n  User->>Select: Check files / directories\n  Select-->>User: Save selection.json \u2192 Tab 3 unlocked\n\n  User->>Indexer: Click Index\n  loop For each selected file\n    Indexer->>Extractor: extract(file_path)\n    Extractor-->>Indexer: raw text (pdfplumber / PyMuPDF / OCR)\n    Indexer->>Chunker: chunk(text)\n    Chunker-->>Indexer: TextChunk list (~512 words each)\n    Indexer->>Embedder: embed_batch([chunk.text, \u2026])\n    Embedder-->>Indexer: 384-dim float vectors\n    Indexer->>VectorStore: upsert_chunks(path, chunks, embeddings)\n  end\n  Indexer-->>User: Summary: N files indexed, M chunks created \u2192 Tab 4 unlocked\n```\n\n## Query Flow (Tab 4)\n\n**Trigger:** User types a question and presses Enter or clicks Ask.\n\n**Reads:** ChromaDB vector collection.\n**Writes:** Nothing \u2014 read-only at query time.\n\nThe query path runs entirely in a background thread so the UI stays responsive. The pipeline embeds the question, retrieves the top-5 most similar chunks by cosine distance, filters by the similarity threshold (default 0.7), and injects any passing chunks into the LLM prompt. If no chunks pass the threshold, the LLM is called without injected context (plain fallback). The response is displayed alongside per-step timing and source file attribution.\n\n```mermaid\nsequenceDiagram\n  participant User\n  participant Tab as Tab 4 (Ask)\n  participant Pipeline as RAGPipeline\n  participant Embedder\n  participant VectorStore as ChromaDB\n  participant LLM as LLM Provider<br/>(Claude / OpenAI)\n\n  User->>Tab: Type question + click Ask\n  Tab->>Pipeline: query(user_query, status_cb)\n\n  Pipeline->>Embedder: embed(user_query)\n  Embedder-->>Pipeline: 384-dim query vector\n\n  Pipeline->>VectorStore: query(vec, n=5)\n  VectorStore-->>Pipeline: Top-N chunks with cosine similarity scores\n\n  Pipeline->>Pipeline: Filter: similarity \u2265 0.7\n\n  alt Chunks found above threshold\n    Pipeline->>LLM: generate(query, context_chunks)\n    Note right of LLM: Prompt includes chunk text<br/>and source file names\n  else No chunks above threshold\n    Pipeline->>LLM: generate(query, [])\n    Note right of LLM: Plain LLM query<br/>no RAG context\n  end\n\n  LLM-->>Pipeline: Answer text\n  Pipeline-->>Tab: RAGResponse(answer, sources, timings)\n  Tab-->>User: Answer + source files + embed/retrieve/LLM ms\n```\n\n## OCR Sub-flow\n\n**Trigger:** Automatically during indexing when a PDF yields no extractable text.\n\n**Reads:** PDF file (image-based pages).\n**Writes:** Extracted text fed back into the normal chunk \u2192 embed \u2192 store pipeline.\n\nWhen pdfplumber and PyMuPDF both return empty text for a PDF, the extractor rasterises each page at 200 DPI using PyMuPDF and passes the image to Tesseract OCR. Pages producing fewer than 20 characters are logged as picture/blank pages but don't block the rest. OCR progress (page number, elapsed time, character count) is logged per-page so long scans remain observable.\n"
+};
+
+const SCRIPTS = {
+  "start.sh": {"desc": "", "sections": {"_desc": ""}},
+  "test.sh": {"desc": "Tests for this project \u2014 add test commands below", "sections": {"_desc": "Tests for this project \u2014 add test commands below"}}
+};
+
+marked.setOptions({ gfm: true, breaks: false });
+
+function clearActive() {
+  document.querySelectorAll('.sn, .sn-sub, .sn-sub2').forEach(function(a) { a.classList.remove('active'); });
+}
+
+function show(id) {
+  document.querySelectorAll('.content-section').forEach(function(s) { s.classList.remove('active'); });
+  var sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  clearActive();
+  document.querySelector('main').scrollTop = 0;
+}
+
+function showGuide(key) {
+  var content = GUIDES[key];
+  if (!content) return;
+  var guideEl = document.getElementById('guide-content');
+  guideEl.innerHTML = marked.parse(content);
+  runMermaid(guideEl);
+  show('guide');
+  clearActive();
+  document.querySelectorAll('[data-key="' + key + '"]').forEach(function(el) {
+    if (el.classList.contains('sn')) el.classList.add('active');
+  });
+}
+
+function showGuideSection(key, anchor) {
+  showGuide(key);
+  clearActive();
+  document.querySelectorAll('[data-key="' + key + '"]').forEach(function(el) { el.classList.add('active'); });
+  // Scroll to the anchor
+  setTimeout(function() {
+    var headings = document.querySelectorAll('#guide-content h2');
+    for (var i = 0; i < headings.length; i++) {
+      var id = headings[i].textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      if (id === anchor) {
+        headings[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      }
+    }
+  }, 50);
+}
+
+function convertMermaidBlocks(container) {
+  // marked.js renders ```mermaid as <pre><code class="language-mermaid">
+  // mermaid.js needs <div class="mermaid"> — convert before running
+  container.querySelectorAll('pre > code.language-mermaid').forEach(function(code) {
+    var div = document.createElement('div');
+    div.className = 'mermaid';
+    div.textContent = code.textContent;
+    code.parentNode.parentNode.replaceChild(div, code.parentNode);
+  });
+}
+
+function runMermaid(container) {
+  convertMermaidBlocks(container);
+  if (window.mermaid) {
+    var nodes = Array.from(container.querySelectorAll('.mermaid:not([data-processed])'));
+    if (nodes.length) window.mermaid.run({ nodes: nodes });
+  }
+}
+
+function esc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+var MAN_SECTION_MAP = {
+  'Arguments': 'OPTIONS', 'Options': 'OPTIONS', 'Flags': 'OPTIONS',
+  'Exit codes': 'EXIT STATUS', 'Exit': 'EXIT STATUS',
+  'Writes': 'FILES', 'Creates': 'FILES', 'Output': 'FILES', 'Reads': 'FILES',
+  'Examples': 'EXAMPLES', 'Example': 'EXAMPLES',
+  'Modes': 'MODES', 'Checks': 'DESCRIPTION', 'Workflow': 'DESCRIPTION',
+  'Template source': 'SEE ALSO',
+};
+var MAN_SECTION_ORDER = ['SYNOPSIS','DESCRIPTION','OPTIONS','MODES','FILES','EXAMPLES','EXIT STATUS','SEE ALSO'];
+
+function showScript(file) {
+  var s = SCRIPTS[file] || {};
+  var desc = s.desc || '';
+  var secs = s.sections || {};
+  var basename = file.replace(/\..*$/, '').toUpperCase();
+  var projectName = "MyRAG";
+
+  var html = '<div class="sd-man">';
+  html += '<div class="sd-man-header">';
+  html += '<span class="sd-man-header-left">' + esc(basename) + '(1)</span>';
+  html += '<span class="sd-man-header-right">' + esc(projectName) + ' Manual</span>';
+  html += '</div>';
+
+  html += '<div class="sd-sec">NAME</div>';
+  html += '<div class="sd-body"><span class="sd-name-line">' + esc(file) + '</span>';
+  if (desc) html += ' <span class="sd-name-dash">&mdash; ' + esc(desc) + '</span>';
+  html += '</div>';
+
+  var syn = secs['Usage'] || secs['Synopsis'] || '';
+  if (syn) {
+    html += '<div class="sd-sec">SYNOPSIS</div><div class="sd-body">';
+    syn.split('\n').forEach(function(line) {
+      if (line.trim()) html += '<code class="sd-cmd">' + esc(line.trim()) + '</code>';
+    });
+    html += '</div>';
+  }
+
+  var body = secs['_desc'] || '';
+  var descExtra = [];
+  Object.keys(secs).forEach(function(key) {
+    if (MAN_SECTION_MAP[key] === 'DESCRIPTION' && secs[key].trim()) descExtra.push(secs[key]);
+  });
+  if (body || descExtra.length) {
+    html += '<div class="sd-sec">DESCRIPTION</div><div class="sd-body">';
+    if (body) {
+      body.split('\n\n').forEach(function(para) {
+        var t = para.trim().replace(/\n/g, ' ');
+        if (t) html += '<p>' + esc(t) + '</p>';
+      });
+    }
+    descExtra.forEach(function(extra) {
+      extra.split('\n').forEach(function(line) {
+        if (line.trim()) html += '<div class="sd-item">' + esc(line.trim()) + '</div>';
+      });
+    });
+    html += '</div>';
+  }
+
+  var skip = {'_desc':1,'Usage':1,'Synopsis':1};
+  var codeKeys = {'EXAMPLES':1,'SYNOPSIS':1};
+  var rendered = {'DESCRIPTION':1};
+
+  MAN_SECTION_ORDER.forEach(function(manKey) {
+    if (manKey === 'SYNOPSIS' || manKey === 'DESCRIPTION') return;
+    var parts = [];
+    Object.keys(secs).forEach(function(key) {
+      if (skip[key] || !secs[key].trim()) return;
+      var mapped = MAN_SECTION_MAP[key] || key.toUpperCase();
+      if (mapped === manKey) parts.push(secs[key]);
+    });
+    if (!parts.length) return;
+    rendered[manKey] = 1;
+    html += '<div class="sd-sec">' + esc(manKey) + '</div><div class="sd-body">';
+    parts.forEach(function(text) {
+      text.split('\n').forEach(function(line) {
+        if (line.trim()) {
+          if (codeKeys[manKey]) html += '<code class="sd-cmd">' + esc(line.trim()) + '</code>';
+          else html += '<div class="sd-item">' + esc(line.trim()) + '</div>';
+        }
+      });
+    });
+    html += '</div>';
+  });
+
+  Object.keys(secs).forEach(function(key) {
+    if (skip[key] || !secs[key].trim()) return;
+    var mapped = MAN_SECTION_MAP[key] || key.toUpperCase();
+    if (rendered[mapped]) return;
+    rendered[mapped] = 1;
+    html += '<div class="sd-sec">' + esc(mapped) + '</div><div class="sd-body">';
+    secs[key].split('\n').forEach(function(line) {
+      if (line.trim()) html += '<div class="sd-item">' + esc(line.trim()) + '</div>';
+    });
+    html += '</div>';
+  });
+
+  if (!desc && !syn && !body) html += '<div class="sd-empty">(no documentation available)</div>';
+
+  html += '<div class="sd-footer">';
+  html += '<span>' + esc(projectName) + '</span>';
+  html += '<span>bin/' + esc(file) + '</span>';
+  html += '</div>';
+
+  html += '</div>';
+
+  document.getElementById('sd-content').innerHTML = html;
+  show('script-detail');
+  clearActive();
+  var el = document.querySelector('[data-script="' + file + '"]');
+  if (el) el.classList.add('active');
+}
+
+// Initialize: show home, render overview
+(function() {
+  var overview = GUIDES['OVERVIEW'] || '';
+  var el = document.getElementById('home-overview');
+  if (el && overview) { el.innerHTML = marked.parse(overview); runMermaid(el); }
+  show('home');
+})();
+</script>
+
+</div><!-- .layout -->
+</body>
+</html>

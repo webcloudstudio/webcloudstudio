@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo Organizer/Deduplicator &mdash; Documentation</title>
+<link rel="stylesheet" href="styles/spec.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad:false, theme:'neutral', flowchart:{curve:'linear',nodeSpacing:40,rankSpacing:35,padding:16} });</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { display: flex; flex-direction: column; height: 100vh; overflow: hidden;
+  background: var(--c-bg); color: var(--c-text);
+  font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif; font-size: 14px; line-height: 1.65; }
+
+.layout { display: flex; flex: 1; overflow: hidden; }
+
+.page-header { background: var(--c-topbar-bg); border-bottom: 1px solid var(--c-side-border); }
+
+/* Sidebar */
+.sidebar { width: 220px; min-width: 220px; display: flex; flex-direction: column;
+  background: var(--c-side-bg); border-right: 1px solid var(--c-side-border);
+  overflow-y: auto; flex-shrink: 0; }
+
+.sidebar-header { background: var(--c-topbar-bg); padding: 6px 10px;
+  flex-shrink: 0; cursor: pointer; display: flex; align-items: center; gap: 9px; }
+.sidebar-header:hover { opacity: .88; }
+.sidebar-header img { width: 100px; height: 75px; object-fit: contain; display: block;
+  flex-shrink: 0; border-radius: 3px; }
+.sidebar-header h1 { color: #fff; font-size: 15px; font-weight: 700; line-height: 1.2;
+  letter-spacing: .4px; }
+
+.nav-section { font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--c-side-section); padding: 10px 16px 3px; }
+.nav-sep { border-top: 1px solid var(--c-side-border); margin: 5px 0; }
+
+.sn { display: block; padding: 3px 16px;
+  font-size: 13px; font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+  color: #fff; cursor: pointer; border-left: 3px solid transparent;
+  text-decoration: none; transition: background .1s, border-color .1s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn:hover { background: rgba(255,255,255,.07); border-left-color: var(--c-accent); }
+.sn.active { color: #fff; border-left-color: var(--c-accent); background: rgba(44,182,125,.12); }
+
+.sn-sub { display: block; padding: 2px 16px 2px 28px;
+  font-size: 11px; font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+  color: rgba(255,255,255,.8); cursor: pointer; border-left: 3px solid transparent;
+  text-decoration: none; transition: background .1s, border-color .1s, color .1s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn-sub:hover { color: #fff; background: rgba(255,255,255,.05); border-left-color: var(--c-accent); }
+.sn-sub.active { color: var(--c-accent); border-left-color: var(--c-accent); }
+
+/* Content */
+main { flex: 1; overflow-y: auto; padding: 28px 36px 48px; position: relative; }
+.content-section { display: none; max-width: 860px; }
+.content-section.active { display: block; }
+
+/* Badge */
+.badge { display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 3px;
+  background: var(--c-code-bg); color: var(--c-code-text);
+  font-family: 'Cascadia Code', Consolas, monospace; }
+
+/* Rendered markdown */
+.md h1 { font-size: 22px; font-weight: 700; color: var(--c-accent);
+  border-bottom: 2px solid var(--c-accent); padding-bottom: 5px; margin: 24px 0 10px; }
+.md h1:first-child { margin-top: 0; }
+.md h2 { font-size: 14px; font-weight: 700; color: #fff;
+  background: var(--c-side-bg); border-left: 3px solid var(--c-accent);
+  padding: 5px 12px; margin: 18px 0 9px; border-radius: 0 4px 4px 0; }
+.md h3 { font-size: 14px; font-weight: 600; color: var(--c-h3); margin: 12px 0 5px; }
+.md p { margin: 7px 0; line-height: 1.65; }
+.md ul, .md ol { margin: 5px 0 5px 18px; }
+.md li { margin: 2px 0; }
+.md a { color: #1565C0; text-decoration: underline; }
+.md a:visited { color: #1565C0; }
+.md table { border-collapse: collapse; margin: 8px 0; font-size: 13px; width: 100%; }
+.md th { background: var(--c-th-bg); color: var(--c-th-text); font-weight: 500; font-size: 11px;
+  letter-spacing: .3px; text-transform: uppercase; padding: 4px 12px; text-align: left; }
+.md td { padding: 4px 12px; border-bottom: 1px solid var(--c-td-border); }
+.md tr:nth-child(even) td { background: var(--c-tr-alt); }
+.md pre { background: var(--c-pre-bg); color: var(--c-pre-text);
+  border: 1px solid var(--c-side-border); border-radius: 4px;
+  padding: 10px 14px; overflow-x: auto; margin: 8px 0;
+  font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; line-height: 1.5; }
+.md code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px;
+  background: var(--c-code-bg); color: var(--c-code-text);
+  padding: 1px 5px; border-radius: 3px; }
+.md pre code { background: none; padding: 0; color: inherit; }
+.md blockquote { border-left: 3px solid var(--c-accent); padding: 6px 14px;
+  margin: 8px 0; background: var(--c-callout-bg); border-radius: 0 4px 4px 0; }
+.md hr { border: none; border-top: 1px solid var(--c-td-border); margin: 16px 0; }
+.md img { max-width: 100%; border: 1px solid var(--c-td-border); border-radius: 4px;
+  margin: 12px 0; display: block; }
+
+/* Page footer */
+.doc-footer { margin-top: 40px; padding-top: 12px; border-top: 1px solid var(--c-td-border);
+  font-size: 11px; color: var(--c-h3); display: flex; justify-content: space-between; }
+</style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style id="wcs-nav-style">
+  #wcs-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #080810;
+    border-bottom: 1px solid #252540;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  #wcs-nav nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  #wcs-nav .wcs-logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: #f1f5f9;
+    text-decoration: none;
+  }
+  #wcs-nav .wcs-logo:hover { opacity: 0.85; text-decoration: none; }
+  #wcs-nav .wcs-nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  #wcs-nav .wcs-nav-links a {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  #wcs-nav .wcs-nav-links a:hover { color: #f1f5f9; text-decoration: none; }
+  #wcs-nav .wcs-contact-trigger { position: relative; }
+  #wcs-nav .wcs-contact-btn {
+    background: none; border: none; cursor: pointer;
+    color: #94a3b8; font-size: 0.9rem; font-weight: 500;
+    font-family: inherit; padding: 0; transition: color 0.2s;
+  }
+  #wcs-nav .wcs-contact-btn:hover { color: #f1f5f9; }
+  #wcs-nav .wcs-contact-card {
+    position: absolute; top: calc(100% + 14px); right: 0;
+    background: #0e0e1a; border: 1px solid #252540; border-radius: 10px;
+    padding: 1rem 1.25rem; min-width: 230px;
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.18s, visibility 0.18s, transform 0.18s;
+    pointer-events: none; z-index: 200; box-shadow: 0 8px 32px #00000066;
+  }
+  #wcs-nav .wcs-contact-card::before {
+    content: ''; position: absolute; top: -6px; right: 16px;
+    width: 10px; height: 10px; background: #0e0e1a;
+    border-left: 1px solid #252540; border-top: 1px solid #252540;
+    transform: rotate(45deg);
+  }
+  #wcs-nav .wcs-contact-trigger:hover .wcs-contact-card,
+  #wcs-nav .wcs-contact-trigger:focus-within .wcs-contact-card {
+    opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
+  }
+  #wcs-nav .wcs-contact-name {
+    font-size: 0.8rem; font-weight: 700; color: #f1f5f9;
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;
+  }
+  #wcs-nav .wcs-contact-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.83rem; color: #94a3b8; padding: 0.35rem 0;
+    border-radius: 4px; transition: color 0.15s; text-decoration: none;
+  }
+  #wcs-nav .wcs-contact-item:hover { color: #4f9cf9; text-decoration: none; }
+  #wcs-nav .wcs-contact-item svg { flex-shrink: 0; color: #4f9cf9; }
+  body { margin-top: 68px !important; height: calc(100vh - 68px) !important; }
+</style>
+</head>
+<body>
+<header id="wcs-nav">
+  <nav>
+    <a href="https://webcloudstudio.com/" class="wcs-logo">Ed Barlow</a>
+    <div class="wcs-nav-links">
+      <a href="https://webcloudstudio.com/">Home</a>
+      <a href="https://webcloudstudio.com/projects/">Projects</a>
+      <a href="https://webcloudstudio.com/project-docs/Prototyper/index.html">AI Process</a>
+      <a href="https://webcloudstudio.com/project-docs/GAME/index.html">AI User Experience</a>
+      <a href="https://webcloudstudio.com/resume/">About Me</a>
+      <div class="wcs-contact-trigger">
+        <button class="wcs-contact-btn">Contact</button>
+        <div class="wcs-contact-card">
+          <p class="wcs-contact-name">Ed Barlow</p>
+          <a href="mailto:edward.m.barlow@gmail.com" class="wcs-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>edward.m.barlow@gmail.com</a>
+          <a href="tel:+19148374798" class="wcs-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.4z"/></svg>(914) 837-4798</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<header class="page-header gem-header">
+  <div class="gem-header-left">
+    <span class="gem-header-logo">Photo Organizer/Deduplicator</span>
+    <span class="gem-header-title">Documentation</span>
+  </div>
+  <nav class="gem-header-nav">
+    <a href="index.html" style="border-bottom-color: var(--c-accent);">Documentation</a>
+  </nav>
+  <span class="gem-header-copyright"></span>
+</header>
+
+<div class="layout">
+
+<nav class="sidebar">
+  <div class="sidebar-header" onclick="showGuide('OVERVIEW')">
+    <img src="images/ezdocs.webp" alt="Photo Organizer/Deduplicator">
+    <h1>Photo Organizer/Deduplicator</h1>
+  </div>
+  <div class="nav-section">OVERVIEW</div>
+  <a class="sn" data-key="OVERVIEW" onclick="showGuide('OVERVIEW')">Overview</a>
+  <div class="nav-sep"></div>
+  <div class="nav-section">FEATURES</div>
+  <a class="sn" data-key="FEATURES" onclick="showGuide('FEATURES')">Features</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES','the-scan-tab')">The Scan Tab</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES','the-preferences-analyze-tab')">The Preferences / Analyze Tab</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES','the-review-copy-plan-tab')">The Review Copy Plan Tab</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES','the-reorganize-tab')">The ReOrganize Tab</a>
+  <a class="sn-sub" data-key="FEATURES" onclick="showGuideSection('FEATURES','safety-features')">Safety Features</a>
+  <div class="nav-sep"></div>
+  <div class="nav-section">SYSTEM</div>
+  <a class="sn" data-key="ARCHITECTURE" onclick="showGuide('ARCHITECTURE')">Architecture</a>
+  <a class="sn" data-key="FLOWS" onclick="showGuide('FLOWS')">Flows</a>
+  <a class="sn" data-key="DEVELOPMENT" onclick="showGuide('DEVELOPMENT')">Development</a>
+</nav>
+
+<main>
+
+  <!-- Home -->
+  <div id="home" class="content-section active">
+    <h2 style="font-size:22px;font-weight:700;color:var(--c-accent);border-bottom:2px solid var(--c-accent);padding-bottom:5px;margin:0 0 10px;">Photo Organizer/Deduplicator</h2>
+    <p style="font-size:15px;margin:0 0 16px;color:var(--c-text);">Photo Scanner/Organizer/Deduplicator</p>
+    <div style="margin:0 0 20px;display:flex;gap:6px;flex-wrap:wrap;">
+      <span class="badge">ACTIVE</span><span class="badge">Python</span>
+      <span class="badge">Tkinter</span><span class="badge">PyInstaller</span>
+    </div>
+    <div id="home-overview" class="md"></div>
+    <div class="doc-footer">
+      <span>Generated: 2026-05-17 23:54 | Version: 20260517.1</span>
+      <span>Source: docs/DOC-*.md</span>
+    </div>
+  </div>
+
+  <!-- Guide viewer -->
+  <div id="guide" class="content-section">
+    <div id="guide-content" class="md"></div>
+    <div class="doc-footer">
+      <span>Generated: 2026-05-17 23:54 | Version: 20260517.1</span>
+      <span>Source: docs/DOC-*.md</span>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const GUIDES = {"OVERVIEW": "# Photo Organizer/Deduplicator — Overview\n\n## What It Is\n\nPhoto Organizer/Deduplicator is a Windows desktop application that solves the chronic problem of scattered, duplicate photos spread across multiple drives, phones, and folders. It scans every source folder you specify, identifies duplicate photos using a filename+size signature (robust enough to catch files renamed with timestamp prefixes), and produces a precise copy plan that consolidates everything into a single Final Photo Folder — all without touching a single file until you explicitly approve the operation. A full simulation mode runs by default, so you can review exactly what will happen before committing.\n\n## What It Can Do\n\n- **Scan multiple drives simultaneously** — accepts any number of source folders (local drives, external drives, mapped network paths) and indexes them in a background thread with live progress reporting\n- **Detect duplicates intelligently** — strips `YYYYMMDD.HHMMSS.` timestamp prefixes before comparing, so photos renamed by camera apps, phones, or cloud sync still match their originals\n- **Respect preferred directories** — mark any folder as \"Green\" (permanent home); files already in a preferred folder are skipped entirely from the copy plan, preventing double-imports\n- **Generate a reviewable copy plan** — writes `data/files_to_copy.txt` with every COPY, MOVE, and ZIP_DELETE operation before executing anything; the GUI shows the plan on a dedicated Review tab\n- **Handle ZIP archives** — detects photo-only zip files and plans them for MOVE or DELETE; skips mixed-content zips with a logged warning\n- **Run headless via CLI** — three-stage pipeline (`photo_scan.sh` → `photo_analyze.sh` → `photo_dedup.sh`) enables automation and WSL workflows without launching the GUI\n- **Package as a standalone Windows EXE** — ships via PyInstaller + Inno Setup; installs with Start Menu and Desktop shortcuts, no Python required on the target machine\n- **Translate Windows paths automatically** — CLI layer converts `C:\\Users\\foo` to `/mnt/c/Users/foo` when running under WSL\n\n## Quick Start\n\n| Command | Description |\n|---------|-------------|\n| `./bin/start.sh` | Launch the GUI |\n| `python3 src/WcsPhotoOrganizer.py` | Run GUI directly |\n| `./bin/photo_scan.sh` | CLI: scan source folders, write `data/scan_data.pkl` |\n| `./bin/photo_analyze.sh` | CLI: analyze duplicates, write `data/files_to_copy.txt` |\n| `./bin/photo_dedup.sh` | CLI: dry-run dedup (preview only) |\n| `./bin/photo_dedup.sh --live` | CLI: execute copy/move operations |\n| `./bin/build.sh` | Build Windows EXE via PyInstaller |\n| `./bin/build_documentation.sh` | Generate `docs/index.html` |\n\n## Architecture Overview\n\n```mermaid\nflowchart LR\n  User -->|launch| GUI[WcsPhotoOrganizer.py\\nTkinter GUI]\n  User -->|CLI| Scripts[photo_scan / analyze / dedup]\n  GUI --> Scanner[scanner.py\\nScan engine]\n  Scripts --> Scanner\n  Scanner -->|reads| Config[config.ini]\n  Scanner -->|writes| Data[(data/\\nscan_data.pkl\\nfiles_to_copy.txt\\ndirectory_states.txt)]\n  DriveDetect[drive_detection.py] -->|first-run defaults| Config\n  CLIConfig[cli_config.py\\nWSL path translation] --> Scripts\n  Data -->|read by| Dedup[cli_dedup.py\\nExecutes plan]\n  GUI -->|packages as| EXE[WcsPhotoOrganizer.exe\\nPyInstaller]\n```\n\n## Vision\n\nPhoto Organizer/Deduplicator is on the path to a v1.0 production release — build, installer, and branding are complete, and the roadmap targets code signing for SmartScreen-free distribution on Windows 10 and 11. Longer-term, direct iPhone integration via `pymobiledevice3` will let the app scan phone photo libraries over USB or Wi-Fi without requiring a manual file copy first, making it the single tool for anyone consolidating a lifetime of photos from phones, cameras, and cloud backups.\n", "FEATURES": "# Photo Organizer/Deduplicator — Features\n\n## The Scan Tab\n\nTriggered by clicking **Scan** in the Tkinter GUI (or running `./bin/photo_scan.sh`). Reads `source_photo_folders` from `config.ini`, recursively walks every folder in a background thread, and builds an in-memory index of all files keyed by `filesignature` (stripped filename + file size). Writes `data/scan_data.pkl` and `data/scan_summary.txt`; updates the GUI with a live directory counter and elapsed time.\n\n![Scan Tab](Screen_Scan.png)\n\n## The Preferences / Analyze Tab\n\nTriggered by clicking **Analyze** after a successful scan. Loads the scan pickle and applies the preferred-directory ruleset: files already present in a Green (preferred) folder are excluded from the copy plan entirely; for all other duplicates, the source folder with the highest file count is chosen as the copy source. Writes `data/files_to_copy.txt` with one line per operation (COPY, MOVE, ZIP_MOVE, ZIP_DELETE). The Preferences tab also displays the current `directory_states.txt` so users can toggle folders between Normal and Preferred before re-running.\n\n![Preferences / Analyze Tab](Screen_DirPrefs.png)\n\n## The Review Copy Plan Tab\n\nDisplays the full contents of `data/files_to_copy.txt` in a scrollable text widget so the user can inspect every planned operation before committing. An **Approve** button gates the ReOrganize step — the final operation cannot run until the plan is explicitly approved here.\n\n![Review Copy Plan](Screen_CopyPlan.png)\n\n![Approve Plan](Screen_Approve.png)\n\n## The ReOrganize Tab\n\nTriggered by clicking **ReOrganize** after plan approval. Executes the copy/move operations from `files_to_copy.txt` in a background thread with a live log viewer. Requires `change_source_directory = True` in `config.ini` for live mode; in simulation mode it logs all planned operations without touching any files. Collision handling appends `-2`, `-3` suffixes to filenames when the destination already exists.\n\n![ReOrganize Tab](Screen_Reorg.png)\n\n## CLI: Photo Scan (`./bin/photo_scan.sh`)\n\nHeadless equivalent of the Scan tab. Invokes `src/cli_scan.py` with the project directory as argument; reads `config.ini`, scans all `source_photo_folders`, and writes `data/scan_data.pkl` and `data/scan_summary.txt`. Path translation is automatic — Windows-style paths in `config.ini` are converted to WSL mountpoints when running under Linux.\n\n## CLI: Photo Analyze (`./bin/photo_analyze.sh`)\n\nHeadless equivalent of the Analyze tab. Invokes `src/cli_analyze.py`; requires `data/scan_data.pkl` from the scan step. Reads `data/directory_states.txt` for preferred-directory preferences (created automatically on first run; edit to set priorities). Writes `data/files_to_copy.txt`.\n\n## CLI: Photo Dedup (`./bin/photo_dedup.sh`)\n\nHeadless execute step. Invokes `src/cli_dedup.py` in dry-run mode by default — prints every COPY/MOVE/ZIP operation without touching files. Pass `--live` to execute; `config.ini` must also have `change_source_directory = True` (double-gating prevents accidental runs).\n\n## Duplicate Detection: Timestamp-Aware Signature\n\nThe scanner strips `YYYYMMDD.HHMMSS.` prefixes from filenames before computing the duplicate signature (`stripped_name + \"~|~\" + file_size`). This ensures photos renamed by camera apps, phone sync tools, or cloud services still match their original copies, dramatically reducing missed duplicates compared to exact-filename matching.\n\n## ZIP Archive Handling\n\nDuring scanning, the engine inspects ZIP files found in source folders. Archives containing only photo files are added to the plan as ZIP_MOVE or ZIP_DELETE operations. Archives containing a mix of photo and non-photo files are skipped with a logged warning and listed in `skipped_mixed_zips` so they can be reviewed manually.\n\n## Build: Windows EXE (`./bin/build.sh`)\n\nPackages the application as a self-contained `WcsPhotoOrganizer.exe` using PyInstaller (must run Windows Python — WSL Python produces a Linux ELF). Optionally invokes Inno Setup to produce a versioned installer (`WcsPhotoOrganizer_v1.0.0_Setup.exe`) with Start Menu and Desktop shortcuts, license agreement, and a proper uninstaller.\n\n## Safety Features\n\n- **Simulation mode** — default; no files modified, all operations logged to `logs/`\n- **Skip existing** — never overwrites a file that already exists at the destination; appends `-2`, `-3` suffixes instead\n- **System directory exclusion** — auto-skips Windows system paths during scan\n- **Confirmation dialogs** — GUI prompts before major operations (Analyze, ReOrganize)\n- **Double-gate for live mode** — both `--live` flag (CLI) and `change_source_directory = True` in `config.ini` must be set before any files are touched\n- **Full logging** — every file operation recorded to `logs/`\n", "ARCHITECTURE": "# Photo Organizer/Deduplicator — Architecture\n\n## Directory Layout\n\n```\nezdocs/\n  src/\n    WcsPhotoOrganizer.py   GUI entry point\n    scanner.py             Scan and dedup engine\n    drive_detection.py     Windows drive enumeration\n    cli_config.py          Config reader + WSL path translator\n    cli_scan.py            CLI scan step\n    cli_analyze.py         CLI analyze step\n    cli_dedup.py           CLI dedup/execute step\n  bin/\n    start.sh               Launch GUI\n    photo_scan.sh          CLI: run scan step\n    photo_analyze.sh       CLI: run analyze step\n    photo_dedup.sh         CLI: run dedup step\n    build.sh               Build Windows EXE\n    build_documentation.sh Generate docs/index.html\n    build_installer.sh     Build Inno Setup installer\n    remove_build_artifacts.sh  Clean build output\n    common.sh              Shared bash functions\n    common.py              Shared Python OperationContext\n    test.sh                Test runner\n  data/                    Runtime-generated data files\n  docs/                    Markdown documentation + generated index.html\n  logs/                    Application log files\n  config.ini               Live config (gitignored)\n  config.ini.sample        Config template\n  WcsPhotoOrganizer.spec   PyInstaller spec\n  installer.iss            Inno Setup installer script\n```\n\n## Modules\n\n| Module / File | Purpose |\n|---|---|\n| `src/WcsPhotoOrganizer.py` | Tkinter GUI; orchestrates Scan → Analyze → Review → ReOrganize 4-tab state machine; spawns background threads for each operation |\n| `src/scanner.py` | Core scan engine; builds `filedict` and `filesignature` indexes; detects duplicates; manages preferred-directory list; persists results to `data/` |\n| `src/drive_detection.py` | Enumerates available Windows drive letters; proposes default `final_photo_folder` and `source_photo_folders` on first run |\n| `src/cli_config.py` | Reads `config.ini`; translates Windows-style paths to WSL mountpoints when running on Linux |\n| `src/cli_scan.py` | Headless scan step; reads config, invokes scanner, writes `data/scan_data.pkl` and `data/scan_summary.txt` |\n| `src/cli_analyze.py` | Headless analyze step; loads scan pickle, applies preferred-directory rules, writes `data/files_to_copy.txt` |\n| `src/cli_dedup.py` | Headless execute step; parses `files_to_copy.txt`; dry-run by default; `--live` + `change_source_directory = True` required to modify files |\n| `bin/common.sh` | Shared bash: project path setup, venv activation, env loading, log helpers, SIGTERM trap |\n| `bin/common.py` | Shared Python `OperationContext`: METADATA.md parsing, env loading, structured logging, heartbeat |\n\n## Configuration\n\n| Field | Default | Description |\n|---|---|---|\n| `final_photo_folder` | *(auto-detected Pictures folder)* | Destination folder where consolidated photos are written |\n| `source_photo_folders` | *(auto-detected drives)* | Comma-separated list of folders to scan for photos |\n| `strings_to_strip` | *(empty)* | Substrings removed from computed target subdirectory paths (e.g. `My Drive`, `Pictures`) |\n| `directories_to_skip` | *(empty)* | Folders excluded from scanning |\n| `change_source_directory` | `False` | `False` = simulation mode; `True` = live file operations |\n| `delete_after_move` | `False` | When `True`, source files are deleted after successful copy |\n| `log_file_folder` | `./logs` | Directory for application log files |\n| `product_name` | `Disk Cleaner` | Application display name shown in the GUI title bar |\n| `company_name` | `Web Cloud Studios` | Company name shown in copyright splash |\n| `show_copyright_splash` | `True` | Whether to show the copyright splash screen on launch |\n", "FLOWS": "# Photo Organizer/Deduplicator — Flows\n\n## GUI Workflow: Scan → Analyze → Review → ReOrganize\n\nThe GUI implements a linear 4-step state machine. Each step must complete successfully before the next button is enabled.\n\n**Trigger:** User launches `WcsPhotoOrganizer.exe` (or `./bin/start.sh`) and clicks through each tab in sequence.\n\n**Reads:** `config.ini` (folder paths, behavior flags), `data/directory_states.txt` (preferred-directory overrides)\n**Writes:** `data/scan_data.pkl`, `data/scan_summary.txt`, `data/files_to_copy.txt`; optionally moves/copies files to `final_photo_folder`\n\n```mermaid\nflowchart TD\n  A([Launch App]) --> B[Tab 1: Scan\\nIndex all source folders\\nWrites scan_data.pkl]\n  B -->|scan complete| C[Tab 2: Preferences / Analyze\\nApply preferred-dir rules\\nWrites files_to_copy.txt]\n  C -->|analysis complete| D[Tab 3: Review Copy Plan\\nInspect every planned operation]\n  D -->|user clicks Approve| E[Tab 4: ReOrganize\\nExecute copy/move plan\\nLive log viewer]\n  E --> F([Done])\n```\n\nEach step runs in a background thread; the GUI remains responsive and displays a live progress counter. State flags (`scan_completed`, `analysis_completed`, `plan_approved`) control which buttons are active.\n\n---\n\n## CLI Pipeline: photo_scan → photo_analyze → photo_dedup\n\nThe headless pipeline mirrors the GUI workflow exactly and is designed for WSL or automation use. All three steps share the same `data/` directory as the hand-off point.\n\n**Trigger:** Manual invocation or shell script chaining.\n\n**Reads:** `config.ini`, `data/directory_states.txt`\n**Writes:** `data/scan_data.pkl` → `data/files_to_copy.txt` → (live mode) files copied/moved to `final_photo_folder`\n\n```mermaid\nsequenceDiagram\n  participant User\n  participant scan as photo_scan.sh\\n(cli_scan.py)\n  participant analyze as photo_analyze.sh\\n(cli_analyze.py)\n  participant dedup as photo_dedup.sh\\n(cli_dedup.py)\n  participant data as data/\n\n  User->>scan: ./bin/photo_scan.sh\n  scan->>data: scan_data.pkl, scan_summary.txt\n  User->>analyze: ./bin/photo_analyze.sh\n  analyze->>data: reads scan_data.pkl\n  analyze->>data: files_to_copy.txt\n  User->>dedup: ./bin/photo_dedup.sh (dry-run)\n  dedup->>User: prints planned operations\n  User->>dedup: ./bin/photo_dedup.sh --live\n  dedup->>data: reads files_to_copy.txt\n  dedup->>User: copies/moves files to final_photo_folder\n```\n\n`photo_dedup.sh` defaults to dry-run: it prints every operation without touching files. Passing `--live` executes the plan, but only if `config.ini` also has `change_source_directory = True` (double-gating).\n\n---\n\n## Duplicate Resolution Flow\n\nFor each unique file signature (`stripped_filename + \"~|~\" + size`) found in multiple locations, the scanner applies this decision tree to decide what goes into the copy plan:\n\n```mermaid\nflowchart TD\n  A([File signature found in multiple locations]) --> B{Any copy in a\\npreferred directory?}\n  B -->|Yes| C[Skip entirely — already home\\nNo entry in files_to_copy.txt]\n  B -->|No| D[Select source: non-preferred dir\\nwith the highest file count]\n  D --> E[Compute target_subdir:\\nrelative path from source root]\n  E --> F{Target filename\\nalready exists?}\n  F -->|No| G[COPY/MOVE entry added]\n  F -->|Yes| H[Append -2, -3 suffix\\nCOPY/MOVE entry added]\n```\n", "DEVELOPMENT": "# Photo Organizer/Deduplicator — Development\n\n## Dev Setup\n\nDevelopment happens in WSL. The application itself runs on Windows.\n\n```bash\n# Clone and enter project\ncd /mnt/c/Users/barlo/projects/ezdocs\n\n# Create Python venv (for linting/tooling — app uses system Python)\npython3 -m venv venv\nsource venv/bin/activate\n\n# Copy config template\ncp config.ini.sample config.ini\n```\n\n> **WSL vs Windows build:** Running `python3 src/WcsPhotoOrganizer.py` from WSL works for UI development. Building the `.exe` requires Windows Python (`python.exe`) — WSL's Python produces a Linux ELF binary.\n\n## Running\n\n```bash\n# Run GUI directly (development)\npython3 src/WcsPhotoOrganizer.py\n\n# Run scanner standalone (test scanning logic)\npython3 src/scanner.py\n\n# Run from Windows Python (test Windows behavior)\npython.exe src/WcsPhotoOrganizer.py\n```\n\n## Building\n\n```bash\n# Build from WSL (recommended)\n./bin/build.sh\n\n# Or call Windows batch directly\n/mnt/c/Windows/System32/cmd.exe /c bin\\\\build_installer.bat\n\n# Clean build artifacts\n./bin/remove_build_artifacts.sh\n```\n\n`bin/build.sh` invokes `python.exe -m PyInstaller --clean WcsPhotoOrganizer.spec` then Inno Setup (if installed) to produce the full installer.\n\n## Build Outputs\n\n| File | Description |\n|---|---|\n| `dist/WcsPhotoOrganizer.exe` | Standalone Windows executable — distribute directly or via installer |\n| `installer_output/WcsPhotoOrganizer_v*.exe` | Full Windows installer — recommended for end users |\n\n## Installer\n\n`installer.iss` is an Inno Setup script that packages the PyInstaller EXE into a professional Windows installer with Start Menu and Desktop shortcuts, license agreement, and an uninstaller. Requires [Inno Setup 6](https://jrsoftware.org/isdl.php).\n\n```bash\n# Build just the EXE (no installer)\npython.exe -m PyInstaller --clean WcsPhotoOrganizer.spec\n\n# Full installer build from WSL\n./bin/build.sh\n```\n"};
+
+marked.setOptions({ gfm: true, breaks: false });
+
+function clearActive() {
+  document.querySelectorAll('.sn, .sn-sub').forEach(function(a) { a.classList.remove('active'); });
+}
+
+function show(id) {
+  document.querySelectorAll('.content-section').forEach(function(s) { s.classList.remove('active'); });
+  var sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  clearActive();
+  document.querySelector('main').scrollTop = 0;
+}
+
+function showGuide(key) {
+  var content = GUIDES[key];
+  if (!content) return;
+  var guideEl = document.getElementById('guide-content');
+  guideEl.innerHTML = marked.parse(content);
+  runMermaid(guideEl);
+  show('guide');
+  clearActive();
+  document.querySelectorAll('[data-key="' + key + '"]').forEach(function(el) {
+    if (el.classList.contains('sn')) el.classList.add('active');
+  });
+}
+
+function showGuideSection(key, anchor) {
+  showGuide(key);
+  clearActive();
+  document.querySelectorAll('[data-key="' + key + '"]').forEach(function(el) { el.classList.add('active'); });
+  setTimeout(function() {
+    var headings = document.querySelectorAll('#guide-content h2, #guide-content h3');
+    for (var i = 0; i < headings.length; i++) {
+      var id = headings[i].textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      if (id === anchor) {
+        headings[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      }
+    }
+  }, 50);
+}
+
+function convertMermaidBlocks(container) {
+  container.querySelectorAll('pre > code.language-mermaid').forEach(function(code) {
+    var div = document.createElement('div');
+    div.className = 'mermaid';
+    div.textContent = code.textContent;
+    code.parentNode.parentNode.replaceChild(div, code.parentNode);
+  });
+}
+
+function runMermaid(container) {
+  convertMermaidBlocks(container);
+  if (window.mermaid) {
+    var nodes = Array.from(container.querySelectorAll('.mermaid:not([data-processed])'));
+    if (nodes.length) window.mermaid.run({ nodes: nodes });
+  }
+}
+
+(function() {
+  var overview = GUIDES['OVERVIEW'] || '';
+  var el = document.getElementById('home-overview');
+  if (el && overview) { el.innerHTML = marked.parse(overview); runMermaid(el); }
+  show('home');
+})();
+</script>
+
+</div><!-- .layout -->
+</body>
+</html>

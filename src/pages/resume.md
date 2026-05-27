@@ -4,7 +4,7 @@ layout: ../layouts/Resume.astro
 
 # Edward Barlow - AI Adoption Consultant
 
-> Active **AI Enabled Developer** with solid understanding of the latest trends and best practices
+> Active **AI Engineer/Devloper** with solid understanding of latest trends and development best practices.
 
 **West Chester, PA | (914) 837-4798**
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**
@@ -12,9 +12,9 @@ layout: ../layouts/Resume.astro
 ---
 ## PROFESSIONAL SUMMARY
 
-**AI Enablement Engineer**.  Building Agentic best practices framework for devops, project interoperability/build standards, and shared services within a UI for command and control.  AI Agents are used only at core spots in the process/workflow and python is used extenively for reproducable processing for cost optimization.
+**Senior AI Engineer & Agentic Platform Builder.** Multi-agent pipelines with RAG, tools, orchestration, and MCP.  My harness optimizes for context and accuracy with feedback and guardrails. Delivered enterprise AI document automation for a $87B private credit firm. Actively building a Framework to share software project capabilities in a single pane of glass devops.  Published Specification driven design framework. 
 
-**Technical Leader with 30+ years of hands-on leadership** driving delivery of high performance solutions, critical infrastructure, and managing enterprise data for leading financial companies and insurance companies. Starupt Experience. Full Stack Engineering Leader with deep technical expertise across the engineering stack.
+**Technical Leader with 30+ years of hands-on leadership** driving delivery of high-performance solutions, critical infrastructure, and managing enterprise data for leading financial companies and insurance companies. Startup experience. Full Stack Engineering Leader with deep technical expertise across the engineering stack.
 
 **Leadership approach:** Active listener and communicator who translates business concepts into actionable technical plans for execution of stakeholder vision in a quality-focused collaborative culture. Detail oriented. 
 
@@ -44,7 +44,7 @@ layout: ../layouts/Resume.astro
 
 **Data & Streaming:** Kafka, ELT/ETL Pipelines, DBT, Delta Lake
 
-**AI**: Pydantic ADK, Anthropic/OpenAI Sdk & Cli, MCP, UV/ruff, Agent Specification By Role, Orchestration, AWS/Bedrock, Best Practices
+**AI:** Pydantic ADK, Anthropic/OpenAI SDK & CLI, MCP, LangChain, RAG Pipelines, Vector Search, ChromaDB, Sentence Transformers, UV/ruff, Agent Specification By Role, LLM Orchestration, AWS/Bedrock, Guardrails, Evals, Best Practices
 
 ---
 <div style="page-break-after: always"></div>
@@ -53,16 +53,17 @@ layout: ../layouts/Resume.astro
 
 ### WEB CLOUD STUDIO
 **Principal/Founder** | 11/2025-Present
-- Building AI developer enablement platform for sharing projects and resource (data/databases/servers) among distributed teams
-- Full-SDLC Platform/Framework using existing DevOps and Process Best Practices
-- "reproducable-build" workflow from specifications
-- See Portfolio
-- Technologies: Python, Anthropic Claude API, Django/Flask, UV/ruff, Pydantic, Anthropic/OpenAI SDK, AWS/Bedrock
+- Designed and built the GAME Framework — agentic SDLC platform providing namespaced project visibility, shared capability catalog (REST/CLI/MCP), reproducible builds, and single-pane-of-glass DevOps for distributed teams
+- Developed full RAG pipeline (ChromaDB, sentence-transformers) for document retrieval and LLM grounding
+- Multi-agent orchestration layer with tool calling, agent/skill registry, guardrails, and observability telemetry
+- Full-SDLC specification-driven "reproducible-build" workflow from specifications with enforced code review and documentation standards
+- Technologies: Python, Anthropic Claude API, LangChain, RAG, ChromaDB, Django/Flask, UV/ruff, Pydantic, Anthropic/OpenAI SDK, MCP, AWS/Bedrock
 
 ### FUTURE STANDARD INVESTMENTS
 **VP - Lead Engineer** | 09/2024 - 11/2025
-- Led core 2025 AI document management initiative for $87B private credit firm.  Automated documents flow and routing from GP's into internal systems. 
-- Responsible for Core Dealcloud Workflow System 
+- Led core 2025 AI document management initiative for $87B private credit firm — automated document ingestion, routing, and processing pipelines from GPs into internal systems
+- Responsible for Core Dealcloud Workflow System supporting deal execution and portfolio monitoring operations
+- Technologies: Python, Azure, Dealcloud
 
 ### EVERNORTH HEALTH SERVICES LLC (CIGNA) 
 **Software Engineering Senior Advisor** | 05/2020 - 09/2024
@@ -88,7 +89,6 @@ layout: ../layouts/Resume.astro
 - Designed/Tuned Java API and REST microservice architecture for high-performance streaming Internet of Things platform 
 - Developed Kafka-streamed reporting data warehouse plus 200+ operational reports enabling product and business teams
 - Established monitoring, alerting, and on-call practices for business-critical systems
-- Kafka streamed reporting warehouse for 200+ operational reports using skinned Jaspersoft
 - Technologies: Kafka, Python, PostgreSQL, Java, Jenkins, Docker/Kubernetes, Tableau, Elasticsearch (ELK), Jasper Reports, Crystal Reports, Bash, Angular
 
 ### MILLENNIUM PARTNERS LLC
@@ -140,6 +140,8 @@ Bachelor of Engineering, Electrical Engineering
 ---
 
 ## PUBLICATIONS & PROJECTS
+
+Principal: **GAME Framework** (2025–Present) — Agentic SDLC platform merging process-based methodology with LLM-driven development; provides shared capability catalog (REST/CLI/MCP), reproducible builds, and single-pane-of-glass DevOps for distributed teams. See edbarlow.net.
 
 Author: **Process-Based Database Administration** (2017) - Best practices for scaling IT platforms, governance, and operational excellence
 

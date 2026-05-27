@@ -1,5 +1,12 @@
 {
   "logo": "Ed Barlow",
+  "nav": [
+    {"label": "Home",        "href": "/"},
+    {"label": "Projects",    "href": "/projects/"},
+    {"label": "Dev Process", "href": "/dev-process/"},
+    {"label": "Agile AI",    "href": "/agile-ai/"},
+    {"label": "About Me",    "href": "/resume/"}
+  ],
   "name": "Ed Barlow",
   "tagline": "Software engineer, database architect, and published author. Building thoughtful systems for complex problems.",
   "email": "edward.m.barlow@gmail.com",

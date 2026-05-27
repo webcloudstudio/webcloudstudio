@@ -19,12 +19,16 @@
       "href": "/projects/"
     },
     {
-      "label": "Dev Process",
+      "label": "Prototyper",
       "href": "/dev-process/"
     },
     {
-      "label": "Agile AI",
+      "label": "Project Assistant",
       "href": "/agile-ai/"
+    },
+    {
+      "label": "Oneshots",
+      "href": "/oneshot/"
     },
     {
       "label": "About Me",

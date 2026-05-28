@@ -2,22 +2,31 @@
 
 ## What It Is
 
-GAME is a Python-based developer framework that gives agentic developers complete visibility and control over every project they own — from a single dashboard. It solves the fragmented tooling problem: scattered scripts, inconsistent project structures, no unified way to run operations, monitor health, or expose capabilities to AI agents. GAME scans your projects directory at startup, reads each project's metadata and scripts, and presents everything through a polished operations center. Developers get instant access to project status, runnable scripts, health monitoring, documentation, and a portfolio publisher — all without changing how they build.
+- A Python-based developer framework that gives agentic developers complete visibility and control over their projects and projects they download.
+
+- Solves the fragmented tooling problem where all your projects run and behave differently so you must acclimate. Now they all can be run the same way and their core capabilities are exposed for your other proects to call.  
+
+- Projects are conformed to simple annotation standards - such that they all
+behave similarly.  Their capabilities and metadata are scanned by the engine and then exposed via mcp AND via python.  
+
+- An polished operations center guides the flow.  Developers get live access to project status, runnable scripts, health monitoring, documentation for their
+projects with no cost or changes.  
 
 ## What It Can Do
 
-- Scans all projects on startup and builds a live service catalog from `METADATA.md`, `bin/` scripts, `AGENTS.md` endpoints, and MCP tool manifests
-- Launches any registered `bin/` script as a background job with full log capture, live status tracking, and stop control from the dashboard
-- Monitors service health via HTTP/TCP polling with uptime tracking, state-change alerts, and an interleaved event log across all projects
-- Publishes a static portfolio site to GitHub Pages by rendering project metadata through Jinja2 templates — no Astro, no npm required
-- Hosts and manages developer-created MCP servers: discovers, registers, starts, stops, and exposes them on configurable network ports
-- Runs a generic workflow state machine (specification tickets, deployments, reviews) with full transition history and event emission
-- Provides a file-based async message queue that accepts work even when the server is down and drains automatically on startup
-- Exposes all project capabilities through five unified transports: REST, CLI (`game-cli.sh`), MCP, async queue, and web UI
+- Conforms projects using annotations to standard methedology
+- Scans all projects on startup and builds a live capability catalog from `METADATA.md`, `bin/` scripts, `AGENTS.md` endpoints, and MCP tool manifests
+- Command, Control, & Observability for conformed projects
+- Monitors service health, Scheduled Jobs with uptime tracking, state-change alerts, and cross project log searching. 
+- Hosts and manages developer-created MCP servers: discovers, registers, starts, stops, and exposes them on capability catalog
+- Runs simple workflow state machines (specification updates, project namespaces)
+- Provides (file-based) async message queue 
+- Exposes your project capabilities through five unified transports: REST, CLI (`game-cli.sh`), MCP, async queue, and web UI
+- Dashboard / Single Pane of Glass
 
-## Built on Specification Driven Design
+## Built via My Specification Driven Design
 
-GAME is a live showcase of the Prototyper methodology — a Specification Driven Design workflow where AI agents build applications directly from structured specification files rather than hand-written code. The project was originally prototyped conventionally, then completely rebuilt from its own specification files using AI agents. GAME actively supports and integrates with this workflow: it tracks specification directories, surfaces validation checks, and provides a Workflow screen for managing specification tickets through their full lifecycle. The full specification and rules engine for GAME weighs approximately 18,498 tokens — the scale at which AI-driven builds become a meaningful advantage over manual implementation.
+GAME is a live showcase of the Prototyper methodology — a Specification Driven Design workflow where AI agents build applications directly from structured specification files rather than hand-written code. The project was originally prototyped conventionally, then completely rebuilt from its own specification files using AI agents. GAME actively supports and integrates with this workflow: it tracks specification directories, surfaces validation checks, and provides a Workflow screen for managing specification tickets through their full lifecycle. The specification for GAME weighs in at (100K tokens) and Build Rules (65K Tokens) and branding (5K Tokens) rules.  I reliably build with sonnet using about 20 customized prompts totalling (24K Tokens).   
 
 ## Architecture Overview
 

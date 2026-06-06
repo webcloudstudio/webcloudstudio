@@ -107,16 +107,10 @@ Fields:
 
 ## Traceability
 
-Every build creates an annotated git tag:
-
-Single-shot: `oneshot/MyProject/2026-04-02.1`
-Phased: `oneshot/MyProject/2026-04-02.1.phased`
-
-Tags are permanent. Diff between builds at the spec level:
-
-```bash
-git diff oneshot/MyProject/2026-03-20.1..oneshot/MyProject/2026-04-02.1 -- MyProject/
-```
+Each phase records its provenance in `<target>/logs/oneshot_phase_N_meta.json` (`spec_commit`,
+per-file content hashes, `build_plan_hash`) and in `data/executions.jsonl` (`spec_commit` +
+`code_commit` per phase). Rebuild decisions compare the recorded file hashes against the current
+specification — only changed phases rebuild.
 
 ## Examples
 

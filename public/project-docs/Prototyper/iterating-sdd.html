@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How To Iterate a Specification Driven Design</title>
+<link rel="stylesheet" href="styles/spec.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad:false, theme:'neutral', flowchart:{curve:'linear',nodeSpacing:40,rankSpacing:35,padding:16} });</script>
+
+<style>
+body {
+  background: var(--c-bg); color: var(--c-text);
+  font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+  margin: 0; padding: 0; min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+.page-header { background: var(--c-topbar-bg); border-bottom: 1px solid var(--c-side-border); }
+.page-content { max-width: 860px; margin: 0 auto; padding: 36px 36px 80px; flex: 1; }
+
+/* ---- Cover ---- */
+.cover { border-bottom: 2px solid var(--c-accent); padding-bottom: 16px; margin-bottom: 28px; }
+.cover-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--c-accent); margin-bottom: 12px; }
+.cover h1 { font-size: 32px; font-weight: 800; color: var(--c-h1); line-height: 1.15; margin-bottom: 10px; }
+.cover-sub { font-size: 15px; color: var(--c-h3); margin-bottom: 18px; line-height: 1.6; }
+.cover-meta { font-size: 12px; color: var(--c-h3); display: flex; gap: 24px; }
+.cover--with-logo { display: flex; align-items: center; gap: 32px; }
+.cover--with-logo .cover-text { flex: 1 1 auto; min-width: 0; }
+.cover-logo { flex: 0 0 auto; width: 150px; height: auto; }
+@media (max-width: 640px) { .cover--with-logo { flex-direction: column; align-items: flex-start; gap: 16px; } .cover-logo { width: 110px; } }
+
+/* ---- Ideas (staggered light bulbs) ---- */
+.wp-ideas { margin: 0 0 8px; }
+.wp-ideas-title { font-size: 17px; font-weight: 700; color: var(--c-h1); border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin: 8px 0 16px; }
+.wp-ideas-intro { font-size: 13.5px; color: var(--c-h3); font-style: italic; line-height: 1.65; margin: 0 0 16px; }
+.wp-idea { display: flex; gap: 12px; align-items: flex-start; background: var(--c-callout-bg); border-left: 3px solid var(--c-accent); border-radius: 0 5px 5px 0; padding: 11px 16px; margin: 0 0 10px; }
+.wp-idea-bulb { font-size: 20px; line-height: 1.2; flex-shrink: 0; }
+.wp-idea-text { font-size: 14px; line-height: 1.6; }
+.wp-idea-text strong { color: var(--c-h1); }
+
+/* ---- Body prose ---- */
+.wp-section { margin-top: 36px; }
+.wp-section h2 { font-size: 17px; font-weight: 700; color: var(--c-h1); border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin-bottom: 12px; }
+.wp-section h3 { font-size: 14px; font-weight: 600; color: var(--c-h3); margin: 16px 0 6px; }
+.wp-section p { margin: 8px 0; line-height: 1.7; font-size: 14px; }
+.wp-section ul { margin: 6px 0 6px 20px; }
+.wp-section li { margin: 3px 0; font-size: 14px; line-height: 1.6; }
+.wp-section code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; background: var(--c-code-bg); color: var(--c-code-text); padding: 1px 5px; border-radius: 3px; }
+.wp-section em { font-style: italic; color: var(--c-h1); }
+
+/* ---- Tables ---- */
+.wp-section table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13px; }
+.wp-section th { background: var(--c-th-bg); color: var(--c-h3); text-align: left; padding: 7px 12px; border-bottom: 2px solid var(--c-td-border); font-weight: 700; }
+.wp-section td { padding: 7px 12px; border-bottom: 1px solid var(--c-td-border); line-height: 1.5; vertical-align: top; }
+.wp-section tr:nth-child(even) td { background: var(--c-tr-alt); }
+.wp-section td code { white-space: nowrap; }
+
+/* ---- Screenshots ---- */
+.wp-section img { max-width: 100%; height: auto; display: block;
+  border: 1px solid var(--c-td-border); border-radius: 6px;
+  margin: 14px 0 4px; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+.wp-section p > img + em,
+.wp-section p:has(img) + p > em { font-size: 11px; color: var(--c-h3); display: block; margin: 2px 0 14px; }
+
+/* ---- Callout (blockquote or .wp-callout) ---- */
+.wp-section blockquote, .wp-callout { background: var(--c-callout-bg); border-left: 3px solid var(--c-accent); border-radius: 0 4px 4px 0; padding: 12px 16px; margin: 16px 0; font-size: 14px; line-height: 1.65; }
+.wp-section blockquote p { margin: 0; }
+
+/* ---- Diagrams ---- */
+.wp-diagram { background: var(--c-pre-bg); border: 1px solid var(--c-td-border); border-radius: 6px; padding: 18px 14px 10px; margin: 16px 0; overflow-x: auto; }
+.wp-diagram-cap { font-size: 11px; color: var(--c-h3); margin: 4px 0 0 2px; font-style: italic; }
+#wp-workflows { margin-top: 28px; }
+
+/* ---- Legend ---- */
+.wp-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0; font-size: 12px; }
+.wp-legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--c-h3); }
+.wp-swatch { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+
+/* ---- Footer ---- */
+footer { padding: 14px 36px; border-top: 1px solid var(--c-td-border); font-size: 11px; color: var(--c-h3); display: flex; justify-content: space-between; max-width: 860px; margin: 0 auto; width: 100%; }
+</style>
+</head>
+<body>
+
+<header class="page-header gem-header">
+  <div class="gem-header-left">
+    <span class="gem-header-logo">Prototyper</span>
+    <span class="gem-header-title">How To Iterate a Specification Driven Design</span>
+  </div>
+  <span class="gem-header-copyright">Ed Barlow &middot; Web Cloud Studio</span>
+</header>
+
+<div class="page-content">
+
+<div class="cover">
+  <div class="cover-eyebrow">Four iteration loops, and the one that worked</div>
+  <h1>How To Iterate a Specification Driven Design</h1>
+  <div class="cover-sub">In Specification Driven Design the specification is the source of truth and code is generated from it. The hard part is not the first build &mdash; it is the <strong>second</strong>. When a defect or a change request arrives, how do you fold it back without letting the specification rot, without rebuilding the whole system, and without losing the change in a backlog? This paper traces four approaches to that question, the way each one failed, and the model that replaced them: edit the specification directly, contain the blast radius with typed encapsulation, and let an interface&#8209;based dependency tree decide what to rebuild.</div>
+  <div class="cover-meta"><span>Ed Barlow</span><span>Web Cloud Studio &middot; 2026</span></div>
+</div>
+
+<div class="wp-ideas">
+  <h2 class="wp-ideas-title">Core Ideas</h2>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The specification is the source of truth — so iterate the specification, not the code</strong> Every loop that tried to capture changes somewhere other than the specification eventually let the specification rot. The durable answer is to edit the specification directly and re-apply it.</div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>Fragility is architectural, not a tracking problem</strong> A one-line storage change rippling through the whole system is a symptom of code reaching past its boundaries. Typed encapsulation classes absorb the change so most of the system never needs to know.</div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The dependency boundary is the interface, not the file</strong> A specification edit dirties a downstream artifact only when the typed interface or the API contract it depends on actually changes. A storage-internal change dirties nothing.</div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>Staleness must survive a clone</strong> Modification times do not survive git. Recording a content hash per input file at build time is the durable signal — and a Version bump changes the hash for free.</div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>One action, three intentions</strong> SPEC edits the specification, TGT patches code in an emergency, BOTH does both in one session. BOTH is the default because it never lets the two drift apart.</div></div>
+</div>
+
+<div class="wp-body" id="wp-body"></div>
+
+</div>
+
+<footer>
+  <span>Ed Barlow</span>
+  <span>Web Cloud Studio &middot; 2026</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const BODY = "## The Problem\n\nThe first build of a Specification Driven Design project is the easy case. A clean specification\ngoes in, an AI agent expands it against the stack rules, and a working system comes out. The\nspecification is the source of truth and the code is a projection of it.\n\nThen reality arrives. A defect is found. A field needs a timezone. A screen needs a column. The\nquestion is no longer \"how do I build this\" but \"how do I fold this change back into a living\nsystem.\" Three failure modes lurk in that question:\n\n- **Specification rot.** If the change is made to the code and not the specification, the two\n  diverge. The next full build silently reverts the fix. The source of truth quietly stops being\n  true.\n- **Over-rebuild.** If the change touches a foundational file, a naive build rebuilds everything\n  that file touches \u2014 which, for a database or an architecture file, is the whole system.\n- **Lost changes.** If the change is parked in a backlog to be applied later, the backlog grows,\n  the context evaporates, and the change is applied long after the person who understood it has\n  moved on.\n\nThis paper is the history of getting that loop wrong three times, and the model that finally\ngot it right.\n\n## Loop 1 \u2014 Capture changes from the session log (`tran_logger.sh`)\n\nThe first instinct was automation. After an interactive session with the agent, a tool read the\nsession transcript, extracted what looked like bugs and decisions, and wrote them back into the\nspecification directory as numbered tickets.\n\nIt failed on signal-to-noise. A working session contains exploration, dead ends, and thinking\naloud. Extracting \"the changes\" from that stream produced tickets that were sometimes wrong,\nfrequently redundant, and always required human review before they could be trusted. The tool\nadded a step without removing one. It was retired.\n\n> **Lesson:** A transcript is a record of how a decision was reached, not a statement of the\n> decision. Mining intent out of process is harder than simply stating the intent.\n\n## Loop 2 \u2014 Log changes, apply in batches (`change_log.sh`, `/sdd`, `iterate_batch.sh`)\n\nThe second loop made the human state the change explicitly. A defect became a one-line entry in a\n`CHANGE_LOG.md` \u2014 a pipe-delimited record of date, type, scope, and description. A batch runner\nlater read the log, grouped entries by scope, and applied each group.\n\nThis was more honest than mining a transcript, but it was clunky in practice. The log was a second\nplace to look, separate from the specification. Each pending change drove its own apply pass, so a\nhandful of small fixes became a handful of separate agent sessions. And the entries described the\nchange without making it \u2014 the specification still did not reflect reality until the batch ran.\n\n> **Lesson:** A change log is a queue, and a queue is latency. The longer a change sits described\n> but not applied, the more the specification lies about the system.\n\n## Loop 3 \u2014 Fix the specification and re-build\n\nThe third loop dropped the intermediary entirely: edit the specification, then re-run the build.\nThis was correct in principle \u2014 the specification stayed the source of truth \u2014 and it is most of\nthe answer. But it exposed the over-rebuild problem in full.\n\nA one-line change to a database file forced a rebuild of every phase that database file touched.\nBecause foundational files are context for the entire build, \"every phase that touches it\" meant\n\"every phase.\" A trivial, safe change became an expensive, risky rebuild, and the operator learned\nto fear editing the foundation at all.\n\nTwo things were missing: a way to know which downstream artifacts a change actually invalidated,\nand an architecture in which a small change stayed small.\n\n> **Lesson:** Editing the specification is right. Rebuilding indiscriminately is not. The build\n> needs to know the difference between a change that ripples and a change that does not.\n\n## The Answer, Part 1 \u2014 Contain the blast radius with encapsulation\n\nThe over-rebuild problem was treated first as a tracking problem and then, correctly, as an\narchitectural one. A one-line storage change rippling through the whole system is a symptom: it\nmeans application code reaches directly into storage, so every reader is coupled to the storage\nshape.\n\nThe cloud layer never had this problem. A single library owned every external service; application\ncode that imported the cloud SDK directly failed review. Swapping or changing a service touched one\nclass. The fix was to generalize that discipline to every persistent store:\n\n- Each database table is a typed row plus a CRUD class, composed into one `Database` class.\n- All environment access goes through one typed `Config` class.\n- File access goes through a `FileStore` class.\n- External services are wrapped in classes over a shared base class.\n\nWith the boundary in place, the database file is no longer a global dependency. It is the\nimplementation behind a typed interface. A change to storage internals \u2014 a new index, a default, a\ntightened format inside an existing field \u2014 is absorbed by the class and is invisible to everything\nupstream.\n\n> **The interface, not the schema, is the dependency boundary.** A storage change that leaves the\n> interface unchanged invalidates nothing downstream.\n\n## The Answer, Part 2 \u2014 The specification dependency tree\n\nEncapsulation shrinks the blast radius; the dependency tree measures what remains. Every\nspecification file carries machine-maintained relationship headers. `Provides` lists the routes a\nfeature exposes. `Depends On` lists the files a screen or feature requires. A scanner derives these\nby matching the routes a screen references to the features that provide them.\n\n```mermaid\nflowchart TD\n  classDef dir    fill:#0a5c38,stroke:#2cb67d,color:#fff,font-weight:bold\n  classDef md     fill:#d4a017,stroke:#a07810,color:#111,font-weight:bold\n  classDef script fill:#1e40af,stroke:#3b5fc0,color:#fff,font-weight:bold\n\n  DB{{\"DATABASE.md\\ntyped Database class\"}}:::md\n  FEAT{{\"FEATURE-*.md\\nProvides: routes\"}}:::md\n  SCRN{{\"SCREEN-*.md\\nDepends On: features\"}}:::md\n  REL[\"build_spec_relationships.py\"]:::script\n\n  REL -.-> FEAT\n  REL -.-> SCRN\n  DB --> FEAT\n  FEAT --> SCRN\n```\n\n*The tree is derived, not hand-written. Features depend on the database through its typed class;\nscreens depend on features through their routes.*\n\nThis tree turns \"what did I just invalidate\" into a bounded question. When a feature is edited, its\ndependent screens are exactly the ones whose routes it provides. When the database is edited, the\ncandidate set is the features that use it. The tree supplies the candidates; the interface rule\ndecides which ones are genuinely stale.\n\n## The Answer, Part 3 \u2014 Interface-based dirtying\n\nWhen the operator edits a base specification, the agent that made the change is responsible for\nmarking the downstream artifacts the change actually invalidated. It does so by bumping only the\n`Version` header of each affected file. The rule is interface-based:\n\n- **Editing `DATABASE.md` or `ARCHITECTURE.md`:** dirty a feature only if the typed access\n  interface it uses changed \u2014 a method signature, a field it reads, a config key, a service\n  method. A storage-internal change dirties nothing.\n- **Editing a `FEATURE`:** dirty a screen only if the API behavior or the route set changed.\n  Identical routes and identical behavior dirty nothing.\n\nA `Version` bump is a real, committed change to the file. Unlike a touched modification time, it\nsurvives a clone, it appears in a diff, and it changes the file's content hash \u2014 which is exactly\nwhat the build watches.\n\n## The Answer, Part 4 \u2014 Build records and hash-based staleness\n\nEach phase of a build records, in its metadata, the content hash of every specification file that\nfed it, plus the specification commit. On the next build, a phase is stale when any of its input\nhashes differs from the recorded hash. Nothing else rebuilds.\n\nThis is durable where modification times are not. A fresh clone resets every file's timestamp, so a\ntimestamp-based check would rebuild everything on a machine that had built nothing. A content hash\ndepends only on the bytes, so it gives the same answer everywhere. And because the dirtying rule\nbumps a downstream file's `Version`, that file's hash changes, and the phase that built it is\nmarked stale \u2014 automatically and selectively.\n\n## The Answer, Part 5 \u2014 One command, three intentions (`iterate.sh`)\n\nThe loop is now a single command with an action that names the intent:\n\n```mermaid\nflowchart LR\n  classDef dir    fill:#0a5c38,stroke:#2cb67d,color:#fff,font-weight:bold\n  classDef md     fill:#d4a017,stroke:#a07810,color:#111,font-weight:bold\n  classDef script fill:#1e40af,stroke:#3b5fc0,color:#fff,font-weight:bold\n\n  REQ([\"Change request\"]):::dir --> IT[\"iterate.sh\\nSPEC \u00b7 TGT \u00b7 BOTH\"]:::script\n  IT --> SP{{\"Specification\\nedited + Version bumped\"}}:::md\n  SP --> DTY{{\"Downstream specs\\ndirtied by interface rule\"}}:::md\n  IT --> CODE[(\"Application code\")]:::dir\n  DTY -.-> BUILD[\"oneshot_phased.sh\\nrebuilds only stale phases\"]:::script\n```\n\n*BOTH edits the specification and applies it to code in one session; SPEC edits the specification\nonly; TGT is a code-only emergency fix.*\n\n- **SPEC** edits the specification only. Use it when a full rebuild will follow.\n- **TGT** patches the application code only and leaves the specification untouched. It is the\n  emergency hotfix, and it is the one path that knowingly accepts drift.\n- **BOTH** edits the specification, dirties the downstream, then applies the change to the code in\n  the same session. It is the default, because for a small project the cost of doing both is low\n  and it never lets the specification and the code drift apart.\n\nAfter a specification edit, the relationship headers are refreshed so the next iteration reasons\nabout the current tree. The change is made once, in the right place, and the build rebuilds only\nwhat the change reached.\n\n## Principles\n\nThe four loops reduce to a short list of principles that hold beyond this toolchain:\n\n1. **Iterate the source of truth.** If the specification is authoritative, the change belongs in\n   the specification \u2014 not a transcript, not a log, not the code alone.\n2. **Make small changes small.** Contain coupling behind typed interfaces so a change to an\n   implementation does not become a change to everything that uses it.\n3. **Invalidate by interface, not by file.** A dependent is stale only when the contract it relies\n   on changed.\n4. **Choose a staleness signal that survives a clone.** Content hashes do; timestamps do not.\n5. **Name the intent.** An explicit action \u2014 specification, code, or both \u2014 beats a flag, and a\n   sensible default beats a decision the operator has to make every time.";
+marked.setOptions({ gfm: true, breaks: false });
+
+function sectionize(container) {
+  var nodes = Array.from(container.childNodes);
+  container.innerHTML = '';
+  var cur = null;
+  nodes.forEach(function (node) {
+    if (node.nodeType === 1 && node.tagName === 'H2') {
+      cur = document.createElement('div');
+      cur.className = 'wp-section';
+      container.appendChild(cur);
+      cur.appendChild(node);
+    } else if (cur) {
+      cur.appendChild(node);
+    } else {
+      container.appendChild(node);
+    }
+  });
+}
+
+function decorateDiagrams(container) {
+  // marked renders ```mermaid as <pre><code class="language-mermaid"> — wrap in a panel,
+  // pull an italic-only following paragraph in as the caption.
+  container.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
+    var pre = code.parentNode;
+    var cap = pre.nextElementSibling;
+    var wrap = document.createElement('div');
+    wrap.className = 'wp-diagram';
+    var div = document.createElement('div');
+    div.className = 'mermaid';
+    div.textContent = code.textContent;
+    wrap.appendChild(div);
+    pre.parentNode.replaceChild(wrap, pre);
+    if (cap && cap.tagName === 'P' && cap.children.length === 1 &&
+        cap.firstElementChild.tagName === 'EM' &&
+        cap.textContent.trim() === cap.firstElementChild.textContent.trim()) {
+      var c = document.createElement('div');
+      c.className = 'wp-diagram-cap';
+      c.textContent = cap.textContent.trim();
+      wrap.appendChild(c);
+      cap.parentNode.removeChild(cap);
+    }
+  });
+}
+
+function runMermaid(container) {
+  if (window.mermaid) {
+    var nodes = Array.from(container.querySelectorAll('.mermaid:not([data-processed])'));
+    if (nodes.length) window.mermaid.run({ nodes: nodes });
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  var body = document.getElementById('wp-body');
+  body.innerHTML = marked.parse(BODY);
+  sectionize(body);
+  decorateDiagrams(body);
+  runMermaid(body);
+  
+});
+</script>
+</body>
+</html>

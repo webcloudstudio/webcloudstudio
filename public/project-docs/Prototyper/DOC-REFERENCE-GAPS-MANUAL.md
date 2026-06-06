@@ -85,7 +85,7 @@ Code not following stack conventions:
 bin/start.sh uses nohup
 - Stack/common.md prescribes foreground under tee
 - Code violates: "nohup python3 run.py &"
-- Action: Create PATCH-NNN-FIX-START-SH.md; rerun oneshot --update
+- Action: iterate.sh <Project> SPEC start.sh "run in foreground under tee, no nohup", then rebuild
 ```
 
 ## Workflow
@@ -93,9 +93,8 @@ bin/start.sh uses nohup
 1. Build prototype with `oneshot.sh` or `oneshot_phased.sh`
 2. Run `bash bin/update_reference_gaps.sh <ProjectName>`
 3. Review `REFERENCE_GAPS.md` to identify priority gaps
-4. Update spec files or create `PATCH-NNN-*.md` tickets
-5. Run `bash bin/oneshot.sh <ProjectName> --update` to apply changes
-6. Re-run `update_reference_gaps.sh` to verify gaps are closed
+4. Close each gap with `iterate.sh` (edits the spec, then applies it to code), or add `AC-NNN-*.md` guardrails for behaviors that must not regress
+5. Re-run `update_reference_gaps.sh` to verify gaps are closed
 
 ## Integration with Other Tools
 

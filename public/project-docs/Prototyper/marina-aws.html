@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marina on AWS — A Hybrid Control Plane</title>
+<link rel="stylesheet" href="styles/spec.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad:false, theme:'neutral', flowchart:{curve:'linear',nodeSpacing:40,rankSpacing:35,padding:16} });</script>
+
+<style>
+body {
+  background: var(--c-bg); color: var(--c-text);
+  font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+  margin: 0; padding: 0; min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+.page-header { background: var(--c-topbar-bg); border-bottom: 1px solid var(--c-side-border); }
+.page-content { max-width: 860px; margin: 0 auto; padding: 36px 36px 80px; flex: 1; }
+
+/* ---- Cover ---- */
+.cover { border-bottom: 2px solid var(--c-accent); padding-bottom: 16px; margin-bottom: 28px; }
+.cover-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--c-accent); margin-bottom: 12px; }
+.cover h1 { font-size: 32px; font-weight: 800; color: var(--c-h1); line-height: 1.15; margin-bottom: 10px; }
+.cover-sub { font-size: 15px; color: var(--c-h3); margin-bottom: 18px; line-height: 1.6; }
+.cover-meta { font-size: 12px; color: var(--c-h3); display: flex; gap: 24px; }
+.cover--with-logo { display: flex; align-items: center; gap: 32px; }
+.cover--with-logo .cover-text { flex: 1 1 auto; min-width: 0; }
+.cover-logo { flex: 0 0 auto; width: 150px; height: auto; }
+@media (max-width: 640px) { .cover--with-logo { flex-direction: column; align-items: flex-start; gap: 16px; } .cover-logo { width: 110px; } }
+
+/* ---- Ideas (staggered light bulbs) ---- */
+.wp-ideas { margin: 0 0 8px; }
+.wp-ideas-title { font-size: 17px; font-weight: 700; color: var(--c-h1); border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin: 8px 0 16px; }
+.wp-ideas-intro { font-size: 13.5px; color: var(--c-h3); font-style: italic; line-height: 1.65; margin: 0 0 16px; }
+.wp-idea { display: flex; gap: 12px; align-items: flex-start; background: var(--c-callout-bg); border-left: 3px solid var(--c-accent); border-radius: 0 5px 5px 0; padding: 11px 16px; margin: 0 0 10px; }
+.wp-idea-bulb { font-size: 20px; line-height: 1.2; flex-shrink: 0; }
+.wp-idea-text { font-size: 14px; line-height: 1.6; }
+.wp-idea-text strong { color: var(--c-h1); }
+
+/* ---- Body prose ---- */
+.wp-section { margin-top: 36px; }
+.wp-section h2 { font-size: 17px; font-weight: 700; color: var(--c-h1); border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin-bottom: 12px; }
+.wp-section h3 { font-size: 14px; font-weight: 600; color: var(--c-h3); margin: 16px 0 6px; }
+.wp-section p { margin: 8px 0; line-height: 1.7; font-size: 14px; }
+.wp-section ul { margin: 6px 0 6px 20px; }
+.wp-section li { margin: 3px 0; font-size: 14px; line-height: 1.6; }
+.wp-section code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; background: var(--c-code-bg); color: var(--c-code-text); padding: 1px 5px; border-radius: 3px; }
+.wp-section em { font-style: italic; color: var(--c-h1); }
+
+/* ---- Tables ---- */
+.wp-section table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13px; }
+.wp-section th { background: var(--c-th-bg); color: var(--c-h3); text-align: left; padding: 7px 12px; border-bottom: 2px solid var(--c-td-border); font-weight: 700; }
+.wp-section td { padding: 7px 12px; border-bottom: 1px solid var(--c-td-border); line-height: 1.5; vertical-align: top; }
+.wp-section tr:nth-child(even) td { background: var(--c-tr-alt); }
+.wp-section td code { white-space: nowrap; }
+
+/* ---- Screenshots ---- */
+.wp-section img { max-width: 100%; height: auto; display: block;
+  border: 1px solid var(--c-td-border); border-radius: 6px;
+  margin: 14px 0 4px; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+.wp-section p > img + em,
+.wp-section p:has(img) + p > em { font-size: 11px; color: var(--c-h3); display: block; margin: 2px 0 14px; }
+
+/* ---- Callout (blockquote or .wp-callout) ---- */
+.wp-section blockquote, .wp-callout { background: var(--c-callout-bg); border-left: 3px solid var(--c-accent); border-radius: 0 4px 4px 0; padding: 12px 16px; margin: 16px 0; font-size: 14px; line-height: 1.65; }
+.wp-section blockquote p { margin: 0; }
+
+/* ---- Diagrams ---- */
+.wp-diagram { background: var(--c-pre-bg); border: 1px solid var(--c-td-border); border-radius: 6px; padding: 18px 14px 10px; margin: 16px 0; overflow-x: auto; }
+.wp-diagram-cap { font-size: 11px; color: var(--c-h3); margin: 4px 0 0 2px; font-style: italic; }
+#wp-workflows { margin-top: 28px; }
+
+/* ---- Legend ---- */
+.wp-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0; font-size: 12px; }
+.wp-legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--c-h3); }
+.wp-swatch { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+
+/* ---- Footer ---- */
+footer { padding: 14px 36px; border-top: 1px solid var(--c-td-border); font-size: 11px; color: var(--c-h3); display: flex; justify-content: space-between; max-width: 860px; margin: 0 auto; width: 100%; }
+</style>
+</head>
+<body>
+
+<header class="page-header gem-header">
+  <div class="gem-header-left">
+    <span class="gem-header-logo">Prototyper</span>
+    <span class="gem-header-title">Marina / AWS</span>
+  </div>
+  <span class="gem-header-copyright">Ed Barlow &middot; Web Cloud Studio</span>
+</header>
+
+<div class="page-content">
+
+<div class="cover">
+  <div class="cover-eyebrow">Cloud Adoption Decision</div>
+  <h1>Marina on AWS — A Hybrid Control Plane</h1>
+  <div class="cover-sub">Marina (working name GAME) is a local-first control plane that conforms projects to standards and gives the owner observability and command-and-control over them. This paper analyses what moving to AWS means, recommends a two-plane hybrid that keeps operations local while broadcasting state to pay-per-call cloud services, and presents a decision table for selecting which services to adopt.</div>
+  <div class="cover-meta"><span>Ed Barlow</span><span>Web Cloud Studio &middot; 2026</span></div>
+</div>
+
+
+
+<div class="wp-body" id="wp-body"></div>
+
+</div>
+
+<footer>
+  <span>Ed Barlow</span>
+  <span>Web Cloud Studio &middot; 2026</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const BODY = "## Executive Summary\n\nMarina is, today, a single-host Flask application that runs entirely on the developer's machine. It\nscans local directories, forks `bin/` scripts, polls `localhost` health endpoints, ingests local log\nfiles, and hosts MCP servers on a local port range. These operations are **intrinsically local** \u2014\nthey act on local processes, local disk, and local PIDs. They cannot move to AWS, and they should not.\n\nWhat the owner identified as worth broadcasting \u2014 the **capability catalog, project metadata, and\nlast-known health** \u2014 is read-mostly state. That state should live in the cloud, where it is reachable\n24\u00d77 even when the laptop is off. The conclusion is a hybrid, not a migration.\n\n> **The one non-negotiable: the home network exposes zero inbound.** The local agent makes only\n> outbound HTTPS calls to AWS. There is no port forward, no public IP on the home side, and nothing to\n> attack inbound. This directly answers the project's founding worry \u2014 that home networks are \"very\n> vulnerable from attacks that direction.\" The cloud split *strengthens* the security perimeter rather\n> than weakening it.\n\n### The two planes\n\n```mermaid\nflowchart LR\n  subgraph LOCAL[\"Plane A \u2014 Local Control Plane (home machine, zero inbound)\"]\n    SC[Scanner] --> AG[Local Agent]\n    PE[Process Engine] --> AG\n    LI[Log Ingestor] --> AG\n    UI[Flask UI] --> AG\n  end\n  AG -- \"outbound HTTPS, SigV4\" --> APIGW\n  subgraph CLOUD[\"Plane B \u2014 Cloud Broadcast Plane (serverless, scales to zero)\"]\n    APIGW[API Gateway HTTP API] --> L[Lambda \u00b7 boto3]\n    L --> DDB[(DynamoDB on-demand)]\n    L --> SQS[[SQS]]\n    L --> S3[(S3)]\n  end\n  AGENT[Agents / circle of trust] -- \"OAuth \u00b7 MCP\" --> GW[AgentCore Gateway]\n  GW --> APIGW\n  READER[Browsers / remote tools] -- \"GET catalog 24x7\" --> APIGW\n```\n\n*Operations stay local because the things they act on are local. State is published outward; reads are served by the cloud.*\n\n## Feature-by-Feature Mapping\n\n| Marina feature | Verdict | AWS service | Phase |\n|---|---|---|---|\n| SQLite catalog / state | Move (projection) | DynamoDB on-demand, single-table | P1 |\n| Catalog & capability read API | Move (read 24\u00d77) | API Gateway HTTP API + Lambda | P1 |\n| Heartbeat / event ingest | Move (ingest 24\u00d77) | API Gateway + Lambda \u2192 DynamoDB | P2 |\n| AsyncQueue (JSONL store-and-forward) | Replace | SQS (pay-per-request) | P2 |\n| VoiceForward upload | Split \u2014 capture cloud, transcribe local | API Gateway \u2192 S3 + SQS | P2 |\n| MCP hosting / capability sharing | Promote-to-remote | AgentCore Gateway + Identity | P3 |\n| Scanner / process engine / log ingestor / scheduler | Stay local | \u2014 | \u2014 |\n| Docker per-project isolation | Stay local; optional cloud burst | ECS Fargate | P4 |\n\nThe async queue is the clearest swap. The specification's own rationale \u2014 \"a phone sends a voice note\nat 2 AM, the server is down, drain on startup\" \u2014 is the canonical SQS use case. The local drain pulls\nmessages when the machine is alive; the queue itself never sleeps. VoiceForward follows the same split:\ncapture audio to S3 and enqueue a job 24\u00d77, but keep the expensive Whisper transcription local so there\nis no GPU cost.\n\n## Decision Table\n\nMark one decision per row. The recommendation column is the analysis position; the cost column is the\nestimated monthly spend at this scale (a handful of projects, light sporadic traffic).\n\n| AWS service | Replaces / provides | Recommendation | Est. $/mo | Your decision |\n|---|---|---|---|---|\n| **DynamoDB on-demand** | SQLite catalog projection | **Adopt P1** | ~$0 (cents) | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **API Gateway HTTP API** | Public 24\u00d77 read/ingest surface | **Adopt P1** | ~$0\u20131 | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **Lambda (boto3)** | Catalog/ingest compute | **Adopt P1** | ~$0 (free tier) | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **SQS** | AsyncQueue transport | **Adopt P2** | ~$0 (free tier) | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **S3** | VoiceForward audio capture | **Adopt P2** | ~$0\u20131 | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **AgentCore Gateway** | MCP tool exposure to circle of trust | **Adopt P3** | ~$1\u20135 (usage) | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **AgentCore Identity** | OAuth / credential brokering for agents | **Adopt P3** | ~$0\u20131 | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **Cognito** | Human / team auth (circle of trust) | **Adopt P3** | ~$0 (free tier MAUs) | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **WAF** | Abuse / cost protection on API Gateway | **Optional P1** | ~$6\u20138 (has a floor) | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **SSM Parameter Store** | Local agent credentials (preferred) | **Adopt P1** | $0 (standard tier) | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **Secrets Manager** | Credentials needing rotation | Defer (use SSM unless rotation needed) | ~$0.40/secret | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **ECS Fargate** | Sporadic cloud container runs | **Adopt P4 (optional)** | ~$0 idle | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **Aurora Serverless v2** | Relational catalog (alternative to DynamoDB) | **Skip for catalog** | floor applies | \u2610 Adopt \u2610 Defer \u2610 Skip |\n| **EKS / Kubernetes** | Always-on orchestration | **Skip** | ~$73+ floor | \u2610 Adopt \u2610 Defer \u2610 Skip |\n\n### DynamoDB over Aurora\n\nThe owner likes Aurora but needs on-demand, not always-on. Aurora Serverless v2 now scales to a low\nfloor and can pause, but it carries cold-start latency and a standing monthly cost, and it is overkill\nfor a catalog that is essentially key-value. **DynamoDB on-demand is the better \"costs next to nothing\"\nfit**: pay-per-request, no idle charge, cents per month at this scale. Keep Aurora Serverless v2 (or\nAurora DSQL) in reserve only if a future feature genuinely needs relational SQL \u2014 joins or ad-hoc\nqueries across projects. Do not adopt Aurora for the catalog.\n\n### Kubernetes is not recommended\n\nEKS carries a control-plane floor of roughly seventy dollars per month before any nodes, which\ncontradicts the near-zero-cost goal. Keep workloads local \u2014 Docker provides the per-project isolation\nalready specified in the Docker architecture \u2014 and use Fargate for the occasional cloud run. Revisit\nKubernetes only if Marina grows into many always-on shared services.\n\n### WAF is the one real floor\n\nWAF is the only service in the P1 path with a standing monthly cost (~$6\u20138). It is **optional**: API\nGateway's own throttling and usage plans, combined with IAM (SigV4) and Cognito authorization, provide\nadequate protection for a private circle of trust at zero floor. Adopt WAF only if the catalog is\nopened to the broader internet.\n\n## Security Framework\n\nThe local agent is **outbound-only**. It signs requests to API Gateway with SigV4 (native to boto3),\npushes catalog, heartbeat, and event data upward, and long-polls SQS for inbound work. It never opens a\nlistener on the public internet.\n\nThe public surface \u2014 API Gateway plus Lambda \u2014 is hardened with:\n\n- **IAM / SigV4** for machine-to-machine callers (the local agent, remote cron jobs).\n- **Cognito or AgentCore Identity (JWT / OAuth)** for humans and agents in the circle of trust.\n- **API Gateway throttling and usage plans** to cap abuse and cost; **WAF** optionally on top.\n- **Least-privilege IAM** for the local agent: write only its own catalog partition, read only its own\n  queue, write only its own S3 prefix.\n- **SSM Parameter Store / Secrets Manager** for the local agent's scoped credentials.\n\nThe authorization model already exists in the specification. The capability schema in\n`SPECIFICATION_CONTRACT.md` carries `permissions: { owners, access }`. Those owners map directly to IAM\nor Cognito groups \u2014 there is no new authorization concept to invent. DynamoDB items are partitioned by\nowner: one AWS account per owner to start, multi-tenant partition keys when sharing across the circle\nof trust.\n\n## Phasing\n\n1. **Phase 1 \u2014 Broadcast catalog (MVP, zero idle).** DynamoDB on-demand, API Gateway HTTP API, and\n   Lambda. The local agent publishes catalog and metadata on each scan; the cloud serves the catalog\n   and capability reads 24\u00d77. SigV4 plus optional WAF.\n2. **Phase 2 \u2014 Durable ingest.** SQS for the async queue and S3 for VoiceForward capture, with\n   heartbeat and event ingest Lambdas. The local drain pulls when alive; remote producers work 24\u00d77.\n3. **Phase 3 \u2014 Secure capability sharing.** AgentCore Gateway and Identity expose the catalog as MCP\n   tools to the circle of trust over OAuth, retiring the raw-port `.mcp.json` exposure model.\n4. **Phase 4 (optional) \u2014 Cloud burst.** Fargate task definitions for sporadic containerized runs,\n   reusing the Dockerfiles already generated by the conformance layer.\n\n## Cost Model\n\n| Path | Services | Estimated $/mo |\n|---|---|---|\n| **P1 only** (read catalog) | DynamoDB + API Gateway + Lambda + SSM | **~$0\u20132** (add ~$6\u20138 if WAF) |\n| **P1\u2013P3** (catalog + ingest + sharing) | + SQS + S3 + AgentCore + Cognito | **~$2\u20139** without WAF; **~$8\u201317** with WAF |\n\nThe dominant variable is WAF. Everything else lives within or near free-tier limits at this scale.\nAgentCore pricing is newer and usage-based; the figures above are conservative estimates and should be\nconfirmed against current AWS pricing before Phase 3.\n\n## Open Questions\n\n- **AWS account model:** one shared account with per-owner partition keys, or one account per owner?\n  Recommendation: start single-account, partitioned by owner.\n- **AgentCore pricing:** confirm Gateway and Identity consumption pricing before committing Phase 3.\n- **Catalog audience:** private circle of trust only (no WAF needed), or internet-facing (WAF\n  recommended)?\n- **Deployment tooling:** CloudFormation, CDK, Terraform, or raw boto3 scripts for provisioning the\n  cloud plane? The owner prefers boto3 for application code; infrastructure provisioning is a separate\n  choice.\n\n*Next stage, after the decisions above are marked: author the `FEATURE-CLOUD-*` and\n`ARCHITECTURE-CLOUD.md` specifications in the Specifications repository for the selected services only.*";
+marked.setOptions({ gfm: true, breaks: false });
+
+function sectionize(container) {
+  var nodes = Array.from(container.childNodes);
+  container.innerHTML = '';
+  var cur = null;
+  nodes.forEach(function (node) {
+    if (node.nodeType === 1 && node.tagName === 'H2') {
+      cur = document.createElement('div');
+      cur.className = 'wp-section';
+      container.appendChild(cur);
+      cur.appendChild(node);
+    } else if (cur) {
+      cur.appendChild(node);
+    } else {
+      container.appendChild(node);
+    }
+  });
+}
+
+function decorateDiagrams(container) {
+  // marked renders ```mermaid as <pre><code class="language-mermaid"> — wrap in a panel,
+  // pull an italic-only following paragraph in as the caption.
+  container.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
+    var pre = code.parentNode;
+    var cap = pre.nextElementSibling;
+    var wrap = document.createElement('div');
+    wrap.className = 'wp-diagram';
+    var div = document.createElement('div');
+    div.className = 'mermaid';
+    div.textContent = code.textContent;
+    wrap.appendChild(div);
+    pre.parentNode.replaceChild(wrap, pre);
+    if (cap && cap.tagName === 'P' && cap.children.length === 1 &&
+        cap.firstElementChild.tagName === 'EM' &&
+        cap.textContent.trim() === cap.firstElementChild.textContent.trim()) {
+      var c = document.createElement('div');
+      c.className = 'wp-diagram-cap';
+      c.textContent = cap.textContent.trim();
+      wrap.appendChild(c);
+      cap.parentNode.removeChild(cap);
+    }
+  });
+}
+
+function runMermaid(container) {
+  if (window.mermaid) {
+    var nodes = Array.from(container.querySelectorAll('.mermaid:not([data-processed])'));
+    if (nodes.length) window.mermaid.run({ nodes: nodes });
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  var body = document.getElementById('wp-body');
+  body.innerHTML = marked.parse(BODY);
+  sectionize(body);
+  decorateDiagrams(body);
+  runMermaid(body);
+  
+});
+</script>
+</body>
+</html>

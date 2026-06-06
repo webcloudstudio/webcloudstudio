@@ -6,6 +6,7 @@ interface Props {
 }
 const { title, description = `${site.logo} — Software Portfolio` } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const papers = (site as any).papers ?? [];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -179,6 +180,22 @@ const base = import.meta.env.BASE_URL;
       }
       .contact-item:hover { color: var(--accent); text-decoration: none; }
       .contact-item svg { flex-shrink: 0; color: var(--accent); }
+
+      /* papers dropdown — reuses .contact-card, left-aligned under its label */
+      .nav-dropdown-label {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: color 0.2s;
+        cursor: pointer;
+      }
+      .nav-dropdown:hover .nav-dropdown-label,
+      .nav-dropdown:focus-within .nav-dropdown-label { color: var(--text); text-decoration: none; }
+      .nav-dropdown-label .caret { font-size: 0.7rem; opacity: 0.7; }
+      .nav-dropdown-card { left: 0; right: auto; min-width: 210px; }
+      .nav-dropdown-card::before { left: 18px; right: auto; }
+      .nav-dropdown-card .contact-item { font-size: 0.88rem; }
 
       /* ── MAIN ── */
       main { flex: 1; padding-top: 68px; }
@@ -609,7 +626,18 @@ const base = import.meta.env.BASE_URL;
         <a href={base} class="logo">{site.logo}</a>
         <div class="nav-links">
           {site.nav.map((item: {label: string; href: string}) => (
-            <a href={item.href}>{item.label}</a>
+            item.href === '/papers/' && papers.length ? (
+              <div class="contact-trigger nav-dropdown">
+                <a href={item.href} class="nav-dropdown-label">{item.label} <span class="caret">▾</span></a>
+                <div class="contact-card nav-dropdown-card" role="menu">
+                  {papers.map((p: {label: string; slug: string}) => (
+                    <a href={`${base}${p.slug}/`} class="contact-item" role="menuitem">{p.label}</a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a href={item.href}>{item.label}</a>
+            )
           ))}
           <div class="contact-trigger">
             <button class="nav-contact-btn">Contact</button>

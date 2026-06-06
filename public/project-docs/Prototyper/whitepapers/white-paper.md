@@ -22,7 +22,7 @@ Each project is defined by a small set of markdown files in a permissioned Speci
 
 - `METADATA.md` — identity, stack, status, manual metadata for the project
 - `ARCHITECTURE.md` — mandatory architecture (modules, routes, directory layout...)
-- `DATABASE.md` — tables, columns, types (schema only — implementation separate)
+- `DATABASE.md` — persistence contract: every store (SQLite schema, `.env` keys, file stores, external services) and the typed class that encapsulates each
 - `FUNCTIONALITY.md` — what the application does at a high level
 - `SCREEN-*.md` — per-screen: route, layout, interactions
 - `FEATURE-*.md` — per-feature: trigger, sequence, reads, writes
@@ -39,14 +39,21 @@ software build agents follow exactly — no creative interpretation.
 
 ## Iteration
 
-After the initial build, changes flow through the specification — not through ad-hoc code edits.
-Numbered tickets (`SCREEN-NNN-*.md`, `FEATURE-NNN-*.md`, `PATCH-NNN-*.md`) describe focused changes.
-The `iterate.sh` script assembles these into an iteration prompt that the AI agent applies to the
-existing codebase.
+After the initial build, changes flow through the specification — never through ad-hoc code edits.
+`iterate.sh <Project> [TargetDir] <Action> <Scope> "<Change>"` runs a single Claude session that
+edits the specification and applies the change to code. Action BOTH (default) does both; SPEC edits
+the specification only; TGT is a code-only hotfix. Editing a base file (DATABASE, ARCHITECTURE)
+dirties a downstream feature only when its typed access interface changed, and dirties screens only
+when a feature's provided routes changed — so unaffected phases are never rebuilt. The Scope argument
+resolves a URL path, a keyword, or a filename to the right spec file; TargetDir auto-resolves from the
+last build.
 
-Quality tools keep things on track: `scorecard.sh` measures specification-to-code alignment,
-`spec_iterate.sh` identifies specification gaps, and `tran_logger.sh` extracts bugs and ideas from
-AI session logs.
+For projects whose scope is small but uncertain, the **Agile Team Oneshot** mode delegates the build
+to an AI team and keeps you as product owner, reviewing spikes and stories through a per-project
+Console. See the *Agile Team Oneshot* paper.
+
+Quality tools keep things on track: `scorecard.sh` measures specification-to-code alignment, and
+`spec_iterate.sh` identifies specification gaps.
 
 ## Promotion
 

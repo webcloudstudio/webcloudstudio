@@ -8,7 +8,7 @@
   "copyright": "Web Cloud Studio — Ed Barlow",
   "section_title": "My Projects",
   "section_subtitle": "",
-  "home_html": "<h2>Current Project:  The GAME Framework for Agentic Development</h2>\n<p>I have combined my <a href=\"https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC\">Process Based Methodology</a> and scale-proven <a href=\"https://webcloudstudio.com/project-docs/Specifications/Features.html\">Technology Rules</a> into an agentic developer Framework.</p>\n<p>The concept is exciting.  Contact me if you want to collaborate.</p>\n<p><strong>Summary</strong>: LLMs enable developers to create quickly. The creations differ and do not work together.  The GAME framework provides a best practice stack and a mechanism to \"conform\" projects such that they work together, work in the same way, and be managed from a single pane of glass.  GAME provides a professional devops workflow with full project observability and control.</p>\n<p>Key Concept: Annotations and Scripts expose project capabilities in a uniform way with no code impact.</p>\n<p>Key Concept: Agents enforce best practices, branding, and security - easily customized defaults provided (its text)</p>\n<p>Key Concept: A Capability Catalog disovers project capabilities and advertises these as a complete tools catalog (MCP for python) </p>\n<p>Key Concept: Capabilities include services, data, and servers.  You share your technologies securely and use your capabilities in your Agentic Development.</p>\n<p>Key Concept: Conformed code is enables an enterprise command center with enterprise features like Logging, Monitoring &amp; Alerting, Scheduling, Pipelines...</p>\n<h3>The GAME Framework contains</h3>\n<ul>\n<li>A <strong>Command Center</strong> provides namespaced views into your projects.</li>\n<li>A <strong>Capability Catalog</strong> broadcasts/shares your tooling in a \"MCP for python\" manner (transport agnostic: REST, CLI, Async, MCP)</li>\n<li>A <strong>Prototyper</strong> enables context aware reproducible builds from base specifications for home developers</li>\n<li><strong>Simple Workflows</strong> enable control of your projects and change management</li>\n</ul>\n<h3>OUT OF THE BOX Enterprise Operations</h3>\n<p>Monitoring, Documentation, Scheduled tasks, Security, Data Flows, and Sharing of your \"STUFF\".</p>\n<h3>Who I am</h3>\n<p><strong>Hands On Backend Technology Leader</strong> at hedge funds, investment banks, insurance companies, and startups </p>\n<p><strong>Author</strong>, <strong>Speaker</strong>, <strong>Free Software Developer</strong></p>",
+  "home_html": "<div style=\"margin:2.25rem 0;padding:1.5rem 1.75rem;background:#0e0e1a;border:1px solid #252540;border-radius:12px;\">\n  <h3 style=\"margin:0 0 1.1rem;font-size:1.15rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;\">📄 Recent AI White Papers</h3>\n  <ul style=\"list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.7rem;\">\n    <li><a href=\"/proto/\" target=\"_blank\" rel=\"noopener\" style=\"color:#4f9cf9;font-weight:600;text-decoration:none;\">Spec Driven Design Methodology &#8599;</a><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">Best-practice specification-driven SDLC — overview and the full paper set.</span></li>\n    <li><a href=\"/iterating-sdd/\" target=\"_blank\" rel=\"noopener\" style=\"color:#4f9cf9;font-weight:600;text-decoration:none;\">How to Iterate in Spec Driven Design &#8599;</a><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">How to change the spec and target so you can reproduce — four tries and my choice.</span></li>\n    <li><a href=\"/oneshot/\" target=\"_blank\" rel=\"noopener\" style=\"color:#4f9cf9;font-weight:600;text-decoration:none;\">Your Agile Team — SDD Build Model &#8599;</a><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">For small token-count work — an agile workflow for uncertainty management; you are Product Owner.</span></li>\n    <li><a href=\"/marina-aws/\" target=\"_blank\" rel=\"noopener\" style=\"color:#4f9cf9;font-weight:600;text-decoration:none;\">The Marina Framework &#8599;</a><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">My big SDD implementation — a trust and sharing architecture on AWS.</span></li>\n    <li><a href=\"/pc-setup/\" target=\"_blank\" rel=\"noopener\" style=\"color:#4f9cf9;font-weight:600;text-decoration:none;\">My Workstation Setup &#8599;</a><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">My workstation and how I work on projects — WSL, Docker, tooling.</span></li>\n  </ul>\n</div>\n\n<div style=\"margin:2.25rem 0;padding:1.5rem 1.75rem;background:#0e0e1a;border:1px solid #252540;border-radius:12px;\">\n  <h3 style=\"margin:0 0 1.1rem;font-size:1.15rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;\">🚀 Current Project: The Marina Framework</h3>\n  <p style=\"margin:0 0 1.1rem;color:#cbd5e1;font-size:0.95rem;line-height:1.6;\"><a href=\"https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC\" target=\"_blank\" rel=\"noopener\" style=\"color:#4f9cf9;font-weight:600;text-decoration:none;\">Process Based Methodology</a> and scale-proven <a href=\"https://webcloudstudio.com/project-docs/Specifications/Features.html\" target=\"_blank\" rel=\"noopener\" style=\"color:#4f9cf9;font-weight:600;text-decoration:none;\">Technology Rules</a> combine to \"conform\" your projects so they expose/encapsulate capabilities and enable an Enterprise Command Center.</p>\n  <ul style=\"list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.7rem;\">\n    <li><span style=\"color:#f1f5f9;font-weight:600;\">Project Capabilities Catalog</span><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">Services, Data, Shared Resources.</span></li>\n    <li><span style=\"color:#f1f5f9;font-weight:600;\">Agents enforce standards</span><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">Your Stack best practices, Your branding, and Automatic security.</span></li>\n    <li><span style=\"color:#f1f5f9;font-weight:600;\">Conformed Documentation</span><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">Consistent docs across all your projects.</span></li>\n    <li><span style=\"color:#f1f5f9;font-weight:600;\">Enterprise Command Center</span><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">Logging, Monitoring &amp; Alerting, Scheduling, Pipelines.</span></li>\n    <li><span style=\"color:#f1f5f9;font-weight:600;\">AWS Integration</span><span style=\"display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;\">Single Library For AWS Service Integration - Built on their ultra low cost services.</span></li>\n  </ul>\n</div>",
   "nav": [
     {
       "label": "Home",
@@ -19,20 +19,44 @@
       "href": "/projects/"
     },
     {
-      "label": "Prototyper",
-      "href": "/dev-process/"
-    },
-    {
-      "label": "Project Assistant",
-      "href": "/agile-ai/"
-    },
-    {
-      "label": "Oneshots",
-      "href": "/oneshot/"
+      "label": "Papers",
+      "href": "/papers/"
     },
     {
       "label": "About Me",
       "href": "/resume/"
+    }
+  ],
+  "papers": [
+    {
+      "label": "Spec Driven Design Methodology",
+      "slug": "proto",
+      "src": "project-docs/Prototyper/index.html",
+      "description": "Best-practice specification-driven SDLC — overview and the full paper set."
+    },
+    {
+      "label": "How to Iterate in Spec Driven Design",
+      "slug": "iterating-sdd",
+      "src": "project-docs/Prototyper/iterating-sdd.html",
+      "description": "How to change the spec and target so you can reproduce — four tries and my choice."
+    },
+    {
+      "label": "Your Agile Team — SDD Build Model",
+      "slug": "oneshot",
+      "src": "project-docs/Prototyper/oneshot.html",
+      "description": "For small token-count work — an agile workflow for uncertainty management; you are Product Owner."
+    },
+    {
+      "label": "The Marina Framework",
+      "slug": "marina-aws",
+      "src": "project-docs/Prototyper/marina-aws.html",
+      "description": "My big SDD implementation — a trust and sharing architecture on AWS."
+    },
+    {
+      "label": "My Workstation Setup",
+      "slug": "pc-setup",
+      "src": "project-docs/Prototyper/ed_barlow_setup.html",
+      "description": "My workstation and how I work on projects — WSL, Docker, tooling."
     }
   ]
 }

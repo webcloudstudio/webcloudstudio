@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+<Layout title="Papers — Ed Barlow">
+  <section class="projects">
+    <div class="section-inner">
+      <div class="work-header">
+        <h2>White Papers</h2>
+      </div>
+      <div class="card-grid">
+        <a href={`${base}proto/`} target="_blank" rel="noopener" class="card card--featured">
+          <div class="card-top">
+            <div class="card-meta">
+              <span class="card-type">White Paper</span>
+              <h3 class="card-title">Spec Driven Design Methodology</h3>
+            </div>
+          </div>
+          <p class="card-desc">Best-practice specification-driven SDLC — overview and the full paper set.</p>
+          <div class="card-actions">
+            <span class="btn-primary btn-sm">Read ↗</span>
+          </div>
+        </a>
+        <a href={`${base}iterating-sdd/`} target="_blank" rel="noopener" class="card card--featured">
+          <div class="card-top">
+            <div class="card-meta">
+              <span class="card-type">White Paper</span>
+              <h3 class="card-title">How to Iterate in Spec Driven Design</h3>
+            </div>
+          </div>
+          <p class="card-desc">How to change the spec and target so you can reproduce — four tries and my choice.</p>
+          <div class="card-actions">
+            <span class="btn-primary btn-sm">Read ↗</span>
+          </div>
+        </a>
+        <a href={`${base}oneshot/`} target="_blank" rel="noopener" class="card card--featured">
+          <div class="card-top">
+            <div class="card-meta">
+              <span class="card-type">White Paper</span>
+              <h3 class="card-title">Your Agile Team — SDD Build Model</h3>
+            </div>
+          </div>
+          <p class="card-desc">For small token-count work — an agile workflow for uncertainty management; you are Product Owner.</p>
+          <div class="card-actions">
+            <span class="btn-primary btn-sm">Read ↗</span>
+          </div>
+        </a>
+        <a href={`${base}marina-aws/`} target="_blank" rel="noopener" class="card card--featured">
+          <div class="card-top">
+            <div class="card-meta">
+              <span class="card-type">White Paper</span>
+              <h3 class="card-title">The Marina Framework</h3>
+            </div>
+          </div>
+          <p class="card-desc">My big SDD implementation — a trust and sharing architecture on AWS.</p>
+          <div class="card-actions">
+            <span class="btn-primary btn-sm">Read ↗</span>
+          </div>
+        </a>
+        <a href={`${base}pc-setup/`} target="_blank" rel="noopener" class="card card--featured">
+          <div class="card-top">
+            <div class="card-meta">
+              <span class="card-type">White Paper</span>
+              <h3 class="card-title">My Workstation Setup</h3>
+            </div>
+          </div>
+          <p class="card-desc">My workstation and how I work on projects — WSL, Docker, tooling.</p>
+          <div class="card-actions">
+            <span class="btn-primary btn-sm">Read ↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

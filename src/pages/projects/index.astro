@@ -27,8 +27,30 @@ import Layout from '../../layouts/Layout.astro';
           </div>
 
           <div class="card-actions">
-            <a href="/project-docs/GAME/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
+            <a href="/project-docs/GAME/index.html" target="_blank" rel="noopener" class="card-link-btn">Docs ↗</a>
             <a href="/project-docs/GAME/index.html" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
+          </div>
+        </article>
+
+        <!-- CARD: Builder -->
+        <article class="card">
+          <div class="card-image-wrapper">
+            <img src="/images/prototyper.webp" alt="Builder" class="card-image"/>
+          </div>
+
+          <div class="card-content">
+            <div class="tags">
+              <span class="tag tag--{'bg': '#4ade80', 'text': '#1a2e1a'}">AI Framework</span>
+            </div>
+
+            <h3 class="card-title">Builder</h3>
+
+            <p class="card-desc">Specification Driven Development Framework With Opinionated Stack and Enterprise Technology Business Rules.  A framework for larger applications.</p>
+          </div>
+
+          <div class="card-actions">
+            <a href="/project-docs/Prototyper/index.html" target="_blank" rel="noopener" class="card-link-btn">Docs ↗</a>
+            <a href="/project-docs/Prototyper/Features.html" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
           </div>
         </article>
 
@@ -73,28 +95,6 @@ import Layout from '../../layouts/Layout.astro';
           <div class="card-actions">
             <a href="/project-docs/ezdocs/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
             
-          </div>
-        </article>
-
-        <!-- CARD: Project Prototyper -->
-        <article class="card">
-          <div class="card-image-wrapper">
-            <img src="/images/prototyper.webp" alt="Project Prototyper" class="card-image"/>
-          </div>
-
-          <div class="card-content">
-            <div class="tags">
-              <span class="tag tag--{'bg': '#4ade80', 'text': '#1a2e1a'}">AI Framework</span>
-            </div>
-
-            <h3 class="card-title">Project Prototyper</h3>
-
-            <p class="card-desc">Specification Driven Development Framework With Opinionated Stack and Enterprise Technology Business Rules.  A framework for larger applications.</p>
-          </div>
-
-          <div class="card-actions">
-            <a href="/project-docs/Prototyper/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
-            <a href="/project-docs/Prototyper/Features.html" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
           </div>
         </article>
 
@@ -350,7 +350,7 @@ import Layout from '../../layouts/Layout.astro';
       padding: 0.4rem 0.75rem 0.6rem;
       margin-top: auto !important;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 0.35rem;
     }
 

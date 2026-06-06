@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agile Team Oneshot Build Model</title>
+<link rel="stylesheet" href="styles/spec.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad:false, theme:'neutral', flowchart:{curve:'linear',nodeSpacing:40,rankSpacing:35,padding:16} });</script>
+
+<style>
+body {
+  background: var(--c-bg); color: var(--c-text);
+  font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+  margin: 0; padding: 0; min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+.page-header { background: var(--c-topbar-bg); border-bottom: 1px solid var(--c-side-border); }
+.page-content { max-width: 860px; margin: 0 auto; padding: 36px 36px 80px; flex: 1; }
+
+/* ---- Cover ---- */
+.cover { border-bottom: 2px solid var(--c-accent); padding-bottom: 16px; margin-bottom: 28px; }
+.cover-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--c-accent); margin-bottom: 12px; }
+.cover h1 { font-size: 32px; font-weight: 800; color: var(--c-h1); line-height: 1.15; margin-bottom: 10px; }
+.cover-sub { font-size: 15px; color: var(--c-h3); margin-bottom: 18px; line-height: 1.6; }
+.cover-meta { font-size: 12px; color: var(--c-h3); display: flex; gap: 24px; }
+.cover--with-logo { display: flex; align-items: center; gap: 32px; }
+.cover--with-logo .cover-text { flex: 1 1 auto; min-width: 0; }
+.cover-logo { flex: 0 0 auto; width: 150px; height: auto; }
+@media (max-width: 640px) { .cover--with-logo { flex-direction: column; align-items: flex-start; gap: 16px; } .cover-logo { width: 110px; } }
+
+/* ---- Ideas (staggered light bulbs) ---- */
+.wp-ideas { margin: 0 0 8px; }
+.wp-ideas-title { font-size: 17px; font-weight: 700; color: var(--c-h1); border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin: 8px 0 16px; }
+.wp-ideas-intro { font-size: 13.5px; color: var(--c-h3); font-style: italic; line-height: 1.65; margin: 0 0 16px; }
+.wp-idea { display: flex; gap: 12px; align-items: flex-start; background: var(--c-callout-bg); border-left: 3px solid var(--c-accent); border-radius: 0 5px 5px 0; padding: 11px 16px; margin: 0 0 10px; }
+.wp-idea-bulb { font-size: 20px; line-height: 1.2; flex-shrink: 0; }
+.wp-idea-text { font-size: 14px; line-height: 1.6; }
+.wp-idea-text strong { color: var(--c-h1); }
+
+/* ---- Body prose ---- */
+.wp-section { margin-top: 36px; }
+.wp-section h2 { font-size: 17px; font-weight: 700; color: var(--c-h1); border-bottom: 2px solid var(--c-accent); padding-bottom: 4px; margin-bottom: 12px; }
+.wp-section h3 { font-size: 14px; font-weight: 600; color: var(--c-h3); margin: 16px 0 6px; }
+.wp-section p { margin: 8px 0; line-height: 1.7; font-size: 14px; }
+.wp-section ul { margin: 6px 0 6px 20px; }
+.wp-section li { margin: 3px 0; font-size: 14px; line-height: 1.6; }
+.wp-section code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; background: var(--c-code-bg); color: var(--c-code-text); padding: 1px 5px; border-radius: 3px; }
+.wp-section em { font-style: italic; color: var(--c-h1); }
+
+/* ---- Tables ---- */
+.wp-section table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13px; }
+.wp-section th { background: var(--c-th-bg); color: var(--c-h3); text-align: left; padding: 7px 12px; border-bottom: 2px solid var(--c-td-border); font-weight: 700; }
+.wp-section td { padding: 7px 12px; border-bottom: 1px solid var(--c-td-border); line-height: 1.5; vertical-align: top; }
+.wp-section tr:nth-child(even) td { background: var(--c-tr-alt); }
+.wp-section td code { white-space: nowrap; }
+
+/* ---- Screenshots ---- */
+.wp-section img { max-width: 100%; height: auto; display: block;
+  border: 1px solid var(--c-td-border); border-radius: 6px;
+  margin: 14px 0 4px; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+.wp-section p > img + em,
+.wp-section p:has(img) + p > em { font-size: 11px; color: var(--c-h3); display: block; margin: 2px 0 14px; }
+
+/* ---- Callout (blockquote or .wp-callout) ---- */
+.wp-section blockquote, .wp-callout { background: var(--c-callout-bg); border-left: 3px solid var(--c-accent); border-radius: 0 4px 4px 0; padding: 12px 16px; margin: 16px 0; font-size: 14px; line-height: 1.65; }
+.wp-section blockquote p { margin: 0; }
+
+/* ---- Diagrams ---- */
+.wp-diagram { background: var(--c-pre-bg); border: 1px solid var(--c-td-border); border-radius: 6px; padding: 18px 14px 10px; margin: 16px 0; overflow-x: auto; }
+.wp-diagram-cap { font-size: 11px; color: var(--c-h3); margin: 4px 0 0 2px; font-style: italic; }
+#wp-workflows { margin-top: 28px; }
+
+/* ---- Legend ---- */
+.wp-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0; font-size: 12px; }
+.wp-legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--c-h3); }
+.wp-swatch { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+
+/* ---- Footer ---- */
+footer { padding: 14px 36px; border-top: 1px solid var(--c-td-border); font-size: 11px; color: var(--c-h3); display: flex; justify-content: space-between; max-width: 860px; margin: 0 auto; width: 100%; }
+</style>
+</head>
+<body>
+
+<header class="page-header gem-header">
+  <div class="gem-header-left">
+    <span class="gem-header-logo">Prototyper</span>
+    <span class="gem-header-title">Agile Team Oneshot Build Model</span>
+  </div>
+  <span class="gem-header-copyright">Ed Barlow &middot; Web Cloud Studio</span>
+</header>
+
+<div class="page-content">
+
+<div class="cover">
+  <div class="cover-eyebrow">Running an agile agent team</div>
+  <h1>Agile Team Oneshot Build Model</h1>
+  <div class="cover-sub">You are the <strong>Agile Product Owner</strong>; the LLM is the <strong>development team</strong>. It decomposes your specification into <strong>features</strong>, then <strong>stories</strong> and <strong>spikes</strong>, builds against <strong>acceptance criteria</strong>, and communicates every demo, evidence, question, and review through a per&#8209;project <strong>Console</strong>.</div>
+  <div class="cover-meta"><span>Ed Barlow</span><span>Web Cloud Studio &middot; 2026</span></div>
+</div>
+
+<div class="wp-ideas">
+  <h2 class="wp-ideas-title">Core Design Ideas</h2>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The LLM acts as the development team. Output must include demos and evidence at each step, with constant quality reviews.</strong> </div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The Developer acts as the Agile Product Owner and the LLM acts as the development team, communicating using the Console.</strong> </div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The LLM decomposes the specification into Features, which are further decomposed into stories and spikes.</strong> </div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>Tickets follow agile best practices, such as Acceptance Criteria. Tickets can have Open Questions (blocker).</strong> </div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>Low-priority decisions can be made by the LLM, but evidence of the decision should be available for review.</strong> </div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The development process follows standard agile SDLC, with artifacts communicated using the Console.</strong> </div></div>
+</div>
+
+<div class="wp-body" id="wp-body"></div>
+
+</div>
+
+<footer>
+  <span>Ed Barlow</span>
+  <span>Web Cloud Studio &middot; 2026</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const BODY = "## How it works\n\nA specification goes in; a reviewed, working build comes out. The team decomposes the spec into\nan agile backlog, builds the runnable frontier one ticket at a time, and stops at a review gate.\nYou review in the Console and decide; the build resumes.\n\n```bash\nbash bin/oneshot.sh <Spec> <Target>          # builds the frontier, then stops at the gate\nbash <Target>/Console/start.sh               # review the board (http://127.0.0.1:8080)\nbash bin/oneshot.sh <Spec> <Target> approve <id>   # accept; unblocks dependents\n```\n\nThe analysis runs automatically on first use. To (re)plan explicitly:\n`bash bin/build_plan.sh <Spec> --analysis`.\n\n```mermaid\nflowchart LR\n  classDef dir    fill:#0a5c38,stroke:#2cb67d,color:#fff,font-weight:bold\n  classDef md     fill:#d4a017,stroke:#a07810,color:#111,font-weight:bold\n  classDef script fill:#1e40af,stroke:#3b5fc0,color:#fff,font-weight:bold\n  classDef web    fill:#be123c,stroke:#fb7185,color:#fff,font-weight:bold\n\n  SPEC([\"Specification\"]):::dir --> AN[\"--analysis\"]:::script\n  AN --> PLAN{{\"AGILE_PLAN.md\"}}:::md\n  PLAN --> OS[\"oneshot.sh\"]:::script\n  OS <--> EV[(\"evidence/\")]:::dir\n  OS --> CON[\"Console\"]:::web\n  PO([\"Product Owner\"]):::dir <--> CON\n  CON -. \"approve \u00b7 revise \u00b7 reject\" .-> OS\n```\n\n## Decomposition\n\nThe team turns the specification into **features**, then into **stories** (known work) and\n**spikes** (unknowns). Every story and spike carries **acceptance criteria**. A ticket that needs\na decision only you can make carries an **Open Question** and is **blocked** until you answer.\n\n## The Console\n\nThe team communicates through the Console \u2014 a config-driven web app deployed to every project, no\nbuild required. One file, `console.json`, lists **items**; each renders by its type. Items group\ninto **sections**, and a section is the item's state:\n\n| Section | Holds |\n|---------|-------|\n| **Core Docs** | The specification, co-edited (`editable_markdown`). |\n| **Plan** | The sprint board (`kanban`). |\n| **Action Items** | Open questions to answer (`questionnaire`). |\n| **Pages** | Demos and evidence to read and sign off (`markdown` + `\"review\": true`). |\n| **Archive** | Closed items. |\n\nFor a oneshot build the config is generated from `AGILE_PLAN.md` after every run \u2014 you do not\nwrite it. `console.json`:\n\n```json\n{\n  \"console\": { \"name\": \"Edgar2 Console\", \"default_item\": \"board\", \"state_db\": \"data/console_state.sqlite\" },\n  \"project\": { \"id\": \"Edgar2\", \"name\": \"Edgar2\", \"description\": \"oneshot build.\" },\n  \"items\": [\n    { \"id\": \"spec\",  \"label\": \"Specification\", \"section\": \"core\",  \"type\": \"markdown\", \"path\": \"specification.md\" },\n    { \"id\": \"board\", \"label\": \"Sprint Board\",  \"section\": \"plan\",  \"type\": \"kanban\",   \"path\": \"tickets.json\" },\n    { \"id\": \"ev_s1\", \"label\": \"S1 Importer\",   \"section\": \"pages\", \"type\": \"markdown\", \"path\": \"../evidence/STEP_S1_FILING_IMPORTER.md\", \"review\": true }\n  ]\n}\n```\n\nThe board, `tickets.json` \u2014 features own stories through `parent`; acceptance criteria and a\nblocker are first-class:\n\n```json\n{\n  \"tickets\": [\n    { \"id\": \"FEAT-1\", \"title\": \"Filing importer\", \"kind\": \"feature\", \"status\": \"in_progress\" },\n    { \"id\": \"SPIKE-1\", \"title\": \"Choose a PDF library\", \"parent\": \"FEAT-1\", \"status\": \"review\",\n      \"blocked\": true, \"blocked_reason\": \"Which PDF library?\", \"links\": [\"q_parser\"],\n      \"ac\": [\"Extracts tables from all three sample filings\", \"No native dependencies\"] },\n    { \"id\": \"STORY-1\", \"title\": \"Persist normalized rows\", \"parent\": \"FEAT-1\", \"status\": \"backlog\",\n      \"ac\": [\"Rejects a duplicate filing\", \"Writes filings and positions tables\"] }\n  ]\n}\n```\n\nAn Open Question, `questionnaires/spike_1.json` \u2014 answers are saved back into the file:\n\n```json\n{\n  \"id\": \"spike_1\", \"title\": \"PDF library\", \"state\": \"open\",\n  \"questions\": [\n    { \"id\": \"native_ok\", \"label\": \"Native deps\", \"prompt\": \"Are native dependencies acceptable?\",\n      \"input\": \"select\", \"options\": [\"No \u2014 pure Python\", \"Yes\"] }\n  ]\n}\n```\n\nEvidence, `evidence/STEP_S1_FILING_IMPORTER.md` \u2014 surfaced with a sign-off bar:\n\n~~~markdown\n# STEP S1 \u2014 Filing importer\n\n## What was built\n- importer.py reads a filing and writes normalized rows.\n\n## How to try it\n    python importer.py samples/0001.pdf\n\n## Result\n- 3 filings imported; duplicate rejected; tests pass.\n~~~\n\n## Evidence and decisions\n\n- Every step ships a **demo and an evidence file**; nothing advances without something to see.\n- **Low-priority decisions** are made by the team, with the rationale in the step's evidence.\n- **Your decisions** happen in the Console: **Approve \u00b7 Revise \u00b7 Reject** an increment, verify or\n  fail each acceptance criterion, answer the open questions. A revision returns as a new criterion.\n\n## AGILE_PLAN.md\n\nThe plan is the state \u2014 backlog and live state in one file, enough to render the board, compute\nthe frontier, and resume.\n\n```\n# AGILE_PLAN: Edgar2\nspec:        Edgar2\nspec_commit: abc123def456\nupdated:     2026-06-06T12:00:00\n\n## feature 1: Filing importer\nsummary:    Ingest a filing and persist normalized rows.\n\n## spike 1: Choose a PDF library\nparent:     feature 1\ndescription: Compare candidate libraries; demo extraction.\nevidence:   STEP_1_LIBRARY_DISCOVERY.md\nquestion:   Which PDF library?\nfinding:    pdfplumber; no native deps.\nstate:      approved\n\n## story 1: Persist normalized rows\nparent:     feature 1\ndescription: Build importer.py against the chosen library.\ninputs:     STEP_1_LIBRARY_DISCOVERY.md\nkind:       python\nevidence:   STEP_S1_FILING_IMPORTER.md\nstate:      pending\n\n## ac 1: importer rejects a duplicate filing\nparent:     story 1\nstate:      open\n```\n\n## Commands\n\n| Command | Does |\n|---------|------|\n| `bash bin/build_plan.sh <Spec> --analysis` | Decompose the spec into `AGILE_PLAN.md`. Runs automatically on first `oneshot.sh`. |\n| `bash bin/oneshot.sh <Spec> <Target>` | Build the frontier, write demos and evidence, refresh the Console board, stop at the gate. |\n| `bash bin/oneshot.sh <Spec> <Target> approve\uff5crevise\uff5creject <id>` | Record a decision on a ticket. |\n| `bash bin/oneshot.sh <Spec> <Target> status` | Print every object and its state. |\n| `bash <Target>/Console/start.sh` | Open the Console at `http://127.0.0.1:8080`. |";
+marked.setOptions({ gfm: true, breaks: false });
+
+function sectionize(container) {
+  var nodes = Array.from(container.childNodes);
+  container.innerHTML = '';
+  var cur = null;
+  nodes.forEach(function (node) {
+    if (node.nodeType === 1 && node.tagName === 'H2') {
+      cur = document.createElement('div');
+      cur.className = 'wp-section';
+      container.appendChild(cur);
+      cur.appendChild(node);
+    } else if (cur) {
+      cur.appendChild(node);
+    } else {
+      container.appendChild(node);
+    }
+  });
+}
+
+function decorateDiagrams(container) {
+  // marked renders ```mermaid as <pre><code class="language-mermaid"> — wrap in a panel,
+  // pull an italic-only following paragraph in as the caption.
+  container.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
+    var pre = code.parentNode;
+    var cap = pre.nextElementSibling;
+    var wrap = document.createElement('div');
+    wrap.className = 'wp-diagram';
+    var div = document.createElement('div');
+    div.className = 'mermaid';
+    div.textContent = code.textContent;
+    wrap.appendChild(div);
+    pre.parentNode.replaceChild(wrap, pre);
+    if (cap && cap.tagName === 'P' && cap.children.length === 1 &&
+        cap.firstElementChild.tagName === 'EM' &&
+        cap.textContent.trim() === cap.firstElementChild.textContent.trim()) {
+      var c = document.createElement('div');
+      c.className = 'wp-diagram-cap';
+      c.textContent = cap.textContent.trim();
+      wrap.appendChild(c);
+      cap.parentNode.removeChild(cap);
+    }
+  });
+}
+
+function runMermaid(container) {
+  if (window.mermaid) {
+    var nodes = Array.from(container.querySelectorAll('.mermaid:not([data-processed])'));
+    if (nodes.length) window.mermaid.run({ nodes: nodes });
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  var body = document.getElementById('wp-body');
+  body.innerHTML = marked.parse(BODY);
+  sectionize(body);
+  decorateDiagrams(body);
+  runMermaid(body);
+  
+});
+</script>
+</body>
+</html>

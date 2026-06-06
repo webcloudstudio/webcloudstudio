@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" width="200" height="260" role="img" aria-label="Light bulb">
+  <defs>
+    <radialGradient id="glass" cx="42%" cy="36%" r="68%">
+      <stop offset="0%" stop-color="#fff7d6"/>
+      <stop offset="55%" stop-color="#ffe27a"/>
+      <stop offset="100%" stop-color="#f6b73c"/>
+    </radialGradient>
+    <linearGradient id="base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9aa3ad"/>
+      <stop offset="100%" stop-color="#5c6670"/>
+    </linearGradient>
+  </defs>
+
+  <!-- cartoon glow rays -->
+  <g stroke="#f6b73c" stroke-width="7" stroke-linecap="round" opacity="0.85">
+    <line x1="100" y1="6"  x2="100" y2="26"/>
+    <line x1="22"  y1="40" x2="38"  y2="54"/>
+    <line x1="178" y1="40" x2="162" y2="54"/>
+    <line x1="6"   y1="118" x2="28" y2="118"/>
+    <line x1="194" y1="118" x2="172" y2="118"/>
+  </g>
+
+  <!-- glass bulb -->
+  <path d="M100 24
+           C148 24 178 58 178 100
+           C178 132 160 152 144 168
+           C134 178 132 188 132 198
+           L68 198
+           C68 188 66 178 56 168
+           C40 152 22 132 22 100
+           C22 58 52 24 100 24 Z"
+        fill="url(#glass)" stroke="#caa12f" stroke-width="4"/>
+
+  <!-- highlight -->
+  <path d="M70 56 C58 70 54 88 58 104" fill="none" stroke="#fffdf2" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- filament -->
+  <path d="M82 150 C82 120 76 108 90 98 C100 91 100 91 110 98 C124 108 118 120 118 150"
+        fill="none" stroke="#b5781a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="82" y1="150" x2="118" y2="150" stroke="#b5781a" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- screw base -->
+  <rect x="68" y="200" width="64" height="14" rx="4" fill="url(#base)"/>
+  <rect x="71" y="216" width="58" height="11" rx="3" fill="url(#base)"/>
+  <rect x="74" y="229" width="52" height="10" rx="3" fill="url(#base)"/>
+  <path d="M82 241 C82 252 118 252 118 241 L114 248 C112 254 88 254 86 248 Z" fill="#454e57"/>
+  <g stroke="#3a424a" stroke-width="2.5" opacity="0.6">
+    <line x1="68" y1="205" x2="132" y2="205"/>
+    <line x1="71" y1="221" x2="129" y2="221"/>
+  </g>
+</svg>

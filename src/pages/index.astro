@@ -3,13 +3,13 @@ import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="Ed Barlow — Ed Barlow">
   <section class="home-hero">
-    <div class="hero-inner">
-
-      <div class="hero-text">
-        <h1 class="home-name">Ed Barlow</h1>
+    <div class="home-inner">
+      <h1 class="home-name">Ed Barlow</h1>
+      <div class="home-divider"></div>
+      <div class="home-grid">
         <div class="home-body">
 <div style="margin:2.25rem 0;padding:1.5rem 1.75rem;background:#0e0e1a;border:1px solid #252540;border-radius:12px;">
-  <h3 style="margin:0 0 1.1rem;font-size:1.15rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;">📄 Recent AI White Papers</h3>
+  <h3 style="margin:0 0 1.1rem;font-size:1.15rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;">Recent White Papers</h3>
   <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.7rem;">
     <li><a href="/proto/" target="_blank" rel="noopener" style="color:#4f9cf9;font-weight:600;text-decoration:none;">Spec Driven Design Methodology &#8599;</a><span style="display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;">Best-practice specification-driven SDLC — overview and the full paper set.</span></li>
     <li><a href="/iterating-sdd/" target="_blank" rel="noopener" style="color:#4f9cf9;font-weight:600;text-decoration:none;">How to Iterate in Spec Driven Design &#8599;</a><span style="display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;">How to change the spec and target so you can reproduce — four tries and my choice.</span></li>
@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
 </div>
 
 <div style="margin:2.25rem 0;padding:1.5rem 1.75rem;background:#0e0e1a;border:1px solid #252540;border-radius:12px;">
-  <h3 style="margin:0 0 1.1rem;font-size:1.15rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;">🚀 Current Project: The Drydock</h3>
+  <h3 style="margin:0 0 1.1rem;font-size:1.15rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;">Project Drydock</h3>
   <p style="margin:0 0 1.1rem;color:#cbd5e1;font-size:0.95rem;line-height:1.6;">Drydock is a Full SDLC Specification Driven Development Framework that has built a ~200K token specification reliably using Sonnet. Drydock is in active development - I have laid the keel!</p>
   <h4 style="margin:0 0 0.8rem;font-size:1rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;">Testimonials</h4>
   <blockquote style="margin:0 0 1.1rem;padding:0.1rem 0 0.1rem 1rem;border-left:3px solid #4f9cf9;color:#94a3b8;font-size:0.88rem;line-height:1.6;">
@@ -35,8 +35,8 @@ import Layout from '../layouts/Layout.astro';
 </div>
 
 <div style="margin:2.25rem 0;padding:1.5rem 1.75rem;background:#0e0e1a;border:1px solid #252540;border-radius:12px;">
-  <h3 style="margin:0 0 1.1rem;font-size:1.15rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;">🚀 Current Project: The Marina Framework</h3>
-  <p style="margin:0 0 1.1rem;color:#cbd5e1;font-size:0.95rem;line-height:1.6;"><a href="https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC" target="_blank" rel="noopener" style="color:#4f9cf9;font-weight:600;text-decoration:none;">Process Based Methodology</a> and scale-proven <a href="https://webcloudstudio.com/project-docs/Specifications/Features.html" target="_blank" rel="noopener" style="color:#4f9cf9;font-weight:600;text-decoration:none;">Technology Rules</a> combine to "conform" your projects so they expose/encapsulate capabilities and enable an Enterprise Command Center.</p>
+  <h3 style="margin:0 0 1.1rem;font-size:1.15rem;font-weight:700;letter-spacing:0.02em;color:#f1f5f9;">Project Marina</h3>
+  <p style="margin:0 0 1.1rem;color:#cbd5e1;font-size:0.95rem;line-height:1.6;">The Marina is a Trust and Interoperability platform into which you can "dock" your projects. <a href="https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC" target="_blank" rel="noopener" style="color:#4f9cf9;font-weight:600;text-decoration:none;">Process Based Methodology</a> and scale-proven <a href="https://webcloudstudio.com/project-docs/Specifications/Features.html" target="_blank" rel="noopener" style="color:#4f9cf9;font-weight:600;text-decoration:none;">Technology Rules</a> combine to "conform" your projects so they expose/encapsulate capabilities and enable an Enterprise Command Center.</p>
   <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.7rem;">
     <li><span style="color:#f1f5f9;font-weight:600;">Project Capabilities Catalog</span><span style="display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;">Services, Data, Shared Resources.</span></li>
     <li><span style="color:#f1f5f9;font-weight:600;">Agents enforce standards</span><span style="display:block;color:#94a3b8;font-size:0.88rem;line-height:1.5;">Your Stack best practices, Your branding, and Automatic security.</span></li>
@@ -46,41 +46,60 @@ import Layout from '../layouts/Layout.astro';
   </ul>
 </div>
         </div>
-      </div>
 
-      <div class="hero-photo">
-        <img src="/images/portrait.jpg" alt="Ed Barlow" class="portrait" />
+        <div class="hero-photo">
+          <img src="/images/portrait.jpg" alt="Ed Barlow" class="portrait" />
+        </div>
       </div>
-
     </div>
   </section>
 
   <style>
     .home-hero { padding: 3rem 0 4rem; }
 
-    .hero-inner {
+    .home-inner {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 1.5rem;
-      display: flex;
-      gap: 4rem;
-      align-items: flex-start;
     }
-
-    .hero-text { flex: 1; min-width: 0; }
 
     .home-name {
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin: 0 0 2rem;
+      margin: 0;
       color: var(--text);
     }
 
+    .home-divider {
+      height: 1px;
+      margin: 1.25rem 0 2rem;
+      background: #252540;
+    }
+
+    .home-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas:
+        "papers photo"
+        "drydock marina";
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .home-body { display: contents; }
+    .home-body > :nth-child(1) { grid-area: papers; }
+    .home-body > :nth-child(2) { grid-area: drydock; }
+    .home-body > :nth-child(3) { grid-area: marina; }
+
+    .home-body > div {
+      margin: 0 !important;
+      min-width: 0;
+    }
+
     .hero-photo {
-      flex: 0 0 360px;
-      width: 360px;
-      padding-top: 0.5rem;
+      grid-area: photo;
+      min-width: 0;
     }
 
     .portrait {
@@ -94,8 +113,14 @@ import Layout from '../layouts/Layout.astro';
     }
 
     @media (max-width: 960px) {
-      .hero-inner { flex-direction: column-reverse; gap: 2rem; }
-      .hero-photo { flex: none; width: 100%; max-width: 480px; }
+      .home-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+          "papers"
+          "photo"
+          "drydock"
+          "marina";
+      }
     }
 
     .home-body p {

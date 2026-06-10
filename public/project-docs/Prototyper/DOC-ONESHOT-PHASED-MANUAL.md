@@ -165,7 +165,7 @@ smoke:
 | Field | Purpose | Required |
 |-------|---------|----------|
 | `specs:` | Comma-separated globs; placed at bottom of prompt (recency anchor) | Yes (unless verify-only) |
-| `context:` | Additional context files (e.g., `UI-GENERAL.md`, `FUNCTIONALITY.md`). METADATA + ARCHITECTURE always included | No |
+| `context:` | Additional context files (e.g., `UI-GENERAL.md`, `INTENT.md`). METADATA + ARCHITECTURE always included | No |
 | `copy:` | `src -> dst` pairs; src relative to Prototyper repo; dst relative to target | No |
 | `instructions:` | Free-form prose; tell LLM what to build | No |
 | `smoke:` | Bash commands run after phase; `${PORT}` substituted; fail → abort | No |

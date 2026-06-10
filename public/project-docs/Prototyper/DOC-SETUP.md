@@ -35,11 +35,10 @@ Every specification directory contains these files:
 | `README.md` | One-line description + intent section |
 | `INTENT.md` | Goals, constraints, success criteria |
 | `ARCHITECTURE.md` | Modules, routes, directory layout |
-| `FUNCTIONALITY.md` | What the application does — grouped by area |
 | `DATABASE.md` | Tables, columns, types — schema only |
 | `UI-GENERAL.md` | Shared UI patterns across screens |
 | `SCREEN-{Name}.md` | Per-screen: route, layout, interactions |
-| `FEATURE-{Name}.md` | Per-feature: trigger, sequence, reads, writes |
+| `FEATURE-{Name}.md` | Per-feature: purpose, status, trigger, sequence, routes, reads, writes, and criteria |
 | `HOMEPAGE.md` | Portfolio page configuration (if applicable) |
 
 All specification files except METADATA and README end with `## Open Questions`.

@@ -23,9 +23,8 @@ Each project is defined by a small set of markdown files in a permissioned Speci
 - `METADATA.md` — identity, stack, status, manual metadata for the project
 - `ARCHITECTURE.md` — mandatory architecture (modules, routes, directory layout...)
 - `DATABASE.md` — persistence contract: every store (SQLite schema, `.env` keys, file stores, external services) and the typed class that encapsulates each
-- `FUNCTIONALITY.md` — what the application does at a high level
 - `SCREEN-*.md` — per-screen: route, layout, interactions
-- `FEATURE-*.md` — per-feature: trigger, sequence, reads, writes
+- `FEATURE-*.md` — per-feature: purpose, status, trigger, sequence, routes, reads, writes, and criteria
 - `UI-GENERAL.md` — shared UI patterns across screens
 
 ### Technology Rules

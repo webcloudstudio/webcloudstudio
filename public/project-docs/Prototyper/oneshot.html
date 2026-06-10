@@ -38,6 +38,8 @@ body {
 .wp-idea-bulb { font-size: 20px; line-height: 1.2; flex-shrink: 0; }
 .wp-idea-text { font-size: 14px; line-height: 1.6; }
 .wp-idea-text strong { color: var(--c-h1); }
+.wp-idea-sub-list { margin: 6px 0 0 18px; padding: 0; font-size: 13px; }
+.wp-idea-sub-list li { margin: 2px 0; line-height: 1.5; }
 
 /* ---- Body prose ---- */
 .wp-section { margin-top: 36px; }
@@ -47,6 +49,7 @@ body {
 .wp-section ul { margin: 6px 0 6px 20px; }
 .wp-section li { margin: 3px 0; font-size: 14px; line-height: 1.6; }
 .wp-section code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; background: var(--c-code-bg); color: var(--c-code-text); padding: 1px 5px; border-radius: 3px; }
+.wp-section pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
 .wp-section em { font-style: italic; color: var(--c-h1); }
 
 /* ---- Tables ---- */
@@ -102,12 +105,12 @@ footer { padding: 14px 36px; border-top: 1px solid var(--c-td-border); font-size
 
 <div class="wp-ideas">
   <h2 class="wp-ideas-title">Core Design Ideas</h2>
-  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The LLM acts as the development team. Output must include demos and evidence at each step, with constant quality reviews.</strong> </div></div>
-  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The Developer acts as the Agile Product Owner and the LLM acts as the development team, communicating using the Console.</strong> </div></div>
-  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The LLM decomposes the specification into Features, which are further decomposed into stories and spikes.</strong> </div></div>
-  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>Tickets follow agile best practices, such as Acceptance Criteria. Tickets can have Open Questions (blocker).</strong> </div></div>
-  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>Low-priority decisions can be made by the LLM, but evidence of the decision should be available for review.</strong> </div></div>
-  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The development process follows standard agile SDLC, with artifacts communicated using the Console.</strong> </div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The LLM acts as the development team. Output must include demos and evidence at each step, with constant quality reviews.</strong></div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The Developer acts as the Agile Product Owner and the LLM acts as the development team, communicating using the Console.</strong></div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The LLM decomposes the specification into Features, which are further decomposed into stories and spikes.</strong></div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>Tickets follow agile best practices, such as Acceptance Criteria. Tickets can have Open Questions (blocker).</strong></div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>Low-priority decisions can be made by the LLM, but evidence of the decision should be available for review.</strong></div></div>
+  <div class="wp-idea"><span class="wp-idea-bulb">&#128161;</span><div class="wp-idea-text"><strong>The development process follows standard agile SDLC, with artifacts communicated using the Console.</strong></div></div>
 </div>
 
 <div class="wp-body" id="wp-body"></div>

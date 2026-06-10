@@ -12,11 +12,13 @@ layout: ../layouts/Resume.astro
 ---
 ## PROFESSIONAL SUMMARY
 
-**Senior AI Engineer & Agentic Platform Builder.** Multi-agent pipelines with RAG, tools, orchestration, and MCP.  My harness optimizes for context and accuracy with feedback and guardrails. Delivered enterprise AI document automation for a $87B private credit firm. Actively building a Framework to share software project capabilities in a single pane of glass devops.  Published Specification driven design framework. 
+**Senior Engineering Leader.** Thirty years building and running mission-critical data platforms at major financial services companies. Designed, built, and managed core systems at multiple top-10-volume equity street firms. IoT/Real Time. Startup leadership.
 
-**Technical Leader with 30+ years of hands-on leadership** driving delivery of high-performance solutions, critical infrastructure, and managing enterprise data for leading financial companies and insurance companies. Startup experience. Full Stack Engineering Leader with deep technical expertise across the engineering stack.
+**Principal AI Engineer** My Drydock is a Specification Driven Development Framework that has built a ~200K token specification reliably using sonnet.  Marina is a trust and interoperability platform providing a single pane of glass devops.  Delivered enterprise AI document automation for large  private credit firm. 
 
-**Leadership approach:** Active listener and communicator who translates business concepts into actionable technical plans for execution of stakeholder vision in a quality-focused collaborative culture. Detail oriented. 
+**Individual Contributor.** Multiple open-source packages. Author. Conference Speaker. Expert developer, data engineer, and DevOps engineer with firm understanding of best practices and delivery. Platform modernization.
+
+**Leadership approach:** Active listener and communicator who translates business concepts into actionable technical plans for execution of stakeholder vision in a quality-focused collaborative culture. Detail oriented. Technical Product Owner Role at Cigna.
 
 ---
 
@@ -26,9 +28,7 @@ layout: ../layouts/Resume.astro
 
 **Leadership & Delivery:** Communication • Team Leadership • Agile/SAFe • Platform Modernization • Process & Governance • Roadmaps • Documentation
 
-**Technical Expertise:** Backend Platform Development • Database and Data Architecture • Microservices & APIs • Data Quality • Security • CI/CD/DevOps • Analytics/KPIs/Reporting • Documentation • Evals 
-
-**Data & Scale:** ETL/ELT Data at Size & Speed • Streaming • Data Warehousing • Internet Of Things
+**Technical Expertise:**  Streaming/Real Time/IoT • Database and Data Architecture • Microservices & APIs • Data Quality • Security • CI/CD/DevOps • Analytics/KPIs/Reporting • Documentation • Architecture • ETL/ELT Data at Size & Speed • Data Warehousing 
 
 ---
 
@@ -44,26 +44,25 @@ layout: ../layouts/Resume.astro
 
 **Data & Streaming:** Kafka, ELT/ETL Pipelines, DBT, Delta Lake
 
-**AI:** Pydantic ADK, Anthropic/OpenAI SDK & CLI, MCP, LangChain, RAG Pipelines, Vector Search, ChromaDB, Sentence Transformers, UV/ruff, Agent Specification By Role, LLM Orchestration, AWS/Bedrock, Guardrails, Evals, Best Practices
+**AI:** Pydantic ADK, Anthropic/OpenAI SDK & CLI, MCP, LangChain, RAG, Vector Search, UV/ruff, AWS/Bedrock
 
 ---
-<div style="page-break-after: always"></div>
+<!-- PAGEBREAK -->
 
 ## PROFESSIONAL EXPERIENCE
 
 ### WEB CLOUD STUDIO
 **Principal/Founder** | 11/2025-Present
-- Designed and built the GAME Framework — agentic SDLC platform providing namespaced project visibility, shared capability catalog (REST/CLI/MCP), reproducible builds, and single-pane-of-glass DevOps for distributed teams
-- Developed full RAG pipeline (ChromaDB, sentence-transformers) for document retrieval and LLM grounding
-- Multi-agent orchestration layer with tool calling, agent/skill registry, guardrails, and observability telemetry
-- Full-SDLC specification-driven "reproducible-build" workflow from specifications with enforced code review and documentation standards
-- Technologies: Python, Anthropic Claude API, LangChain, RAG, ChromaDB, Django/Flask, UV/ruff, Pydantic, Anthropic/OpenAI SDK, MCP, AWS/Bedrock
+- Author: **The Marina** — Safety and Collaboration platform - Shared Capabilities Catalog - Single-pane-of-glass DevOps.  
+- Author: **The Drydock** — Full SDLC Specification Driven Development platform - Superset of SpecKit. Reproducible Builds. Agile Process. Typed Specifications.  V1 can build a ~100K token application with a ~100K token opinionated infrastructure using sonnet. Integrated Agile Based Web Console. 
+- RAG pipeline (ChromaDB, sentence-transformers) for document retrieval 
+- Technologies: Python, Codex, Claude, RAG, Django/Flask, UV/ruff, MCP, AWS/Bedrock
 
 ### FUTURE STANDARD INVESTMENTS
 **VP - Lead Engineer** | 09/2024 - 11/2025
-- Led core 2025 AI document management initiative for $87B private credit firm — automated document ingestion, routing, and processing pipelines from GPs into internal systems
+- Led core 2025 AI document management initiative for a major institutional private credit firm — automated document ingestion, routing, and processing pipelines from GPs into internal systems
 - Responsible for Core Dealcloud Workflow System supporting deal execution and portfolio monitoring operations
-- Technologies: Python, Azure, Dealcloud
+- Technologies: Python, Canoe, Terraform, Github Actions, AWS, Azure, Dealcloud, Databricks
 
 ### EVERNORTH HEALTH SERVICES LLC (CIGNA) 
 **Software Engineering Senior Advisor** | 05/2020 - 09/2024
@@ -79,8 +78,7 @@ layout: ../layouts/Resume.astro
 - Served as Senior Kafka expert for the team on high volume streaming data platform
 - Reduced AWS costs by 20% through dynamic infrastructure scaling 
 - Technologies: AWS, OpenShift, Ansible, Jenkins, Docker, Kubernetes, Python, Airflow, Kafka, CI/CD infra/tooling
-
-<div style="page-break-after: always"></div>
+<!-- PAGEBREAK -->
 
 ### WALKER DIGITAL TABLE SYSTEMS LLC
 **Director of Database, Architecture, and Business Intelligence** | 07/2013 - 05/2018
@@ -141,7 +139,7 @@ Bachelor of Engineering, Electrical Engineering
 
 ## PUBLICATIONS & PROJECTS
 
-Principal: **GAME Framework** (2025–Present) — Agentic SDLC platform merging process-based methodology with LLM-driven development; provides shared capability catalog (REST/CLI/MCP), reproducible builds, and single-pane-of-glass DevOps for distributed teams. See edbarlow.net.
+Author: **Marina Framework** (2025–Present) — Agentic SDLC safety and collaboration platform forLLM developmer; provides sharing and a single-pane-of-glass DevOps across multiple projects.  
 
 Author: **Process-Based Database Administration** (2017) - Best practices for scaling IT platforms, governance, and operational excellence
 

@@ -41,7 +41,7 @@
       learnings: [
         'Prompts above 80KB cause hallucination — phased builds with BUILD_PLAN.md solve this.',
         'Staleness is content-hash based: each phase records a sha256 per input spec file, so a Version bump (or any edit) rebuilds just that phase — durable across clones, unlike mtime.',
-        'FUNCTIONALITY.md is a Phase 1 context file only (scope orientation). All detail lives in individual FEATURE-*.md files.',
+        'Individual FEATURE-*.md files are the sole source of feature purpose, behavior, routes, and criteria.',
         'Opinionated stack — prescriptive patterns, not guidelines — enables consistent single-shot phase builds.',
         'Non-foundation phases load _compact.md siblings — LLM-compacted rules and stack files at ~30-40% of source size — saving 10-26KB per phase without dropping build-critical content.',
         'Provenance (spec commit + code commit per phase) gives directionality on token count and outcome over time; scorecard.sh tracks specification-to-code drift.',
@@ -54,8 +54,7 @@
           ['ARCHITECTURE.md', 'Modules, routes, directory layout — base context in every phase'],
           ['DATABASE.md', 'Core persistence — always Phase 1'],
           ['UI-GENERAL.md', 'Shared UI patterns — context in every screen phase'],
-          ['FUNCTIONALITY.md', 'Feature index only (one paragraph each) — Phase 1 context'],
-          ['FEATURE-*.md', 'Feature detail: routes (Provides), dependencies (Depends On), trigger, sequence, reads, writes'],
+          ['FEATURE-*.md', 'Feature purpose, status, routes (Provides), dependencies (Depends On), trigger, sequence, reads, writes, and criteria'],
           ['SCREEN-*.md', 'Per-screen: route, layout, interactions, Depends On FEATURE files'],
           ['*-AC.md / AC-*.md / *-AC-*.md', 'Acceptance criteria files — AC as a word in filename; guardrails permanent, positive facts reconcile into spec'],
           ['BUILD_PLAN_INTENT.md', 'Ordered semantic bundles for priority-driven phasing — author this, build_plan.sh generates BUILD_PLAN.md'],

@@ -120,9 +120,7 @@ curl localhost:11434/api/tags                          # confirm the API is up
 ### Conventions
 
 - **`set -o vi`** — vi editing mode on the command line; `EDITOR`/`VISUAL` set to `vi` to match.
-- **Shared history across all terminals** — every prompt appends new commands to the history file
-  and re-reads it, so any open terminal sees commands run in any other. `HISTSIZE=100000`,
-  `HISTFILESIZE=200000`, timestamps on:
+- **Shared history across all terminals** 
 
   ```bash
   shopt -s histappend
@@ -139,13 +137,8 @@ curl localhost:11434/api/tags                          # confirm the API is up
 | Alias / function | Action |
 |------------------|--------|
 | `pro` | `cd $MYPROJECTS` |
-| `myroot` | `cd /mnt/c/Users/barlo` |
-| `ccc` | `cd commandcenter` |
-| `mybook` | `cd TheTruth` |
-| `myjobs` | `cd "Job Hunt"` |
 | `myidea` / `myquery` / `mytrack` | `book.py idea` / `query` / `track` |
 | `mntg` | Mount `G:` at `/mnt/g` |
-| `ll` / `la` / `l` | `ls` variants (`-alF` / `-A` / `-CF`) |
 | `ollama` | Windows Ollama binary via WSL interop |
 | `slearn` `stodo` `sbook` `sidea` `scomplete` | Append an entry to the platform `LEARNINGS.md` via `log_entry.py` |
 | `fd` / `bat` | Aliased to Ubuntu's `fdfind` / `batcat` |

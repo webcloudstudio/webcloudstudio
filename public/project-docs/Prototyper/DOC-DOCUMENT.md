@@ -25,7 +25,6 @@ bash bin/document.sh <ProjectName> --theme=slate --model=opus
 | `FEATURE-*.md` | Features — requires `**Description:**` |
 | `ARCHITECTURE.md` | Architecture — requires `## Directory Layout` |
 | `DATABASE.md` | Schema (optional) |
-| `FUNCTIONALITY.md` | Flows (optional) |
 
 ## Outputs
 
@@ -38,7 +37,7 @@ bash bin/document.sh <ProjectName> --theme=slate --model=opus
 | `DOC-FEATURES.md` | Feature summaries |
 | `DOC-ARCHITECTURE.md` | Architecture summary |
 | `DOC-DATABASE.md` | Database summary (if DATABASE.md exists) |
-| `DOC-FLOWS.md` | Flow summaries (if FUNCTIONALITY.md exists) |
+| `DOC-FLOWS.md` | Flow summaries (if feature specifications define end-to-end flows) |
 
 ## Rebuild
 

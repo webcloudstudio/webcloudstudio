@@ -241,7 +241,7 @@ post-processor, and no reliance on html > pdf > md precedence.
 - `analyze` keeps emitting plain ANALYSIS.md; QuarterDeck decides tabbed presentation purely
   from the console declaration.
 - Standard page header (title + filename) wraps it like any item; the tab strip is the body.
-- Captain's Chair stays a pure scoreboard (quality + counts + next-step); no coupling.
+- Commanders Chair stays a pure scoreboard (quality + counts + next-step); no coupling.
 
 Update `2026-06-16`: the ANALYSIS console item is **wired and verified end-to-end** —
 `standard_artifacts.py` declares it (`type: markdown, tabs: true`, file-existence visibility,
@@ -276,14 +276,14 @@ directory tree) with the legend.
 |---|---|---|---|---|---|
 | COMPASS.md | O*/I | I | I | I | I |
 | ANALYSIS.md | O | I | · | · | · |
-| ANALYSIS_COMPASS.md | I | · | · | · | · |
+| ANALYZE_COMPASS.md | I | · | · | · | · |
 | SEA_TRIALS.md | O | · | · | · | · |
 | SOUNDINGS.md | O | O/I | O | I | · |
 | BLOCKERS.md | O/I | X | · | · | · |
 | Spikes (answered) | O | I | I | · | · |
 | Typed Spec files | I | I | I | I | I |
 | MANIFEST.md | · | O | I | I | I |
-| MANIFEST_COMPASS.md | · | I | · | · | · |
+| PLAN_COMPASS.md | · | I | · | · | · |
 | tickets.json | · | O | I | I | I |
 | BUILD_PLAN_COMPASS.md | · | O | I | · | · |
 | SCORECARD.md | · | · | · | O | · |

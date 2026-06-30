@@ -1,10 +1,12 @@
 ---
-title: The Drydock - Agile Specification Driven Design
+title: Agile Specification Driven Design
+title_sub:
 eyebrow: The SAIL Methodology for Governed Software Delivery
-subtitle: Drydock is an implementation of the SAIL Methodology to build programs from specifications.
+subtitle: The Complete Drydock Documentation
+logo: drydock_logo.png
 author: Ed Barlow
 studio: Web Cloud Studio
-year: June 26 2026
+year: June 28, 2026
 nav_active: drydock.html
 header_title: Drydock
 copyright: Copyright © 2026 Web Cloud Studio. All rights reserved. No part of this document may be reproduced or distributed without express written consent.
@@ -124,9 +126,45 @@ flowchart LR
   CONFIG --> INIT["init"]:::script
 ```
 
-### Requirements
+### Installation Instructions
 
-Drydock requires a working codex or claude cli.
+**Prerequisites**
+
+- Python 3.11 or later
+- A subscription-authenticated CLI: `claude` (Anthropic) or `codex` (OpenAI)
+
+**Install**
+
+```bash
+uv tool install drydock-sdd
+# or: pipx install drydock-sdd
+```
+
+`uv tool` and `pipx` place `drydock` on `PATH` automatically.
+
+**Configure the workspace**
+
+Set `$PROJECTS` to the directory where you keep your projects, then run:
+
+```bash
+drydock config set drydock_workspace "$PROJECTS/drydock"
+drydock config set drydock_build_directory "$PROJECTS"
+```
+
+**Initialize a target**
+
+```bash
+drydock init <Target>
+```
+
+The resulting layout:
+
+```text
+$PROJECTS/
+├── drydock/                    # Drydock workspace
+│   └── targets/<Target>/       # Created by drydock init
+└── <Target>/                   # Generated application output
+```
 
 ### Commands
 
@@ -164,7 +202,7 @@ showing its validation state, plan progress, and current runnable frontier.
 
 `drydock init <Target>` creates the temporary workspace for the <target> under targets/.  It populates the artifacts such that you can proceed with the workflow.
 
-## SAIL Phase 2 — Analyze: Charting the Course
+## SAIL Phase 2 — Agile Analyze: Charting the Course
 
 The Analyze phase turns imported source material into an Analysis for review, then into an executable Manifest for build.
 
@@ -173,8 +211,9 @@ The Analyze phase turns imported source material into an Analysis for review, th
 3. `drydock run quarterdeck` lets the product owner review, approve, and answer questions
 4. `drydock plan` consumes the reviewed analysis and creates Blueprint files, the Manifest, and tickets.json.
 
-What is a compass
-: a compass file contains user overrides and it is marked Important:.  The llm treats compass files as the intent of the commander.  COMPASS.md is inserted into EVERY command.  PLAN_COMPASS.md is inserted into `drydock plan`. ANALYZE_COMPASS.md is inserted into `drydock analyze`.  The compass files let the Commander define goals, constraints, and definition of done.
+> **Definition — Compass**
+>
+> A compass file contains Commander overrides and is marked `Important:`. The LLM treats compass files as the intent of the Commander. `COMPASS.md` is inserted into every command. `PLAN_COMPASS.md` is inserted into `drydock plan`. `ANALYZE_COMPASS.md` is inserted into `drydock analyze`. Compass files let the Commander define goals, constraints, and definition of done.
 
 ### Commands
 
@@ -223,18 +262,17 @@ a compass file.  The data is copied as is into `blueprint/sources/`.
 
 ### drydock analyze
 
-`drydock analyze` is Sprint Feature Planning. The LLM decomposes `blueprint/sources/` into a set of
-markdown artifacts using agile. It prepares the following files for Commander review.
+`drydock analyze` is Agile Decomposition, the phase where the Agile Epic is split into features and stories and the plan is created. The LLM decomposes `blueprint/sources/` into a set of markdown artifacts using its role as an Agile Best Practices Team. It prepares the following files for Commander review.
 
 **Input files**
 
 | Artifact | Location | Purpose |
 |---|---|---|
 | `sources/*` | `blueprint/` | Imported source material; read-only planning context |
-| `COMPASS.md` | Target root | Project intent |
+| `*COMPASS.md` | Target root | Project intent - Note that the COMPASS.md is injected into EVERY prompt |
 | `ANALYZE_COMPASS.md` | Target root | Commanders Feedback: Update it - injected every run |
-| `BLOCKERS.md` | Target root | Blockers is created by analyze with any gaps or required information.  Users should edit file to address these concerns. |
-| `questionnaires/*.json` | `QuarterDeck/` | Persistent answers consumed on re-run |
+| `BLOCKERS.md` | Target root | Created by `drydock analyze`. Blockers identify gaps or required information and the Commander edits file to address these concerns. |
+| `questionnaires/*.json` | `QuarterDeck/` | Created by `drydock analyze`. Persistent answers consumed on re-run |
 
 **Output files**
 
@@ -244,11 +282,11 @@ markdown artifacts using agile. It prepares the following files for Commander re
 | `ANALYSIS.md` | Target root | Summary of the decomposition, story list, blockers, questions, and recommendations |
 | `SEA_TRIALS.md` | Target root | Product-level objectives and success criteria |
 | `SOUNDINGS.md` | Target root | Acceptance tests and milestones  |
-| `COMPASS.md` | Target root | The master project intent file.   Always imported.  Review it if one was automatically created. |
+| `COMPASS.md` | Target root | Created if it does not Exist. The master project intent file.   Always imported.  Review it if one was automatically created. |
 | `questionnaires/*.json` | `QuarterDeck/` | Review questionnaires for unresolved decisions and genuine research spikes |
 | `commanders_chair.html` | `QuarterDeck/` | QuarterDeck summary view for the current state |
 
-The LLM also gives a verdict on the condition of the build.  The most important guard is `BLOCKERS.md`.  If
+The LLM gives a verdict on the condition of the build.  The most important guard is `BLOCKERS.md`.  If
 `BLOCKERS.md` exists, the Commander edits it to answer the questions and reruns `drydock analyze`. The
 Commander's answers guide the LLM on the next run, and the cycle repeats until no blockers remain.
 
@@ -260,15 +298,13 @@ Commander's answers guide the LLM on the next run, and the cycle repeats until n
 
 ### Agile Story Refinement with drydock run quarterdeck
 
-**What is the Quarterdeck:**
-: The quarterdeck is a dumb console that can render markdown output generated by the LLM.
+> **Definition — QuarterDeck**
+>
+> The QuarterDeck is a web console that renders Markdown output generated by the LLM.
 
-`drydock run quarterdeck` starts a web console for the Commander (product owner).  Navigate to the listed host and port to review.
+`drydock run quarterdeck` starts a web console for the Commander (product owner).  It is your helm or cockpit.  Navigate to the listed host and port.
 
-At this stage, each story will be presented in its feature/story heirarchy with acceptance criteria.  Blockers have been identified and should be reconciled.  The QuarterDeck shows the artifacts, blockers, questions, questionnaires, and activity that need review.
-
-* BLOCKERS.md prevents `drydock plan` from running.
-* Questionnaires contain decisions that guide planning
+At this stage, each story will be presented in its feature/story heirarchy with acceptance criteria.  Blockers have been identified and should be reconciled.  The QuarterDeck shows the artifacts, blockers, questions, questionnaires, and activity that need review in the planning session.  Review the tabs. When you are ready and ok with the plan move to the next step.  Change the instructions by filling out the Questionaires, Compass, or Analyze Compass.
 
 Questionnaires and BLOCKERS.md can be edited directly or modified in the QuarterDeck to respond.  Responses are used on the next run of `drydock analyze`.
 
@@ -310,6 +346,19 @@ the task instructions.  Similar tasks are grouped together to save context.
 | `SOUNDINGS.md` | Target root | Acceptance gates projected by stable ID |
 | `tickets.json` | Target root | Target ticketing system projection |
 
+**Replan behavior**
+
+`drydock plan` is rerun-safe. When a prior `MANIFEST.md` exists, the following merge rules apply:
+
+- `applied_specs` is restored verbatim — it is the build graph database and is never regenerated by `plan`.
+- Blueprint files whose sha256 matches their `applied_specs` record (clean) are protected: `plan` does not overwrite them with the LLM-generated version.
+- Block states are preserved for any block whose `implements:` files are all clean.
+- Blocks with any dirty `implements:` file (sha256 changed since application) are reset to `pending` for re-execution.
+- Spike `finding:` text is preserved regardless of dirty state.
+- `BUILD_COMPASS.md` and `PLAN_COMPASS.md` are never overwritten.
+
+A Commander dirties a file explicitly — via the QuarterDeck or by editing it directly — to force re-application of its story on the next `drydock build`.
+
 ## SAIL Phase 3 — Implement: Sailing the Frontier
 
 Implement the Blueprint using the Manifest
@@ -346,7 +395,7 @@ drydock rigging verify <Target>
 
 ### Agile Build Planning with drydock run quarterdeck
 
-Review `MANIFEST.md` in the QuarterDeck to understand the build process and update direction.
+Review `MANIFEST.md` in the QuarterDeck to understand the build process and to update build direction and instructions.
 
 The first step is Story Planning, which is the agile step where your work is prioritized and assigned to a developer. It lives in QuarterDeck before build execution and produces `BUILD_COMPASS.md`.
 
@@ -398,6 +447,7 @@ flowchart LR
 
 | Artifact | Location | Purpose |
 |---|---|---|
+| `COMPASS.md` | Target root | Always Injected |
 | `BUILD_COMPASS.md` | Target root | Story-planning grouping and build-order input |
 | `MANIFEST.md` | Target root | Executable build plan and dependency graph |
 | `tickets.json` | Target root | Target ticketing system projection consumed during build execution |
@@ -514,7 +564,13 @@ flowchart LR
 2. `SCORECARD.md` identifies the highest-value gap across all seven dimensions. Use it to
    prioritize the `drydock refit`.
 
+TODO: Need to import SOUNDINGS and SEA TRIALS as well.
+
 ### drydock survey
+
+TODO: Drydock survey was the mechanism i used to have Claude and Codex judge each others prompt and iterate them.  I
+have not decided it it is strategic though it certainly is of value.  I built the prompts with opus then iterated from
+weak/er models through stronger models to have them determine the ideal prompt that met the needs defined.
 
 ```text
 drydock survey <Target>             # render the latest scoreboard
@@ -639,7 +695,7 @@ can rerun only those files.
 ### Commands
 
 ```text
-drydock refit <Target> <blueprint|target|both> <Scope> <Change>
+drydock refit <Target>
 ```
 
 ```mermaid
@@ -659,17 +715,22 @@ flowchart LR
 ```
 ### drydock refit
 
-Drydock supports several mechanisms to Refit your project.
+`drydock refit` conforms change tickets in `blueprint/changes/` to the Drydock build process. The Commander (or an external ticketing system) places `TICKET-NNN-{Name}.md` files in that directory. Refit normalizes each ticket's typed spec header, generates or refines stories and acceptance criteria, and patches `MANIFEST.md` with new story rows for those tickets. Applied manifest rows are never touched.
 
-**Method 1: Change Tickets:** Change tickets are related to features with the `build refit` and can be built with `drydock build`. Change tickets are incremental work items. A change ticket is just a new Specification file with the correct frontmatter as created by the refit process. Change tickts are identified as such.
+**Change ticket format.** A change ticket is a Typed Specification file with FileType `CHANGE`. It carries an `Amends:` header field that names the parent Blueprint spec the ticket modifies (e.g. `Amends: FEATURE-Copy.md`). `drydock refit` reads this field to resolve dependency inheritance and to inject the parent spec as context.
 
-**Method 2: Specification Updates:**  Drydock currently tracks the commit ids and chksums of built objects in its graph database.  This enables drydock to 'dirty' the specification files that have been
-updated.
+**Dependency inheritance.** A change ticket's `Depends On:` field equals the parent spec's `Depends On:` set plus the parent spec filename itself. `drydock refit` computes this deterministically from the parent spec header before the LLM call and injects the resolved list into the prompt.
 
-**Method 3: Emergency Change Tickets:**  Implement emergency changes using an 'apply in parallel' methedology.  Skills create the change tickets while simultaneously updating your application.
-My process uses a /thinkthrough skill which is a directed discussion on a feature and which on close out will create persistent notes.  I can then release with /apply (TBD: rename to /release, the skill is highly tuned to my process and 'voice' and needs to be made general).
+**Role boundary.** `drydock refit` is a targeted patch: it processes only tickets in `blueprint/changes/` and inserts or replaces pending manifest rows for those tickets. `drydock plan create` is a full regeneration: it reads all Blueprint inputs and rewrites `MANIFEST.md` with state-preserving merge. Run `drydock plan create` after `drydock refit` when the full plan graph must be recomputed.
 
-`drydock refit` will update the headers of your tickets and the manifest. You can then rerurn `drydock build`.  The Planning and build execution process it like any other Specification driven builds.
+**Behavior.** Scans `blueprint/changes/*.md`. For each ticket: reads `Amends:`, resolves parent spec dependencies, runs one LLM call to normalize the ticket header and generate manifest rows, writes the updated ticket, and patches `MANIFEST.md`. Tickets without an `Amends:` field are skipped with a warning. Exits 0 when no tickets are found.
+
+**Input files.** `blueprint/changes/*.md`, `blueprint/<parent-spec>.md`, `MANIFEST.md`, `COMPASS.md`, `MANIFEST_CONTRACT.md`.
+
+**Output files.** Updated `blueprint/changes/*.md` (headers normalized); patched `MANIFEST.md`.
+
+**Exit codes.** `0` success or no-op; `1` operational failure; `2` usage error.
+
 TODO: The refit can roll the change tickets into the primary specification files.
 
 ## Artifact I/O Matrix - What drydock operations read/write
@@ -692,6 +753,7 @@ TODO: The refit can roll the change tickets into the primary specification files
 | SCREEN-{Name}.md | blueprint/ | · | O | I | I | I |
 | SEA_TRIALS.md | Target root | O | · | · | · | · |
 | SOUNDINGS.md | Target root | O | O/I | O | I | · |
+| changes/TICKET-{NNN}-{Name}.md | blueprint/changes/ | · | I | I | · | O |
 | sources/* | blueprint/sources/ | I | I | · | · | · |
 | tickets.json | Target root | · | O | I | I | I |
 | UI-GENERAL.md | blueprint/ | · | O | I | I | I |

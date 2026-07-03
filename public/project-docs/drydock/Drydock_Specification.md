@@ -107,7 +107,7 @@ options:
   --debug     Show full traceback on unexpected errors.
 ```
 
-## SAIL Phase 1 — Set Up: Laying the Keel
+## SAIL Phase 1 — Set Up: Laying the Keelx
 
 Install Drydock, configure runtime defaults, and create a workspace for a Target build.
 Process environment variables override values stored in Drydock's user-scoped `.env`.
@@ -322,7 +322,7 @@ The headers of the blueprints are structured as a dependency graph and the runna
 The plan contains Acceptance Criteria, Spikes and Specification Tickets for features, screens, and scaffolding.
 
 One major goal of the decomposition is for MANIFEST.md to contain a graph database of your work.  The configuration variable
-`PROMPT_WARN_KB` (default 50KB) sets a maximum total context size for each build.  Each step stacks
+`PROMPT_WARN_KB` (default 50KB tokens) sets a maximum total context size for each build.  Each step stacks
 multiple files into a prompt for execution — including `COMPASS.md`, the applicable subsets of the stack, and
 the task instructions.  Similar tasks are grouped together to save context.
 
@@ -396,7 +396,7 @@ Review `MANIFEST.md` in the QuarterDeck to understand the build process and to u
 
 The first step is Story Planning, which is the agile step where your work is prioritized and assigned to a developer. It lives in QuarterDeck before build execution and produces `BUILD_COMPASS.md`.
 
-In the planning session you review the build plan in the Manifest.   The manifest will group similar steps
+In the Build Compass you review the build plan in the Manifest.   The manifest will group similar steps
 to reduce your context and will set the stories up in a meaningful implementaton plan of Foundation -> Data and Persistence -> Features -> User Interface.  Each step will display its estimated counts and the Commander can:
 * reorder stories so important/testable steps are done first
 * re group stories so they can be run by a single agent
@@ -902,6 +902,10 @@ evidence:     evidence/<id>.md
 `ac` blocks are supported for legacy Manifests and exceptional orchestration checks. Blueprint
 `Programmatic Acceptance` is the normal source of durable acceptance.
 
+An `ac` block's `depends:` may name its own parent story only; the build engine drops any
+cross-story `ac` dependency on read. Acceptance checks are out of the build-ordering stream:
+they are never positioned among steps, only run after their parent story builds.
+
 ### Block States
 
 All four block types use the same four states:
@@ -924,15 +928,24 @@ acceptance authority for new plans.
 A `story` or `spike` becomes `closed/verified` after the build agent succeeds, files are written,
 and Blueprint `Programmatic Acceptance` passes.
 
+The story and the deterministic tests that prove its acceptance are written in the same build
+step. The Blueprint's `Programmatic Acceptance` is the story's Definition of Done — declared
+before the build and human-owned. The build authors the executable tests that satisfy it and may
+add finer coverage, but never removes or weakens a declared acceptance assertion.
+
 `closed/failed` is not terminal. The product owner reopens failed work from the QuarterDeck —
 revising the block's instructions, acceptance, or scope interactively — and the decision writer
 returns it to `pending` with the revision recorded. The decision writer is the only mutator of
 Manifest block state; recovery never requires hand-editing `MANIFEST.md`.
 
 Guardrails and `Programmatic Acceptance` embedded in the Specification files run after each
-successful story build. A story that satisfies its implementation but fails programmatic
-acceptance becomes `closed/failed` until rebuilt. `User Acceptance` entries are Commander review
-signals and do not block ordinary downstream build unless modeled as explicit dependencies.
+successful story build. `Programmatic Acceptance` is deterministic and non-agentic: each check is
+a Python invocation run as a post-build hook, so verification consumes no model context and cannot
+self-report. A story that satisfies its implementation but fails programmatic acceptance becomes
+`closed/failed` until rebuilt. A story that fails build records a single-line
+`finding:` with the failure reason, surfaced on the Build Compass. `User Acceptance` entries are
+Commander review signals and do not block ordinary downstream build unless modeled as explicit
+dependencies.
 
 ### Worked Example
 
@@ -998,7 +1011,7 @@ reference, page-type schemas, and API surface are documented in `QuarterDeck/REA
 | `questionnaire` | Form backed by a JSON file; saves answers in SQLite and writes them back to the source file. |
 | `link` | External URL or local file; opens in a new tab. |
 | `command_status` | Derived read-only acceptance-readiness view from Core Docs. |
-| `plan_decision` | Whole-plan approval for a `MANIFEST.md`. |
+| `compass` | The Build Compass: the live `MANIFEST.md` work graph — grouped, costed, state-badged (buildable now / review / done / failed with reason), and editable (reorder/regroup/rename/split). |
 
 **Standard artifacts.** Every Drydock QuarterDeck carries three pinned source-of-truth artifacts
 in Drydock Core, shown by file existence:
@@ -1013,8 +1026,9 @@ in Drydock Core, shown by file existence:
 preserves them and projects acceptance gates into Soundings by stable ID.
 
 **Decisions write back.** Review decisions made in the QuarterDeck are written to `MANIFEST.md` by
-the same decision writer used by the CLI. The `plan_decision` page runs the Planning Session and
-applies whole-plan approval. The QuarterDeck renders plan state and records decisions; it does not
+the same decision writer used by the CLI. The `compass` page is the Build Compass — the live work
+graph with per-step lifecycle state and constrained structure editing. The QuarterDeck renders plan
+state and records decisions; it does not
 replace the Blueprint, `MANIFEST.md`, or build engine.
 
 **Blockers.** `drydock analyze` emits `BLOCKERS.md` only when questions prevent planning; a healthy
@@ -1282,7 +1296,7 @@ Explanation:
     --model <model> selects the runtime model
     trailing - tells Codex to read the fully assembled Drydock prompt from stdin
 
-## Blueprints — Typed Specification Contract
+## Blueprints - Typed Specification Contract
 
 ### Blueprint File Inventory
 

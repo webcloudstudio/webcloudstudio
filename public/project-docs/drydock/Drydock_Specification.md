@@ -70,6 +70,23 @@ flowchart LR
   LOOP -.-> ANALYZE
 ```
 
+### Glossary
+
+| Drydock term | Meaning |
+|---|---|
+| Commander | The operator; the Agile Product Owner. |
+| Target | The named project under `$DRYDOCK_WORKSPACE/targets/<Target>`. |
+| Blueprint | The Typed Specification files that define the product; the source of truth. |
+| Manifest | The executable build plan and dependency graph, `MANIFEST.md`. |
+| Frontier | The set of Manifest blocks that are runnable now. |
+| QuarterDeck | The web review console between the Commander and the LLM process. |
+| Compass | Persistent Commander intent injected into command prompts. |
+| Rigging | Shared branding, stack rules, templates, and compact context derivatives. |
+| Soundings | The acceptance checklist and implementation evidence ledger. |
+| Sea Trials | Product-level objectives and proof-of-delivery criteria. |
+| Ship's Log | The append-only ledger of material decisions and milestones. |
+| Refit | The Loop-phase change process that keeps the Blueprint and the software aligned. |
+
 ## The drydock CLI
 
 ```text
@@ -107,7 +124,7 @@ options:
   --debug     Show full traceback on unexpected errors.
 ```
 
-## SAIL Phase 1 — Set Up: Laying the Keelx
+## SAIL Phase 1 — Set Up: Laying the Keel
 
 Install Drydock, configure runtime defaults, and create a workspace for a Target build.
 Process environment variables override values stored in Drydock's user-scoped `.env`.
@@ -191,16 +208,16 @@ showing its validation state, plan progress, and current runnable frontier.
 
 | Variable | Purpose |
 |---|---|
-| `DRYDOCK_BUILD_DIRECTORY` | `drydock build` builds `$DRYDOCK_BUILD_DIRECTORY/<Target>`. |
-| `DRYDOCK_WORKSPACE` | Home directory for the drydock |
+| `DRYDOCK_BUILD_DIRECTORY` | `drydock build` builds `$DRYDOCK_BUILD_DIRECTORY/<Target>`; defaults to `$DRYDOCK_WORKSPACE/build`. |
+| `DRYDOCK_WORKSPACE` | Drydock workspace root; set explicitly or resolved from the Git top-level. Required — commands error when neither is available. |
 | `LLM_PROVIDER` | Subscription CLI provider: `claude` or `codex` |
-| `PROMPT_WARN_KB` | Build-block prompt-size warning threshold |
-| `MODEL` | LLM model - gpt-6.4, gpt-5.5, sonnet, opus  |
+| `PROMPT_WARN_TOKENS` | Build-block prompt-size warning threshold in tokens |
+| `MODEL` | LLM model - gpt-5.4, gpt-5.5, sonnet, opus  |
 | `QUARTERDECK_PORT` | Default QuarterDeck service port |
 
 ### drydock init
 
-`drydock init <Target>` creates the temporary workspace for the <target> under targets/.  It populates the artifacts such that you can proceed with the workflow.
+`drydock init <Target>` creates the temporary workspace for the <target> under targets/.  It populates the artifacts such that you can proceed with the workflow. `drydock init` creates `$DRYDOCK_WORKSPACE` when it does not exist. Target-consuming commands require an initialized Target and direct the Commander to `drydock init <Target>` otherwise.
 
 ## SAIL Phase 2 — Agile Analyze: Charting the Course
 
@@ -209,7 +226,7 @@ The Analyze phase turns imported source material into an Analysis for review, th
 1. `drydock import` brings source material under Drydock control.
 2. `drydock analyze` reads the imported sources and derives stories, acceptance milestones, blockers, questions
 3. `drydock run quarterdeck` lets the product owner review, approve, and answer questions
-4. `drydock plan` consumes the reviewed analysis and creates Blueprint files, the Manifest, and tickets.json.
+4. `drydock plan` consumes the reviewed analysis and creates Blueprint files and the Manifest.
 
 > **Definition — Compass**
 >
@@ -242,7 +259,6 @@ flowchart LR
   QUARTERDECK --> PLANCREATE["plan"]:::script
   PCOMPASS{{"PLAN_COMPASS.md"}}:::md --> PLANCREATE
   PLANCREATE --> BLUEPRINT("Blueprint"):::dir
-  PLANCREATE --> BCOMPASS{{"tickets.json"}}:::md
   PLANCREATE --> MANIFEST{{"MANIFEST.md"}}:::md
 ```
 
@@ -322,7 +338,7 @@ The headers of the blueprints are structured as a dependency graph and the runna
 The plan contains Acceptance Criteria, Spikes and Specification Tickets for features, screens, and scaffolding.
 
 One major goal of the decomposition is for MANIFEST.md to contain a graph database of your work.  The configuration variable
-`PROMPT_WARN_KB` (default 50KB tokens) sets a maximum total context size for each build.  Each step stacks
+`PROMPT_WARN_TOKENS` (default 50,000 tokens) sets a maximum total context size for each build.  Each step stacks
 multiple files into a prompt for execution — including `COMPASS.md`, the applicable subsets of the stack, and
 the task instructions.  Similar tasks are grouped together to save context.
 
@@ -344,7 +360,6 @@ the task instructions.  Similar tasks are grouped together to save context.
 | `BUILD_COMPASS.md` | Target root | Story-planning grouping and build-order input for `drydock build` |
 | `MANIFEST.md` | Target root | The executable build plan |
 | `SOUNDINGS.md` | Target root | Acceptance gates projected by stable ID |
-| `tickets.json` | Target root | Target ticketing system projection |
 
 **Replan behavior**
 
@@ -434,7 +449,6 @@ flowchart LR
   SPEC(["Blueprint"]):::dir --> BUILD["build"]:::script
   BP{{"MANIFEST.md"}}:::md --> BUILD["build"]:::script
   BCOMPASS{{"BUILD_COMPASS.md"}}:::md --> BUILD
-  TICKETS{{"tickets.json"}}:::md --> BUILD
   BUILD --> EV{{"Evidence"}}:::md
   BUILD --> TARGET(["Working Software"]):::dir
 ```
@@ -446,7 +460,6 @@ flowchart LR
 | `COMPASS.md` | Target root | Always Injected |
 | `BUILD_COMPASS.md` | Target root | Story-planning grouping and build-order input |
 | `MANIFEST.md` | Target root | Executable build plan and dependency graph |
-| `tickets.json` | Target root | Target ticketing system projection consumed during build execution |
 | `ARCHITECTURE.md`, `DATABASE.md`,<br> `FEATURE-{Name}.md`, <br>`SCREEN-{Name}.md`,<br> `UI-GENERAL.md` | `blueprint/` | Typed Specification files consumed for the current build step or phase |
 
 **Output files**
@@ -457,11 +470,23 @@ flowchart LR
 | Built application files | `<Target>` | Target working directory for build<br>override in `METADATA.md` field `build_dir:` |
 
 `drydock build <Target>` executes the dependency-ready frontier and builds the application in the target working directory `$DRYDOCK_BUILD_DIRECTORY/<Target>`.
+`drydock build <Target> --dry-run` resolves the same build block, assembles the same prompt,
+prints build diagnostics, assembled-file names, prompt size, and estimated tokens, and exits without
+compact refresh, LLM execution, file writes, evidence writes, Manifest state changes, QuarterDeck
+refresh, README generation, or git initialization/commit. `--dry-run` does not print file contents
+or the full prompt by default. `--show-prompt` prints the full assembled prompt only when explicitly
+combined with `--dry-run`.
 Before executing any agent, `drydock build` compares every previously applied Blueprint
 Specification in the Manifest's `applied_specs` registry against the current Blueprint file
 content. A changed or missing previously applied Specification blocks the build and reports the
 stale file, recorded commit, current commit, recorded hash, and current hash. New unapplied
 Specification files do not block build.
+
+`ARCHITECTURE.md`, `DATABASE.md`, and `UI-GENERAL.md` are sealed foundational Specifications;
+their compact derivatives carry the same sealing. When a sealed foundational Specification is
+stale, the block message names it and instructs the Commander to create a change ticket in
+`blueprint/changes/` with `Amends: <file>` and run `drydock refit`. For a stale ordinary
+Specification, the block message instructs the Commander to run `drydock refit`.
 
 ### drydock build - PseudoCode State Machine
 
@@ -478,30 +503,39 @@ Specification files do not block build.
     closed/verified -> [done]
     closed/failed -> [FAILED]
 
-  next_buildable_step:
-    for feature in manifest:
-      for step in feature.stories_and_spikes:
-        if step.state != pending: continue
-        if any(dep.state != closed/verified for dep in step.depends): continue
-        return step
+  next_buildable_block:
+    for block in manifest:
+      if block has child stories_or_spikes:
+        pending_children = child stories_or_spikes where child.state == pending
+        if pending_children is empty: continue
+        if any(external dep.state != closed/verified for dep in block.depends): stop blocked
+        if any(external dep.state != closed/verified for dep in pending_children.depends): stop blocked
+        return block with pending_children
+      if block is story_or_spike and block.state == pending:
+        if any(dep.state != closed/verified for dep in block.depends): stop blocked
+        return block
     return none
 
   build:
-    step = selected_step or next_buildable_step()
-    if step is none: stop
-    run_agent(step)
+    block = selected_block or next_buildable_block()
+    if block is none: stop
+    run_agent(block)
     if agent_failed or no_files_written:
-      step.state = closed/failed
-    else if programmatic_acceptance_fails(step.implements):
-      step.state = closed/failed
+      block.pending_children.state = closed/failed
+    else if programmatic_acceptance_fails(block.pending_children.implements):
+      block.pending_children.state = closed/failed
     else:
-      step.state = closed/verified
+      block.pending_children.state = closed/verified
+      if all block child stories_or_spikes are closed/verified:
+        block.state = closed/verified
 
-  force_rebuild(step):
-    step.state = pending
-    for ac in step.child_acs:
+  force_rebuild(block):
+    block.state = pending
+    for child in block.child_stories_or_spikes:
+      child.state = pending
+    for ac in block.child_acs:
       ac.state = pending
-    build(step)
+    build(block)
 ```
 
 ### Agile Build Review with drydock run quarterdeck
@@ -696,7 +730,7 @@ flowchart LR
 ```
 ### drydock refit
 
-`drydock refit` conforms change tickets in `blueprint/changes/` to the Drydock build process. The Commander (or an external ticketing system) places `TICKET-NNN-{Name}.md` files in that directory. Refit normalizes each ticket's typed spec header, generates or refines stories and acceptance criteria, and patches `MANIFEST.md` with new story rows for those tickets. Applied manifest rows are never touched.
+`drydock refit` conforms change tickets in `blueprint/changes/` to the Drydock build process. The Commander (or an external ticketing system) places `TICKET-NNN-{Name}.md` files in that directory. Refit normalizes each ticket's typed spec header, generates or refines stories and acceptance criteria, and patches `MANIFEST.md` with new story rows for those tickets. The ticket pass never touches applied manifest rows; only the drift reconciliation pass resets them.
 
 **Change ticket format.** A change ticket is a Typed Specification file with FileType `CHANGE`. It carries an `Amends:` header field that names the parent Blueprint spec the ticket modifies (e.g. `Amends: FEATURE-Copy.md`). `drydock refit` reads this field to resolve dependency inheritance and to inject the parent spec as context.
 
@@ -704,13 +738,17 @@ flowchart LR
 
 **Role boundary.** `drydock refit` is a targeted patch: it processes only tickets in `blueprint/changes/` and inserts or replaces pending manifest rows for those tickets. `drydock plan create` is a full regeneration: it reads all Blueprint inputs and rewrites `MANIFEST.md` with state-preserving merge. Run `drydock plan create` after `drydock refit` when the full plan graph must be recomputed.
 
-**Behavior.** Scans `blueprint/changes/*.md`. For each ticket: reads `Amends:`, resolves parent spec dependencies, runs one LLM call to normalize the ticket header and generate manifest rows, writes the updated ticket, and patches `MANIFEST.md`. Tickets without an `Amends:` field are skipped with a warning. Exits 0 when no tickets are found.
+**Behavior.** Scans `blueprint/changes/*.md`. For each ticket: reads `Amends:`, resolves parent spec dependencies, runs one LLM call to normalize the ticket header and generate manifest rows, writes the updated ticket, and patches `MANIFEST.md`. Tickets without an `Amends:` field are skipped with a warning. After the ticket pass, refit runs a deterministic drift reconciliation over the Manifest's `applied_specs` registry.
 
-**Input files.** `blueprint/changes/*.md`, `blueprint/<parent-spec>.md`, `MANIFEST.md`, `COMPASS.md`, `MANIFEST_CONTRACT.md`.
+**Drift reconciliation.** Refit compares every `applied_specs` record against the current Blueprint file content. For each drifted file, refit computes the reset cascade: every block whose `implements:` or `context:` references the file or one of its compact derivatives, every transitive dependent of those blocks through `depends:`, and every child of a reset block. Refit sets each cascaded block's `state:` to `pending`, reopens the parent feature of each reset step, removes the drifted file's `applied_specs` records, and removes every record stamped by a reset block. The next `drydock build` rebuilds the reset blocks in dependency order.
 
-**Output files.** Updated `blueprint/changes/*.md` (headers normalized); patched `MANIFEST.md`.
+**Sealed foundational Specifications.** A drifted `ARCHITECTURE.md`, `DATABASE.md`, or `UI-GENERAL.md` (or a compact derivative of one) resets its cascade only when a ticket in the same refit run amends it. Without such a ticket, refit reports the file as blocked with the instruction to create a change ticket carrying `Amends: <file>`, leaves its blocks and records untouched, and exits 1. A foundational reset cascades to every dependent block; a foundational change rebuilds the application.
 
-**Exit codes.** `0` success or no-op; `1` operational failure; `2` usage error.
+**Input files.** `blueprint/changes/*.md`, `blueprint/<parent-spec>.md`, `blueprint/*.md` (drift comparison), `MANIFEST.md`, `COMPASS.md`, `MANIFEST_CONTRACT.md`.
+
+**Output files.** Updated `blueprint/changes/*.md` (headers normalized); patched `MANIFEST.md` (ticket rows, cascaded `state:` resets, pruned `applied_specs` records).
+
+**Exit codes.** `0` success or no-op; `1` operational failure or unticketed foundational drift; `2` usage error.
 
 TODO: The refit can roll the change tickets into the primary specification files.
 
@@ -738,7 +776,6 @@ What drydock operations read/write
 | SOUNDINGS.md | Target root | O | O/I | O | I | · |
 | changes/TICKET-{NNN}-{Name}.md | blueprint/changes/ | · | I | I | · | O |
 | sources/* | blueprint/sources/ | I | I | · | · | · |
-| tickets.json | Target root | · | O | I | I | I |
 | UI-GENERAL.md | blueprint/ | · | O | I | I | I |
 
 **Legend:** `O` the command produces the artifact · `I` the command consumes the artifact ·
@@ -752,7 +789,7 @@ Human-authored feedback artifacts (`ANALYZE_COMPASS.md`, `PLAN_COMPASS.md`, answ
 Drydock stores its own state under `$DRYDOCK_WORKSPACE/targets/<Target>`. The built application lives under `$DRYDOCK_BUILD_DIRECTORY/<Target>`. The QuarterDeck is configuration driven and uses files from the Drydock-managed Target tree.
 
 ```text
-$DRYDOCK_WORKSPACE/                       # Git top-level or cwd — the Drydock project
+$DRYDOCK_WORKSPACE/                       # explicit config/env or Git top-level — required
 ├── logs/
 │   ├── ships_log.jsonl                   # workspace product/design decision ledger
 │   ├── history.jsonl                     # append-only command-invocation log
@@ -771,7 +808,6 @@ $DRYDOCK_WORKSPACE/                       # Git top-level or cwd — the Drydock
         ├── SCORECARD.md                  # seven-dimension quality + drift scores
         ├── SEA_TRIALS.md                 # Project AC — project-level acceptance criteria
         ├── SOUNDINGS.md                  # AC — calculated acceptance/readiness ledger
-        ├── tickets.json                  # target ticketing system / board projection
         │
         ├── BUILD_COMPASS.md              # story-planning grouping and build-order input
         │
@@ -868,9 +904,12 @@ software, or both.
 
 ### Feature Blocks
 
-A feature is an optional non-executable parent ticket. Small plans do not require features. A
-feature closes only after all required child stories, spikes, and feature-level `ac` blocks are
-`closed/verified`.
+A feature is an optional grouping block. Small plans do not require features. Build execution uses
+the grouping block as the atomic build unit: if a pending child story or spike depends on another
+child story or spike inside the same feature, that dependency is internal sequencing and does not
+block the feature from running. A feature can run only when every dependency outside the feature is
+`closed/verified`. A feature closes only after all required child stories, spikes, and feature-level
+`ac` blocks are `closed/verified`.
 
 ### Spike Blocks
 
@@ -921,8 +960,12 @@ All four block types use the same four states:
 
 ### Execution Rules
 
-A block can run only when everything in `depends:` is `closed/verified`. Features are never
-directly executable.
+A build block can run only when every external dependency in `depends:` is `closed/verified`.
+Dependencies between stories or spikes inside the same grouping block are internal build-agent
+sequencing and do not split the build block. A standalone `story` or `spike` is a one-step build
+block. A grouped feature is a multi-step build block containing its pending child stories and
+spikes. A build block with an unverified external dependency blocks build execution and reports the
+blocking dependency.
 
 Legacy `ac` blocks are reconciled by the build engine or QuarterDeck. They are not the normal
 acceptance authority for new plans.
@@ -1141,6 +1184,13 @@ Do not recompact Rigging files unless the governing source actually changed.
 Files without callable surface are classified by the compaction agent and skipped (`no-surface`).
 `_compact.md` files are never treated as sources.
 
+**Compact stability.** When a compact derivative already exists, the compaction prompt receives
+it alongside the source and reproduces it verbatim unless the source contains a structural change
+to the extracted contract. When the regenerated body matches the existing derivative, compaction
+keeps the existing file bytes, refreshes its modification time, and reports the file as
+`skipped-unchanged`. An unchanged derivative keeps its `applied_specs` hash and triggers no
+rebuild cascade.
+
 `rigging compact` runs in three forms - the ARCHITECTURE.md role, the DATABASE.md role, and the evrything else role  The ARCHITECTURE and DATABASE components are repeatedly reinjected and should be special compaction when they are created is our solution.
 
 ### Commands
@@ -1271,32 +1321,30 @@ Drydock invokes the Claude CLI as a non-interactive build agent inside an isolat
 
 ### Codex Implementation
 
-Drydock encapsulates the llm when codex is chosen via:
+When the provider is codex, Drydock isolates Codex's configuration and identity — not its command execution. 
 
-    Drydock runs Codex in a clean room with
+ CODEX_HOME=/tmp/drydock-codex-home-XXXX codex exec \
+     --ignore-user-config \
+     --ignore-rules \
+     --ephemeral \
+     --sandbox <codex_sandbox> \
+     --cd <build_dir> \
+     --json \
+     --output-last-message <output_file> \
+     --model <model> -
 
-    CODEX_HOME=/tmp/drydock-codex-home-XXXX codex exec \
-        --ignore-user-config
-        --ignore-rules \
-        --ephemeral \
-        --sandbox workspace-write \
-        --cd <build_dir> \
-        --json
-        --output-last-message <output_file> \
-        --model <model> -;
+ - CODEX_HOME=<dir> — a temporary home seeded only with auth.json, so Codex inherits none of the user's config, rules, memories, or session history.
+ - --ignore-user-config — disables $CODEX_HOME/config.toml.
+ - --ignore-rules — disables user and project .rules.
+ - --ephemeral — disables persisted session state.
+ - --sandbox <codex_sandbox> — the OS execution-sandbox policy, resolved from codex_sandbox (default danger-full-access).
+ - --cd <build_dir> — sets the working root.
+ - --json — structured event output.
+ - --output-last-message <output_file> — captures the final agent message deterministically.
+ - --model <model> — selects the runtime model.
+ - trailing - — Codex reads the fully assembled Drydock prompt from stdin.
 
-Explanation:
-
-    CODEX_HOME=<dir> points Codex at a temporary home seeded only with auth.json,
-    --ignore-user-config disables $CODEX_HOME/config.toml,
-    --ignore-rules disables user/project .rules,
-    --ephemeral disables persisted session state,
-    --sandbox workspace-write constrains tool execution to the workspace sandbox,
-    --cd <build_dir> sets the working root,
-    --json enables structured event output,
-    --output-last-message <output_file> captures the final agent message deterministically,
-    --model <model> selects the runtime model
-    trailing - tells Codex to read the fully assembled Drydock prompt from stdin
+Execution sandbox. The codex provider executes model-generated commands in the invoking shell. codex_sandbox selects the OS sandbox policy: danger-full-access (default, no OS confinement), workspace-write, or read-only. Non-default modes require the platform sandbox helper (codex-linux-sandbox on Linux) and fail fast when it is absent. Drydock does not require an external encapsulation layer; hardened deployments confine execution by running Drydock inside a container that exposes only the workspace and target directories.
 
 ## Blueprints - Typed Specification Contract
 
@@ -1420,11 +1468,6 @@ build and review actions.
 - **`<Target>/QuarterDeck/console.yaml`** — console index; defines project identity, the
   default view, the sidebar section taxonomy, and all renderable navigation items
   - Created and updated: `drydock init`
-
-- **`<Target>/tickets.json`** — Target ticketing system projection; features, spikes, and stories
-  projected as tickets with acceptance criteria folded under their parent
-  - Created and updated: `drydock build` from `MANIFEST.md`
-  - Drydock follows feature/story best practices with acceptance criteria embedded
 
 ### Specification File Format
 

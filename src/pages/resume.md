@@ -4,7 +4,7 @@ layout: ../layouts/Resume.astro
 
 # Edward Barlow - AI Adoption Consultant
 
-> Active **AI Engineer/Devloper** with solid understanding of latest trends and development best practices.
+> Active **AI Engineer/Developer** with solid understanding of latest trends and development best practices.
 
 **West Chester, PA | (914) 837-4798**
 **edward.m.barlow@gmail.com | linkedin.com/in/ed-barlow**

@@ -8,6 +8,19 @@ import Layout from './Layout.astro';
       max-width: 860px;
       margin: 0 auto;
       padding: 3rem 2rem 5rem;
+      position: relative;
+    }
+
+    .resume-photo {
+      float: right;
+      width: min(280px, 34vw);
+      aspect-ratio: 1 / 1;
+      margin: 0 0 1.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      box-shadow: 0 8px 48px rgba(79, 156, 249, 0.08);
+      display: block;
     }
 
     /* Name & contact block */
@@ -111,6 +124,7 @@ import Layout from './Layout.astro';
       border: none;
       border-top: 1px solid var(--border);
       margin: 2rem 0;
+      clear: both;
     }
 
     /* Links */
@@ -120,10 +134,23 @@ import Layout from './Layout.astro';
     }
     .resume-container a:hover { text-decoration: underline; }
 
+    @media (max-width: 760px) {
+      .resume-container {
+        padding: 2.25rem 1.5rem 4rem;
+      }
+
+      .resume-photo {
+        float: none;
+        width: min(320px, 100%);
+        margin: 0 0 1.5rem;
+      }
+    }
+
     /* Print */
     @media print {
       body { background: white; color: black; }
       .resume-container { padding: 0; max-width: 100%; }
+      .resume-photo { display: none; }
       .resume-container h1 { color: black; }
       .resume-container h2 { color: #333; border-color: #ccc; }
       .resume-container h3 { color: black; }
@@ -136,6 +163,7 @@ import Layout from './Layout.astro';
   </style>
 
   <div class="resume-container">
+    <img src="/images/portrait.jpg" alt="Ed Barlow" class="resume-photo" />
     <slot />
   </div>
 </Layout>

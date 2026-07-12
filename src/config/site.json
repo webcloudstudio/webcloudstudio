@@ -29,6 +29,12 @@
   ],
   "papers": [
     {
+      "label": "Improving Step Accuracy in Specification-Driven Development",
+      "slug": "step-accuracy",
+      "url": "https://zenodo.org/records/21287574",
+      "description": "White paper on Zenodo — raising per-step accuracy in specification-driven development."
+    },
+    {
       "label": "Developers Log",
       "slug": "devlog",
       "src": "project-docs/devlog/index.html",

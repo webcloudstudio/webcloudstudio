@@ -664,8 +664,8 @@ const papers = (site as any).papers ?? [];
               <div class="contact-trigger nav-dropdown">
                 <a href={item.href} class="nav-dropdown-label">{item.label} <span class="caret">▾</span></a>
                 <div class="contact-card nav-dropdown-card" role="menu">
-                  {papers.map((p: {label: string; slug: string}) => (
-                    <a href={`${base}${p.slug}/`} class="contact-item" role="menuitem">{p.label}</a>
+                  {papers.map((p: {label: string; slug: string; url?: string}) => (
+                    <a href={p.url ? p.url : `${base}${p.slug}/`} class="contact-item" role="menuitem">{p.label}</a>
                   ))}
                 </div>
               </div>

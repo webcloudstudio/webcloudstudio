@@ -21,6 +21,7 @@ import Layout from '../layouts/Layout.astro';
       <a href="https://webcloudstudio.github.io/Drydock/" target="_blank" rel="noopener">Documentation</a>
       <a href="/project-docs/drydock/presentation/Drydock_Video.web.mp4" target="_blank" rel="noopener">Video</a>
     </div>
+    <p class="feature-repo-link"><a href="https://github.com/webcloudstudio/Drydock" target="_blank" rel="noopener">View source on GitHub</a></p>
   </div>
 
   <a class="drydock-window drydock-video-popout" href="/project-docs/drydock/presentation/Drydock_Video.web.mp4" target="_blank" rel="noopener" aria-label="Open Drydock presentation video">
@@ -35,15 +36,15 @@ import Layout from '../layouts/Layout.astro';
 </div>
 
 <div class="marina-note">
-  <h2>The Marina - Project Organizer - Capability Sharing</h2>
-  <p>The Marina is a Trust and Interoperability platform into which you "dock" your projects. <a href="https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC" target="_blank" rel="noopener">Process Based Methodology</a> (my book) and scale-proven <a href="https://webcloudstudio.com/project-docs/Specifications/Features.html" target="_blank" rel="noopener">Technology Rules</a> have led to a method to "conform" your projects so they expose/encapsulate capabilities.  Project being build by Drydock.</p>
+  <h2>The Marina - Project Organizer - Capability Sharing - (in development)</h2>
+  <p>The Marina is a Trust and Interoperability platform into which you "dock" your projects. <a href="https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC" target="_blank" rel="noopener">Process Based Methodology</a> (my book) and scale-proven <a href="https://webcloudstudio.com/project-docs/Specifications/Features.html" target="_blank" rel="noopener">Technology Rules</a> have led to a method to "conform" your projects so they expose/encapsulate capabilities.  The Marina is being build by Drydock.</p>
   <ul>
     <li>Project Organizer<span>Workflow, Tagging, Namespaces.</span></li>
     <li>Project Capabilities Catalog<span>Services, Data, Shared Resources.</span></li>
     <li>Agents enforce standards<span>Your Stack best practices, Your branding, and Automatic security.</span></li>
     <li>Conformed Documentation<span>Consistent docs across all your projects.</span></li>
     <li>Enterprise Command Center<span>Logging, Monitoring &amp; Alerting, Scheduling, Pipelines.</span></li>
-    <li>AWS Integration<span>Single Library For AWS Service Integration - Built on their ultra low cost services.</span></li>
+    <li>AWS Integration<span>Library encapsulation of AWS published as project capabilities. Your apps get native access to services like s3 and databases. </span></li>
   </ul>
 </div>
       </div>
@@ -142,6 +143,20 @@ import Layout from '../layouts/Layout.astro';
       background: #4f9cf9;
       color: #080810;
       text-decoration: none;
+    }
+
+    .feature-repo-link {
+      margin: 0.75rem 0 0;
+      font-size: 0.86rem;
+    }
+
+    .feature-repo-link a {
+      color: #94a3b8;
+      text-decoration: underline;
+    }
+
+    .feature-repo-link a:hover {
+      color: #4f9cf9;
     }
 
     .drydock-window {

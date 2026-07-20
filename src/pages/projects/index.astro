@@ -1,33 +1,58 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="My Projects — Ed Barlow">
+<Layout title="My Projects — Web Cloud Studio">
   <section class="projects-page">
     <div class="section-inner">
       <div class="projects-header">
-        <h1 class="page-title">My Projects</h1>
         
       </div>
       <div class="cards-grid">
-        <!-- CARD: MyRAG -->
+        <!-- CARD: AutoApply -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="/images/myrag.webp" alt="MyRAG" class="card-image"/>
+            <img src="/images/autoapply-icon.svg" alt="AutoApply" class="card-image"/>
           </div>
 
           <div class="card-content">
             <div class="tags">
-              <span class="tag tag--neutral">RAG</span>
+              <span class="tag tag--neutral">FastApi</span>
+            <span class="tag tag--{'bg': '#a78bfa', 'text': '#1a0040'}">React</span>
+            <span class="tag tag--neutral">Saas</span>
             </div>
 
-            <h3 class="card-title">MyRAG</h3>
+            <h3 class="card-title">AutoApply</h3>
 
-            <p class="card-desc">Local RAG desktop for all your Documents.  Clean directory picker, auto scanner, and ability to answers questions using Claude or OpenAI.</p>
+            <p class="card-desc">SAAS / Pay Service that scrapes jobs, tailors your résumé and cover letter, and tracks applications.  Remembers your skills and capabilities to provide accurate keyword matching.</p>
           </div>
 
           <div class="card-actions">
-            <a href="/project-docs/myrag/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
+            <a href="https://matthewbarlow.me/projects/autoapply/overview/" target="_blank" rel="noopener" class="card-link-btn">Docs ↗</a>
+            <a href="https://autoapply.matthewbarlow.me" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
+          </div>
+        </article>
+
+        <!-- CARD: Herpes Hearts (2026) -->
+        <article class="card">
+          <div class="card-image-wrapper">
+            <img src="/images/HerpesHearts.webp" alt="Herpes Hearts (2026)" class="card-image"/>
+          </div>
+
+          <div class="card-content">
+            <div class="tags">
+              <span class="tag tag--{'bg': '#4ade80', 'text': '#1a2e1a'}">Django</span>
+            <span class="tag tag--{'bg': '#4f9cf9', 'text': '#00174d'}">Docker</span>
+            <span class="tag tag--{'bg': '#4f9cf9', 'text': '#00174d'}">Railway</span>
+            </div>
+
+            <h3 class="card-title">Herpes Hearts (2026)</h3>
+
+            <p class="card-desc">Completely Free Django dating platform built for the HSV+ community.</p>
+          </div>
+
+          <div class="card-actions">
             
+            <a href="https://www.herpeshearts.com" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
           </div>
         </article>
 
@@ -49,52 +74,6 @@ import Layout from '../../layouts/Layout.astro';
 
           <div class="card-actions">
             <a href="/project-docs/ezdocs/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
-            
-          </div>
-        </article>
-
-        <!-- CARD: Conquer 2026 -->
-        <article class="card">
-          <div class="card-image-wrapper">
-            <img src="/images/conquer_2026.webp" alt="Conquer 2026" class="card-image"/>
-          </div>
-
-          <div class="card-content">
-            <div class="tags">
-              <span class="tag tag--{'bg': '#f87171', 'text': '#1a0000'}">Multi-Player Game</span>
-            <span class="tag tag--neutral">C</span>
-            </div>
-
-            <h3 class="card-title">Conquer 2026</h3>
-
-            <p class="card-desc">Port of my classic 1990s multi-player hex-map strategy game</p>
-          </div>
-
-          <div class="card-actions">
-            <a href="/project-docs/conquer_2026/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
-            
-          </div>
-        </article>
-
-        <!-- CARD: Ed Barlows Stored Procedure Library (1997-2010) -->
-        <article class="card">
-          <div class="card-image-wrapper">
-            <img src="/images/EdBarlowsStoredProcs.webp" alt="Ed Barlows Stored Procedure Library (1997-2010)" class="card-image"/>
-          </div>
-
-          <div class="card-content">
-            <div class="tags">
-              <span class="tag tag--{'bg': '#4f9cf9', 'text': '#00174d'}">Sybase</span>
-            <span class="tag tag--{'bg': '#4f9cf9', 'text': '#00174d'}">Sql Server</span>
-            </div>
-
-            <h3 class="card-title">Ed Barlows Stored Procedure Library (1997-2010)</h3>
-
-            <p class="card-desc">Widely Used Shareware Stored Procedure Library For SQL Server and Sybase Servers</p>
-          </div>
-
-          <div class="card-actions">
-            <a href="/project-docs/EdBarlowsStoredProcs/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
             
           </div>
         </article>
@@ -123,27 +102,48 @@ import Layout from '../../layouts/Layout.astro';
           </div>
         </article>
 
-        <!-- CARD: Herpes Hearts (2026) -->
+        <!-- CARD: MyRAG -->
         <article class="card">
           <div class="card-image-wrapper">
-            <img src="/images/HerpesHearts.webp" alt="Herpes Hearts (2026)" class="card-image"/>
+            <img src="/images/myrag.webp" alt="MyRAG" class="card-image"/>
           </div>
 
           <div class="card-content">
             <div class="tags">
-              <span class="tag tag--{'bg': '#4ade80', 'text': '#1a2e1a'}">Django</span>
-            <span class="tag tag--{'bg': '#4f9cf9', 'text': '#00174d'}">Docker</span>
-            <span class="tag tag--{'bg': '#4f9cf9', 'text': '#00174d'}">Railway</span>
+              <span class="tag tag--neutral">RAG</span>
             </div>
 
-            <h3 class="card-title">Herpes Hearts (2026)</h3>
+            <h3 class="card-title">MyRAG</h3>
 
-            <p class="card-desc">Completely Free Django dating platform built for the HSV+ community.</p>
+            <p class="card-desc">Local RAG desktop for all your Documents.  Clean directory picker, auto scanner, and ability to answers questions using Claude or OpenAI.</p>
           </div>
 
           <div class="card-actions">
+            <a href="/project-docs/myrag/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
             
-            <a href="https://www.herpeshearts.com" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
+          </div>
+        </article>
+
+        <!-- CARD: Ed Barlows Stored Procedure Library (1997-2010) -->
+        <article class="card">
+          <div class="card-image-wrapper">
+            <img src="/images/EdBarlowsStoredProcs.webp" alt="Ed Barlows Stored Procedure Library (1997-2010)" class="card-image"/>
+          </div>
+
+          <div class="card-content">
+            <div class="tags">
+              <span class="tag tag--{'bg': '#4f9cf9', 'text': '#00174d'}">Sybase</span>
+            <span class="tag tag--{'bg': '#4f9cf9', 'text': '#00174d'}">Sql Server</span>
+            </div>
+
+            <h3 class="card-title">Ed Barlows Stored Procedure Library (1997-2010)</h3>
+
+            <p class="card-desc">Widely Used Shareware Stored Procedure Library For SQL Server and Sybase Servers</p>
+          </div>
+
+          <div class="card-actions">
+            <a href="/project-docs/EdBarlowsStoredProcs/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
+            
           </div>
         </article>
 
@@ -167,6 +167,29 @@ import Layout from '../../layouts/Layout.astro';
           <div class="card-actions">
             
             <a href="https://www.amazon.com/Process-Based-Database-Administration-Management-ebook/dp/B073RRQBZC" target="_blank" rel="noopener" class="card-link-btn">Details ↗</a>
+          </div>
+        </article>
+
+        <!-- CARD: Conquer 2026 -->
+        <article class="card">
+          <div class="card-image-wrapper">
+            <img src="/images/conquer_2026.webp" alt="Conquer 2026" class="card-image"/>
+          </div>
+
+          <div class="card-content">
+            <div class="tags">
+              <span class="tag tag--{'bg': '#f87171', 'text': '#1a0000'}">Multi-Player Game</span>
+            <span class="tag tag--neutral">C</span>
+            </div>
+
+            <h3 class="card-title">Conquer 2026</h3>
+
+            <p class="card-desc">Port of my classic 1990s multi-player hex-map strategy game</p>
+          </div>
+
+          <div class="card-actions">
+            <a href="/project-docs/conquer_2026/index.html" target="_blank" rel="noopener" class="card-link-btn">Documentation ↗</a>
+            
           </div>
         </article>
       </div>

@@ -1,8 +1,14 @@
 ---
 import Layout from './Layout.astro';
+interface Props {
+  photo?: string;
+  alt?: string;
+  pageTitle?: string;
+}
+const { photo = '/images/portrait.jpg', alt = 'Ed Barlow', pageTitle = 'About — Ed Barlow' } = Astro.props;
 ---
 
-<Layout title="About — Ed Barlow">
+<Layout title={pageTitle}>
   <style is:global>
     .resume-container {
       max-width: 860px;
@@ -163,7 +169,7 @@ import Layout from './Layout.astro';
   </style>
 
   <div class="resume-container">
-    <img src="/images/portrait.jpg" alt="Ed Barlow" class="resume-photo" />
+    <img src={photo} alt={alt} class="resume-photo" />
     <slot />
   </div>
 </Layout>

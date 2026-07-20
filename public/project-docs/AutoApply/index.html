@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto Apply — Help</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    nav.app-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      height: 48px;
+      background: #1a1a1a;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav.app-nav a { color: #ccc; text-decoration: none; font-size: 14px; }
+    nav.app-nav a:hover { color: #fff; }
+    nav.app-nav a.nav-active { color: #fff; font-weight: 600; }
+    nav.app-nav .brand { font-weight: 700; font-size: 15px; color: #fff; margin-right: auto; }
+    nav.app-nav .nav-right { margin-left: auto; }
+
+    .help-layout {
+      display: flex;
+      height: calc(100vh - 48px);
+    }
+
+    .help-sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: #fff;
+      border-right: 1px solid #e5e5e5;
+      padding: 1.5rem 0;
+      overflow-y: auto;
+    }
+    .sidebar-heading {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #888;
+      padding: 0 1.25rem 0.5rem;
+    }
+    a.sidebar-link {
+      display: block;
+      padding: 0.4rem 1.25rem;
+      color: #444;
+      text-decoration: none;
+      font-size: 13px;
+      border-left: 3px solid transparent;
+      transition: background 0.1s, border-color 0.1s;
+      cursor: pointer;
+    }
+    a.sidebar-link:hover {
+      background: #f5f5f5;
+      color: #1a1a1a;
+      border-left-color: #0a66c2;
+    }
+    a.sidebar-link.active {
+      background: #f0f4ff;
+      color: #0a66c2;
+      font-weight: 600;
+      border-left-color: #0a66c2;
+    }
+
+    .help-content {
+      flex: 1;
+      padding: 2rem 2.5rem;
+      overflow-y: auto;
+      max-width: 860px;
+    }
+
+    .help-content h1 { font-size: 22px; font-weight: 700; margin-bottom: 0.75rem; color: #111; }
+    .help-content h2 { font-size: 17px; font-weight: 700; margin: 2rem 0 0.6rem; color: #111; border-bottom: 1px solid #eee; padding-bottom: 0.3rem; }
+    .help-content h3 { font-size: 15px; font-weight: 600; margin: 1.25rem 0 0.4rem; color: #333; }
+    .help-content p  { line-height: 1.7; margin-bottom: 0.75rem; color: #333; }
+    .help-content ul,
+    .help-content ol { padding-left: 1.5rem; margin-bottom: 0.75rem; line-height: 1.7; color: #333; }
+    .help-content li { margin-bottom: 0.2rem; }
+    .help-content a  { color: #0a66c2; text-decoration: none; }
+    .help-content a:hover { text-decoration: underline; }
+
+    .help-content code {
+      background: #f0f0f0;
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-size: 12.5px;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      color: #c7254e;
+    }
+    .help-content pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 0.75rem 0 1rem;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .help-content pre code {
+      background: none;
+      color: inherit;
+      padding: 0;
+      font-size: inherit;
+    }
+
+    .help-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1.25rem;
+      font-size: 13px;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+    }
+    .help-content th {
+      text-align: left;
+      padding: 9px 12px;
+      background: #f0f0f0;
+      font-weight: 600;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .help-content td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    .help-content tr:last-child td { border-bottom: none; }
+
+    .empty-state {
+      color: #888;
+      font-size: 13px;
+      padding: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="app-nav">
+  <a class="brand" href="/">Auto Apply</a>
+  <a href="/">Dashboard</a>
+  <a href="/config">Config</a>
+  <a href="/setup">Setup</a>
+  <a href="/help" class="nav-active nav-right">Help</a>
+</nav>
+
+<div class="help-layout">
+  <aside class="help-sidebar">
+    <div class="sidebar-heading">Documentation</div>
+    <div id="toc"></div>
+  </aside>
+
+  <main class="help-content" id="content">
+    <p class="empty-state">Select a document from the sidebar.</p>
+  </main>
+</div>
+
+<script>
+  const toc = document.getElementById('toc');
+  const content = document.getElementById('content');
+
+  async function loadDoc(filename, title, linkEl) {
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    linkEl.classList.add('active');
+    content.innerHTML = '<p class="empty-state">Loading…</p>';
+    try {
+      const res = await fetch(`/api/docs/${encodeURIComponent(filename)}`);
+      if (!res.ok) throw new Error(res.statusText);
+      const md = await res.text();
+      content.innerHTML = marked.parse(md);
+    } catch (e) {
+      content.innerHTML = `<p class="empty-state">Failed to load: ${e.message}</p>`;
+    }
+    content.scrollTop = 0;
+  }
+
+  async function init() {
+    const res = await fetch('/api/docs');
+    if (!res.ok) { toc.innerHTML = '<p class="empty-state">Could not load docs.</p>'; return; }
+    const docs = await res.json();
+    if (!docs.length) { toc.innerHTML = '<p style="padding:0 1.25rem;color:#888;font-size:13px;">No documents found.</p>'; return; }
+
+    docs.forEach((doc, i) => {
+      const a = document.createElement('a');
+      a.className = 'sidebar-link';
+      a.textContent = doc.title;
+      a.addEventListener('click', () => loadDoc(doc.filename, doc.title, a));
+      toc.appendChild(a);
+      if (i === 0) a.click();
+    });
+  }
+
+  init();
+</script>
+
+</body>
+</html>

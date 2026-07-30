@@ -115,7 +115,7 @@ flowchart LR
 **Test Driven Development**
 - Your Crew (LLM) uses Test Driven Development
 - Programmatic acceptance criteria created using a checklist 
-- Use EARS-notation acceptance criteria with grammar validation for Project level AC (SEA_TRIALS.md)
+- Use EARS-notation acceptance criteria for Project level AC (SEA_TRIALS.md)
 
 **The Quarterdeck**
 - QuarterDeck is a custom Commander to Crew web portal.
@@ -140,7 +140,6 @@ flowchart LR
 - `drydock analyze` is Story Planning and surfaces any gaps
 - Persistent intent injection at each process stage 
 - `drydock plan` creates typed specifications with prescribed roles.
-- EARS acceptance criteria, grammar-validated.
 - Programmatic Acceptance criteria for each story.
 - Sealed foundational specifications require a change ticket to alter.
 - Persistence encapsulation (library) prevent forced large rebuilds 
@@ -199,6 +198,43 @@ options:
   -h, --help  show this help message and exit
   --version   show program's version number and exit
   --debug     Show full traceback on unexpected errors.
+```
+
+## End-to-End Command Flow
+
+A Target runs from source material to a scored release and through subsequent change with the
+following commands.
+
+```bash
+# Build Specifications into Code With Agile and Test Driven Development
+# Runs on your Claude/Codex/Other subscription CLI. No API keys or per-token-billing.
+
+# ── S ── SET UP ──────────────────────────────────────────────────────────
+drydock config set llm_provider claude      # or codex
+drydock init            MyApp               # create the Target workspace
+
+# ── A ── ANALYZE ─────────────────────────────────────────────────────────
+drydock import          MyApp ./notes       # notes, a source tree, or Spec Kit
+drydock analyze         MyApp               # → stories, acceptance criteria, blockers
+drydock run quarterdeck MyApp               # the Commander answers the open questions
+drydock plan            MyApp               # → Blueprint + MANIFEST.md dependency graph
+drydock validate        MyApp               # typed specification conformance. no LLM.
+
+# ── I ── IMPLEMENT ───────────────────────────────────────────────────────
+while drydock status MyApp --ready; do      # build the runnable frontier, one step at a time
+  drydock build         MyApp               # scoped context in, code + evidence out
+  drydock build status  MyApp               # what is done, blocked, and next
+done
+
+drydock score ac        MyApp               # every assertion, deterministically → SOUNDINGS.md
+drydock score release   MyApp               # Sea Trials release gate → SCORECARD.md
+
+# ── L ── LOOP ────────────────────────────────────────────────────────────
+# The Blueprint changes first; the software follows.
+drydock refit           MyApp               # change tickets → conformed manifest work
+drydock build           MyApp               # rebuild what the change touched
+drydock document        MyApp               # documentation generated from the Blueprint
+drydock rigging update  MyApp               # propagate shared rules and templates
 ```
 
 ## SAIL Phase 1 — Set Up: Laying the Keel
@@ -537,7 +573,11 @@ Passing programmatic acceptance unlocks the next set of dependent operations.
 
 ### drydock build
 
-`drydock build` converts Blueprints to code, executing the dependency-ready frontier of `MANIFEST.md` one block of stories at a time. Blocks are grouped by `drydock plan`, and the Commander controls grouping and build order in the QuarterDeck. Each story is validated against the deterministic acceptance criteria it declares, and a block advances only when its criteria pass. A block that fails resumes in place on the next build: its partial work is kept and its failing checks are fed back, so `drydock build` continues where it left off by default.
+`drydock build` converts Blueprints to code, executing the dependency-ready frontier of `MANIFEST.md` one block of stories at a time. Blocks are grouped by `drydock plan`, and the Commander controls grouping and build order in the QuarterDeck. Each story is validated against the deterministic acceptance criteria it declares, and a block advances only when its criteria pass. Pending dependency-ready work is reported as the frontier. A failed block is reported as resume work and resumes in place on the next build with its partial work and current failing checks.
+
+A feature repair implements its failed stories and runs the Programmatic Acceptance criteria for both those stories and their verified siblings. A regression reopens the sibling story as `closed/failed`.
+
+Each LLM attempt that reaches the acceptance gate is followed by a deterministic acceptance summary. A failed block receives up to three automatic repair passes. Repair continues when the set of passing acceptance criteria grows without regression, or when that set remains unchanged and at least one per-criterion case tally improves without another case tally regressing. Repair stops when neither condition is met or the repair-pass limit is reached.
 
 ```mermaid
 %%{init: {'theme': 'neutral', 'flowchart': {'curve': 'linear'}, 'themeVariables': {'fontSize': '14px'}}}%%
@@ -583,7 +623,7 @@ restored; `drydock score` reports a modified staged asset as a release blocker.
   `--step <STEP>` builds one block: a feature group, or a story resolved to its containing block.
   `--story <STORY>` builds exactly one story, even inside a feature group.
   `--reset` discards prior work and rebuilds clean; with `--step`/`--story` it resets that block, and with no selector it resets every block and wipes the build directory.
-  `--repair-attempts <n>` sets the number of automatic repair passes after a failed block (default 1).
+  `--repair-attempts <n>` sets the number of automatic repair passes after a failed block (default 3).
   `--escalate-model <model>` uses an alternate model on the final repair attempt.
   `--normalize-order` normalizes authored Manifest group order before building.
   `--build-dir <path>` overrides the output directory for the current run.

@@ -354,9 +354,10 @@ drydock status <Target> --check   # 0 complete, 2 blocked
 The Analyze phase turns imported source material into an Analysis for review, then into an executable Manifest for build.
 
 1. `drydock import` brings source material under Drydock control.
-2. `drydock analyze` reads the imported sources and derives stories, acceptance milestones, blockers, questions
-3. `drydock run quarterdeck` lets the product owner review, approve, and answer questions
-4. `drydock plan` consumes the analysis and creates Blueprint files and the Manifest.
+2. `drydock score spec` optionally diagnoses potential errors in the imported specifications.
+3. `drydock analyze` reads the imported sources and derives stories, acceptance milestones, blockers, questions
+4. `drydock run quarterdeck` lets the product owner review, approve, and answer questions
+5. `drydock plan` consumes the analysis and creates Blueprint files and the Manifest.
 
 > **Definition — Compass Files**
 >
@@ -371,6 +372,7 @@ The Analyze phase turns imported source material into an Analysis for review, th
 
 ```text
 drydock import <Target> <Source> --format <auto|markdown|source|speckit|compass> [--force]
+drydock score spec <Target>
 drydock analyze <Target>
 drydock run quarterdeck [<Target>] [--host HOST] [--port PORT]
 drydock plan [--overwrite] [--no-conform] <Target>
@@ -412,6 +414,11 @@ the Target workspace for later analysis. Compass imports write `COMPASS.md` at t
 `drydock import <Target> <Source> --format compass` normalizes the source into the canonical
 `COMPASS.md` format and writes it to the Target root. An existing `COMPASS.md` is preserved unless
 `--force` is given.
+
+### drydock score spec
+
+`drydock score spec <Target>` diagnoses potential errors in the specification. Feed the output to your
+LLM to update your specifications for likely errors. False positives may not require repair.
 
 ### drydock analyze
 
@@ -520,6 +527,7 @@ Implement the Blueprint using the Manifest
 
 ```text
 drydock build <Target> [--continue] [--repair-attempts <n>] [--escalate-model <model>] [--build-dir <path>]
+drydock build <Target> [--step <id|name>] [--story <id|name>] [--ungate] [--reset] [--dry-run] [--show-prompt] [--normalize-order] [--build-dir <path>] [--repair-attempts <n>] [--escalate-model <model>]
 drydock build <Target> --step <STEP> [--reset] [--build-dir <path>]
 drydock build <Target> --story <STORY> [--reset] [--build-dir <path>]
 drydock build <Target> --reset [--build-dir <path>]
@@ -631,6 +639,8 @@ restored; `drydock score` reports a modified staged asset as a release blocker.
   `--show-prompt` prints the full assembled prompt only when combined with `--dry-run`.
 ```
 
+`--ungate` marks prior programmatic acceptance failures as UNVERIFIED, closes their owning build steps as verified, and continues with the next buildable step; execution and dependency failures remain gated.
+
 Before executing work, `drydock build` checks previously applied Blueprint files for drift. If they have changed, the build stops and directs the Commander to run `drydock refit`. Foundational specifications such as `ARCHITECTURE.md`, `DATABASE.md`, and `UI-GENERAL.md` require explicit 
 change tickets to modify.
 
@@ -645,12 +655,19 @@ drydock build status <Target>   # print per-block state and current runnable fro
 ```
 ### drydock score
 
-`drydock score` rates the build and can run in two modes. 
+`drydock score` audits specifications, reports build evidence, verifies acceptance, and evaluates release readiness.
 
 ```text
+drydock score spec <Target>
 drydock score ac <Target> [--step <id>]
+drydock score build <Target>
 drydock score release <Target>
+drydock score drydock
 ```
+
+It writes `SPECIFICATION_SCORECARD.md` atomically and prints identical content to the terminal.
+Findings are advisory. The command does not modify imported sources, create Blueprints, ask product
+questions, gate Analyze, or evaluate files outside `blueprint/sources/`.
 
 The Commander scans checkmarks in the QuarterDeck instead of granting approvals.
 
@@ -664,6 +681,10 @@ Criteria with vacuous proof — an empty body, a constant assertion, or a self-c
 `drydock score release` is an LLM pass to evaluates the project-level criteria in `SEA_TRIALS.md`. 
 `SEA_TRIALS.md` contains criteria are expressed in EARS notation. The LLM  judges the project and reports the release verdict. 
 
+`drydock score build` reads build evidence and LLM usage logs and prints a deterministic post-build report.
+
+`drydock score drydock` performs an advisory assessment of Drydock and writes ranked feature files to `docs/drydock_planning/`.
+
 A `measurement` criterion carries `Command:`, a literal argv run from the build directory, and is
 compared against `Target:` using `Operator:`. `Extract:` supplies a regular expression whose first
 capture group reads the measured value from the command's standard output; without it the command
@@ -675,6 +696,10 @@ is rejected.
 
 | Artifact | Location | Purpose |
 |---|---|---|
+| `blueprint/sources/**/*` | Target Blueprint | Raw imported sources (`score spec` reads Markdown content and inventories non-Markdown paths) |
+| `evidence/*.md` | Target root | Build and repair evidence (`score build`) |
+| `logs/llm.jsonl` | Workspace | LLM usage records (`score build`) |
+| Drydock specification, prompts, implementation, and Rigging | Drydock repository | Methodology assessment inputs (`score drydock`) |
 | `MANIFEST.md` | Target root | Acceptance-criterion blocks and their parent stories |
 | `SEA_TRIALS.md` | Target root | Project criteria, measurement contracts, and guardrails |
 | `blueprint/*.md` | Target Blueprint | Programmatic Acceptance proofs |
@@ -684,6 +709,9 @@ is rejected.
 
 | Artifact | Location | Purpose |
 |---|---|---|
+| `SPECIFICATION_SCORECARD.md` | Target root | Advisory raw-specification findings (`score spec`) |
+| Terminal report | Terminal | Deterministic post-build evidence and usage report (`score build`) |
+| `docs/drydock_planning/` | Drydock repository | Ranked methodology feature files (`score drydock`) |
 | `SOUNDINGS.md` | Target root | Per-criterion verified status, evidence, and timestamp (whole-target `score ac`; a `--step` run leaves it unchanged) |
 | `SCORECARD.md` | Target root | Release scoring results, verdicts, and blockers (`score release`) |
 
@@ -691,8 +719,8 @@ is rejected.
 
 | Code | Meaning |
 |---:|---|
-| `0` | Scoring completes successfully |
-| `1` | Scoring cannot complete or the Target does not satisfy the evaluated gate |
+| `0` | Scoring completes; `score spec` and `score drydock` findings remain advisory |
+| `1` | Scoring cannot complete or the Target does not satisfy the evaluated build, acceptance, or release state |
 | `2` | Command syntax is invalid |
 
 ### drydock document
@@ -1118,7 +1146,7 @@ The QuarterDeck is documented in `QuarterDeck/README.md`.
 | `document` | Collapses `path_md` / `path_html` / `path_pdf` variants into a tab bar. |
 | `jsonl` | Read-only table from an append-only JSONL file. |
 | `kanban` | Renders `MANIFEST.md`-derived tickets as a four-column board. |
-| `questionnaire` | Form backed by a JSON file; saves answers in SQLite and writes them back to the source file. |
+| `questionnaire` | Form backed by a JSON file. |
 | `link` | External URL or local file; opens in a new tab. |
 | `command_status` | Derived read-only acceptance-readiness view from Core Docs. |
 | `compass` | The Build Compass: the live `MANIFEST.md` work graph — grouped, costed, state-badged (buildable now / review / done / failed with reason), and editable (reorder/regroup/rename/split). |

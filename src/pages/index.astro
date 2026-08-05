@@ -20,6 +20,10 @@ import Layout from '../layouts/Layout.astro';
       <a href="https://webcloudstudio.github.io/Drydock/" target="_blank" rel="noopener">Documentation</a>
       <a href="https://github.com/webcloudstudio/Drydock" target="_blank" rel="noopener">GitHub</a>
     </div>
+    <div class="feature-actions feature-actions--two">
+      <a href="/project-docs/drydock/presentation/PRODUCTION_Drydock_Video.web.mp4" target="_blank" rel="noopener">Overview</a>
+      <a href="/project-docs/drydock/presentation2/PRODUCTION_RedditVideo2.web.mp4" target="_blank" rel="noopener">Walkthrough</a>
+    </div>
   </div>
 
   <div class="drydock-window">
@@ -118,6 +122,12 @@ import Layout from '../layouts/Layout.astro';
       gap: 0.65rem;
       align-items: center;
       margin-top: 1.25rem;
+    }
+
+    /* Second action row (video links) — two buttons, full width. */
+    .feature-actions--two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 0.65rem;
     }
 
     .feature-actions a {

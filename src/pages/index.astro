@@ -9,20 +9,20 @@ import Layout from '../layouts/Layout.astro';
   <div class="drydock-copy">
     <p class="feature-kicker">Featured Presentation</p>
     <h2>Drydock: Specification Driven Software Delivery</h2>
-    <p>Based an Agile concepts AND Test Driven Development.</p>
+    <p>Based an Agile concepts.<br />Test Driven Development.</p>
     <ul>
       <li>Dependency Graph of Stories.</li>
-      <li>Clean Web Interface for Commander-to-LLM interaction.</li>
+      <li>Web Interface</li>
       <li>Context Compression, Context Optimization.</li>
     </ul>
     <div class="feature-actions">
+      <a class="feature-action--primary" href="/project-docs/drydock/QUICK_START.html" target="_blank" rel="noopener">Quick Start</a>
+      <a href="https://webcloudstudio.github.io/Drydock/" target="_blank" rel="noopener">Full Documentation</a>
       <a href="https://webcloudstudio.github.io/Drydock/USER_INSTALLATION.pdf" target="_blank" rel="noopener">Installation</a>
-      <a href="https://webcloudstudio.github.io/Drydock/" target="_blank" rel="noopener">Documentation</a>
-      <a href="https://github.com/webcloudstudio/Drydock" target="_blank" rel="noopener">GitHub</a>
     </div>
     <div class="feature-actions feature-actions--two">
-      <a href="/project-docs/drydock/presentation/PRODUCTION_Drydock_Video.web.mp4" target="_blank" rel="noopener">Overview</a>
-      <a href="/project-docs/drydock/presentation2/PRODUCTION_RedditVideo2.web.mp4" target="_blank" rel="noopener">Walkthrough</a>
+      <a href="https://github.com/webcloudstudio/Drydock" target="_blank" rel="noopener">GitHub</a>
+      <a href="/project-docs/drydock/presentation2/PRODUCTION_RedditVideo2.web.mp4" target="_blank" rel="noopener">Walkthrough (15min)</a>
     </div>
   </div>
 
@@ -150,6 +150,19 @@ import Layout from '../layouts/Layout.astro';
       background: #4f9cf9;
       color: #080810;
       text-decoration: none;
+    }
+
+    /* Standout primary action — the Quick Start link. */
+    .feature-actions a.feature-action--primary {
+      background: #4f9cf9;
+      color: #080810;
+      box-shadow: 0 0 0 3px #4f9cf933;
+    }
+
+    .feature-actions a.feature-action--primary:hover {
+      background: #7fb8ff;
+      border-color: #7fb8ff;
+      color: #080810;
     }
 
     .drydock-window {

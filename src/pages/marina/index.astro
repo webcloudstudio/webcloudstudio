@@ -136,6 +136,56 @@ import Layout from '../../layouts/Layout.astro';
       color: #080810;
     }
 
+    /* Build-evidence footer — full-width rule plus centered green link row. */
+    .evidence-footer {
+      margin: 2.5rem 0 0;
+    }
+
+    .evidence-footer hr,
+    .home-body .evidence-footer hr {
+      border: 0;
+      border-top: 1px solid #252540;
+      margin: 0 0 1.5rem;
+    }
+
+    .evidence-footer h2,
+    .home-body .evidence-footer h2 {
+      margin: 0 0 1rem;
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .evidence-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem;
+    }
+
+    .evidence-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 1px solid #4ade80;
+      color: #4ade80;
+      padding: 0.58rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      min-height: 40px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .evidence-links a:hover {
+      background: #4ade80;
+      color: #080810;
+      text-decoration: none;
+    }
+
     .drydock-window {
       min-width: 0;
       background: #05070c;

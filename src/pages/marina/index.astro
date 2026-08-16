@@ -136,9 +136,11 @@ import Layout from '../../layouts/Layout.astro';
       color: #080810;
     }
 
-    /* Build-evidence footer — full-width rule plus centered green link row. */
+    /* Build-evidence footer — full-width rule plus centered green link row.
+       Lives inside .drydock-feature and spans both grid columns. */
     .evidence-footer {
-      margin: 2.5rem 0 0;
+      grid-column: 1 / -1;
+      margin: 0.75rem 0 0;
     }
 
     .evidence-footer hr,
@@ -164,7 +166,8 @@ import Layout from '../../layouts/Layout.astro';
       gap: 0.65rem;
     }
 
-    .evidence-links a {
+    .evidence-links a,
+    .home-body .evidence-links a {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -180,7 +183,8 @@ import Layout from '../../layouts/Layout.astro';
       white-space: nowrap;
     }
 
-    .evidence-links a:hover {
+    .evidence-links a:hover,
+    .home-body .evidence-links a:hover {
       background: #4ade80;
       color: #080810;
       text-decoration: none;

@@ -40,16 +40,16 @@ import Layout from '../layouts/Layout.astro';
     </div>
     <img class="drydock-process" src="/project-docs/drydock/drydock_process.svg" alt="Drydock specification-driven delivery process" />
   </div>
-</div>
 
-<div class="evidence-footer">
-  <hr>
-  <h2>Drydock Build Evidence</h2>
-  <div class="evidence-links">
-    <a href="https://webcloudstudio.github.io/drydock-example-readinglist/" target="_blank" rel="noopener">Reading List</a>
-    <a href="https://webcloudstudio.github.io/drydock-example-commonmark/" target="_blank" rel="noopener">CommonMark</a>
-    <a href="https://webcloudstudio.github.io/drydock-example-toml/" target="_blank" rel="noopener">TOML</a>
-    <a href="https://webcloudstudio.github.io/drydock-example-jq/" target="_blank" rel="noopener">jq</a>
+  <div class="evidence-footer">
+    <hr>
+    <h2>Drydock Build Evidence</h2>
+    <div class="evidence-links">
+      <a href="https://webcloudstudio.github.io/drydock-example-readinglist/" target="_blank" rel="noopener">Reading List</a>
+      <a href="https://webcloudstudio.github.io/drydock-example-commonmark/" target="_blank" rel="noopener">CommonMark</a>
+      <a href="https://webcloudstudio.github.io/drydock-example-toml/" target="_blank" rel="noopener">TOML</a>
+      <a href="https://webcloudstudio.github.io/drydock-example-jq/" target="_blank" rel="noopener">jq</a>
+    </div>
   </div>
 </div>
       </div>
@@ -169,9 +169,11 @@ import Layout from '../layouts/Layout.astro';
       color: #080810;
     }
 
-    /* Build-evidence footer — full-width rule plus centered green link row. */
+    /* Build-evidence footer — full-width rule plus centered green link row.
+       Lives inside .drydock-feature and spans both grid columns. */
     .evidence-footer {
-      margin: 2.5rem 0 0;
+      grid-column: 1 / -1;
+      margin: 0.75rem 0 0;
     }
 
     .evidence-footer hr,
@@ -197,7 +199,8 @@ import Layout from '../layouts/Layout.astro';
       gap: 0.65rem;
     }
 
-    .evidence-links a {
+    .evidence-links a,
+    .home-body .evidence-links a {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -213,7 +216,8 @@ import Layout from '../layouts/Layout.astro';
       white-space: nowrap;
     }
 
-    .evidence-links a:hover {
+    .evidence-links a:hover,
+    .home-body .evidence-links a:hover {
       background: #4ade80;
       color: #080810;
       text-decoration: none;

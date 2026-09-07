@@ -9,7 +9,7 @@ Photo Organizer/Deduplicator is a Windows desktop application that solves the ch
 - **Scan multiple drives simultaneously** — accepts any number of source folders (local drives, external drives, mapped network paths) and indexes them in a background thread with live progress reporting
 - **Detect duplicates intelligently** — strips `YYYYMMDD.HHMMSS.` timestamp prefixes before comparing, so photos renamed by camera apps, phones, or cloud sync still match their originals
 - **Respect preferred directories** — mark any folder as "Green" (permanent home); files already in a preferred folder are skipped entirely from the copy plan, preventing double-imports
-- **Generate a reviewable copy plan** — writes `data/files_to_copy.txt` with every COPY, MOVE, and ZIP_DELETE operation before executing anything; the GUI shows the plan on a dedicated Review tab
+- **Generate a reviewable copy plan** — writes `data/files_to_copy.txt` with every COPY, MOVE, ZIP_COPY, ZIP_MOVE, ZIP_RETAIN, and ZIP_DELETE operation before execution; the GUI shows the plan on a dedicated Review tab
 - **Handle ZIP archives** — detects photo-only zip files and plans them for MOVE or DELETE; skips mixed-content zips with a logged warning
 - **Run headless via CLI** — three-stage pipeline (`photo_scan.sh` → `photo_analyze.sh` → `photo_dedup.sh`) enables automation and WSL workflows without launching the GUI
 - **Package as a standalone Windows EXE** — ships via PyInstaller + Inno Setup; installs with Start Menu and Desktop shortcuts, no Python required on the target machine

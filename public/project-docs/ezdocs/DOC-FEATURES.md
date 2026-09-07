@@ -8,7 +8,7 @@ Triggered by clicking **Scan** in the Tkinter GUI (or running `./bin/photo_scan.
 
 ## The Preferences / Analyze Tab
 
-Triggered by clicking **Analyze** after a successful scan. Loads the scan pickle and applies the preferred-directory ruleset: files already present in a Green (preferred) folder are excluded from the copy plan entirely; for all other duplicates, the source folder with the highest file count is chosen as the copy source. Writes `data/files_to_copy.txt` with one line per operation (COPY, MOVE, ZIP_MOVE, ZIP_DELETE). The Preferences tab also displays the current `directory_states.txt` so users can toggle folders between Normal and Preferred before re-running.
+Triggered by clicking **Analyze** after a successful scan. Loads the scan pickle and applies the preferred-directory ruleset: files already present in a Green (preferred) folder are excluded from the copy plan entirely; for all other duplicates, the source folder with the highest file count is chosen as the copy source. Writes `data/files_to_copy.txt` with COPY operations in Simulation Mode or MOVE operations in Live Mode, plus ZIP actions. The Preferences tab also displays the current `directory_states.txt` so users can toggle folders between Normal and Preferred before re-running.
 
 ![Preferences / Analyze Tab](Screen_DirPrefs.png)
 
@@ -22,7 +22,7 @@ Displays the full contents of `data/files_to_copy.txt` in a scrollable text widg
 
 ## The ReOrganize Tab
 
-Triggered by clicking **ReOrganize** after plan approval. Executes the copy/move operations from `files_to_copy.txt` in a background thread with a live log viewer. Requires `change_source_directory = True` in `config.ini` for live mode; in simulation mode it logs all planned operations without touching any files. Collision handling appends `-2`, `-3` suffixes to filenames when the destination already exists.
+Triggered by clicking **Copy** or **Move** after plan approval. Checked Simulation Mode builds a Copy preview without touching files; unchecked Simulation Mode enables the live Move operation. Collision handling appends `-2`, `-3` suffixes to filenames when the destination already exists.
 
 ![ReOrganize Tab](Screen_Reorg.png)
 
@@ -44,7 +44,7 @@ The scanner strips `YYYYMMDD.HHMMSS.` prefixes from filenames before computing t
 
 ## ZIP Archive Handling
 
-During scanning, the engine inspects ZIP files found in source folders. Archives containing only photo files are added to the plan as ZIP_MOVE or ZIP_DELETE operations. Archives containing a mix of photo and non-photo files are skipped with a logged warning and listed in `skipped_mixed_zips` so they can be reviewed manually.
+During scanning, the engine inspects ZIP files found in source folders. Archives containing only photo files are added as ZIP_COPY or ZIP_RETAIN in Copy Mode, and ZIP_MOVE or ZIP_DELETE in Move Mode. Archives containing non-photo files or that cannot be read are skipped, with their reason shown in the copy plan, for example `SKIPPED_ZIP (Other file types found)`. In Move Mode, a source file whose exact duplicate is already in the Final Photo Folder is listed as `DELETE`, making the source removal explicit; Copy Mode retains it and labels it as already consolidated.
 
 ## Build: Windows EXE (`./bin/build.sh`)
 

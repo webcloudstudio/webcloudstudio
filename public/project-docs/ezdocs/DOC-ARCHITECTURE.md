@@ -55,8 +55,7 @@ ezdocs/
 | `source_photo_folders` | *(auto-detected drives)* | Comma-separated list of folders to scan for photos |
 | `strings_to_strip` | *(empty)* | Substrings removed from computed target subdirectory paths (e.g. `My Drive`, `Pictures`) |
 | `directories_to_skip` | *(empty)* | Folders excluded from scanning |
-| `change_source_directory` | `False` | `False` = simulation mode; `True` = live file operations |
-| `delete_after_move` | `False` | When `True`, source files are deleted after successful copy |
+| `change_source_directory` | `False` | `False` = simulation Copy preview; `True` = live Move execution |
 | `log_file_folder` | `./logs` | Directory for application log files |
 | `product_name` | `Disk Cleaner` | Application display name shown in the GUI title bar |
 | `company_name` | `Web Cloud Studios` | Company name shown in copyright splash |

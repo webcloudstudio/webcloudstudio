@@ -49,6 +49,9 @@ run, and read.
 ```bash
 drydock uat                      # every kit under uat/
 drydock uat Toml                 # one kit
+drydock uat status Toml          # current run, stop point, and recovery command
+drydock uat resume Toml          # resume the current failed run
+drydock uat resume Toml --from plan  # re-enter a named lifecycle stage
 ```
 
 | Flag | Effect |
@@ -59,6 +62,12 @@ drydock uat Toml                 # one kit
 
 A run is long and consumes subscription quota. The `Toml` kit takes roughly thirty minutes and
 eighteen LLM calls.
+
+`drydock uat status <Kit>` selects the kit's recorded `LATEST_RUN` run. The pointer is updated
+after every run result is recorded. If a pointed-to run directory is removed, UAT falls back to
+the latest complete run remaining on disk. `drydock uat resume <Kit>` resumes that run at its
+failed lifecycle stage. `--run <run-id>` selects a historical run; `--from <stage>` explicitly
+overrides the inferred stage. `--steps` remains the detailed evidence view for step-level recovery.
 
 ## 3. Reviewing the report — `index.html`
 
@@ -72,14 +81,14 @@ generated viewer under `view/`, which carries the report's own styling: Markdown
 anything else is shown as source. Each viewer links the raw file, and `SHA256SUMS` covers the raw
 files, never the viewers. `view/` and `assets/` are generated output, rewritten on every rebuild.
 
-## 4. Rebuilding reports — `--report`
+## 4. Rebuilding reports — `report`
 
 ```bash
-drydock uat --report             # rebuild proof kits from every completed run
-drydock uat --report Toml        # rebuild one kit's proof kits
+drydock uat report               # rebuild proof kits from every completed run
+drydock uat report Toml          # rebuild one kit's proof kits
 ```
 
-`--report` regenerates `index.html`, `view/`, and `assets/` in full from the runs already recorded
+`report` regenerates `index.html`, `view/`, and `assets/` in full from the runs already recorded
 under `runs/`. It executes no build and makes no LLM call. Use it after changing report styling or
 layout, or to restore a report from runs that are still on disk.
 

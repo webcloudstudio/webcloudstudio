@@ -109,8 +109,15 @@ Environment variables override saved configuration for the current process:
 | `drydock_build_directory` | `DRYDOCK_BUILD_DIRECTORY` |
 | `drydock_model` | `DRYDOCK_MODEL` |
 | `llm_provider` | `LLM_PROVIDER` |
-| `prompt_warn_tokens` | `PROMPT_WARN_TOKENS` |
 | `quarterdeck_port` | `QUARTERDECK_PORT` |
+
+Per-model token settings and each provider's allowed models and aliases live in
+`model_config.jsonl` beside `.env`, created on first use from the copy at the repository root
+(packaged with the wheel). `drydock config show` lists the allowed models. Token settings are: the bytes-per-token ratio, the CLI's fixed request payload, the stacking
+target (`prompt_target_tokens`), the warning threshold (`prompt_warning_tokens`), and an optional
+price-tier limit (`prompt_limit_tokens`) with the model that runs a prompt crossing 98% of it
+(`escalate_model`). `drydock config calibrate` compares these values with measured runs, and
+`--apply` writes the measured values. `DRYDOCK_MODEL_CONFIG` names another file.
 
 Your installation is ready. Continue with the [Quick Start Guide](QUICK_START.md).
 
@@ -128,7 +135,8 @@ playwright install chromium
 
 Drydock ships the `/ddk-refit` skill. Every `drydock init <Target>` installs or upgrades it in the
 workspace's `.claude/skills/` (Claude Code) and `.agents/skills/` (Codex and Gemini).
-`/ddk-refit <Target> <change text>` turns a plain-text change into REFIT tickets and updates the
+`/ddk-refit <Target> <change request>` accepts a page URL, API route, CLI command, error message,
+or plain description. It resolves the owning Blueprints, creates REFIT tickets, and updates the
 Manifest. Run `drydock build <Target>` to build them.
 
 ## Upgrade or Remove Drydock

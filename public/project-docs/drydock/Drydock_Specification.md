@@ -108,49 +108,81 @@ LLM actions are scoped to the workspace at `$DRYDOCK_WORKSPACE/targets/<Target>`
 
 ### S — Set Up
 
+```text
+drydock init <Target> [--model <model>]
+drydock import <Target> <Source> [--model <model>]
+```
+
 ```bash
-drydock init MyApp                  # create the workspace
+drydock init MyApp                            # create the workspace
+drydock import MyApp $INPUT_DIRECTORY         # load specifications
 ```
 
 ### A — Analyze and Plan
 
+```text
+drydock analyze <Target> [--model <model>]
+drydock run quarterdeck <Target>
+drydock plan <Target> [--model <model>]
+```
+
 ```bash
-drydock import MyApp ./notes        # load specifications
-drydock analyze MyApp               # stories, questions, blockers
-drydock run quarterdeck MyApp       # review and answer
-drydock plan MyApp                  # Blueprints and Manifest
+drydock analyze MyApp                         # stories, questions, blockers
+drydock run quarterdeck MyApp                 # review and answer, then continue
+drydock plan MyApp                            # Blueprints and Manifest
 ```
 
 ### I — Implement
+
+```text
+drydock status <Target> --check | --ready
+drydock build <Target> [--model <model>]
+drydock diagnose <Target> --apply [--model <model>]
+drydock score ac | build | release <Target>
+```
 
 ```bash
 n=1; max=5
 while drydock status MyApp --ready
 do
     echo "*** BUILD ATTEMPT $n ***"
-    drydock build MyApp || drydock diagnose MyApp --apply || true
+    drydock build MyApp || drydock diagnose MyApp --apply
     n=$((n+1))
-    if [ "$n" -ge "$max" ]; then
+    if [ "$n" -gt "$max" ]
+    then
         echo "hit $max build attempts - aborting"
         exit 1
     fi
 done
-drydock status MyApp --check        
-```
+drydock status MyApp --check                  # done when every block is closed
 
-Score the result.
-
-```bash
-drydock score ac MyApp              # story acceptance
-drydock score build MyApp           # build evidence
-drydock score release MyApp         # release gate
+drydock score ac MyApp                        # story acceptance
+drydock score build MyApp                     # build evidence
+drydock score release MyApp                   # release gate
 ```
 
 ### L — Loop
 
-```bash
-drydock refit MyApp                 # map changes into the Manifest- rerun the build 
+```text
+drydock refit <Target> [--model <model>]
 ```
+
+```bash
+drydock refit MyApp                           # map changes into the Manifest, then rerun I
+```
+
+### Model Selection
+
+`--model <model>` selects the model and its provider. `model_config.jsonl` lists the models each
+provider accepts. `drydock config show` prints them.
+
+| Provider | `--model` arguments |
+|---|---|
+| `claude` | `haiku`, `sonnet`, `opus`, `fable`, `claude-haiku-5-5`, `claude-sonnet-5-5`, `claude-opus-5-5`, `claude-fable-5-1` |
+| `codex` | `sol`, `luna`, `astra`, `terra`, `gpt-6.1-sol`, `gpt-6-sol`, `gpt-5.6-sol`, `gpt-6-luna`, `gpt-5.6-luna`, `gpt-6-astra`, `gpt-5.6-terra` |
+| `gemini` (metered) | `auto`, `pro`, `flash`, `flash-lite`, `gemini-3.1-pro-preview`, `gemini-3-pro-preview`, `gemini-3.5-flash`, `gemini-3-flash`, `gemini-3-flash-preview`, `gemini-3.1-flash-lite`, `gemma-4-31b-it`, `gemma-4-26b-a4b-it` |
+
+A short name selects the newest model of that family.
 
 ## SAIL Phase 1 — Set Up: Laying the Keel
 
@@ -320,7 +352,7 @@ Imported source files must be UTF-8. a file that fails UTF-8 decoding is not ana
 
 ### drydock score spec
 
-`drydock score spec <Target>` diagnoses potential specification errors.  This optional step attempts to find specification errors before you start.
+`drydock score spec <Target>` prints potential specification errors.  This optional step attempts to find specification errors before you start.
 
 ### drydock analyze
 
@@ -428,19 +460,19 @@ The Build is self repairing.  `drydock diagnose` identifies problems with the pr
 correct identified errors. The llm is authorized to make these decisions which will show in the **QuarterDeck**.  Because the LLM is non-deterministic, this self repair process finds and fixes issues which do not require human intervention.  The diagnose command will stop on serious errors or misspecification.
 
 ```bash
-n=1
-max=5
-while drydock status "$PROJECT" --ready
+n=1; max=5
+while drydock status MyApp --ready
 do
-    echo "RUNNING BUILD ATTEMPT $n"
-    drydock build "$PROJECT" $OPTS || drydock diagnose "$PROJECT" --apply
+    echo "*** BUILD ATTEMPT $n ***"
+    drydock build MyApp || drydock diagnose MyApp --apply
     n=$((n+1))
-    if [ "$n" -ge "$max" ]
+    if [ "$n" -gt "$max" ]
     then
-        echo "ERROR - hit $max build iterations"
+        echo "hit $max build attempts - aborting"
         exit 1
     fi
 done
+drydock status MyApp --check                  # done when every block is closed
 ```
 
 `drydock diagnose` writes a diagnostic report and recommends **Blueprint** changes. `--apply` updates
@@ -544,6 +576,40 @@ drydock publish docs/Drydock_Specification.md --output docs/index.html
 drydock publish docs/Drydock_Specification.md --output dist/Drydock_Whitepaper.html --theme sail --pdf
 ```
 
+### drydock diagnose
+
+```bash
+drydock diagnose <Target>
+drydock diagnose <Target> --apply
+drydock diagnose <Target> --no-apply
+drydock diagnose <Target> --run <stamp>
+```
+
+`drydock diagnose` writes a report explaining failed builds and authorizes the LLM to create **Blueprint** diffs that let the next build proceed.
+
+The report contains Root Cause, Details, Commander Feedback Requested, and a Repair Proposal.  Commander Feedback Requested lists the next steps and asks how to proceed.
+
+`--apply` applies the diffs and records decisions in `DECISIONS.json`.
+
+### Drydock Reporting
+
+```text
+drydock report help
+
+ReportName | Command | Description
+--- | --- | ---
+status      | drydock report status <Target>   | Target phase, plan, frontier, and next step
+manifest    | drydock report manifest <Target> | Manifest groups, step states, and buildable frontier
+run         | drydock report run <Target>      | Recorded lifecycle state and attempts
+build       | drydock report build <Target>    | Recorded build evidence, repairs, and usage
+history     | drydock report history <Target>  | Target command execution history
+llm         | drydock report llm <Target>      | Lifecycle LLM usage by command and model
+token       | drydock report token <Target>    | Prompt size, model, and run time of each LLM call
+scores      | drydock report scores <Target>   | Last score runs and artifact locations
+uat_summary | drydock report uat_summary       | 30-day UAT summary: passed kits by Claude and Codex
+uat_report  | drydock report uat_report        | Passed UAT runs: LLM calls, tokens, tool calls, time
+```
+
 ## SAIL Phase 4 — Loop: The Refit
 
 A **Refit** updates the **Manifest** from **Blueprint** changes and change tickets, creating new nodes for a normal build.
@@ -551,11 +617,6 @@ A **Refit** updates the **Manifest** from **Blueprint** changes and change ticke
 ### Build Commands
 
 ```text
-drydock diagnose <Target>
-drydock diagnose <Target> --apply
-drydock diagnose <Target> --no-apply
-drydock diagnose <Target> --run <stamp>
-
 drydock refit <Target>
 ```
 
@@ -576,18 +637,16 @@ flowchart LR
   REFIT --> SOFTWARE(["Updated Manifest"]):::output
 ```
 
-### drydock diagnose
-
-`drydock diagnose` writes a report explaining failed builds and authorizes the LLM to create **Blueprint** diffs that let the next build proceed.
-
-The report contains Root Cause, Details, Commander Feedback Requested, and a Repair Proposal.  Commander Feedback Requested lists the next steps and asks how to proceed.
-
-`--apply` applies the diffs and records decisions in `DECISIONS.json`.
-
 ### drydock refit
 
 `drydock refit <Target>` maps changes into new **Manifest** stories. Changes are tickets (Jira or
 plain English), direct **Blueprint** edits, and Feature-ticket **Blueprint** comments.
+
+## External Database Connectivity
+
+See Documentation in main directory - HOW_TO_SETUP_POSTGRES.md
+
+Databases are rigging files and can be easily added by copying the existing examples. Database access is fully encapsulated to lower the impact of changes. Drydock minimizes for rebuilding by detecting contract changes and by fully encapsulating all database access using language native libraries.
 
 ## Directory Layout
 
